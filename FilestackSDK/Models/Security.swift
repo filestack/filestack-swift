@@ -14,7 +14,7 @@ import SCrypto
  
     See [Security Overview](https://www.filestack.com/docs/security) for more information about security.
  */
-public class Security: NSObject {
+@objc(FPSecurity) public class Security: NSObject {
 
 
     // MARK: - Properties

@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents a client that allows communicating with the Filestack REST API.
  */
-public class Client: NSObject {
+@objc(FPClient) public class Client: NSObject {
 
     /// An API key obtained from the Developer Portal.
     public let apiKey: String
