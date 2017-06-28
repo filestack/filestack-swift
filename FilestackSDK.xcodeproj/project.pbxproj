@@ -11,6 +11,12 @@
 		45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830B31F03B3310053742A /* Alamofire.framework */; };
 		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
 		45B830DD1F03BC340053742A /* SCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830D41F03BC1C0053742A /* SCrypto.framework */; };
+		45B830E31F03BCF20053742A /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E01F03BCF20053742A /* Policy.swift */; };
+		45B830E41F03BCF20053742A /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E11F03BCF20053742A /* Security.swift */; };
+		45B831121F03D8140053742A /* FilestackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B8309B1F03B27A0053742A /* FilestackSDK.framework */; };
+		45B831191F03DA280053742A /* PolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831181F03DA280053742A /* PolicyTests.swift */; };
+		45B8311E1F03E2890053742A /* SecurityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8311D1F03E2890053742A /* SecurityTests.swift */; };
+		45B831201F03E52B0053742A /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8311F1F03E52B0053742A /* Seeds.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +111,13 @@
 			remoteGlobalIDString = 5ED8F9ED1C51788B00DE0760;
 			remoteInfo = "SCrypto iOS";
 		};
+		45B831131F03D8140053742A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B830921F03B27A0053742A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B8309A1F03B27A0053742A;
+			remoteInfo = FilestackSDK;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +127,13 @@
 		45B830A71F03B3300053742A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		45B830CA1F03BB6D0053742A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SCrypto.xcodeproj; path = Carthage/Checkouts/SCrypto/SCrypto.xcodeproj; sourceTree = "<group>"; };
+		45B830E01F03BCF20053742A /* Policy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Policy.swift; sourceTree = "<group>"; };
+		45B830E11F03BCF20053742A /* Security.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
+		45B8310D1F03D8140053742A /* FilestackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilestackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45B831111F03D8140053742A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45B831181F03DA280053742A /* PolicyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyTests.swift; sourceTree = "<group>"; };
+		45B8311D1F03E2890053742A /* SecurityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityTests.swift; sourceTree = "<group>"; };
+		45B8311F1F03E52B0053742A /* Seeds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +146,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B8310A1F03D8140053742A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B831121F03D8140053742A /* FilestackSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -134,6 +162,7 @@
 			children = (
 				45B830A61F03B3210053742A /* External Dependencies */,
 				45B8309D1F03B27A0053742A /* FilestackSDK */,
+				45B8310E1F03D8140053742A /* FilestackSDKTests */,
 				45B8309C1F03B27A0053742A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -142,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				45B8309B1F03B27A0053742A /* FilestackSDK.framework */,
+				45B8310D1F03D8140053742A /* FilestackSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +179,7 @@
 		45B8309D1F03B27A0053742A /* FilestackSDK */ = {
 			isa = PBXGroup;
 			children = (
+				45B830DE1F03BCF20053742A /* Models */,
 				45B8309E1F03B27A0053742A /* FilestackSDK.h */,
 				45B8309F1F03B27A0053742A /* Info.plist */,
 			);
@@ -190,6 +221,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45B830DE1F03BCF20053742A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				45B830E01F03BCF20053742A /* Policy.swift */,
+				45B830E11F03BCF20053742A /* Security.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		45B8310E1F03D8140053742A /* FilestackSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				45B831111F03D8140053742A /* Info.plist */,
+				45B831181F03DA280053742A /* PolicyTests.swift */,
+				45B8311D1F03E2890053742A /* SecurityTests.swift */,
+				45B8311F1F03E52B0053742A /* Seeds.swift */,
+			);
+			path = FilestackSDKTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -224,18 +275,41 @@
 			productReference = 45B8309B1F03B27A0053742A /* FilestackSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		45B8310C1F03D8140053742A /* FilestackSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45B831151F03D8140053742A /* Build configuration list for PBXNativeTarget "FilestackSDKTests" */;
+			buildPhases = (
+				45B831091F03D8140053742A /* Sources */,
+				45B8310A1F03D8140053742A /* Frameworks */,
+				45B8310B1F03D8140053742A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45B831141F03D8140053742A /* PBXTargetDependency */,
+			);
+			name = FilestackSDKTests;
+			productName = FilestackSDKTests;
+			productReference = 45B8310D1F03D8140053742A /* FilestackSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		45B830921F03B27A0053742A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Filestack;
 				TargetAttributes = {
 					45B8309A1F03B27A0053742A = {
 						CreatedOnToolsVersion = 8.3.3;
 						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					45B8310C1F03D8140053742A = {
+						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -263,6 +337,7 @@
 			projectRoot = "";
 			targets = (
 				45B8309A1F03B27A0053742A /* FilestackSDK */,
+				45B8310C1F03D8140053742A /* FilestackSDKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -356,6 +431,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B8310B1F03D8140053742A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -363,6 +445,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
+				45B830E41F03BCF20053742A /* Security.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45B831091F03D8140053742A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B831191F03DA280053742A /* PolicyTests.swift in Sources */,
+				45B8311E1F03E2890053742A /* SecurityTests.swift in Sources */,
+				45B831201F03E52B0053742A /* Seeds.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +472,11 @@
 			isa = PBXTargetDependency;
 			name = "SCrypto iOS";
 			targetProxy = 45B830DB1F03BC2E0053742A /* PBXContainerItemProxy */;
+		};
+		45B831141F03D8140053742A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45B8309A1F03B27A0053742A /* FilestackSDK */;
+			targetProxy = 45B831131F03D8140053742A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -524,6 +623,28 @@
 			};
 			name = Release;
 		};
+		45B831161F03D8140053742A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FilestackSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.filestack.FilestackSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		45B831171F03D8140053742A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FilestackSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.filestack.FilestackSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -544,6 +665,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		45B831151F03D8140053742A /* Build configuration list for PBXNativeTarget "FilestackSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45B831161F03D8140053742A /* Debug */,
+				45B831171F03D8140053742A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
