@@ -14,7 +14,7 @@ import Foundation
  
     See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policy calls.
  */
-@objc(FPPolicyCall) public enum PolicyCall: UInt {
+@objc(FSPolicyCall) public enum PolicyCall: UInt {
 
     /// Allows users to upload files.
     case pick = 0
@@ -94,7 +94,7 @@ import Foundation
     
     See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policies.
  */
-@objc(FPPolicy) public class Policy: NSObject {
+@objc(FSPolicy) public class Policy: NSObject {
 
 
     // MARK: - Properties
