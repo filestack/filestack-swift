@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		45B830A01F03B27A0053742A /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B8309E1F03B27A0053742A /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830B31F03B3310053742A /* Alamofire.framework */; };
+		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
+		45B830DD1F03BC340053742A /* SCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830D41F03BC1C0053742A /* SCrypto.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,41 @@
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = "Alamofire iOS";
 		};
+		45B830D31F03BC1C0053742A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5ED8F9EE1C51788B00DE0760;
+			remoteInfo = "SCrypto iOS";
+		};
+		45B830D51F03BC1C0053742A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5ED8F9F81C51788B00DE0760;
+			remoteInfo = "SCrypto iOS Tests";
+		};
+		45B830D71F03BC1C0053742A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5EAB865E1CADCF8F00182F7C;
+			remoteInfo = "SCrypto OSX";
+		};
+		45B830D91F03BC1C0053742A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5EAB86671CADCF8F00182F7C;
+			remoteInfo = "SCrypto OSX Tests";
+		};
+		45B830DB1F03BC2E0053742A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5ED8F9ED1C51788B00DE0760;
+			remoteInfo = "SCrypto iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +112,8 @@
 		45B8309E1F03B27A0053742A /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		45B8309F1F03B27A0053742A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45B830A71F03B3300053742A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		45B830CA1F03BB6D0053742A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SCrypto.xcodeproj; path = Carthage/Checkouts/SCrypto/SCrypto.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B830DD1F03BC340053742A /* SCrypto.framework in Frameworks */,
 				45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +158,9 @@
 		45B830A61F03B3210053742A /* External Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				45B830CA1F03BB6D0053742A /* Cartfile */,
 				45B830A71F03B3300053742A /* Alamofire.xcodeproj */,
+				45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */,
 			);
 			name = "External Dependencies";
 			sourceTree = "<group>";
@@ -133,6 +175,17 @@
 				45B830BB1F03B3310053742A /* Alamofire.framework */,
 				45B830BD1F03B3310053742A /* Alamofire tvOS Tests.xctest */,
 				45B830BF1F03B3310053742A /* Alamofire.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45B830CD1F03BC1C0053742A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45B830D41F03BC1C0053742A /* SCrypto.framework */,
+				45B830D61F03BC1C0053742A /* SCrypto iOS Tests.xctest */,
+				45B830D81F03BC1C0053742A /* SCrypto.framework */,
+				45B830DA1F03BC1C0053742A /* SCrypto OSX Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +216,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				45B830DC1F03BC2E0053742A /* PBXTargetDependency */,
 				45B830C11F03B3380053742A /* PBXTargetDependency */,
 			);
 			name = FilestackSDK;
@@ -181,6 +235,7 @@
 				TargetAttributes = {
 					45B8309A1F03B27A0053742A = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -199,6 +254,10 @@
 				{
 					ProductGroup = 45B830A81F03B3300053742A /* Products */;
 					ProjectRef = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
+				},
+				{
+					ProductGroup = 45B830CD1F03BC1C0053742A /* Products */;
+					ProjectRef = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -258,6 +317,34 @@
 			remoteRef = 45B830BE1F03B3310053742A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45B830D41F03BC1C0053742A /* SCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SCrypto.framework;
+			remoteRef = 45B830D31F03BC1C0053742A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B830D61F03BC1C0053742A /* SCrypto iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SCrypto iOS Tests.xctest";
+			remoteRef = 45B830D51F03BC1C0053742A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B830D81F03BC1C0053742A /* SCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SCrypto.framework;
+			remoteRef = 45B830D71F03BC1C0053742A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B830DA1F03BC1C0053742A /* SCrypto OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SCrypto OSX Tests.xctest";
+			remoteRef = 45B830D91F03BC1C0053742A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -265,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B830CB1F03BB6D0053742A /* Cartfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +373,11 @@
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";
 			targetProxy = 45B830C01F03B3380053742A /* PBXContainerItemProxy */;
+		};
+		45B830DC1F03BC2E0053742A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SCrypto iOS";
+			targetProxy = 45B830DB1F03BC2E0053742A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -393,6 +486,7 @@
 		45B830A41F03B27A0053742A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -405,6 +499,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.filestack.FilestackSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -412,6 +507,7 @@
 		45B830A51F03B27A0053742A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
