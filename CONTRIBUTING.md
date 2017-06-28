@@ -8,7 +8,7 @@ First of all, thank you so much for being interested in contributing to Filestac
 
 ## Issues
 Feel free to open new issues or participating in the discussion of the existing ones on 
-[this repository](https://github.com/filepicker/sdk-template/issues), but before doing so, please make sure that the issue is not duplicated and/or the discussion is related to the topic of the issue.
+[this repository](https://github.com/filepicker/filepicker-swift/issues), but before doing so, please make sure that the issue is not duplicated and/or the discussion is related to the topic of the issue.
 
 ## Pull requests
 Code contributions are welcome following a process which guarantees the long-term maintainability of the project. 
@@ -18,11 +18,11 @@ You can contribute either with bugfixes or new features. Before submitting a new
 Before starting to code, it is desirable to first open an issue describing the bug or the new feature. Please be sure the issue is not duplicated.
 
 ### Step 2: Fork the repository
-Fork the project https://github.com/filepicker/sdk-template into your account. Then, check out your copy of the project locally.
+Fork the project https://github.com/filepicker/filepicker-swift into your account. Then, check out your copy of the project locally.
 ```
-git clone git@github.com:user/sdk-template.git
-cd sdk-template
-git remote add upstream https://github.com/filepicker/sdk-template.git
+git clone git@github.com:user/filepicker-swift.git
+cd filepicker-swift
+git remote add upstream https://github.com/filepicker/filepicker-swift.git
 ```
 
 ### Step 3: Create a new feature branch `contrib/issue-number`

@@ -30,11 +30,11 @@ If you have problems, please create a [Github Issue](https://github.com/filepick
 
 ## Contributing
 
-Please see [CONTRIBUTING.md](https://github.com/filepickerfilestack-swift/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING.md](https://github.com/filepicker/filestack-swift/blob/master/CONTRIBUTING.md) for details.
 
 ## Credits
 
-Thank you to all the [contributors](https://github.com/filepicker/sdk-template/graphs/contributors).
+Thank you to all the [contributors](https://github.com/filepicker/filestack-swift/graphs/contributors).
 
 [travis_ci]: http://travis-ci.org/filestack/filestack-swift
 [travis_ci_badge]: https://travis-ci.org/filestack/filestack-swift.svg?branch=master
