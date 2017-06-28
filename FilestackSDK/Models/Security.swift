@@ -30,6 +30,8 @@ class Security: NSObject {
 
     /**
         Convenience initializer that takes a `Policy` and an `appSecret` as parameters.
+        
+        - SeeAlso: `Policy`
 
         - Parameter policy: A configured `Policy` object.
         - Parameter appSecret: A secret taken from the developer portal.

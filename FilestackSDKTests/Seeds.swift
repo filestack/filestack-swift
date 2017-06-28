@@ -24,4 +24,12 @@ struct Seeds {
             container: "SOME-CONTAINER"
         )
     }
+
+    struct Securities {
+
+        static let basic = try! Security(
+            policy: Seeds.Policies.basic,
+            appSecret: "APP-SECRET"
+        )
+    }
 }
