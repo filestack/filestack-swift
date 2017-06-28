@@ -14,16 +14,16 @@ import SCrypto
  
     See [Security Overview](https://www.filestack.com/docs/security) for more information about security.
  */
-class Security: NSObject {
+public class Security: NSObject {
 
 
     // MARK: - Properties
 
     /// An encoded policy.
-    let encodedPolicy: String
+    public let encodedPolicy: String
 
     /// A computed signature.
-    let signature: String
+    public let signature: String
 
 
     // MARK: - Lifecyle Functions
@@ -36,7 +36,7 @@ class Security: NSObject {
         - Parameter policy: A configured `Policy` object.
         - Parameter appSecret: A secret taken from the developer portal.
     */
-    convenience init(policy: Policy, appSecret: String) throws {
+    public convenience init(policy: Policy, appSecret: String) throws {
 
         let policyJSON: Data = try policy.toJSON()
         let encodedPolicy: String = policyJSON.base64EncodedString()
@@ -54,7 +54,7 @@ class Security: NSObject {
         - Parameter encodedPolicy: An encoded policy.
         - Parameter signature: A computed signature.
      */
-    init(encodedPolicy: String, signature: String) {
+    public init(encodedPolicy: String, signature: String) {
 
         self.encodedPolicy = encodedPolicy
         self.signature = signature

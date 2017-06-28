@@ -12,13 +12,13 @@ import Foundation
 /**
     Represents a client that allows communicating with the Filestack REST API.
  */
-class Client: NSObject {
+public class Client: NSObject {
 
     /// An API key obtained from the Developer Portal.
-    let apiKey: String
+    public let apiKey: String
 
     /// A `Security` object. `nil` by default.
-    let security: Security?
+    public let security: Security?
 
 
     /**
@@ -29,7 +29,7 @@ class Client: NSObject {
         - Parameter apiKey: An API key obtained from the Developer Portal.
         - Parameter security: A `Security` object. `nil` by default.
      */
-    init(apiKey: String, security: Security? = nil) {
+    public init(apiKey: String, security: Security? = nil) {
 
         self.apiKey = apiKey
         self.security = security

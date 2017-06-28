@@ -14,7 +14,7 @@ import Foundation
  
     See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policy calls.
  */
-@objc(FPCallPolicy) enum CallPolicy: UInt {
+@objc(FPPolicyCall) public enum PolicyCall: UInt {
 
     /// Allows users to upload files.
     case pick = 0
@@ -94,13 +94,13 @@ import Foundation
     
     See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policies.
  */
-@objc(FPPolicy) class Policy: NSObject {
+@objc(FPPolicy) public class Policy: NSObject {
 
 
     // MARK: - Properties
 
     private let expiry: Date
-    private let call: [CallPolicy]
+    private let call: [PolicyCall]
     private let handle: String
     private let url: URL
     private let maxSize: UInt
@@ -124,8 +124,8 @@ import Foundation
         - Parameter path: For policies that store files, a Perl-like regular expression that must match the path that the files will be stored under.
         - Parameter container: For policies that store files, a Perl-like regular expression that must match the container/bucket that the files will be stored under.
      */
-    init(expiry: Date,
-         call: [CallPolicy],
+    public init(expiry: Date,
+         call: [PolicyCall],
          handle: String,
          url: URL,
          maxSize: UInt,
@@ -151,7 +151,7 @@ import Foundation
      
         - Returns: A `Data` object.
     */
-    func toJSON() throws -> Data {
+    public func toJSON() throws -> Data {
 
         let data = try JSONSerialization.data(withJSONObject: self.toDictionary())
 
