@@ -12,12 +12,13 @@ import Foundation
 /**
     Represents a type of policy call.
  
-    See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policy calls.
+    See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more 
+    information about policy calls.
  */
 @objc(FSPolicyCall) public enum PolicyCall: UInt {
 
     /// Allows users to upload files.
-    case pick = 0
+    case pick
 
     /// Allows files to be viewed/accessed.
     case read
@@ -92,7 +93,8 @@ import Foundation
 /**
     Represents a policy object.
     
-    See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policies.
+    See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more 
+    information about policies.
  */
 @objc(FSPolicy) public class Policy: NSObject {
 
@@ -118,11 +120,14 @@ import Foundation
         - Parameter expiry: The expiration date for the policy.
         - Parameter call: The calls that you allow this policy to make.
         - Parameter handle: The unique file handle that you would like to access.
-        - Parameter url: It is possible to create a subset of external URL domains that are allowed to be image/document sources for `processing.filestackapi.com` transformations. The URL parameter only applies to processing engine transformations and cannot be used to restrict uploads via the picker to specific domains for example. The filter is a regular expression that must match the input URL.
-        - Parameter maxSize: The maximum file size in bytes that can be stored by your request. This only applies to the store command.
-        - Parameter minSize: The minimum file size that can be stored by your request. This only applies to the store command. Together with maxSize, this forms a range. The value of minSize should be smaller then maxSize.
-        - Parameter path: For policies that store files, a Perl-like regular expression that must match the path that the files will be stored under.
-        - Parameter container: For policies that store files, a Perl-like regular expression that must match the container/bucket that the files will be stored under.
+        - Parameter url: It is possible to create a subset of external URL domains that are 
+            allowed to be image/document sources for `processing.filestackapi.com` transformations.
+        - Parameter maxSize: The maximum file size in bytes that can be stored by your request.
+        - Parameter minSize: The minimum file size that can be stored by your request.
+        - Parameter path: For policies that store files, a Perl-like regular expression that must 
+            match the path that the files will be stored under.
+        - Parameter container: For policies that store files, a Perl-like regular expression that 
+            must match the container/bucket that the files will be stored under.
      */
     public init(expiry: Date,
          call: [PolicyCall],

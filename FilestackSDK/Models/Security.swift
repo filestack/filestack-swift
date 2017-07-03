@@ -9,10 +9,12 @@
 import Foundation
 import SCrypto
 
+
 /**
     Represents a security object.
  
-    See [Security Overview](https://www.filestack.com/docs/security) for more information about security.
+    See [Security Overview](https://www.filestack.com/docs/security) for more information 
+    about security.
  */
 @objc(FSSecurity) public class Security: NSObject {
 
