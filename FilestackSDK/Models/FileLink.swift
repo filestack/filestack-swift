@@ -29,7 +29,7 @@ import Foundation
     /// A Filestack Handle. `nil` by default.
     public let handle: String
 
-    /// A Filestack CDN URL.
+    /// A Filestack CDN URL corresponding to this `FileLink`.
     public var url: URL {
 
         return Utils.getURL(baseURL: Config.cdnURL, handle: handle, security: security)!
