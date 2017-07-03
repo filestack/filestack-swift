@@ -31,7 +31,7 @@ import SCrypto
     // MARK: - Lifecyle Functions
 
     /**
-        Convenience initializer that takes a `Policy` and an `appSecret` as parameters.
+        A convenience initializer that takes a `Policy` and an `appSecret` as parameters.
         
         - SeeAlso: `Policy`
 

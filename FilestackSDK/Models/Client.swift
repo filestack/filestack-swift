@@ -30,7 +30,7 @@ import Foundation
     // MARK: - Lifecyle Functions
 
     /**
-        Convenience initializer that takes an API key, and optionally a `Security` object.
+        The designated initializer.
      
         - SeeAlso: `Security`
 

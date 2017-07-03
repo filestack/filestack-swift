@@ -114,7 +114,7 @@ import Foundation
     // MARK: - Lifecyle Functions
 
     /**
-        Initializes a `Policy` object.
+        The designated initializer.
      
         - Parameter expiry: The expiration date for the policy.
         - Parameter call: The calls that you allow this policy to make.
