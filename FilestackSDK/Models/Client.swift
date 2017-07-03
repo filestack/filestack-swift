@@ -14,6 +14,9 @@ import Foundation
  */
 @objc(FSClient) public class Client: NSObject {
 
+
+    // MARK: - Properties
+
     /// An API key obtained from the Developer Portal.
     public let apiKey: String
 
@@ -24,6 +27,8 @@ import Foundation
     public let storage: StorageLocation?
 
 
+    // MARK: - Lifecyle Functions
+
     /**
         Convenience initializer that takes an API key, and optionally a `Security` object.
      
@@ -31,6 +36,7 @@ import Foundation
 
         - Parameter apiKey: An API key obtained from the Developer Portal.
         - Parameter security: A `Security` object. `nil` by default.
+        - Parameter storage: A `StorageLocation` object. `nil` by default.
      */
     public init(apiKey: String, security: Security? = nil, storage: StorageLocation? = nil) {
 

@@ -113,7 +113,6 @@ import Foundation
 
     // MARK: - Lifecyle Functions
 
-
     /**
         Initializes a `Policy` object.
      
