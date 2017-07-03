@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A45E1F0A3B5500C39405 /* Storage.swift */; };
+		4589A4841F0A429D00C39405 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4831F0A429D00C39405 /* Utils.swift */; };
+		4589A4861F0A468000C39405 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4851F0A468000C39405 /* UtilsTest.swift */; };
+		4589A4881F0A4B1900C39405 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4871F0A4B1900C39405 /* Config.swift */; };
 		45B830A01F03B27A0053742A /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B8309E1F03B27A0053742A /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830B31F03B3310053742A /* Alamofire.framework */; };
 		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
@@ -125,6 +128,9 @@
 
 /* Begin PBXFileReference section */
 		4589A45E1F0A3B5500C39405 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		4589A4831F0A429D00C39405 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Misc/Utils.swift; sourceTree = "<group>"; };
+		4589A4851F0A468000C39405 /* UtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
+		4589A4871F0A4B1900C39405 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Misc/Config.swift; sourceTree = "<group>"; };
 		45B8309B1F03B27A0053742A /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B8309E1F03B27A0053742A /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		45B8309F1F03B27A0053742A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,6 +169,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4589A46C1F0A426700C39405 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				4589A4831F0A429D00C39405 /* Utils.swift */,
+				4589A4871F0A4B1900C39405 /* Config.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
 		45B830911F03B27A0053742A = {
 			isa = PBXGroup;
 			children = (
@@ -185,9 +200,10 @@
 		45B8309D1F03B27A0053742A /* FilestackSDK */ = {
 			isa = PBXGroup;
 			children = (
-				45B830DE1F03BCF20053742A /* Models */,
 				45B8309E1F03B27A0053742A /* FilestackSDK.h */,
 				45B8309F1F03B27A0053742A /* Info.plist */,
+				4589A46C1F0A426700C39405 /* Misc */,
+				45B830DE1F03BCF20053742A /* Models */,
 			);
 			path = FilestackSDK;
 			sourceTree = "<group>";
@@ -242,10 +258,11 @@
 			isa = PBXGroup;
 			children = (
 				45B831111F03D8140053742A /* Info.plist */,
+				45B831231F03F4300053742A /* ClientTests.swift */,
 				45B831181F03DA280053742A /* PolicyTests.swift */,
 				45B8311D1F03E2890053742A /* SecurityTests.swift */,
 				45B8311F1F03E52B0053742A /* Seeds.swift */,
-				45B831231F03F4300053742A /* ClientTests.swift */,
+				4589A4851F0A468000C39405 /* UtilsTest.swift */,
 			);
 			path = FilestackSDKTests;
 			sourceTree = "<group>";
@@ -457,7 +474,9 @@
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
 				4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
+				4589A4881F0A4B1900C39405 /* Config.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
+				4589A4841F0A429D00C39405 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +486,7 @@
 			files = (
 				45B831191F03DA280053742A /* PolicyTests.swift in Sources */,
 				45B8311E1F03E2890053742A /* SecurityTests.swift in Sources */,
+				4589A4861F0A468000C39405 /* UtilsTest.swift in Sources */,
 				45B831241F03F4300053742A /* ClientTests.swift in Sources */,
 				45B831201F03E52B0053742A /* Seeds.swift in Sources */,
 			);
