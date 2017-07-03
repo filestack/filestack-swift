@@ -18,6 +18,7 @@ class ClientTests: XCTestCase {
 
         XCTAssertEqual(client.apiKey, "MY-API-KEY")
         XCTAssertEqual(client.security, nil)
+        XCTAssertEqual(client.storage, nil)
     }
 
     func testInitializerWithApiKeyAndSecurity() {
@@ -27,5 +28,16 @@ class ClientTests: XCTestCase {
 
         XCTAssertEqual(client.apiKey, "MY-OTHER-API-KEY")
         XCTAssertEqual(client.security, security)
+        XCTAssertEqual(client.storage, nil)
+    }
+
+    func testInitializerWithApiKeySecurityAndStorage() {
+
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
+
+        XCTAssertEqual(client.apiKey, "MY-OTHER-API-KEY")
+        XCTAssertEqual(client.security, security)
+        XCTAssertEqual(client.storage, .s3)
     }
 }

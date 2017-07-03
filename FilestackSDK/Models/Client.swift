@@ -20,6 +20,9 @@ import Foundation
     /// A `Security` object. `nil` by default.
     public let security: Security?
 
+    /// A `StorageLocation` object. `nil` by default.
+    public let storage: StorageLocation?
+
 
     /**
         Convenience initializer that takes an API key, and optionally a `Security` object.
@@ -29,10 +32,11 @@ import Foundation
         - Parameter apiKey: An API key obtained from the Developer Portal.
         - Parameter security: A `Security` object. `nil` by default.
      */
-    public init(apiKey: String, security: Security? = nil) {
+    public init(apiKey: String, security: Security? = nil, storage: StorageLocation? = nil) {
 
         self.apiKey = apiKey
         self.security = security
+        self.storage = storage
 
         super.init()
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A45E1F0A3B5500C39405 /* Storage.swift */; };
 		45B830A01F03B27A0053742A /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B8309E1F03B27A0053742A /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830B31F03B3310053742A /* Alamofire.framework */; };
 		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
@@ -123,6 +124,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4589A45E1F0A3B5500C39405 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		45B8309B1F03B27A0053742A /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B8309E1F03B27A0053742A /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		45B8309F1F03B27A0053742A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				45B831211F03F1C90053742A /* Client.swift */,
 				45B830E01F03BCF20053742A /* Policy.swift */,
 				45B830E11F03BCF20053742A /* Security.swift */,
+				4589A45E1F0A3B5500C39405 /* Storage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
+				4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
 			);
