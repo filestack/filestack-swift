@@ -25,6 +25,11 @@
 		45B831201F03E52B0053742A /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8311F1F03E52B0053742A /* Seeds.swift */; };
 		45B831221F03F1C90053742A /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831211F03F1C90053742A /* Client.swift */; };
 		45B831241F03F4300053742A /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831231F03F4300053742A /* ClientTests.swift */; };
+		45F9B8C41F0B941300E04380 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F9B8C31F0B941300E04380 /* sample.jpg */; };
+		45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */; };
+		45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CC71F0B86AD008EDBCD /* Globals.swift */; };
+		45FA0CCC1F0B86B6008EDBCD /* CDNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CCA1F0B86B6008EDBCD /* CDNService.swift */; };
+		45FA0CCD1F0B86B6008EDBCD /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CCB1F0B86B6008EDBCD /* NetworkingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,7 +218,12 @@
 		45B8311F1F03E52B0053742A /* Seeds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeds.swift; sourceTree = "<group>"; };
 		45B831211F03F1C90053742A /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		45B831231F03F4300053742A /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
+		45F9B8C31F0B941300E04380 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sample.jpg; path = Fixtures/sample.jpg; sourceTree = "<group>"; };
+		45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResponse.swift; sourceTree = "<group>"; };
 		45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHHTTPStubs.xcodeproj; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/OHHTTPStubs.xcodeproj; sourceTree = "<group>"; };
+		45FA0CC71F0B86AD008EDBCD /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = Misc/Globals.swift; sourceTree = "<group>"; };
+		45FA0CCA1F0B86B6008EDBCD /* CDNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNService.swift; sourceTree = "<group>"; };
+		45FA0CCB1F0B86B6008EDBCD /* NetworkingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,8 +250,9 @@
 		4589A46C1F0A426700C39405 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				4589A4831F0A429D00C39405 /* Utils.swift */,
 				4589A4871F0A4B1900C39405 /* Config.swift */,
+				45FA0CC71F0B86AD008EDBCD /* Globals.swift */,
+				4589A4831F0A429D00C39405 /* Utils.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -272,6 +283,7 @@
 				45B8309F1F03B27A0053742A /* Info.plist */,
 				4589A46C1F0A426700C39405 /* Misc */,
 				45B830DE1F03BCF20053742A /* Models */,
+				45FA0CC91F0B86B6008EDBCD /* Services */,
 			);
 			path = FilestackSDK;
 			sourceTree = "<group>";
@@ -320,6 +332,7 @@
 				45B830E01F03BCF20053742A /* Policy.swift */,
 				45B830E11F03BCF20053742A /* Security.swift */,
 				4589A45E1F0A3B5500C39405 /* Storage.swift */,
+				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -334,6 +347,7 @@
 				45B8311D1F03E2890053742A /* SecurityTests.swift */,
 				45B8311F1F03E52B0053742A /* Seeds.swift */,
 				4589A4851F0A468000C39405 /* UtilsTest.swift */,
+				45FA0CCE1F0B8841008EDBCD /* Fixtures */,
 			);
 			path = FilestackSDKTests;
 			sourceTree = "<group>";
@@ -351,6 +365,23 @@
 				45FA0CC11F0B85C7008EDBCD /* OHHTTPStubs tvOS Fmk Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		45FA0CC91F0B86B6008EDBCD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				45FA0CCA1F0B86B6008EDBCD /* CDNService.swift */,
+				45FA0CCB1F0B86B6008EDBCD /* NetworkingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		45FA0CCE1F0B8841008EDBCD /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				45F9B8C31F0B941300E04380 /* sample.jpg */,
+			);
+			name = Fixtures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,7 +444,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Filestack;
 				TargetAttributes = {
 					45B8309A1F03B27A0053742A = {
@@ -608,6 +639,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F9B8C41F0B941300E04380 /* sample.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,12 +650,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */,
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
 				4589A48A1F0A4DA600C39405 /* FileLink.swift in Sources */,
 				4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
+				45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */,
+				45FA0CCD1F0B86B6008EDBCD /* NetworkingService.swift in Sources */,
 				4589A4881F0A4B1900C39405 /* Config.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
+				45FA0CCC1F0B86B6008EDBCD /* CDNService.swift in Sources */,
 				4589A4841F0A429D00C39405 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,7 +713,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -685,7 +723,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -731,7 +773,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -739,7 +783,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

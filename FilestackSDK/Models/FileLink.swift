@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 /**
@@ -57,4 +58,44 @@ import Foundation
     }
 
 
+    // MARK: - Public Functions
+
+
+    /**
+        Downloads the content associated to this `FileLink`.
+     
+        - Parameter parameters: TODO explain.
+        - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle 
+            of the Request as data is read from the server.
+        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     */
+    public func getContent(parameters: [String: Any]? = nil,
+                           downloadProgress: ((Progress) -> Void)? = nil,
+                           completionHandler: @escaping (NetworkDataResponse) -> Void) {
+
+        guard let request = defaultCDNService.getDataRequest(handle: handle,
+                                                             path: nil,
+                                                             parameters: parameters,
+                                                             security: security) else {
+            return
+        }
+
+        if let downloadProgress = downloadProgress {
+            request.downloadProgress(closure: downloadProgress)
+        }
+
+        request.validate(statusCode: [200, 303, 304])
+
+        request.responseData(completionHandler: { (response) in
+
+            let networkResponse = NetworkDataResponse(
+                request: response.request,
+                response: response.response,
+                data: response.data,
+                error: response.error
+            )
+            
+            completionHandler(networkResponse)
+        })
+    }
 }
