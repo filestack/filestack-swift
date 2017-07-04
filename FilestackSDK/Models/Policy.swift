@@ -148,14 +148,9 @@ import Foundation
     }
 
 
-    // MARK: - Public Functions
+    // MARK: - Internal Functions
 
-    /**
-        Returns a JSON representation of this `Policy` object.
-     
-        - Returns: A `Data` object.
-    */
-    public func toJSON() throws -> Data {
+    internal func toJSON() throws -> Data {
 
         let data = try JSONSerialization.data(withJSONObject: self.toDictionary())
 
