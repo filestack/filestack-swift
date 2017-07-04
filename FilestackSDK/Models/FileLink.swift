@@ -64,9 +64,10 @@ import Alamofire
     /**
         Downloads the content associated to this `FileLink`.
      
-        - Parameter parameters: TODO explain.
+        - Parameter parameters: Any query string parameters that should be added to the request.
+             `nil` by default.
         - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle 
-            of the Request as data is read from the server.
+            of the Request as data is read from the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func getContent(parameters: [String: Any]? = nil,
