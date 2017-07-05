@@ -409,6 +409,7 @@
 				45B830971F03B27A0053742A /* Frameworks */,
 				45B830981F03B27A0053742A /* Headers */,
 				45B830991F03B27A0053742A /* Resources */,
+				454CC1C11F0CEEA5005821AC /* Set Version and Build Number */,
 			);
 			buildRules = (
 			);
@@ -647,6 +648,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		454CC1C11F0CEEA5005821AC /* Set Version and Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version and Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/bin/set-buildnumber.sh\n$SRCROOT/bin/set-version.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		45B830961F03B27A0053742A /* Sources */ = {
