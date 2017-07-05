@@ -119,15 +119,8 @@ class FileLinkTests: XCTestCase {
             return stubsResponse
         }
 
-        let security = Seeds.Securities.basic
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
-
-        let expectedRequestURL = Config.cdnURL
-            .appendingPathComponent(
-                "security=policy:\(security.encodedPolicy)," +
-                "signature:\(security.signature)"
-            )
-            .appendingPathComponent("MY-HANDLE")
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
         var response: NetworkDataResponse?
@@ -202,7 +195,7 @@ class FileLinkTests: XCTestCase {
         }
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
-        let progressExpectation = self.expectation(description: "request should report preogress")
+        let progressExpectation = self.expectation(description: "request should report progress")
 
         let downloadProgress: ((Progress) -> Void) = { progress in
 
@@ -270,15 +263,8 @@ class FileLinkTests: XCTestCase {
             return stubsResponse
         }
 
-        let security = Seeds.Securities.basic
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
-
-        let expectedRequestURL = Config.cdnURL
-            .appendingPathComponent(
-                "security=policy:\(security.encodedPolicy)," +
-                "signature:\(security.signature)"
-            )
-            .appendingPathComponent("MY-HANDLE")
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
@@ -356,7 +342,7 @@ class FileLinkTests: XCTestCase {
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
-        let progressExpectation = self.expectation(description: "request should report preogress")
+        let progressExpectation = self.expectation(description: "request should report progress")
 
         let downloadProgress: ((Progress) -> Void) = { progress in
 

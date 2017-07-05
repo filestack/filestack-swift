@@ -110,9 +110,9 @@ import Alamofire
 
         - Parameter destinationURL: The local URL where content should be saved.
         - Parameter parameters: Any query string parameters that should be added to the request.
-        `nil` by default.
+            `nil` by default.
         - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle
-        of the Request as data is read from the server. `nil` by default.
+            of the Request as data is read from the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func download(destinationURL: URL,
