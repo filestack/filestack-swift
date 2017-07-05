@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */; };
 		4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A45E1F0A3B5500C39405 /* Storage.swift */; };
 		4589A4841F0A429D00C39405 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4831F0A429D00C39405 /* Utils.swift */; };
 		4589A4861F0A468000C39405 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4851F0A468000C39405 /* UtilsTest.swift */; };
@@ -197,6 +198,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadResponse.swift; sourceTree = "<group>"; };
 		4589A45E1F0A3B5500C39405 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4589A4831F0A429D00C39405 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Misc/Utils.swift; sourceTree = "<group>"; };
 		4589A4851F0A468000C39405 /* UtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				45B830E11F03BCF20053742A /* Security.swift */,
 				4589A45E1F0A3B5500C39405 /* Storage.swift */,
 				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
+				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				4589A48A1F0A4DA600C39405 /* FileLink.swift in Sources */,
 				4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
+				454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */,
 				45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */,
 				45FA0CCD1F0B86B6008EDBCD /* NetworkingService.swift in Sources */,
 				4589A4881F0A4B1900C39405 /* Config.swift in Sources */,

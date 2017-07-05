@@ -36,4 +36,20 @@ extension NetworkingService {
 
         return Alamofire.request(url, method: .get, parameters: parameters)
     }
+
+    func downloadRequest(handle: String,
+                         path: String?,
+                         parameters: [String: Any]?,
+                         security: Security?,
+                         downloadDestination: DownloadRequest.DownloadFileDestination?) -> DownloadRequest? {
+
+        guard let url = Utils.getURL(baseURL: baseURL,
+                                     handle: handle,
+                                     path: path,
+                                     security: security) else {
+            return nil
+        }
+
+        return Alamofire.download(url, method: .get, parameters: parameters, to: downloadDestination)
+    }
 }

@@ -17,6 +17,7 @@ import CFNetwork.CFNetworkErrors
 class FileLinkTests: XCTestCase {
 
     private let cdnStubConditions = isScheme(Config.cdnURL.scheme!) && isHost(Config.cdnURL.host!)
+    private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 
     override func tearDown() {
 
@@ -129,7 +130,6 @@ class FileLinkTests: XCTestCase {
             .appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
-
         var response: NetworkDataResponse?
 
         fileLink.getContent { (resp) in
@@ -165,25 +165,27 @@ class FileLinkTests: XCTestCase {
         ]
 
         let expectation = self.expectation(description: "request should succeed")
+        var response: NetworkDataResponse?
 
-        fileLink.getContent(parameters: ["foo": "123", "bar": "321"]) { (response) in
+        fileLink.getContent(parameters: ["foo": "123", "bar": "321"]) { (resp) in
 
-            XCTAssertNotNil(response.request?.url)
-
-            let actualURLComponents = URLComponents(url: response.request!.url!,
-                                                    resolvingAgainstBaseURL: true)!
-
-            XCTAssertEqual(actualURLComponents.fragment, expectedURLComponents.fragment)
-
-            for item in actualURLComponents.queryItems! {
-
-                XCTAssertTrue(expectedURLComponents.queryItems!.contains(item))
-            }
-
+            response = resp
             expectation.fulfill()
         }
         
         waitForExpectations(timeout: 5, handler: nil)
+
+        XCTAssertNotNil(response?.request?.url)
+
+        let actualURLComponents = URLComponents(url: response!.request!.url!,
+                                                resolvingAgainstBaseURL: true)!
+
+        XCTAssertEqual(actualURLComponents.fragment, expectedURLComponents.fragment)
+
+        for item in actualURLComponents.queryItems! {
+
+            XCTAssertTrue(expectedURLComponents.queryItems!.contains(item))
+        }
     }
 
     func testGetContentWithDownloadProgressMonitoring() {
@@ -210,7 +212,161 @@ class FileLinkTests: XCTestCase {
         }
 
         fileLink.getContent(downloadProgress: downloadProgress) { _ in }
+
         waitForExpectations(timeout: 3, handler: nil)
     }
 
+    func testDownloadExistingContent() {
+
+        stub(condition: cdnStubConditions) { _ in
+            let stubPath = OHPathForFile("sample.jpg", type(of: self))!
+
+            let httpHeaders: [AnyHashable: Any] = [
+                "Content-Type": "image/jpeg",
+                "Content-Length": "200367"
+            ]
+
+            return fixture(filePath: stubPath, headers: httpHeaders)
+        }
+
+        let security = Seeds.Securities.basic
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+
+        let expectedRequestURL = Config.cdnURL
+            .appendingPathComponent(
+                "security=policy:\(security.encodedPolicy)," +
+                "signature:\(security.signature)"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        let expectation = self.expectation(description: "request should succeed")
+        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+        var response: NetworkDownloadResponse?
+
+        fileLink.download(destinationURL: destinationURL) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertNotNil(response?.response)
+        XCTAssertEqual(response?.response?.url, expectedRequestURL)
+        XCTAssertEqual(response?.destinationURL, destinationURL)
+        XCTAssertNil(response?.error)
+
+        let image = UIImage(contentsOfFile: destinationURL.path)
+        XCTAssertNotNil(image)
+    }
+
+    func testDownloadUnexistingContent() {
+
+        stub(condition: cdnStubConditions) { _ in
+            let data = Data()
+            let stubsResponse = OHHTTPStubsResponse(data: data, statusCode: 404, headers: nil)
+
+            return stubsResponse
+        }
+
+        let security = Seeds.Securities.basic
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+
+        let expectedRequestURL = Config.cdnURL
+            .appendingPathComponent(
+                "security=policy:\(security.encodedPolicy)," +
+                "signature:\(security.signature)"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        let expectation = self.expectation(description: "request should fail with a 404")
+        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+        var response: NetworkDownloadResponse?
+
+        fileLink.download(destinationURL: destinationURL) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 404)
+        XCTAssertEqual(response?.request?.url, expectedRequestURL)
+        XCTAssertNotNil(response?.error)
+    }
+
+    func testDownloadWithParameters() {
+
+        stub(condition: cdnStubConditions) { _ in
+            let data = Data()
+
+            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
+
+        var expectedURLComponents = URLComponents(url: expectedRequestURL,
+                                                  resolvingAgainstBaseURL: true)!
+
+        expectedURLComponents.queryItems = [
+            URLQueryItem(name: "foo", value: "123"),
+            URLQueryItem(name: "bar", value: "321")
+        ]
+
+        let expectation = self.expectation(description: "request should succeed")
+        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+        var response: NetworkDownloadResponse?
+
+        fileLink.download(destinationURL: destinationURL, parameters: ["foo": "123", "bar": "321"]) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+
+        XCTAssertNotNil(response?.request?.url)
+
+        let actualURLComponents = URLComponents(url: response!.request!.url!,
+                                                resolvingAgainstBaseURL: true)!
+
+        XCTAssertEqual(actualURLComponents.fragment, expectedURLComponents.fragment)
+
+        for item in actualURLComponents.queryItems! {
+
+            XCTAssertTrue(expectedURLComponents.queryItems!.contains(item))
+        }
+    }
+
+    func testDownloadWithDownloadProgressMonitoring() {
+
+        stub(condition: cdnStubConditions) { _ in
+            let stubPath = OHPathForFile("sample.jpg", type(of: self))!
+
+            let httpHeaders: [AnyHashable: Any] = [
+                "Content-Type": "image/jpeg",
+                "Content-Length": "200367"
+            ]
+
+            return fixture(filePath: stubPath, headers: httpHeaders).requestTime(0.2, responseTime: 2)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+        let progressExpectation = self.expectation(description: "request should report preogress")
+
+        let downloadProgress: ((Progress) -> Void) = { progress in
+
+            if progress.fractionCompleted == 1.0 {
+                progressExpectation.fulfill()
+            }
+        }
+
+        fileLink.download(destinationURL: destinationURL, downloadProgress: downloadProgress) { _ in }
+
+        waitForExpectations(timeout: 3, handler: nil)
+    }
 }

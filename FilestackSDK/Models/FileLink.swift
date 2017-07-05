@@ -19,7 +19,7 @@ import Alamofire
 @objc(FSFileLink) public class FileLink: NSObject {
 
 
-    // MARK: - Properties
+    // MARK: - Public Properties
 
     /// An API key obtained from the Developer Portal.
     public let apiKey: String
@@ -35,6 +35,11 @@ import Alamofire
 
         return Utils.getURL(baseURL: Config.cdnURL, handle: handle, security: security)!
     }
+
+
+    // MARK: - Private Properties
+
+    private let validHTTPResponseCodes = [200, 303, 304]
 
 
     // MARK: - Lifecyle Functions
@@ -62,7 +67,7 @@ import Alamofire
 
 
     /**
-        Downloads the content associated to this `FileLink`.
+        Gets the content associated to this `FileLink` as a `Data` object.
      
         - Parameter parameters: Any query string parameters that should be added to the request.
              `nil` by default.
@@ -85,7 +90,7 @@ import Alamofire
             request.downloadProgress(closure: downloadProgress)
         }
 
-        request.validate(statusCode: [200, 303, 304])
+        request.validate(statusCode: validHTTPResponseCodes)
 
         request.responseData(completionHandler: { (response) in
 
@@ -99,4 +104,58 @@ import Alamofire
             completionHandler(networkResponse)
         })
     }
+
+    /**
+        Downloads the content associated to this `FileLink` to a destination URL.
+
+        - Parameter destinationURL: The local URL where content should be saved.
+        - Parameter parameters: Any query string parameters that should be added to the request.
+        `nil` by default.
+        - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle
+        of the Request as data is read from the server. `nil` by default.
+        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     */
+    public func download(destinationURL: URL,
+                         parameters: [String: Any]? = nil,
+                         downloadProgress: ((Progress) -> Void)? = nil,
+                         completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
+
+        let downloadDestination: DownloadRequest.DownloadFileDestination = { (temporaryURL, response) in
+
+            let downloadOptions: DownloadRequest.DownloadOptions = [
+                .createIntermediateDirectories,
+                .removePreviousFile
+            ]
+
+            return (destinationURL: destinationURL, options: downloadOptions)
+        }
+
+        guard let request = defaultCDNService.downloadRequest(handle: handle,
+                                                              path: nil,
+                                                              parameters: parameters,
+                                                              security: security,
+                                                              downloadDestination: downloadDestination) else {
+            return
+        }
+
+        if let downloadProgress = downloadProgress {
+            request.downloadProgress(closure: downloadProgress)
+        }
+
+        request.validate(statusCode: validHTTPResponseCodes)
+
+        request.responseData(completionHandler: { (response) in
+
+            let networkResponse = NetworkDownloadResponse(
+                request: response.request,
+                response: response.response,
+                temporaryURL: response.temporaryURL,
+                destinationURL: response.destinationURL,
+                error: response.error
+            )
+
+            completionHandler(networkResponse)
+        })
+    }
+
 }
