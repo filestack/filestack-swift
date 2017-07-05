@@ -4,7 +4,7 @@
 
 # Filestack Swift SDK
 <a href="https://www.filestack.com"><img src="https://filestack.com/themes/filestack/assets/images/press-articles/color.svg" align="left" hspace="10" vspace="6"></a>
-This is the official Swift SDK for Filestack - API and content management system that makes it easy to add powerful file uploading and transformation capabilities to any web or mobile application. 
+This is the official Swift SDK for Filestack - API and content management system that makes it easy to add powerful file uploading and transformation capabilities to any web or mobile application.
 
 ## Resources
 
@@ -36,9 +36,9 @@ Please see [CONTRIBUTING.md](https://github.com/filepicker/filestack-swift/blob/
 
 Thank you to all the [contributors](https://github.com/filepicker/filestack-swift/graphs/contributors).
 
-[travis_ci]: http://travis-ci.org/filestack/filestack-swift
-[travis_ci_badge]: https://travis-ci.org/filestack/filestack-swift.svg?branch=master
-[code_climate]: https://codeclimate.com/github/filestack/filestack-swift
-[code_climate_badge]: https://codeclimate.com/github/filestack/filestack-swift.png
-[coveralls]: https://coveralls.io/github/filestack/filestack-swift?branch=master
-[coveralls_badge]: https://coveralls.io/repos/github/filestack/filestack-swift/badge.svg?branch=master
+[travis_ci]: http://travis-ci.org/filepicker/filestack-swift
+[travis_ci_badge]: https://travis-ci.org/filepicker/filestack-swift.svg?branch=master
+[code_climate]: https://codeclimate.com/github/filepicker/filestack-swift
+[code_climate_badge]: https://codeclimate.com/github/filepicker/filestack-swift.png
+[coveralls]: https://coveralls.io/github/filepicker/filestack-swift?branch=master
+[coveralls_badge]: https://coveralls.io/repos/github/filepicker/filestack-swift/badge.svg?branch=master
