@@ -266,10 +266,10 @@
 		4589A46C1F0A426700C39405 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				454CC1C71F0D10D2005821AC /* BundleInfo.swift */,
 				4589A4871F0A4B1900C39405 /* Config.swift */,
 				45FA0CC71F0B86AD008EDBCD /* Globals.swift */,
 				4589A4831F0A429D00C39405 /* Utils.swift */,
-				454CC1C71F0D10D2005821AC /* BundleInfo.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
