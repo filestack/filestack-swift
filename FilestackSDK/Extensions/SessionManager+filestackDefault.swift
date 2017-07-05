@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 
-extension SessionManager {
+internal extension SessionManager {
 
     class func filestackDefault() -> SessionManager {
 
