@@ -13,4 +13,5 @@ import Alamofire
 internal class CDNService: NetworkingService {
 
     let baseURL = Config.cdnURL
+    let sessionManager = SessionManager.filestackDefault()
 }

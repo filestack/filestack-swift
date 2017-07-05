@@ -14,6 +14,8 @@ internal protocol NetworkingService {
 
     var baseURL: URL { get }
 
+    var sessionManager: Alamofire.SessionManager { get }
+
     func getDataRequest(handle: String,
                         path: String?,
                         parameters: [String: Any]?,
@@ -34,7 +36,7 @@ extension NetworkingService {
             return nil
         }
 
-        return Alamofire.request(url, method: .get, parameters: parameters)
+        return sessionManager.request(url, method: .get, parameters: parameters)
     }
 
     func downloadRequest(handle: String,
@@ -50,6 +52,6 @@ extension NetworkingService {
             return nil
         }
 
-        return Alamofire.download(url, method: .get, parameters: parameters, to: downloadDestination)
+        return sessionManager.download(url, method: .get, parameters: parameters, to: downloadDestination)
     }
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */; };
+		454CC1C61F0CF932005821AC /* SessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1C51F0CF932005821AC /* SessionManagerTests.swift */; };
+		454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1C71F0D10D2005821AC /* BundleInfo.swift */; };
+		454CC1CB1F0D1160005821AC /* SessionManager+filestackDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1CA1F0D1160005821AC /* SessionManager+filestackDefault.swift */; };
 		4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A45E1F0A3B5500C39405 /* Storage.swift */; };
 		4589A4841F0A429D00C39405 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4831F0A429D00C39405 /* Utils.swift */; };
 		4589A4861F0A468000C39405 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4851F0A468000C39405 /* UtilsTest.swift */; };
@@ -199,6 +202,9 @@
 
 /* Begin PBXFileReference section */
 		454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadResponse.swift; sourceTree = "<group>"; };
+		454CC1C51F0CF932005821AC /* SessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
+		454CC1C71F0D10D2005821AC /* BundleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BundleInfo.swift; path = Misc/BundleInfo.swift; sourceTree = "<group>"; };
+		454CC1CA1F0D1160005821AC /* SessionManager+filestackDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionManager+filestackDefault.swift"; sourceTree = "<group>"; };
 		4589A45E1F0A3B5500C39405 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4589A4831F0A429D00C39405 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Misc/Utils.swift; sourceTree = "<group>"; };
 		4589A4851F0A468000C39405 /* UtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
@@ -249,12 +255,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		454CC1C91F0D1151005821AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				454CC1CA1F0D1160005821AC /* SessionManager+filestackDefault.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4589A46C1F0A426700C39405 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
 				4589A4871F0A4B1900C39405 /* Config.swift */,
 				45FA0CC71F0B86AD008EDBCD /* Globals.swift */,
 				4589A4831F0A429D00C39405 /* Utils.swift */,
+				454CC1C71F0D10D2005821AC /* BundleInfo.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -283,6 +298,7 @@
 			children = (
 				45B8309E1F03B27A0053742A /* FilestackSDK.h */,
 				45B8309F1F03B27A0053742A /* Info.plist */,
+				454CC1C91F0D1151005821AC /* Extensions */,
 				4589A46C1F0A426700C39405 /* Misc */,
 				45B830DE1F03BCF20053742A /* Models */,
 				45FA0CC91F0B86B6008EDBCD /* Services */,
@@ -349,6 +365,7 @@
 				45B831181F03DA280053742A /* PolicyTests.swift */,
 				45B8311D1F03E2890053742A /* SecurityTests.swift */,
 				45B8311F1F03E52B0053742A /* Seeds.swift */,
+				454CC1C51F0CF932005821AC /* SessionManagerTests.swift */,
 				4589A4851F0A468000C39405 /* UtilsTest.swift */,
 				45FA0CCE1F0B8841008EDBCD /* Fixtures */,
 			);
@@ -678,7 +695,9 @@
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
 				454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */,
 				45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */,
+				454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */,
 				45FA0CCD1F0B86B6008EDBCD /* NetworkingService.swift in Sources */,
+				454CC1CB1F0D1160005821AC /* SessionManager+filestackDefault.swift in Sources */,
 				4589A4881F0A4B1900C39405 /* Config.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
 				45FA0CCC1F0B86B6008EDBCD /* CDNService.swift in Sources */,
@@ -692,6 +711,7 @@
 			files = (
 				45B831191F03DA280053742A /* PolicyTests.swift in Sources */,
 				4589A48C1F0A4DBC00C39405 /* FileLinkTests.swift in Sources */,
+				454CC1C61F0CF932005821AC /* SessionManagerTests.swift in Sources */,
 				45B8311E1F03E2890053742A /* SecurityTests.swift in Sources */,
 				4589A4861F0A468000C39405 /* UtilsTest.swift in Sources */,
 				45B831241F03F4300053742A /* ClientTests.swift in Sources */,
