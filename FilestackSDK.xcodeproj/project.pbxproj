@@ -346,11 +346,11 @@
 			children = (
 				45B831211F03F1C90053742A /* Client.swift */,
 				4589A4891F0A4DA600C39405 /* FileLink.swift */,
+				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
+				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
 				45B830E01F03BCF20053742A /* Policy.swift */,
 				45B830E11F03BCF20053742A /* Security.swift */,
 				4589A45E1F0A3B5500C39405 /* Storage.swift */,
-				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
-				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
