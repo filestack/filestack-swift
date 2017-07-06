@@ -42,7 +42,7 @@ import SCrypto
 
         let policyJSON: Data = try policy.toJSON()
         let encodedPolicy: String = policyJSON.base64EncodedString()
-        let signature: String = "\(appSecret)\(encodedPolicy)".digest(.sha256)
+        let signature: String = encodedPolicy.hmac(.sha256, key: appSecret)
 
         self.init(encodedPolicy: encodedPolicy, signature: signature)
     }
