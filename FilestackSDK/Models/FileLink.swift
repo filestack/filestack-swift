@@ -31,10 +31,10 @@ import Alamofire
     public let handle: String
 
     /// A Filestack CDN URL corresponding to this `FileLink`.
-    public var url: URL {
+    public lazy var url: URL = {
 
-        return cdnService.buildURL(handle: handle, security: security)!
-    }
+        return cdnService.buildURL(handle: self.handle, security: self.security)!
+    }()
 
 
     // MARK: - Private Properties
