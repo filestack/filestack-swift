@@ -13,6 +13,10 @@ struct Seeds {
 
     struct Policies {
 
+        static let minimal = Policy(
+            expiry: Date(timeIntervalSince1970: 12345)
+        )
+
         static let basic = Policy(
             expiry: Date(timeIntervalSince1970: 12345),
             call: [.read, .write, .stat, .convert],

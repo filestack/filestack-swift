@@ -12,7 +12,30 @@ import XCTest
 
 class PolicyTests: XCTestCase {
     
-    func testPolicyInstantiationAndJSONEncoding() {
+    func testMinimalPolicyInstantiationAndJSONEncoding() {
+
+        let policy = Seeds.Policies.minimal
+
+        var jsonData: Data!
+        XCTAssertNoThrow(jsonData = try! policy.toJSON())
+
+        var decodedJSON: Any!
+        XCTAssertNoThrow(decodedJSON = try! JSONSerialization.jsonObject(with: jsonData))
+
+        let json = decodedJSON as! [String: Any]
+        XCTAssertNotNil(json, "Unable to decode JSON object as a dictionary of [String: Any] values.")
+
+        XCTAssertEqual(json["expiry"] as! TimeInterval, 12345)
+        XCTAssertNil(json["call"])
+        XCTAssertNil(json["handle"])
+        XCTAssertNil(json["url"])
+        XCTAssertNil(json["max_size"])
+        XCTAssertNil(json["min_size"])
+        XCTAssertNil(json["path"])
+        XCTAssertNil(json["container"])
+    }
+
+    func testBasicPolicyInstantiationAndJSONEncoding() {
 
         let policy = Seeds.Policies.basic
 
