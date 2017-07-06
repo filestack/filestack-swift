@@ -102,13 +102,13 @@ import Foundation
     // MARK: - Properties
 
     private let expiry: Date
-    private let call: [PolicyCall]
-    private let handle: String
-    private let url: URL
-    private let maxSize: UInt
-    private let minSize: UInt
-    private let path: String
-    private let container: String
+    private let call: [PolicyCall]?
+    private let handle: String?
+    private let url: URL?
+    private let maxSize: UInt?
+    private let minSize: UInt?
+    private let path: String?
+    private let container: String?
 
 
     // MARK: - Lifecyle Functions
@@ -129,13 +129,13 @@ import Foundation
             must match the container/bucket that the files will be stored under.
      */
     public init(expiry: Date,
-         call: [PolicyCall],
-         handle: String,
-         url: URL,
-         maxSize: UInt,
-         minSize: UInt,
-         path: String,
-         container: String) {
+         call: [PolicyCall]? = nil,
+         handle: String? = nil,
+         url: URL? = nil,
+         maxSize: UInt? = nil,
+         minSize: UInt? = nil,
+         path: String? = nil,
+         container: String? = nil) {
 
         self.expiry = expiry
         self.call = call
@@ -165,13 +165,34 @@ import Foundation
         var dict = [String: Any]()
 
         dict["expiry"] = expiry.timeIntervalSince1970
-        dict["call"] = call.map { $0.toString }
-        dict["handle"] = handle
-        dict["url"] = url.absoluteString
-        dict["max_size"] = maxSize
-        dict["min_size"] = minSize
-        dict["path"] = path
-        dict["container"] = container
+
+        if let call = call {
+            dict["call"] = call.map { $0.toString }
+        }
+
+        if let handle = handle {
+            dict["handle"] = handle
+        }
+
+        if let url = url {
+            dict["url"] = url.absoluteString
+        }
+
+        if let maxSize = maxSize {
+            dict["max_size"] = maxSize
+        }
+
+        if let minSize = minSize {
+            dict["min_size"] = minSize
+        }
+
+        if let path = path {
+            dict["path"] = path
+        }
+
+        if let container = container {
+            dict["container"] = container
+        }
 
         return dict
     }
