@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 /**
@@ -35,17 +36,13 @@ import Foundation
 
     // MARK: - Lifecyle Functions
 
-    init(request: URLRequest? = nil,
-         response: HTTPURLResponse? = nil,
-         temporaryURL: URL? = nil,
-         destinationURL: URL? = nil,
-         error: Error? = nil) {
+    internal init(with downloadResponse: DownloadResponse<Data>) {
 
-        self.request = request
-        self.response = response
-        self.temporaryURL = temporaryURL
-        self.destinationURL = destinationURL
-        self.error = error
+        self.request = downloadResponse.request
+        self.response = downloadResponse.response
+        self.temporaryURL = downloadResponse.temporaryURL
+        self.destinationURL = downloadResponse.destinationURL
+        self.error = downloadResponse.error
 
         super.init()
     }

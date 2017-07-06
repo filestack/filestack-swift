@@ -94,14 +94,7 @@ import Alamofire
 
         request.responseData(completionHandler: { (response) in
 
-            let networkResponse = NetworkDataResponse(
-                request: response.request,
-                response: response.response,
-                data: response.data,
-                error: response.error
-            )
-            
-            completionHandler(networkResponse)
+            completionHandler(NetworkDataResponse(with: response))
         })
     }
 
@@ -146,15 +139,7 @@ import Alamofire
 
         request.responseData(completionHandler: { (response) in
 
-            let networkResponse = NetworkDownloadResponse(
-                request: response.request,
-                response: response.response,
-                temporaryURL: response.temporaryURL,
-                destinationURL: response.destinationURL,
-                error: response.error
-            )
-
-            completionHandler(networkResponse)
+            completionHandler(NetworkDownloadResponse(with: response))
         })
     }
 
@@ -182,14 +167,7 @@ import Alamofire
 
         request.responseData(completionHandler: { (response) in
 
-            let networkResponse = NetworkDataResponse(
-                request: response.request,
-                response: response.response,
-                data: response.data,
-                error: response.error
-            )
-
-            completionHandler(networkResponse)
+            completionHandler(NetworkDataResponse(with: response))
         })
     }
 }

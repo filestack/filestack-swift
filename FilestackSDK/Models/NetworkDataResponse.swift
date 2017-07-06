@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 /**
@@ -32,15 +33,12 @@ import Foundation
 
     // MARK: - Lifecyle Functions
 
-    init(request: URLRequest? = nil,
-         response: HTTPURLResponse? = nil,
-         data: Data? = nil,
-         error: Error? = nil) {
+    internal init(with dataResponse: DataResponse<Data>) {
 
-        self.request = request
-        self.response = response
-        self.data = data
-        self.error = error
+        self.request = dataResponse.request
+        self.response = dataResponse.response
+        self.data = dataResponse.data
+        self.error = dataResponse.error
 
         super.init()
     }
