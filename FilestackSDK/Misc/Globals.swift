@@ -9,4 +9,5 @@
 import Foundation
 
 
-internal let defaultCDNService = CDNService()
+internal let cdnService = CDNService()
+internal let apiService = APIService()

@@ -2,7 +2,7 @@
 //  NetworkingService.swift
 //  FilestackSDK
 //
-//  Created by Ruben Nine on 03/07/2017.
+//  Created by Ruben Nine on 7/6/17.
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
@@ -12,46 +12,35 @@ import Alamofire
 
 internal protocol NetworkingService {
 
+    var sessionManager: SessionManager { get }
     var baseURL: URL { get }
 
-    var sessionManager: Alamofire.SessionManager { get }
-
-    func getDataRequest(handle: String,
-                        path: String?,
-                        parameters: [String: Any]?,
-                        security: Security?) -> DataRequest?
+    func buildURL(handle: String?, path: String?, security: Security?) -> URL?
 }
 
 extension NetworkingService {
 
-    func getDataRequest(handle: String,
-                        path: String?,
-                        parameters: [String: Any]?,
-                        security: Security?) -> DataRequest? {
+    func buildURL(handle: String? = nil, path: String? = nil, security: Security? = nil) -> URL? {
 
-        guard let url = Utils.getURL(baseURL: baseURL,
-                                     handle: handle,
-                                     path: path,
-                                     security: security) else {
-            return nil
+        var url = baseURL
+
+        if let path = path {
+            url.appendPathComponent(path)
         }
 
-        return sessionManager.request(url, method: .get, parameters: parameters)
-    }
-
-    func downloadRequest(handle: String,
-                         path: String?,
-                         parameters: [String: Any]?,
-                         security: Security?,
-                         downloadDestination: DownloadRequest.DownloadFileDestination?) -> DownloadRequest? {
-
-        guard let url = Utils.getURL(baseURL: baseURL,
-                                     handle: handle,
-                                     path: path,
-                                     security: security) else {
-            return nil
+        if let handle = handle {
+            url.appendPathComponent(handle)
         }
 
-        return sessionManager.download(url, method: .get, parameters: parameters, to: downloadDestination)
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+
+        if let security = security {
+            urlComponents.queryItems = [
+                URLQueryItem(name: "policy", value: security.encodedPolicy),
+                URLQueryItem(name: "signature", value: security.signature)
+            ]
+        }
+
+        return try? urlComponents.asURL()
     }
 }

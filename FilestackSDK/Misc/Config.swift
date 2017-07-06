@@ -14,4 +14,8 @@ internal struct Config {
     static let apiURL = URL(string: "https://www.filestackapi.com/api")!
     static let cdnURL = URL(string: "https://cdn.filestackcontent.com")!
     static let processURL = URL(string: "https://process.filestackapi.com")!
+
+    static let filePath = "file"
+    static let storePath = "store"
+    static let metadataPath = "metadata"
 }

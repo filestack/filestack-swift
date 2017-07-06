@@ -11,10 +11,10 @@ import Alamofire
 
 
 /**
-    Represents a filelink object.
+    Represents a `FileLink` object.
 
-    See [Filestack Architecture Overview](https://www.filestack.com/docs/file-architecture) for 
-    more information files.
+    See [Filestack Architecture Overview](https://www.filestack.com/docs/file-architecture) for more information
+    about files.
  */
 @objc(FSFileLink) public class FileLink: NSObject {
 
@@ -33,13 +33,13 @@ import Alamofire
     /// A Filestack CDN URL corresponding to this `FileLink`.
     public var url: URL {
 
-        return Utils.getURL(baseURL: Config.cdnURL, handle: handle, security: security)!
+        return cdnService.buildURL(handle: handle, security: security)!
     }
 
 
     // MARK: - Private Properties
 
-    private let validHTTPResponseCodes = [200, 303, 304]
+    private let validHTTPResponseCodes = Array(200..<300)
 
 
     // MARK: - Lifecyle Functions
@@ -79,10 +79,10 @@ import Alamofire
                            downloadProgress: ((Progress) -> Void)? = nil,
                            completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
-        guard let request = defaultCDNService.getDataRequest(handle: handle,
-                                                             path: nil,
-                                                             parameters: parameters,
-                                                             security: security) else {
+        guard let request = cdnService.getDataRequest(handle: handle,
+                                                      path: nil,
+                                                      parameters: parameters,
+                                                      security: security) else {
             return
         }
 
@@ -130,11 +130,11 @@ import Alamofire
             return (destinationURL: destinationURL, options: downloadOptions)
         }
 
-        guard let request = defaultCDNService.downloadRequest(handle: handle,
-                                                              path: nil,
-                                                              parameters: parameters,
-                                                              security: security,
-                                                              downloadDestination: downloadDestination) else {
+        guard let request = cdnService.downloadRequest(handle: handle,
+                                                       path: nil,
+                                                       parameters: parameters,
+                                                       security: security,
+                                                       downloadDestination: downloadDestination) else {
             return
         }
 
@@ -158,4 +158,38 @@ import Alamofire
         })
     }
 
+    /**
+        Removes this `FileLink` from Filestack.
+
+        - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
+          that includes the `remove` permission.
+
+        - Parameter parameters: Any query string parameters that should be added to the request.
+            `nil` by default.
+        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     */
+    public func delete(parameters: [String: Any]? = nil,
+                       completionHandler: @escaping (NetworkDataResponse) -> Void) {
+
+        guard let request = apiService.deleteRequest(handle: handle,
+                                                     path: Config.filePath,
+                                                     parameters: parameters,
+                                                     security: security) else {
+            return
+        }
+
+        request.validate(statusCode: validHTTPResponseCodes)
+
+        request.responseData(completionHandler: { (response) in
+
+            let networkResponse = NetworkDataResponse(
+                request: response.request,
+                response: response.response,
+                data: response.data,
+                error: response.error
+            )
+
+            completionHandler(networkResponse)
+        })
+    }
 }

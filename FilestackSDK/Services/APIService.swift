@@ -1,0 +1,27 @@
+//
+//  APIService.swift
+//  FilestackSDK
+//
+//  Created by Ruben Nine on 7/6/17.
+//  Copyright © 2017 Filestack. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+
+
+internal class APIService: NetworkingService {
+
+    let sessionManager = SessionManager.filestackDefault()
+    let baseURL = Config.apiURL
+
+    func deleteRequest(handle: String,
+                       path: String?,
+                       parameters: [String: Any]?,
+                       security: Security?) -> DataRequest? {
+
+        guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
+
+        return sessionManager.request(url, method: .delete, parameters: parameters)
+    }
+}

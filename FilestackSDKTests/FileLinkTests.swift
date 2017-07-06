@@ -57,14 +57,10 @@ class FileLinkTests: XCTestCase {
         let security = Seeds.Securities.basic
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
 
-        let expectedURL = Config.cdnURL
-            .appendingPathComponent(
-                "security=policy:\(security.encodedPolicy)," +
-                "signature:\(security.signature)"
-            )
-            .appendingPathComponent("MY-HANDLE")
-
-        XCTAssertEqual(fileLink.url, expectedURL)
+        XCTAssertEqual(fileLink.url.absoluteString,
+                       Config.cdnURL.absoluteString +
+                       "/MY-HANDLE" +
+                       "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
     }
 
     func testGetExistingContent() {
@@ -83,31 +79,31 @@ class FileLinkTests: XCTestCase {
         let security = Seeds.Securities.basic
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
 
-        let expectedRequestURL = Config.cdnURL
-            .appendingPathComponent(
-                "security=policy:\(security.encodedPolicy)," +
-                "signature:\(security.signature)"
-            )
-            .appendingPathComponent("MY-HANDLE")
-
         let expectation = self.expectation(description: "request should succeed")
+        var response: NetworkDataResponse?
 
-        fileLink.getContent() { (response) in
+        fileLink.getContent() { (resp) in
 
-            XCTAssertEqual(response.response?.statusCode, 200)
-            XCTAssertNotNil(response.response)
-            XCTAssertEqual(response.response?.url, expectedRequestURL)
-            XCTAssertNotNil(response.data)
-            XCTAssertEqual(response.data?.count, 200367)
-            XCTAssertNil(response.error)
-
-            let image = UIImage(data: response.data!)
-            XCTAssertNotNil(image)
-
+            response = resp
             expectation.fulfill()
         }
 
         waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertNotNil(response?.response)
+
+        XCTAssertEqual(response?.response?.url?.absoluteString,
+                       Config.cdnURL.absoluteString +
+                       "/MY-HANDLE" +
+                       "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
+
+        XCTAssertNotNil(response?.data)
+        XCTAssertEqual(response?.data?.count, 200367)
+        XCTAssertNil(response?.error)
+
+        let image = UIImage(data: response!.data!)
+        XCTAssertNotNil(image)
     }
 
     func testGetUnexistingContent() {
@@ -147,16 +143,6 @@ class FileLinkTests: XCTestCase {
         }
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
-        let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
-
-        var expectedURLComponents = URLComponents(url: expectedRequestURL,
-                                                  resolvingAgainstBaseURL: true)!
-
-        expectedURLComponents.queryItems = [
-            URLQueryItem(name: "foo", value: "123"),
-            URLQueryItem(name: "bar", value: "321")
-        ]
-
         let expectation = self.expectation(description: "request should succeed")
         var response: NetworkDataResponse?
 
@@ -170,15 +156,10 @@ class FileLinkTests: XCTestCase {
 
         XCTAssertNotNil(response?.request?.url)
 
-        let actualURLComponents = URLComponents(url: response!.request!.url!,
-                                                resolvingAgainstBaseURL: true)!
-
-        XCTAssertEqual(actualURLComponents.fragment, expectedURLComponents.fragment)
-
-        for item in actualURLComponents.queryItems! {
-
-            XCTAssertTrue(expectedURLComponents.queryItems!.contains(item))
-        }
+        XCTAssertEqual(response?.request?.url?.absoluteString,
+                       Config.cdnURL.absoluteString +
+                       "/MY-HANDLE" +
+                       "?bar=321&foo=123")
     }
 
     func testGetContentWithDownloadProgressMonitoring() {
@@ -224,14 +205,6 @@ class FileLinkTests: XCTestCase {
 
         let security = Seeds.Securities.basic
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
-
-        let expectedRequestURL = Config.cdnURL
-            .appendingPathComponent(
-                "security=policy:\(security.encodedPolicy)," +
-                "signature:\(security.signature)"
-            )
-            .appendingPathComponent("MY-HANDLE")
-
         let expectation = self.expectation(description: "request should succeed")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
         var response: NetworkDownloadResponse?
@@ -246,7 +219,12 @@ class FileLinkTests: XCTestCase {
 
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNotNil(response?.response)
-        XCTAssertEqual(response?.response?.url, expectedRequestURL)
+
+        XCTAssertEqual(response?.response?.url?.absoluteString,
+                       Config.cdnURL.absoluteString +
+                       "/MY-HANDLE" +
+                       "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
+
         XCTAssertEqual(response?.destinationURL, destinationURL)
         XCTAssertNil(response?.error)
 
@@ -292,16 +270,6 @@ class FileLinkTests: XCTestCase {
         }
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
-        let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
-
-        var expectedURLComponents = URLComponents(url: expectedRequestURL,
-                                                  resolvingAgainstBaseURL: true)!
-
-        expectedURLComponents.queryItems = [
-            URLQueryItem(name: "foo", value: "123"),
-            URLQueryItem(name: "bar", value: "321")
-        ]
-
         let expectation = self.expectation(description: "request should succeed")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
         var response: NetworkDownloadResponse?
@@ -316,15 +284,10 @@ class FileLinkTests: XCTestCase {
 
         XCTAssertNotNil(response?.request?.url)
 
-        let actualURLComponents = URLComponents(url: response!.request!.url!,
-                                                resolvingAgainstBaseURL: true)!
-
-        XCTAssertEqual(actualURLComponents.fragment, expectedURLComponents.fragment)
-
-        for item in actualURLComponents.queryItems! {
-
-            XCTAssertTrue(expectedURLComponents.queryItems!.contains(item))
-        }
+        XCTAssertEqual(response?.request?.url?.absoluteString,
+                       Config.cdnURL.absoluteString +
+                       "/MY-HANDLE" +
+                       "?bar=321&foo=123")
     }
 
     func testDownloadWithDownloadProgressMonitoring() {
