@@ -107,7 +107,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testGetUnexistingContent() {
@@ -131,7 +131,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertEqual(response?.request?.url, expectedRequestURL)
@@ -166,7 +166,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertNotNil(response?.request?.url)
 
@@ -206,7 +206,7 @@ class FileLinkTests: XCTestCase {
 
         fileLink.getContent(downloadProgress: downloadProgress) { _ in }
 
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testDownloadExistingContent() {
@@ -242,7 +242,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNotNil(response?.response)
@@ -276,7 +276,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertEqual(response?.request?.url, expectedRequestURL)
@@ -312,7 +312,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertNotNil(response?.request?.url)
 
@@ -353,6 +353,6 @@ class FileLinkTests: XCTestCase {
 
         fileLink.download(destinationURL: destinationURL, downloadProgress: downloadProgress) { _ in }
 
-        waitForExpectations(timeout: 3, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 }
