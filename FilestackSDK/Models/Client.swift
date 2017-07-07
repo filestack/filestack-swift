@@ -46,4 +46,17 @@ import Foundation
 
         super.init()
     }
+
+
+    // MARK: - Public Functions
+
+    /**
+        A `FileLink` object corresponding to a given handle.
+
+        - Parameter handle: A Filestack handle.
+     */
+    public func fileLink(`for` handle: String) -> FileLink {
+
+        return FileLink(handle: handle, apiKey: apiKey, security: security)
+    }
 }

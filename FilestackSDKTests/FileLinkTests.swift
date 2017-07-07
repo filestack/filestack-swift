@@ -28,7 +28,8 @@ class FileLinkTests: XCTestCase {
 
     func testInitializerWithHandleAndApiKey() {
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
 
         XCTAssertEqual(fileLink.handle, "MY-HANDLE")
         XCTAssertEqual(fileLink.apiKey, "MY-API-KEY")
@@ -38,7 +39,8 @@ class FileLinkTests: XCTestCase {
     func testInitializerWithHandleApiKeyAndSecurity() {
 
         let security = Seeds.Securities.basic
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+        let fileLink = client.fileLink(for: "MY-HANDLE")
 
         XCTAssertEqual(fileLink.handle, "MY-HANDLE")
         XCTAssertEqual(fileLink.apiKey, "MY-API-KEY")
@@ -47,7 +49,8 @@ class FileLinkTests: XCTestCase {
 
     func testURL() {
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectedURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(fileLink.url, expectedURL)
@@ -56,7 +59,8 @@ class FileLinkTests: XCTestCase {
     func testURLWithSecurity() {
 
         let security = Seeds.Securities.basic
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+        let fileLink = client.fileLink(for: "MY-HANDLE")
 
         XCTAssertEqual(fileLink.url.absoluteString,
                        Config.cdnURL.absoluteString +
@@ -78,7 +82,8 @@ class FileLinkTests: XCTestCase {
         }
 
         let security = Seeds.Securities.basic
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+        let fileLink = client.fileLink(for: "MY-HANDLE")
 
         let expectation = self.expectation(description: "request should succeed")
         var response: NetworkDataResponse?
@@ -113,7 +118,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
@@ -138,7 +144,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
         var response: NetworkDataResponse?
 
@@ -165,7 +172,8 @@ class FileLinkTests: XCTestCase {
         }
 
         let security = Seeds.Securities.basic
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
         var response: NetworkDataResponse?
 
@@ -199,7 +207,8 @@ class FileLinkTests: XCTestCase {
             return fixture(filePath: stubPath, headers: httpHeaders).requestTime(0.2, responseTime: 2)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let progressExpectation = self.expectation(description: "request should report progress")
 
         let downloadProgress: ((Progress) -> Void) = { progress in
@@ -228,7 +237,8 @@ class FileLinkTests: XCTestCase {
         }
 
         let security = Seeds.Securities.basic
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
         var response: NetworkDownloadResponse?
@@ -262,7 +272,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
@@ -288,7 +299,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
         var response: NetworkDownloadResponse?
@@ -322,7 +334,8 @@ class FileLinkTests: XCTestCase {
             return fixture(filePath: stubPath, headers: httpHeaders).requestTime(0.2, responseTime: 2)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
         let progressExpectation = self.expectation(description: "request should report progress")
 
@@ -344,7 +357,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should complete")
         var response: NetworkDataResponse?
 
@@ -371,7 +385,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should complete")
         var response: NetworkDataResponse?
 
@@ -393,7 +408,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should complete")
         var response: NetworkDataResponse?
 
@@ -415,7 +431,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should complete")
         var response: NetworkDataResponse?
 
@@ -437,7 +454,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let fileURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
         let expectation = self.expectation(description: "request should complete")
         var response: NetworkDataResponse?
@@ -460,7 +478,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
-        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
         let fileURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
         let expectation = self.expectation(description: "request should complete")
         var response: NetworkDataResponse?

@@ -44,16 +44,7 @@ import Alamofire
 
     // MARK: - Lifecyle Functions
 
-    /**
-        The designated initializer.
-
-        - SeeAlso: `Security`
-
-        - Parameter handle: A Filestack Handle.
-        - Parameter apiKey: An API key obtained from the Developer Portal.
-        - Parameter security: A `Security` object. `nil` by default.
-     */
-    public init(handle: String, apiKey: String, security: Security? = nil) {
+    internal init(handle: String, apiKey: String, security: Security? = nil) {
 
         self.handle = handle
         self.apiKey = apiKey
