@@ -62,11 +62,13 @@ import Alamofire
      
         - Parameter parameters: Any query string parameters that should be added to the request.
              `nil` by default.
+        - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
         - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle 
             of the Request as data is read from the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func getContent(parameters: [String: Any]? = nil,
+                           queue: DispatchQueue? = nil,
                            downloadProgress: ((Progress) -> Void)? = nil,
                            completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
@@ -78,12 +80,16 @@ import Alamofire
         }
 
         if let downloadProgress = downloadProgress {
-            request.downloadProgress(closure: downloadProgress)
+            if let queue = queue {
+                request.downloadProgress(queue: queue, closure: downloadProgress)
+            } else {
+                request.downloadProgress(closure: downloadProgress)
+            }
         }
 
         request.validate(statusCode: validHTTPResponseCodes)
 
-        request.responseData(completionHandler: { (response) in
+        request.responseData(queue: queue, completionHandler: { (response) in
 
             completionHandler(NetworkDataResponse(with: response))
         })
@@ -95,12 +101,14 @@ import Alamofire
         - Parameter destinationURL: The local URL where content should be saved.
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
+        - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
         - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle
             of the Request as data is read from the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func download(destinationURL: URL,
                          parameters: [String: Any]? = nil,
+                         queue: DispatchQueue? = nil,
                          downloadProgress: ((Progress) -> Void)? = nil,
                          completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
 
@@ -123,12 +131,16 @@ import Alamofire
         }
 
         if let downloadProgress = downloadProgress {
-            request.downloadProgress(closure: downloadProgress)
+            if let queue = queue {
+                request.downloadProgress(queue: queue, closure: downloadProgress)
+            } else {
+                request.downloadProgress(closure: downloadProgress)
+            }
         }
 
         request.validate(statusCode: validHTTPResponseCodes)
 
-        request.responseData(completionHandler: { (response) in
+        request.responseData(queue: queue, completionHandler: { (response) in
 
             completionHandler(NetworkDownloadResponse(with: response))
         })
@@ -142,9 +154,11 @@ import Alamofire
 
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
+        - Parameter queue: The queue on which the completion handler is dispatched.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func delete(parameters: [String: Any]? = nil,
+                       queue: DispatchQueue? = nil,
                        completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
         guard let request = apiService.deleteRequest(handle: handle,
@@ -156,7 +170,7 @@ import Alamofire
 
         request.validate(statusCode: validHTTPResponseCodes)
 
-        request.responseData(completionHandler: { (response) in
+        request.responseData(queue: queue, completionHandler: { (response) in
 
             completionHandler(NetworkDataResponse(with: response))
         })
@@ -171,12 +185,14 @@ import Alamofire
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
         - Parameter fileURL: A local file that will replace the existing remote content.
+        - Parameter queue: The queue on which the uploadProgress and completion handlers are dispatched.
         - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
             of the Request as data is written on the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func overwrite(parameters: [String: Any]? = nil,
                           fileURL: URL,
+                          queue: DispatchQueue? = nil,
                           uploadProgress: ((Progress) -> Void)? = nil,
                           completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
@@ -189,12 +205,16 @@ import Alamofire
         }
 
         if let uploadProgress = uploadProgress {
-            request.uploadProgress(closure: uploadProgress)
+            if let queue = queue {
+                request.uploadProgress(queue: queue, closure: uploadProgress)
+            } else {
+                request.uploadProgress(closure: uploadProgress)
+            }
         }
 
         request.validate(statusCode: validHTTPResponseCodes)
 
-        request.responseData(completionHandler: { (response) in
+        request.responseData(queue: queue, completionHandler: { (response) in
 
             completionHandler(NetworkDataResponse(with: response))
         })
@@ -208,11 +228,13 @@ import Alamofire
 
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
+        - Parameter queue: The queue on which the completion handler is dispatched.
         - Parameter remoteURL: A remote `URL` whose content will replace the existing remote content.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func overwrite(parameters: [String: Any]? = nil,
                           remoteURL: URL,
+                          queue: DispatchQueue? = nil,
                           completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
         guard let request = apiService.overwriteRequest(handle: handle,
@@ -225,7 +247,7 @@ import Alamofire
 
         request.validate(statusCode: validHTTPResponseCodes)
 
-        request.responseData(completionHandler: { (response) in
+        request.responseData(queue: queue, completionHandler: { (response) in
 
             completionHandler(NetworkDataResponse(with: response))
         })

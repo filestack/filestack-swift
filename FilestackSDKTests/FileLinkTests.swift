@@ -223,6 +223,53 @@ class FileLinkTests: XCTestCase {
         waitForExpectations(timeout: 10, handler: nil)
     }
 
+    func testGetContentUsingDefaultQueue() {
+
+        stub(condition: cdnStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
+
+        let expectation = self.expectation(description: "request should succeed")
+        var isMainThread: Bool?
+
+        fileLink.getContent() { _ in
+
+            isMainThread = Thread.isMainThread
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertTrue(isMainThread!)
+    }
+
+    func testGetContentUsingCustomQueue() {
+
+        stub(condition: cdnStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
+
+        let expectation = self.expectation(description: "request should succeed")
+        let customQueue = DispatchQueue(label: "com.filestack.my-custom-queue")
+        var isMainThread: Bool?
+
+        fileLink.getContent(queue: customQueue) { _ in
+
+            isMainThread = Thread.isMainThread
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertFalse(isMainThread!)
+    }
+
     func testDownloadExistingContent() {
 
         stub(condition: cdnStubConditions) { _ in
