@@ -60,3 +60,30 @@ import Foundation
         return FileLink(handle: handle, apiKey: apiKey, security: security)
     }
 }
+
+
+// MARK: - CustomStringConvertible
+
+public extension Client {
+
+    override var description: String {
+
+        var components: [String] = []
+
+        components.append("\(super.description)(")
+        components.append("    apiKey: \(apiKey),")
+
+        if let security = security {
+            components.append("    security: \(attachedDescription(object: security))")
+        }
+
+        if let storage = storage {
+            components.append("    storage: \(storage.toString)")
+        }
+
+        components.append(")")
+
+        return components.joined(separator: "\n")
+    }
+}
+

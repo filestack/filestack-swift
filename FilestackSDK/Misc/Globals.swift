@@ -11,3 +11,18 @@ import Foundation
 
 internal let cdnService = CDNService()
 internal let apiService = APIService()
+
+internal func attachedDescription(object: CustomStringConvertible, indent: Int = 1, spaces: Int = 4) -> String {
+
+    var components: [String] = []
+
+    for (idx, line) in object.description.split(separator: "\n").enumerated() {
+        if idx == 0 {
+            components.append(String(line))
+        } else {
+            components.append("\(String(repeatElement(" ", count: indent * spaces)))\(line)")
+        }
+    }
+
+    return components.joined(separator: "\n")
+}

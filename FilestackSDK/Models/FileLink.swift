@@ -247,3 +247,27 @@ import Alamofire
         return parameters
     }
 }
+
+// MARK: - CustomStringConvertible
+
+public extension FileLink {
+
+    override var description: String {
+
+        var components: [String] = []
+
+        components.append("\(super.description)(")
+        components.append("    apiKey: \(apiKey),")
+        components.append("    handle: \(handle),")
+        components.append("    url: \(url.absoluteString)")
+
+        if let security = security {
+            components.append("    security: \(attachedDescription(object: security))")
+        }
+
+        components.append(")")
+
+        return components.joined(separator: "\n")
+    }
+}
+

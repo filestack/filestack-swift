@@ -101,14 +101,14 @@ import Foundation
 
     // MARK: - Properties
 
-    private let expiry: Date
-    private let call: [PolicyCall]?
-    private let handle: String?
-    private let url: URL?
-    private let maxSize: UInt?
-    private let minSize: UInt?
-    private let path: String?
-    private let container: String?
+    public let expiry: Date
+    public let call: [PolicyCall]?
+    public let handle: String?
+    public let url: URL?
+    public let maxSize: UInt?
+    public let minSize: UInt?
+    public let path: String?
+    public let container: String?
 
 
     // MARK: - Lifecyle Functions
@@ -195,5 +195,51 @@ import Foundation
         }
 
         return dict
+    }
+}
+
+
+// MARK: - CustomStringConvertible
+
+public extension Policy {
+
+    override var description: String {
+
+        var components: [String] = []
+
+        components.append("\(super.description)(")
+        components.append("    expiry: \(expiry),")
+
+        if let call = call {
+            components.append("    call: \(call)")
+        }
+
+        if let handle = handle {
+            components.append("    handle: \(handle)")
+        }
+
+        if let url = url {
+            components.append("    url: \(url)")
+        }
+
+        if let maxSize = maxSize {
+            components.append("    maxSize: \(maxSize)")
+        }
+
+        if let minSize = minSize {
+            components.append("    minSize: \(minSize)")
+        }
+
+        if let path = path {
+            components.append("    path: \(path)")
+        }
+
+        if let container = container {
+            components.append("    container: \(container)")
+        }
+
+        components.append(")")
+
+        return components.joined(separator: "\n")
     }
 }
