@@ -158,6 +158,34 @@ class FileLinkTests: XCTestCase {
                        "?bar=321&foo=123")
     }
 
+    func testGetContentWithParametersAndSecurity() {
+
+        stub(condition: cdnStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        let security = Seeds.Securities.basic
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY", security: security)
+        let expectation = self.expectation(description: "request should succeed")
+        var response: NetworkDataResponse?
+
+        fileLink.getContent(parameters: ["foo": "123", "bar": "321"]) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertNotNil(response?.request?.url)
+
+        XCTAssertEqual(response?.request?.url?.absoluteString,
+                       Config.cdnURL.absoluteString +
+                       "/MY-HANDLE" +
+                       "?policy=\(security.encodedPolicy)&signature=\(security.signature)" +
+                       "&bar=321&foo=123")
+    }
+
     func testGetContentWithDownloadProgressMonitoring() {
 
         stub(condition: cdnStubConditions) { _ in
