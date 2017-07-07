@@ -158,7 +158,7 @@ import Alamofire
 
         guard let request = apiService.deleteRequest(handle: handle,
                                                      path: Config.filePath,
-                                                     parameters: parameters,
+                                                     parameters: ensureAPIKey(parameters),
                                                      security: security) else {
             return
         }
@@ -243,5 +243,21 @@ import Alamofire
 
             completionHandler(NetworkDataResponse(with: response))
         })
+    }
+
+
+    // MARK: - Private Functions
+
+    private func ensureAPIKey(_ parameters: [String: Any]?) -> [String: Any] {
+
+        guard var parameters = parameters else {
+            return ["key": apiKey]
+        }
+
+        if parameters.keys.contains("key") == false {
+            parameters["key"] = apiKey
+        }
+
+        return parameters
     }
 }

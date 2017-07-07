@@ -358,6 +358,11 @@ class FileLinkTests: XCTestCase {
 
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNil(response?.error)
+
+        XCTAssertEqual(response?.request?.url?.absoluteString,
+                       Config.apiURL.absoluteString +
+                       "/file/MY-HANDLE" +
+                       "?key=MY-API-KEY")
     }
 
     func testDeleteUnexistingContent() {
