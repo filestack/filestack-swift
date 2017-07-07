@@ -170,4 +170,78 @@ import Alamofire
             completionHandler(NetworkDataResponse(with: response))
         })
     }
+
+    /**
+        Overwrites this `FileLink` with a provided local file.
+
+        - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
+        that includes the `remove` permission.
+
+        - Parameter parameters: Any query string parameters that should be added to the request.
+            `nil` by default.
+        - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
+            of the Request as data is written on the server. `nil` by default.
+        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     */
+    public func overwrite(parameters: [String: Any]? = nil,
+                          fileURL: URL,
+                          uploadProgress: ((Progress) -> Void)? = nil,
+                          completionHandler: @escaping (NetworkDataResponse) -> Void) {
+
+        guard let request = apiService.overwriteRequest(handle: handle,
+                                                        path: Config.filePath,
+                                                        parameters: parameters,
+                                                        fileURL: fileURL,
+                                                        security: security) else {
+            return
+        }
+
+        if let uploadProgress = uploadProgress {
+            request.uploadProgress(closure: uploadProgress)
+        }
+
+        request.validate(statusCode: validHTTPResponseCodes)
+
+        request.responseData(completionHandler: { (response) in
+
+            completionHandler(NetworkDataResponse(with: response))
+        })
+    }
+
+    /**
+        Overwrites this `FileLink` with a provided local file.
+
+        - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
+            that includes the `remove` permission.
+
+        - Parameter parameters: Any query string parameters that should be added to the request.
+            `nil` by default.
+        - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
+            of the Request as data is written on the server. `nil` by default.
+        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     */
+    public func overwrite(parameters: [String: Any]? = nil,
+                          data: Data,
+                          uploadProgress: ((Progress) -> Void)? = nil,
+                          completionHandler: @escaping (NetworkDataResponse) -> Void) {
+
+        guard let request = apiService.overwriteRequest(handle: handle,
+                                                        path: Config.filePath,
+                                                        parameters: parameters,
+                                                        data: data,
+                                                        security: security) else {
+                                                            return
+        }
+
+        if let uploadProgress = uploadProgress {
+            request.uploadProgress(closure: uploadProgress)
+        }
+
+        request.validate(statusCode: validHTTPResponseCodes)
+
+        request.responseData(completionHandler: { (response) in
+
+            completionHandler(NetworkDataResponse(with: response))
+        })
+    }
 }

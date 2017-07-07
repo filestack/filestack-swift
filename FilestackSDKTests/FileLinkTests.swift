@@ -353,4 +353,104 @@ class FileLinkTests: XCTestCase {
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertNotNil(response?.error)
     }
+
+    func testOverwriteExistingContentWithData() {
+
+        stub(condition: apiStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.overwrite(data: Data()) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertNil(response?.error)
+    }
+
+    func testOverwriteUnexistingContentWithData() {
+
+        stub(condition: apiStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.overwrite(data: Data()) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 404)
+        XCTAssertNotNil(response?.error)
+    }
+
+    func testOverwriteExistingContentWithFileURL() {
+
+        stub(condition: apiStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let fileURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.overwrite(fileURL: fileURL) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertNil(response?.error)
+    }
+
+    func testOverwriteUnexistingContentWithFileURL() {
+
+        stub(condition: apiStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let fileURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.overwrite(fileURL: fileURL) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 404)
+        XCTAssertNotNil(response?.error)
+    }
+
+    // NOTE: OHHTTPStubs can not simulate data uploads, so we can't test this specific case.
+    // func testOverwriteExistingContentWithDataAndUploadProgressReporting() {
+    //
+    // }
+
+    // NOTE: OHHTTPStubs can not simulate data uploads, so we can't test this specific case.
+    // func testOverwriteExistingContentWithFileURLAndUploadProgressReporting() {
+    //
+    // }
 }
