@@ -109,10 +109,7 @@ class FileLinkTests: XCTestCase {
     func testGetUnexistingContent() {
 
         stub(condition: cdnStubConditions) { _ in
-            let data = Data()
-            let stubsResponse = OHHTTPStubsResponse(data: data, statusCode: 404, headers: nil)
-
-            return stubsResponse
+            return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
@@ -137,9 +134,7 @@ class FileLinkTests: XCTestCase {
     func testGetContentWithParameters() {
 
         stub(condition: cdnStubConditions) { _ in
-            let data = Data()
-
-            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
@@ -235,10 +230,7 @@ class FileLinkTests: XCTestCase {
     func testDownloadUnexistingContent() {
 
         stub(condition: cdnStubConditions) { _ in
-            let data = Data()
-            let stubsResponse = OHHTTPStubsResponse(data: data, statusCode: 404, headers: nil)
-
-            return stubsResponse
+            return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
@@ -264,9 +256,7 @@ class FileLinkTests: XCTestCase {
     func testDownloadWithParameters() {
 
         stub(condition: cdnStubConditions) { _ in
-            let data = Data()
-
-            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
