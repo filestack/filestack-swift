@@ -147,7 +147,7 @@ import Alamofire
         Removes this `FileLink` from Filestack.
 
         - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
-          that includes the `remove` permission.
+            that includes the `remove` permission.
 
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
@@ -175,7 +175,7 @@ import Alamofire
         Overwrites this `FileLink` with a provided local file.
 
         - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
-        that includes the `remove` permission.
+            that includes the `remove` permission.
 
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
