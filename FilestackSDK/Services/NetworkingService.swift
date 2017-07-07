@@ -32,7 +32,7 @@ extension NetworkingService {
             url.appendPathComponent(handle)
         }
 
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
 
         if let security = security {
             urlComponents.queryItems = [
