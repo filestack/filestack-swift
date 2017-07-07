@@ -17,6 +17,7 @@ import CFNetwork.CFNetworkErrors
 class FileLinkTests: XCTestCase {
 
     private let cdnStubConditions = isScheme(Config.cdnURL.scheme!) && isHost(Config.cdnURL.host!)
+    private let apiStubConditions = isScheme(Config.apiURL.scheme!) && isHost(Config.apiURL.host!)
     private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 
     override func tearDown() {
@@ -307,5 +308,49 @@ class FileLinkTests: XCTestCase {
         fileLink.download(destinationURL: destinationURL, downloadProgress: downloadProgress) { _ in }
 
         waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testDeleteExistingContent() {
+
+        stub(condition: apiStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.delete { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertNil(response?.error)
+    }
+
+    func testDeleteUnexistingContent() {
+
+        stub(condition: apiStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+        }
+
+        let fileLink = FileLink(handle: "MY-HANDLE", apiKey: "MY-API-KEY")
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.delete { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 404)
+        XCTAssertNotNil(response?.error)
     }
 }
