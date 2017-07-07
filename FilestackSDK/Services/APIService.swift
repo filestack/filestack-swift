@@ -39,11 +39,17 @@ internal class APIService: NetworkingService {
     func overwriteRequest(handle: String,
                           path: String?,
                           parameters: [String: Any]?,
-                          data: Data,
-                          security: Security?) -> UploadRequest? {
+                          remoteURL: URL,
+                          security: Security?) -> DataRequest? {
 
         guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
 
-        return sessionManager.upload(data, to: url)
+        var parameters = parameters ?? [String: Any]()
+
+        if parameters.keys.contains("url") == false {
+            parameters["url"] = remoteURL.absoluteString
+        }
+
+        return sessionManager.request(url, method: .post, parameters: parameters)
     }
 }

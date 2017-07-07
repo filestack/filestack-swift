@@ -402,55 +402,16 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.error)
     }
 
-    func testOverwriteExistingContentWithData() {
-
-        stub(condition: apiStubConditions) { _ in
-            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
-        }
-
-        let client = Client(apiKey: "MY-API-KEY")
-        let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectation = self.expectation(description: "request should complete")
-        var response: NetworkDataResponse?
-
-        fileLink.overwrite(data: Data()) { (resp) in
-
-            response = resp
-            expectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 10, handler: nil)
-
-        XCTAssertEqual(response?.response?.statusCode, 200)
-        XCTAssertNil(response?.error)
-    }
-
-    func testOverwriteUnexistingContentWithData() {
-
-        stub(condition: apiStubConditions) { _ in
-            return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
-        }
-
-        let client = Client(apiKey: "MY-API-KEY")
-        let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectation = self.expectation(description: "request should complete")
-        var response: NetworkDataResponse?
-
-        fileLink.overwrite(data: Data()) { (resp) in
-
-            response = resp
-            expectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 10, handler: nil)
-
-        XCTAssertEqual(response?.response?.statusCode, 404)
-        XCTAssertNotNil(response?.error)
-    }
-
     func testOverwriteExistingContentWithFileURL() {
 
-        stub(condition: apiStubConditions) { _ in
+        let requestExpectation = self.expectation(description: "request should complete")
+        var request: URLRequest?
+
+        stub(condition: apiStubConditions) { req in
+
+            request = req
+            requestExpectation.fulfill()
+
             return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
@@ -468,8 +429,65 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
+        XCTAssertEqual(request?.value(forHTTPHeaderField: "Content-Type"), "application/octet-stream")
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNil(response?.error)
+    }
+
+    func testOverwriteExistingContentWithRemoteURL() {
+
+        let requestExpectation = self.expectation(description: "request should complete")
+        var request: URLRequest?
+
+        stub(condition: apiStubConditions) { req in
+
+            request = req
+            requestExpectation.fulfill()
+
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
+        let remoteURL = URL(string: "https://SOME-REMOTE-PLACE")!
+        let responseExpectation = expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.overwrite(remoteURL: remoteURL) { (resp) in
+
+            response = resp
+            responseExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(request?.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertNil(response?.error)
+    }
+
+    func testOverwriteUnExistingContentWithRemoteURL() {
+
+        stub(condition: apiStubConditions) { req in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+        }
+
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
+        let remoteURL = URL(string: "https://SOME-REMOTE-PLACE")!
+        let responseExpectation = expectation(description: "request should complete")
+        var response: NetworkDataResponse?
+
+        fileLink.overwrite(remoteURL: remoteURL) { (resp) in
+
+            response = resp
+            responseExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 404)
+        XCTAssertNotNil(response?.error)
     }
 
     func testOverwriteUnexistingContentWithFileURL() {

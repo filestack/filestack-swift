@@ -170,6 +170,7 @@ import Alamofire
 
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
+        - Parameter fileURL: A local file that will replace the existing remote content.
         - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
             of the Request as data is written on the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
@@ -200,32 +201,26 @@ import Alamofire
     }
 
     /**
-        Overwrites this `FileLink` with a provided local file.
+        Overwrites this `FileLink` with a provided remote URL.
 
         - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
             that includes the `write` permission.
 
         - Parameter parameters: Any query string parameters that should be added to the request.
             `nil` by default.
-        - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
-            of the Request as data is written on the server. `nil` by default.
+        - Parameter remoteURL: A remote `URL` whose content will replace the existing remote content.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func overwrite(parameters: [String: Any]? = nil,
-                          data: Data,
-                          uploadProgress: ((Progress) -> Void)? = nil,
+                          remoteURL: URL,
                           completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
         guard let request = apiService.overwriteRequest(handle: handle,
                                                         path: Config.filePath,
                                                         parameters: parameters,
-                                                        data: data,
+                                                        remoteURL: remoteURL,
                                                         security: security) else {
-                                                            return
-        }
-
-        if let uploadProgress = uploadProgress {
-            request.uploadProgress(closure: uploadProgress)
+            return
         }
 
         request.validate(statusCode: validHTTPResponseCodes)
