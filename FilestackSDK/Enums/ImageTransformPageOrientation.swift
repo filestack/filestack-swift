@@ -1,0 +1,33 @@
+//
+//  ImageTransformPageOrientation.swift
+//  FilestackSDK
+//
+//  Created by Ruben Nine on 7/13/17.
+//  Copyright © 2017 Filestack. All rights reserved.
+//
+
+import Foundation
+
+
+@objc(FSImageTransformPageOrientation) public enum ImageTransformPageOrientation: UInt, CustomStringConvertible {
+
+    case portrait
+
+    case landscape
+
+
+    /// Returns a `String` representation of self.
+    public var description: String {
+
+        switch self {
+        case .portrait:
+
+            return "portrait"
+
+        case .landscape:
+
+            return "landscape"
+
+        }
+    }
+}

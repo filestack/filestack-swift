@@ -41,7 +41,8 @@ import Foundation
 
     // MARK: - Private Properties
 
-    private typealias Task = (name: String, options: [(key: String, value: Any)]?)
+    private typealias TaskOption = (key: String, value: Any?)
+    private typealias Task = (name: String, options: [TaskOption]?)
     private var transformationTasks: [Task] = [Task]()
 
 
@@ -75,7 +76,7 @@ import Foundation
                                           fit: ImageTransformFit? = nil,
                                           align: ImageTransformAlign? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let width = width {
             options.append((key: "width", value: width))
@@ -144,7 +145,7 @@ import Foundation
 
     @discardableResult public func watermark(file: String, size: Int? = nil, position: ImageTransformPosition? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         options.append((key: "file", value: file))
 
@@ -165,7 +166,7 @@ import Foundation
 
     @discardableResult public func watermark(file: String, size: Int? = nil, position: [ImageTransformPosition]) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         options.append((key: "file", value: file))
 
@@ -187,7 +188,7 @@ import Foundation
                                                color: UIColor? = nil,
                                                export: Bool? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let minSize = minSize {
             options.append((key: "minsize", value: minSize))
@@ -296,7 +297,7 @@ import Foundation
                                             blurMode: ImageTransformBlurMode? = nil,
                                             background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let amount = amount {
             options.append((key: "amount", value: amount))
@@ -321,7 +322,7 @@ import Foundation
                                             rotate: Int? = nil,
                                             background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let color = color {
             options.append((key: "color", value: color.hexString))
@@ -345,7 +346,7 @@ import Foundation
     @discardableResult public func tornEdges(spread: [Int]? = nil,
                                              background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let spread = spread {
             options.append((key: "spread", value: spread))
@@ -368,7 +369,7 @@ import Foundation
                                           color: UIColor? = nil,
                                           background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let blur = blur {
             options.append((key: "blur", value: blur))
@@ -399,7 +400,7 @@ import Foundation
 
     @discardableResult public func circle(background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let background = background {
             options.append((key: "background", value: background.hexString))
@@ -416,7 +417,7 @@ import Foundation
                                           color: UIColor? = nil,
                                           background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let width = width {
             options.append((key: "width", value: width))
@@ -439,7 +440,7 @@ import Foundation
 
     @discardableResult public func sharpen(amount: Int? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let amount = amount {
             options.append((key: "amount", value: amount))
@@ -454,7 +455,7 @@ import Foundation
 
     @discardableResult public func blur(amount: Int? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let amount = amount {
             options.append((key: "amount", value: amount))
@@ -478,7 +479,7 @@ import Foundation
 
     @discardableResult public func blackAndWhite(threshold: Int? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let threshold = threshold {
             options.append((key: "threshold", value: threshold))
@@ -493,7 +494,7 @@ import Foundation
 
     @discardableResult public func sepia(tone: Int? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let tone = tone {
             options.append((key: "tone", value: tone))
@@ -506,12 +507,91 @@ import Foundation
         return self
     }
 
+    @discardableResult public func convert(format: String,
+                                           background: UIColor? = nil,
+                                           page: Int? = nil,
+                                           density: Int? = nil,
+                                           compress: Bool? = nil,
+                                           quality: Int? = nil,
+                                           strip: Bool? = nil,
+                                           noMetadata: Bool? = nil,
+                                           colorSpace: ImageTransformColorSpace? = nil,
+                                           secure: Bool? = nil,
+                                           docInfo: Bool? = nil,
+                                           pageFormat: ImageTransformPageFormat? = nil,
+                                           pageOrientation: ImageTransformPageOrientation? = nil) -> Self {
+
+        return pConvert(format: format,
+                        background: background,
+                        page: page,
+                        density: density,
+                        compress: compress,
+                        quality: quality,
+                        strip: strip,
+                        noMetadata: noMetadata,
+                        colorSpace: colorSpace,
+                        secure: secure,
+                        docInfo: docInfo,
+                        pageFormat: pageFormat,
+                        pageOrientation: pageOrientation)
+    }
+
+    @discardableResult public func convertPreservingInputQuality(format: String,
+                                                                 background: UIColor? = nil,
+                                                                 page: Int? = nil,
+                                                                 density: Int? = nil,
+                                                                 compress: Bool? = nil,
+                                                                 strip: Bool? = nil,
+                                                                 noMetadata: Bool? = nil,
+                                                                 colorSpace: ImageTransformColorSpace? = nil,
+                                                                 secure: Bool? = nil,
+                                                                 docInfo: Bool? = nil,
+                                                                 pageFormat: ImageTransformPageFormat? = nil,
+                                                                 pageOrientation: ImageTransformPageOrientation? = nil) -> Self {
+
+        return pConvert(format: format,
+                        background: background,
+                        page: page,
+                        density: density,
+                        compress: compress,
+                        quality: "input",
+                        strip: strip,
+                        noMetadata: noMetadata,
+                        colorSpace: colorSpace,
+                        secure: secure,
+                        docInfo: docInfo,
+                        pageFormat: pageFormat,
+                        pageOrientation: pageOrientation)
+    }
+
+    @discardableResult public func quality(value: Int) -> Self {
+
+        var options = [TaskOption]()
+
+        options.append((key: "value", value: value))
+
+        let task = Task(name: "quality", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func zip() -> Self {
+
+        let task = Task(name: "zip", options: nil)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
 
     // MARK: - Private Functions
 
     @discardableResult private func pRotate(deg: Any? = nil, exif: Bool? = nil, background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let deg = deg {
             options.append((key: "deg", value: deg))
@@ -537,7 +617,7 @@ import Foundation
                                               height: Int? = nil,
                                               faces: Any? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let mode = mode {
             options.append((key: "mode", value: String(describing: mode)))
@@ -569,7 +649,7 @@ import Foundation
                                                   blur: Float? = nil,
                                                   type: ImageTransformPixelateFacesType? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         options.append((key: "faces", value: faces))
 
@@ -602,7 +682,7 @@ import Foundation
                                                  blur: Float? = nil,
                                                  background: UIColor? = nil) -> Self {
 
-        var options = [(key: String, value: Any)]()
+        var options = [TaskOption]()
 
         if let radius = radius {
             options.append((key: "radius", value: radius))
@@ -617,6 +697,79 @@ import Foundation
         }
 
         let task = Task(name: "round_corners", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult private func pConvert(format: String,
+                                             background: UIColor? = nil,
+                                             page: Int? = nil,
+                                             density: Int? = nil,
+                                             compress: Bool? = nil,
+                                             quality: Any? = nil,
+                                             strip: Bool? = nil,
+                                             noMetadata: Bool? = nil,
+                                             colorSpace: ImageTransformColorSpace? = nil,
+                                             secure: Bool? = nil,
+                                             docInfo: Bool? = nil,
+                                             pageFormat: ImageTransformPageFormat? = nil,
+                                             pageOrientation: ImageTransformPageOrientation? = nil) -> Self {
+
+        var options = [TaskOption]()
+
+        options.append((key: "format", value: format))
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        if let page = page {
+            options.append((key: "page", value: page))
+        }
+
+        if let density = density {
+            options.append((key: "density", value: density))
+        }
+
+        if let compress = compress {
+            options.append((key: "compress", value: compress))
+        }
+
+        if let quality = quality {
+            options.append((key: "quality", value: quality))
+        }
+
+        if let strip = strip {
+            options.append((key: "strip", value: strip))
+        }
+
+        if let noMetadata = noMetadata, noMetadata == true {
+            options.append((key: "no_metadata", value: nil))
+        }
+
+        if let colorSpace = colorSpace {
+            options.append((key: "colorspace", value: String(describing: colorSpace)))
+        }
+
+        if let secure = secure {
+            options.append((key: "secure", value: secure))
+        }
+
+        if let docInfo = docInfo {
+            options.append((key: "docinfo", value: docInfo))
+        }
+
+        if let pageFormat = pageFormat {
+            options.append((key: "pageformat", value: String(describing: pageFormat)))
+        }
+
+        if let pageOrientation = pageOrientation {
+            options.append((key: "pageorientation", value: String(describing: pageOrientation)))
+        }
+
+        let task = Task(name: "output", options: options)
 
         transformationTasks.append(task)
 
@@ -648,7 +801,11 @@ import Foundation
 
                     default:
 
-                        return "\($0.key):\($0.value)"
+                        if let value = $0.value {
+                            return "\($0.key):\(value)"
+                        } else {
+                            return $0.key
+                        }
                     }
                 }
 

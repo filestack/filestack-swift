@@ -59,7 +59,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .rotate(deg: 320, exif: true, background: UIColor.white)
+            .rotate(deg: 320, exif: true, background: .white)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("rotate=deg:320,exif:true,background:FFFFFFFF")
@@ -73,7 +73,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .rotateDegExif(exif: false, background: UIColor.red)
+            .rotateDegExif(exif: false, background: .red)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("rotate=deg:exif,exif:false,background:FF0000FF")
@@ -171,7 +171,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .detectFaces(minSize: 0.25, maxSize: 0.55, color: UIColor.white, export: true)
+            .detectFaces(minSize: 0.25, maxSize: 0.55, color: .white, export: true)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
@@ -185,7 +185,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .detectFaces(color:UIColor.red)
+            .detectFaces(color:.red)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("detect_faces=color:FF0000FF")
@@ -367,7 +367,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .roundCorners(radius: 150, blur: 0.8, background: UIColor.black)
+            .roundCorners(radius: 150, blur: 0.8, background: .black)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
@@ -395,7 +395,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .roundCornersMaxRadius(blur: 0.25, background: UIColor.white)
+            .roundCornersMaxRadius(blur: 0.25, background: .white)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("round_corners=radius:max,blur:0.25,background:FFFFFFFF")
@@ -423,7 +423,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .vignette(amount: 80, blurMode: .gaussian, background: UIColor.black)
+            .vignette(amount: 80, blurMode: .gaussian, background: .black)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
@@ -465,7 +465,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .polaroid(color: UIColor.white, rotate: 33, background: UIColor.black)
+            .polaroid(color: .white, rotate: 33, background: .black)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
@@ -507,7 +507,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .tornEdges(spread: [5, 25], background: UIColor.blue)
+            .tornEdges(spread: [5, 25], background: .blue)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
@@ -549,7 +549,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .shadow(blur: 10, opacity: 35, vector: [30, 30], color: UIColor.black, background: UIColor.white)
+            .shadow(blur: 10, opacity: 35, vector: [30, 30], color: .black, background: .white)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("shadow=blur:10,opacity:35,vector:[30,30],color:000000FF,background:FFFFFFFF")
@@ -591,7 +591,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .circle(background: UIColor.red)
+            .circle(background: .red)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("circle=background:FF0000FF")
@@ -619,7 +619,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
-            .border(width: 3, color: UIColor.white, background: UIColor.red)
+            .border(width: 3, color: .white, background: .red)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("border=width:3,color:FFFFFFFF,background:FF0000FF")
@@ -782,6 +782,127 @@ class ImageTransformTests: XCTestCase {
         XCTAssertEqual(imageTransform.url, expectedURL)
     }
 
+    func testConvertTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .convert(format: "pdf",
+                     background: .white,
+                     page: 1,
+                     density: 100,
+                     compress: true,
+                     quality: 85,
+                     strip: true,
+                     noMetadata: false,
+                     colorSpace: ImageTransformColorSpace.input,
+                     secure: true,
+                     docInfo: true,
+                     pageFormat: ImageTransformPageFormat.letter,
+                     pageOrientation: ImageTransformPageOrientation.portrait)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "output=format:pdf,background:FFFFFFFF,page:1,density:100,compress:true,quality:85,strip:true," +
+                "colorspace:input,secure:true,docinfo:true,pageformat:letter,pageorientation:portrait"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testConvertTransformationWithoutMetadataURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .convert(format: "pdf",
+                     background: .white,
+                     page: 1,
+                     density: 100,
+                     compress: true,
+                     quality:85,
+                     strip: true,
+                     noMetadata: true,
+                     colorSpace: ImageTransformColorSpace.input,
+                     secure: true,
+                     docInfo: true,
+                     pageFormat: ImageTransformPageFormat.letter,
+                     pageOrientation: ImageTransformPageOrientation.portrait)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "output=format:pdf,background:FFFFFFFF,page:1,density:100,compress:true,quality:85,strip:true," +
+                "no_metadata,colorspace:input,secure:true,docinfo:true,pageformat:letter,pageorientation:portrait"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testConvertTransformationWithOptionalsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .convert(format: "jpg",
+                     compress: true,
+                     strip: true,
+                     noMetadata: true,
+                     colorSpace: .input)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("output=format:jpg,compress:true,strip:true,no_metadata,colorspace:input")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testConvertPreservingInputQualityTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .convertPreservingInputQuality(format: "jpg",
+                                           compress: true,
+                                           noMetadata: true,
+                                           colorSpace: .input)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("output=format:jpg,compress:true,quality:input,no_metadata,colorspace:input")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testQualityTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .quality(value: 88)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("quality=value:88")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testZipTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .zip()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("zip")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
     func testChainedTransformationsURL() {
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -792,21 +913,24 @@ class ImageTransformTests: XCTestCase {
             .flip()
             .flop()
             .watermark(file: "WATERMARK-HANDLE", size: 50, position: [.bottom, .right])
-            .detectFaces(minSize: 0.25, maxSize: 0.55, color: UIColor.white, export: true)
+            .detectFaces(minSize: 0.25, maxSize: 0.55, color: .white, export: true)
             .cropFaces(mode: .fill, width: 250, height: 150, faces: 4)
             .pixelateFaces(faces: 3, minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
-            .roundCorners(radius: 150, blur: 0.8, background: UIColor.black)
-            .vignette(amount: 80, blurMode: .gaussian, background: UIColor.black)
-            .polaroid(color: UIColor.white, rotate: 33, background: UIColor.black)
-            .tornEdges(spread: [5, 25], background: UIColor.blue)
-            .shadow(blur: 10, opacity: 35, vector: [30, 30], color: UIColor.black, background: UIColor.white)
-            .circle(background: UIColor.red)
-            .border(width: 3, color: UIColor.white, background: UIColor.red)
+            .roundCorners(radius: 150, blur: 0.8, background: .black)
+            .vignette(amount: 80, blurMode: .gaussian, background: .black)
+            .polaroid(color: .white, rotate: 33, background: .black)
+            .tornEdges(spread: [5, 25], background: .blue)
+            .shadow(blur: 10, opacity: 35, vector: [30, 30], color: .black, background: .white)
+            .circle(background: .red)
+            .border(width: 3, color: .white, background: .red)
             .sharpen(amount: 3)
             .blur(amount: 5)
             .monochrome()
             .blackAndWhite(threshold: 45)
             .sepia(tone: 85)
+            .convert(format: "jpg", compress: true, strip: true, noMetadata: true, colorSpace: .input)
+            .quality(value: 88)
+            .zip()
 
         let expectedURL = Config.processURL
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
@@ -829,6 +953,9 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("monochrome")
             .appendingPathComponent("blackwhite=threshold:45")
             .appendingPathComponent("sepia=tone:85")
+            .appendingPathComponent("output=format:jpg,compress:true,strip:true,no_metadata,colorspace:input")
+            .appendingPathComponent("quality=value:88")
+            .appendingPathComponent("zip")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)

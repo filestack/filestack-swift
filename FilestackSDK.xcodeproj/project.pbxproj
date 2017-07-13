@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		450E433C1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E433B1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift */; };
+		452D715B1F17A49D0037E1BB /* ImageTransformPageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715A1F17A49D0037E1BB /* ImageTransformPageFormat.swift */; };
+		452D715D1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */; };
+		452D715F1F17A51B0037E1BB /* ImageTransformColorSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */; };
 		454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */; };
 		454CC1C61F0CF932005821AC /* SessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1C51F0CF932005821AC /* SessionManagerTests.swift */; };
 		454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1C71F0D10D2005821AC /* BundleInfo.swift */; };
@@ -213,6 +216,9 @@
 
 /* Begin PBXFileReference section */
 		450E433B1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPixelateFacesType.swift; sourceTree = "<group>"; };
+		452D715A1F17A49D0037E1BB /* ImageTransformPageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPageFormat.swift; sourceTree = "<group>"; };
+		452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPageOrientation.swift; sourceTree = "<group>"; };
+		452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformColorSpace.swift; sourceTree = "<group>"; };
 		454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadResponse.swift; sourceTree = "<group>"; };
 		454CC1C51F0CF932005821AC /* SessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
 		454CC1C71F0D10D2005821AC /* BundleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BundleInfo.swift; path = Misc/BundleInfo.swift; sourceTree = "<group>"; };
@@ -291,8 +297,11 @@
 			children = (
 				457D5BF01F1614A800FBD5B1 /* ImageTransformAlign.swift */,
 				4579CD3D1F1764A500DCF37A /* ImageTransformBlurMode.swift */,
+				452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */,
 				455266301F1618E1009537D9 /* ImageTransformCropMode.swift */,
 				457D5BEE1F16147E00FBD5B1 /* ImageTransformFix.swift */,
+				452D715A1F17A49D0037E1BB /* ImageTransformPageFormat.swift */,
+				452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */,
 				450E433B1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift */,
 				457D5BEC1F16146B00FBD5B1 /* ImageTransformPosition.swift */,
 				457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */,
@@ -743,7 +752,9 @@
 				457D5BF31F1614D400FBD5B1 /* PolicyCall.swift in Sources */,
 				454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */,
 				455266311F1618E1009537D9 /* ImageTransformCropMode.swift in Sources */,
+				452D715D1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift in Sources */,
 				45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */,
+				452D715F1F17A51B0037E1BB /* ImageTransformColorSpace.swift in Sources */,
 				454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */,
 				45513FFA1F0E9739006DB972 /* APIService.swift in Sources */,
 				45FA0CCD1F0B86B6008EDBCD /* CDNService.swift in Sources */,
@@ -752,6 +763,7 @@
 				4589A4881F0A4B1900C39405 /* Config.swift in Sources */,
 				45991FA41F14C1DD0042A279 /* ProcessService.swift in Sources */,
 				457D5BEF1F16147E00FBD5B1 /* ImageTransformFix.swift in Sources */,
+				452D715B1F17A49D0037E1BB /* ImageTransformPageFormat.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

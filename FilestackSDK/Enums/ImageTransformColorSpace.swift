@@ -1,0 +1,39 @@
+//
+//  ImageTransformColorSpace.swift
+//  FilestackSDK
+//
+//  Created by Ruben Nine on 7/13/17.
+//  Copyright © 2017 Filestack. All rights reserved.
+//
+
+import Foundation
+
+
+@objc(FSImageTransformColorSpace) public enum ImageTransformColorSpace: UInt, CustomStringConvertible {
+
+    case rgb
+
+    case cmyk
+
+    case input
+
+
+    /// Returns a `String` representation of self.
+    public var description: String {
+
+        switch self {
+        case .rgb:
+
+            return "rgb"
+
+        case .cmyk:
+
+            return "cmyk"
+
+        case .input:
+
+            return "input"
+
+        }
+    }
+}
