@@ -15,6 +15,7 @@
 		45513FFA1F0E9739006DB972 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FF91F0E9739006DB972 /* APIService.swift */; };
 		4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551400C1F0E97E2006DB972 /* NetworkingService.swift */; };
 		455266311F1618E1009537D9 /* ImageTransformCropMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455266301F1618E1009537D9 /* ImageTransformCropMode.swift */; };
+		4579CD3E1F1764A500DCF37A /* ImageTransformBlurMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4579CD3D1F1764A500DCF37A /* ImageTransformBlurMode.swift */; };
 		457D5BED1F16146B00FBD5B1 /* ImageTransformPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BEC1F16146B00FBD5B1 /* ImageTransformPosition.swift */; };
 		457D5BEF1F16147E00FBD5B1 /* ImageTransformFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BEE1F16147E00FBD5B1 /* ImageTransformFix.swift */; };
 		457D5BF11F1614A800FBD5B1 /* ImageTransformAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BF01F1614A800FBD5B1 /* ImageTransformAlign.swift */; };
@@ -219,6 +220,7 @@
 		45513FF91F0E9739006DB972 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		4551400C1F0E97E2006DB972 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		455266301F1618E1009537D9 /* ImageTransformCropMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformCropMode.swift; sourceTree = "<group>"; };
+		4579CD3D1F1764A500DCF37A /* ImageTransformBlurMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformBlurMode.swift; sourceTree = "<group>"; };
 		457D5BEC1F16146B00FBD5B1 /* ImageTransformPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPosition.swift; sourceTree = "<group>"; };
 		457D5BEE1F16147E00FBD5B1 /* ImageTransformFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformFix.swift; sourceTree = "<group>"; };
 		457D5BF01F1614A800FBD5B1 /* ImageTransformAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformAlign.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				457D5BF01F1614A800FBD5B1 /* ImageTransformAlign.swift */,
+				4579CD3D1F1764A500DCF37A /* ImageTransformBlurMode.swift */,
 				455266301F1618E1009537D9 /* ImageTransformCropMode.swift */,
 				457D5BEE1F16147E00FBD5B1 /* ImageTransformFix.swift */,
 				450E433B1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift */,
@@ -734,6 +737,7 @@
 				4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */,
 				45C9E93B1F137EB200260F2A /* ImageTransform.swift in Sources */,
 				457D5BF11F1614A800FBD5B1 /* ImageTransformAlign.swift in Sources */,
+				4579CD3E1F1764A500DCF37A /* ImageTransformBlurMode.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
 				457D5BED1F16146B00FBD5B1 /* ImageTransformPosition.swift in Sources */,
 				457D5BF31F1614D400FBD5B1 /* PolicyCall.swift in Sources */,

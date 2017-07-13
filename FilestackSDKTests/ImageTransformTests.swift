@@ -362,6 +362,426 @@ class ImageTransformTests: XCTestCase {
         XCTAssertEqual(imageTransform.url, expectedURL)
     }
 
+    func testRoundCornersTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .roundCorners(radius: 150, blur: 0.8, background: UIColor.black)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testRoundCornersTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .roundCorners()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("round_corners")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testRoundCornersMaxRadiusTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .roundCornersMaxRadius(blur: 0.25, background: UIColor.white)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("round_corners=radius:max,blur:0.25,background:FFFFFFFF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testRoundCornersMaxRadiusTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .roundCornersMaxRadius()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("round_corners=radius:max")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testVignetteTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .vignette(amount: 80, blurMode: .gaussian, background: UIColor.black)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testVignetteTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .vignette()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("vignette")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testVignetteTransformationWithOptionalsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .vignette(amount: 35)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("vignette=amount:35")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testPolaroidTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .polaroid(color: UIColor.white, rotate: 33, background: UIColor.black)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testPolaroidTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .polaroid()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("polaroid")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testPolaroidTransformationWithOptionalsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .polaroid(rotate: 45)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("polaroid=rotate:45")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testTornEdgesTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .tornEdges(spread: [5, 25], background: UIColor.blue)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testTornEdgesTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .tornEdges()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("torn_edges")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testTornEdgesTransformationWithOptionalsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .tornEdges(spread: [5, 25])
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("torn_edges=spread:[5,25]")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testShadowTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .shadow(blur: 10, opacity: 35, vector: [30, 30], color: UIColor.black, background: UIColor.white)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("shadow=blur:10,opacity:35,vector:[30,30],color:000000FF,background:FFFFFFFF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testShadowTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .shadow()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("shadow")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testShadowTransformationWithOptionalsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .shadow(blur: 15, opacity: 20)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("shadow=blur:15,opacity:20")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testCircleTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .circle(background: UIColor.red)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("circle=background:FF0000FF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testCircleTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .circle()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("circle")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testBorderTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .border(width: 3, color: UIColor.white, background: UIColor.red)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("border=width:3,color:FFFFFFFF,background:FF0000FF")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testBorderTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .border()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("border")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testBorderTransformationWithOptionalsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .border(width: 5)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("border=width:5")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testSharpenTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .sharpen(amount: 3)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("sharpen=amount:3")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testSharpenTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .sharpen()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("sharpen")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testBlurTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .blur(amount: 5)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("blur=amount:5")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testBlurTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .blur()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("blur")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testMonochromeTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .monochrome()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("monochrome")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testBlackAndWhiteTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .blackAndWhite(threshold: 45)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("blackwhite=threshold:45")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testBlackAndWhiteTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .blackAndWhite()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("blackwhite")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testSepiaTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .sepia(tone: 85)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("sepia=tone:85")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testSepiaTransformationWithoutArgumentsURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .sepia()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("sepia")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
     func testChainedTransformationsURL() {
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -374,6 +794,19 @@ class ImageTransformTests: XCTestCase {
             .watermark(file: "WATERMARK-HANDLE", size: 50, position: [.bottom, .right])
             .detectFaces(minSize: 0.25, maxSize: 0.55, color: UIColor.white, export: true)
             .cropFaces(mode: .fill, width: 250, height: 150, faces: 4)
+            .pixelateFaces(faces: 3, minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
+            .roundCorners(radius: 150, blur: 0.8, background: UIColor.black)
+            .vignette(amount: 80, blurMode: .gaussian, background: UIColor.black)
+            .polaroid(color: UIColor.white, rotate: 33, background: UIColor.black)
+            .tornEdges(spread: [5, 25], background: UIColor.blue)
+            .shadow(blur: 10, opacity: 35, vector: [30, 30], color: UIColor.black, background: UIColor.white)
+            .circle(background: UIColor.red)
+            .border(width: 3, color: UIColor.white, background: UIColor.red)
+            .sharpen(amount: 3)
+            .blur(amount: 5)
+            .monochrome()
+            .blackAndWhite(threshold: 45)
+            .sepia(tone: 85)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
@@ -383,6 +816,19 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[bottom,right]")
             .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
             .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:4")
+            .appendingPathComponent("pixelate_faces=faces:3,minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
+            .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
+            .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
+            .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
+            .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
+            .appendingPathComponent("shadow=blur:10,opacity:35,vector:[30,30],color:000000FF,background:FFFFFFFF")
+            .appendingPathComponent("circle=background:FF0000FF")
+            .appendingPathComponent("border=width:3,color:FFFFFFFF,background:FF0000FF")
+            .appendingPathComponent("sharpen=amount:3")
+            .appendingPathComponent("blur=amount:5")
+            .appendingPathComponent("monochrome")
+            .appendingPathComponent("blackwhite=threshold:45")
+            .appendingPathComponent("sepia=tone:85")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)

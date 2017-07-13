@@ -279,6 +279,233 @@ import Foundation
                               type: type)
     }
 
+    @discardableResult public func roundCorners(radius: Int? = nil,
+                                                blur: Float? = nil,
+                                                background: UIColor? = nil) -> Self {
+
+        return pRoundCorners(radius: radius, blur: blur, background: background)
+    }
+
+    @discardableResult public func roundCornersMaxRadius(blur: Float? = nil,
+                                                         background: UIColor? = nil) -> Self {
+
+        return pRoundCorners(radius: "max", blur: blur, background: background)
+    }
+
+    @discardableResult public func vignette(amount: Int? = nil,
+                                            blurMode: ImageTransformBlurMode? = nil,
+                                            background: UIColor? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let amount = amount {
+            options.append((key: "amount", value: amount))
+        }
+
+        if let blurMode = blurMode {
+            options.append((key: "blurmode", value: String(describing: blurMode)))
+        }
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        let task = Task(name: "vignette", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func polaroid(color: UIColor? = nil,
+                                            rotate: Int? = nil,
+                                            background: UIColor? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let color = color {
+            options.append((key: "color", value: color.hexString))
+        }
+
+        if let rotate = rotate {
+            options.append((key: "rotate", value: String(describing: rotate)))
+        }
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        let task = Task(name: "polaroid", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func tornEdges(spread: [Int]? = nil,
+                                             background: UIColor? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let spread = spread {
+            options.append((key: "spread", value: spread))
+        }
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        let task = Task(name: "torn_edges", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func shadow(blur: Int? = nil,
+                                          opacity: Int? = nil,
+                                          vector: [Int]? = nil,
+                                          color: UIColor? = nil,
+                                          background: UIColor? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let blur = blur {
+            options.append((key: "blur", value: blur))
+        }
+
+        if let opacity = opacity {
+            options.append((key: "opacity", value: opacity))
+        }
+
+        if let vector = vector {
+            options.append((key: "vector", value: vector))
+        }
+
+        if let color = color {
+            options.append((key: "color", value: color.hexString))
+        }
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        let task = Task(name: "shadow", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func circle(background: UIColor? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        let task = Task(name: "circle", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func border(width: Int? = nil,
+                                          color: UIColor? = nil,
+                                          background: UIColor? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let width = width {
+            options.append((key: "width", value: width))
+        }
+
+        if let color = color {
+            options.append((key: "color", value: color.hexString))
+        }
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        let task = Task(name: "border", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func sharpen(amount: Int? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let amount = amount {
+            options.append((key: "amount", value: amount))
+        }
+
+        let task = Task(name: "sharpen", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func blur(amount: Int? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let amount = amount {
+            options.append((key: "amount", value: amount))
+        }
+
+        let task = Task(name: "blur", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func monochrome() -> Self {
+
+        let task = Task(name: "monochrome", options: nil)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func blackAndWhite(threshold: Int? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let threshold = threshold {
+            options.append((key: "threshold", value: threshold))
+        }
+
+        let task = Task(name: "blackwhite", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func sepia(tone: Int? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let tone = tone {
+            options.append((key: "tone", value: tone))
+        }
+
+        let task = Task(name: "sepia", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
 
     // MARK: - Private Functions
 
@@ -365,6 +592,31 @@ import Foundation
         }
 
         let task = Task(name: "pixelate_faces", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func pRoundCorners(radius: Any? = nil,
+                                                 blur: Float? = nil,
+                                                 background: UIColor? = nil) -> Self {
+
+        var options = [(key: String, value: Any)]()
+
+        if let radius = radius {
+            options.append((key: "radius", value: radius))
+        }
+
+        if let blur = blur {
+            options.append((key: "blur", value: blur))
+        }
+
+        if let background = background {
+            options.append((key: "background", value: background.hexString))
+        }
+
+        let task = Task(name: "round_corners", options: options)
 
         transformationTasks.append(task)
 
