@@ -23,7 +23,7 @@
 		457D5BEF1F16147E00FBD5B1 /* ImageTransformFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BEE1F16147E00FBD5B1 /* ImageTransformFix.swift */; };
 		457D5BF11F1614A800FBD5B1 /* ImageTransformAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BF01F1614A800FBD5B1 /* ImageTransformAlign.swift */; };
 		457D5BF31F1614D400FBD5B1 /* PolicyCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */; };
-		4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A45E1F0A3B5500C39405 /* Storage.swift */; };
+		4589A45F1F0A3B5500C39405 /* StorageLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A45E1F0A3B5500C39405 /* StorageLocation.swift */; };
 		4589A4881F0A4B1900C39405 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4871F0A4B1900C39405 /* Config.swift */; };
 		4589A48A1F0A4DA600C39405 /* FileLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4891F0A4DA600C39405 /* FileLink.swift */; };
 		4589A48C1F0A4DBC00C39405 /* FileLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A48B1F0A4DBC00C39405 /* FileLinkTests.swift */; };
@@ -41,6 +41,8 @@
 		45B831221F03F1C90053742A /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831211F03F1C90053742A /* Client.swift */; };
 		45B831241F03F4300053742A /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831231F03F4300053742A /* ClientTests.swift */; };
 		45C3BB261F0E9B3500856883 /* NetworkingServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */; };
+		45C8F2061F18B279001A6558 /* ImageTransformAspectMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8F2051F18B279001A6558 /* ImageTransformAspectMode.swift */; };
+		45C8F2081F18B3AF001A6558 /* StorageAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8F2071F18B3AF001A6558 /* StorageAccess.swift */; };
 		45C9E93B1F137EB200260F2A /* ImageTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9E93A1F137EB200260F2A /* ImageTransform.swift */; };
 		45C9E94E1F1384B200260F2A /* ImageTransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9E94D1F1384B200260F2A /* ImageTransformTests.swift */; };
 		45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */; };
@@ -231,7 +233,7 @@
 		457D5BEE1F16147E00FBD5B1 /* ImageTransformFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformFix.swift; sourceTree = "<group>"; };
 		457D5BF01F1614A800FBD5B1 /* ImageTransformAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformAlign.swift; sourceTree = "<group>"; };
 		457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCall.swift; sourceTree = "<group>"; };
-		4589A45E1F0A3B5500C39405 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		4589A45E1F0A3B5500C39405 /* StorageLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageLocation.swift; sourceTree = "<group>"; };
 		4589A4871F0A4B1900C39405 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Misc/Config.swift; sourceTree = "<group>"; };
 		4589A4891F0A4DA600C39405 /* FileLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLink.swift; sourceTree = "<group>"; };
 		4589A48B1F0A4DBC00C39405 /* FileLinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLinkTests.swift; sourceTree = "<group>"; };
@@ -252,6 +254,8 @@
 		45B831211F03F1C90053742A /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		45B831231F03F4300053742A /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
 		45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceTest.swift; sourceTree = "<group>"; };
+		45C8F2051F18B279001A6558 /* ImageTransformAspectMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformAspectMode.swift; sourceTree = "<group>"; };
+		45C8F2071F18B3AF001A6558 /* StorageAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAccess.swift; sourceTree = "<group>"; };
 		45C9E93A1F137EB200260F2A /* ImageTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransform.swift; sourceTree = "<group>"; };
 		45C9E94D1F1384B200260F2A /* ImageTransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformTests.swift; sourceTree = "<group>"; };
 		45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				457D5BF01F1614A800FBD5B1 /* ImageTransformAlign.swift */,
+				45C8F2051F18B279001A6558 /* ImageTransformAspectMode.swift */,
 				4579CD3D1F1764A500DCF37A /* ImageTransformBlurMode.swift */,
 				452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */,
 				455266301F1618E1009537D9 /* ImageTransformCropMode.swift */,
@@ -305,6 +310,8 @@
 				450E433B1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift */,
 				457D5BEC1F16146B00FBD5B1 /* ImageTransformPosition.swift */,
 				457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */,
+				45C8F2071F18B3AF001A6558 /* StorageAccess.swift */,
+				4589A45E1F0A3B5500C39405 /* StorageLocation.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -398,7 +405,6 @@
 				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
 				45B830E01F03BCF20053742A /* Policy.swift */,
 				45B830E11F03BCF20053742A /* Security.swift */,
-				4589A45E1F0A3B5500C39405 /* Storage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -743,10 +749,12 @@
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
 				450E433C1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift in Sources */,
 				4589A48A1F0A4DA600C39405 /* FileLink.swift in Sources */,
-				4589A45F1F0A3B5500C39405 /* Storage.swift in Sources */,
+				45C8F2061F18B279001A6558 /* ImageTransformAspectMode.swift in Sources */,
+				4589A45F1F0A3B5500C39405 /* StorageLocation.swift in Sources */,
 				45C9E93B1F137EB200260F2A /* ImageTransform.swift in Sources */,
 				457D5BF11F1614A800FBD5B1 /* ImageTransformAlign.swift in Sources */,
 				4579CD3E1F1764A500DCF37A /* ImageTransformBlurMode.swift in Sources */,
+				45C8F2081F18B3AF001A6558 /* StorageAccess.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
 				457D5BED1F16146B00FBD5B1 /* ImageTransformPosition.swift in Sources */,
 				457D5BF31F1614D400FBD5B1 /* PolicyCall.swift in Sources */,

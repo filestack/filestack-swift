@@ -903,6 +903,106 @@ class ImageTransformTests: XCTestCase {
         XCTAssertEqual(imageTransform.url, expectedURL)
     }
 
+    func testVideoConvertTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .videoConvert(preset: "h264",
+                          force: false,
+                          width: 1080,
+                          height: 720,
+                          title: "Chapter 1",
+                          extName: "mp4",
+                          fileName: "chapter_1",
+                          location: .s3,
+                          path: "/myfiles/chapter_1.mp4",
+                          access: .public,
+                          container: "user-videos",
+                          upscale: false,
+                          aspectMode: .preserve,
+                          twoPass: true,
+                          videoBitRate: 3200,
+                          fps: 30,
+                          keyframeInterval: 250,
+                          audioBitRate: 320,
+                          audioSampleRate: 44100,
+                          audioChannels: 2,
+                          clipLength: "00:02:30",
+                          clipOffset: "00:00:05",
+                          watermarkURL: URL(string:"https://SOME-EXTERNAL-URL")!,
+                          watermarkTop: 20,
+                          watermarkRight: 20,
+                          watermarkWidth: 256,
+                          watermarkHeight: 256)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1," +
+                "extname:mp4,filename:chapter_1,location:S3,path:/myfiles/chapter_1.mp4," +
+                "access:public,container:user-videos,upscale:false,aspect_mode:preserve," +
+                "two_pass:true,video_bitrate:3200,fps:30,keyframe_interval:250," +
+                "audio_bitrate:320,audio_samplerate:44100,audio_channels:2," +
+                "clip_length:00:02:30,clip_offset:00:00:05," +
+                "watermark_url:https://SOME-EXTERNAL-URL,watermark_top:20,watermark_right:20," +
+                "watermark_width:256,watermark_height:256"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testVideoConvertWithTitleIncludingCommasTransformationURL() {
+
+        let title = "Chapters 1,2,3 and 4"
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .videoConvert(preset: "h264", title: title)
+
+        let allowedCharacters = CharacterSet(charactersIn: ",").inverted
+        let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("video_convert=preset:h264,title:\(escapedTitle)")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testAudioConvertTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .audioConvert(preset: "m4a",
+                          force: false,
+                          title: "Chapter 1",
+                          extName: "m4a",
+                          fileName: "chapter_1",
+                          location: .s3,
+                          path: "/myfiles/chapter_1.m4a",
+                          access: .public,
+                          container: "user-audios",
+                          audioBitRate: 320,
+                          audioSampleRate: 44100,
+                          audioChannels: 2,
+                          clipLength: "00:02:30",
+                          clipOffset: "00:00:05")
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "video_convert=preset:m4a,force:false,title:Chapter 1," +
+                "extname:m4a,filename:chapter_1,location:S3,path:/myfiles/chapter_1.m4a," +
+                "access:public,container:user-audios," +
+                "audio_bitrate:320,audio_samplerate:44100,audio_channels:2," +
+                "clip_length:00:02:30,clip_offset:00:00:05"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
     func testChainedTransformationsURL() {
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -931,6 +1031,8 @@ class ImageTransformTests: XCTestCase {
             .convert(format: "jpg", compress: true, strip: true, noMetadata: true, colorSpace: .input)
             .quality(value: 88)
             .zip()
+            .videoConvert(preset: "h264", force: false, width: 1080, height: 720, title: "Chapter 1", extName: "mp4")
+            .audioConvert(preset: "m4a", extName: "m4a", fileName: "audio_1", audioBitRate: 320, audioSampleRate: 44100)
 
         let expectedURL = Config.processURL
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
@@ -956,6 +1058,8 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("output=format:jpg,compress:true,strip:true,no_metadata,colorspace:input")
             .appendingPathComponent("quality=value:88")
             .appendingPathComponent("zip")
+            .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
+            .appendingPathComponent("video_convert=preset:m4a,extname:m4a,filename:audio_1,audio_bitrate:320,audio_samplerate:44100")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)

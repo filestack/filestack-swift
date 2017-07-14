@@ -83,7 +83,7 @@ public extension Client {
         }
 
         if let storage = storage {
-            components.append("    storage: \(storage.toString)")
+            components.append("    storage: \(String(describing: storage))")
         }
 
         components.append(")")

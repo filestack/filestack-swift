@@ -586,6 +586,190 @@ import Foundation
         return self
     }
 
+    @discardableResult public func videoConvert(preset: String,
+                                                force: Bool? = nil,
+                                                width: Int? = nil,
+                                                height: Int? = nil,
+                                                title: String? = nil,
+                                                extName: String? = nil,
+                                                fileName: String? = nil,
+                                                location: StorageLocation? = nil,
+                                                path: String? = nil,
+                                                `access`: StorageAccess? = nil,
+                                                container: String? = nil,
+                                                upscale: Bool? = nil,
+                                                aspectMode: ImageTransformAspectMode? = nil,
+                                                twoPass: Bool? = nil,
+                                                videoBitRate: Int? = nil,
+                                                fps: Int? = nil,
+                                                keyframeInterval: Int? = nil,
+                                                audioBitRate: Int? = nil,
+                                                audioSampleRate: Int? = nil,
+                                                audioChannels: Int? = nil,
+                                                clipLength: String? = nil,
+                                                clipOffset: String? = nil,
+                                                watermarkURL: URL? = nil,
+                                                watermarkTop: Int? = nil,
+                                                watermarkBottom: Int? = nil,
+                                                watermarkLeft: Int? = nil,
+                                                watermarkRight: Int? = nil,
+                                                watermarkWidth: Int? = nil,
+                                                watermarkHeight: Int? = nil) -> Self {
+
+        var options = [TaskOption]()
+
+        options.append((key: "preset", value: preset))
+
+        if let force = force {
+            options.append((key: "force", value: force))
+        }
+
+        if let width = width {
+            options.append((key: "width", value: width))
+        }
+
+        if let height = height {
+            options.append((key: "height", value: height))
+        }
+
+        if let title = title {
+            options.append((key: "title", value: title))
+        }
+
+        if let extName = extName {
+            options.append((key: "extname", value: extName))
+        }
+
+        if let fileName = fileName {
+            options.append((key: "filename", value: fileName))
+        }
+
+        if let location = location {
+            options.append((key: "location", value: location))
+        }
+
+        if let path = path {
+            options.append((key: "path", value: path))
+        }
+
+        if let access = access {
+            options.append((key: "access", value: access))
+        }
+
+        if let container = container {
+            options.append((key: "container", value: container))
+        }
+
+        if let upscale = upscale {
+            options.append((key: "upscale", value: upscale))
+        }
+
+        if let aspectMode = aspectMode {
+            options.append((key: "aspect_mode", value: aspectMode))
+        }
+
+        if let twoPass = twoPass {
+            options.append((key: "two_pass", value: twoPass))
+        }
+
+        if let videoBitRate = videoBitRate {
+            options.append((key: "video_bitrate", value: videoBitRate))
+        }
+
+        if let fps = fps {
+            options.append((key: "fps", value: fps))
+        }
+
+        if let keyframeInterval = keyframeInterval {
+            options.append((key: "keyframe_interval", value: keyframeInterval))
+        }
+
+        if let audioBitRate = audioBitRate {
+            options.append((key: "audio_bitrate", value: audioBitRate))
+        }
+
+        if let audioSampleRate = audioSampleRate {
+            options.append((key: "audio_samplerate", value: audioSampleRate))
+        }
+
+        if let audioChannels = audioChannels {
+            options.append((key: "audio_channels", value: audioChannels))
+        }
+
+        if let clipLength = clipLength {
+            options.append((key: "clip_length", value: clipLength))
+        }
+
+        if let clipOffset = clipOffset {
+            options.append((key: "clip_offset", value: clipOffset))
+        }
+
+        if let watermarkURL = watermarkURL {
+            options.append((key: "watermark_url", value: watermarkURL))
+        }
+
+        if let watermarkTop = watermarkTop {
+            options.append((key: "watermark_top", value: watermarkTop))
+        }
+
+        if let watermarkBottom = watermarkBottom {
+            options.append((key: "watermark_bottom", value: watermarkBottom))
+        }
+
+        if let watermarkLeft = watermarkLeft {
+            options.append((key: "watermark_left", value: watermarkLeft))
+        }
+
+        if let watermarkRight = watermarkRight {
+            options.append((key: "watermark_right", value: watermarkRight))
+        }
+
+        if let watermarkWidth = watermarkWidth {
+            options.append((key: "watermark_width", value: watermarkWidth))
+        }
+
+        if let watermarkHeight = watermarkHeight {
+            options.append((key: "watermark_height", value: watermarkHeight))
+        }
+
+        let task = Task(name: "video_convert", options: options)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
+    @discardableResult public func audioConvert(preset: String,
+                                                force: Bool? = nil,
+                                                title: String? = nil,
+                                                extName: String? = nil,
+                                                fileName: String? = nil,
+                                                location: StorageLocation? = nil,
+                                                path: String? = nil,
+                                                `access`: StorageAccess? = nil,
+                                                container: String? = nil,
+                                                audioBitRate: Int? = nil,
+                                                audioSampleRate: Int? = nil,
+                                                audioChannels: Int? = nil,
+                                                clipLength: String? = nil,
+                                                clipOffset: String? = nil) -> Self {
+
+        return videoConvert(preset: preset,
+                            force: force,
+                            title: title,
+                            extName: extName,
+                            fileName: fileName,
+                            location: location,
+                            path: path,
+                            access: access,
+                            container: container,
+                            audioBitRate: audioBitRate,
+                            audioSampleRate: audioSampleRate,
+                            audioChannels: audioChannels,
+                            clipLength: clipLength,
+                            clipOffset: clipOffset)
+    }
+
 
     // MARK: - Private Functions
 
@@ -787,6 +971,13 @@ import Foundation
         }
     }
 
+    private func sanitize(string: String) -> String {
+
+        let allowedCharacters = CharacterSet(charactersIn: ",").inverted
+
+        return string.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
+    }
+
     private func tasksToURLFragment() -> String {
 
         let tasks: [String] = transformationTasks.flatMap {
@@ -801,8 +992,10 @@ import Foundation
 
                     default:
 
-                        if let value = $0.value {
-                            return "\($0.key):\(value)"
+                        if let value = $0.value as? String {
+                            return "\($0.key):\(sanitize(string: value))"
+                        } else if let value = $0.value {
+                                return "\($0.key):\(value)"
                         } else {
                             return $0.key
                         }
