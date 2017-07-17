@@ -17,7 +17,7 @@ internal func attachedDescription(object: CustomStringConvertible, indent: Int =
 
     var components: [String] = []
 
-    for (idx, line) in object.description.split(separator: "\n").enumerated() {
+    for (idx, line) in object.description.components(separatedBy: "\n").enumerated() {
         if idx == 0 {
             components.append(String(line))
         } else {
