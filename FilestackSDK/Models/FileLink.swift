@@ -248,6 +248,14 @@ import Alamofire
         })
     }
 
+    /**
+        Returns an `ImageTransform` corresponding to this `FileLink`.
+     */
+    public func imageTransform() -> ImageTransform {
+
+        return ImageTransform(handle: handle, apiKey: apiKey, security: security)
+    }
+
 
     // MARK: - Private Functions
 
