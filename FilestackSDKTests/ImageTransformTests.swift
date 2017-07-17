@@ -1003,6 +1003,22 @@ class ImageTransformTests: XCTestCase {
         XCTAssertEqual(imageTransform.url, expectedURL)
     }
 
+    func testDebugTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .debug()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "debug"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
     func testChainedTransformationsURL() {
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -1033,6 +1049,7 @@ class ImageTransformTests: XCTestCase {
             .zip()
             .videoConvert(preset: "h264", force: false, width: 1080, height: 720, title: "Chapter 1", extName: "mp4")
             .audioConvert(preset: "m4a", extName: "m4a", fileName: "audio_1", audioBitRate: 320, audioSampleRate: 44100)
+            .debug()
 
         let expectedURL = Config.processURL
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
@@ -1060,6 +1077,7 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("zip")
             .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
             .appendingPathComponent("video_convert=preset:m4a,extname:m4a,filename:audio_1,audio_bitrate:320,audio_samplerate:44100")
+            .appendingPathComponent("debug")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)

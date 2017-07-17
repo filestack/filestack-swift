@@ -960,6 +960,15 @@ import Foundation
         return self
     }
 
+    @discardableResult func debug() -> Self {
+
+        let task = Task(name: "debug", options: nil)
+
+        transformationTasks.append(task)
+
+        return self
+    }
+
     private func computeURL() -> URL {
 
         let tasks = tasksToURLFragment()
