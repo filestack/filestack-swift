@@ -964,7 +964,7 @@ import Foundation
 
         let task = Task(name: "debug", options: nil)
 
-        transformationTasks.append(task)
+        transformationTasks.insert(task, at: 0)
 
         return self
     }

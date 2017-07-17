@@ -1008,12 +1008,14 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .flip()
+            .flop()
             .debug()
 
         let expectedURL = Config.processURL
-            .appendingPathComponent(
-                "debug"
-            )
+            .appendingPathComponent("debug")
+            .appendingPathComponent("flip")
+            .appendingPathComponent("flop")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -1052,6 +1054,7 @@ class ImageTransformTests: XCTestCase {
             .debug()
 
         let expectedURL = Config.processURL
+            .appendingPathComponent("debug")
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
             .appendingPathComponent("crop=dim:[20,30,150,250]")
             .appendingPathComponent("flip")
@@ -1077,7 +1080,6 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("zip")
             .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
             .appendingPathComponent("video_convert=preset:m4a,extname:m4a,filename:audio_1,audio_bitrate:320,audio_samplerate:44100")
-            .appendingPathComponent("debug")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -1132,6 +1134,7 @@ class ImageTransformTests: XCTestCase {
 
         let expectedURL = Config.processURL
             .appendingPathComponent("MY-API-KEY")
+            .appendingPathComponent("debug")
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
             .appendingPathComponent("crop=dim:[20,30,150,250]")
             .appendingPathComponent("flip")
@@ -1157,7 +1160,6 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("zip")
             .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
             .appendingPathComponent("video_convert=preset:m4a,extname:m4a,filename:audio_1,audio_bitrate:320,audio_samplerate:44100")
-            .appendingPathComponent("debug")
             .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
