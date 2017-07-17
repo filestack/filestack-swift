@@ -60,7 +60,7 @@ import Foundation
         return FileLink(handle: handle, apiKey: apiKey, security: security)
     }
 
-    public func imageTransform(`for` handle: String) -> ImageTransform {
+    public func imageTransform(handle: String) -> ImageTransform {
 
         return ImageTransform(handle: handle, apiKey: apiKey, security: security)
     }

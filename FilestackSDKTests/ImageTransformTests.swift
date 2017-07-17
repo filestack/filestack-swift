@@ -26,7 +26,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .resize(width: 50, height: 25, fit: .crop, align: .bottom)
 
         let expectedURL = Config.processURL
@@ -40,7 +40,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .resize(width: 50, fit: .crop, align: .center)
 
         let expectedURL = Config.processURL
@@ -54,7 +54,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .crop(x: 20, y: 30, width: 150, height: 250)
 
         let expectedURL = Config.processURL
@@ -68,7 +68,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .rotate(deg: 320, exif: true, background: .white)
 
         let expectedURL = Config.processURL
@@ -82,7 +82,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .rotateDegExif(exif: false, background: .red)
 
         let expectedURL = Config.processURL
@@ -96,7 +96,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .rotate(deg: 150)
 
         let expectedURL = Config.processURL
@@ -110,7 +110,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .flip()
 
         let expectedURL = Config.processURL
@@ -124,7 +124,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .flop()
 
         let expectedURL = Config.processURL
@@ -138,7 +138,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .watermark(file: "WATERMARK-HANDLE", size: 50, position: .top)
 
         let expectedURL = Config.processURL
@@ -152,7 +152,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .watermark(file: "WATERMARK-HANDLE", size: 50, position: [.top, .left])
 
         let expectedURL = Config.processURL
@@ -166,7 +166,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .watermark(file: "WATERMARK-HANDLE")
 
         let expectedURL = Config.processURL
@@ -180,7 +180,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .detectFaces(minSize: 0.25, maxSize: 0.55, color: .white, export: true)
 
         let expectedURL = Config.processURL
@@ -194,7 +194,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .detectFaces(color:.red)
 
         let expectedURL = Config.processURL
@@ -208,7 +208,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .detectFaces()
 
         let expectedURL = Config.processURL
@@ -222,7 +222,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .cropFaces(mode: .fill, width: 250, height: 150, faces: 4)
 
         let expectedURL = Config.processURL
@@ -236,7 +236,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .cropFaces(mode: .thumb, faces: 1)
 
         let expectedURL = Config.processURL
@@ -250,7 +250,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .cropFaces(mode: .crop)
 
         let expectedURL = Config.processURL
@@ -264,7 +264,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .cropFaces(mode: .fill, width: 250, height: 150, faces: [1,2,3,4])
 
         let expectedURL = Config.processURL
@@ -278,7 +278,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .cropFacesAll(mode: .fill, width: 250, height: 150)
 
         let expectedURL = Config.processURL
@@ -292,7 +292,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .pixelateFaces(faces: 3, minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
 
         let expectedURL = Config.processURL
@@ -306,7 +306,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .pixelateFaces(faces: [1,3,5], minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
 
         let expectedURL = Config.processURL
@@ -320,7 +320,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .pixelateFacesAll(minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
 
         let expectedURL = Config.processURL
@@ -334,7 +334,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .pixelateFaces(faces: 4, buffer: 250)
 
         let expectedURL = Config.processURL
@@ -348,7 +348,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .pixelateFaces(faces: [1,3,5], buffer: 320)
 
         let expectedURL = Config.processURL
@@ -362,7 +362,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .pixelateFacesAll(buffer:220)
 
         let expectedURL = Config.processURL
@@ -376,7 +376,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .roundCorners(radius: 150, blur: 0.8, background: .black)
 
         let expectedURL = Config.processURL
@@ -390,7 +390,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .roundCorners()
 
         let expectedURL = Config.processURL
@@ -404,7 +404,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .roundCornersMaxRadius(blur: 0.25, background: .white)
 
         let expectedURL = Config.processURL
@@ -418,7 +418,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .roundCornersMaxRadius()
 
         let expectedURL = Config.processURL
@@ -432,7 +432,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .vignette(amount: 80, blurMode: .gaussian, background: .black)
 
         let expectedURL = Config.processURL
@@ -446,7 +446,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .vignette()
 
         let expectedURL = Config.processURL
@@ -460,7 +460,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .vignette(amount: 35)
 
         let expectedURL = Config.processURL
@@ -474,7 +474,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .polaroid(color: .white, rotate: 33, background: .black)
 
         let expectedURL = Config.processURL
@@ -488,7 +488,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .polaroid()
 
         let expectedURL = Config.processURL
@@ -502,7 +502,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .polaroid(rotate: 45)
 
         let expectedURL = Config.processURL
@@ -516,7 +516,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .tornEdges(spread: [5, 25], background: .blue)
 
         let expectedURL = Config.processURL
@@ -530,7 +530,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .tornEdges()
 
         let expectedURL = Config.processURL
@@ -544,7 +544,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .tornEdges(spread: [5, 25])
 
         let expectedURL = Config.processURL
@@ -558,7 +558,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .shadow(blur: 10, opacity: 35, vector: [30, 30], color: .black, background: .white)
 
         let expectedURL = Config.processURL
@@ -572,7 +572,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .shadow()
 
         let expectedURL = Config.processURL
@@ -586,7 +586,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .shadow(blur: 15, opacity: 20)
 
         let expectedURL = Config.processURL
@@ -600,7 +600,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .circle(background: .red)
 
         let expectedURL = Config.processURL
@@ -614,7 +614,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .circle()
 
         let expectedURL = Config.processURL
@@ -628,7 +628,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .border(width: 3, color: .white, background: .red)
 
         let expectedURL = Config.processURL
@@ -642,7 +642,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .border()
 
         let expectedURL = Config.processURL
@@ -656,7 +656,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .border(width: 5)
 
         let expectedURL = Config.processURL
@@ -670,7 +670,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .sharpen(amount: 3)
 
         let expectedURL = Config.processURL
@@ -684,7 +684,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .sharpen()
 
         let expectedURL = Config.processURL
@@ -698,7 +698,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .blur(amount: 5)
 
         let expectedURL = Config.processURL
@@ -712,7 +712,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .blur()
 
         let expectedURL = Config.processURL
@@ -726,7 +726,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .monochrome()
 
         let expectedURL = Config.processURL
@@ -740,7 +740,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .blackAndWhite(threshold: 45)
 
         let expectedURL = Config.processURL
@@ -754,7 +754,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .blackAndWhite()
 
         let expectedURL = Config.processURL
@@ -768,7 +768,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .sepia(tone: 85)
 
         let expectedURL = Config.processURL
@@ -782,7 +782,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .sepia()
 
         let expectedURL = Config.processURL
@@ -796,7 +796,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .convert(format: "pdf",
                      background: .white,
                      page: 1,
@@ -825,7 +825,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .convert(format: "pdf",
                      background: .white,
                      page: 1,
@@ -854,7 +854,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .convert(format: "jpg",
                      compress: true,
                      strip: true,
@@ -872,7 +872,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .convertPreservingInputQuality(format: "jpg",
                                            compress: true,
                                            noMetadata: true,
@@ -889,7 +889,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .quality(value: 88)
 
         let expectedURL = Config.processURL
@@ -903,7 +903,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .zip()
 
         let expectedURL = Config.processURL
@@ -917,7 +917,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .videoConvert(preset: "h264",
                           force: false,
                           width: 1080,
@@ -967,7 +967,7 @@ class ImageTransformTests: XCTestCase {
         let title = "Chapters 1,2,3 and 4"
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .videoConvert(preset: "h264", title: title)
 
         let allowedCharacters = CharacterSet(charactersIn: ",").inverted
@@ -984,7 +984,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .audioConvert(preset: "m4a",
                           force: false,
                           title: "Chapter 1",
@@ -1017,7 +1017,7 @@ class ImageTransformTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .flip()
             .flop()
             .debug()
@@ -1036,7 +1036,7 @@ class ImageTransformTests: XCTestCase {
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-API-KEY", security: security)
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .resize(width: 50, height: 25, fit: .crop, align: .bottom)
             .crop(x: 20, y: 30, width: 150, height: 250)
             .flip()
@@ -1201,7 +1201,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY", security: security)
         let expectation = self.expectation(description: "request should complete")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .crop(x: 301, y: 269, width: 1226, height: 1100)
 
         let expectedURL = Config.processURL
@@ -1253,7 +1253,7 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
         let expectation = self.expectation(description: "request should complete")
 
-        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .crop(x: 301, y: 269, width: 1226, height: 1100)
 
         let expectedURL = Config.processURL
