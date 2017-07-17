@@ -770,7 +770,7 @@ import Foundation
                             clipOffset: clipOffset)
     }
 
-    @discardableResult func debug() -> Self {
+    @discardableResult public func debug() -> Self {
 
         let task = Task(name: "debug", options: nil)
 
@@ -779,15 +779,15 @@ import Foundation
         return self
     }
 
-    @discardableResult func store(fileName: String? = nil,
-                                  location: StorageLocation? = nil,
-                                  path: String? = nil,
-                                  container: String? = nil,
-                                  region: String? = nil,
-                                  access: StorageAccess? = nil,
-                                  base64Decode: Bool? = nil,
-                                  queue: DispatchQueue? = nil,
-                                  completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
+    @discardableResult public func store(fileName: String? = nil,
+                                         location: StorageLocation? = nil,
+                                         path: String? = nil,
+                                         container: String? = nil,
+                                         region: String? = nil,
+                                         access: StorageAccess? = nil,
+                                         base64Decode: Bool? = nil,
+                                         queue: DispatchQueue? = nil,
+                                         completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
 
         var options = [TaskOption]()
 
