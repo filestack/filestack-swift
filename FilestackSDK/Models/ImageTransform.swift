@@ -770,6 +770,15 @@ import Foundation
                             clipOffset: clipOffset)
     }
 
+    @discardableResult func debug() -> Self {
+
+        let task = Task(name: "debug", options: nil)
+
+        transformationTasks.insert(task, at: 0)
+
+        return self
+    }
+
 
     // MARK: - Private Functions
 
@@ -796,10 +805,10 @@ import Foundation
         return self
     }
 
-    @discardableResult public func pCropFaces(mode: ImageTransformCropMode? = nil,
-                                              width: Int? = nil,
-                                              height: Int? = nil,
-                                              faces: Any? = nil) -> Self {
+    @discardableResult private func pCropFaces(mode: ImageTransformCropMode? = nil,
+                                               width: Int? = nil,
+                                               height: Int? = nil,
+                                               faces: Any? = nil) -> Self {
 
         var options = [TaskOption]()
 
@@ -826,12 +835,12 @@ import Foundation
         return self
     }
 
-    @discardableResult public func pPixelateFaces(faces: Any,
-                                                  minSize: Float? = nil,
-                                                  maxSize: Float? = nil,
-                                                  buffer: Int,
-                                                  blur: Float? = nil,
-                                                  type: ImageTransformPixelateFacesType? = nil) -> Self {
+    @discardableResult private func pPixelateFaces(faces: Any,
+                                                   minSize: Float? = nil,
+                                                   maxSize: Float? = nil,
+                                                   buffer: Int,
+                                                   blur: Float? = nil,
+                                                   type: ImageTransformPixelateFacesType? = nil) -> Self {
 
         var options = [TaskOption]()
 
@@ -862,9 +871,9 @@ import Foundation
         return self
     }
 
-    @discardableResult public func pRoundCorners(radius: Any? = nil,
-                                                 blur: Float? = nil,
-                                                 background: UIColor? = nil) -> Self {
+    @discardableResult private func pRoundCorners(radius: Any? = nil,
+                                                  blur: Float? = nil,
+                                                  background: UIColor? = nil) -> Self {
 
         var options = [TaskOption]()
 
@@ -956,15 +965,6 @@ import Foundation
         let task = Task(name: "output", options: options)
 
         transformationTasks.append(task)
-
-        return self
-    }
-
-    @discardableResult func debug() -> Self {
-
-        let task = Task(name: "debug", options: nil)
-
-        transformationTasks.insert(task, at: 0)
 
         return self
     }
