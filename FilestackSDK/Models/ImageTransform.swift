@@ -1060,10 +1060,10 @@ import Foundation
 
     private func tasksToURLFragment() -> String {
 
-        let tasks: [String] = transformationTasks.flatMap {
+        let tasks: [String] = transformationTasks.map {
 
             if let options = $0.options {
-                let params: [String] = options.flatMap {
+                let params: [String] = options.map {
 
                     switch $0.value {
                     case let array as [Any]:
