@@ -64,6 +64,11 @@ import Foundation
 
         return ImageTransform(handle: handle, apiKey: apiKey, security: security)
     }
+
+    public func imageTransform(externalURL: URL) -> ImageTransform {
+
+        return ImageTransform(externalURL: externalURL, apiKey: apiKey, security: security)
+    }
 }
 
 

@@ -1082,4 +1082,85 @@ class ImageTransformTests: XCTestCase {
 
         XCTAssertEqual(imageTransform.url, expectedURL)
     }
+
+    func testTransfomationURLWithExternalURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
+            .resize(width: 50, height: 25, fit: .crop, align: .bottom)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("MY-API-KEY")
+            .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
+            .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testChainedTransformationsURLWithExternalURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
+            .resize(width: 50, height: 25, fit: .crop, align: .bottom)
+            .crop(x: 20, y: 30, width: 150, height: 250)
+            .flip()
+            .flop()
+            .watermark(file: "WATERMARK-HANDLE", size: 50, position: [.bottom, .right])
+            .detectFaces(minSize: 0.25, maxSize: 0.55, color: .white, export: true)
+            .cropFaces(mode: .fill, width: 250, height: 150, faces: 4)
+            .pixelateFaces(faces: 3, minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
+            .roundCorners(radius: 150, blur: 0.8, background: .black)
+            .vignette(amount: 80, blurMode: .gaussian, background: .black)
+            .polaroid(color: .white, rotate: 33, background: .black)
+            .tornEdges(spread: [5, 25], background: .blue)
+            .shadow(blur: 10, opacity: 35, vector: [30, 30], color: .black, background: .white)
+            .circle(background: .red)
+            .border(width: 3, color: .white, background: .red)
+            .sharpen(amount: 3)
+            .blur(amount: 5)
+            .monochrome()
+            .blackAndWhite(threshold: 45)
+            .sepia(tone: 85)
+            .convert(format: "jpg", compress: true, strip: true, noMetadata: true, colorSpace: .input)
+            .quality(value: 88)
+            .zip()
+            .videoConvert(preset: "h264", force: false, width: 1080, height: 720, title: "Chapter 1", extName: "mp4")
+            .audioConvert(preset: "m4a", extName: "m4a", fileName: "audio_1", audioBitRate: 320, audioSampleRate: 44100)
+            .debug()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("MY-API-KEY")
+            .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
+            .appendingPathComponent("crop=dim:[20,30,150,250]")
+            .appendingPathComponent("flip")
+            .appendingPathComponent("flop")
+            .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[bottom,right]")
+            .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
+            .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:4")
+            .appendingPathComponent("pixelate_faces=faces:3,minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
+            .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
+            .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
+            .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
+            .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
+            .appendingPathComponent("shadow=blur:10,opacity:35,vector:[30,30],color:000000FF,background:FFFFFFFF")
+            .appendingPathComponent("circle=background:FF0000FF")
+            .appendingPathComponent("border=width:3,color:FFFFFFFF,background:FF0000FF")
+            .appendingPathComponent("sharpen=amount:3")
+            .appendingPathComponent("blur=amount:5")
+            .appendingPathComponent("monochrome")
+            .appendingPathComponent("blackwhite=threshold:45")
+            .appendingPathComponent("sepia=tone:85")
+            .appendingPathComponent("output=format:jpg,compress:true,strip:true,no_metadata,colorspace:input")
+            .appendingPathComponent("quality=value:88")
+            .appendingPathComponent("zip")
+            .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
+            .appendingPathComponent("video_convert=preset:m4a,extname:m4a,filename:audio_1,audio_bitrate:320,audio_samplerate:44100")
+            .appendingPathComponent("debug")
+            .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
 }
