@@ -7,11 +7,21 @@
 //
 
 import XCTest
+import OHHTTPStubs
+
 @testable import FilestackSDK
 
 
 class ImageTransformTests: XCTestCase {
-    
+
+    private let processStubConditions = isScheme(Config.processURL.scheme!) && isHost(Config.processURL.host!)
+
+    override func tearDown() {
+
+        OHHTTPStubs.removeAllStubs()
+        super.tearDown()
+    }
+
     func testResizeTransformationURL() {
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -1023,7 +1033,8 @@ class ImageTransformTests: XCTestCase {
 
     func testChainedTransformationsURL() {
 
-        let client = Client(apiKey: "MY-API-KEY")
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
 
         let imageTransform = client.imageTransform(for: "MY-HANDLE")
             .resize(width: 50, height: 25, fit: .crop, align: .bottom)
@@ -1080,6 +1091,7 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("zip")
             .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
             .appendingPathComponent("video_convert=preset:m4a,extname:m4a,filename:audio_1,audio_bitrate:320,audio_samplerate:44100")
+            .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -1102,7 +1114,8 @@ class ImageTransformTests: XCTestCase {
 
     func testChainedTransformationsURLWithExternalURL() {
 
-        let client = Client(apiKey: "MY-API-KEY")
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
 
         let imageTransform = client.imageTransform(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
             .resize(width: 50, height: 25, fit: .crop, align: .bottom)
@@ -1160,9 +1173,112 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("zip")
             .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
             .appendingPathComponent("video_convert=preset:m4a,extname:m4a,filename:audio_1,audio_bitrate:320,audio_samplerate:44100")
+            .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testStoreImageTransformation() {
+
+        stub(condition: processStubConditions) { _ in
+
+            let json: [String: Any] = [
+                "container": "filestack-web-demo",
+                "filename": "custom_flower_crop.jpg",
+                "width": 1226,
+                "height": 1100,
+                "size": 215693,
+                "key": "my/custom/path/lv3P2Q4QN2aluHLGhgAV_custom_flower_crop.jpg",
+                "type": "image/jpeg",
+                "url": "https://cdn.filestackcontent.com/lv3P2Q4QN2aluHLGhgAV"
+            ]
+
+            return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: nil)
+        }
+
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+        let expectation = self.expectation(description: "request should complete")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .crop(x: 301, y: 269, width: 1226, height: 1100)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "store=filename:custom_flower_crop.jpg,location:S3,path:my/custom/path/," +
+                "container:filestack-web-demo,region:us-east-1,access:public,base64decode:true"
+            )
+            .appendingPathComponent("crop=dim:[301,269,1226,1100]")
+            .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
+            .appendingPathComponent("MY-HANDLE")
+
+        var aFileLink: FileLink?
+        var aResponse: NetworkJSONResponse?
+
+        let transform = imageTransform.store(fileName: "custom_flower_crop.jpg",
+                                             location: .s3,
+                                             path: "my/custom/path/",
+                                             container: "filestack-web-demo",
+                                             region: "us-east-1",
+                                             access: .public,
+                                             base64Decode: true) { fileLink, response in
+
+            aFileLink = fileLink
+            aResponse = response
+
+            expectation.fulfill()
+        }
+
+        XCTAssertEqual(transform.url, expectedURL)
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(aResponse?.request?.url, expectedURL)
+        XCTAssertEqual(aResponse?.response?.statusCode, 200)
+        XCTAssertNil(aResponse?.error)
+
+        XCTAssertNotNil(aFileLink)
+        XCTAssertEqual(aFileLink?.apiKey, "MY-API-KEY")
+        XCTAssertEqual(aFileLink?.handle, "lv3P2Q4QN2aluHLGhgAV")
+        XCTAssertEqual(aFileLink?.security, security)
+    }
+
+    func testFailedStoreImageTransformation() {
+
+        stub(condition: processStubConditions) { _ in
+            return OHHTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
+        }
+
+        let client = Client(apiKey: "MY-API-KEY")
+        let expectation = self.expectation(description: "request should complete")
+
+        let imageTransform = client.imageTransform(for: "MY-HANDLE")
+            .crop(x: 301, y: 269, width: 1226, height: 1100)
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("store")
+            .appendingPathComponent("crop=dim:[301,269,1226,1100]")
+            .appendingPathComponent("MY-HANDLE")
+
+        var aFileLink: FileLink?
+        var aResponse: NetworkJSONResponse?
+
+        imageTransform.store() { fileLink, response in
+
+            aFileLink = fileLink
+            aResponse = response
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(aResponse?.request?.url, expectedURL)
+        XCTAssertEqual(aResponse?.response?.statusCode, 500)
+        XCTAssertNotNil(aResponse?.error)
+
+        XCTAssertNil(aFileLink)
     }
 
 }

@@ -18,4 +18,6 @@ internal struct Config {
     static let filePath = "file"
     static let storePath = "store"
     static let metadataPath = "metadata"
+
+    static let validHTTPResponseCodes = Array(200..<300)
 }

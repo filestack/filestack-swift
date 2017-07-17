@@ -43,4 +43,9 @@ extension NetworkingService {
 
         return try? urlComponents.asURL()
     }
+
+    func postRequest(url: URL, parameters: [String: Any]? = nil) -> DataRequest? {
+
+        return sessionManager.request(url, method: .post, parameters: parameters)
+    }
 }

@@ -37,11 +37,6 @@ import Alamofire
     }()
 
 
-    // MARK: - Private Properties
-
-    private let validHTTPResponseCodes = Array(200..<300)
-
-
     // MARK: - Lifecyle Functions
 
     internal init(handle: String, apiKey: String, security: Security? = nil) {
@@ -87,7 +82,7 @@ import Alamofire
             }
         }
 
-        request.validate(statusCode: validHTTPResponseCodes)
+        request.validate(statusCode: Config.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { (response) in
 
@@ -138,7 +133,7 @@ import Alamofire
             }
         }
 
-        request.validate(statusCode: validHTTPResponseCodes)
+        request.validate(statusCode: Config.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { (response) in
 
@@ -168,7 +163,7 @@ import Alamofire
             return
         }
 
-        request.validate(statusCode: validHTTPResponseCodes)
+        request.validate(statusCode: Config.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { (response) in
 
@@ -212,7 +207,7 @@ import Alamofire
             }
         }
 
-        request.validate(statusCode: validHTTPResponseCodes)
+        request.validate(statusCode: Config.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { (response) in
 
@@ -245,7 +240,7 @@ import Alamofire
             return
         }
 
-        request.validate(statusCode: validHTTPResponseCodes)
+        request.validate(statusCode: Config.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { (response) in
 

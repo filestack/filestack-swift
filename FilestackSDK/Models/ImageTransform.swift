@@ -779,6 +779,77 @@ import Foundation
         return self
     }
 
+    @discardableResult func store(fileName: String? = nil,
+                                  location: StorageLocation? = nil,
+                                  path: String? = nil,
+                                  container: String? = nil,
+                                  region: String? = nil,
+                                  access: StorageAccess? = nil,
+                                  base64Decode: Bool? = nil,
+                                  queue: DispatchQueue? = nil,
+                                  completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
+
+        var options = [TaskOption]()
+
+        if let fileName = fileName {
+            options.append((key: "filename", value: fileName))
+        }
+
+        if let location = location {
+            options.append((key: "location", value: location))
+        }
+
+        if let path = path {
+            options.append((key: "path", value: path))
+        }
+
+        if let container = container {
+            options.append((key: "container", value: container))
+        }
+
+        if let region = region {
+            options.append((key: "region", value: region))
+        }
+
+        if let access = access {
+            options.append((key: "access", value: access))
+        }
+
+        if let base64Decode = base64Decode {
+            options.append((key: "base64decode", value: base64Decode))
+        }
+
+        let task = Task(name: "store", options: options)
+
+        transformationTasks.insert(task, at: 0)
+
+
+        // Create and perform post request
+
+        guard let request = processService.postRequest(url: url) else { return self }
+
+        request.validate(statusCode: Config.validHTTPResponseCodes)
+
+        request.responseJSON(queue: queue ?? DispatchQueue.main) { (response) in
+
+            let jsonResponse = NetworkJSONResponse(with: response)
+            var fileLink: FileLink?
+
+            if let json = jsonResponse.json,
+               let urlString = json["url"] as? String,
+               let url = URL(string: urlString) {
+
+                fileLink = FileLink(handle: url.lastPathComponent, apiKey: self.apiKey, security: self.security)
+            }
+
+            completionHandler(fileLink, jsonResponse)
+
+            return
+        }
+
+        return self
+    }
+
 
     // MARK: - Private Functions
 

@@ -8,7 +8,6 @@
 
 import XCTest
 import OHHTTPStubs
-import CFNetwork.CFNetworkErrors
 
 @testable import FilestackSDK
 @testable import Alamofire

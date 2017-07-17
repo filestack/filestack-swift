@@ -11,6 +11,7 @@
 		452D715B1F17A49D0037E1BB /* ImageTransformPageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715A1F17A49D0037E1BB /* ImageTransformPageFormat.swift */; };
 		452D715D1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */; };
 		452D715F1F17A51B0037E1BB /* ImageTransformColorSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */; };
+		4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */; };
 		454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */; };
 		454CC1C61F0CF932005821AC /* SessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1C51F0CF932005821AC /* SessionManagerTests.swift */; };
 		454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1C71F0D10D2005821AC /* BundleInfo.swift */; };
@@ -221,6 +222,7 @@
 		452D715A1F17A49D0037E1BB /* ImageTransformPageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPageFormat.swift; sourceTree = "<group>"; };
 		452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPageOrientation.swift; sourceTree = "<group>"; };
 		452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformColorSpace.swift; sourceTree = "<group>"; };
+		4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONResponse.swift; sourceTree = "<group>"; };
 		454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadResponse.swift; sourceTree = "<group>"; };
 		454CC1C51F0CF932005821AC /* SessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
 		454CC1C71F0D10D2005821AC /* BundleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BundleInfo.swift; path = Misc/BundleInfo.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				45C9E93A1F137EB200260F2A /* ImageTransform.swift */,
 				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
 				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
+				4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */,
 				45B830E01F03BCF20053742A /* Policy.swift */,
 				45B830E11F03BCF20053742A /* Security.swift */,
 			);
@@ -765,6 +768,7 @@
 				452D715F1F17A51B0037E1BB /* ImageTransformColorSpace.swift in Sources */,
 				454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */,
 				45513FFA1F0E9739006DB972 /* APIService.swift in Sources */,
+				4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */,
 				45FA0CCD1F0B86B6008EDBCD /* CDNService.swift in Sources */,
 				454CC1CB1F0D1160005821AC /* SessionManager+filestackDefault.swift in Sources */,
 				45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */,
