@@ -11,6 +11,8 @@
 		452D715B1F17A49D0037E1BB /* ImageTransformPageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715A1F17A49D0037E1BB /* ImageTransformPageFormat.swift */; };
 		452D715D1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */; };
 		452D715F1F17A51B0037E1BB /* ImageTransformColorSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */; };
+		45341A8D1F1E170C00DC7B79 /* URL+mimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341A8C1F1E170C00DC7B79 /* URL+mimeType.swift */; };
+		45341AA01F1E17C400DC7B79 /* URLMimeTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341A9F1F1E17C400DC7B79 /* URLMimeTypeTests.swift */; };
 		4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */; };
 		454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */; };
 		454CC1C61F0CF932005821AC /* SessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CC1C51F0CF932005821AC /* SessionManagerTests.swift */; };
@@ -222,6 +224,8 @@
 		452D715A1F17A49D0037E1BB /* ImageTransformPageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPageFormat.swift; sourceTree = "<group>"; };
 		452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformPageOrientation.swift; sourceTree = "<group>"; };
 		452D715E1F17A51B0037E1BB /* ImageTransformColorSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformColorSpace.swift; sourceTree = "<group>"; };
+		45341A8C1F1E170C00DC7B79 /* URL+mimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+mimeType.swift"; sourceTree = "<group>"; };
+		45341A9F1F1E17C400DC7B79 /* URLMimeTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLMimeTypeTests.swift; sourceTree = "<group>"; };
 		4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONResponse.swift; sourceTree = "<group>"; };
 		454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadResponse.swift; sourceTree = "<group>"; };
 		454CC1C51F0CF932005821AC /* SessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 			children = (
 				454CC1CA1F0D1160005821AC /* SessionManager+filestackDefault.swift */,
 				45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */,
+				45341A8C1F1E170C00DC7B79 /* URL+mimeType.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 				45B8311D1F03E2890053742A /* SecurityTests.swift */,
 				45B8311F1F03E52B0053742A /* Seeds.swift */,
 				454CC1C51F0CF932005821AC /* SessionManagerTests.swift */,
+				45341A9F1F1E17C400DC7B79 /* URLMimeTypeTests.swift */,
 				45FA0CCE1F0B8841008EDBCD /* Fixtures */,
 			);
 			path = FilestackSDKTests;
@@ -767,6 +773,7 @@
 				45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */,
 				452D715F1F17A51B0037E1BB /* ImageTransformColorSpace.swift in Sources */,
 				454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */,
+				45341A8D1F1E170C00DC7B79 /* URL+mimeType.swift in Sources */,
 				45513FFA1F0E9739006DB972 /* APIService.swift in Sources */,
 				4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */,
 				45FA0CCD1F0B86B6008EDBCD /* CDNService.swift in Sources */,
@@ -789,6 +796,7 @@
 				45C3BB261F0E9B3500856883 /* NetworkingServiceTest.swift in Sources */,
 				454CC1C61F0CF932005821AC /* SessionManagerTests.swift in Sources */,
 				45B8311E1F03E2890053742A /* SecurityTests.swift in Sources */,
+				45341AA01F1E17C400DC7B79 /* URLMimeTypeTests.swift in Sources */,
 				45B831241F03F4300053742A /* ClientTests.swift in Sources */,
 				45C9E94E1F1384B200260F2A /* ImageTransformTests.swift in Sources */,
 				45B831201F03E52B0053742A /* Seeds.swift in Sources */,
