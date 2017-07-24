@@ -826,7 +826,7 @@ import Foundation
 
         // Create and perform post request
 
-        guard let request = processService.postRequest(url: url) else { return self }
+        guard let request = processService.request(url: url, method: .post) else { return self }
 
         request.validate(statusCode: Config.validHTTPResponseCodes)
 
