@@ -606,7 +606,7 @@ class FileLinkTests: XCTestCase {
 
         stub(condition: cdnStubConditions) { _ in
             let headers = ["Content-Type": "application/json"]
-            return OHHTTPStubsResponse(jsonObject: ["swf": true], statusCode: 200, headers: headers)
+            return OHHTTPStubsResponse(jsonObject: ["sfw": true], statusCode: 200, headers: headers)
         }
 
         let security = Seeds.Securities.basic
@@ -631,7 +631,7 @@ class FileLinkTests: XCTestCase {
 
         XCTAssertEqual(response?.response?.url, expectedURL)
         XCTAssertEqual(response?.response?.statusCode, 200)
-        XCTAssertEqual(response?.json?["swf"] as? Bool, true)
+        XCTAssertEqual(response?.json?["sfw"] as? Bool, true)
         XCTAssertNil(response?.error)
     }
 
