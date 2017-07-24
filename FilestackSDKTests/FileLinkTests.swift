@@ -576,7 +576,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
         }
 
-        let client = Client(apiKey: "MY-API-KEY")
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         let expectation = self.expectation(description: "request should complete")
@@ -590,6 +591,12 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
+        let expectedURL = Config.cdnURL
+            .appendingPathComponent("tags")
+            .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(response?.response?.url, expectedURL)
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNotNil(response?.json)
         XCTAssertNil(response?.error)
@@ -602,7 +609,8 @@ class FileLinkTests: XCTestCase {
             return OHHTTPStubsResponse(jsonObject: ["swf": true], statusCode: 200, headers: headers)
         }
 
-        let client = Client(apiKey: "MY-API-KEY")
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         let expectation = self.expectation(description: "request should complete")
@@ -616,6 +624,12 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
+        let expectedURL = Config.cdnURL
+            .appendingPathComponent("sfw")
+            .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(response?.response?.url, expectedURL)
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertEqual(response?.json?["swf"] as? Bool, true)
         XCTAssertNil(response?.error)
