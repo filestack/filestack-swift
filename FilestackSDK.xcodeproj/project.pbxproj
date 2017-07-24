@@ -46,6 +46,7 @@
 		45B831221F03F1C90053742A /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831211F03F1C90053742A /* Client.swift */; };
 		45B831241F03F4300053742A /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831231F03F4300053742A /* ClientTests.swift */; };
 		45C3BB261F0E9B3500856883 /* NetworkingServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */; };
+		45C3EA0F1F262ED30003598D /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3EA0E1F262ED30003598D /* MetadataOptions.swift */; };
 		45C8F2061F18B279001A6558 /* ImageTransformAspectMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8F2051F18B279001A6558 /* ImageTransformAspectMode.swift */; };
 		45C8F2081F18B3AF001A6558 /* StorageAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8F2071F18B3AF001A6558 /* StorageAccess.swift */; };
 		45C9E93B1F137EB200260F2A /* ImageTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9E93A1F137EB200260F2A /* ImageTransform.swift */; };
@@ -264,6 +265,7 @@
 		45B831211F03F1C90053742A /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		45B831231F03F4300053742A /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
 		45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceTest.swift; sourceTree = "<group>"; };
+		45C3EA0E1F262ED30003598D /* MetadataOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
 		45C8F2051F18B279001A6558 /* ImageTransformAspectMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformAspectMode.swift; sourceTree = "<group>"; };
 		45C8F2071F18B3AF001A6558 /* StorageAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAccess.swift; sourceTree = "<group>"; };
 		45C9E93A1F137EB200260F2A /* ImageTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransform.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				452D715C1F17A4DB0037E1BB /* ImageTransformPageOrientation.swift */,
 				450E433B1F161DE500E46B56 /* ImageTransformPixelateFacesType.swift */,
 				457D5BEC1F16146B00FBD5B1 /* ImageTransformPosition.swift */,
+				45C3EA0E1F262ED30003598D /* MetadataOptions.swift */,
 				457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */,
 				45C8F2071F18B3AF001A6558 /* StorageAccess.swift */,
 				4589A45E1F0A3B5500C39405 /* StorageLocation.swift */,
@@ -791,6 +794,7 @@
 				457D5BEF1F16147E00FBD5B1 /* ImageTransformFix.swift in Sources */,
 				452D715B1F17A49D0037E1BB /* ImageTransformPageFormat.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
+				45C3EA0F1F262ED30003598D /* MetadataOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

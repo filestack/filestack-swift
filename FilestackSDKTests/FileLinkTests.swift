@@ -635,6 +635,61 @@ class FileLinkTests: XCTestCase {
         XCTAssertNil(response?.error)
     }
 
+    func testGetMetadata() {
+
+        stub(condition: apiStubConditions) { _ in
+            let headers = ["Content-Type": "application/json"]
+
+            let returnedJSON: [String: Any] = [
+                "width": 320,
+                "height": 280,
+                "md5": "de2af2ee5450732a4768442199d6718d"
+            ]
+
+            return OHHTTPStubsResponse(jsonObject: returnedJSON, statusCode: 200, headers: headers)
+        }
+
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+        let fileLink = client.fileLink(for: "MY-HANDLE")
+
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkJSONResponse?
+
+        fileLink.getMetadata(options: [.width, .height, .md5]) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        let expectedBaseURL = Config.apiURL
+            .appendingPathComponent("file")
+            .appendingPathComponent("MY-HANDLE")
+            .appendingPathComponent("metadata")
+
+        var expectedURLComponents = URLComponents(url: expectedBaseURL, resolvingAgainstBaseURL: false)!
+
+        expectedURLComponents.queryItems = [
+            URLQueryItem(name: "width", value: "true"),
+            URLQueryItem(name: "height", value: "true"),
+            URLQueryItem(name: "md5", value: "true"),
+            URLQueryItem(name: "policy", value: security.encodedPolicy),
+            URLQueryItem(name: "signature", value: security.signature)
+        ]
+
+        let expectedURL = try! expectedURLComponents.asURL()
+
+        XCTAssertEqual(response?.response?.url, expectedURL)
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertEqual(response?.json?["width"] as? Int, 320)
+        XCTAssertEqual(response?.json?["height"] as? Int, 280)
+        XCTAssertEqual(response?.json?["md5"] as? String, "de2af2ee5450732a4768442199d6718d")
+
+        XCTAssertNil(response?.error)
+    }
+
     // NOTE: OHHTTPStubs can not simulate data uploads, so we can't test this specific case.
     // func testOverwriteExistingContentWithDataAndUploadProgressReporting() {
     //

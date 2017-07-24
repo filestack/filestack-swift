@@ -15,12 +15,16 @@ internal protocol NetworkingService {
     var sessionManager: SessionManager { get }
     var baseURL: URL { get }
 
-    func buildURL(handle: String?, path: String?, security: Security?) -> URL?
+    func buildURL(handle: String?, path: String?, extra: String?, queryItems: [URLQueryItem]?, security: Security?) -> URL?
 }
 
 extension NetworkingService {
 
-    func buildURL(handle: String? = nil, path: String? = nil, security: Security? = nil) -> URL? {
+    func buildURL(handle: String? = nil,
+                  path: String? = nil,
+                  extra: String? = nil,
+                  queryItems: [URLQueryItem]? = nil,
+                  security: Security? = nil) -> URL? {
 
         var url = baseURL
 
@@ -32,13 +36,21 @@ extension NetworkingService {
             url.appendPathComponent(handle)
         }
 
+        if let extra = extra {
+            url.appendPathComponent(extra)
+        }
+
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
 
+        urlComponents.queryItems = queryItems
+
         if let security = security {
-            urlComponents.queryItems = [
-                URLQueryItem(name: "policy", value: security.encodedPolicy),
-                URLQueryItem(name: "signature", value: security.signature)
-            ]
+            if urlComponents.queryItems == nil {
+                urlComponents.queryItems = []
+            }
+
+            urlComponents.queryItems?.append(URLQueryItem(name: "policy", value: security.encodedPolicy))
+            urlComponents.queryItems?.append(URLQueryItem(name: "signature", value: security.signature))
         }
 
         return try? urlComponents.asURL()
