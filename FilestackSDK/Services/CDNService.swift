@@ -25,6 +25,21 @@ internal class CDNService: NetworkingService {
         return sessionManager.request(url, method: .get, parameters: parameters)
     }
 
+    func getImageTaggingRequest(type: String, handle: String, security: Security?) -> DataRequest? {
+
+        var url = baseURL
+
+        url.appendPathComponent(type)
+
+        if let security = security {
+            url.appendPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
+        }
+
+        url.appendPathComponent(handle)
+
+        return sessionManager.request(url, method: .get, parameters: nil)
+    }
+
     func downloadRequest(handle: String,
                          path: String?,
                          parameters: [String: Any]?,

@@ -91,6 +91,48 @@ import Alamofire
     }
 
     /**
+        Gets the image tags associated to this `FileLink` as a JSON payload.
+
+        - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
+        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     */
+    public func getTags(queue: DispatchQueue? = nil,
+                        completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+
+        guard let request = cdnService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
+            return
+        }
+
+        request.validate(statusCode: Config.validHTTPResponseCodes)
+
+        request.responseJSON(queue: queue) { response in
+
+            completionHandler(NetworkJSONResponse(with: response))
+        }
+    }
+
+    /**
+        Gets the safe for work status associated to this `FileLink` as a JSON payload.
+
+        - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
+        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     */
+    public func getSafeForWork(queue: DispatchQueue? = nil,
+                               completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+
+        guard let request = cdnService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
+            return
+        }
+
+        request.validate(statusCode: Config.validHTTPResponseCodes)
+
+        request.responseJSON(queue: queue) { response in
+
+            completionHandler(NetworkJSONResponse(with: response))
+        }
+    }
+
+    /**
         Downloads the content associated to this `FileLink` to a destination URL.
 
         - Parameter destinationURL: The local URL where content should be saved.

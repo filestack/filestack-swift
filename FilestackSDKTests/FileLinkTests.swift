@@ -560,6 +560,67 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.error)
     }
 
+    func testGetImageTaggingResponse() {
+
+        stub(condition: cdnStubConditions) { _ in
+            let headers = ["Content-Type": "application/json"]
+
+            let json = [
+                "auto": [
+                    "perching bird": 58,
+                    "eurasian golden oriole": 57
+                ],
+                "user": nil
+            ]
+
+            return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
+        }
+
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
+
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkJSONResponse?
+
+        fileLink.getTags { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertNotNil(response?.json)
+        XCTAssertNil(response?.error)
+    }
+
+    func testGetSafeForWorkResponse() {
+
+        stub(condition: cdnStubConditions) { _ in
+            let headers = ["Content-Type": "application/json"]
+            return OHHTTPStubsResponse(jsonObject: ["swf": true], statusCode: 200, headers: headers)
+        }
+
+        let client = Client(apiKey: "MY-API-KEY")
+        let fileLink = client.fileLink(for: "MY-HANDLE")
+
+        let expectation = self.expectation(description: "request should complete")
+        var response: NetworkJSONResponse?
+
+        fileLink.getSafeForWork { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertEqual(response?.response?.statusCode, 200)
+        XCTAssertEqual(response?.json?["swf"] as? Bool, true)
+        XCTAssertNil(response?.error)
+    }
+
     // NOTE: OHHTTPStubs can not simulate data uploads, so we can't test this specific case.
     // func testOverwriteExistingContentWithDataAndUploadProgressReporting() {
     //
