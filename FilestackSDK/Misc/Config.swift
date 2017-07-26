@@ -14,12 +14,9 @@ internal struct Config {
     static let apiURL = URL(string: "https://www.filestackapi.com/api")!
     static let cdnURL = URL(string: "https://cdn.filestackcontent.com")!
     static let processURL = URL(string: "https://process.filestackapi.com")!
+    static let uploadURL = URL(string: "https://upload.filestackapi.com")!
 
-    static let multipartStartURL = URL(string: "https://upload.filestackapi.com/multipart/start")!
-    static let multipartUploadURL = URL(string: "https://upload.filestackapi.com/multipart/upload")!
-    static let multipartCompleteURL = URL(string: "https://upload.filestackapi.com/multipart/complete")!
-
-    static let defaultChunkSize = 5 * pow(1024, 2) // 5MB
+    static let defaultChunkSize = 5 * Int(pow(Double(1024), Double(2))) // 5MB
 
     static let filePath = "file"
     static let storePath = "store"

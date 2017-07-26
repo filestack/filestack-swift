@@ -12,6 +12,7 @@ import Foundation
 internal let cdnService = CDNService()
 internal let apiService = APIService()
 internal let processService = ProcessService()
+internal let uploadService = UploadService()
 
 internal func attachedDescription(object: CustomStringConvertible, indent: Int = 1, spaces: Int = 4) -> String {
 

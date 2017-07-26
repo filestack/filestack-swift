@@ -69,6 +69,20 @@ import Foundation
 
         return ImageTransform(externalURL: externalURL, apiKey: apiKey, security: security)
     }
+
+    public func multiPartUpload(from localURL: URL,
+                                storage: StorageLocation? = nil,
+                                queue: DispatchQueue = .main,
+                                completionHandler: @escaping (NetworkJSONResponse?) -> Void) {
+
+        let mpu = MultipartUpload(apiKey: apiKey,
+                                  storage: self.storage ?? storage ?? .s3,
+                                  security: security)
+
+        mpu.uploadFile(at: localURL,
+                       queue: queue,
+                       completionHandler: completionHandler)
+    }
 }
 
 

@@ -48,6 +48,16 @@ import Alamofire
 
         super.init()
     }
+
+    internal init(with error: Error) {
+
+        self.request = nil
+        self.response = nil
+        self.json = nil
+        self.error = error
+
+        super.init()
+    }
 }
 
 extension NetworkJSONResponse {

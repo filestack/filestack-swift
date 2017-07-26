@@ -11,10 +11,10 @@ import Foundation
 
 extension URL {
 
-    internal func size() -> UInt? {
+    internal func size() -> UInt64? {
 
         let fm = FileManager.default
-        let fileSize = (try? fm.attributesOfItem(atPath: relativePath))?[.size] as? UInt
+        let fileSize = (try? fm.attributesOfItem(atPath: relativePath))?[.size] as? UInt64
 
         return fileSize
     }
