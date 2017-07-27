@@ -134,8 +134,6 @@ internal class MultipartUpload {
                     partsAndEtags[operation.part] = responseETag
                 }
 
-                print("partsAndEtags = \(partsAndEtags), missingEtags = \(missingEtags)")
-
                 if missingEtags {
                     let errorResponse = NetworkJSONResponse(with: MultipartUploadError.failedChunkUploads)
 
