@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import CommonCrypto
 
 
 internal class MultipartUploadSubmitPartOperation: BaseOperation {
@@ -74,20 +73,10 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
         let multipartFormData: (MultipartFormData) -> Void = { form in
 
-            // Base64-encoded 128-bit MD5 digest (according to RFC 1864)
-            var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-
-            let _ = dataChunk.withUnsafeBytes { bytes in
-                CC_MD5(bytes, CC_LONG(dataChunk.count), &digest)
-            }
-
-            let digestData: Data = Data(bytes: digest)
-            let base64Digest = digestData.base64EncodedString()
-
             form.append(self.apiKey.data(using: .utf8)!, withName: "apikey")
             form.append("\(self.part)".data(using: .utf8)!, withName: "part")
             form.append("\(dataChunk.count)".data(using: .utf8)!, withName: "size")
-            form.append(base64Digest.data(using: .utf8)!, withName: "md5")
+            form.append(dataChunk.base64MD5Digest().data(using: .utf8)!, withName: "md5")
             form.append(self.uri.data(using: .utf8)!, withName: "uri")
             form.append(self.region.data(using: .utf8)!, withName: "region")
             form.append(self.uploadID.data(using: .utf8)!, withName: "upload_id")
