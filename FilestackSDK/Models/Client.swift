@@ -73,15 +73,22 @@ import Foundation
     public func multiPartUpload(from localURL: URL,
                                 storage: StorageLocation? = nil,
                                 queue: DispatchQueue = .main,
+                                useIntelligentIngestionIfAvailable: Bool = true,
+                                uploadProgress: ((Progress) -> Void)? = nil,
                                 completionHandler: @escaping (NetworkJSONResponse?) -> Void) {
 
-        let mpu = MultipartUpload(apiKey: apiKey,
+        let mpu = MultipartUpload(at: localURL,
+                                  queue: queue,
+                                  uploadProgress: uploadProgress,
+                                  completionHandler: completionHandler,
+                                  partUploadConcurrency: 5,
+                                  chunkUploadConcurrency: 8,
+                                  apiKey: apiKey,
                                   storage: self.storage ?? storage ?? .s3,
-                                  security: security)
+                                  security: security,
+                                  useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 
-        mpu.uploadFile(at: localURL,
-                       queue: queue,
-                       completionHandler: completionHandler)
+        mpu.uploadFile()
     }
 }
 

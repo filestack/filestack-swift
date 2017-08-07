@@ -18,6 +18,7 @@ internal class MultipartUploadStartOperation: BaseOperation {
     let mimeType: String
     let storeLocation: StorageLocation
     let security: Security?
+    let useIntelligentIngestionIfAvailable: Bool
 
     var response: NetworkJSONResponse?
 
@@ -27,7 +28,8 @@ internal class MultipartUploadStartOperation: BaseOperation {
                   fileSize: UInt64,
                   mimeType: String,
                   storeLocation: StorageLocation,
-                  security: Security? = nil) {
+                  security: Security? = nil,
+                  useIntelligentIngestionIfAvailable: Bool) {
 
         self.apiKey = apiKey
         self.fileName = fileName
@@ -35,6 +37,7 @@ internal class MultipartUploadStartOperation: BaseOperation {
         self.mimeType = mimeType
         self.storeLocation = storeLocation
         self.security = security
+        self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
 
         super.init()
 
@@ -44,6 +47,7 @@ internal class MultipartUploadStartOperation: BaseOperation {
     override func main() {
 
         guard !isCancelled else {
+            isExecuting = false
             isFinished = true
             return
         }
@@ -53,7 +57,6 @@ internal class MultipartUploadStartOperation: BaseOperation {
         let url = URL(string: "multipart/start", relativeTo: uploadService.baseURL)!
 
         let multipartFormData: (MultipartFormData) -> Void = { form in
-
             let apiKeyData = self.apiKey.data(using: .utf8)!
             let fileNameData = self.fileName.data(using: .utf8)!
             let fileSizeData = "\(self.fileSize)".data(using: .utf8)!
@@ -74,11 +77,16 @@ internal class MultipartUploadStartOperation: BaseOperation {
                 form.append(policyData, withName: "policy")
                 form.append(signatureData, withName: "signature")
             }
+
+            if self.useIntelligentIngestionIfAvailable {
+                // Attempt to use Intelligent Ingestion
+                form.append("true".data(using: .utf8)!, withName: "multipart")
+            }
         }
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
-
             self.response = response
+            self.isExecuting = false
             self.isFinished = true
         }
     }

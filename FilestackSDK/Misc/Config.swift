@@ -16,8 +16,6 @@ internal struct Config {
     static let processURL = URL(string: "https://process.filestackapi.com")!
     static let uploadURL = URL(string: "https://upload.filestackapi.com")!
 
-    static let defaultChunkSize = 5 * Int(pow(Double(1024), Double(2))) // 5MB
-
     static let filePath = "file"
     static let storePath = "store"
     static let metadataPath = "metadata"

@@ -1,8 +1,8 @@
 //
-//  MultipartUploadCompleteOperation.swift
+//  MultipartUploadCommitOperation.swift
 //  FilestackSDK
 //
-//  Created by Ruben Nine on 7/25/17.
+//  Created by Ruben Nine on 7/31/17.
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
@@ -10,43 +10,34 @@ import Foundation
 import Alamofire
 
 
-internal class MultipartUploadCompleteOperation: BaseOperation {
+internal class MultipartUploadCommitOperation: BaseOperation {
 
     let apiKey: String
-    let fileName: String
     let fileSize: UInt64
-    let mimeType: String
+    let part: Int
     let uri: String
     let region: String
     let uploadID: String
-    let parts: String
-    let storeLocation: StorageLocation
-    let useIntelligentIngestion: Bool
+    let storageLocation: StorageLocation
 
     var response: NetworkJSONResponse?
 
 
     required init(apiKey: String,
-                  fileName: String,
                   fileSize: UInt64,
-                  mimeType: String,
+                  part: Int,
                   uri: String,
                   region: String,
                   uploadID: String,
-                  storeLocation: StorageLocation,
-                  partsAndEtags: [Int: String],
-                  useIntelligentIngestion: Bool) {
+                  storageLocation: StorageLocation) {
 
         self.apiKey = apiKey
-        self.fileName = fileName
         self.fileSize = fileSize
-        self.mimeType = mimeType
+        self.part = part
         self.uri = uri
         self.region = region
         self.uploadID = uploadID
-        self.storeLocation = storeLocation
-        self.parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
-        self.useIntelligentIngestion = useIntelligentIngestion
+        self.storageLocation = storageLocation
 
         super.init()
 
@@ -56,35 +47,26 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
     override func main() {
 
         guard !isCancelled else {
-            isExecuting = false
             isFinished = true
             return
         }
 
         isExecuting = true
 
-        let url = URL(string: "multipart/complete", relativeTo: uploadService.baseURL)!
+        let url = URL(string: "multipart/commit", relativeTo: uploadService.baseURL)!
 
         let multipartFormData: (MultipartFormData) -> Void = { form in
             form.append(self.apiKey.data(using: .utf8)!, withName: "apikey")
             form.append(self.uri.data(using: .utf8)!, withName: "uri")
             form.append(self.region.data(using: .utf8)!, withName: "region")
             form.append(self.uploadID.data(using: .utf8)!, withName: "upload_id")
-            form.append(self.fileName.data(using: .utf8)!, withName: "filename")
             form.append("\(self.fileSize)".data(using: .utf8)!, withName: "size")
-            form.append(self.mimeType.data(using: .utf8)!, withName: "mimetype")
-            form.append(String(describing: self.storeLocation).data(using: .utf8)!, withName: "store_location")
-
-            if self.useIntelligentIngestion {
-                form.append("true".data(using: .utf8)!, withName: "multipart")
-            } else {
-                form.append(self.parts.data(using: .utf8)!, withName: "parts")
-            }
+            form.append("\(self.part)".data(using: .utf8)!, withName: "part")
+            form.append(String(describing: self.storageLocation).data(using: .utf8)!, withName: "store_location")
         }
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
             self.response = response
-            self.isExecuting = false
             self.isFinished = true
         }
     }
