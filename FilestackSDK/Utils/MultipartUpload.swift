@@ -172,7 +172,12 @@ internal class MultipartUpload {
         var uploadedBytes: Int64 = 0
 
         // Submit all parts
-        while !shouldAbort && seekPoint < fileSize {
+        while seekPoint < fileSize {
+
+            if shouldAbort {
+                break
+            }
+
             part += 1
 
             let partOperation = MultipartUploadSubmitPartOperation(seek: seekPoint,
@@ -198,12 +203,20 @@ internal class MultipartUpload {
             partOperation.completionBlock = {
                 guard let partOperation = weakPartOperation else { return }
 
+                if partOperation.shouldAbort {
+                    self.shouldAbort = true
+                }
+
                 if !shouldUseIntelligentIngestion {
                     if let responseEtag = partOperation.responseEtag {
                         partsAndEtags[partOperation.part] = responseEtag
                     } else {
                         self.shouldAbort = true
                     }
+                }
+
+                if self.shouldAbort {
+                    self.uploadOperationQueue.cancelAllOperations()
                 }
             }
 

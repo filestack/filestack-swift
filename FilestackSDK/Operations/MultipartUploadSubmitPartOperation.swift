@@ -223,6 +223,10 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             retriesLeft -= 1
         }
 
+        if retriesLeft == 0 {
+            shouldAbort = true
+        }
+
         fileHandle.closeFile()
         uploadProgress = nil
         isExecuting = false
