@@ -226,7 +226,11 @@ internal class MultipartUpload {
 
         uploadOperationQueue.waitUntilAllOperationsAreFinished()
 
-        if shouldAbort {
+        objc_sync_enter(shouldAbort)
+        let abort = shouldAbort
+        objc_sync_exit(shouldAbort)
+
+        if abort {
             fail(with: MultipartUploadError.aborted)
             return
         } else {

@@ -227,7 +227,6 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             shouldAbort = true
         }
 
-        fileHandle?.closeFile()
         fileHandle = nil
         uploadProgress = nil
         isExecuting = false
