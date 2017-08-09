@@ -14,7 +14,7 @@ env:
     - DESTINATION="OS=9.0,name=iPhone 5"           SCHEME="$IOS_FRAMEWORK_SCHEME"      RUN_TESTS="YES"
 before_install:
   - brew update
-  - brew install carthage
+  - brew upgrade carthage
   - carthage bootstrap --no-build --use-submodules --verbose
 script:
   - set -o pipefail
