@@ -171,13 +171,9 @@ internal class MultipartUpload {
         var partsAndEtags: [Int: String] = [:]
         var uploadedBytes: Int64 = 0
 
+
         // Submit all parts
-        while seekPoint < fileSize {
-
-            if shouldAbort {
-                break
-            }
-
+        while !shouldAbort && seekPoint < fileSize {
             part += 1
 
             let partOperation = MultipartUploadSubmitPartOperation(seek: seekPoint,
@@ -200,7 +196,7 @@ internal class MultipartUpload {
 
             weak var weakPartOperation = partOperation
 
-            partOperation.completionBlock = {
+            let checkpointOperation = BlockOperation {
                 guard let partOperation = weakPartOperation else { return }
 
                 if partOperation.shouldAbort {
@@ -220,17 +216,16 @@ internal class MultipartUpload {
                 }
             }
 
+            checkpointOperation.addDependency(partOperation)
             uploadOperationQueue.addOperation(partOperation)
+            uploadOperationQueue.addOperation(checkpointOperation)
+
             seekPoint += UInt64(chunkSize)
         }
 
         uploadOperationQueue.waitUntilAllOperationsAreFinished()
 
-        objc_sync_enter(shouldAbort)
-        let abort = shouldAbort
-        objc_sync_exit(shouldAbort)
-
-        if abort {
+        if shouldAbort {
             fail(with: MultipartUploadError.aborted)
             return
         } else {
@@ -269,7 +264,7 @@ internal class MultipartUpload {
 
         weak var weakCompleteOperation = completeOperation
 
-        completeOperation.completionBlock = {
+        let checkpointOperation = BlockOperation {
             guard let completeOperation = weakCompleteOperation else { return }
 
             let jsonResponse = completeOperation.response
@@ -301,6 +296,8 @@ internal class MultipartUpload {
             }
         }
 
+        checkpointOperation.addDependency(completeOperation)
         uploadOperationQueue.addOperation(completeOperation)
+        uploadOperationQueue.addOperation(checkpointOperation)
     }
 }

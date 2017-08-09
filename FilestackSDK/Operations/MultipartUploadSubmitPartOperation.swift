@@ -189,7 +189,6 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                 break
             }
 
-            chunkUploadOperationQueue.addOperation(chunkOperation)
             partOffset += UInt64(chunkOperation.dataChunk.count)
         }
 
@@ -253,7 +252,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                                                             storageLocation: storageLocation)
         weak var weakOperation = operation
 
-        operation.completionBlock = {
+        let checkpointOperation = BlockOperation {
             guard let operation = weakOperation else { return }
             guard operation.isCancelled == false else { return }
 
@@ -269,12 +268,10 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
                 self.retriesLeft -= 1
 
-                guard let chunkOperation = self.addChunkOperation(partOffset: operation.partOffset,
-                                                                  partChunkSize: self.partChunkSize) else {
+                guard self.addChunkOperation(partOffset: operation.partOffset,
+                                             partChunkSize: self.partChunkSize) != nil else {
                     return
                 }
-
-                self.chunkUploadOperationQueue.addOperation(chunkOperation)
             // Server error
             } else if let response = operation.response?.response {
                 switch response.statusCode {
@@ -299,17 +296,20 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                     var localPartOffset = operation.partOffset
 
                     for _ in 1...2 {
-                        guard let operation = self.addChunkOperation(partOffset: localPartOffset,
-                                                                     partChunkSize: newPartChunkSize) else {
+                        guard self.addChunkOperation(partOffset: localPartOffset,
+                                                    partChunkSize: newPartChunkSize) != nil else {
                             break
                         }
 
-                        self.chunkUploadOperationQueue.addOperation(operation)
                         localPartOffset += UInt64(newPartChunkSize)
                     }
                 }
             }
         }
+
+        checkpointOperation.addDependency(operation)
+        chunkUploadOperationQueue.addOperation(operation)
+        chunkUploadOperationQueue.addOperation(checkpointOperation)
 
         return operation
     }
