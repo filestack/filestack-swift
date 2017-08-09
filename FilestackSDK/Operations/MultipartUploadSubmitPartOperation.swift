@@ -33,7 +33,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
     var response: DefaultDataResponse?
     var responseEtag: String?
-    var shouldAbort: Bool
+    var didFail: Bool
 
     private var retriesLeft: Int
     private var fileHandle: FileHandle?
@@ -79,7 +79,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         self.partChunkSize = 0
         self.maxRetries = 5
         self.retriesLeft = maxRetries
-        self.shouldAbort = false
+        self.didFail = false
         self.uploadProgress = uploadProgress
         self.chunkUploadOperationQueue.maxConcurrentOperationCount = chunkUploadConcurrency
 
@@ -223,7 +223,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         }
 
         if retriesLeft == 0 {
-            shouldAbort = true
+            didFail = true
         }
 
         fileHandle = nil
@@ -259,7 +259,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             // Network error
             if operation.response?.error != nil {
                 guard self.retriesLeft > 0 else {
-                    self.shouldAbort = true
+                    self.didFail = true
                     self.isExecuting = false
                     self.isFinished = true
                     self.chunkUploadOperationQueue.cancelAllOperations()
@@ -283,7 +283,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                 default:
 
                     guard partChunkSize > self.minimumPartChunkSize else {
-                        self.shouldAbort = true
+                        self.didFail = true
                         self.isExecuting = false
                         self.isFinished = true
                         self.chunkUploadOperationQueue.cancelAllOperations()

@@ -169,8 +169,7 @@ internal class MultipartUpload {
         }
 
         var partsAndEtags: [Int: String] = [:]
-        var uploadedBytes: Int64 = 0
-
+        var totalUploadedBytes: Int64 = 0
 
         // Submit all parts
         while !shouldAbort && seekPoint < fileSize {
@@ -188,10 +187,10 @@ internal class MultipartUpload {
                                                                    storageLocation: storage,
                                                                    chunkSize: chunkSize,
                                                                    chunkUploadConcurrency: chunkUploadConcurrency,
-                                                                   useIntelligentIngestion: shouldUseIntelligentIngestion) { lastUploadedBytes in
+                                                                   useIntelligentIngestion: shouldUseIntelligentIngestion) { uploadedBytes in
 
-                uploadedBytes += lastUploadedBytes
-                self.updateProgress(uploadedBytes: uploadedBytes)
+                totalUploadedBytes += uploadedBytes
+                self.updateProgress(uploadedBytes: totalUploadedBytes)
             }
 
             weak var weakPartOperation = partOperation
@@ -199,7 +198,7 @@ internal class MultipartUpload {
             let checkpointOperation = BlockOperation {
                 guard let partOperation = weakPartOperation else { return }
 
-                if partOperation.shouldAbort {
+                if partOperation.didFail {
                     self.shouldAbort = true
                 }
 
@@ -271,9 +270,7 @@ internal class MultipartUpload {
             let isNetworkError = jsonResponse?.response == nil && jsonResponse?.error != nil
 
             // Check for any error response
-            if useIntelligentIngestion &&
-                (jsonResponse?.response?.statusCode != 200 || isNetworkError) && retriesLeft > 0 {
-
+            if (jsonResponse?.response?.statusCode != 200 || isNetworkError) && retriesLeft > 0 {
                 let delay = isNetworkError ? 0 : pow(2, Double(self.maxRetries - retriesLeft))
 
                 // Retry in `delay` seconds
