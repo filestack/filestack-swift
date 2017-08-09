@@ -177,7 +177,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
         var partOffset: UInt64 = 0
 
-        while partOffset < chunkSize {
+        while partOffset < UInt64(chunkSize) {
             if isCancelled || isFinished {
                 chunkUploadOperationQueue.cancelAllOperations()
                 break
