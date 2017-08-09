@@ -36,7 +36,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
     var shouldAbort: Bool
 
     private var retriesLeft: Int
-    private var fileHandle: FileHandle!
+    private var fileHandle: FileHandle?
     private var partChunkSize: Int
 
     private let chunkUploadOperationQueue: OperationQueue = {
@@ -110,7 +110,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
     private func regularUpload() {
 
-        guard !isCancelled else {
+        guard !isCancelled, let fileHandle = fileHandle else {
             isExecuting = false
             isFinished = true
             return
@@ -227,7 +227,8 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             shouldAbort = true
         }
 
-        fileHandle.closeFile()
+        fileHandle?.closeFile()
+        fileHandle = nil
         uploadProgress = nil
         isExecuting = false
         isFinished = true
@@ -236,8 +237,9 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
     private func addChunkOperation(partOffset: UInt64,
                                    partChunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
 
-        fileHandle.seek(toFileOffset: self.seek + partOffset)
+        guard let fileHandle = fileHandle else { return nil }
 
+        fileHandle.seek(toFileOffset: self.seek + partOffset)
         let dataChunk = fileHandle.readData(ofLength: partChunkSize)
 
         guard dataChunk.count > 0 else { return nil }

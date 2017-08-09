@@ -394,9 +394,9 @@ class ClientTests: XCTestCase {
         var currentOffset = 0
 
         let uploadMultipartStartStubConditions = isScheme(Config.uploadURL.scheme!) &&
-            isHost(Config.uploadURL.host!) &&
-            isPath("/multipart/start") &&
-            isMethodPOST()
+                                                 isHost(Config.uploadURL.host!) &&
+                                                 isPath("/multipart/start") &&
+                                                 isMethodPOST()
 
         stub(condition: uploadMultipartStartStubConditions) { _ in
 
