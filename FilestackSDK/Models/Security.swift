@@ -64,10 +64,11 @@ import SCrypto
 }
 
 
-// MARK: - CustomStringConvertible
-
 public extension Security {
 
+    // MARK: - CustomStringConvertible
+
+    /// Returns a `String` representation of self.
     override var description: String {
 
         var components: [String] = []

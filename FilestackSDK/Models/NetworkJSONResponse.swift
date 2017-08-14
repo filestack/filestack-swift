@@ -62,6 +62,9 @@ import Alamofire
 
 extension NetworkJSONResponse {
 
+    // MARK: - CustomStringConvertible
+
+    /// Returns a `String` representation of self.
     public override var description: String {
 
         return "(request: \(String(describing: request))," +

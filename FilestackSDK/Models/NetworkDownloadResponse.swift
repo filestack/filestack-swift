@@ -50,6 +50,9 @@ import Alamofire
 
 extension NetworkDownloadResponse {
 
+    // MARK: - CustomStringConvertible
+
+    /// Returns a `String` representation of self.
     public override var description: String {
 
         return "(request: \(String(describing: request))," +

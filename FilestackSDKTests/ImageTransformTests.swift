@@ -139,10 +139,10 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(handle: "MY-HANDLE")
-            .watermark(file: "WATERMARK-HANDLE", size: 50, position: .top)
+            .watermark(file: "WATERMARK-HANDLE", size: 50, position: [.top])
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:top")
+            .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[top]")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -223,10 +223,10 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(handle: "MY-HANDLE")
-            .cropFaces(mode: .fill, width: 250, height: 150, faces: 4)
+            .cropFaces(mode: .fill, width: 250, height: 150, faces: [4])
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:4")
+            .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[4]")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -237,10 +237,10 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(handle: "MY-HANDLE")
-            .cropFaces(mode: .thumb, faces: 1)
+            .cropFaces(mode: .thumb, faces: [1])
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("crop_faces=mode:thumb,faces:1")
+            .appendingPathComponent("crop_faces=mode:thumb,faces:[1]")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -293,10 +293,10 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(handle: "MY-HANDLE")
-            .pixelateFaces(faces: 3, minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
+            .pixelateFaces(faces: [3], minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("pixelate_faces=faces:3,minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
+            .appendingPathComponent("pixelate_faces=faces:[3],minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -335,10 +335,10 @@ class ImageTransformTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
 
         let imageTransform = client.imageTransform(handle: "MY-HANDLE")
-            .pixelateFaces(faces: 4, buffer: 250)
+            .pixelateFaces(faces: [4], buffer: 250)
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("pixelate_faces=faces:4,buffer:250")
+            .appendingPathComponent("pixelate_faces=faces:[4],buffer:250")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -804,7 +804,6 @@ class ImageTransformTests: XCTestCase {
                      compress: true,
                      quality: 85,
                      strip: true,
-                     noMetadata: false,
                      colorSpace: ImageTransformColorSpace.input,
                      secure: true,
                      docInfo: true,
@@ -821,35 +820,6 @@ class ImageTransformTests: XCTestCase {
         XCTAssertEqual(imageTransform.url, expectedURL)
     }
 
-    func testConvertTransformationWithoutMetadataURL() {
-
-        let client = Client(apiKey: "MY-API-KEY")
-
-        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
-            .convert(format: "pdf",
-                     background: .white,
-                     page: 1,
-                     density: 100,
-                     compress: true,
-                     quality:85,
-                     strip: true,
-                     noMetadata: true,
-                     colorSpace: ImageTransformColorSpace.input,
-                     secure: true,
-                     docInfo: true,
-                     pageFormat: ImageTransformPageFormat.letter,
-                     pageOrientation: ImageTransformPageOrientation.portrait)
-
-        let expectedURL = Config.processURL
-            .appendingPathComponent(
-                "output=format:pdf,background:FFFFFFFF,page:1,density:100,compress:true,quality:85,strip:true," +
-                "no_metadata,colorspace:input,secure:true,docinfo:true,pageformat:letter,pageorientation:portrait"
-            )
-            .appendingPathComponent("MY-HANDLE")
-
-        XCTAssertEqual(imageTransform.url, expectedURL)
-    }
-
     func testConvertTransformationWithOptionalsURL() {
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -858,11 +828,10 @@ class ImageTransformTests: XCTestCase {
             .convert(format: "jpg",
                      compress: true,
                      strip: true,
-                     noMetadata: true,
                      colorSpace: .input)
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("output=format:jpg,compress:true,strip:true,no_metadata,colorspace:input")
+            .appendingPathComponent("output=format:jpg,compress:true,strip:true,colorspace:input")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -875,11 +844,26 @@ class ImageTransformTests: XCTestCase {
         let imageTransform = client.imageTransform(handle: "MY-HANDLE")
             .convertPreservingInputQuality(format: "jpg",
                                            compress: true,
-                                           noMetadata: true,
                                            colorSpace: .input)
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("output=format:jpg,compress:true,quality:input,no_metadata,colorspace:input")
+            .appendingPathComponent("output=format:jpg,compress:true,quality:input,colorspace:input")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(imageTransform.url, expectedURL)
+    }
+
+    func testNoMetadataTransformationURL() {
+
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let imageTransform = client.imageTransform(handle: "MY-HANDLE")
+            .noMetadata()
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "no_metadata"
+            )
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(imageTransform.url, expectedURL)
@@ -1043,8 +1027,8 @@ class ImageTransformTests: XCTestCase {
             .flop()
             .watermark(file: "WATERMARK-HANDLE", size: 50, position: [.bottom, .right])
             .detectFaces(minSize: 0.25, maxSize: 0.55, color: .white, export: true)
-            .cropFaces(mode: .fill, width: 250, height: 150, faces: 4)
-            .pixelateFaces(faces: 3, minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
+            .cropFaces(mode: .fill, width: 250, height: 150, faces: [4])
+            .pixelateFaces(faces: [3], minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
             .roundCorners(radius: 150, blur: 0.8, background: .black)
             .vignette(amount: 80, blurMode: .gaussian, background: .black)
             .polaroid(color: .white, rotate: 33, background: .black)
@@ -1057,7 +1041,8 @@ class ImageTransformTests: XCTestCase {
             .monochrome()
             .blackAndWhite(threshold: 45)
             .sepia(tone: 85)
-            .convert(format: "jpg", compress: true, strip: true, noMetadata: true, colorSpace: .input)
+            .convert(format: "jpg", compress: true, strip: true, colorSpace: .input)
+            .noMetadata()
             .quality(value: 88)
             .zip()
             .videoConvert(preset: "h264", force: false, width: 1080, height: 720, title: "Chapter 1", extName: "mp4")
@@ -1072,8 +1057,8 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("flop")
             .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[bottom,right]")
             .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
-            .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:4")
-            .appendingPathComponent("pixelate_faces=faces:3,minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
+            .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[4]")
+            .appendingPathComponent("pixelate_faces=faces:[3],minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
             .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
             .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
             .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
@@ -1086,7 +1071,8 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("monochrome")
             .appendingPathComponent("blackwhite=threshold:45")
             .appendingPathComponent("sepia=tone:85")
-            .appendingPathComponent("output=format:jpg,compress:true,strip:true,no_metadata,colorspace:input")
+            .appendingPathComponent("output=format:jpg,compress:true,strip:true,colorspace:input")
+            .appendingPathComponent("no_metadata")
             .appendingPathComponent("quality=value:88")
             .appendingPathComponent("zip")
             .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")
@@ -1124,8 +1110,8 @@ class ImageTransformTests: XCTestCase {
             .flop()
             .watermark(file: "WATERMARK-HANDLE", size: 50, position: [.bottom, .right])
             .detectFaces(minSize: 0.25, maxSize: 0.55, color: .white, export: true)
-            .cropFaces(mode: .fill, width: 250, height: 150, faces: 4)
-            .pixelateFaces(faces: 3, minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
+            .cropFaces(mode: .fill, width: 250, height: 150, faces: [4])
+            .pixelateFaces(faces: [3], minSize: 0.25, maxSize: 0.45, buffer: 200, blur: 0.25, type: .oval)
             .roundCorners(radius: 150, blur: 0.8, background: .black)
             .vignette(amount: 80, blurMode: .gaussian, background: .black)
             .polaroid(color: .white, rotate: 33, background: .black)
@@ -1138,7 +1124,8 @@ class ImageTransformTests: XCTestCase {
             .monochrome()
             .blackAndWhite(threshold: 45)
             .sepia(tone: 85)
-            .convert(format: "jpg", compress: true, strip: true, noMetadata: true, colorSpace: .input)
+            .convert(format: "jpg", compress: true, strip: true, colorSpace: .input)
+            .noMetadata()
             .quality(value: 88)
             .zip()
             .videoConvert(preset: "h264", force: false, width: 1080, height: 720, title: "Chapter 1", extName: "mp4")
@@ -1154,8 +1141,8 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("flop")
             .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[bottom,right]")
             .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
-            .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:4")
-            .appendingPathComponent("pixelate_faces=faces:3,minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
+            .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[4]")
+            .appendingPathComponent("pixelate_faces=faces:[3],minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
             .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
             .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
             .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
@@ -1168,7 +1155,8 @@ class ImageTransformTests: XCTestCase {
             .appendingPathComponent("monochrome")
             .appendingPathComponent("blackwhite=threshold:45")
             .appendingPathComponent("sepia=tone:85")
-            .appendingPathComponent("output=format:jpg,compress:true,strip:true,no_metadata,colorspace:input")
+            .appendingPathComponent("output=format:jpg,compress:true,strip:true,colorspace:input")
+            .appendingPathComponent("no_metadata")
             .appendingPathComponent("quality=value:88")
             .appendingPathComponent("zip")
             .appendingPathComponent("video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1,extname:mp4")

@@ -9,20 +9,31 @@
 import Foundation
 
 
+/**
+    Represents an image transform alignment type.
+ */
 @objc(FSImageTransformAlign) public enum ImageTransformAlign: UInt, CustomStringConvertible {
 
+    /// Center
     case center
 
+    /// Top
     case top
 
+    /// Bottom
     case bottom
 
+    /// Left
     case left
 
+    /// Right
     case right
 
+    /// Faces
     case faces
 
+
+    // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {

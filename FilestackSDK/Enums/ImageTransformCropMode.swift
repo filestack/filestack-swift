@@ -9,14 +9,23 @@
 import Foundation
 
 
+/**
+    Represents an image transform crop type.
+ */
 @objc(FSImageTransformCropMode) public enum ImageTransformCropMode: UInt, CustomStringConvertible {
 
+
+    /// Thumb
     case thumb
 
+    /// Crop
     case crop
 
+    /// Fill
     case fill
 
+
+    // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {

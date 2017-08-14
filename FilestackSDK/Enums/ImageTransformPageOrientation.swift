@@ -9,12 +9,19 @@
 import Foundation
 
 
+/**
+    Represents an image transform page orientation type.
+ */
 @objc(FSImageTransformPageOrientation) public enum ImageTransformPageOrientation: UInt, CustomStringConvertible {
 
+    /// Portrait
     case portrait
 
+    /// Landscape
     case landscape
 
+
+    // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {

@@ -14,43 +14,63 @@ import Foundation
  */
 @objc(FSMetadataOptions) public enum MetadataOptions: UInt, CustomStringConvertible {
 
+    /// Size
     case size
 
+    /// MIME type
     case mimeType
 
+    /// Filename
     case fileName
 
+    /// Width
     case width
 
+    /// Height
     case height
 
+    /// Uploaded
     case uploaded
 
+    /// Writeable
     case writeable
 
+    /// Cloud
     case cloud
 
+    /// Source URL
     case sourceURL
 
+    /// MD5
     case md5
 
+    /// SHA224
     case sha224
 
+    /// SHA256
     case sha256
 
+    /// SHA384
     case sha384
 
+    /// SHA512
     case sha512
 
+    /// Location
     case location
 
+    /// Path
     case path
 
+    /// Container
     case container
 
+    /// Exif
     case exif
 
 
+    // MARK: - CustomStringConvertible
+    
     /// Returns a `String` representation of self.
     public var description: String {
 

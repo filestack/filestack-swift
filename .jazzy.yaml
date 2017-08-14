@@ -1,0 +1,13 @@
+module: FilestackSDK
+author: Filestack
+github_url: http://github.com/filepicker/filestack-swift
+
+theme: fullwidth
+clean: true
+
+readme: README.md
+
+skip_undocumented: false
+hide_documentation_coverage: false
+
+xcodebuild_arguments: [-project, FilestackSDK.xcodeproj, -target, FilestackSDK]

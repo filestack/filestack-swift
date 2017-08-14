@@ -21,7 +21,7 @@ struct Seeds {
             expiry: Date(timeIntervalSince1970: 12345),
             call: [.read, .write, .stat, .convert],
             handle: "SOME-HANDLE",
-            url: URL(string: "https://some-url.tld")!,
+            url: "https://some-url.tld",
             maxSize: 1024 * 10,
             minSize: 1024 * 1,
             path: "SOME-PATH",

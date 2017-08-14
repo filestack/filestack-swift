@@ -20,13 +20,61 @@ import Foundation
 
     // MARK: - Properties
 
+    /**
+        The expiration date for the policy.
+     */
     public let expiry: Date
+
+    /**
+        The calls that you allow this policy to make.
+     
+        - SeeAlso: `PolicyCall`
+     */
     public let call: [PolicyCall]?
+
+    /**
+        The unique file handle that you would like to access.
+     */
     public let handle: String?
-    public let url: URL?
+
+    /** 
+        It is possible to create a subset of external URL domains that are allowed to be 
+        image/document sources for processing.filestackapi.com transformations. 
+        The URL parameter only applies to processing engine transformations and cannot be used to 
+        restrict uploads via the picker to specific domains for example. The filter is a regular 
+        expression that must match the input URL. The following is an example of a policy that 
+        restricts conversion requests to urls from wikimedia:
+     
+        ```
+        {
+            "expiry":1577836800,
+            "call":["convert"],
+            "url":"https://upload\\.wikimedia\\.org/wikipedia/.*"
+        }
+        ```
+     */
+    public let url: String?
+
+    /** 
+        The maximum file size in bytes that can be stored by your request.
+     */
     public let maxSize: UInt?
+
+    /**
+        The minimum file size that can be stored by your request.
+     */
     public let minSize: UInt?
+
+    /** 
+        For policies that store files, a Perl-like regular expression that must
+        match the path that the files will be stored under.
+     */
     public let path: String?
+
+    /**
+        For policies that store files, a Perl-like regular expression that
+        must match the container/bucket that the files will be stored under.
+     */
     public let container: String?
 
 
@@ -34,23 +82,11 @@ import Foundation
 
     /**
         The designated initializer.
-     
-        - Parameter expiry: The expiration date for the policy.
-        - Parameter call: The calls that you allow this policy to make.
-        - Parameter handle: The unique file handle that you would like to access.
-        - Parameter url: It is possible to create a subset of external URL domains that are 
-            allowed to be image/document sources for `processing.filestackapi.com` transformations.
-        - Parameter maxSize: The maximum file size in bytes that can be stored by your request.
-        - Parameter minSize: The minimum file size that can be stored by your request.
-        - Parameter path: For policies that store files, a Perl-like regular expression that must 
-            match the path that the files will be stored under.
-        - Parameter container: For policies that store files, a Perl-like regular expression that 
-            must match the container/bucket that the files will be stored under.
      */
     public init(expiry: Date,
          call: [PolicyCall]? = nil,
          handle: String? = nil,
-         url: URL? = nil,
+         url: String? = nil,
          maxSize: UInt? = nil,
          minSize: UInt? = nil,
          path: String? = nil,
@@ -94,7 +130,7 @@ import Foundation
         }
 
         if let url = url {
-            dict["url"] = url.absoluteString
+            dict["url"] = url
         }
 
         if let maxSize = maxSize {
@@ -118,10 +154,11 @@ import Foundation
 }
 
 
-// MARK: - CustomStringConvertible
-
 public extension Policy {
 
+    // MARK: - CustomStringConvertible
+
+    /// Returns a `String` representation of self.
     override var description: String {
 
         var components: [String] = []

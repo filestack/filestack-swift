@@ -9,14 +9,22 @@
 import Foundation
 
 
+/**
+    Represents an image transform color space type.
+ */
 @objc(FSImageTransformColorSpace) public enum ImageTransformColorSpace: UInt, CustomStringConvertible {
 
+    /// RGB
     case rgb
 
+    /// CMYK
     case cmyk
 
+    /// Input
     case input
 
+
+    // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {

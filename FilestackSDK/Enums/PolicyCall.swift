@@ -10,7 +10,7 @@ import Foundation
 
 
 /**
-    Represents a type of policy call.
+    Represents a policy call type.
 
     See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
     information about policy calls.
@@ -41,9 +41,11 @@ import Foundation
     /// Allows removal of Filestack files.
     case remove
 
-    /// Allows exif metadata to be accessed
+    /// Allows exif metadata to be accessed.
     case exif
 
+
+    // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {

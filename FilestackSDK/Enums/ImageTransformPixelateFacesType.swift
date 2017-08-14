@@ -9,12 +9,19 @@
 import Foundation
 
 
+/**
+    Represents an image transform pixelate faces type.
+ */
 @objc(FSImageTransformPixelateFacesType) public enum ImageTransformPixelateFacesType: UInt, CustomStringConvertible {
 
+    /// Rect
     case rect
 
+    /// Oval
     case oval
 
+
+    // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {

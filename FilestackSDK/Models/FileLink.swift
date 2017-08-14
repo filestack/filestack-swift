@@ -63,7 +63,7 @@ import Alamofire
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func getContent(parameters: [String: Any]? = nil,
-                           queue: DispatchQueue? = nil,
+                           queue: DispatchQueue? = .main,
                            downloadProgress: ((Progress) -> Void)? = nil,
                            completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
@@ -96,7 +96,7 @@ import Alamofire
         - Parameter queue: The queue on which the completion handler is dispatched.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func getTags(queue: DispatchQueue? = nil,
+    public func getTags(queue: DispatchQueue? = .main,
                         completionHandler: @escaping (NetworkJSONResponse) -> Void) {
 
         guard let request = cdnService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
@@ -117,7 +117,7 @@ import Alamofire
         - Parameter queue: The queue on which the completion handler is dispatched.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func getSafeForWork(queue: DispatchQueue? = nil,
+    public func getSafeForWork(queue: DispatchQueue? = .main,
                                completionHandler: @escaping (NetworkJSONResponse) -> Void) {
 
         guard let request = cdnService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
@@ -140,7 +140,7 @@ import Alamofire
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func getMetadata(options: [MetadataOptions],
-                            queue: DispatchQueue? = nil,
+                            queue: DispatchQueue? = .main,
                             completionHandler: @escaping (NetworkJSONResponse) -> Void) {
 
         let optionQueryItems = options.map { URLQueryItem(name: $0.description, value: "true") }
@@ -175,7 +175,7 @@ import Alamofire
      */
     public func download(destinationURL: URL,
                          parameters: [String: Any]? = nil,
-                         queue: DispatchQueue? = nil,
+                         queue: DispatchQueue? = .main,
                          downloadProgress: ((Progress) -> Void)? = nil,
                          completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
 
@@ -225,7 +225,7 @@ import Alamofire
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     public func delete(parameters: [String: Any]? = nil,
-                       queue: DispatchQueue? = nil,
+                       queue: DispatchQueue? = .main,
                        completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
         guard let request = apiService.deleteRequest(handle: handle,
@@ -259,7 +259,7 @@ import Alamofire
      */
     public func overwrite(parameters: [String: Any]? = nil,
                           fileURL: URL,
-                          queue: DispatchQueue? = nil,
+                          queue: DispatchQueue? = .main,
                           uploadProgress: ((Progress) -> Void)? = nil,
                           completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
@@ -301,7 +301,7 @@ import Alamofire
      */
     public func overwrite(parameters: [String: Any]? = nil,
                           remoteURL: URL,
-                          queue: DispatchQueue? = nil,
+                          queue: DispatchQueue? = .main,
                           completionHandler: @escaping (NetworkDataResponse) -> Void) {
 
         guard let request = apiService.overwriteRequest(handle: handle,
@@ -345,10 +345,11 @@ import Alamofire
     }
 }
 
-// MARK: - CustomStringConvertible
-
 public extension FileLink {
 
+    // MARK: - CustomStringConvertible
+
+    /// Returns a `String` representation of self.
     override var description: String {
 
         var components: [String] = []

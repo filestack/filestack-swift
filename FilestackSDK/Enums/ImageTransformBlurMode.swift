@@ -9,12 +9,19 @@
 import Foundation
 
 
+/**
+    Represents an image transform blur type.
+ */
 @objc(FSImageTransformBlurMode) public enum ImageTransformBlurMode: UInt, CustomStringConvertible {
 
+    /// Linear
     case linear
 
+    /// Gaussian
     case gaussian
 
+
+    // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {

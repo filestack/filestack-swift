@@ -10,14 +10,15 @@ import Foundation
 
 
 /**
-    Represents a client that allows communicating with the Filestack REST API.
+    Represents a client that allows communicating with the 
+    [Filestack REST API](https://www.filestack.com/docs/rest-api).
  */
 @objc(FSClient) public class Client: NSObject {
 
 
     // MARK: - Properties
 
-    /// An API key obtained from the Developer Portal.
+    /// An API key obtained from the [Developer Portal](http://dev.filestack.com).
     public let apiKey: String
 
     /// A `Security` object. `nil` by default.
@@ -51,7 +52,7 @@ import Foundation
     // MARK: - Public Functions
 
     /**
-        A `FileLink` object corresponding to a given handle.
+        A `FileLink` object for a given Filestack handle.
 
         - Parameter handle: A Filestack handle.
      */
@@ -60,20 +61,47 @@ import Foundation
         return FileLink(handle: handle, apiKey: apiKey, security: security)
     }
 
+    /**
+        An `ImageTransform` object for a Filestack handle.
+
+        - SeeAlso: `ImageTransform`
+
+        - Parameter handle: A Filestack handle.
+     */
     public func imageTransform(handle: String) -> ImageTransform {
 
         return ImageTransform(handle: handle, apiKey: apiKey, security: security)
     }
 
+    /**
+        An `ImageTransform` object for an external URL.
+     
+        - SeeAlso: `ImageTransform`
+
+        - Parameter externalURL: An external URL.
+     */
     public func imageTransform(externalURL: URL) -> ImageTransform {
 
         return ImageTransform(externalURL: externalURL, apiKey: apiKey, security: security)
     }
 
+    /**
+        Uploads a file directly to a given storage location (currently only S3 is supported.)
+
+        - Parameter localURL: The URL of the local file to be uploaded.
+        - Parameter storage: The storage location. Defaults to `s3`.
+        - Parameter useIntelligentIngestionIfAvailable: Attempts to use Intelligent Ingestion
+            for file uploading. Defaults to `true`.
+        - Parameter queue: The queue on which the upload progress and completion handlers are 
+            dispatched.
+        - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
+            of the upload process as data is uploaded to the server. `nil` by default.
+        - Parameter completionHandler: Adds a handler to be called once the upload has finished.
+     */
     public func multiPartUpload(from localURL: URL,
-                                storage: StorageLocation? = nil,
-                                queue: DispatchQueue = .main,
+                                storage: StorageLocation = .s3,
                                 useIntelligentIngestionIfAvailable: Bool = true,
+                                queue: DispatchQueue = .main,
                                 uploadProgress: ((Progress) -> Void)? = nil,
                                 completionHandler: @escaping (NetworkJSONResponse?) -> Void) {
 
@@ -84,7 +112,7 @@ import Foundation
                                   partUploadConcurrency: 5,
                                   chunkUploadConcurrency: 8,
                                   apiKey: apiKey,
-                                  storage: self.storage ?? storage ?? .s3,
+                                  storage: self.storage ?? storage,
                                   security: security,
                                   useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 
@@ -93,10 +121,11 @@ import Foundation
 }
 
 
-// MARK: - CustomStringConvertible
-
 public extension Client {
 
+    // MARK: - CustomStringConvertible
+
+    /// Returns a `String` representation of self.
     override var description: String {
 
         var components: [String] = []

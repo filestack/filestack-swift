@@ -17,7 +17,7 @@ internal class UploadService: NetworkingService {
 
     func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
                 url: URL,
-                queue: DispatchQueue? = nil,
+                queue: DispatchQueue? = .main,
                 completionHandler: @escaping (NetworkJSONResponse) -> Void) {
 
         sessionManager.upload(multipartFormData: multipartFormData, to: url) { result in

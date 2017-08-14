@@ -1,5 +1,5 @@
 //
-//  ImageTransformFix.swift
+//  ImageTransformFit.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/12/17.
@@ -9,17 +9,26 @@
 import Foundation
 
 
+/**
+    Represents an image transform fit type.
+ */
 @objc(FSImageTransformFit) public enum ImageTransformFit: UInt, CustomStringConvertible {
 
+    /// Clip
     case clip
 
+    /// Crop
     case crop
 
+    /// Scale
     case scale
 
+    /// Max
     case max
 
-    
+
+    // MARK: - CustomStringConvertible
+
     /// Returns a `String` representation of self.
     public var description: String {
 
