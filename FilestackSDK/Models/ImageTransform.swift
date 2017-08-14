@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an `ImageTransform` object.
 
-    See [Filestack Architecture Overview](https://www.filestack.com/docs/image-transformations) for more information
+    See [Image Transformations Overview](https://www.filestack.com/docs/image-transformations) for more information
     about image transformations.
  */
 @objc(FSImageTransform) public class ImageTransform: NSObject {

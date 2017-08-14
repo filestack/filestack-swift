@@ -112,7 +112,7 @@ import Foundation
                                   partUploadConcurrency: 5,
                                   chunkUploadConcurrency: 8,
                                   apiKey: apiKey,
-                                  storage: self.storage ?? storage,
+                                  storage: storage,
                                   security: security,
                                   useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 

@@ -269,20 +269,25 @@ internal class MultipartUpload {
             let isNetworkError = jsonResponse?.response == nil && jsonResponse?.error != nil
 
             // Check for any error response
-            if (jsonResponse?.response?.statusCode != 200 || isNetworkError) && retriesLeft > 0 {
-                let delay = isNetworkError ? 0 : pow(2, Double(self.maxRetries - retriesLeft))
+            if (jsonResponse?.response?.statusCode != 200 || isNetworkError) {
+                if retriesLeft > 0 {
+                    let delay = isNetworkError ? 0 : pow(2, Double(self.maxRetries - retriesLeft))
 
-                // Retry in `delay` seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.addCompleteOperation(fileName: fileName,
-                                              fileSize: fileSize,
-                                              mimeType: mimeType,
-                                              uri: uri,
-                                              region: region,
-                                              uploadID: uploadID,
-                                              partsAndEtags: partsAndEtags,
-                                              useIntelligentIngestion: useIntelligentIngestion,
-                                              retriesLeft: retriesLeft - 1)
+                    // Retry in `delay` seconds
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.addCompleteOperation(fileName: fileName,
+                                                  fileSize: fileSize,
+                                                  mimeType: mimeType,
+                                                  uri: uri,
+                                                  region: region,
+                                                  uploadID: uploadID,
+                                                  partsAndEtags: partsAndEtags,
+                                                  useIntelligentIngestion: useIntelligentIngestion,
+                                                  retriesLeft: retriesLeft - 1)
+                    }
+                } else {
+                    self.fail(with: MultipartUploadError.aborted)
+                    return
                 }
             } else {
                 // Return response to the user.
