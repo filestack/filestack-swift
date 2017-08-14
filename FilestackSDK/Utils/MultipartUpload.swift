@@ -132,7 +132,6 @@ internal class MultipartUpload {
                                                            useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 
         if shouldAbort {
-            uploadOperationQueue.cancelAllOperations()
             fail(with: MultipartUploadError.aborted)
             return
         } else {
