@@ -16,7 +16,7 @@ before_install:
   - brew install carthage
   - carthage bootstrap --no-build --use-submodules --verbose
 script:
-  - set -o pipefail
+  - set -o pipefail && env NSUnbufferedIO=YES
   - xcodebuild -version
   - xcodebuild -showsdks
   - carthage version
@@ -34,3 +34,5 @@ script:
   #   else
   #     xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty;
   #   fi
+after_success:
+   - sleep 15
