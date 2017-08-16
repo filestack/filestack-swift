@@ -26,19 +26,19 @@ Filestack Swift SDK follows the [Semantic Versioning](http://semver.org/).
 
 ## Issues
 
-If you have problems, please create a [Github Issue](https://github.com/filepicker/filestack-swift/issues).
+If you have problems, please create a [Github Issue](https://github.com/filestack/filestack-swift/issues).
 
 ## Contributing
 
-Please see [CONTRIBUTING.md](https://github.com/filepicker/filestack-swift/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING.md](https://github.com/filestack/filestack-swift/blob/master/CONTRIBUTING.md) for details.
 
 ## Credits
 
-Thank you to all the [contributors](https://github.com/filepicker/filestack-swift/graphs/contributors).
+Thank you to all the [contributors](https://github.com/filestack/filestack-swift/graphs/contributors).
 
-[travis_ci]: http://travis-ci.org/filepicker/filestack-swift
-[travis_ci_badge]: https://travis-ci.org/filepicker/filestack-swift.svg?branch=master
-[code_climate]: https://codeclimate.com/github/filepicker/filestack-swift
-[code_climate_badge]: https://codeclimate.com/github/filepicker/filestack-swift.png
-[coveralls]: https://coveralls.io/github/filepicker/filestack-swift?branch=master
-[coveralls_badge]: https://coveralls.io/repos/github/filepicker/filestack-swift/badge.svg?branch=master
+[travis_ci]: http://travis-ci.org/filestack/filestack-swift
+[travis_ci_badge]: https://travis-ci.org/filestack/filestack-swift.svg?branch=master
+[code_climate]: https://codeclimate.com/github/filestack/filestack-swift
+[code_climate_badge]: https://codeclimate.com/github/filestack/filestack-swift.png
+[coveralls]: https://coveralls.io/github/filestack/filestack-swift?branch=master
+[coveralls_badge]: https://coveralls.io/repos/github/filestack/filestack-swift/badge.svg?branch=master
