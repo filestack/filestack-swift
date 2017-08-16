@@ -1,5 +1,5 @@
 [![Travis CI][travis_ci_badge]][travis_ci]
-[![Coveralls][coveralls_badge]][coveralls]
+[![Coverage Status][coveralls_badge]][coveralls]
 [![Code Climate][code_climate_badge]][code_climate]
 
 # Filestack Swift SDK
@@ -14,11 +14,11 @@ This is the official Swift SDK for Filestack - API and content management system
 
 ## Installing
 
-(TODO) Add installation instructions.
+See our [Installation Instructions](https://github.com/filestack/filestack-swift/wiki/Installation-Instructions).
 
 ## Usage
 
-(TODO) Add usage instructions.
+See our [Usage Instructions](https://github.com/filestack/filestack-swift/wiki/Usage-Instructions).
 
 ## Versioning
 
