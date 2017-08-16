@@ -35,4 +35,4 @@ script:
   #     xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty;
   #   fi
 after_success:
-   - sleep 15
+   - sleep 5
