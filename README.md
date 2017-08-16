@@ -10,7 +10,7 @@ This is the official Swift SDK for Filestack - API and content management system
 
 * [Filestack](https://www.filestack.com)
 * [Documentation](https://www.filestack.com/docs)
-* [API Reference](https://filestack.github.io/)
+* [API Reference](https://filestack.github.io/filestack-swift/)
 
 ## Installing
 
@@ -18,7 +18,7 @@ See our [Installation Instructions](https://github.com/filestack/filestack-swift
 
 ## Usage
 
-See our [Usage Instructions](https://github.com/filestack/filestack-swift/wiki/Usage-Instructions).
+See our [Usage Instructions](https://github.com/filestack/filestack-swift/wiki/Usage-Instructions) and [API Reference](https://filestack.github.io/filestack-swift/).
 
 ## Versioning
 
