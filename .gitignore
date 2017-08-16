@@ -61,3 +61,6 @@ fastlane/report.xml
 fastlane/screenshots
 
 *.DS_Store
+
+# Jazzy Docs
+docs/
