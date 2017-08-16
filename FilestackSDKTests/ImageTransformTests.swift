@@ -18,8 +18,8 @@ class ImageTransformTests: XCTestCase {
 
     override func tearDown() {
 
-        OHHTTPStubs.removeAllStubs()
         super.tearDown()
+        OHHTTPStubs.removeAllStubs()
     }
 
     func testResizeTransformationURL() {

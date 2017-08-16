@@ -21,8 +21,8 @@ class FileLinkTests: XCTestCase {
 
     override func tearDown() {
 
-        OHHTTPStubs.removeAllStubs()
         super.tearDown()
+        OHHTTPStubs.removeAllStubs()
     }
 
     func testInitializerWithHandleAndApiKey() {

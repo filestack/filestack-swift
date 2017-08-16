@@ -13,7 +13,13 @@ import OHHTTPStubs
 
 
 class SessionManagerTests: XCTestCase {
-    
+
+    override func tearDown() {
+
+        super.tearDown()
+        OHHTTPStubs.removeAllStubs()
+    }
+
     func testFilestackDefaultCustomHTTPHeaders() {
 
         let session = SessionManager.filestackDefault()
