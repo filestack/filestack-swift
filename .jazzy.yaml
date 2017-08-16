@@ -1,6 +1,6 @@
 module: FilestackSDK
 author: Filestack
-github_url: http://github.com/filepicker/filestack-swift
+github_url: http://github.com/filestack/filestack-swift
 
 theme: fullwidth
 clean: true
