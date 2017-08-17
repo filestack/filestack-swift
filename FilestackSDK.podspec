@@ -9,8 +9,10 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target  = '9.0'
 
-  spec.source_files       = 'FilestackSDK/**/*.swift'
-  
+  spec.source_files = 'FilestackSDK/**/*.swift'
+
+  spec.framework    = 'CommonCrypto'
+
   spec.dependency 'Alamofire', '~> 4.5'
-  spec.dependency 'SCrypto', '~> 2.0'
+  spec.dependency 'Arcane', '~> 0.5'
 end

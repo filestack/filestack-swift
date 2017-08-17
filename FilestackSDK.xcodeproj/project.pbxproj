@@ -40,13 +40,13 @@
 		4589A4881F0A4B1900C39405 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4871F0A4B1900C39405 /* Config.swift */; };
 		4589A48A1F0A4DA600C39405 /* FileLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4891F0A4DA600C39405 /* FileLink.swift */; };
 		4589A48C1F0A4DBC00C39405 /* FileLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A48B1F0A4DBC00C39405 /* FileLinkTests.swift */; };
+		45944BF81F45908D0097D910 /* Arcane.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45944BE71F4590840097D910 /* Arcane.framework */; };
 		45965C6B1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */; };
 		45991FA41F14C1DD0042A279 /* ProcessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45991FA31F14C1DD0042A279 /* ProcessService.swift */; };
 		459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */; };
 		45B830A01F03B27A0053742A /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B8309E1F03B27A0053742A /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830B31F03B3310053742A /* Alamofire.framework */; };
 		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
-		45B830DD1F03BC340053742A /* SCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830D41F03BC1C0053742A /* SCrypto.framework */; };
 		45B830E31F03BCF20053742A /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E01F03BCF20053742A /* Policy.swift */; };
 		45B830E41F03BCF20053742A /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E11F03BCF20053742A /* Security.swift */; };
 		45B831121F03D8140053742A /* FilestackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B8309B1F03B27A0053742A /* FilestackSDK.framework */; };
@@ -69,6 +69,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		45944BE61F4590840097D910 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5B2E89F1C3A780C00C0327D;
+			remoteInfo = "Arcane-iOS";
+		};
+		45944BE81F4590840097D910 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5C629401C3A7FAA007F7B7C;
+			remoteInfo = "Arcane-Mac";
+		};
+		45944BEA1F4590840097D910 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5B2E8A91C3A780C00C0327D;
+			remoteInfo = "Arcane-iOS-Tests";
+		};
+		45944BEC1F4590840097D910 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5C629491C3A7FAA007F7B7C;
+			remoteInfo = "Arcane-Mac-Tests";
+		};
 		45B830B21F03B3310053742A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
@@ -124,41 +152,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = "Alamofire iOS";
-		};
-		45B830D31F03BC1C0053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5ED8F9EE1C51788B00DE0760;
-			remoteInfo = "SCrypto iOS";
-		};
-		45B830D51F03BC1C0053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5ED8F9F81C51788B00DE0760;
-			remoteInfo = "SCrypto iOS Tests";
-		};
-		45B830D71F03BC1C0053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5EAB865E1CADCF8F00182F7C;
-			remoteInfo = "SCrypto OSX";
-		};
-		45B830D91F03BC1C0053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5EAB86671CADCF8F00182F7C;
-			remoteInfo = "SCrypto OSX Tests";
-		};
-		45B830DB1F03BC2E0053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5ED8F9ED1C51788B00DE0760;
-			remoteInfo = "SCrypto iOS";
 		};
 		45B831131F03D8140053742A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -266,6 +259,7 @@
 		4589A4871F0A4B1900C39405 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Misc/Config.swift; sourceTree = "<group>"; };
 		4589A4891F0A4DA600C39405 /* FileLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLink.swift; sourceTree = "<group>"; };
 		4589A48B1F0A4DBC00C39405 /* FileLinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLinkTests.swift; sourceTree = "<group>"; };
+		45944BD81F4590840097D910 /* Arcane.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Arcane.xcodeproj; path = Carthage/Checkouts/Arcane/Arcane.xcodeproj; sourceTree = "<group>"; };
 		45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45991FA31F14C1DD0042A279 /* ProcessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessService.swift; sourceTree = "<group>"; };
 		459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartuploadSubmitChunkOperation.swift; sourceTree = "<group>"; };
@@ -274,7 +268,6 @@
 		45B8309F1F03B27A0053742A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45B830A71F03B3300053742A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		45B830CA1F03BB6D0053742A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SCrypto.xcodeproj; path = Carthage/Checkouts/SCrypto/SCrypto.xcodeproj; sourceTree = "<group>"; };
 		45B830E01F03BCF20053742A /* Policy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Policy.swift; sourceTree = "<group>"; };
 		45B830E11F03BCF20053742A /* Security.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
 		45B8310D1F03D8140053742A /* FilestackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilestackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -303,7 +296,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45B830DD1F03BC340053742A /* SCrypto.framework in Frameworks */,
+				45944BF81F45908D0097D910 /* Arcane.framework in Frameworks */,
 				45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +376,17 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		45944BD91F4590840097D910 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45944BE71F4590840097D910 /* Arcane.framework */,
+				45944BE91F4590840097D910 /* Arcane.framework */,
+				45944BEB1F4590840097D910 /* Arcane-iOS-Tests.xctest */,
+				45944BED1F4590840097D910 /* Arcane-Mac-Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45B830911F03B27A0053742A = {
 			isa = PBXGroup;
 			children = (
@@ -423,8 +427,8 @@
 			children = (
 				45B830CA1F03BB6D0053742A /* Cartfile */,
 				45B830A71F03B3300053742A /* Alamofire.xcodeproj */,
+				45944BD81F4590840097D910 /* Arcane.xcodeproj */,
 				45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */,
-				45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */,
 			);
 			name = "External Dependencies";
 			sourceTree = "<group>";
@@ -439,17 +443,6 @@
 				45B830BB1F03B3310053742A /* Alamofire.framework */,
 				45B830BD1F03B3310053742A /* Alamofire tvOS Tests.xctest */,
 				45B830BF1F03B3310053742A /* Alamofire.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		45B830CD1F03BC1C0053742A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45B830D41F03BC1C0053742A /* SCrypto.framework */,
-				45B830D61F03BC1C0053742A /* SCrypto iOS Tests.xctest */,
-				45B830D81F03BC1C0053742A /* SCrypto.framework */,
-				45B830DA1F03BC1C0053742A /* SCrypto OSX Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -551,7 +544,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				45B830DC1F03BC2E0053742A /* PBXTargetDependency */,
 				45B830C11F03B3380053742A /* PBXTargetDependency */,
 			);
 			name = FilestackSDK;
@@ -615,12 +607,12 @@
 					ProjectRef = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
 				},
 				{
-					ProductGroup = 45FA0CA11F0B85C7008EDBCD /* Products */;
-					ProjectRef = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
+					ProductGroup = 45944BD91F4590840097D910 /* Products */;
+					ProjectRef = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
 				},
 				{
-					ProductGroup = 45B830CD1F03BC1C0053742A /* Products */;
-					ProjectRef = 45B830CC1F03BC1C0053742A /* SCrypto.xcodeproj */;
+					ProductGroup = 45FA0CA11F0B85C7008EDBCD /* Products */;
+					ProjectRef = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -632,6 +624,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		45944BE71F4590840097D910 /* Arcane.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Arcane.framework;
+			remoteRef = 45944BE61F4590840097D910 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45944BE91F4590840097D910 /* Arcane.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Arcane.framework;
+			remoteRef = 45944BE81F4590840097D910 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45944BEB1F4590840097D910 /* Arcane-iOS-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Arcane-iOS-Tests.xctest";
+			remoteRef = 45944BEA1F4590840097D910 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45944BED1F4590840097D910 /* Arcane-Mac-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Arcane-Mac-Tests.xctest";
+			remoteRef = 45944BEC1F4590840097D910 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45B830B31F03B3310053742A /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -679,34 +699,6 @@
 			fileType = wrapper.framework;
 			path = Alamofire.framework;
 			remoteRef = 45B830BE1F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830D41F03BC1C0053742A /* SCrypto.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SCrypto.framework;
-			remoteRef = 45B830D31F03BC1C0053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830D61F03BC1C0053742A /* SCrypto iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SCrypto iOS Tests.xctest";
-			remoteRef = 45B830D51F03BC1C0053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830D81F03BC1C0053742A /* SCrypto.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SCrypto.framework;
-			remoteRef = 45B830D71F03BC1C0053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830DA1F03BC1C0053742A /* SCrypto OSX Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SCrypto OSX Tests.xctest";
-			remoteRef = 45B830D91F03BC1C0053742A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45FA0CB31F0B85C7008EDBCD /* libOHHTTPStubs.a */ = {
@@ -878,11 +870,6 @@
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";
 			targetProxy = 45B830C01F03B3380053742A /* PBXContainerItemProxy */;
-		};
-		45B830DC1F03BC2E0053742A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "SCrypto iOS";
-			targetProxy = 45B830DB1F03BC2E0053742A /* PBXContainerItemProxy */;
 		};
 		45B831141F03D8140053742A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
