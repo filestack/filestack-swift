@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
   spec.homepage     = 'https://github.com/filestack/filestack-swift'
   spec.authors      = { 'Filestack' => 'ios@filepicker.io' }
   spec.summary      = 'Official Swift SDK for Filestack - API and content management system that makes it easy to add powerful file uploading and transformation capabilities to any web or mobile application.'
-  spec.source       = { :git => 'https://github.com/filestack/filestack-swift.git', :tag => "v#{spec.version}" }
+  spec.source       = { :git => 'https://github.com/filestack/filestack-swift.git', :tag => spec.version }
 
   spec.ios.deployment_target  = '9.0'
 
