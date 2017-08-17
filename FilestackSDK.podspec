@@ -11,8 +11,6 @@ Pod::Spec.new do |spec|
 
   spec.source_files = 'FilestackSDK/**/*.swift'
 
-  spec.framework    = 'CommonCrypto'
-
   spec.dependency 'Alamofire', '~> 4.5'
   spec.dependency 'Arcane', '~> 0.5'
 end
