@@ -269,7 +269,7 @@ internal class MultipartUpload {
             let isNetworkError = jsonResponse?.response == nil && jsonResponse?.error != nil
 
             // Check for any error response
-            if (jsonResponse?.response?.statusCode != 200 || isNetworkError) {
+            if jsonResponse?.response?.statusCode != 200 || isNetworkError {
                 if retriesLeft > 0 {
                     let delay = isNetworkError ? 0 : pow(2, Double(self.maxRetries - retriesLeft))
 
