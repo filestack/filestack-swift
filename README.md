@@ -1,5 +1,5 @@
 [![Travis CI][travis_ci_badge]][travis_ci]
-[![Coverage Status][coveralls_badge]][coveralls]
+[![Coverage Status](https://coveralls.io/repos/github/filestack/filestack-swift/badge.svg?branch=master)](https://coveralls.io/github/filestack/filestack-swift?branch=master)
 [![Code Climate][code_climate_badge]][code_climate]
 
 # Filestack Swift SDK
@@ -40,5 +40,3 @@ Thank you to all the [contributors](https://github.com/filestack/filestack-swift
 [travis_ci_badge]: https://travis-ci.org/filestack/filestack-swift.svg?branch=master
 [code_climate]: https://codeclimate.com/github/filestack/filestack-swift
 [code_climate_badge]: https://codeclimate.com/github/filestack/filestack-swift.png
-[coveralls]: https://coveralls.io/github/filestack/filestack-swift?branch=master
-[coveralls_badge]: https://coveralls.io/repos/github/filestack/filestack-swift/badge.svg?branch=master
