@@ -1,5 +1,4 @@
 [![Travis CI][travis_ci_badge]][travis_ci]
-[![Coverage Status](https://coveralls.io/repos/github/filestack/filestack-swift/badge.svg?branch=master)](https://coveralls.io/github/filestack/filestack-swift?branch=master)
 [![Code Climate][code_climate_badge]][code_climate]
 
 # Filestack Swift SDK
