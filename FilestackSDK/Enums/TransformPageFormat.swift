@@ -1,5 +1,5 @@
 //
-//  ImageTransformPageFormat.swift
+//  TransformPageFormat.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/13/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform page format type.
  */
-@objc(FSImageTransformPageFormat) public enum ImageTransformPageFormat: UInt, CustomStringConvertible {
+@objc(FSTransformPageFormat) public enum TransformPageFormat: UInt, CustomStringConvertible {
 
 
     /// Letter

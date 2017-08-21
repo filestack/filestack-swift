@@ -1,5 +1,5 @@
 //
-//  ImageTransformBlurMode.swift
+//  TransformBlurMode.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/13/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform blur type.
  */
-@objc(FSImageTransformBlurMode) public enum ImageTransformBlurMode: UInt, CustomStringConvertible {
+@objc(FSTransformBlurMode) public enum TransformBlurMode: UInt, CustomStringConvertible {
 
     /// Linear
     case linear

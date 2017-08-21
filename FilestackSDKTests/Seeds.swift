@@ -19,7 +19,7 @@ struct Seeds {
 
         static let basic = Policy(
             expiry: Date(timeIntervalSince1970: 12345),
-            call: [.read, .write, .stat, .convert],
+            call: [.read, .stat, .write, .convert],
             handle: "SOME-HANDLE",
             url: "https://some-url.tld",
             maxSize: 1024 * 10,

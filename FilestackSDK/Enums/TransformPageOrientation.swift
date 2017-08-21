@@ -1,5 +1,5 @@
 //
-//  ImageTransformPageOrientation.swift
+//  TransformPageOrientation.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/13/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform page orientation type.
  */
-@objc(FSImageTransformPageOrientation) public enum ImageTransformPageOrientation: UInt, CustomStringConvertible {
+@objc(FSTransformPageOrientation) public enum TransformPageOrientation: UInt, CustomStringConvertible {
 
     /// Portrait
     case portrait

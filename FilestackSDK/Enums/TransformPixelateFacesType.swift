@@ -1,5 +1,5 @@
 //
-//  ImageTransformPixelateFacesType.swift
+//  TransformPixelateFacesType.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/12/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform pixelate faces type.
  */
-@objc(FSImageTransformPixelateFacesType) public enum ImageTransformPixelateFacesType: UInt, CustomStringConvertible {
+@objc(FSTransformPixelateFacesType) public enum TransformPixelateFacesType: UInt, CustomStringConvertible {
 
     /// Rect
     case rect

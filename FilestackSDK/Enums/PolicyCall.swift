@@ -15,77 +15,70 @@ import Foundation
     See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
     information about policy calls.
  */
-@objc(FSPolicyCall) public enum PolicyCall: UInt, CustomStringConvertible {
+public typealias PolicyCall = FSPolicyCall
 
-    /// Allows users to upload files.
-    case pick
+public extension PolicyCall {
 
-    /// Allows files to be viewed/accessed.
-    case read
+    internal static func all() -> [PolicyCall] {
 
-    /// Allows metadata about files to be retrieved.
-    case stat
+        return [.pick, .read, .stat, .write, .writeURL, .store, .convert, .remove, .exif]
+    }
 
-    /// Allows use of the write function.
-    case write
+    internal func toArray() -> [String] {
 
-    /// Allows use of the writeUrl function.
-    case writeURL
+        let ops: [String] = type(of: self).all().flatMap {
+            if contains($0) {
+                return $0.stringValue()
+            } else {
+                return nil
+            }
+        }
 
-    /// Allows files to be written to custom storage.
-    case store
+        return ops
+    }
 
-    /// Allows transformation (crop, resize, rotate) of files, also needed for the viewer.
-    case convert
-
-    /// Allows removal of Filestack files.
-    case remove
-
-    /// Allows exif metadata to be accessed.
-    case exif
-
-
-    // MARK: - CustomStringConvertible
-
-    /// Returns a `String` representation of self.
-    public var description: String {
+    private func stringValue() -> String? {
 
         switch self {
-        case .pick:
+        case PolicyCall.pick:
 
             return "pick"
 
-        case .read:
+        case PolicyCall.read:
 
             return "read"
 
-        case .stat:
+        case PolicyCall.stat:
 
             return "stat"
 
-        case .write:
+        case PolicyCall.write:
 
             return "write"
 
-        case .writeURL:
+        case PolicyCall.writeURL:
 
             return "write_url"
 
-        case .store:
+        case PolicyCall.store:
 
             return "store"
 
-        case .convert:
+        case PolicyCall.convert:
 
             return "convert"
 
-        case .remove:
+        case PolicyCall.remove:
 
             return "remove"
 
-        case .exif:
+        case PolicyCall.exif:
 
             return "exif"
+
+        default:
+
+            return nil
         }
     }
 }

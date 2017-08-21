@@ -31,15 +31,32 @@ import Foundation
     // MARK: - Lifecyle Functions
 
     /**
-        The designated initializer.
-     
+        Default initializer.
+
         - SeeAlso: `Security`
 
         - Parameter apiKey: An API key obtained from the Developer Portal.
         - Parameter security: A `Security` object. `nil` by default.
-        - Parameter storage: A `StorageLocation` object. `nil` by default.
      */
-    public init(apiKey: String, security: Security? = nil, storage: StorageLocation? = nil) {
+    @objc public init(apiKey: String, security: Security? = nil) {
+
+        self.apiKey = apiKey
+        self.security = security
+        self.storage = nil
+
+        super.init()
+    }
+
+    /**
+         Initializer with security and storage location.
+
+         - SeeAlso: `Security`
+
+         - Parameter apiKey: An API key obtained from the Developer Portal.
+         - Parameter security: A `Security` object. `nil` by default.
+         - Parameter storage: A `StorageLocation` object.
+     */
+    @objc public init(apiKey: String, security: Security? = nil, storage: StorageLocation) {
 
         self.apiKey = apiKey
         self.security = security
@@ -47,7 +64,6 @@ import Foundation
 
         super.init()
     }
-
 
     // MARK: - Public Functions
 
@@ -62,27 +78,27 @@ import Foundation
     }
 
     /**
-        An `ImageTransform` object for a Filestack handle.
+        An `Transformable` object for a Filestack handle.
 
-        - SeeAlso: `ImageTransform`
+        - SeeAlso: `Transformable`
 
         - Parameter handle: A Filestack handle.
      */
-    public func imageTransform(handle: String) -> ImageTransform {
+    public func transformable(handle: String) -> Transformable {
 
-        return ImageTransform(handle: handle, apiKey: apiKey, security: security)
+        return Transformable(handle: handle, apiKey: apiKey, security: security)
     }
 
     /**
-        An `ImageTransform` object for an external URL.
+        An `Transformable` object for an external URL.
      
-        - SeeAlso: `ImageTransform`
+        - SeeAlso: `Transformable`
 
         - Parameter externalURL: An external URL.
      */
-    public func imageTransform(externalURL: URL) -> ImageTransform {
+    public func transformable(externalURL: URL) -> Transformable {
 
-        return ImageTransform(externalURL: externalURL, apiKey: apiKey, security: security)
+        return Transformable(externalURL: externalURL, apiKey: apiKey, security: security)
     }
 
     /**

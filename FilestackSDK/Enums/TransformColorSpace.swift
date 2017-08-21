@@ -1,5 +1,5 @@
 //
-//  ImageTransformColorSpace.swift
+//  TransformColorSpace.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/13/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform color space type.
  */
-@objc(FSImageTransformColorSpace) public enum ImageTransformColorSpace: UInt, CustomStringConvertible {
+@objc(FSTransformColorSpace) public enum TransformColorSpace: UInt, CustomStringConvertible {
 
     /// RGB
     case rgb

@@ -12,141 +12,110 @@ import Foundation
 /**
     Represents a metadata option.
  */
-@objc(FSMetadataOptions) public enum MetadataOptions: UInt, CustomStringConvertible {
+public typealias MetadataOptions = FSMetadataOptions
 
-    /// Size
-    case size
+public extension MetadataOptions {
 
-    /// MIME type
-    case mimeType
+    internal static func all() -> [MetadataOptions] {
 
-    /// Filename
-    case fileName
+        return [
+            .size, .mimeType, .fileName, .width, .height, .uploaded, .writeable, .cloud,
+            .sourceURL, .MD5, .SHA224, .SHA256, .SHA384, .SHA512, .location, .path,
+            .container, .exif
+        ]
+    }
 
-    /// Width
-    case width
+    internal func toArray() -> [String] {
 
-    /// Height
-    case height
+        let ops: [String] = type(of: self).all().flatMap {
+            if contains($0) {
+                return $0.stringValue()
+            } else {
+                return nil
+            }
+        }
 
-    /// Uploaded
-    case uploaded
+        return ops
+    }
 
-    /// Writeable
-    case writeable
-
-    /// Cloud
-    case cloud
-
-    /// Source URL
-    case sourceURL
-
-    /// MD5
-    case md5
-
-    /// SHA224
-    case sha224
-
-    /// SHA256
-    case sha256
-
-    /// SHA384
-    case sha384
-
-    /// SHA512
-    case sha512
-
-    /// Location
-    case location
-
-    /// Path
-    case path
-
-    /// Container
-    case container
-
-    /// Exif
-    case exif
-
-
-    // MARK: - CustomStringConvertible
-    
-    /// Returns a `String` representation of self.
-    public var description: String {
+    private func stringValue() -> String? {
 
         switch self {
-        case .size:
+        case MetadataOptions.size:
 
             return "size"
 
-        case .mimeType:
+        case MetadataOptions.mimeType:
 
             return "mimetype"
 
-        case .fileName:
+        case MetadataOptions.fileName:
 
             return "filename"
 
-        case .width:
+        case MetadataOptions.width:
 
             return "width"
 
-        case .height:
+        case MetadataOptions.height:
 
             return "height"
 
-        case .uploaded:
+        case MetadataOptions.uploaded:
 
             return "uploaded"
 
-        case .writeable:
+        case MetadataOptions.writeable:
 
             return "writeable"
 
-        case .cloud:
+        case MetadataOptions.cloud:
 
             return "cloud"
 
-        case .sourceURL:
+        case MetadataOptions.sourceURL:
 
             return "source_url"
 
-        case .md5:
+        case MetadataOptions.MD5:
 
             return "md5"
 
-        case .sha224:
+        case MetadataOptions.SHA224:
 
             return "sha224"
 
-        case .sha256:
+        case MetadataOptions.SHA256:
 
             return "sha256"
 
-        case .sha384:
+        case MetadataOptions.SHA384:
 
             return "sha384"
 
-        case .sha512:
+        case MetadataOptions.SHA512:
 
             return "sha512"
 
-        case .location:
+        case MetadataOptions.location:
 
             return "location"
 
-        case .path:
+        case MetadataOptions.path:
 
             return "path"
 
-        case .container:
+        case MetadataOptions.container:
 
             return "container"
 
-        case .exif:
+        case MetadataOptions.exif:
 
             return "exif"
 
+        default:
+
+            return nil
         }
     }
 }

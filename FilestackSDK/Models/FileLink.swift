@@ -139,11 +139,13 @@ import Alamofire
         - Parameter queue: The queue on which the completion handler is dispatched.
         - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func getMetadata(options: [MetadataOptions],
-                            queue: DispatchQueue? = .main,
-                            completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+    @objc public func getMetadata(options: MetadataOptions,
+                                  queue: DispatchQueue? = .main,
+                                  completionHandler: @escaping (NetworkJSONResponse) -> Void) {
 
-        let optionQueryItems = options.map { URLQueryItem(name: $0.description, value: "true") }
+        let optionQueryItems = options.toArray().map {
+            URLQueryItem(name: $0.description, value: "true")
+        }
 
         guard let url = apiService.buildURL(handle: handle,
                                             path: "file",
@@ -321,11 +323,11 @@ import Alamofire
     }
 
     /**
-        Returns an `ImageTransform` corresponding to this `FileLink`.
+        Returns an `Transformable` corresponding to this `FileLink`.
      */
-    public func imageTransform() -> ImageTransform {
+    public func transformable() -> Transformable {
 
-        return ImageTransform(handle: handle, apiKey: apiKey, security: security)
+        return Transformable(handle: handle, apiKey: apiKey, security: security)
     }
 
 

@@ -30,12 +30,12 @@ import Foundation
      
         - SeeAlso: `PolicyCall`
      */
-    public let call: [PolicyCall]?
+    public let call: PolicyCall?
 
     /**
         The unique file handle that you would like to access.
      */
-    public let handle: String?
+    public var handle: String?
 
     /** 
         It is possible to create a subset of external URL domains that are allowed to be 
@@ -53,44 +53,74 @@ import Foundation
         }
         ```
      */
-    public let url: String?
+    public var url: String?
 
     /** 
         The maximum file size in bytes that can be stored by your request.
      */
-    public let maxSize: UInt?
+    public var maxSize: UInt?
 
     /**
         The minimum file size that can be stored by your request.
      */
-    public let minSize: UInt?
+    public var minSize: UInt?
 
     /** 
         For policies that store files, a Perl-like regular expression that must
         match the path that the files will be stored under.
      */
-    public let path: String?
+    public var path: String?
 
     /**
         For policies that store files, a Perl-like regular expression that
         must match the container/bucket that the files will be stored under.
      */
-    public let container: String?
+    public var container: String?
 
 
     // MARK: - Lifecyle Functions
 
     /**
+        Convenience initializer with expiry time.
+     */
+    @objc public convenience init(expiry: Date) {
+
+        self.init(expiry: expiry,
+                  call: nil,
+                  handle: nil,
+                  url: nil,
+                  maxSize: nil,
+                  minSize: nil,
+                  path: nil,
+                  container: nil)
+    }
+
+    /**
+        Convenience initializer with expiry time and call permissions.
+     */
+    @objc public convenience init(expiry: Date, call: PolicyCall) {
+
+        self.init(expiry: expiry,
+                  call: call,
+                  handle: nil,
+                  url: nil,
+                  maxSize: nil,
+                  minSize: nil,
+                  path: nil,
+                  container: nil)
+    }
+
+    /**
         The designated initializer.
      */
-    public init(expiry: Date,
-         call: [PolicyCall]? = nil,
-         handle: String? = nil,
-         url: String? = nil,
-         maxSize: UInt? = nil,
-         minSize: UInt? = nil,
-         path: String? = nil,
-         container: String? = nil) {
+    @nonobjc public init(expiry: Date,
+                         call: PolicyCall? = nil,
+                         handle: String? = nil,
+                         url: String? = nil,
+                         maxSize: UInt? = nil,
+                         minSize: UInt? = nil,
+                         path: String? = nil,
+                         container: String? = nil) {
 
         self.expiry = expiry
         self.call = call
@@ -101,7 +131,6 @@ import Foundation
         self.path = path
         self.container = container
     }
-
 
     // MARK: - Internal Functions
 
@@ -122,7 +151,7 @@ import Foundation
         dict["expiry"] = expiry.timeIntervalSince1970
 
         if let call = call {
-            dict["call"] = call.map { String(describing: $0) }
+            dict["call"] = call.toArray()
         }
 
         if let handle = handle {

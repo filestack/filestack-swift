@@ -49,7 +49,7 @@ class PolicyTests: XCTestCase {
         XCTAssertNotNil(json, "Unable to decode JSON object as a dictionary of [String: Any] values.")
 
         XCTAssertEqual(json["expiry"] as! TimeInterval, 12345)
-        XCTAssertEqual(json["call"] as! [String], ["read", "write", "stat", "convert"])
+        XCTAssertEqual(json["call"] as! [String], ["read", "stat", "write", "convert"])
         XCTAssertEqual(json["handle"] as! String, "SOME-HANDLE")
         XCTAssertEqual(json["url"] as! String, "https://some-url.tld")
         XCTAssertEqual(json["max_size"] as! UInt, 1024 * 10)

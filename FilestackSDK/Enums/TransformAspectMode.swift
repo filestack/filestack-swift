@@ -1,5 +1,5 @@
 //
-//  ImageTransformAspectMode.swift
+//  TransformAspectMode.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/14/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform aspect type.
  */
-@objc(FSImageTransformAspectMode) public enum ImageTransformAspectMode: UInt, CustomStringConvertible {
+@objc(FSTransformAspectMode) public enum TransformAspectMode: UInt, CustomStringConvertible {
 
     /// Preserve
     case preserve

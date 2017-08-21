@@ -656,7 +656,7 @@ class FileLinkTests: XCTestCase {
         let expectation = self.expectation(description: "request should complete")
         var response: NetworkJSONResponse?
 
-        fileLink.getMetadata(options: [.width, .height, .md5]) { (resp) in
+        fileLink.getMetadata(options: [.width, .height, .MD5]) { (resp) in
 
             response = resp
             expectation.fulfill()

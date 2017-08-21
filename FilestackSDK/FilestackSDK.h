@@ -15,5 +15,6 @@ FOUNDATION_EXPORT double FilestackSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char FilestackSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <FilestackSDK/PublicHeader.h>
-
-
+#import <FilestackSDK/FSPolicyCall.h>
+#import <FilestackSDK/FSTransformPosition.h>
+#import <FilestackSDK/FSMetadataOptions.h>

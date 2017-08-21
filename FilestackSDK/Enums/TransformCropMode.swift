@@ -1,5 +1,5 @@
 //
-//  ImageTransformCropMode.swift
+//  TransformCropMode.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/12/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform crop type.
  */
-@objc(FSImageTransformCropMode) public enum ImageTransformCropMode: UInt, CustomStringConvertible {
+@objc(FSTransformCropMode) public enum TransformCropMode: UInt, CustomStringConvertible {
 
 
     /// Thumb

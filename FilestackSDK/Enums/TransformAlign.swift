@@ -1,5 +1,5 @@
 //
-//  ImageTransformAlign.swift
+//  TransformAlign.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/12/17.
@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform alignment type.
  */
-@objc(FSImageTransformAlign) public enum ImageTransformAlign: UInt, CustomStringConvertible {
+@objc(FSTransformAlign) public enum TransformAlign: UInt, CustomStringConvertible {
 
     /// Center
     case center
