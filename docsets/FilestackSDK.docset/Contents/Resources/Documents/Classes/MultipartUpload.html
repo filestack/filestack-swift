@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Security Class Reference</title>
+    <title>MultipartUpload Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/Security" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/MultipartUpload" class="dashAnchor"></a>
 
-    <a title="Security Class Reference"></a>
+    <a title="MultipartUpload Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">FilestackSDK Reference</a>
       <img class="carat" src="../img/carat.png" />
-      Security Class Reference
+      MultipartUpload Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -218,17 +218,8 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Security</h1>
-              <div class="declaration">
-                <div class="language">
-                  <pre class="highlight"><code><span class="kd">@objc(FSSecurity)</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">Security</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-
-                </div>
-              </div>
-            <p>Represents a security object.</p>
-
-<p>See <a href="https://www.filestack.com/docs/security">Security Overview</a> for more information 
-about security.</p>
+            <h1>MultipartUpload</h1>
+            <p>Undocumented</p>
 
           </div>
         </section>
@@ -237,19 +228,19 @@ about security.</p>
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Properties"></a>
-                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
-                <a href="#/Properties">
-                  <h3 class="section-name">Properties</h3>
+                <a name="/Public%20Functions"></a>
+                <a name="//apple_ref/swift/Section/Public Functions" class="dashAnchor"></a>
+                <a href="#/Public%20Functions">
+                  <h3 class="section-name">Public Functions</h3>
                 </a>
               </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC12FilestackSDK8Security13encodedPolicySS"></a>
-                    <a name="//apple_ref/swift/Property/encodedPolicy" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12FilestackSDK8Security13encodedPolicySS">encodedPolicy</a>
+                    <a name="/s:FC12FilestackSDK15MultipartUpload6cancelFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/cancel()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC12FilestackSDK15MultipartUpload6cancelFT_T_">cancel()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -257,216 +248,14 @@ about security.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An encoded policy.</p>
+                        <p>Cancels a multipart upload request.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">encodedPolicy</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC12FilestackSDK8Security9signatureSS"></a>
-                    <a name="//apple_ref/swift/Property/signature" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12FilestackSDK8Security9signatureSS">signature</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A computed signature.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">signature</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Lifecyle%20Functions"></a>
-                <a name="//apple_ref/swift/Section/Lifecyle Functions" class="dashAnchor"></a>
-                <a href="#/Lifecyle%20Functions">
-                  <h3 class="section-name">Lifecyle Functions</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC12FilestackSDK8SecuritycFzT6policyCS_6Policy9appSecretSS_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(policy:appSecret:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC12FilestackSDK8SecuritycFzT6policyCS_6Policy9appSecretSS_S0_">init(policy:appSecret:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A convenience initializer that takes a <code><a href="../Classes/Policy.html">Policy</a></code> and an <code>appSecret</code> as parameters.</p>
-<div class="aside aside-see-also">
-    <p class="aside-title">See also</p>
-    <p><code><a href="../Classes/Policy.html">Policy</a></code></p>
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">policy</span><span class="p">:</span> <span class="kt"><a href="../Classes/Policy.html">Policy</a></span><span class="p">,</span> <span class="nv">appSecret</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>policy</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A configured <code>Policy</code> object.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>appSecret</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A secret taken from the developer portal.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC12FilestackSDK8SecuritycFT13encodedPolicySS9signatureSS_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(encodedPolicy:signature:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC12FilestackSDK8SecuritycFT13encodedPolicySS9signatureSS_S0_">init(encodedPolicy:signature:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The designated initializer.</p>
-<div class="aside aside-see-also">
-    <p class="aside-title">See also</p>
-    <p><code>init(policy:appSecret)</code>.</p>
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">encodedPolicy</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">signature</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>encodedPolicy</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An encoded policy.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>signature</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A computed signature.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/CustomStringConvertible"></a>
-                <a name="//apple_ref/swift/Section/CustomStringConvertible" class="dashAnchor"></a>
-                <a href="#/CustomStringConvertible">
-                  <h3 class="section-name">CustomStringConvertible</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC12FilestackSDK8Security11descriptionSS"></a>
-                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC12FilestackSDK8Security11descriptionSS">description</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Returns a <code>String</code> representation of self.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cancel</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
