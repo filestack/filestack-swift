@@ -15,7 +15,7 @@ enum MultipartUploadError: Error {
     case aborted
 }
 
-
+/// :nodoc:
 @objc(FSMultipartUpload) public class MultipartUpload: NSObject {
 
     // MARK: - Properties
