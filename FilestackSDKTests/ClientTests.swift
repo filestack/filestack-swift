@@ -198,7 +198,7 @@ class ClientTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 30, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.json?["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(response?.json?["size"] as? Int, 6034668)
@@ -342,7 +342,7 @@ class ClientTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 30, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.json?["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(response?.json?["size"] as? Int, 6034668)
@@ -350,6 +350,155 @@ class ClientTests: XCTestCase {
         XCTAssertEqual(response?.json?["status"] as? String, "Stored")
         XCTAssertEqual(response?.json?["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(response?.json?["mimetype"] as? String, "image/jpeg")
+    }
+
+    func testCancellingResumableMultiPartUpload() {
+
+        let chunkSize = 1 * Int(pow(Double(1024), Double(2)))
+        let partSize = 8 * Int(pow(Double(1024), Double(2)))
+        var currentPart = 1
+        var currentOffset = 0
+
+        let uploadMultipartStartStubConditions = isScheme(Config.uploadURL.scheme!) &&
+            isHost(Config.uploadURL.host!) &&
+            isPath("/multipart/start") &&
+            isMethodPOST()
+
+        stub(condition: uploadMultipartStartStubConditions) { _ in
+
+            let headers = ["Content-Type": "application/json"]
+
+            let json = [
+                "location_url": "upload-eu-west-1.filestackapi.com",
+                "uri": "/SOME-URI-HERE",
+                "upload_id": "SOME-UPLOAD-ID",
+                "region": "us-east-1",
+                "upload_type": "intelligent_ingestion"
+            ]
+
+            return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
+        }
+
+        let uploadMultipartPostPartStubConditions = isScheme(Config.uploadURL.scheme!) &&
+            isHost(Config.uploadURL.host!) &&
+            isPath("/multipart/upload") &&
+            isMethodPOST()
+
+        stub(condition: uploadMultipartPostPartStubConditions) { _ in
+
+            var json: [String: Any] = [:]
+
+            json = [
+                "location_url": "upload-eu-west-1.filestackapi.com",
+                "url": "https://s3.amazonaws.com/PART-\(currentPart)/\(currentOffset)",
+                "headers": [
+                    "Authorization":
+                        "AWS4-HMAC-SHA256 Credential=AKIAIBGGXL3I2XTGV4IQ/20170726/us-east-1/s3/aws4_request, " +
+                            "SignedHeaders=content-length;content-md5;host;x-amz-date, " +
+                    "Signature=6638349931141536177e23f93b4eade99113ccc27ff96cc414b90dee260841c2",
+                    "Content-MD5": "yWCet0EAi8FVbzQfk3oofg==",
+                    "x-amz-content-sha256": "UNSIGNED-PAYLOAD",
+                    "x-amz-date": "20170726T095615Z"
+                ]
+            ]
+
+            currentOffset += chunkSize
+
+            if currentOffset >= partSize {
+                currentOffset = 0
+                currentPart += 1
+            }
+
+            let headers = ["Content-Type": "application/json"]
+
+            return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
+        }
+
+
+        let uploadMultipartPutStubConditions = isScheme("https") &&
+                                            isHost("s3.amazonaws.com") &&
+            isMethodPUT()
+
+        stub(condition: uploadMultipartPutStubConditions) { _ in
+
+            let headers = [
+                "Content-Length": "0",
+                "Date": "Wed, 26 Jul 2017 09:16:37 GMT",
+                "Etag": "c9609eb741008bc1556f341f937a287e",
+                "Server": "AmazonS3",
+                "x-amz-id-2": "LxaKVvjp9jAK+ErminkrN8HV0VMOA/Bjkbf4A0cCaDRC6smJZerZqN9PqzRzGfn9p8vvTb6YIfM=",
+                "x-amz-request-id": "7D827E4E5CFD2E7A"
+            ]
+
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: headers)
+        }
+
+        let uploadMultipartCommitStubConditions = isScheme(Config.uploadURL.scheme!) &&
+            isHost(Config.uploadURL.host!) &&
+            isPath("/multipart/commit") &&
+            isMethodPOST()
+
+        stub(condition: uploadMultipartCommitStubConditions) { _ in
+
+            let headers = ["Content-Type": "text/plain; charset=utf-8"]
+
+            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: headers)
+        }
+
+        let uploadMultipartCompleteStubConditions = isScheme(Config.uploadURL.scheme!) &&
+            isHost(Config.uploadURL.host!) &&
+            isPath("/multipart/complete")
+
+        stub(condition: uploadMultipartCompleteStubConditions) { _ in
+            let headers = ["Content-Type": "application/json"]
+
+            let json: [String: Any] = [
+                "handle": "6GKA0wnQWO7tKaGu2YXA",
+                "size": 6034668,
+                "filename": "large.jpg",
+                "status": "Stored",
+                "url": "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA",
+                "mimetype": "image/jpeg"
+            ]
+
+            let response = OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
+
+            response.requestTime = 1.0
+            response.responseTime = 5.0
+
+            return response
+        }
+
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
+        let localURL = Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
+        let expectation = self.expectation(description: "request should succeed")
+        let progressExpectation = self.expectation(description: "request should succeed")
+
+        var response: NetworkJSONResponse?
+
+        let progressHandler: ((Progress) -> Void) = { progress in
+            if progress.completedUnitCount == 6034668 {
+                progressExpectation.fulfill()
+            }
+        }
+
+        let multipartUpload = client.multiPartUpload(from: localURL,
+                                                     useIntelligentIngestionIfAvailable: true,
+                                                     uploadProgress: progressHandler) { (resp) in
+
+            response = resp
+            expectation.fulfill()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+
+            multipartUpload.cancel()
+        }
+
+        waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertNotNil(response?.error)
     }
 
     func testResumableMultiPartUploadWithDownNetwork() {
@@ -381,7 +530,7 @@ class ClientTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 30, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertNotNil(response?.error)
     }
@@ -475,7 +624,7 @@ class ClientTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 30, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertNotNil(response?.error)
     }

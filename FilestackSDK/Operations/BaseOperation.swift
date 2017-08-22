@@ -64,4 +64,22 @@ internal class BaseOperation: Operation {
             }
         }
     }
+
+    // `isCancelled` property override boilerplate, as suggested by Apple
+    private var _cancelled: Bool = false
+
+    internal override var isCancelled: Bool {
+
+        get {
+            return _cancelled
+        }
+
+        set {
+            if _cancelled != newValue {
+                willChangeValue(forKey: "isCancelled")
+                _cancelled = newValue
+                didChangeValue(forKey: "isCancelled")
+            }
+        }
+    }
 }

@@ -16,7 +16,7 @@ enum MultipartUploadError: Error {
 }
 
 
-internal class MultipartUpload {
+@objc(FSMultipartUpload) public class MultipartUpload: NSObject {
 
     // MARK: - Properties
 
@@ -76,6 +76,21 @@ internal class MultipartUpload {
         self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
         self.uploadOperationQueue.maxConcurrentOperationCount = partUploadConcurrency
         self.chunkUploadConcurrency = chunkUploadConcurrency
+    }
+
+    // MARK: - Public Functions
+
+    /**
+        Cancels a multipart upload request.
+     */
+    public func cancel() {
+
+        uploadQueue.sync {
+            shouldAbort = true
+            uploadOperationQueue.cancelAllOperations()
+        }
+
+        fail(with: MultipartUploadError.aborted)
     }
 
 
@@ -170,6 +185,25 @@ internal class MultipartUpload {
         var partsAndEtags: [Int: String] = [:]
         var totalUploadedBytes: Int64 = 0
 
+        let beforeCompleteCheckPointOperation = BlockOperation()
+
+        beforeCompleteCheckPointOperation.completionBlock = {
+            if self.shouldAbort {
+                self.fail(with: MultipartUploadError.aborted)
+                return
+            } else {
+                self.addCompleteOperation(fileName: fileName,
+                                          fileSize: fileSize,
+                                          mimeType: mimeType,
+                                          uri: uri,
+                                          region: region,
+                                          uploadID: uploadID,
+                                          partsAndEtags: partsAndEtags,
+                                          useIntelligentIngestion: shouldUseIntelligentIngestion,
+                                          retriesLeft: self.maxRetries)
+            }
+        }
+
         // Submit all parts
         while !shouldAbort && seekPoint < fileSize {
             part += 1
@@ -218,25 +252,13 @@ internal class MultipartUpload {
             uploadOperationQueue.addOperation(partOperation)
             uploadOperationQueue.addOperation(checkpointOperation)
 
+            beforeCompleteCheckPointOperation.addDependency(partOperation)
+            beforeCompleteCheckPointOperation.addDependency(checkpointOperation)
+
             seekPoint += UInt64(chunkSize)
         }
 
-        uploadOperationQueue.waitUntilAllOperationsAreFinished()
-
-        if shouldAbort {
-            fail(with: MultipartUploadError.aborted)
-            return
-        } else {
-            self.addCompleteOperation(fileName: fileName,
-                                      fileSize: fileSize,
-                                      mimeType: mimeType,
-                                      uri: uri,
-                                      region: region,
-                                      uploadID: uploadID,
-                                      partsAndEtags: partsAndEtags,
-                                      useIntelligentIngestion: shouldUseIntelligentIngestion,
-                                      retriesLeft: maxRetries)
-        }
+        uploadOperationQueue.addOperation(beforeCompleteCheckPointOperation)
     }
 
     private func addCompleteOperation(fileName: String,

@@ -39,6 +39,8 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
     private var fileHandle: FileHandle?
     private var partChunkSize: Int
 
+    private var beforeCommitCheckPointOperation: BlockOperation?
+
     private let chunkUploadOperationQueue: OperationQueue = {
 
         $0.underlyingQueue = DispatchQueue(label: "com.filestack.chunk-upload-operation-queue",
@@ -105,6 +107,12 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         }
     }
 
+    override func cancel() {
+
+        didFail = true
+        chunkUploadOperationQueue.cancelAllOperations()
+        isCancelled = true
+    }
 
     // MARK: - Private Functions
 
@@ -175,6 +183,12 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         isExecuting = true
         partChunkSize = resumableMobileChunkSize
 
+        beforeCommitCheckPointOperation = BlockOperation()
+
+        beforeCommitCheckPointOperation?.completionBlock = {
+            self.doCommit()
+        }
+
         var partOffset: UInt64 = 0
 
         while partOffset < UInt64(chunkSize) {
@@ -192,10 +206,15 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             partOffset += UInt64(chunkOperation.dataChunk.count)
         }
 
-        chunkUploadOperationQueue.waitUntilAllOperationsAreFinished()
+        if let beforeCommitCheckPointOperation = beforeCommitCheckPointOperation {
+            chunkUploadOperationQueue.addOperation(beforeCommitCheckPointOperation)
+        }
+    }
+
+    private func doCommit() {
 
         // Try to commit operation with retries.
-        while retriesLeft > 0 {
+        while !didFail && retriesLeft > 0 {
             let commitOperation = MultipartUploadCommitOperation(apiKey: self.apiKey,
                                                                  fileSize: self.fileSize,
                                                                  part: self.part,
@@ -230,6 +249,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         uploadProgress = nil
         isExecuting = false
         isFinished = true
+        beforeCommitCheckPointOperation = nil
     }
 
     private func addChunkOperation(partOffset: UInt64,
@@ -310,6 +330,9 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         checkpointOperation.addDependency(operation)
         chunkUploadOperationQueue.addOperation(operation)
         chunkUploadOperationQueue.addOperation(checkpointOperation)
+
+        beforeCommitCheckPointOperation?.addDependency(operation)
+        beforeCommitCheckPointOperation?.addDependency(checkpointOperation)
 
         return operation
     }

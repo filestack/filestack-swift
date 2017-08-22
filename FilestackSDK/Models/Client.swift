@@ -114,12 +114,12 @@ import Foundation
             of the upload process as data is uploaded to the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the upload has finished.
      */
-    public func multiPartUpload(from localURL: URL,
-                                storage: StorageLocation = .s3,
-                                useIntelligentIngestionIfAvailable: Bool = true,
-                                queue: DispatchQueue = .main,
-                                uploadProgress: ((Progress) -> Void)? = nil,
-                                completionHandler: @escaping (NetworkJSONResponse?) -> Void) {
+    @discardableResult public func multiPartUpload(from localURL: URL,
+                                                   storage: StorageLocation = .s3,
+                                                   useIntelligentIngestionIfAvailable: Bool = true,
+                                                   queue: DispatchQueue = .main,
+                                                   uploadProgress: ((Progress) -> Void)? = nil,
+                                                   completionHandler: @escaping (NetworkJSONResponse?) -> Void) -> MultipartUpload {
 
         let mpu = MultipartUpload(at: localURL,
                                   queue: queue,
@@ -133,6 +133,8 @@ import Foundation
                                   useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 
         mpu.uploadFile()
+
+        return mpu
     }
 }
 
