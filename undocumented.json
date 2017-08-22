@@ -1,12 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Utils/MultipartUpload.swift",
-      "line": 19,
-      "symbol": "MultipartUpload",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Users/ruben/src/filestack/filestack-swift"
 }
