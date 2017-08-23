@@ -12,6 +12,8 @@
 		4502F7371F1F540F000875D6 /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4502F7361F1F540F000875D6 /* UploadService.swift */; };
 		45050F4C1F2B49C100B4E3C3 /* Data+Base64MD5Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45050F4B1F2B49C100B4E3C3 /* Data+Base64MD5Digest.swift */; };
 		450E433C1F161DE500E46B56 /* TransformPixelateFacesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E433B1F161DE500E46B56 /* TransformPixelateFacesType.swift */; };
+		45107C8C1F4D6ADC00250ABE /* MultipartUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */; };
+		45107CA01F4D6B0E00250ABE /* MultipartUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107C9F1F4D6B0E00250ABE /* MultipartUploadTests.swift */; };
 		452055401F4AE87D00A6795D /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 4520553F1F4AE7B900A6795D /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		452055421F4B191900A6795D /* RotateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452055411F4B191900A6795D /* RotateTransform.swift */; };
 		452055451F4B263B00A6795D /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452055441F4B263B00A6795D /* Transform.swift */; };
@@ -39,7 +41,6 @@
 		457D5BF31F1614D400FBD5B1 /* PolicyCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */; };
 		458256151F1E1C860009185C /* URL+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458256141F1E1C860009185C /* URL+size.swift */; };
 		458256171F1E1D330009185C /* URLSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458256161F1E1D330009185C /* URLSizeTests.swift */; };
-		4582561A1F1E3E7E0009185C /* MultipartUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458256191F1E3E720009185C /* MultipartUpload.swift */; };
 		4589A45F1F0A3B5500C39405 /* StorageLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A45E1F0A3B5500C39405 /* StorageLocation.swift */; };
 		4589A4881F0A4B1900C39405 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4871F0A4B1900C39405 /* Config.swift */; };
 		4589A48A1F0A4DA600C39405 /* FileLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589A4891F0A4DA600C39405 /* FileLink.swift */; };
@@ -261,6 +262,8 @@
 		4502F7361F1F540F000875D6 /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		45050F4B1F2B49C100B4E3C3 /* Data+Base64MD5Digest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Base64MD5Digest.swift"; sourceTree = "<group>"; };
 		450E433B1F161DE500E46B56 /* TransformPixelateFacesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPixelateFacesType.swift; sourceTree = "<group>"; };
+		45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartUpload.swift; sourceTree = "<group>"; };
+		45107C9F1F4D6B0E00250ABE /* MultipartUploadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartUploadTests.swift; sourceTree = "<group>"; };
 		4520553F1F4AE7B900A6795D /* FSPolicyCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
 		452055411F4B191900A6795D /* RotateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotateTransform.swift; path = FilestackSDK/Transforms/RotateTransform.swift; sourceTree = SOURCE_ROOT; };
 		452055441F4B263B00A6795D /* Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transform.swift; path = Transforms/Transform.swift; sourceTree = "<group>"; };
@@ -288,7 +291,6 @@
 		457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCall.swift; sourceTree = "<group>"; };
 		458256141F1E1C860009185C /* URL+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+size.swift"; sourceTree = "<group>"; };
 		458256161F1E1D330009185C /* URLSizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSizeTests.swift; sourceTree = "<group>"; };
-		458256191F1E3E720009185C /* MultipartUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUpload.swift; sourceTree = "<group>"; };
 		4589A45E1F0A3B5500C39405 /* StorageLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageLocation.swift; sourceTree = "<group>"; };
 		4589A4871F0A4B1900C39405 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Misc/Config.swift; sourceTree = "<group>"; };
 		4589A4891F0A4DA600C39405 /* FileLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLink.swift; sourceTree = "<group>"; };
@@ -455,14 +457,6 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		458256181F1E3E720009185C /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				458256191F1E3E720009185C /* MultipartUpload.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		4589A46C1F0A426700C39405 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,7 +509,6 @@
 				4502F71E1F1F4C28000875D6 /* Operations */,
 				45FA0CC91F0B86B6008EDBCD /* Services */,
 				452055431F4B192000A6795D /* Transforms */,
-				458256181F1E3E720009185C /* Utils */,
 			);
 			path = FilestackSDK;
 			sourceTree = "<group>";
@@ -550,6 +543,7 @@
 			children = (
 				45B831211F03F1C90053742A /* Client.swift */,
 				4589A4891F0A4DA600C39405 /* FileLink.swift */,
+				45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */,
 				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
 				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
 				4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */,
@@ -566,12 +560,13 @@
 				45B831111F03D8140053742A /* Info.plist */,
 				45B831231F03F4300053742A /* ClientTests.swift */,
 				4589A48B1F0A4DBC00C39405 /* FileLinkTests.swift */,
-				45C9E94D1F1384B200260F2A /* TransformableTests.swift */,
+				45107C9F1F4D6B0E00250ABE /* MultipartUploadTests.swift */,
 				45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */,
 				45B831181F03DA280053742A /* PolicyTests.swift */,
 				45B8311D1F03E2890053742A /* SecurityTests.swift */,
 				45B8311F1F03E52B0053742A /* Seeds.swift */,
 				454CC1C51F0CF932005821AC /* SessionManagerTests.swift */,
+				45C9E94D1F1384B200260F2A /* TransformableTests.swift */,
 				45341A9F1F1E17C400DC7B79 /* URLMimeTypeTests.swift */,
 				458256161F1E1D330009185C /* URLSizeTests.swift */,
 				45FA0CCE1F0B8841008EDBCD /* Fixtures */,
@@ -905,7 +900,6 @@
 				452055471F4B266F00A6795D /* ResizeTransform.swift in Sources */,
 				458D66CD1F4B31E4001770FB /* ZipTransform.swift in Sources */,
 				458D66DD1F4B3D9E001770FB /* BorderTransform.swift in Sources */,
-				4582561A1F1E3E7E0009185C /* MultipartUpload.swift in Sources */,
 				4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */,
 				458256151F1E1C860009185C /* URL+size.swift in Sources */,
 				45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */,
@@ -923,6 +917,7 @@
 				4589A45F1F0A3B5500C39405 /* StorageLocation.swift in Sources */,
 				45C9E93B1F137EB200260F2A /* Transformable.swift in Sources */,
 				457D5BF11F1614A800FBD5B1 /* TransformAlign.swift in Sources */,
+				45107C8C1F4D6ADC00250ABE /* MultipartUpload.swift in Sources */,
 				456FF4C11F27799D00E9F192 /* MultipartUploadCompleteOperation.swift in Sources */,
 				458D66C71F4B2E8D001770FB /* FlopTransform.swift in Sources */,
 				4579CD3E1F1764A500DCF37A /* TransformBlurMode.swift in Sources */,
@@ -985,6 +980,7 @@
 				454CC1C61F0CF932005821AC /* SessionManagerTests.swift in Sources */,
 				45B8311E1F03E2890053742A /* SecurityTests.swift in Sources */,
 				45341AA01F1E17C400DC7B79 /* URLMimeTypeTests.swift in Sources */,
+				45107CA01F4D6B0E00250ABE /* MultipartUploadTests.swift in Sources */,
 				45B831241F03F4300053742A /* ClientTests.swift in Sources */,
 				45C9E94E1F1384B200260F2A /* TransformableTests.swift in Sources */,
 				45B831201F03E52B0053742A /* Seeds.swift in Sources */,
