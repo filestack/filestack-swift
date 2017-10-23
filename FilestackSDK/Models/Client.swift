@@ -110,14 +110,16 @@ import Foundation
             for file uploading. Defaults to `true`.
         - Parameter queue: The queue on which the upload progress and completion handlers are 
             dispatched.
+        - Parameter startUploadImmediately: Whether the upload should start immediately. Defaults to true.
         - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
             of the upload process as data is uploaded to the server. `nil` by default.
         - Parameter completionHandler: Adds a handler to be called once the upload has finished.
      */
-    @discardableResult public func multiPartUpload(from localURL: URL,
+    @discardableResult public func multiPartUpload(from localURL: URL? = nil,
                                                    storage: StorageLocation = .s3,
                                                    useIntelligentIngestionIfAvailable: Bool = true,
                                                    queue: DispatchQueue = .main,
+                                                   startUploadImmediately: Bool = true,
                                                    uploadProgress: ((Progress) -> Void)? = nil,
                                                    completionHandler: @escaping (NetworkJSONResponse?) -> Void) -> MultipartUpload {
 
@@ -132,7 +134,9 @@ import Foundation
                                   security: security,
                                   useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 
-        mpu.uploadFile()
+        if startUploadImmediately {
+            mpu.uploadFile()
+        }
 
         return mpu
     }

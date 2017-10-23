@@ -18,7 +18,11 @@ enum MultipartUploadError: Error {
 /// :nodoc:
 @objc(FSMultipartUpload) public class MultipartUpload: NSObject {
 
-    // MARK: - Properties
+    // MARK: - Public Properties
+
+    public var localURL: URL?
+
+    // MARK: - Internal Properties
 
     let regularChunkSize = 5 * Int(pow(Double(1024), Double(2)))
     let resumableChunkSize = 8 * Int(pow(Double(1024), Double(2)))
@@ -30,7 +34,6 @@ enum MultipartUploadError: Error {
     private var shouldAbort: Bool
     private var useIntelligentIngestionIfAvailable: Bool
 
-    private let localURL: URL
     private let queue: DispatchQueue
     private let uploadProgress: ((Progress) -> Void)?
     private let completionHandler: (NetworkJSONResponse?) -> Void
@@ -53,7 +56,7 @@ enum MultipartUploadError: Error {
 
     // MARK: - Lifecyle Functions
 
-    internal init(at localURL: URL,
+    internal init(at localURL: URL? = nil,
                   queue: DispatchQueue = .main,
                   uploadProgress: ((Progress) -> Void)? = nil,
                   completionHandler: @escaping (NetworkJSONResponse?) -> Void,
@@ -64,7 +67,11 @@ enum MultipartUploadError: Error {
                   security: Security? = nil,
                   useIntelligentIngestionIfAvailable: Bool = true) {
 
-        self.localURL = localURL
+
+        if let localURL = localURL {
+            self.localURL = localURL
+        }
+
         self.queue = queue
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler
@@ -93,16 +100,12 @@ enum MultipartUploadError: Error {
         fail(with: MultipartUploadError.aborted)
     }
 
-
-    // MARK: - Internal Functions
-
-    internal func uploadFile() {
+    public func uploadFile() {
 
         uploadQueue.async {
             self.doUploadFile()
         }
     }
-
 
     // MARK: - Private Functions
 
@@ -126,6 +129,8 @@ enum MultipartUploadError: Error {
     }
 
     private func doUploadFile() {
+
+        guard let localURL = localURL else { return }
 
         let fileName = localURL.lastPathComponent
         let mimeType = localURL.mimeType() ?? "text/plain"
