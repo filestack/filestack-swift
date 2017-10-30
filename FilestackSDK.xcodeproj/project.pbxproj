@@ -14,6 +14,7 @@
 		450E433C1F161DE500E46B56 /* TransformPixelateFacesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E433B1F161DE500E46B56 /* TransformPixelateFacesType.swift */; };
 		45107C8C1F4D6ADC00250ABE /* MultipartUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */; };
 		45107CA01F4D6B0E00250ABE /* MultipartUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107C9F1F4D6B0E00250ABE /* MultipartUploadTests.swift */; };
+		4512EB811FA7655F003A8C38 /* StorageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4512EB801FA7655F003A8C38 /* StorageOptions.swift */; };
 		452055401F4AE87D00A6795D /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 4520553F1F4AE7B900A6795D /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		452055421F4B191900A6795D /* RotateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452055411F4B191900A6795D /* RotateTransform.swift */; };
 		452055451F4B263B00A6795D /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452055441F4B263B00A6795D /* Transform.swift */; };
@@ -264,6 +265,7 @@
 		450E433B1F161DE500E46B56 /* TransformPixelateFacesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPixelateFacesType.swift; sourceTree = "<group>"; };
 		45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartUpload.swift; sourceTree = "<group>"; };
 		45107C9F1F4D6B0E00250ABE /* MultipartUploadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartUploadTests.swift; sourceTree = "<group>"; };
+		4512EB801FA7655F003A8C38 /* StorageOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageOptions.swift; sourceTree = "<group>"; };
 		4520553F1F4AE7B900A6795D /* FSPolicyCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
 		452055411F4B191900A6795D /* RotateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotateTransform.swift; path = FilestackSDK/Transforms/RotateTransform.swift; sourceTree = SOURCE_ROOT; };
 		452055441F4B263B00A6795D /* Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transform.swift; path = Transforms/Transform.swift; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 				4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */,
 				45B830E01F03BCF20053742A /* Policy.swift */,
 				45B830E11F03BCF20053742A /* Security.swift */,
+				4512EB801FA7655F003A8C38 /* StorageOptions.swift */,
 				45C9E93A1F137EB200260F2A /* Transformable.swift */,
 			);
 			path = Models;
@@ -949,6 +952,7 @@
 				4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */,
 				45FA0CCD1F0B86B6008EDBCD /* CDNService.swift in Sources */,
 				458D66EF1F4B5079001770FB /* WatermarkTransform.swift in Sources */,
+				4512EB811FA7655F003A8C38 /* StorageOptions.swift in Sources */,
 				458D66EB1F4B468F001770FB /* AVTransform.swift in Sources */,
 				454CC1CB1F0D1160005821AC /* SessionManager+filestackDefault.swift in Sources */,
 				458D66D31F4B34D4001770FB /* VignetteTransform.swift in Sources */,
