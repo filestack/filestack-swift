@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 1.0.2 *(2017-11-01)*
+
+- Disabled new Xcode build system to prevent issues with Carthage builds.
+- Updated Arcane dependency to version 1.0.
+- Updated Alamofire dependency to version 4.5.1.
+
 Version 1.0.1 *(2017-10-31)*
 ----------------------------
 
