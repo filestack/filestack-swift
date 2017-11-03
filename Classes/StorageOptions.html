@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TransformPageFormat Enum Reference</title>
+    <title>StorageOptions Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Enum/TransformPageFormat" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/StorageOptions" class="dashAnchor"></a>
 
-    <a title="TransformPageFormat Enum Reference"></a>
+    <a title="StorageOptions Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">FilestackSDK Reference</a>
       <img class="carat" src="../img/carat.png" />
-      TransformPageFormat Enum Reference
+      StorageOptions Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -226,14 +226,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>TransformPageFormat</h1>
+            <h1>StorageOptions</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">@objc(FSTransformPageFormat)</span> <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TransformPageFormat</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">@objc(FSStorageOptions)</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">StorageOptions</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                 </div>
               </div>
-            <p>Represents an image transform page format type.</p>
+            <p>Represents a set of storage options.</p>
 
           </div>
         </section>
@@ -241,13 +241,20 @@
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Public Properties" class="dashAnchor"></a>
+                <a href="#/Public%20Properties">
+                  <h3 class="section-name">Public Properties</h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@E@FSTransformPageFormat@FSTransformPageFormatLetter"></a>
-                    <a name="//apple_ref/swift/Element/letter" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@E@FSTransformPageFormat@FSTransformPageFormatLetter">letter</a>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)location"></a>
+                    <a name="//apple_ref/swift/Property/location" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)location">location</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -255,30 +262,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Letter</p>
+                        <p>An <code><a href="../Enums/StorageLocation.html">StorageLocation</a></code> value. Valid options are <code>.s3</code>, <code>.dropbox</code>, <code>.rackspace</code>, <code>.azure</code>, <code>.gcs</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">letter</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Enums/StorageLocation.html">StorageLocation</a></span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@E@FSTransformPageFormat@FSTransformPageFormatLegal"></a>
-                    <a name="//apple_ref/swift/Element/legal" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@E@FSTransformPageFormat@FSTransformPageFormatLegal">legal</a>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)region"></a>
+                    <a name="//apple_ref/swift/Property/region" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)region">region</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -286,14 +289,124 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Legal</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">legal</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@objc(FSStorageOptions)</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">StorageOptions</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)container"></a>
+                    <a name="//apple_ref/swift/Property/container" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)container">container</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The bucket or container in the specified file store where the file should end up.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">container</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)path"></a>
+                    <a name="//apple_ref/swift/Property/path" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)path">path</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For S3, this is the key where the file will be stored at. By default, Filestack stores
+the file at the root at a unique id, followed by an underscore, followed by the
+filename, for example: <code>3AB239102DB_myvideo.mp4</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)filename"></a>
+                    <a name="//apple_ref/swift/Property/filename" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSStorageOptions(py)filename">filename</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The desired filename.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12FilestackSDK14StorageOptionsC6accessAA0C6AccessOSgv"></a>
+                    <a name="//apple_ref/swift/Property/access" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12FilestackSDK14StorageOptionsC6accessAA0C6AccessOSgv">access</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An <code><a href="../Enums/StorageAccess.html">StorageAccess</a></code> value. Valid options are <code>.public</code> or <code>.private</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">access</span><span class="p">:</span> <span class="kt"><a href="../Enums/StorageAccess.html">StorageAccess</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -304,19 +417,19 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/CustomStringConvertible"></a>
-                <a name="//apple_ref/swift/Section/CustomStringConvertible" class="dashAnchor"></a>
-                <a href="#/CustomStringConvertible">
-                  <h3 class="section-name">CustomStringConvertible</h3>
+                <a name="/Lifecyle%20Functions"></a>
+                <a name="//apple_ref/swift/Section/Lifecyle Functions" class="dashAnchor"></a>
+                <a href="#/Lifecyle%20Functions">
+                  <h3 class="section-name">Lifecyle Functions</h3>
                 </a>
               </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12FilestackSDK19TransformPageFormatO11descriptionSSv"></a>
-                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12FilestackSDK19TransformPageFormatO11descriptionSSv">description</a>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSStorageOptions(im)initWithLocation:"></a>
+                    <a name="//apple_ref/swift/Method/init(location:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSStorageOptions(im)initWithLocation:">init(location:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -324,14 +437,46 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a <code>String</code> representation of self.</p>
+                        <p>Convenience initializer (for Objective-C).</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@objc</span> <span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Enums/StorageLocation.html">StorageLocation</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12FilestackSDK14StorageOptionsCAcA0C8LocationO8location_SSSg6regionAG9containerAG4pathAG8filenameAA0C6AccessOSg6accesstcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(location:region:container:path:filename:access:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12FilestackSDK14StorageOptionsCAcA0C8LocationO8location_SSSg6regionAG9containerAG4pathAG8filenameAA0C6AccessOSg6accesstcfc">init(location:region:container:path:filename:access:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default initializer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Enums/StorageLocation.html">StorageLocation</a></span><span class="p">,</span>
+                <span class="nv">region</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                <span class="nv">container</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                <span class="nv">access</span><span class="p">:</span> <span class="kt"><a href="../Enums/StorageAccess.html">StorageAccess</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
