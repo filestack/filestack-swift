@@ -19,7 +19,7 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
     let uri: String
     let region: String
     let uploadID: String
-    let storageLocation: StorageLocation
+    let storeOptions: StorageOptions
 
     var response: DefaultDataResponse?
     var responseEtag: String?
@@ -34,7 +34,7 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
                   uri: String,
                   region: String,
                   uploadID: String,
-                  storageLocation: StorageLocation) {
+                  storeOptions: StorageOptions) {
 
         self.partOffset = partOffset
         self.dataChunk = dataChunk
@@ -43,7 +43,7 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
         self.uri = uri
         self.region = region
         self.uploadID = uploadID
-        self.storageLocation = storageLocation
+        self.storeOptions = storeOptions
 
         super.init()
 
@@ -64,15 +64,14 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
 
         let multipartFormData: (MultipartFormData) -> Void = { form in
             form.append(self.apiKey.data(using: .utf8)!, withName: "apikey")
-            form.append("\(self.part)".data(using: .utf8)!, withName: "part")
-            form.append("\(self.dataChunk.count)".data(using: .utf8)!, withName: "size")
+            form.append(String(self.part).data(using: .utf8)!, withName: "part")
+            form.append(String(self.dataChunk.count).data(using: .utf8)!, withName: "size")
             form.append(self.dataChunk.base64MD5Digest().data(using: .utf8)!, withName: "md5")
             form.append(self.uri.data(using: .utf8)!, withName: "uri")
             form.append(self.region.data(using: .utf8)!, withName: "region")
             form.append(self.uploadID.data(using: .utf8)!, withName: "upload_id")
-            form.append(String(describing: self.storageLocation).data(using: .utf8)!, withName: "store_location")
             form.append("true".data(using: .utf8)!, withName: "multipart")
-            form.append("\(self.partOffset)".data(using: .utf8)!, withName: "offset")
+            form.append(String(self.partOffset).data(using: .utf8)!, withName: "offset")
         }
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in

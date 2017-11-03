@@ -11,9 +11,31 @@ import Foundation
 enum MultipartUploadError: Error {
 
     case invalidFile
-    case failedChunkUploads
     case aborted
+    case error(description: String)
 }
+
+extension MultipartUploadError: LocalizedError {
+
+    public var errorDescription: String? {
+
+        switch self {
+        case .invalidFile:
+
+            return "The file provided is invalid or could not be found"
+
+        case .aborted:
+
+            return "The upload operation was aborted"
+
+        case .error(let description):
+
+            return description
+
+        }
+    }
+}
+
 
 /// :nodoc:
 @objc(FSMultipartUpload) public class MultipartUpload: NSObject {
@@ -38,7 +60,7 @@ enum MultipartUploadError: Error {
     private let uploadProgress: ((Progress) -> Void)?
     private let completionHandler: (NetworkJSONResponse?) -> Void
     private let apiKey: String
-    private let storage: StorageLocation
+    private let storeOptions: StorageOptions
     private let security: Security?
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
 
@@ -63,7 +85,7 @@ enum MultipartUploadError: Error {
                   partUploadConcurrency: Int = 5,
                   chunkUploadConcurrency: Int = 8,
                   apiKey: String,
-                  storage: StorageLocation,
+                  storeOptions: StorageOptions,
                   security: Security? = nil,
                   useIntelligentIngestionIfAvailable: Bool = true) {
 
@@ -76,7 +98,7 @@ enum MultipartUploadError: Error {
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler
         self.apiKey = apiKey
-        self.storage = storage
+        self.storeOptions = storeOptions
         self.security = security
         self.shouldAbort = false
         self.progress = Progress(totalUnitCount: 0)
@@ -132,7 +154,7 @@ enum MultipartUploadError: Error {
 
         guard let localURL = localURL else { return }
 
-        let fileName = localURL.lastPathComponent
+        let fileName = storeOptions.filename ?? localURL.lastPathComponent
         let mimeType = localURL.mimeType() ?? "text/plain"
         var shouldUseIntelligentIngestion = false
 
@@ -147,7 +169,7 @@ enum MultipartUploadError: Error {
                                                            fileName: fileName,
                                                            fileSize: fileSize,
                                                            mimeType: mimeType,
-                                                           storeLocation: storage,
+                                                           storeOptions: storeOptions,
                                                            security: security,
                                                            useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 
@@ -160,11 +182,20 @@ enum MultipartUploadError: Error {
 
         uploadOperationQueue.waitUntilAllOperationsAreFinished()
 
-        // Check for start response
+        // Ensure that there's a response and JSON payload or fail.
+        guard let response = startOperation.response, let json = response.json else {
+            fail(with: MultipartUploadError.aborted)
+            return
+        }
 
-        guard let response = startOperation.response,
-            let json = response.json,
-            let uri = json["uri"] as? String,
+        // Did the REST API return an error? Fail and send the error downstream.
+        if let apiErrorDescription = json["error"] as? String {
+            fail(with: MultipartUploadError.error(description: apiErrorDescription))
+            return
+        }
+
+        // Ensure that there's an uri, region, and upload_id in the JSON payload or fail.
+        guard let uri = json["uri"] as? String,
             let region = json["region"] as? String,
             let uploadID = json["upload_id"] as? String else {
                 fail(with: MultipartUploadError.aborted)
@@ -222,7 +253,7 @@ enum MultipartUploadError: Error {
                                                                    uri: uri,
                                                                    region: region,
                                                                    uploadID: uploadID,
-                                                                   storageLocation: storage,
+                                                                   storeOptions: storeOptions,
                                                                    chunkSize: chunkSize,
                                                                    chunkUploadConcurrency: chunkUploadConcurrency,
                                                                    useIntelligentIngestion: shouldUseIntelligentIngestion) { uploadedBytes in
@@ -283,7 +314,7 @@ enum MultipartUploadError: Error {
                                                                  uri: uri,
                                                                  region: region,
                                                                  uploadID: uploadID,
-                                                                 storeLocation: storage,
+                                                                 storeOptions: storeOptions,
                                                                  partsAndEtags: partsAndEtags,
                                                                  useIntelligentIngestion: useIntelligentIngestion)
 

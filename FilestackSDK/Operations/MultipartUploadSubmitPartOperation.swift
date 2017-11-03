@@ -25,7 +25,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
     let uri: String
     let region: String
     let uploadID: String
-    let storageLocation: StorageLocation
+    let storeOptions: StorageOptions
     let chunkSize: Int
     let useIntelligentIngestion: Bool
     var uploadProgress: ((Int64) -> Void)?
@@ -60,7 +60,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                   uri: String,
                   region: String,
                   uploadID: String,
-                  storageLocation: StorageLocation,
+                  storeOptions: StorageOptions,
                   chunkSize: Int,
                   chunkUploadConcurrency: Int,
                   useIntelligentIngestion: Bool,
@@ -75,7 +75,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         self.uri = uri
         self.region = region
         self.uploadID = uploadID
-        self.storageLocation = storageLocation
+        self.storeOptions = storeOptions
         self.chunkSize = chunkSize
         self.useIntelligentIngestion = useIntelligentIngestion
         self.partChunkSize = 0
@@ -137,15 +137,16 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             form.append(self.uri.data(using: .utf8)!, withName: "uri")
             form.append(self.region.data(using: .utf8)!, withName: "region")
             form.append(self.uploadID.data(using: .utf8)!, withName: "upload_id")
-            form.append("\(dataChunk.count)".data(using: .utf8)!, withName: "size")
-            form.append("\(self.part)".data(using: .utf8)!, withName: "part")
+            form.append(String(dataChunk.count).data(using: .utf8)!, withName: "size")
+            form.append(String(self.part).data(using: .utf8)!, withName: "part")
             form.append(dataChunk.base64MD5Digest().data(using: .utf8)!, withName: "md5")
-            form.append(String(describing: self.storageLocation).data(using: .utf8)!, withName: "store_location")
         }
 
         let url = URL(string: "multipart/upload", relativeTo: uploadService.baseURL)!
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
+            debugPrint("response = \(response.error), \(response.json), \(response.response)")
+
             guard let urlString = response.json?["url"] as? String, let url = URL(string: urlString) else {
                 self.isExecuting = false
                 self.isFinished = true
@@ -221,7 +222,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                                                                  uri: self.uri,
                                                                  region: self.region,
                                                                  uploadID: self.uploadID,
-                                                                 storageLocation: self.storageLocation)
+                                                                 storeOptions: self.storeOptions)
 
             chunkUploadOperationQueue.addOperation(commitOperation)
             chunkUploadOperationQueue.waitUntilAllOperationsAreFinished()
@@ -269,7 +270,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                                                             uri: uri,
                                                             region: region,
                                                             uploadID: uploadID,
-                                                            storageLocation: storageLocation)
+                                                            storeOptions: storeOptions)
         weak var weakOperation = operation
 
         let checkpointOperation = BlockOperation {

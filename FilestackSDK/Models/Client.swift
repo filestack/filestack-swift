@@ -116,7 +116,7 @@ import Foundation
         - Parameter completionHandler: Adds a handler to be called once the upload has finished.
      */
     @discardableResult public func multiPartUpload(from localURL: URL? = nil,
-                                                   storage: StorageLocation = .s3,
+                                                   storeOptions: StorageOptions = StorageOptions(location: .s3),
                                                    useIntelligentIngestionIfAvailable: Bool = true,
                                                    queue: DispatchQueue = .main,
                                                    startUploadImmediately: Bool = true,
@@ -130,7 +130,7 @@ import Foundation
                                   partUploadConcurrency: 5,
                                   chunkUploadConcurrency: 8,
                                   apiKey: apiKey,
-                                  storage: storage,
+                                  storeOptions: storeOptions,
                                   security: security,
                                   useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
 

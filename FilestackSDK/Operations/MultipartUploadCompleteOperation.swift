@@ -20,7 +20,7 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
     let region: String
     let uploadID: String
     let parts: String
-    let storeLocation: StorageLocation
+    let storeOptions: StorageOptions
     let useIntelligentIngestion: Bool
 
     var response: NetworkJSONResponse?
@@ -33,7 +33,7 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
                   uri: String,
                   region: String,
                   uploadID: String,
-                  storeLocation: StorageLocation,
+                  storeOptions: StorageOptions,
                   partsAndEtags: [Int: String],
                   useIntelligentIngestion: Bool) {
 
@@ -44,7 +44,7 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
         self.uri = uri
         self.region = region
         self.uploadID = uploadID
-        self.storeLocation = storeLocation
+        self.storeOptions = storeOptions
         self.parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
         self.useIntelligentIngestion = useIntelligentIngestion
 
@@ -71,9 +71,28 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
             form.append(self.region.data(using: .utf8)!, withName: "region")
             form.append(self.uploadID.data(using: .utf8)!, withName: "upload_id")
             form.append(self.fileName.data(using: .utf8)!, withName: "filename")
-            form.append("\(self.fileSize)".data(using: .utf8)!, withName: "size")
+            form.append(String(self.fileSize).data(using: .utf8)!, withName: "size")
             form.append(self.mimeType.data(using: .utf8)!, withName: "mimetype")
-            form.append(String(describing: self.storeLocation).data(using: .utf8)!, withName: "store_location")
+
+            if let storeLocation = self.storeOptions.location.description.data(using: .utf8) {
+                form.append(storeLocation, withName: "store_location")
+            }
+
+            if let storeRegionData = self.storeOptions.region?.data(using: .utf8) {
+                form.append(storeRegionData, withName: "store_region")
+            }
+
+            if let storeContainerData = self.storeOptions.container?.data(using: .utf8) {
+                form.append(storeContainerData, withName: "store_container")
+            }
+
+            if let storePathData = self.storeOptions.path?.data(using: .utf8) {
+                form.append(storePathData, withName: "store_path")
+            }
+
+            if let storeAccessData = self.storeOptions.access?.description.data(using: .utf8) {
+                form.append(storeAccessData, withName: "store_access")
+            }
 
             if self.useIntelligentIngestion {
                 form.append("true".data(using: .utf8)!, withName: "multipart")
