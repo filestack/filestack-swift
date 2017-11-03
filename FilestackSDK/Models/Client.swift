@@ -105,7 +105,8 @@ import Foundation
         Uploads a file directly to a given storage location (currently only S3 is supported.)
 
         - Parameter localURL: The URL of the local file to be uploaded.
-        - Parameter storage: The storage location. Defaults to `s3`.
+        - Parameter storeOptions: An object containing the store options (e.g. location, region, container, access, etc.)
+            If none given, S3 location with default options is assumed.
         - Parameter useIntelligentIngestionIfAvailable: Attempts to use Intelligent Ingestion
             for file uploading. Defaults to `true`.
         - Parameter queue: The queue on which the upload progress and completion handlers are 
