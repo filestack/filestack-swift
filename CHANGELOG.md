@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.1 *(2017-11-03)*
+
+- Added support for store options to uploads functionality.
+- Improved upload error reporting.
+
 Version 1.0.2 *(2017-11-01)*
 
 - Disabled new Xcode build system to prevent issues with Carthage builds.
