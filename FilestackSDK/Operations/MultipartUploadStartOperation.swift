@@ -56,8 +56,6 @@ internal class MultipartUploadStartOperation: BaseOperation {
 
         let url = URL(string: "multipart/start", relativeTo: uploadService.baseURL)!
 
-        debugPrint("url = \(url)")
-
         let multipartFormData: (MultipartFormData) -> Void = { form in
             form.append(self.apiKey.data(using: .utf8)!, withName: "apikey")
             form.append(self.fileName.data(using: .utf8)!, withName: "filename")

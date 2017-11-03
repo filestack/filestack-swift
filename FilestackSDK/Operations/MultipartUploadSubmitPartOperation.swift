@@ -145,8 +145,6 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         let url = URL(string: "multipart/upload", relativeTo: uploadService.baseURL)!
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
-            debugPrint("response = \(response.error), \(response.json), \(response.response)")
-
             guard let urlString = response.json?["url"] as? String, let url = URL(string: urlString) else {
                 self.isExecuting = false
                 self.isFinished = true
