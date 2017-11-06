@@ -1,4 +1,3 @@
-[![Travis CI][travis_ci_badge]][travis_ci]
 [![Code Climate][code_climate_badge]][code_climate]
 
 # Filestack Swift SDK
@@ -86,11 +85,11 @@ Repeat the same process for adding `Alamofire` and `Arcane` dependent frameworks
 ### Integration into a Swift project
 
 1. Import the framework into your code:
-        
+
     ```swift
     import FilestackSDK
     ```
-    
+
 2. Instantiate a `Client` object by providing your API key and, optionally, a `Security` object:
 
     ```swift
@@ -100,13 +99,13 @@ Repeat the same process for adding `Alamofire` and `Arcane` dependent frameworks
                         expiry: Date(timeIntervalSinceNow: oneDayInSeconds),
                         // Set the permissions you want your policy to have
                         call: [.pick, .read, .store])
-    
+
     // Initialize a `Security` object by providing a `Policy` object and your app secret.
     // You can find and/or enable your app secret in the Developer Portal.
     guard let security = try? Security(policy: policy, appSecret: "YOUR-APP-SECRET") else {
         return
     }
-    
+
     // Initialize your `Client` object by passing a valid API key, and security options.
     let client = Client(apiKey: "YOUR-API-KEY", security: security)
     ```
@@ -114,7 +113,7 @@ Repeat the same process for adding `Alamofire` and `Arcane` dependent frameworks
 ### Integration into an Objective-C project
 
 1. Import the framework into your code:
-    
+
     ```objective-c
     @import FilestackSDK;
     ```
@@ -126,26 +125,26 @@ Repeat the same process for adding `Alamofire` and `Arcane` dependent frameworks
     NSTimeInterval oneDayInSeconds = 60 * 60 * 24; // expires tomorrow
     NSDate *expiryDate = [[NSDate alloc] initWithTimeIntervalSinceNow:oneDayInSeconds];
     FSPolicyCall permissions = FSPolicyCallPick | FSPolicyCallRead | FSPolicyCallStore;
-    
+
     FSPolicy *policy = [[FSPolicy alloc] initWithExpiry:expiryDate
                                                    call:permissions];
-    
+
     NSError *error;
-    
+
     // Initialize a `Security` object by providing a `FSPolicy` object and your app secret.
     // You can find and/or enable your app secret in the Developer Portal.
     FSSecurity *security = [[FSSecurity alloc] initWithPolicy:policy
                                                     appSecret:@"YOUR-APP-SECRET"
                                                         error:&error];
-    
+
     if (error != nil) {
         NSLog(@"Error instantiating policy object: %@", error.localizedDescription);
         return;
     }
-    
+
     // Initialize your `Client` object by passing a valid API key, and security options.
     FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
-                                               security:security];    
+                                               security:security];
     ```
 
 For more information, please consult our [API Reference](https://filestack.github.io/filestack-swift/).
@@ -171,7 +170,7 @@ guard let security = try? Security(policy: policy, appSecret: "YOUR-APP-SECRET")
 }
 
 // Get an URL pointing to the local file you would like to upload.
-guard let localURL = Bundle.main.url(forResource: "YOUR-IMAGE", withExtension: "jpg") else { 
+guard let localURL = Bundle.main.url(forResource: "YOUR-IMAGE", withExtension: "jpg") else {
     return
 }
 
@@ -195,7 +194,7 @@ let storeOptions: StorageOptions = StorageOptions(// Store location (e.g. S3, Dr
                                                   // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
                                                   // When using a path to a folder, the uploaded file will be stored at that folder using a
                                                   // filename derived from the original filename.
-                                                  // When using a path to a filename, the uploaded file will be stored at the given path 
+                                                  // When using a path to a filename, the uploaded file will be stored at the given path
                                                   // using the filename indicated in the path.
                                                   path: "/public/oncorhynchus.jpg",
                                                   // Access permissions (either public or private)
@@ -204,17 +203,17 @@ let storeOptions: StorageOptions = StorageOptions(// Store location (e.g. S3, Dr
 // Call the function in your `Client` instance that takes care of file uploading.
 // Please notice that some of the parameters are optional and have default values.
 let multiPartUpload = client.multiPartUpload(// Set the URL pointing to the local file you want to upload.
-                                             from: localURL, 
-                                             // Set the destination storage location here. 
+                                             from: localURL,
+                                             // Set the destination storage location here.
                                              // If none given, S3 location with default options is assumed.
-                                             storeOptions: storeOptions, 
-                                             // Set to `false` if you don't want to use 
-                                             // Intelligent Ingestion regardless of whether it is available 
+                                             storeOptions: storeOptions,
+                                             // Set to `false` if you don't want to use
+                                             // Intelligent Ingestion regardless of whether it is available
                                              // for you.
-                                             useIntelligentIngestionIfAvailable: true, 
-                                             // Set the dispatch queue where you want your upload progress 
-                                             // and completion handlers to be called. 
-                                             // Remember that any UI updates should be performed on the                       
+                                             useIntelligentIngestionIfAvailable: true,
+                                             // Set the dispatch queue where you want your upload progress
+                                             // and completion handlers to be called.
+                                             // Remember that any UI updates should be performed on the
                                              // main queue.
                                              // You can omit this parameter, and the main queue will be
                                              // used by default.
@@ -258,7 +257,7 @@ if (error != nil) {
 }
 
 // Get an URL pointing to the local file you would like to upload.
-NSURL *localURL = [[NSBundle mainBundle] URLForResource:@"YOUR-IMAGE" 
+NSURL *localURL = [[NSBundle mainBundle] URLForResource:@"YOUR-IMAGE"
                                           withExtension:@"jpg"];
 
 // Initialize your `FSClient` object by passing a valid API key, and security options.
@@ -282,7 +281,7 @@ storeOptions.container = @"YOUR-S3-BUCKET";
 // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
 // When using a path to a folder, the uploaded file will be stored at that folder using a
 // filename derived from the original filename.
-// When using a path to a filename, the uploaded file will be stored at the given path 
+// When using a path to a filename, the uploaded file will be stored at the given path
 // using the filename indicated in the path.
 storeOptions.path = @"/public/oncorhynchus.jpg";
 // Access permissions (either public or private)
@@ -291,7 +290,7 @@ storeOptions.access = FSStorageAccessPublic;
 // Call the function in your `FSClient` instance that takes care of file uploading.
 // Please notice that some of the parameters are optional and have default values.
 MultipartUpload *multipartUpload = [client multiPartUploadFrom:localURL
-                                                  storeOptions: storeOptions, 
+                                                  storeOptions: storeOptions,
                             useIntelligentIngestionIfAvailable:YES
                                                          queue:dispatch_get_main_queue()
                                                 uploadProgress:uploadProgress
@@ -299,7 +298,7 @@ MultipartUpload *multipartUpload = [client multiPartUploadFrom:localURL
                  NSDictionary *jsonResponse = response.json;
                  NSString *handle = jsonResponse[@"handle"];
                  NSError *error = response.error;
-            
+
                  if (handle) {
                      // Use Filestack handle
                      NSLog(@"Handle is: %@", handle);
@@ -330,7 +329,5 @@ Please see [CONTRIBUTING.md](https://github.com/filestack/filestack-swift/blob/m
 
 Thank you to all the [contributors](https://github.com/filestack/filestack-swift/graphs/contributors).
 
-[travis_ci]: http://travis-ci.org/filestack/filestack-swift
-[travis_ci_badge]: https://travis-ci.org/filestack/filestack-swift.svg?branch=master
 [code_climate]: https://codeclimate.com/github/filestack/filestack-swift
 [code_climate_badge]: https://codeclimate.com/github/filestack/filestack-swift.png
