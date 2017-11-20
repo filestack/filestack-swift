@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.2 *(2017-11-20)*
+
+- Migrated from Arcane to CryptoSwift.
+
 Version 1.1 *(2017-11-03)*
 
 - Added support for store options to uploads functionality.
