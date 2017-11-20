@@ -226,8 +226,7 @@
         <section class="section">
           <div class="section-content">
             
-            <p><a href="http://travis-ci.org/filestack/filestack-swift"><img src="https://travis-ci.org/filestack/filestack-swift.svg?branch=master" alt="Travis CI"></a>
-<a href="https://codeclimate.com/github/filestack/filestack-swift"><img src="https://codeclimate.com/github/filestack/filestack-swift.png" alt="Code Climate"></a></p>
+            <p><a href="https://codeclimate.com/github/filestack/filestack-swift"><img src="https://codeclimate.com/github/filestack/filestack-swift.png" alt="Code Climate"></a></p>
 <h1 id='filestack-swift-sdk' class='heading'>Filestack Swift SDK</h1>
 
 <p><a href="https://www.filestack.com"><img src="https://filestack.com/themes/filestack/assets/images/press-articles/color.svg" align="left" hspace="10" vspace="6"></a>
@@ -353,7 +352,7 @@ if (error != nil) {
 
 // Initialize your `Client` object by passing a valid API key, and security options.
 FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
-                                           security:security];    
+                                           security:security];
 </code></pre></li>
 </ol>
 
@@ -376,7 +375,7 @@ FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
 <span class="p">}</span>
 
 <span class="c1">// Get an URL pointing to the local file you would like to upload.</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">localURL</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"YOUR-IMAGE"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"jpg"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> 
+<span class="k">guard</span> <span class="k">let</span> <span class="nv">localURL</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"YOUR-IMAGE"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"jpg"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">return</span>
 <span class="p">}</span>
 
@@ -400,7 +399,7 @@ FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
                                                   <span class="c1">// alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).</span>
                                                   <span class="c1">// When using a path to a folder, the uploaded file will be stored at that folder using a</span>
                                                   <span class="c1">// filename derived from the original filename.</span>
-                                                  <span class="c1">// When using a path to a filename, the uploaded file will be stored at the given path </span>
+                                                  <span class="c1">// When using a path to a filename, the uploaded file will be stored at the given path</span>
                                                   <span class="c1">// using the filename indicated in the path.</span>
                                                   <span class="nv">path</span><span class="p">:</span> <span class="s">"/public/oncorhynchus.jpg"</span><span class="p">,</span>
                                                   <span class="c1">// Access permissions (either public or private)</span>
@@ -409,17 +408,17 @@ FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
 <span class="c1">// Call the function in your `Client` instance that takes care of file uploading.</span>
 <span class="c1">// Please notice that some of the parameters are optional and have default values.</span>
 <span class="k">let</span> <span class="nv">multiPartUpload</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nf">multiPartUpload</span><span class="p">(</span><span class="c1">// Set the URL pointing to the local file you want to upload.</span>
-                                             <span class="nv">from</span><span class="p">:</span> <span class="n">localURL</span><span class="p">,</span> 
-                                             <span class="c1">// Set the destination storage location here. </span>
+                                             <span class="nv">from</span><span class="p">:</span> <span class="n">localURL</span><span class="p">,</span>
+                                             <span class="c1">// Set the destination storage location here.</span>
                                              <span class="c1">// If none given, S3 location with default options is assumed.</span>
-                                             <span class="nv">storeOptions</span><span class="p">:</span> <span class="n">storeOptions</span><span class="p">,</span> 
-                                             <span class="c1">// Set to `false` if you don't want to use </span>
-                                             <span class="c1">// Intelligent Ingestion regardless of whether it is available </span>
+                                             <span class="nv">storeOptions</span><span class="p">:</span> <span class="n">storeOptions</span><span class="p">,</span>
+                                             <span class="c1">// Set to `false` if you don't want to use</span>
+                                             <span class="c1">// Intelligent Ingestion regardless of whether it is available</span>
                                              <span class="c1">// for you.</span>
-                                             <span class="nv">useIntelligentIngestionIfAvailable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
-                                             <span class="c1">// Set the dispatch queue where you want your upload progress </span>
-                                             <span class="c1">// and completion handlers to be called. </span>
-                                             <span class="c1">// Remember that any UI updates should be performed on the                       </span>
+                                             <span class="nv">useIntelligentIngestionIfAvailable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                                             <span class="c1">// Set the dispatch queue where you want your upload progress</span>
+                                             <span class="c1">// and completion handlers to be called.</span>
+                                             <span class="c1">// Remember that any UI updates should be performed on the</span>
                                              <span class="c1">// main queue.</span>
                                              <span class="c1">// You can omit this parameter, and the main queue will be</span>
                                              <span class="c1">// used by default.</span>
@@ -460,7 +459,7 @@ if (error != nil) {
 }
 
 // Get an URL pointing to the local file you would like to upload.
-NSURL *localURL = [[NSBundle mainBundle] URLForResource:@"YOUR-IMAGE" 
+NSURL *localURL = [[NSBundle mainBundle] URLForResource:@"YOUR-IMAGE"
                                           withExtension:@"jpg"];
 
 // Initialize your `FSClient` object by passing a valid API key, and security options.
@@ -484,7 +483,7 @@ storeOptions.container = @"YOUR-S3-BUCKET";
 // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
 // When using a path to a folder, the uploaded file will be stored at that folder using a
 // filename derived from the original filename.
-// When using a path to a filename, the uploaded file will be stored at the given path 
+// When using a path to a filename, the uploaded file will be stored at the given path
 // using the filename indicated in the path.
 storeOptions.path = @"/public/oncorhynchus.jpg";
 // Access permissions (either public or private)
@@ -493,7 +492,7 @@ storeOptions.access = FSStorageAccessPublic;
 // Call the function in your `FSClient` instance that takes care of file uploading.
 // Please notice that some of the parameters are optional and have default values.
 MultipartUpload *multipartUpload = [client multiPartUploadFrom:localURL
-                                                  storeOptions: storeOptions, 
+                                                  storeOptions: storeOptions,
                             useIntelligentIngestionIfAvailable:YES
                                                          queue:dispatch_get_main_queue()
                                                 uploadProgress:uploadProgress
@@ -535,7 +534,7 @@ MultipartUpload *multipartUpload = [client multiPartUploadFrom:localURL
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2017-11-06)</p>
+      <p>&copy; 2017 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2017-11-20)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
