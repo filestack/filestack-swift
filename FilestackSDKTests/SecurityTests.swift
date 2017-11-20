@@ -26,7 +26,7 @@ class SecurityTests: XCTestCase {
         XCTAssertEqual(security.encodedPolicy, jsonData.base64EncodedString())
 
         let signature: String = try! HMAC(key: "MY-APP-SECRET", variant: .sha256)
-            .authenticate(security.encodedPolicy.bytes)
+            .authenticate(Array(security.encodedPolicy.utf8))
             .toHexString()
 
         XCTAssertEqual(security.signature, signature)

@@ -44,7 +44,7 @@ import CryptoSwift
         let encodedPolicy: String = policyJSON.base64EncodedString()
 
         let signature: String = try HMAC(key: appSecret, variant: .sha256)
-            .authenticate(encodedPolicy.bytes)
+            .authenticate(Array(encodedPolicy.utf8))
             .toHexString()
 
         self.init(encodedPolicy: encodedPolicy, signature: signature)
