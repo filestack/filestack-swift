@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Arcane
+import CryptoSwift
 @testable import FilestackSDK
 
 
@@ -24,7 +24,12 @@ class SecurityTests: XCTestCase {
         XCTAssertNoThrow(jsonData = try! policy.toJSON())
 
         XCTAssertEqual(security.encodedPolicy, jsonData.base64EncodedString())
-        XCTAssertEqual(security.signature, HMAC.SHA256(security.encodedPolicy, key: "MY-APP-SECRET")!)
+
+        let signature: String = try! HMAC(key: "MY-APP-SECRET", variant: .sha256)
+            .authenticate(security.encodedPolicy.bytes)
+            .toHexString()
+
+        XCTAssertEqual(security.signature, signature)
     }
 
     func testDefaultInitializer() {

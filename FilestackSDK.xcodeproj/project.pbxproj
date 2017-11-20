@@ -72,7 +72,6 @@
 		458D66ED1F4B5020001770FB /* FSTransformPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 458D66EC1F4B4EC2001770FB /* FSTransformPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		458D66EF1F4B5079001770FB /* WatermarkTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458D66EE1F4B5079001770FB /* WatermarkTransform.swift */; };
 		458D66F11F4B5A81001770FB /* FSMetadataOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 458D66F01F4B598C001770FB /* FSMetadataOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45944BF81F45908D0097D910 /* Arcane.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45944BE71F4590840097D910 /* Arcane.framework */; };
 		45965C6B1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */; };
 		45991FA41F14C1DD0042A279 /* ProcessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45991FA31F14C1DD0042A279 /* ProcessService.swift */; };
 		459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */; };
@@ -94,6 +93,7 @@
 		45C9E93B1F137EB200260F2A /* Transformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9E93A1F137EB200260F2A /* Transformable.swift */; };
 		45C9E94E1F1384B200260F2A /* TransformableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9E94D1F1384B200260F2A /* TransformableTests.swift */; };
 		45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */; };
+		45E2B7DF1FC3284600448ED2 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E2B7D41FC3283800448ED2 /* CryptoSwift.framework */; };
 		45F9B8C41F0B941300E04380 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F9B8C31F0B941300E04380 /* sample.jpg */; };
 		45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */; };
 		45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CC71F0B86AD008EDBCD /* Globals.swift */; };
@@ -101,34 +101,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		45944BE61F4590840097D910 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D5B2E89F1C3A780C00C0327D;
-			remoteInfo = "Arcane-iOS";
-		};
-		45944BE81F4590840097D910 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D5C629401C3A7FAA007F7B7C;
-			remoteInfo = "Arcane-Mac";
-		};
-		45944BEA1F4590840097D910 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D5B2E8A91C3A780C00C0327D;
-			remoteInfo = "Arcane-iOS-Tests";
-		};
-		45944BEC1F4590840097D910 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D5C629491C3A7FAA007F7B7C;
-			remoteInfo = "Arcane-Mac-Tests";
-		};
 		45B830B21F03B3310053742A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
@@ -191,6 +163,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45B8309A1F03B27A0053742A;
 			remoteInfo = FilestackSDK;
+		};
+		45E2B7D31FC3283800448ED2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE45519693E190098E6F3;
+			remoteInfo = CryptoSwift;
+		};
+		45E2B7D51FC3283800448ED2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE46019693E190098E6F3;
+			remoteInfo = Tests;
+		};
+		45E2B7E01FC3286D00448ED2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 754BE45419693E190098E6F3;
+			remoteInfo = CryptoSwift;
 		};
 		45FA0CB21F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -323,7 +316,6 @@
 		458D66EC1F4B4EC2001770FB /* FSTransformPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSTransformPosition.h; sourceTree = "<group>"; };
 		458D66EE1F4B5079001770FB /* WatermarkTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatermarkTransform.swift; path = Transforms/WatermarkTransform.swift; sourceTree = "<group>"; };
 		458D66F01F4B598C001770FB /* FSMetadataOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSMetadataOptions.h; sourceTree = "<group>"; };
-		45944BD81F4590840097D910 /* Arcane.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Arcane.xcodeproj; path = Carthage/Checkouts/Arcane/Arcane.xcodeproj; sourceTree = "<group>"; };
 		45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45991FA31F14C1DD0042A279 /* ProcessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessService.swift; sourceTree = "<group>"; };
 		459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartuploadSubmitChunkOperation.swift; sourceTree = "<group>"; };
@@ -348,6 +340,7 @@
 		45C9E93A1F137EB200260F2A /* Transformable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformable.swift; sourceTree = "<group>"; };
 		45C9E94D1F1384B200260F2A /* TransformableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformableTests.swift; sourceTree = "<group>"; };
 		45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
+		45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = Carthage/Checkouts/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		45F9B8C31F0B941300E04380 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sample.jpg; path = Fixtures/sample.jpg; sourceTree = "<group>"; };
 		45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResponse.swift; sourceTree = "<group>"; };
 		45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHHTTPStubs.xcodeproj; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/OHHTTPStubs.xcodeproj; sourceTree = "<group>"; };
@@ -360,8 +353,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45944BF81F45908D0097D910 /* Arcane.framework in Frameworks */,
 				45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */,
+				45E2B7DF1FC3284600448ED2 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,17 +462,6 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
-		45944BD91F4590840097D910 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45944BE71F4590840097D910 /* Arcane.framework */,
-				45944BE91F4590840097D910 /* Arcane.framework */,
-				45944BEB1F4590840097D910 /* Arcane-iOS-Tests.xctest */,
-				45944BED1F4590840097D910 /* Arcane-Mac-Tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		45B830911F03B27A0053742A = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +469,7 @@
 				45B8309D1F03B27A0053742A /* FilestackSDK */,
 				45B8310E1F03D8140053742A /* FilestackSDKTests */,
 				45B8309C1F03B27A0053742A /* Products */,
+				45E2B7DE1FC3284600448ED2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -520,7 +503,7 @@
 			children = (
 				45B830CA1F03BB6D0053742A /* Cartfile */,
 				45B830A71F03B3300053742A /* Alamofire.xcodeproj */,
-				45944BD81F4590840097D910 /* Arcane.xcodeproj */,
+				45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */,
 				45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */,
 			);
 			name = "External Dependencies";
@@ -575,6 +558,22 @@
 				45FA0CCE1F0B8841008EDBCD /* Fixtures */,
 			);
 			path = FilestackSDKTests;
+			sourceTree = "<group>";
+		};
+		45E2B7BB1FC3283800448ED2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45E2B7D41FC3283800448ED2 /* CryptoSwift.framework */,
+				45E2B7D61FC3283800448ED2 /* Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45E2B7DE1FC3284600448ED2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		45FA0CA11F0B85C7008EDBCD /* Products */ = {
@@ -643,6 +642,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				45E2B7E11FC3286D00448ED2 /* PBXTargetDependency */,
 				45B830C11F03B3380053742A /* PBXTargetDependency */,
 			);
 			name = FilestackSDK;
@@ -706,8 +706,8 @@
 					ProjectRef = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
 				},
 				{
-					ProductGroup = 45944BD91F4590840097D910 /* Products */;
-					ProjectRef = 45944BD81F4590840097D910 /* Arcane.xcodeproj */;
+					ProductGroup = 45E2B7BB1FC3283800448ED2 /* Products */;
+					ProjectRef = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
 				},
 				{
 					ProductGroup = 45FA0CA11F0B85C7008EDBCD /* Products */;
@@ -723,34 +723,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		45944BE71F4590840097D910 /* Arcane.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Arcane.framework;
-			remoteRef = 45944BE61F4590840097D910 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45944BE91F4590840097D910 /* Arcane.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Arcane.framework;
-			remoteRef = 45944BE81F4590840097D910 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45944BEB1F4590840097D910 /* Arcane-iOS-Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Arcane-iOS-Tests.xctest";
-			remoteRef = 45944BEA1F4590840097D910 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45944BED1F4590840097D910 /* Arcane-Mac-Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Arcane-Mac-Tests.xctest";
-			remoteRef = 45944BEC1F4590840097D910 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		45B830B31F03B3310053742A /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -798,6 +770,20 @@
 			fileType = wrapper.framework;
 			path = Alamofire.framework;
 			remoteRef = 45B830BE1F03B3310053742A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45E2B7D41FC3283800448ED2 /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 45E2B7D31FC3283800448ED2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45E2B7D61FC3283800448ED2 /* Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Tests.xctest;
+			remoteRef = 45E2B7D51FC3283800448ED2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45FA0CB31F0B85C7008EDBCD /* libOHHTTPStubs.a */ = {
@@ -1003,6 +989,11 @@
 			isa = PBXTargetDependency;
 			target = 45B8309A1F03B27A0053742A /* FilestackSDK */;
 			targetProxy = 45B831131F03D8140053742A /* PBXContainerItemProxy */;
+		};
+		45E2B7E11FC3286D00448ED2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CryptoSwift;
+			targetProxy = 45E2B7E01FC3286D00448ED2 /* PBXContainerItemProxy */;
 		};
 		45FA0CC61F0B85DA008EDBCD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -7,3 +7,6 @@
 [submodule "Carthage/Checkouts/Arcane"]
 	path = Carthage/Checkouts/Arcane
 	url = https://github.com/onmyway133/Arcane.git
+[submodule "Carthage/Checkouts/CryptoSwift"]
+	path = Carthage/Checkouts/CryptoSwift
+	url = https://github.com/krzyzanowskim/CryptoSwift.git

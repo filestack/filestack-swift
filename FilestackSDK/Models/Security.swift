@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Arcane
+import CryptoSwift
 
 
 /**
@@ -42,7 +42,10 @@ import Arcane
 
         let policyJSON: Data = try policy.toJSON()
         let encodedPolicy: String = policyJSON.base64EncodedString()
-        let signature: String = HMAC.SHA256(encodedPolicy, key: appSecret)!
+
+        let signature: String = try HMAC(key: appSecret, variant: .sha256)
+            .authenticate(encodedPolicy.bytes)
+            .toHexString()
 
         self.init(encodedPolicy: encodedPolicy, signature: signature)
     }

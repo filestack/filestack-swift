@@ -7,13 +7,14 @@
 //
 
 import Foundation
-import Arcane
+import CryptoSwift
+
 
 extension Data {
 
     /// Base64-encoded 128-bit MD5 digest (according to RFC 1864)
     internal func base64MD5Digest() -> String {
 
-        return String(data: Base64.MD5(self), encoding: .utf8)!
+        return md5().base64EncodedString(options: [])
     }
 }
