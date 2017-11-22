@@ -49,7 +49,7 @@ To integrate FilestackSDK into your Xcode project using Carthage, specify it in 
 
 `github "filestack/filestack-swift" ~> 1.1`
 
-Run `carthage update` to build the framework and drag the built `FilestackSDK.framework` into your Xcode project. Additionally, add `FilestackSDK.framework`, `Alamofire.framework` and `Arcane.framework` to the embedded frameworks build phase of your app's target.
+Run `carthage update` to build the framework and drag the built `FilestackSDK.framework` into your Xcode project. Additionally, add `FilestackSDK.framework`, `Alamofire.framework` and `CryptoSwift.framework` to the embedded frameworks build phase of your app's target.
 
 ### Manually
 
@@ -64,7 +64,7 @@ Add FilestackSDK and its dependencies as git submodules by running the following
 ```shell
 $ git submodule add https://github.com/filestack/filestack-swift.git
 $ git submodule add https://github.com/Alamofire/Alamofire.git
-$ git submodule add https://github.com/onmyway133/Arcane.git
+$ git submodule add https://github.com/krzyzanowskim/CryptoSwift.git
 ```
 
 Open the new `filestack-swift` folder, and drag the `FilestackSDK.xcodeproj` into the Project Navigator of your application's Xcode project.
@@ -78,7 +78,7 @@ In the tab bar at the top of that window, open the "General" panel.
 
 Click on the + button under the "Embedded Binaries" section and choose the `FilestackSDK.framework` for iOS.
 
-Repeat the same process for adding `Alamofire` and `Arcane` dependent frameworks.
+Repeat the same process for adding `Alamofire` and `CryptoSwift` dependent frameworks.
 
 ## Usage
 
