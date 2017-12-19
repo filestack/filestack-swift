@@ -1,19 +1,19 @@
 {
   "warnings": [
     {
-      "file": "/Users/ruben/src/filestack/filestack-ios/Carthage/Checkouts/filestack-swift/FilestackSDK/Models/MultipartUpload.swift",
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Models/MultipartUpload.swift",
       "line": null,
       "symbol": "MultipartUploadError",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/ruben/src/filestack/filestack-ios/Carthage/Checkouts/filestack-swift/FilestackSDK/Models/StorageOptions.swift",
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Models/StorageOptions.swift",
       "line": 24,
       "symbol": "StorageOptions.region",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/ruben/src/filestack/filestack-ios/Carthage/Checkouts/filestack-swift"
+  "source_directory": "/Users/ruben/src/filestack/filestack-swift"
 }
