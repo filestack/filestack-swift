@@ -7,7 +7,6 @@ Pod::Spec.new do |spec|
   spec.summary      = 'Official Swift SDK for Filestack.'
   spec.source       = { :git => 'https://github.com/filestack/filestack-swift.git', :tag => spec.version }
 
-  spec.swift_version = '4.0'
   spec.ios.deployment_target  = '9.0'
 
   spec.source_files = 'FilestackSDK/**/*.{h,swift}'
