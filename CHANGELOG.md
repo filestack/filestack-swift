@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.2.1 *(2017-12-19)*
+
+- Updated CryptoSwift and Alamofire dependencies.
+- Upgraded code to Swift 4.
+
 Version 1.2 *(2017-11-20)*
 
 - Migrated from Arcane to CryptoSwift.
