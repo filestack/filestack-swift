@@ -112,7 +112,7 @@ extension MultipartUploadError: LocalizedError {
     /**
         Cancels a multipart upload request.
      */
-    public func cancel() {
+    @objc public func cancel() {
 
         uploadQueue.sync {
             shouldAbort = true
