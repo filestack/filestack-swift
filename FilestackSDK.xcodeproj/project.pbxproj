@@ -98,6 +98,7 @@
 		45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */; };
 		45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CC71F0B86AD008EDBCD /* Globals.swift */; };
 		45FA0CCD1F0B86B6008EDBCD /* CDNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CCB1F0B86B6008EDBCD /* CDNService.swift */; };
+		BCDB405220A9A87C00148136 /* MultifileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDB405120A9A87C00148136 /* MultifileUpload.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -346,6 +347,7 @@
 		45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHHTTPStubs.xcodeproj; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/OHHTTPStubs.xcodeproj; sourceTree = "<group>"; };
 		45FA0CC71F0B86AD008EDBCD /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = Misc/Globals.swift; sourceTree = "<group>"; };
 		45FA0CCB1F0B86B6008EDBCD /* CDNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNService.swift; sourceTree = "<group>"; };
+		BCDB405120A9A87C00148136 /* MultifileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultifileUpload.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,6 +531,7 @@
 				45B831211F03F1C90053742A /* Client.swift */,
 				4589A4891F0A4DA600C39405 /* FileLink.swift */,
 				45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */,
+				BCDB405120A9A87C00148136 /* MultifileUpload.swift */,
 				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
 				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
 				4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */,
@@ -934,6 +937,7 @@
 				45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */,
 				452D715F1F17A51B0037E1BB /* TransformColorSpace.swift in Sources */,
 				454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */,
+				BCDB405220A9A87C00148136 /* MultifileUpload.swift in Sources */,
 				45341A8D1F1E170C00DC7B79 /* URL+mimeType.swift in Sources */,
 				45513FFA1F0E9739006DB972 /* APIService.swift in Sources */,
 				4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */,
