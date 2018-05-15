@@ -154,8 +154,7 @@ import Foundation
      - Parameter startUploadImmediately: Whether the upload should start immediately. Defaults to true.
      - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
      of the upload process as data is uploaded to the server. `nil` by default.
-     - Parameter singleFileCompletionHandler: Adds a handler to be called every time the single file has been uploaded.
-     - Parameter wholeOperationCompletionHandler: Adds a handler to be called once the upload of all files has finished.
+     - Parameter completionHandler: Adds a handler to be called once the upload of all files has finished.
      */
     @discardableResult public func multiFileUpload(from localURLs: [URL]?,
                                                    storeOptions: StorageOptions = StorageOptions(location: .s3),
@@ -163,13 +162,11 @@ import Foundation
                                                    queue: DispatchQueue = .main,
                                                    startUploadImmediately: Bool = true,
                                                    uploadProgress: ((Progress) -> Void)? = nil,
-                                                   singleFileCompletionHandler: ((NetworkJSONResponse?) -> Void)? = nil,
-                                                   wholeOperationCompletionHandler: @escaping () -> Void) -> MultifileUpload {
+                                                   completionHandler: @escaping ([NetworkJSONResponse?]) -> Void) -> MultifileUpload {
         let mfu = MultifileUpload(with: localURLs,
                                   queue: queue,
                                   uploadProgress: uploadProgress,
-                                  completionHandler: wholeOperationCompletionHandler,
-                                  singleFileCompletionHandler: singleFileCompletionHandler,
+                                  completionHandler: completionHandler,
                                   apiKey: apiKey,
                                   storeOptions: storeOptions,
                                   security: security,

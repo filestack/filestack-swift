@@ -21,6 +21,7 @@ import Foundation
     // MARK: - Private Properties
     
     private var leftToUploadURLs: [URL] = []
+    private var uploadResponses: [NetworkJSONResponse?] = []
     
     private var finishedFilesSize: Int64
     private var currentFileSize: Int64
@@ -35,8 +36,7 @@ import Foundation
 
     private let queue: DispatchQueue
     private let uploadProgress: ((Progress) -> Void)?
-    private let completionHandler: (() -> Void)?
-    private let singleFileCompletionHandler: ((NetworkJSONResponse?) -> Void)?
+    private let completionHandler: (([NetworkJSONResponse?]) -> Void)?
     private let apiKey: String
     private let storeOptions: StorageOptions
     private let security: Security?
@@ -44,8 +44,7 @@ import Foundation
     init(with uploadURLs: [URL]?,
          queue: DispatchQueue = .main,
          uploadProgress: ((Progress) -> Void)? = nil,
-         completionHandler: @escaping () -> Void,
-         singleFileCompletionHandler: ((NetworkJSONResponse?) -> Void)? = nil,
+         completionHandler: @escaping ([NetworkJSONResponse?]) -> Void,
          apiKey: String,
          storeOptions: StorageOptions,
          security: Security? = nil,
@@ -55,7 +54,6 @@ import Foundation
         self.queue = queue
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler
-        self.singleFileCompletionHandler = singleFileCompletionHandler
         self.apiKey = apiKey
         self.storeOptions = storeOptions
         self.security = security
@@ -92,12 +90,11 @@ private extension MultifileUpload {
     func uploadNextFile() {
         guard
             shouldAbort == false,
-            let nextURL = leftToUploadURLs.first,
-            let fileSize = nextURL.size() else {
-                queue.async { self.completionHandler?() }
+            let nextURL = leftToUploadURLs.first else {
+                stopUpload()
                 return
         }
-        currentFileSize = Int64(fileSize)
+        currentFileSize = Int64(nextURL.size() ?? 0)
         currentOperation = MultipartUpload(at: nextURL,
                                            queue: queue,
                                            uploadProgress: { progress in self.updateProgress(progress) },
@@ -111,6 +108,14 @@ private extension MultifileUpload {
         currentOperation?.uploadFile()
     }
     
+    func stopUpload() {
+        let maxCount = uploadURLs?.count ?? 0
+        while uploadResponses.count < maxCount {
+            uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
+        }
+        queue.async { self.completionHandler?(self.uploadResponses) }
+    }
+    
     func updateProgress(_ currentFileProgress: Progress) {
         currentFileSize = currentFileProgress.completedUnitCount
         queue.async { self.uploadProgress?(self.progress) }
@@ -118,7 +123,7 @@ private extension MultifileUpload {
     
     func finishedCurrentFile(with response: NetworkJSONResponse?) {
         finishedFilesSize += currentFileSize
-        queue.async { self.singleFileCompletionHandler?(response) }
+        uploadResponses.append(response)
         leftToUploadURLs = Array(leftToUploadURLs.dropFirst())
         uploadNextFile()
     }
