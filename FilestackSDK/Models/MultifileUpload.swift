@@ -12,11 +12,15 @@ import Foundation
 
     // MARK: - Public Properties
 
-    public let uploadURLs: [URL]
+    public var uploadURLs: [URL]? {
+        didSet {
+            leftToUploadURLs = uploadURLs ?? []
+        }
+    }
     
     // MARK: - Private Properties
     
-    private var leftToUploadURLs: [URL]
+    private var leftToUploadURLs: [URL] = []
     
     private var finishedFilesSize: Int64
     private var currentFileSize: Int64
@@ -37,7 +41,7 @@ import Foundation
     private let storeOptions: StorageOptions
     private let security: Security?
     
-    init(with uploadURLs: [URL],
+    init(with uploadURLs: [URL]?,
          queue: DispatchQueue = .main,
          uploadProgress: ((Progress) -> Void)? = nil,
          completionHandler: @escaping () -> Void,
@@ -49,7 +53,6 @@ import Foundation
         self.shouldAbort = false
         self.uploadURLs = uploadURLs
         self.queue = queue
-        self.leftToUploadURLs = uploadURLs
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler
         self.singleFileCompletionHandler = singleFileCompletionHandler
@@ -82,6 +85,7 @@ import Foundation
 private extension MultifileUpload {
     
     func totalSize() -> Int64 {
+        guard let uploadURLs = uploadURLs else { return 0 }
         return Int64(uploadURLs.reduce(UInt64(0)) { sum, url in sum + (url.size() ?? 0) })
     }
     

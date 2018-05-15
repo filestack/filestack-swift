@@ -157,7 +157,7 @@ import Foundation
      - Parameter singleFileCompletionHandler: Adds a handler to be called every time the single file has been uploaded.
      - Parameter wholeOperationCompletionHandler: Adds a handler to be called once the upload of all files has finished.
      */
-    @discardableResult public func multiFileUpload(from localURLs: [URL],
+    @discardableResult public func multiFileUpload(from localURLs: [URL]?,
                                                    storeOptions: StorageOptions = StorageOptions(location: .s3),
                                                    useIntelligentIngestionIfAvailable: Bool = true,
                                                    queue: DispatchQueue = .main,
