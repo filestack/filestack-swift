@@ -141,6 +141,44 @@ import Foundation
 
         return mpu
     }
+  
+    /**
+        Uploads multiple files to given storage location.
+
+        - Parameter localURLs: Array of URLs of local files to upload.
+     - Parameter storeOptions: An object containing the store options (e.g. location, region, container, access, etc.)
+     - Parameter useIntelligentIngestionIfAvailable: Attempts to use Intelligent Ingestion
+     for file uploading. Defaults to `true`.
+     - Parameter queue: The queue on which the upload progress and completion handlers are
+     dispatched.
+     - Parameter startUploadImmediately: Whether the upload should start immediately. Defaults to true.
+     - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
+     of the upload process as data is uploaded to the server. `nil` by default.
+     - Parameter singleFileCompletionHandler: Adds a handler to be called every time the single file has been uploaded.
+     - Parameter wholeOperationCompletionHandler: Adds a handler to be called once the upload of all files has finished.
+     */
+    @discardableResult public func multiFileUpload(from localURLs: [URL],
+                                                   storeOptions: StorageOptions = StorageOptions(location: .s3),
+                                                   useIntelligentIngestionIfAvailable: Bool = true,
+                                                   queue: DispatchQueue = .main,
+                                                   startUploadImmediately: Bool = true,
+                                                   uploadProgress: ((Progress) -> Void)? = nil,
+                                                   singleFileCompletionHandler: ((NetworkJSONResponse?) -> Void)? = nil,
+                                                   wholeOperationCompletionHandler: @escaping () -> Void) -> MultifileUpload {
+        let mfu = MultifileUpload(with: localURLs,
+                                  queue: queue,
+                                  uploadProgress: uploadProgress,
+                                  completionHandler: wholeOperationCompletionHandler,
+                                  singleFileCompletionHandler: singleFileCompletionHandler,
+                                  apiKey: apiKey,
+                                  storeOptions: storeOptions,
+                                  security: security,
+                                  useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
+        if startUploadImmediately {
+            mfu.uploadFiles()
+        }
+        return mfu
+    }
 }
 
 

@@ -90,8 +90,8 @@ private extension MultifileUpload {
             shouldAbort == false,
             let nextURL = leftToUploadURLs.first,
             let fileSize = nextURL.size() else {
-            completionHandler?()
-            return
+                queue.async { self.completionHandler?() }
+                return
         }
         currentFileSize = Int64(fileSize)
         currentOperation = MultipartUpload(at: nextURL,
@@ -109,12 +109,12 @@ private extension MultifileUpload {
     
     func updateProgress(_ currentFileProgress: Progress) {
         currentFileSize = currentFileProgress.completedUnitCount
-        uploadProgress?(self.progress)
+        queue.async { self.uploadProgress?(self.progress) }
     }
     
     func finishedCurrentFile(with response: NetworkJSONResponse?) {
         finishedFilesSize += currentFileSize
-        singleFileCompletionHandler?(response)
+        queue.async { self.singleFileCompletionHandler?(response) }
         leftToUploadURLs = Array(leftToUploadURLs.dropFirst())
         uploadNextFile()
     }
