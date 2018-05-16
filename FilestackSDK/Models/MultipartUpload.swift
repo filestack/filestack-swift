@@ -58,18 +58,16 @@ extension MultipartUploadError: LocalizedError {
 
     private let queue: DispatchQueue
     private let uploadProgress: ((Progress) -> Void)?
-    private let completionHandler: (NetworkJSONResponse?) -> Void
+    private let completionHandler: (NetworkJSONResponse) -> Void
     private let apiKey: String
     private let storeOptions: StorageOptions
     private let security: Security?
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
 
     private let uploadOperationQueue: OperationQueue = {
-
         $0.underlyingQueue = DispatchQueue(label: "com.filestack.upload-operation-queue",
                                            qos: .utility,
                                            attributes: .concurrent)
-
         return $0
     }(OperationQueue())
 
@@ -81,19 +79,16 @@ extension MultipartUploadError: LocalizedError {
     internal init(at localURL: URL? = nil,
                   queue: DispatchQueue = .main,
                   uploadProgress: ((Progress) -> Void)? = nil,
-                  completionHandler: @escaping (NetworkJSONResponse?) -> Void,
+                  completionHandler: @escaping (NetworkJSONResponse) -> Void,
                   partUploadConcurrency: Int = 5,
                   chunkUploadConcurrency: Int = 8,
                   apiKey: String,
                   storeOptions: StorageOptions,
                   security: Security? = nil,
                   useIntelligentIngestionIfAvailable: Bool = true) {
-
-
         if let localURL = localURL {
             self.localURL = localURL
         }
-
         self.queue = queue
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler
@@ -113,17 +108,14 @@ extension MultipartUploadError: LocalizedError {
         Cancels a multipart upload request.
      */
     @objc public func cancel() {
-
         uploadQueue.sync {
             shouldAbort = true
             uploadOperationQueue.cancelAllOperations()
         }
-
         fail(with: MultipartUploadError.aborted)
     }
 
     public func uploadFile() {
-
         uploadQueue.async {
             self.doUploadFile()
         }
@@ -133,27 +125,20 @@ extension MultipartUploadError: LocalizedError {
 
     private func fail(with error: Error) {
         let errorResponse = NetworkJSONResponse(with: error)
-
         queue.async {
             self.completionHandler(errorResponse)
         }
     }
 
     private func updateProgress(uploadedBytes: Int64) {
-
         progress.completedUnitCount = uploadedBytes
-
-        if let uploadProgress = uploadProgress {
-            queue.async {
-                uploadProgress(self.progress)
-            }
+        queue.async {
+            self.uploadProgress?(self.progress)
         }
     }
 
     private func doUploadFile() {
-
         guard let localURL = localURL else { return }
-
         let fileName = storeOptions.filename ?? localURL.lastPathComponent
         let mimeType = localURL.mimeType() ?? "text/plain"
         var shouldUseIntelligentIngestion = false
@@ -322,12 +307,11 @@ extension MultipartUploadError: LocalizedError {
 
         let checkpointOperation = BlockOperation {
             guard let completeOperation = weakCompleteOperation else { return }
-
             let jsonResponse = completeOperation.response
-            let isNetworkError = jsonResponse?.response == nil && jsonResponse?.error != nil
+            let isNetworkError = jsonResponse.response == nil && jsonResponse.error != nil
 
             // Check for any error response
-            if jsonResponse?.response?.statusCode != 200 || isNetworkError {
+            if jsonResponse.response?.statusCode != 200 || isNetworkError {
                 if retriesLeft > 0 {
                     let delay = isNetworkError ? 0 : pow(2, Double(self.maxRetries - retriesLeft))
 

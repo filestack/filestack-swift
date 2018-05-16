@@ -21,7 +21,7 @@ import Foundation
     // MARK: - Private Properties
     
     private var leftToUploadURLs: [URL] = []
-    private var uploadResponses: [NetworkJSONResponse?] = []
+    private var uploadResponses: [NetworkJSONResponse] = []
     
     private var finishedFilesSize: Int64
     private var currentFileSize: Int64
@@ -36,7 +36,7 @@ import Foundation
 
     private let queue: DispatchQueue
     private let uploadProgress: ((Progress) -> Void)?
-    private let completionHandler: (([NetworkJSONResponse?]) -> Void)?
+    private let completionHandler: (([NetworkJSONResponse]) -> Void)?
     private let apiKey: String
     private let storeOptions: StorageOptions
     private let security: Security?
@@ -44,7 +44,7 @@ import Foundation
     init(with uploadURLs: [URL]?,
          queue: DispatchQueue = .main,
          uploadProgress: ((Progress) -> Void)? = nil,
-         completionHandler: @escaping ([NetworkJSONResponse?]) -> Void,
+         completionHandler: @escaping ([NetworkJSONResponse]) -> Void,
          apiKey: String,
          storeOptions: StorageOptions,
          security: Security? = nil,
@@ -121,7 +121,7 @@ private extension MultifileUpload {
         queue.async { self.uploadProgress?(self.progress) }
     }
     
-    func finishedCurrentFile(with response: NetworkJSONResponse?) {
+    func finishedCurrentFile(with response: NetworkJSONResponse) {
         finishedFilesSize += currentFileSize
         uploadResponses.append(response)
         leftToUploadURLs = Array(leftToUploadURLs.dropFirst())

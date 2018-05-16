@@ -122,7 +122,7 @@ import Foundation
                                                    queue: DispatchQueue = .main,
                                                    startUploadImmediately: Bool = true,
                                                    uploadProgress: ((Progress) -> Void)? = nil,
-                                                   completionHandler: @escaping (NetworkJSONResponse?) -> Void) -> MultipartUpload {
+                                                   completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
 
         let mpu = MultipartUpload(at: localURL,
                                   queue: queue,
@@ -162,7 +162,7 @@ import Foundation
                                                    queue: DispatchQueue = .main,
                                                    startUploadImmediately: Bool = true,
                                                    uploadProgress: ((Progress) -> Void)? = nil,
-                                                   completionHandler: @escaping ([NetworkJSONResponse?]) -> Void) -> MultifileUpload {
+                                                   completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
         let mfu = MultifileUpload(with: localURLs,
                                   queue: queue,
                                   uploadProgress: uploadProgress,
