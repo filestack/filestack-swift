@@ -51,6 +51,7 @@ import Foundation
          useIntelligentIngestionIfAvailable: Bool = true) {
         self.shouldAbort = false
         self.uploadURLs = uploadURLs
+        self.leftToUploadURLs = uploadURLs ?? []
         self.queue = queue
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler

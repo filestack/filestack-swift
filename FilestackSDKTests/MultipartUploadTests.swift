@@ -27,10 +27,7 @@ class MultipartUploadTests: XCTestCase {
 
         var hitCount = 0
 
-        stubMultipartStartRequest(supportsIntelligentIngestion: false)
-        stubMultipartPostPartRequest(parts: ["PART-1"], hitCount: &hitCount)
-        stubMultipartPutRequest(part: "PART-1")
-        stubMultipartCompleteRequest()
+        stubRegularMultipartRequest(hitCount: &hitCount)
 
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
@@ -326,7 +323,127 @@ class MultipartUploadTests: XCTestCase {
         XCTAssertNotNil(response?.error)
     }
 
+    func testMultiFileUploadWithOneFile() {
+        
+        var hitCount = 0
+        
+        stubRegularMultipartRequest(hitCount: &hitCount)
+        
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
+        let localURL = Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
+        let expectation = self.expectation(description: "request should succeed")
+        
+        var responses: [NetworkJSONResponse]!
+        
+        client.multiFileUpload(from: [localURL], useIntelligentIngestionIfAvailable: false) { (resp) in
+            
+            responses = resp
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 15, handler: nil)
+        
+        XCTAssertEqual(hitCount, 1)
+        XCTAssertEqual(responses.count, 1)
+        let response = responses.first!
+        XCTAssertEqual(response.json?["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(response.json?["size"] as? Int, 6034668)
+        XCTAssertEqual(response.json?["filename"] as? String, "large.jpg")
+        XCTAssertEqual(response.json?["status"] as? String, "Stored")
+        XCTAssertEqual(response.json?["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(response.json?["mimetype"] as? String, "image/jpeg")
+
+    }
+
+    func testMultiFileUploadWithFewFile() {
+        
+        var hitCount = 0
+        
+        stubRegularMultipartRequest(hitCount: &hitCount)
+        
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
+        let localURL = Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
+        let expectation = self.expectation(description: "request should succeed")
+        
+        var responses: [NetworkJSONResponse]!
+        
+        client.multiFileUpload(from: [localURL, localURL, localURL],
+                               useIntelligentIngestionIfAvailable: false) { (resp) in
+            
+            responses = resp
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 15, handler: nil)
+        
+        XCTAssertEqual(responses.count, 3)
+    }
+
+    func testMultiFileUploadWithoutAutostart() {
+        
+        var hitCount = 0
+        
+        stubRegularMultipartRequest(hitCount: &hitCount)
+        
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
+        let localURL = Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
+        let expectation = self.expectation(description: "request should succeed")
+        
+        var responses: [NetworkJSONResponse]!
+        
+        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false,
+                                         startUploadImmediately: false) { (resp) in
+                                            
+                                            responses = resp
+                                            expectation.fulfill()
+        }
+        
+        mfu.uploadURLs = [localURL, localURL, localURL]
+        mfu.uploadFiles()
+        
+        waitForExpectations(timeout: 15, handler: nil)
+        
+        XCTAssertEqual(responses.count, 3)
+    }
+
+    func testMultiFileUploadWithoutURLs() {
+        
+        var hitCount = 0
+        
+        stubRegularMultipartRequest(hitCount: &hitCount)
+        
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
+        let expectation = self.expectation(description: "request should succeed")
+        
+        var responses: [NetworkJSONResponse]!
+        
+        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false,
+                                         startUploadImmediately: false) { (resp) in
+                                            
+                                            responses = resp
+                                            expectation.fulfill()
+        }
+        
+        mfu.uploadURLs = nil
+        mfu.uploadFiles()
+        
+        waitForExpectations(timeout: 15, handler: nil)
+        
+        XCTAssertEqual(responses.count, 0)
+    }
+    
     // MARK: - Helper Functions
+    
+    private func stubRegularMultipartRequest(hitCount: inout Int) {
+        stubMultipartStartRequest(supportsIntelligentIngestion: false)
+        stubMultipartPostPartRequest(parts: ["PART-1"], hitCount: &hitCount)
+        stubMultipartPutRequest(part: "PART-1")
+        stubMultipartCompleteRequest()
+    }
 
     private func stubMultipartStartRequest(supportsIntelligentIngestion: Bool) {
 
