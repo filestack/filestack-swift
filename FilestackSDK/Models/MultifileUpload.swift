@@ -12,9 +12,9 @@ import Foundation
 
     // MARK: - Public Properties
 
-    public var uploadURLs: [URL]? {
+    public var uploadURLs: [URL] {
         didSet {
-            leftToUploadURLs = uploadURLs ?? []
+            leftToUploadURLs = uploadURLs
         }
     }
     
@@ -49,9 +49,10 @@ import Foundation
          storeOptions: StorageOptions,
          security: Security? = nil,
          useIntelligentIngestionIfAvailable: Bool = true) {
+        let urls = uploadURLs ?? []
         self.shouldAbort = false
-        self.uploadURLs = uploadURLs
-        self.leftToUploadURLs = uploadURLs ?? []
+        self.uploadURLs = urls
+        self.leftToUploadURLs = urls
         self.queue = queue
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler
@@ -84,7 +85,6 @@ import Foundation
 private extension MultifileUpload {
     
     func totalSize() -> Int64 {
-        guard let uploadURLs = uploadURLs else { return 0 }
         return Int64(uploadURLs.reduce(UInt64(0)) { sum, url in sum + (url.size() ?? 0) })
     }
     
@@ -110,8 +110,7 @@ private extension MultifileUpload {
     }
     
     func stopUpload() {
-        let maxCount = uploadURLs?.count ?? 0
-        while uploadResponses.count < maxCount {
+        while uploadResponses.count < uploadURLs.count {
             uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
         }
         queue.async { self.completionHandler?(self.uploadResponses) }

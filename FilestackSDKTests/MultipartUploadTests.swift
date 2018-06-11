@@ -428,7 +428,7 @@ class MultipartUploadTests: XCTestCase {
                                             expectation.fulfill()
         }
         
-        mfu.uploadURLs = nil
+        mfu.uploadURLs = []
         mfu.uploadFiles()
         
         waitForExpectations(timeout: 15, handler: nil)
