@@ -10,27 +10,27 @@ import Foundation
 
 
 /**
-    Applies a circle border effect to the image.
+ Applies a circle border effect to the image.
  */
 @objc(FSCircleTransform) public class CircleTransform: Transform {
-
-    /**
-        Initializes a `CircleTransform` object.
-    */
-    public init() {
-
-        super.init(name: "circle")
-    }
-
-    /**
-        Adds the `background` option.
-
-        - Parameter value: Sets the background color to display behind the image.
-     */
-    @discardableResult public func background(_ value: UIColor) -> Self {
-
-        options.append((key: "background", value: value.hexString))
-
-        return self
-    }
+  
+  /**
+   Initializes a `CircleTransform` object.
+   */
+  public init() {
+    
+    super.init(name: "circle")
+  }
+  
+  /**
+   Adds the `background` option.
+   
+   - Parameter value: Sets the background color to display behind the image.
+   */
+  @discardableResult public func background(_ value: UIColor) -> Self {
+    
+    options.append((key: "background", value: value.hexString))
+    
+    return self
+  }
 }

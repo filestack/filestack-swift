@@ -8,75 +8,85 @@
 
 import Foundation
 
-
 /**
-    Crops selected faces contained inside an image.
+ Crops selected faces contained inside an image.
  */
 @objc(FSCropFacesTransform) public class CropFacesTransform: Transform {
-
-    /**
-        Initializes a `CropFacesTransform` object.
-     */
-    public init() {
-
-        super.init(name: "crop_faces")
-    }
-
-    /**
-        Adds the `mode` option.
-
-        - Parameter value: An `TransformCropMode` value.
-     */
-    @discardableResult public func mode(_ value: TransformCropMode) -> Self {
-
-        options.append((key: "mode", value: value))
-
-        return self
-    }
-
-    /**
-        Adds the `width` option.
-
-        - Parameter value: The crop's width.
-     */
-    @discardableResult public func width(_ value: Int) -> Self {
-
-        options.append((key: "width", value: value))
-
-        return self
-    }
-
-    /**
-        Adds the `height` option.
-
-        - Parameter value: The crop's height.
-     */
-    @discardableResult public func height(_ value: Int) -> Self {
-
-        options.append((key: "height", value: value))
-
-        return self
-    }
-
-    /**
-        Adds the `faces` option with value `all`.
-     */
-    @discardableResult public func allFaces() -> Self {
-
-        options.append((key: "faces", value: "all"))
-
-        return self
-    }
-
-    /**
-        Adds the `faces` option.
-
-        - Parameter value: The faces to be included in the crop.
-     */
-    @discardableResult public func faces(_ value: [Int]) -> Self {
-
-        options.append((key: "faces", value: value))
-
-        return self
-    }
+  
+  /**
+   Initializes a `CropFacesTransform` object.
+   */
+  public init() {
+    super.init(name: "crop_faces")
+  }
+  
+  /**
+   Adds the `mode` option.
+   
+   - Parameter value: An `TransformCropMode` value.
+   */
+  @discardableResult public func mode(_ value: TransformCropMode) -> Self {
+    options.append((key: "mode", value: value))
+    return self
+  }
+  
+  /**
+   Adds the `width` option.
+   
+   - Parameter value: The crop's width.
+   */
+  @discardableResult public func width(_ value: Int) -> Self {
+    options.append((key: "width", value: value))
+    return self
+  }
+  
+  /**
+   Adds the `height` option.
+   
+   - Parameter value: The crop's height.
+   */
+  @discardableResult public func height(_ value: Int) -> Self {
+    options.append((key: "height", value: value))
+    return self
+  }
+  
+  /**
+   Adds the `minSize` option.
+   
+   - Parameter value: This parameter is used to weed out objects that most likely
+   are not faces. Valid range: `0.01...10000`
+   */
+  @discardableResult public func minSize(_ value: Float) -> Self {
+    options.append((key: "minsize", value: value))
+    return self
+  }
+  
+  /**
+   Adds the `maxSize` option.
+   
+   - Parameter value: This parameter is used to weed out objects that most likely
+   are not faces. Valid range: `0.01...10000`
+   */
+  @discardableResult public func maxSize(_ value: Float) -> Self {
+    options.append((key: "maxsize", value: value))
+    return self
+  }
+  
+  /**
+   Adds the `faces` option with value `all`.
+   */
+  @discardableResult public func allFaces() -> Self {
+    options.append((key: "faces", value: "all"))
+    return self
+  }
+  
+  /**
+   Adds the `faces` option.
+   
+   - Parameter value: The faces to be included in the crop.
+   */
+  @discardableResult public func faces(_ value: [Int]) -> Self {
+    options.append((key: "faces", value: value))
+    return self
+  }
 }

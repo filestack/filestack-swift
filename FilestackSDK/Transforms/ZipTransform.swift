@@ -10,15 +10,15 @@ import Foundation
 
 
 /**
-    Takes the file or files that are passed into it and compresses them into a zip file.
+ Takes the file or files that are passed into it and compresses them into a zip file.
  */
 @objc(FSZipTransform) public class ZipTransform: Transform {
-
-    /**
-        Initializes a `ZipTransform` object.
-     */
-    public init() {
-
-        super.init(name: "zip")
-    }
+  
+  /**
+   Initializes a `ZipTransform` object.
+   */
+  public init() {
+    
+    super.init(name: "zip")
+  }
 }
