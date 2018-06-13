@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Watermarks the image by overlaying another image on top of your main image.
  */
@@ -21,9 +20,7 @@ import Foundation
    another image as a watermark.
    */
   public init(file: String) {
-    
     super.init(name: "watermark")
-    
     options.append((key: "file", value: file))
   }
   
@@ -34,10 +31,7 @@ import Foundation
    Valid range: `1...500`
    */
   @discardableResult public func size(_ value: Int) -> Self {
-    
-    options.append((key: "size", value: value))
-    
-    return self
+    return appending((key: "size", value: value))
   }
   
   /**
@@ -47,9 +41,6 @@ import Foundation
    well like position: [.top, .right].
    */
   @discardableResult public func position(_ value: TransformPosition) -> Self {
-    
-    options.append((key: "position", value: value.toArray()))
-    
-    return self
+    return appending((key: "position", value: value.toArray()))
   }
 }
