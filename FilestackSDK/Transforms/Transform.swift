@@ -8,23 +8,27 @@
 
 import Foundation
 
-
-internal typealias TaskOption = (key: String, value: Any?)
-internal typealias Task = (name: String, options: [TaskOption]?)
+typealias TaskOption = (key: String, value: Any?)
+typealias Task = (name: String, options: [TaskOption]?)
 
 /// :nodoc:
 @objc(FSTransform) public class Transform: NSObject {
+  
+  var options = [TaskOption]()
+  var name: String
+  
+  var task: Task {
+    return Task(name: name, options: options)
+  }
+  
+  init(name: String) {
+    self.name = name
+  }
+}
 
-    internal var options = [TaskOption]()
-    internal var name: String
-
-    internal var task: Task {
-
-        return Task(name: name, options: options)
-    }
-
-    internal init(name: String) {
-
-        self.name = name
-    }
+extension Transform {
+  @discardableResult func appending(_ option: TaskOption) -> Self {
+    options.append(option)
+    return self
+  }
 }
