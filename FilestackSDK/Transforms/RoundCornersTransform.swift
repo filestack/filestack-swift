@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Rounds the image's corners.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `RoundCornersTransform` object.
    */
   public init() {
-    
     super.init(name: "round_corners")
   }
   
@@ -26,10 +24,7 @@ import Foundation
    Adds the `radius` option with value set to "max".
    */
   @discardableResult public func maxRadius() -> Self {
-    
-    options.append((key: "radius", value: "max"))
-    
-    return self
+    return appending((key: "radius", value: "max"))
   }
   
   /**
@@ -39,10 +34,7 @@ import Foundation
    Valid range: `1...10000`
    */
   @discardableResult public func radius(_ value: Int) -> Self {
-    
-    options.append((key: "radius", value: value))
-    
-    return self
+    return appending((key: "radius", value: value))
   }
   
   /**
@@ -51,11 +43,8 @@ import Foundation
    - Parameter value: Specify the amount of blur to apply to the rounded edges of the image.
    Valid range: `0...20`
    */
-  @discardableResult public func blur(_ value: Float) -> Self {
-    
-    options.append((key: "blur", value: value))
-    
-    return self
+  @discardableResult public func blur(_ value: Float = 0.3) -> Self {
+    return appending((key: "blur", value: value))
   }
   
   /**
@@ -65,9 +54,6 @@ import Foundation
    have removed part of the image.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    
-    options.append((key: "background", value: value.hexString))
-    
-    return self
+    return appending((key: "background", value: value.hexString))
   }
 }
