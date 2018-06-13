@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Flips/mirrors the image horizontally.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `FlopTransform` object.
    */
   public init() {
-    
     super.init(name: "flop")
   }
 }
