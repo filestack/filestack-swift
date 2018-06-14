@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Applies a blurring effect to the image.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `BlurTransform` object.
    */
   public init() {
-    
     super.init(name: "blur")
   }
   
@@ -28,9 +26,6 @@ import Foundation
    - Parameter value: The amount to blur the image. Valid range: `1...20`
    */
   @discardableResult public func amount(_ value: Int) -> Self {
-    
-    options.append((key: "amount", value: value))
-    
-    return self
+    return appending((key: "amount", value: value))
   }
 }
