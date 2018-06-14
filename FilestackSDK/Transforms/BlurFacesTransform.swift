@@ -11,7 +11,7 @@ import Foundation
 /**
  Blur selected faces contained inside an image.
  */
-@objc(FSBlurFacesTransform) public class BlurFacesTransform: Transform, CoverFacesTransform {
+@objc(FSBlurFacesTransform) public class BlurFacesTransform: Transform, CoverFacesTransformProtocol {
   
   /**
    Initializes a `BlurFacesTransform` object.

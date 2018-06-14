@@ -11,7 +11,7 @@ import Foundation
 /**
   Shared interface for BlurFacesTransform and PixelateFacesTransform
  */
-protocol CoverFacesTransform {
+protocol CoverFacesTransformProtocol {
   
   /**
    Adds the `type` option.
@@ -26,7 +26,7 @@ protocol CoverFacesTransform {
    - Parameter value: This parameter is used to weed out objects that most likely
    are not faces. Valid range: `0.01...10000`
    */
-  @discardableResult func minSize(_ value: Float = 0.35) -> Self
+  @discardableResult func minSize(_ value: Float) -> Self
   
   /**
    Adds the `maxSize` option.
@@ -34,7 +34,7 @@ protocol CoverFacesTransform {
    - Parameter value: This parameter is used to weed out objects that most likely
    are not faces. Valid range: `0.01...10000`
    */
-  @discardableResult func maxSize(_ value: Float = 0.35) -> Self
+  @discardableResult func maxSize(_ value: Float) -> Self
   
   /**
    Adds the `buffer` option.
@@ -49,7 +49,7 @@ protocol CoverFacesTransform {
    
    - Parameter value: The amount to blur the pixelated faces. Valid range: `0...20`
    */
-  @discardableResult func blur(_ value: Float = 4) -> Self
+  @discardableResult func blur(_ value: Float) -> Self
   
   /**
    Adds the `faces` option with value `all`.
@@ -64,7 +64,7 @@ protocol CoverFacesTransform {
   @discardableResult func faces(_ value: [Int]) -> Self
 }
 
-extension CoverFacesTransform where Self: Transform {
+extension CoverFacesTransformProtocol where Self: Transform {
 
   @discardableResult func type(_ value: TransformFacesShapeType) -> Self {
     return appending((key: "type", value: value))
