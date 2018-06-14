@@ -9,9 +9,9 @@
 import Foundation
 
 /**
- Pixelates the image.
+ Change the image to look like it was oil painted.
  */
-@objc(FSoilPaintTransform) public class OilPaintTransform: Transform {
+@objc(FSOilPaintTransform) public class OilPaintTransform: Transform {
   
   /**
    Initializes a `OilPaintTransform` object.
