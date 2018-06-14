@@ -11,7 +11,7 @@ import Foundation
 /**
   Shared interface for BlurFacesTransform and PixelateFacesTransform
  */
-protocol CoverFacesTransformProtocol {
+protocol CoverFacesTransformExtension {
   
   /**
    Adds the `type` option.
@@ -64,7 +64,7 @@ protocol CoverFacesTransformProtocol {
   @discardableResult func faces(_ value: [Int]) -> Self
 }
 
-extension CoverFacesTransformProtocol where Self: Transform {
+extension CoverFacesTransformExtension where Self: Transform {
 
   @discardableResult func type(_ value: TransformFacesShapeType) -> Self {
     return appending((key: "type", value: value))

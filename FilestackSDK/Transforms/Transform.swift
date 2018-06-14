@@ -33,12 +33,12 @@ extension Transform {
   typealias Border = BorderTransform
   typealias Circle = CircleTransform
   typealias Convert = ConvertTransform
-  typealias CoverFaces = CoverFacesTransform
   typealias CropFaces = CropFacesTransform
   typealias Crop = CropTransform
   typealias DetectFaces = DetectFacesTransform
   typealias Flip = FlipTransform
   typealias Flop = FlopTransform
+  typealias Modulate = ModulateTransform
   typealias Monochrome = MonochromeTransform
   typealias NoMetadata = NoMetadataTransform
   typealias PixelateFaces = PixelateFacesTransform
