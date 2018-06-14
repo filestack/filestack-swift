@@ -17,7 +17,6 @@ import Foundation
    Initializes a `SharpenTransform` object.
    */
   public init() {
-    
     super.init(name: "sharpen")
   }
   
@@ -27,9 +26,6 @@ import Foundation
    - Parameter value: The amount to sharpen the image. Valid range: `1...20`
    */
   @discardableResult public func amount(_ value: Int) -> Self {
-    
-    options.append((key: "amount", value: value))
-    
-    return self
+    return appending((key: "amount", value: value))
   }
 }
