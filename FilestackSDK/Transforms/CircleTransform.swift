@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Applies a circle border effect to the image.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `CircleTransform` object.
    */
   public init() {
-    
     super.init(name: "circle")
   }
   
@@ -28,9 +26,6 @@ import Foundation
    - Parameter value: Sets the background color to display behind the image.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    
-    options.append((key: "background", value: value.hexString))
-    
-    return self
+    return appending((key: "background", value: value.hexString))
   }
 }
