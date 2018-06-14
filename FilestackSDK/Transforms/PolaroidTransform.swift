@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Applies a Polaroid border effect to the image.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `PolaroidTransform` object.
    */
   public init() {
-    
     super.init(name: "polaroid")
   }
   
@@ -28,10 +26,7 @@ import Foundation
    - Parameter value: Sets the Polaroid frame color.
    */
   @discardableResult public func color(_ value: UIColor) -> Self {
-    
-    options.append((key: "color", value: value.hexString))
-    
-    return self
+    return appending((key: "color", value: value.hexString))
   }
   
   /**
@@ -40,10 +35,7 @@ import Foundation
    - Parameter value: The degree by which to rotate the image clockwise. Valid range: `0...359`
    */
   @discardableResult public func rotate(_ value: Int) -> Self {
-    
-    options.append((key: "rotate", value: value))
-    
-    return self
+    return appending((key: "rotate", value: value))
   }
   
   /**
@@ -53,9 +45,6 @@ import Foundation
    it has been rotated at all.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    
-    options.append((key: "background", value: value.hexString))
-    
-    return self
+    return appending((key: "background", value: value.hexString))
   }
 }
