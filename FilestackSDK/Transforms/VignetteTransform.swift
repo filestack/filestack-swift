@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Applies a vignette border effect to the image.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `VignetteTransform` object.
    */
   public init() {
-    
     super.init(name: "vignette")
   }
   
@@ -28,10 +26,7 @@ import Foundation
    - Parameter value: Controls the opacity of the vignette effect. Valid range: `0...100`
    */
   @discardableResult public func amount(_ value: Int) -> Self {
-    
-    options.append((key: "amount", value: value))
-    
-    return self
+    return appending((key: "amount", value: value))
   }
   
   /**
@@ -40,10 +35,7 @@ import Foundation
    - Parameter value: An `TransformBlurMode` value.
    */
   @discardableResult public func blurMode(_ value: TransformBlurMode) -> Self {
-    
-    options.append((key: "blurmode", value: value))
-    
-    return self
+    return appending((key: "blurmode", value: value))
   }
   
   /**
@@ -52,9 +44,6 @@ import Foundation
    - Parameter value: Replaces the default transparent background with the specified color.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    
-    options.append((key: "background", value: value.hexString))
-    
-    return self
+    return appending((key: "background", value: value.hexString))
   }
 }
