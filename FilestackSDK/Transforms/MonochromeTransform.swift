@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Converts the image to monochrome.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `MonochromeTransform` object.
    */
   public init() {
-    
     super.init(name: "monochrome")
   }
 }
