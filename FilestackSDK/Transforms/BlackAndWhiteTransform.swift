@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Converts the image to black and white.
  */
@@ -18,7 +17,6 @@ import Foundation
    Initializes a `BlackAndWhiteTransform` object.
    */
   public init() {
-    
     super.init(name: "blackwhite")
   }
   
@@ -29,9 +27,6 @@ import Foundation
    the returned image. Valid range: `1...100`
    */
   @discardableResult public func threshold(_ value: Int) -> Self {
-    
-    options.append((key: "threshold", value: value))
-    
-    return self
+    return appending((key: "threshold", value: value))
   }
 }
