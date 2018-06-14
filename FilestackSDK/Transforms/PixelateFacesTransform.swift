@@ -11,7 +11,7 @@ import Foundation
 /**
  Pixelates selected faces contained inside an image.
  */
-@objc(FSPixelateFacesTransform) public class PixelateFacesTransform: Transform, CoverFacesTransformProtocol {
+@objc(FSPixelateFacesTransform) public class PixelateFacesTransform: Transform, CoverFacesTransformExtension {
   
   /**
    Initializes a `PixelateFacesTransform` object.
@@ -19,6 +19,7 @@ import Foundation
   public init() {
     super.init(name: "pixelate_faces")
   }
+  
   /**
    Adds `amount` option.
    

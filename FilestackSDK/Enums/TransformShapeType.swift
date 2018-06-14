@@ -12,7 +12,7 @@ import Foundation
 /**
     Represents an image transform pixelate faces type.
  */
-@objc(FSTransformPixelateFacesType) public enum TransformFacesShapeType: UInt, CustomStringConvertible {
+@objc(FSTTransformShapeType) public enum TransformShapeType: UInt, CustomStringConvertible {
 
     /// Rect
     case rect

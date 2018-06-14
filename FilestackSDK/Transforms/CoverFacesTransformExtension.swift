@@ -16,9 +16,9 @@ protocol CoverFacesTransformExtension {
   /**
    Adds the `type` option.
    
-   - Parameter value: An `TransformFacesShapeType` value.
+   - Parameter value: An `TransformShapeType` value.
    */
-  @discardableResult func type(_ value: TransformFacesShapeType) -> Self
+  @discardableResult func type(_ value: TransformShapeType) -> Self
 
   /**
    Adds the `minSize` option.
@@ -66,7 +66,7 @@ protocol CoverFacesTransformExtension {
 
 extension CoverFacesTransformExtension where Self: Transform {
 
-  @discardableResult func type(_ value: TransformFacesShapeType) -> Self {
+  @discardableResult func type(_ value: TransformShapeType) -> Self {
     return appending((key: "type", value: value))
   }
   
