@@ -23,8 +23,7 @@ import Foundation
    original, the original file will be returned. Valid range: `1...100`
    */
   public init(value: Int) {
-    
     super.init(name: "quality")
-    options.append((key: "value", value: value))
+    appending(key: "value", value: value)
   }
 }
