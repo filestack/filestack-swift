@@ -67,28 +67,16 @@ import Foundation
   
   var files = [String]()
   
-  @discardableResult public func add(handle: String) -> Self {
-    files.append(handle)
-    return self
+  @discardableResult public func add(_ resource: String) -> Self {
+    return add([resource])
   }
   
-  @discardableResult public func add(handles: [String]) -> Self {
-    files.append(contentsOf: handles)
+  @discardableResult public func add(_ resources: [String]) -> Self {
+    files.append(contentsOf: resources.map { envelop($0) })
     return self
   }
 
-  @discardableResult public func add(externalUrl: String) -> Self {
-    files.append(envelop(externalUrl))
-    return self
+  private func envelop(_ string: String) -> String {
+    return "\"\(string)\""
   }
-  
-  @discardableResult public func add(externalUrls: [String]) -> Self {
-    files.append(contentsOf: externalUrls.map { envelop($0) })
-    return self
-  }
-  
-  private func envelop(_ externalUrl: String) -> String {
-    return "\"\(externalUrl)\""
-  }
-  
 }
