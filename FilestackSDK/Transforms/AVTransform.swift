@@ -17,7 +17,6 @@ import Foundation
    Initializes a `AVTransform` object.
    */
   public init() {
-    
     super.init(name: "video_convert")
   }
   
@@ -30,8 +29,6 @@ import Foundation
    */
   @discardableResult public func preset(_ value: String) -> Self {
     return appending(key: "preset", value: value)
-    
-    return self
   }
   
   /**
@@ -43,8 +40,6 @@ import Foundation
    */
   @discardableResult public func force(_ value: Bool) -> Self {
     return appending(key: "force", value: value)
-    
-    return self
   }
   
   /**
@@ -55,8 +50,6 @@ import Foundation
    */
   @discardableResult public func width(_ value: Int) -> Self {
     return appending(key: "width", value: value)
-    
-    return self
   }
   
   /**
@@ -67,8 +60,6 @@ import Foundation
    */
   @discardableResult public func height(_ value: Int) -> Self {
     return appending(key: "height", value: value)
-    
-    return self
   }
   
   /**
@@ -78,8 +69,6 @@ import Foundation
    */
   @discardableResult public func title(_ value: String) -> Self {
     return appending(key: "title", value: value)
-    
-    return self
   }
   
   /**
@@ -90,8 +79,6 @@ import Foundation
    */
   @discardableResult public func extName(_ value: String) -> Self {
     return appending(key: "extname", value: value)
-    
-    return self
   }
   
   /**
@@ -102,8 +89,6 @@ import Foundation
    */
   @discardableResult public func fileName(_ value: String) -> Self {
     return appending(key: "filename", value: value)
-    
-    return self
   }
   
   /**
@@ -113,8 +98,6 @@ import Foundation
    */
   @discardableResult public func location(_ value: StorageLocation) -> Self {
     return appending(key: "location", value: value)
-    
-    return self
   }
   
   /**
@@ -127,8 +110,6 @@ import Foundation
    */
   @discardableResult public func path(_ value: String) -> Self {
     return appending(key: "path", value: value)
-    
-    return self
   }
   
   /**
@@ -138,8 +119,6 @@ import Foundation
    */
   @discardableResult public func access(_ value: StorageAccess) -> Self {
     return appending(key: "access", value: value)
-    
-    return self
   }
   
   /**
@@ -150,8 +129,6 @@ import Foundation
    */
   @discardableResult public func container(_ value: String) -> Self {
     return appending(key: "container", value: value)
-    
-    return self
   }
   
   /**
@@ -161,8 +138,6 @@ import Foundation
    */
   @discardableResult public func upscale(_ value: Bool) -> Self {
     return appending(key: "upscale", value: value)
-    
-    return self
   }
   
   /**
@@ -172,8 +147,6 @@ import Foundation
    */
   @discardableResult public func aspectMode(_ value: TransformAspectMode) -> Self {
     return appending(key: "aspect_mode", value: value)
-    
-    return self
   }
   
   /**
@@ -184,8 +157,6 @@ import Foundation
    */
   @discardableResult public func twoPass(_ value: Bool) -> Self {
     return appending(key: "two_pass", value: value)
-    
-    return self
   }
   
   /**
@@ -196,8 +167,6 @@ import Foundation
    */
   @discardableResult public func videoBitRate(_ value: Int) -> Self {
     return appending(key: "video_bitrate", value: value)
-    
-    return self
   }
   
   /**
@@ -209,8 +178,6 @@ import Foundation
    */
   @discardableResult public func fps(_ value: Int) -> Self {
     return appending(key: "fps", value: value)
-    
-    return self
   }
   
   /**
@@ -221,8 +188,6 @@ import Foundation
    */
   @discardableResult public func keyframeInterval(_ value: Int) -> Self {
     return appending(key: "keyframe_interval", value: value)
-    
-    return self
   }
   
   /**
@@ -233,8 +198,6 @@ import Foundation
    */
   @discardableResult public func audioBitRate(_ value: Int) -> Self {
     return appending(key: "audio_bitrate", value: value)
-    
-    return self
   }
   
   /**
@@ -245,8 +208,6 @@ import Foundation
    */
   @discardableResult public func audioSampleRate(_ value: Int) -> Self {
     return appending(key: "audio_samplerate", value: value)
-    
-    return self
   }
   
   /**
@@ -257,8 +218,6 @@ import Foundation
    */
   @discardableResult public func audioChannels(_ value: Int) -> Self {
     return appending(key: "audio_channels", value: value)
-    
-    return self
   }
   
   /**
@@ -269,8 +228,6 @@ import Foundation
    */
   @discardableResult public func clipLength(_ value: String) -> Self {
     return appending(key: "clip_length", value: value)
-    
-    return self
   }
   
   /**
@@ -282,8 +239,6 @@ import Foundation
    */
   @discardableResult public func clipOffset(_ value: String) -> Self {
     return appending(key: "clip_offset", value: value)
-    
-    return self
   }
   
   /**
@@ -294,8 +249,6 @@ import Foundation
    */
   @discardableResult public func watermarkURL(_ value: URL) -> Self {
     return appending(key: "watermark_url", value: value)
-    
-    return self
   }
   
   /**
@@ -306,8 +259,6 @@ import Foundation
    */
   @discardableResult public func watermarkTop(_ value: Int) -> Self {
     return appending(key: "watermark_top", value: value)
-    
-    return self
   }
   
   /**
@@ -318,8 +269,6 @@ import Foundation
    */
   @discardableResult public func watermarkBottom(_ value: Int) -> Self {
     return appending(key: "watermark_bottom", value: value)
-    
-    return self
   }
   
   /**
@@ -330,8 +279,6 @@ import Foundation
    */
   @discardableResult public func watermarkLeft(_ value: Int) -> Self {
     return appending(key: "watermark_left", value: value)
-    
-    return self
   }
   
   /**
@@ -342,8 +289,6 @@ import Foundation
    */
   @discardableResult public func watermarkRight(_ value: Int) -> Self {
     return appending(key: "watermark_right", value: value)
-    
-    return self
   }
   
   /**
@@ -353,8 +298,6 @@ import Foundation
    */
   @discardableResult public func watermarkWidth(_ value: Int) -> Self {
     return appending(key: "watermark_width", value: value)
-    
-    return self
   }
   
   /**
@@ -364,7 +307,5 @@ import Foundation
    */
   @discardableResult public func watermarkHeight(_ value: Int) -> Self {
     return appending(key: "watermark_height", value: value)
-    
-    return self
   }
 }
