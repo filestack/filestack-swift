@@ -117,6 +117,7 @@
 		BC88330720D3E0E600B88EAF /* RedEyeRemovalTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330620D3E0E600B88EAF /* RedEyeRemovalTransform.swift */; };
 		BC88330B20D3E36A00B88EAF /* TransformFiletype.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330A20D3E36A00B88EAF /* TransformFiletype.swift */; };
 		BC88330D20D3EB7800B88EAF /* CompressTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330C20D3EB7800B88EAF /* CompressTransform.swift */; };
+		BC88330F20D3EC6300B88EAF /* ProgressiveJpegTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330E20D3EC6300B88EAF /* ProgressiveJpegTransform.swift */; };
 		BCDB405220A9A87C00148136 /* MultifileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDB405120A9A87C00148136 /* MultifileUpload.swift */; };
 /* End PBXBuildFile section */
 
@@ -406,6 +407,7 @@
 		BC88330620D3E0E600B88EAF /* RedEyeRemovalTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedEyeRemovalTransform.swift; sourceTree = "<group>"; };
 		BC88330A20D3E36A00B88EAF /* TransformFiletype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformFiletype.swift; sourceTree = "<group>"; };
 		BC88330C20D3EB7800B88EAF /* CompressTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressTransform.swift; sourceTree = "<group>"; };
+		BC88330E20D3EC6300B88EAF /* ProgressiveJpegTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressiveJpegTransform.swift; sourceTree = "<group>"; };
 		BCDB405120A9A87C00148136 /* MultifileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultifileUpload.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -474,6 +476,7 @@
 				BC8832C020D181A600B88EAF /* PixelateFacesTransform.swift */,
 				BC8832E920D238B600B88EAF /* PixelateTransform.swift */,
 				BC8832B320D181A600B88EAF /* PolaroidTransform.swift */,
+				BC88330E20D3EC6300B88EAF /* ProgressiveJpegTransform.swift */,
 				BC8832C920D181A700B88EAF /* QualityTransform.swift */,
 				BC88330620D3E0E600B88EAF /* RedEyeRemovalTransform.swift */,
 				BC8832C820D181A700B88EAF /* ResizeTransform.swift */,
@@ -999,6 +1002,7 @@
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
 				BC8832D720D181A700B88EAF /* MonochromeTransform.swift in Sources */,
 				BC8832E120D181A700B88EAF /* ResizeTransform.swift in Sources */,
+				BC88330F20D3EC6300B88EAF /* ProgressiveJpegTransform.swift in Sources */,
 				450E433C1F161DE500E46B56 /* TransformShapeType.swift in Sources */,
 				BC8832D520D181A700B88EAF /* CropTransform.swift in Sources */,
 				452055421F4B191900A6795D /* RotateTransform.swift in Sources */,

@@ -60,11 +60,6 @@ import Foundation
    - Parameter value: You can change the quality (and reduce the file size) of JPEG images
    by using the quality parameter. Valid range: `1...100`
    */
-  /**
-   Adds the `quality` option.
-   
-   - Parameter value: You can change the quality (and change the file size) of JPEG images by using the quality parameter. Valid range: `1...100`
-   */
   @discardableResult public func quality(_ value: Int) -> Self {
     return appending(key: "quality", value: value)
   }
