@@ -16,7 +16,7 @@ import Foundation
   /**
    Initializes a `PartialPixelateTransform` object.
    */
-  public init() {
+  public init(objects: [CGRect]) {
     super.init(name: "partial_pixelate")
     let values = objects
       .map { "[\($0.origin.x),\($0.origin.y),\($0.size.width),\($0.size.height)]" }

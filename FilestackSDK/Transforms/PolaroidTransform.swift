@@ -26,7 +26,7 @@ import Foundation
    - Parameter value: Sets the Polaroid frame color.
    */
   @discardableResult public func color(_ value: UIColor) -> Self {
-    return appending((key: "color", value: value.hexString))
+    return appending(key: "color", value: value.hexString)
   }
   
   /**
@@ -35,7 +35,7 @@ import Foundation
    - Parameter value: The degree by which to rotate the image clockwise. Valid range: `0...359`
    */
   @discardableResult public func rotate(_ value: Int) -> Self {
-    return appending((key: "rotate", value: value))
+    return appending(key: "rotate", value: value)
   }
   
   /**
@@ -45,6 +45,6 @@ import Foundation
    it has been rotated at all.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    return appending((key: "background", value: value.hexString))
+    return appending(key: "background", value: value.hexString)
   }
 }

@@ -31,7 +31,7 @@ import Foundation
    Valid range: `1...500`
    */
   @discardableResult public func size(_ value: Int) -> Self {
-    return appending((key: "size", value: value))
+    return appending(key: "size", value: value)
   }
   
   /**
@@ -41,6 +41,6 @@ import Foundation
    well like position: [.top, .right].
    */
   @discardableResult public func position(_ value: TransformPosition) -> Self {
-    return appending((key: "position", value: value.toArray()))
+    return appending(key: "position", value: value.toArray())
   }
 }

@@ -40,7 +40,7 @@ import Foundation
    if displayed in an application that supports Exif orientations.
    */
   @discardableResult public func exif(_ value: Bool) -> Self {
-    return appending((key: "exif", value: value))
+    return appending(key: "exif", value: value)
     
   }
   
@@ -51,7 +51,7 @@ import Foundation
    than a full 90 degrees.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    return appending((key: "background", value: value.hexString))
+    return appending(key: "background", value: value.hexString)
     
   }
 }

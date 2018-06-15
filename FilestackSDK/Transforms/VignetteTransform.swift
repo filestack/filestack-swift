@@ -26,7 +26,7 @@ import Foundation
    - Parameter value: Controls the opacity of the vignette effect. Valid range: `0...100`
    */
   @discardableResult public func amount(_ value: Int) -> Self {
-    return appending((key: "amount", value: value))
+    return appending(key: "amount", value: value)
   }
   
   /**
@@ -35,7 +35,7 @@ import Foundation
    - Parameter value: An `TransformBlurMode` value.
    */
   @discardableResult public func blurMode(_ value: TransformBlurMode) -> Self {
-    return appending((key: "blurmode", value: value))
+    return appending(key: "blurmode", value: value)
   }
   
   /**
@@ -44,6 +44,6 @@ import Foundation
    - Parameter value: Replaces the default transparent background with the specified color.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    return appending((key: "background", value: value.hexString))
+    return appending(key: "background", value: value.hexString)
   }
 }

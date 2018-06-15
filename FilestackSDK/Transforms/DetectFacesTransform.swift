@@ -27,7 +27,7 @@ import Foundation
    are not faces. Valid range: `0.01...10000`
    */
   @discardableResult public func minSize(_ value: Float) -> Self {
-    return appending((key: "minsize", value: value))
+    return appending(key: "minsize", value: value)
   }
   
   /**
@@ -37,7 +37,7 @@ import Foundation
    are not faces. Valid range: `0.01...10000`
    */
   @discardableResult public func maxSize(_ value: Float) -> Self {
-    return appending((key: "maxsize", value: value))
+    return appending(key: "maxsize", value: value)
   }
   
   /**
@@ -46,7 +46,7 @@ import Foundation
    - Parameter value: Will change the color of the "face object" boxes and text.
    */
   @discardableResult public func color(_ value: UIColor) -> Self {
-    return appending((key: "color", value: value.hexString))
+    return appending(key: "color", value: value.hexString)
   }
   
   /**
@@ -55,6 +55,6 @@ import Foundation
    - Parameter value: If true, it will export all face objects to a JSON object.
    */
   @discardableResult public func export(_ value: Bool) -> Self {
-    return appending((key: "export", value: value))
+    return appending(key: "export", value: value)
   }
 }

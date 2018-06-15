@@ -24,7 +24,7 @@ import Foundation
    Adds the `radius` option with value set to "max".
    */
   @discardableResult public func maxRadius() -> Self {
-    return appending((key: "radius", value: "max"))
+    return appending(key: "radius", value: "max")
   }
   
   /**
@@ -34,7 +34,7 @@ import Foundation
    Valid range: `1...10000`
    */
   @discardableResult public func radius(_ value: Int) -> Self {
-    return appending((key: "radius", value: value))
+    return appending(key: "radius", value: value)
   }
   
   /**
@@ -44,7 +44,7 @@ import Foundation
    Valid range: `0...20`
    */
   @discardableResult public func blur(_ value: Float = 0.3) -> Self {
-    return appending((key: "blur", value: value))
+    return appending(key: "blur", value: value)
   }
   
   /**
@@ -54,6 +54,6 @@ import Foundation
    have removed part of the image.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    return appending((key: "background", value: value.hexString))
+    return appending(key: "background", value: value.hexString)
   }
 }

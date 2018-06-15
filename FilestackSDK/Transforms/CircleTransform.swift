@@ -26,6 +26,6 @@ import Foundation
    - Parameter value: Sets the background color to display behind the image.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    return appending((key: "background", value: value.hexString))
+    return appending(key: "background", value: value.hexString)
   }
 }

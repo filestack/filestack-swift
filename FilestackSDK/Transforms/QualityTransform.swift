@@ -25,7 +25,6 @@ import Foundation
   public init(value: Int) {
     
     super.init(name: "quality")
-    
     options.append((key: "value", value: value))
   }
 }

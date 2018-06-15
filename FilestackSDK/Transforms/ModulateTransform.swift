@@ -26,7 +26,7 @@ import Foundation
    - Parameter value: Valid range: `0...10000`
    */
   @discardableResult public func brightness(_ value: Int) -> Self {
-    return appending((key: "brightness", value: value))
+    return appending(key: "brightness", value: value)
   }
 
   /**
@@ -35,7 +35,7 @@ import Foundation
    - Parameter value: Valid range: `0...10000`
    */
   @discardableResult public func saturation(_ value: Int) -> Self {
-    return appending((key: "saturation", value: value))
+    return appending(key: "saturation", value: value)
   }
 
   /**
@@ -44,8 +44,6 @@ import Foundation
    - Parameter value: Valid range: `0...359`
    */
   @discardableResult public func hue(_ value: Int) -> Self {
-    return appending((key: "hue", value: value))
+    return appending(key: "hue", value: value)
   }
-
-
 }

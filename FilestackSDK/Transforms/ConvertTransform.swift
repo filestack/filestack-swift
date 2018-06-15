@@ -30,8 +30,7 @@ import Foundation
    for more information on supported formats.
    */
   @discardableResult public func format(_ value: String) -> Self {
-    
-    options.append((key: "format", value: value))
+    return appending(key: "format", value: value)
     
     return self
   }
@@ -43,8 +42,7 @@ import Foundation
    into other file types.
    */
   @discardableResult public func background(_ value: UIColor) -> Self {
-    
-    options.append((key: "background", value: value.hexString))
+    return appending(key: "background", value: value.hexString)
     
     return self
   }
@@ -57,8 +55,7 @@ import Foundation
    Valid range: `1...10000`
    */
   @discardableResult public func page(_ value: Int) -> Self {
-    
-    options.append((key: "page", value: value))
+    return appending(key: "page", value: value)
     
     return self
   }
@@ -70,8 +67,7 @@ import Foundation
    PDF, AI and EPS files to image formats like JPG or PNG. Valid range: `1...500`
    */
   @discardableResult public func density(_ value: Int) -> Self {
-    
-    options.append((key: "density", value: value))
+    return appending(key: "density", value: value)
     
     return self
   }
@@ -83,8 +79,7 @@ import Foundation
    JPEGtran and OptiPNG.
    */
   @discardableResult public func compress(_ value: Bool) -> Self {
-    
-    options.append((key: "compress", value: value))
+    return appending(key: "compress", value: value)
     
     return self
   }
@@ -96,8 +91,7 @@ import Foundation
    by using the quality parameter. Valid range: `1...100`
    */
   @discardableResult public func quality(_ value: Int) -> Self {
-    
-    options.append((key: "quality", value: value))
+    return appending(key: "quality", value: value)
     
     return self
   }
@@ -106,8 +100,7 @@ import Foundation
    Adds the `quality` option with value set to "input".
    */
   @discardableResult public func preserveInputQuality() -> Self {
-    
-    options.append((key: "quality", value: "input"))
+    return appending(key: "quality", value: "input")
     
     return self
   }
@@ -119,8 +112,7 @@ import Foundation
    - Parameter value: If true, it will remove any metadata embedded in an image.
    */
   @discardableResult public func strip(_ value: Bool) -> Self {
-    
-    options.append((key: "strip", value: value))
+    return appending(key: "strip", value: value)
     
     return self
   }
@@ -131,8 +123,7 @@ import Foundation
    - Parameter value: An `TransformColorSpace` value.
    */
   @discardableResult public func colorSpace(_ value: TransformColorSpace) -> Self {
-    
-    options.append((key: "colorspace", value: value))
+    return appending(key: "colorspace", value: value)
     
     return self
   }
@@ -144,8 +135,7 @@ import Foundation
    If true, the HTML or SVG file will be stripped of any insecure tags (HTML sanitization).
    */
   @discardableResult public func secure(_ value: Bool) -> Self {
-    
-    options.append((key: "secure", value: value))
+    return appending(key: "secure", value: value)
     
     return self
   }
@@ -168,8 +158,7 @@ import Foundation
    ```
    */
   @discardableResult public func docInfo(_ value: Bool) -> Self {
-    
-    options.append((key: "docinfo", value: value))
+    return appending(key: "docinfo", value: value)
     
     return self
   }
@@ -180,8 +169,7 @@ import Foundation
    - Parameter value: An `TransformPageFormat` value.
    */
   @discardableResult public func pageFormat(_ value: TransformPageFormat) -> Self {
-    
-    options.append((key: "pageformat", value: value))
+    return appending(key: "pageformat", value: value)
     
     return self
   }
@@ -192,8 +180,7 @@ import Foundation
    - Parameter value: An `TransformPageOrientation` value.
    */
   @discardableResult public func pageOrientation(_ value: TransformPageOrientation) -> Self {
-    
-    options.append((key: "pageorientation", value: value))
+    return appending(key: "pageorientation", value: value)
     
     return self
   }

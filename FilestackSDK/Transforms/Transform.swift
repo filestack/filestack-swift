@@ -57,8 +57,8 @@ extension Transform {
 }
 
 extension Transform {
-  @discardableResult func appending(_ option: TaskOption) -> Self {
-    options.append(option)
+  @discardableResult func appending(key: String, value: Any?) -> Self {
+    options.append((key: key, value: value))
     return self
   }
 }

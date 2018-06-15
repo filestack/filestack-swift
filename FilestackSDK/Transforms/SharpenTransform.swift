@@ -26,6 +26,6 @@ import Foundation
    - Parameter value: The amount to sharpen the image. Valid range: `1...20`
    */
   @discardableResult public func amount(_ value: Int) -> Self {
-    return appending((key: "amount", value: value))
+    return appending(key: "amount", value: value)
   }
 }

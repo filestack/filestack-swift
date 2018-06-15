@@ -27,6 +27,6 @@ import Foundation
    the returned image. Valid range: `1...100`
    */
   @discardableResult public func threshold(_ value: Int) -> Self {
-    return appending((key: "threshold", value: value))
+    return appending(key: "threshold", value: value)
   }
 }

@@ -67,30 +67,30 @@ protocol CoverFacesTransformExtension {
 extension CoverFacesTransformExtension where Self: Transform {
 
   @discardableResult func type(_ value: TransformShapeType) -> Self {
-    return appending((key: "type", value: value))
+    return appending(key: "type", value: value)
   }
   
   @discardableResult func minSize(_ value: Float) -> Self {
-    return appending((key: "minsize", value: value))
+    return appending(key: "minsize", value: value)
   }
   
   @discardableResult func maxSize(_ value: Float) -> Self {
-    return appending((key: "maxsize", value: value))
+    return appending(key: "maxsize", value: value)
   }
   
   @discardableResult func buffer(_ value: Int) -> Self {
-    return appending((key: "buffer", value: value))
+    return appending(key: "buffer", value: value)
   }
   
   @discardableResult func blur(_ value: Float) -> Self {
-    return appending((key: "blur", value: value))
+    return appending(key: "blur", value: value)
   }
   
   @discardableResult func allFaces() -> Self {
-    return appending((key: "faces", value: "all"))
+    return appending(key: "faces", value: "all")
   }
 
   @discardableResult func faces(_ value: [Int]) -> Self {
-    return appending((key: "faces", value: value))
+    return appending(key: "faces", value: value)
   }
 }
