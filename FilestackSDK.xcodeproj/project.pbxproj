@@ -115,6 +115,7 @@
 		BC88330220D3DF7900B88EAF /* TransformStyleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330120D3DF7900B88EAF /* TransformStyleMode.swift */; };
 		BC88330520D3E08000B88EAF /* EnhanceTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330420D3E08000B88EAF /* EnhanceTransform.swift */; };
 		BC88330720D3E0E600B88EAF /* RedEyeRemovalTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330620D3E0E600B88EAF /* RedEyeRemovalTransform.swift */; };
+		BC88330B20D3E36A00B88EAF /* TransformFiletype.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330A20D3E36A00B88EAF /* TransformFiletype.swift */; };
 		BCDB405220A9A87C00148136 /* MultifileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDB405120A9A87C00148136 /* MultifileUpload.swift */; };
 /* End PBXBuildFile section */
 
@@ -402,6 +403,7 @@
 		BC88330120D3DF7900B88EAF /* TransformStyleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformStyleMode.swift; sourceTree = "<group>"; };
 		BC88330420D3E08000B88EAF /* EnhanceTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhanceTransform.swift; sourceTree = "<group>"; };
 		BC88330620D3E0E600B88EAF /* RedEyeRemovalTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedEyeRemovalTransform.swift; sourceTree = "<group>"; };
+		BC88330A20D3E36A00B88EAF /* TransformFiletype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformFiletype.swift; sourceTree = "<group>"; };
 		BCDB405120A9A87C00148136 /* MultifileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultifileUpload.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -515,6 +517,7 @@
 				4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */,
 				452D715E1F17A51B0037E1BB /* TransformColorSpace.swift */,
 				455266301F1618E1009537D9 /* TransformCropMode.swift */,
+				BC88330A20D3E36A00B88EAF /* TransformFiletype.swift */,
 				457D5BEE1F16147E00FBD5B1 /* TransformFit.swift */,
 				BC8832FF20D3DCB600B88EAF /* TransformNoiseMode.swift */,
 				452D715A1F17A49D0037E1BB /* TransformPageFormat.swift */,
@@ -1038,6 +1041,7 @@
 				BC8832E720D181F000B88EAF /* BlurFacesTransform.swift in Sources */,
 				45050F4C1F2B49C100B4E3C3 /* Data+Base64MD5Digest.swift in Sources */,
 				455266311F1618E1009537D9 /* TransformCropMode.swift in Sources */,
+				BC88330B20D3E36A00B88EAF /* TransformFiletype.swift in Sources */,
 				452D715D1F17A4DB0037E1BB /* TransformPageOrientation.swift in Sources */,
 				45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */,
 				452D715F1F17A51B0037E1BB /* TransformColorSpace.swift in Sources */,

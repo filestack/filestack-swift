@@ -25,16 +25,9 @@ import Foundation
 
     /// Returns a `String` representation of self.
     public var description: String {
-
         switch self {
-        case .portrait:
-
-            return "portrait"
-
-        case .landscape:
-
-            return "landscape"
-
+        case .portrait: return "portrait"
+        case .landscape: return "landscape"
         }
     }
 }
