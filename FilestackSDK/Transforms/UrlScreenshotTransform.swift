@@ -1,5 +1,5 @@
 //
-//  UrlScreenshotTransformation.swift
+//  UrlScreenshotTransform.swift
 //  FilestackSDK
 //
 //  Created by Mihály Papp on 15/06/2018.
@@ -13,7 +13,7 @@ import Foundation
  The URL screenshot task will not work for content that is located in areas that require you to login.
  If the content is not publicly visible, then it will not be captured.
  */
-@objc(FSUrlScreenshotTransformation) public class UrlScreenshotTransformation: Transform {
+@objc(FSUrlScreenshotTransform) public class UrlScreenshotTransform: Transform {
   
   /**
    Initializes a `UrlScreenshotTransformation` object.
