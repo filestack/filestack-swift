@@ -30,9 +30,9 @@ import Foundation
   }
   
   /**
-   Adds the `width` option.
+   Adds the `height` option.
    
-   - Parameter value: The new width in pixels. Valid range: `1...10000`
+   - Parameter value: The new height in pixels. Valid range: `1...10000`
    */
   @discardableResult public func height(_ value: Int) -> Self {
     return appending(key: "height", value: value)
