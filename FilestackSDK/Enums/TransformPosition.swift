@@ -37,27 +37,27 @@ public extension TransformPosition {
     private func stringValue() -> String? {
 
         switch self {
-        case TransformPosition.top:
+        case .top:
 
             return "top"
 
-        case TransformPosition.middle:
+        case .middle:
 
             return "middle"
 
-        case TransformPosition.bottom:
+        case .bottom:
 
             return "bottom"
 
-        case TransformPosition.left:
+        case .left:
 
             return "left"
 
-        case TransformPosition.center:
+        case .center:
 
             return "center"
 
-        case TransformPosition.right:
+        case .right:
 
             return "right"
 

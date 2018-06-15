@@ -72,7 +72,7 @@ import Foundation
 
         - Parameter handle: A Filestack handle.
      */
-    public func fileLink(`for` handle: String) -> FileLink {
+    public func fileLink(for handle: String) -> FileLink {
 
         return FileLink(handle: handle, apiKey: apiKey, security: security)
     }
