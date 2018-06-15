@@ -14,7 +14,22 @@ import Foundation
  */
 @objc(FSConvertTransform) public class ConvertTransform: Transform {
   
-  
+  /**
+   Initializes a `ConvertTransform` object.
+   */
+  public init() {
+    super.init(name: "output")
+  }
+
+  /**
+   Adds the `format` option.
+   
+   - Parameter value: The format to which you would like to convert the file.
+   */
+  @discardableResult public func format(_ value: TransformFiletype) -> Self {
+    return appending(key: "format", value: value)
+  }
+
   /**
    Adds the `background` option.
    
