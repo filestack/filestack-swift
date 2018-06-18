@@ -36,7 +36,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testAsciiWithReverseTransformationUrl() {
     transformable.add(transform: AsciiTransform().background(.red).foreground(.blue).reverse())
     
@@ -59,7 +59,7 @@ class TransformableTests: XCTestCase {
   
   func testCacheTransformationUrl() {
     transformable.add(transform: CacheTransform().expiry(3600))
-  
+    
     let expectedUrl = Config.processURL
       .appendingPathComponent("cache=expiry:3600")
       .appendingPathComponent("MY-HANDLE")
@@ -76,7 +76,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testTurningOffCacheTransformationUrl() {
     transformable.add(transform: CacheTransform().maxExpiry().turnOff())
     
@@ -86,7 +86,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testCollageTransformationUrl() {
     let collection = CollageTransformCollection().add(["HANDLE-1", "HANDLE-2"])
     transformable.add(transform: CollageTransform(size: CGSize(width: 15, height: 35), collection: collection).margin(40).color(.red).cropFit().autorotate())
@@ -117,7 +117,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testModulateTransformationUrl() {
     transformable.add(transform: ModulateTransform().brightness(50).hue(60).saturation(200))
     
@@ -147,7 +147,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testPartialBlurTransformationUrl() {
     let firstObj = CGRect(x: 10, y: 20, width: 30, height: 40)
     let secondObj = CGRect(x: 11, y: 21, width: 31, height: 41)
@@ -159,7 +159,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testPartialPixelateTransformationUrl() {
     let firstObj = CGRect(x: 10, y: 20, width: 30, height: 40)
     let secondObj = CGRect(x: 11, y: 21, width: 31, height: 41)
@@ -181,7 +181,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testRedEyeRemovalTransformationUrl() {
     transformable.add(transform: RedEyeRemovalTransform())
     
@@ -201,7 +201,7 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testUrlScreenshotTransformationUrl() {
     transformable.add(transform: UrlScreenshotTransform().mobileAgent().windowMode().width(1).height(2).delay(5).orientation(.landscape).device("test"))
     
@@ -211,13 +211,9 @@ class TransformableTests: XCTestCase {
     
     XCTAssertEqual(transformable.url, expectedUrl)
   }
-
+  
   func testResizeTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ResizeTransform().width(50).height(25).fit(.crop).align(.bottom))
+    transformable.add(transform: ResizeTransform().width(50).height(25).fit(.crop).align(.bottom))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
@@ -227,11 +223,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testResizeTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ResizeTransform().width(50).fit(.crop).align(.center))
+    transformable.add(transform: ResizeTransform().width(50).fit(.crop).align(.center))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("resize=width:50,fit:crop,align:center")
@@ -241,11 +233,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCropTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CropTransform(x: 20, y: 30, width: 150, height: 250))
+    transformable.add(transform: CropTransform(x: 20, y: 30, width: 150, height: 250))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("crop=dim:[20,30,150,250]")
@@ -255,11 +243,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testRotateTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: RotateTransform(deg: 320).exif(true).background(.white))
+    transformable.add(transform: RotateTransform(deg: 320).exif(true).background(.white))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("rotate=deg:320,exif:true,background:FFFFFFFF")
@@ -269,11 +253,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testRotateDegExifTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: RotateTransform().exif(false).background(.red))
+    transformable.add(transform: RotateTransform().exif(false).background(.red))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("rotate=deg:exif,exif:false,background:FF0000FF")
@@ -283,11 +263,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testRotateTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: RotateTransform(deg: 150))
+    transformable.add(transform: RotateTransform(deg: 150))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("rotate=deg:150")
@@ -297,11 +273,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testFlipTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: FlipTransform())
+    transformable.add(transform: FlipTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("flip")
@@ -311,11 +283,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testFlopTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: FlopTransform())
+    transformable.add(transform: FlopTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("flop")
@@ -325,11 +293,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testWatermarkTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: WatermarkTransform(file: "WATERMARK-HANDLE").size(50).position(.top))
+    transformable.add(transform: WatermarkTransform(file: "WATERMARK-HANDLE").size(50).position(.top))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[top]")
@@ -339,11 +303,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testWatermarkTransformationWithPairedPositionURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: WatermarkTransform(file: "WATERMARK-HANDLE").size(50).position([.top, .left]))
+    transformable.add(transform: WatermarkTransform(file: "WATERMARK-HANDLE").size(50).position([.top, .left]))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[top,left]")
@@ -353,11 +313,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testWatermarkTransformationWithPairedPositionAndOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: WatermarkTransform(file: "WATERMARK-HANDLE"))
+    transformable.add(transform: WatermarkTransform(file: "WATERMARK-HANDLE"))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("watermark=file:WATERMARK-HANDLE")
@@ -367,11 +323,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testDetectFacesTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: DetectFacesTransform().minSize(0.25).maxSize(0.55).color(.white).export(true))
+    transformable.add(transform: DetectFacesTransform().minSize(0.25).maxSize(0.55).color(.white).export(true))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
@@ -381,11 +333,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testDetectFacesTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: DetectFacesTransform().color(.red))
+    transformable.add(transform: DetectFacesTransform().color(.red))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("detect_faces=color:FF0000FF")
@@ -395,11 +343,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testDetectFacesTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: DetectFacesTransform())
+    transformable.add(transform: DetectFacesTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("detect_faces")
@@ -409,11 +353,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCropFacesTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([4]))
+    transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([4]))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[4]")
@@ -423,11 +363,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCropFacesTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CropFacesTransform().mode(.thumb).faces([1]))
+    transformable.add(transform: CropFacesTransform().mode(.thumb).faces([1]))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("crop_faces=mode:thumb,faces:[1]")
@@ -437,11 +373,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCropFacesTransformationWithOptionals2URL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CropFacesTransform().mode(.crop))
+    transformable.add(transform: CropFacesTransform().mode(.crop))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("crop_faces=mode:crop")
@@ -451,11 +383,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCropFacesTransformationWithFacesArrayURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([1,2,3,4]))
+    transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([1,2,3,4]))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[1,2,3,4]")
@@ -465,11 +393,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCropFacesTransformationWithFacesAllURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CropFacesTransform().mode(.fill).width(250).height(150).allFaces())
+    transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).allFaces())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:all")
@@ -479,11 +403,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPixelateFacesTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PixelateFacesTransform()
+    transformable.add(transform: PixelateFacesTransform()
         .faces([3])
         .minSize(0.25)
         .maxSize(0.45)
@@ -499,11 +419,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPixelateFacesTransformationWithFacesArrayURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PixelateFacesTransform()
+    transformable.add(transform: PixelateFacesTransform()
         .faces([1,3,5])
         .minSize(0.25)
         .maxSize(0.45)
@@ -519,11 +435,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPixelateFacesTransformationWithFacesAllURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PixelateFacesTransform()
+    transformable.add(transform: PixelateFacesTransform()
         .allFaces()
         .minSize(0.25)
         .maxSize(0.45)
@@ -539,11 +451,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPixelateFacesTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PixelateFacesTransform()
+    transformable.add(transform: PixelateFacesTransform()
         .faces([4])
         .buffer(250))
     
@@ -555,11 +463,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPixelateFacesTransformationWithOptionals2URL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PixelateFacesTransform()
+    transformable.add(transform: PixelateFacesTransform()
         .faces([1,3,5])
         .buffer(320))
     
@@ -571,11 +475,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPixelateFacesTransformationWithOptionals3URL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PixelateFacesTransform()
+    transformable.add(transform: PixelateFacesTransform()
         .allFaces()
         .buffer(220))
     
@@ -587,11 +487,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testRoundCornersTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: RoundCornersTransform().radius(150).blur(0.8).background(.black))
+    transformable.add(transform: RoundCornersTransform().radius(150).blur(0.8).background(.black))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
@@ -601,11 +497,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testRoundCornersTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: RoundCornersTransform())
+    transformable.add(transform: RoundCornersTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("round_corners")
@@ -615,11 +507,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testRoundCornersMaxRadiusTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: RoundCornersTransform().maxRadius().blur(0.25).background(.white))
+    transformable.add(transform: RoundCornersTransform().maxRadius().blur(0.25).background(.white))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("round_corners=radius:max,blur:0.25,background:FFFFFFFF")
@@ -629,11 +517,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testRoundCornersMaxRadiusTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: RoundCornersTransform().maxRadius())
+    transformable.add(transform: RoundCornersTransform().maxRadius())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("round_corners=radius:max")
@@ -643,11 +527,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testVignetteTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: VignetteTransform().amount(80).blurMode(.gaussian).background(.black))
+    transformable.add(transform: VignetteTransform().amount(80).blurMode(.gaussian).background(.black))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
@@ -657,11 +537,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testVignetteTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: VignetteTransform())
+    transformable.add(transform: VignetteTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("vignette")
@@ -671,11 +547,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testVignetteTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: VignetteTransform().amount(35))
+    transformable.add(transform: VignetteTransform().amount(35))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("vignette=amount:35")
@@ -685,11 +557,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPolaroidTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PolaroidTransform().color(.white).rotate(33).background(.black))
+    transformable.add(transform: PolaroidTransform().color(.white).rotate(33).background(.black))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
@@ -699,11 +567,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPolaroidTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PolaroidTransform())
+    transformable.add(transform: PolaroidTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("polaroid")
@@ -713,11 +577,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testPolaroidTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: PolaroidTransform().rotate(45))
+    transformable.add(transform: PolaroidTransform().rotate(45))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("polaroid=rotate:45")
@@ -727,11 +587,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testTornEdgesTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: TornEdgesTransform().spread(start: 5, end: 25).background(.blue))
+    transformable.add(transform: TornEdgesTransform().spread(start: 5, end: 25).background(.blue))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
@@ -741,11 +597,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testTornEdgesTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: TornEdgesTransform())
+    transformable.add(transform: TornEdgesTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("torn_edges")
@@ -755,11 +607,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testTornEdgesTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: TornEdgesTransform().spread(start: 5, end: 25))
+    transformable.add(transform: TornEdgesTransform().spread(start: 5, end: 25))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("torn_edges=spread:[5,25]")
@@ -769,11 +617,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testShadowTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ShadowTransform()
+    transformable.add(transform: ShadowTransform()
         .blur(10)
         .opacity(35)
         .vector(x: 30, y: 30)
@@ -788,11 +632,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testShadowTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ShadowTransform())
+    transformable.add(transform: ShadowTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("shadow")
@@ -802,11 +642,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testShadowTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ShadowTransform().blur(15).opacity(20))
+    transformable.add(transform: ShadowTransform().blur(15).opacity(20))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("shadow=blur:15,opacity:20")
@@ -816,11 +652,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCircleTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CircleTransform().background(.red))
+    transformable.add(transform: CircleTransform().background(.red))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("circle=background:FF0000FF")
@@ -830,11 +662,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testCircleTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: CircleTransform())
+    transformable.add(transform: CircleTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("circle")
@@ -844,11 +672,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testBorderTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: BorderTransform().width(3).color(.white).background(.red))
+    transformable.add(transform: BorderTransform().width(3).color(.white).background(.red))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("border=width:3,color:FFFFFFFF,background:FF0000FF")
@@ -858,11 +682,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testBorderTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: BorderTransform())
+    transformable.add(transform: BorderTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("border")
@@ -872,11 +692,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testBorderTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: BorderTransform().width(5))
+    transformable.add(transform: BorderTransform().width(5))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("border=width:5")
@@ -886,11 +702,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testSharpenTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: SharpenTransform().amount(3))
+    transformable.add(transform: SharpenTransform().amount(3))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("sharpen=amount:3")
@@ -900,11 +712,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testSharpenTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: SharpenTransform())
+    transformable.add(transform: SharpenTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("sharpen")
@@ -914,11 +722,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testBlurTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: BlurTransform().amount(5))
+    transformable.add(transform: BlurTransform().amount(5))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("blur=amount:5")
@@ -928,11 +732,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testBlurTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: BlurTransform())
+    transformable.add(transform: BlurTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("blur")
@@ -942,11 +742,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testMonochromeTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: MonochromeTransform())
+    transformable.add(transform: MonochromeTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("monochrome")
@@ -956,11 +752,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testBlackAndWhiteTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: BlackAndWhiteTransform().threshold(45))
+    transformable.add(transform: BlackAndWhiteTransform().threshold(45))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("blackwhite=threshold:45")
@@ -970,11 +762,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testBlackAndWhiteTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: BlackAndWhiteTransform())
+    transformable.add(transform: BlackAndWhiteTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("blackwhite")
@@ -984,11 +772,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testSepiaTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: SepiaTransform().tone(85))
+    transformable.add(transform: SepiaTransform().tone(85))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("sepia=tone:85")
@@ -998,11 +782,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testSepiaTransformationWithoutArgumentsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: SepiaTransform())
+    transformable.add(transform: SepiaTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("sepia")
@@ -1012,11 +792,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testConvertTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ConvertTransform()
+    transformable.add(transform: ConvertTransform()
         .format(.pdf)
         .background(.white)
         .page(1)
@@ -1041,11 +817,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testConvertTransformationWithOptionalsURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ConvertTransform()
+    transformable.add(transform: ConvertTransform()
         .format(.jpg)
         .compress()
         .strip()
@@ -1059,11 +831,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testConvertPreservingInputQualityTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ConvertTransform()
+    transformable.add(transform: ConvertTransform()
         .format(.jpg)
         .compress()
         .preserveInputQuality()
@@ -1077,11 +845,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testNoMetadataTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: NoMetadataTransform())
+    transformable.add(transform: NoMetadataTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("no_metadata")
@@ -1091,11 +855,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testQualityTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: QualityTransform(value: 88))
+    transformable.add(transform: QualityTransform(value: 88))
     
     let expectedURL = Config.processURL
       .appendingPathComponent("quality=value:88")
@@ -1105,11 +865,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testZipTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: ZipTransform())
+    transformable.add(transform: ZipTransform())
     
     let expectedURL = Config.processURL
       .appendingPathComponent("zip")
@@ -1119,11 +875,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testVideoConvertTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: AVTransform()
+    transformable.add(transform: AVTransform()
         .preset("h264")
         .force(false)
         .width(1080)
@@ -1169,12 +921,8 @@ class TransformableTests: XCTestCase {
   }
   
   func testVideoConvertWithTitleIncludingCommasTransformationURL() {
-    
     let title = "Chapters 1,2,3 and 4"
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: AVTransform().preset("h264").title(title))
+    transformable.add(transform: AVTransform().preset("h264").title(title))
     
     let allowedCharacters = CharacterSet(charactersIn: ",").inverted
     let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
@@ -1187,25 +935,22 @@ class TransformableTests: XCTestCase {
   }
   
   func testAudioConvertTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
+    transformable
       .add(transform: AVTransform()
-        .preset("m4a")
-        .force(false)
-        .title("Chapter 1")
-        .extName("m4a")
-        .fileName("chapter_1")
-        .location(.s3)
-        .path("/myfiles/chapter_1.m4a")
-        .access(.public)
-        .container("user-audios")
-        .audioBitRate(320)
-        .audioSampleRate(44100)
-        .audioChannels(2)
-        .clipLength("00:02:30")
-        .clipOffset("00:00:05"))
+      .preset("m4a")
+      .force(false)
+      .title("Chapter 1")
+      .extName("m4a")
+      .fileName("chapter_1")
+      .location(.s3)
+      .path("/myfiles/chapter_1.m4a")
+      .access(.public)
+      .container("user-audios")
+      .audioBitRate(320)
+      .audioSampleRate(44100)
+      .audioChannels(2)
+      .clipLength("00:02:30")
+      .clipOffset("00:00:05"))
     
     let expectedURL = Config.processURL
       .appendingPathComponent(
@@ -1221,11 +966,7 @@ class TransformableTests: XCTestCase {
   }
   
   func testDebugTransformationURL() {
-    
-    let client = Client(apiKey: "MY-API-KEY")
-    
-    let transformable = client.transformable(handle: "MY-HANDLE")
-      .add(transform: FlipTransform())
+    transformable.add(transform: FlipTransform())
       .add(transform: FlopTransform())
       .debug()
     
@@ -1239,7 +980,6 @@ class TransformableTests: XCTestCase {
   }
   
   func testChainedTransformationsURL() {
-    
     let security = Seeds.Securities.basic
     let client = Client(apiKey: "MY-API-KEY", security: security)
     
