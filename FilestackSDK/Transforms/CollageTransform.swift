@@ -24,8 +24,8 @@ import Foundation
    */
   init(size: CGSize, collection: CollageTransformCollection) {
     super.init(name: "collage")
-    appending(key: "width", value: size.width)
-    appending(key: "height", value: size.height)
+    appending(key: "width", value: Int(size.width))
+    appending(key: "height", value: Int(size.height))
     appending(key: "files", value: collection.files)
   }
   

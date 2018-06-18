@@ -11,17 +11,207 @@ import OHHTTPStubs
 
 @testable import FilestackSDK
 
-
 class TransformableTests: XCTestCase {
   
   private let processStubConditions = isScheme(Config.processURL.scheme!) && isHost(Config.processURL.host!)
+  private let client = Client(apiKey: "My-API-KEY")
+  
+  private var transformable: Transformable!
+  
+  override func setUp() {
+    transformable = client.transformable(handle: "MY-HANDLE")
+  }
   
   override func tearDown() {
-    
     super.tearDown()
     OHHTTPStubs.removeAllStubs()
   }
   
+  func testAsciiTransformationUrl() {
+    transformable.add(transform: AsciiTransform().background(.red).foreground(.blue).size(50))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("ascii=background:FF0000FF,foreground:0000FFFF,size:50")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testAsciiWithReverseTransformationUrl() {
+    transformable.add(transform: AsciiTransform().background(.red).foreground(.blue).reverse())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("ascii=background:FF0000FF,foreground:0000FFFF,colored:true,reverse:true")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testBlurFacesTransformationUrl() {
+    transformable.add(transform: BlurFacesTransform().amount(30))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("blur_faces=amount:30.0")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testCacheTransformationUrl() {
+    transformable.add(transform: CacheTransform().expiry(3600))
+  
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("cache=expiry:3600")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testCacheTransformationWithMaxExpiryUrl() {
+    transformable.add(transform: CacheTransform().maxExpiry())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("cache=expiry:max")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testTurningOffCacheTransformationUrl() {
+    transformable.add(transform: CacheTransform().maxExpiry().turnOff())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("cache=false")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testCollageTransformationUrl() {
+    let collection = CollageTransformCollection().add(["HANDLE-1", "HANDLE-2"])
+    transformable.add(transform: CollageTransform(size: CGSize(width: 15, height: 35), collection: collection).margin(40).color(.red).cropFit().autorotate())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("collage=width:15,height:35,files:[\"HANDLE-1\",\"HANDLE-2\"],margin:40,color:FF0000FF,fit:crop,autorotate:true")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testCompressTransformationUrl() {
+    transformable.add(transform: CompressTransform().metadata(true))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("compress=metadata:true")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testEnhanceTransformationUrl() {
+    transformable.add(transform: EnhanceTransform())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("enhance")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testModulateTransformationUrl() {
+    transformable.add(transform: ModulateTransform().brightness(50).hue(60).saturation(200))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("modulate=brightness:50,hue:60,saturation:200")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testNegativeTransformationUrl() {
+    transformable.add(transform: NegativeTransform())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("negative")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testOilPaintTransformationUrl() {
+    transformable.add(transform: OilPaintTransform().amount(13))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("oil_paint=amount:13")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testPartialBlurTransformationUrl() {
+    let firstObj = CGRect(x: 10, y: 20, width: 30, height: 40)
+    let secondObj = CGRect(x: 11, y: 21, width: 31, height: 41)
+    transformable.add(transform: PartialBlurTransform(objects: [firstObj, secondObj]))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("partial_blur=objects:[[10,20,30,40],[11,21,31,41]]")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testPartialPixelateTransformationUrl() {
+    let firstObj = CGRect(x: 10, y: 20, width: 30, height: 40)
+    let secondObj = CGRect(x: 11, y: 21, width: 31, height: 41)
+    transformable.add(transform: PartialPixelateTransform(objects: [firstObj, secondObj]))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("partial_pixelate=objects:[[10,20,30,40],[11,21,31,41]]")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testProgressiveJpegTransformationUrl() {
+    transformable.add(transform: ProgressiveJpegTransform().quality(15).metadata(true))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("pjpg=quality:15,metadata:true")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testRedEyeRemovalTransformationUrl() {
+    transformable.add(transform: RedEyeRemovalTransform())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("redeye")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+  
+  func testUpscaleTransformationUrl() {
+    transformable.add(transform: UpscaleTransform().noise(.low).style(.artwork).noUpscale())
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("upscale=noise:low,style:artwork,upscale:false")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
+  func testUrlScreenshotTransformationUrl() {
+    transformable.add(transform: UrlScreenshotTransform().mobileAgent().windowMode().width(1).height(2).delay(5).orientation(.landscape).device("test"))
+    
+    let expectedUrl = Config.processURL
+      .appendingPathComponent("urlscreenshot=agent:mobile,mode:window,width:1,height:2,delay:5,orientation:landscape,device:test")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedUrl)
+  }
+
   func testResizeTransformationURL() {
     
     let client = Client(apiKey: "MY-API-KEY")
@@ -827,16 +1017,16 @@ class TransformableTests: XCTestCase {
     
     let transformable = client.transformable(handle: "MY-HANDLE")
       .add(transform: ConvertTransform()
-        .format("pdf")
+        .format(.pdf)
         .background(.white)
         .page(1)
         .density(100)
-        .compress(true)
+        .compress()
         .quality(85)
-        .strip(true)
+        .strip()
         .colorSpace(.input)
-        .secure(true)
-        .docInfo(true)
+        .secure()
+        .docInfo()
         .pageFormat(.letter)
         .pageOrientation(.portrait))
     
@@ -856,9 +1046,9 @@ class TransformableTests: XCTestCase {
     
     let transformable = client.transformable(handle: "MY-HANDLE")
       .add(transform: ConvertTransform()
-        .format("jpg")
-        .compress(true)
-        .strip(true)
+        .format(.jpg)
+        .compress()
+        .strip()
         .colorSpace(.input))
     
     let expectedURL = Config.processURL
@@ -874,8 +1064,8 @@ class TransformableTests: XCTestCase {
     
     let transformable = client.transformable(handle: "MY-HANDLE")
       .add(transform: ConvertTransform()
-        .format("jpg")
-        .compress(true)
+        .format(.jpg)
+        .compress()
         .preserveInputQuality()
         .colorSpace(.input))
     
@@ -894,9 +1084,7 @@ class TransformableTests: XCTestCase {
       .add(transform: NoMetadataTransform())
     
     let expectedURL = Config.processURL
-      .appendingPathComponent(
-        "no_metadata"
-      )
+      .appendingPathComponent("no_metadata")
       .appendingPathComponent("MY-HANDLE")
     
     XCTAssertEqual(transformable.url, expectedURL)
@@ -1088,9 +1276,9 @@ class TransformableTests: XCTestCase {
       .add(transform: BlackAndWhiteTransform().threshold(45))
       .add(transform: SepiaTransform().tone(85))
       .add(transform: ConvertTransform()
-        .format("jpg")
-        .compress(true)
-        .strip(true)
+        .format(.jpg)
+        .compress()
+        .strip()
         .colorSpace(.input))
       .add(transform: NoMetadataTransform())
       .add(transform: QualityTransform(value: 88))
@@ -1197,9 +1385,9 @@ class TransformableTests: XCTestCase {
       .add(transform: BlackAndWhiteTransform().threshold(45))
       .add(transform: SepiaTransform().tone(85))
       .add(transform: ConvertTransform()
-        .format("jpg")
-        .compress(true)
-        .strip(true)
+        .format(.jpg)
+        .compress()
+        .strip()
         .colorSpace(.input))
       .add(transform: NoMetadataTransform())
       .add(transform: QualityTransform(value: 88))

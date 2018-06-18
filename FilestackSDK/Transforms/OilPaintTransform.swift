@@ -25,7 +25,7 @@ import Foundation
    
    - Parameter value: Valid range: `2...100`
    */
-  @discardableResult public func amount(_ value: Int = 2) -> Self {
+  @discardableResult public func amount(_ value: Int) -> Self {
     return appending(key: "amount", value: value)
   }
 }

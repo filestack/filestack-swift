@@ -11,7 +11,7 @@ import Foundation
 /**
  Upscalling image making it two times bigger.
  */
-@objc(FSUpscaleTransform) public class UpscaleTransformation: Transform {
+@objc(FSUpscaleTransform) public class UpscaleTransform: Transform {
   
   /**
    Initializes a `TornEdgesTransform` object.

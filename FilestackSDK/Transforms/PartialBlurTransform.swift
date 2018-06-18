@@ -19,8 +19,7 @@ import Foundation
   public init(objects: [CGRect]) {
     super.init(name: "partial_blur")
     let values = objects
-      .map { "[\($0.origin.x),\($0.origin.y),\($0.size.width),\($0.size.height)]" }
-      .joined(separator: ",")
-    options.append((key: "objects", value: "[\(values)]"))
+      .map { "[\(Int($0.origin.x)),\(Int($0.origin.y)),\(Int($0.size.width)),\(Int($0.size.height))]" }
+    options.append((key: "objects", value: values))
   }
 }

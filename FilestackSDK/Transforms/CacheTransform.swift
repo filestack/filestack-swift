@@ -16,7 +16,7 @@ import Foundation
   /**
    Initializes a `CacheTransform` object.
    */
-  public init(_ value: Bool) {
+  public init() {
     super.init(name: "cache")
   }
   
@@ -28,6 +28,7 @@ import Foundation
    it will count against your conversion quota.
    */
   @discardableResult public func turnOff() -> Self {
+    options.removeAll()
     return appending(key: "false", value: nil)
   }
 

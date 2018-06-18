@@ -101,7 +101,7 @@ import Foundation
    
    - Parameter value: An `TransformColorSpace` value.
    */
-  @discardableResult public func colorspace(_ value: TransformColorSpace) -> Self {
+  @discardableResult public func colorSpace(_ value: TransformColorSpace) -> Self {
     return appending(key: "colorspace", value: value)
   }
 
@@ -119,7 +119,7 @@ import Foundation
    Gives information about a document, such as the number of pages and the dimensions of the file.
    This information is delivered as a JSON object.
    */
-  @discardableResult public func docinfo() -> Self {
+  @discardableResult public func docInfo() -> Self {
     return appending(key: "docinfo", value: true)
   }
 
