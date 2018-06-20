@@ -75,6 +75,16 @@ import Foundation
   }
   
   /**
+   Adds the `buffer` option.
+   
+   - Parameter value: Adjusts the buffer around the face object as a percentage of
+   the original object. Valid range: `0...1000`
+   */
+  @discardableResult func buffer(_ value: Int) -> Self {
+    return appending(key: "buffer", value: value)
+  }
+
+  /**
    Adds the `faces` option.
    
    - Parameter value: The faces to be included in the crop.
