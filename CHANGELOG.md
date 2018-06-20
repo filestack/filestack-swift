@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.2.6 *(2018-06-20)*
+----------------------------
+
+- Added new image content detection transforms.
+
 Version 1.2.5 *(2018-06-18)*
 ----------------------------
 
