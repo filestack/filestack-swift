@@ -242,6 +242,26 @@ class TransformableTests: XCTestCase {
     XCTAssertEqual(transformable.url, expectedURL)
   }
   
+  func testSecureForWorkTransformationURL() {
+    transformable.add(transform: SecureForWorkTransform())
+    
+    let expectedURL = Config.processURL
+      .appendingPathComponent("sfw")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedURL)
+  }
+
+  func testTagsTransformationURL() {
+    transformable.add(transform: TagsTransform())
+    
+    let expectedURL = Config.processURL
+      .appendingPathComponent("tags")
+      .appendingPathComponent("MY-HANDLE")
+    
+    XCTAssertEqual(transformable.url, expectedURL)
+  }
+
   func testRotateTransformationURL() {
     transformable.add(transform: RotateTransform(deg: 320).exif(true).background(.white))
     

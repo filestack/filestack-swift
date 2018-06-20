@@ -73,6 +73,8 @@
 		45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */; };
 		45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CC71F0B86AD008EDBCD /* Globals.swift */; };
 		45FA0CCD1F0B86B6008EDBCD /* CDNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CCB1F0B86B6008EDBCD /* CDNService.swift */; };
+		BC27300620DA7D1B00142174 /* SecureForWorkTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27300520DA7D1B00142174 /* SecureForWorkTransform.swift */; };
+		BC27301A20DA806200142174 /* TagsTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27301920DA806200142174 /* TagsTransform.swift */; };
 		BC8832CC20D181A700B88EAF /* PolaroidTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832B320D181A600B88EAF /* PolaroidTransform.swift */; };
 		BC8832CD20D181A700B88EAF /* WatermarkTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832B420D181A600B88EAF /* WatermarkTransform.swift */; };
 		BC8832CE20D181A700B88EAF /* AVTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832B520D181A600B88EAF /* AVTransform.swift */; };
@@ -364,6 +366,8 @@
 		45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHHTTPStubs.xcodeproj; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/OHHTTPStubs.xcodeproj; sourceTree = "<group>"; };
 		45FA0CC71F0B86AD008EDBCD /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = Misc/Globals.swift; sourceTree = "<group>"; };
 		45FA0CCB1F0B86B6008EDBCD /* CDNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNService.swift; sourceTree = "<group>"; };
+		BC27300520DA7D1B00142174 /* SecureForWorkTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureForWorkTransform.swift; sourceTree = "<group>"; };
+		BC27301920DA806200142174 /* TagsTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTransform.swift; sourceTree = "<group>"; };
 		BC8832B320D181A600B88EAF /* PolaroidTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolaroidTransform.swift; sourceTree = "<group>"; };
 		BC8832B420D181A600B88EAF /* WatermarkTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkTransform.swift; sourceTree = "<group>"; };
 		BC8832B520D181A600B88EAF /* AVTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVTransform.swift; sourceTree = "<group>"; };
@@ -485,9 +489,11 @@
 				BC8832C820D181A700B88EAF /* ResizeTransform.swift */,
 				452055411F4B191900A6795D /* RotateTransform.swift */,
 				BC8832C620D181A700B88EAF /* RoundCornersTransform.swift */,
+				BC27300520DA7D1B00142174 /* SecureForWorkTransform.swift */,
 				BC8832B820D181A600B88EAF /* SepiaTransform.swift */,
 				BC8832BF20D181A600B88EAF /* ShadowTransform.swift */,
 				BC8832C320D181A700B88EAF /* SharpenTransform.swift */,
+				BC27301920DA806200142174 /* TagsTransform.swift */,
 				BC8832C520D181A700B88EAF /* TornEdgesTransform.swift */,
 				BC8832CA20D181A700B88EAF /* Transform.swift */,
 				BC8832FD20D3DBCA00B88EAF /* UpscaleTransform.swift */,
@@ -1017,6 +1023,7 @@
 				4502F7371F1F540F000875D6 /* UploadService.swift in Sources */,
 				BC88330020D3DCB600B88EAF /* TransformNoiseMode.swift in Sources */,
 				459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */,
+				BC27301A20DA806200142174 /* TagsTransform.swift in Sources */,
 				4589A45F1F0A3B5500C39405 /* StorageLocation.swift in Sources */,
 				45C9E93B1F137EB200260F2A /* Transformable.swift in Sources */,
 				BC8832EC20D239A900B88EAF /* OilPaintTransform.swift in Sources */,
@@ -1028,6 +1035,7 @@
 				456FF4C11F27799D00E9F192 /* MultipartUploadCompleteOperation.swift in Sources */,
 				4579CD3E1F1764A500DCF37A /* TransformBlurMode.swift in Sources */,
 				45C8F2081F18B3AF001A6558 /* StorageAccess.swift in Sources */,
+				BC27300620DA7D1B00142174 /* SecureForWorkTransform.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
 				BC88330D20D3EB7800B88EAF /* CompressTransform.swift in Sources */,
 				BC8832FA20D3C90D00B88EAF /* CollageTransform.swift in Sources */,

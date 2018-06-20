@@ -14,7 +14,7 @@ import Foundation
 @objc(FSNegativeTransform) public class NegativeTransform: Transform {
   
   /**
-   Initializes a `OilPaintTransform` object.
+   Initializes a `NegativeTransform` object.
    */
   public init() {
     super.init(name: "negative")
