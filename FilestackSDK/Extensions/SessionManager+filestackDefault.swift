@@ -9,21 +9,22 @@
 import Foundation
 import Alamofire
 
-
-internal extension SessionManager {
-
-    class func filestackDefault() -> SessionManager {
-
-        var defaultHeaders = SessionManager.defaultHTTPHeaders
-
-        if let shortVersionString = BundleInfo.version {
-            defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
-            defaultHeaders["Filestack-Source"] = "Swift-\(shortVersionString)"
-        }
-
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = defaultHeaders
-
-        return SessionManager(configuration: configuration)
-    }
+extension SessionManager {
+  
+  class func filestackDefault() -> SessionManager {
+    let configuration = URLSessionConfiguration.default
+    configuration.httpAdditionalHeaders = additionalHeaders
+    return SessionManager(configuration: configuration)
+  }
+  
+  class private var additionalHeaders: HTTPHeaders {
+    var defaultHeaders = SessionManager.defaultHTTPHeaders
+    defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
+    defaultHeaders["Filestack-Source"] = "Swift-\(shortVersionString)"
+    return defaultHeaders
+  }
+  
+  class private var shortVersionString: String {
+    return BundleInfo.version ?? "0.0.0"
+  }
 }

@@ -140,7 +140,7 @@ extension MultipartUploadError: LocalizedError {
     private func doUploadFile() {
         guard let localURL = localURL else { return }
         let fileName = storeOptions.filename ?? localURL.lastPathComponent
-        let mimeType = localURL.mimeType() ?? "text/plain"
+        let mimeType = localURL.mimeType ?? "text/plain"
         var shouldUseIntelligentIngestion = false
 
         guard !fileName.isEmpty, let fileSize = localURL.size() else {
