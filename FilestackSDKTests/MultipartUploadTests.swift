@@ -369,14 +369,14 @@ class MultipartUploadTests: XCTestCase {
         
         var responses: [NetworkJSONResponse]!
         
-        client.multiFileUpload(from: [localURL, localURL, localURL],
+        client.multiFileUpload(from: [localURL, localURL],
                                useIntelligentIngestionIfAvailable: false) { (resp) in
             
             responses = resp
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 20, handler: nil)
         
         XCTAssertEqual(responses.count, 3)
     }
