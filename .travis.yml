@@ -10,8 +10,8 @@ env:
   - IOS_FRAMEWORK_SCHEME="FilestackSDK"
   - NSUnbufferedIO=YES
   matrix:
-    - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"   SCHEME="$IOS_FRAMEWORK_SCHEME"
-    - DESTINATION="OS=9.3,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"
+    - DESTINATION="OS=11.4,name=iPhone 7 Plus"   SCHEME="$IOS_FRAMEWORK_SCHEME"
+    - DESTINATION="OS=10.3,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"
     - DESTINATION="OS=9.0,name=iPhone 5"           SCHEME="$IOS_FRAMEWORK_SCHEME"
 before_install:
   - brew install carthage
@@ -27,4 +27,4 @@ script:
   - travis_retry xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Debug test-without-building | xcpretty;
   
 after_success:
-   - sleep 15
+   - sleep 20
