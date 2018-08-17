@@ -8,14 +8,11 @@
 
 import Foundation
 
-
 extension URL {
-
-    internal func size() -> UInt64? {
-
-        let fm = FileManager.default
-        let fileSize = (try? fm.attributesOfItem(atPath: relativePath))?[.size] as? UInt64
-
-        return fileSize
-    }
+  
+  func size() -> UInt64? {
+    let manager = FileManager.default
+    guard let attributtes = try? manager.attributesOfItem(atPath: relativePath) else { return nil }
+    return attributtes[.size] as? UInt64
+  }
 }

@@ -23,7 +23,7 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
     let storeOptions: StorageOptions
     let useIntelligentIngestion: Bool
 
-    var response: NetworkJSONResponse?
+    var response = NetworkJSONResponse(with: MultipartUploadError.aborted)
 
 
     required init(apiKey: String,
@@ -36,7 +36,6 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
                   storeOptions: StorageOptions,
                   partsAndEtags: [Int: String],
                   useIntelligentIngestion: Bool) {
-
         self.apiKey = apiKey
         self.fileName = fileName
         self.fileSize = fileSize
@@ -73,27 +72,21 @@ internal class MultipartUploadCompleteOperation: BaseOperation {
             form.append(self.fileName.data(using: .utf8)!, withName: "filename")
             form.append(String(self.fileSize).data(using: .utf8)!, withName: "size")
             form.append(self.mimeType.data(using: .utf8)!, withName: "mimetype")
-
             if let storeLocation = self.storeOptions.location.description.data(using: .utf8) {
                 form.append(storeLocation, withName: "store_location")
             }
-
             if let storeRegionData = self.storeOptions.region?.data(using: .utf8) {
                 form.append(storeRegionData, withName: "store_region")
             }
-
             if let storeContainerData = self.storeOptions.container?.data(using: .utf8) {
                 form.append(storeContainerData, withName: "store_container")
             }
-
             if let storePathData = self.storeOptions.path?.data(using: .utf8) {
                 form.append(storePathData, withName: "store_path")
             }
-
             if let storeAccessData = self.storeOptions.access?.description.data(using: .utf8) {
                 form.append(storeAccessData, withName: "store_access")
             }
-
             if self.useIntelligentIngestion {
                 form.append("true".data(using: .utf8)!, withName: "multipart")
             } else {

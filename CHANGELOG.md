@@ -1,6 +1,34 @@
 Change Log
 ==========
 
+Version 1.2.7 *(2018-06-16)*
+----------------------------
+
+- Fix test target.
+
+Version 1.2.6 *(2018-06-20)*
+----------------------------
+
+- Added new image content detection transforms.
+
+Version 1.2.5 *(2018-06-18)*
+----------------------------
+
+- Added new Transforms.
+- Moved some Transform related string to enums.
+
+
+Version 1.2.4 *(2018-06-11)*
+----------------------------
+
+- Added `MultifileUpload` class.
+
+
+Version 1.2.3 *(2018-06-01)*
+----------------------------
+
+- Updated CryptoSwift to version 0.10.0.
+
 Version 1.2.2 *(2017-12-19)*
 ----------------------------
 
