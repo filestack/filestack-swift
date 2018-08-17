@@ -378,7 +378,7 @@ class MultipartUploadTests: XCTestCase {
         
         waitForExpectations(timeout: 20, handler: nil)
         
-        XCTAssertEqual(responses.count, 3)
+        XCTAssertEqual(responses.count, 2)
     }
 
     func testMultiFileUploadWithoutAutostart() {

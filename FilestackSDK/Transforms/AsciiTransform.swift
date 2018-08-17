@@ -41,7 +41,7 @@ import Foundation
   /**
    Adds the `colored` option.
    
-   - Parameter value: //TODO: finish this!
+   - Parameter value: Sets output as colored.
    */
   @discardableResult public func colored() -> Self {
     return appending(key: "colored", value: true)
