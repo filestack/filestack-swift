@@ -401,12 +401,12 @@ class MultipartUploadTests: XCTestCase {
                                             expectation.fulfill()
         }
         
-        mfu.uploadURLs = [localURL, localURL, localURL]
+        mfu.uploadURLs = [localURL, localURL]
         mfu.uploadFiles()
         
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 20, handler: nil)
         
-        XCTAssertEqual(responses.count, 3)
+        XCTAssertEqual(responses.count, 2)
     }
 
     func testMultiFileUploadWithoutURLs() {
