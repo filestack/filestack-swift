@@ -331,7 +331,7 @@ class MultipartUploadTests: XCTestCase {
         
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
-        let localURL = Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
+        let localURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
         let expectation = self.expectation(description: "request should succeed")
         
         var responses: [NetworkJSONResponse]!
@@ -364,7 +364,7 @@ class MultipartUploadTests: XCTestCase {
         
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
-        let localURL = Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
+        let localURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
         let expectation = self.expectation(description: "request should succeed")
         
         var responses: [NetworkJSONResponse]!
@@ -389,7 +389,7 @@ class MultipartUploadTests: XCTestCase {
         
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
-        let localURL = Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
+        let localURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
         let expectation = self.expectation(description: "request should succeed")
         
         var responses: [NetworkJSONResponse]!
