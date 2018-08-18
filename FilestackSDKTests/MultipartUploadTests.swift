@@ -162,7 +162,7 @@ class MultipartUploadTests: XCTestCase {
     let expectation = self.expectation(description: "request should succeed")
     
     var error: Error?
-    client.multiPartUpload(from: largeFileUrl) { (resp) in
+    client.multiPartUpload(from: sampleFileUrl) { (resp) in
       error = resp.error
       expectation.fulfill()
     }
