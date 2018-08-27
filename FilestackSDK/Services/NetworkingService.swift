@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 
-
 internal protocol NetworkingService {
 
     var sessionManager: SessionManager { get }

@@ -20,7 +20,7 @@ import Foundation
     /// An `StorageLocation` value. Valid options are `.s3`, `.dropbox`, `.rackspace`, `.azure`, `.gcs`.
     public let location: StorageLocation
 
-    // A region name, e.g. "us-east-1".
+    /// A region name, e.g. "us-east-1".
     public var region: String?
 
     /// The bucket or container in the specified file store where the file should end up.

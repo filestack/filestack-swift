@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// :nodoc:
 enum MultipartUploadError: Error {
 
     case invalidFile
@@ -42,6 +43,7 @@ extension MultipartUploadError: LocalizedError {
 
     // MARK: - Public Properties
 
+    /// Local URL of file we want to upload.
     public var localURL: URL?
 
     // MARK: - Internal Properties
