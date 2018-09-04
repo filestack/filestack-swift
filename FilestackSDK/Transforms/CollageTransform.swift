@@ -63,14 +63,26 @@ import Foundation
 
 }
 
+/**
+ Class that is used for creating and sanitizing collection of file handles, storage aliases, or external urls.
+ See also: 'CollageTransform'
+ */
 @objc(FSCollageTransformCollection) public class CollageTransformCollection: NSObject {
   
   var files = [String]()
   
+  /// Adding one resource to collection.
+  ///
+  /// - Parameter resource: File handle, storage aliase, or external url passed as String.
+  /// - Returns: self
   @discardableResult public func add(_ resource: String) -> Self {
     return add([resource])
   }
   
+  /// Adding few resources to collection.
+  ///
+  /// - Parameter resources: Array of file handles, storage aliase, or external url passed as String.
+  /// - Returns: self
   @discardableResult public func add(_ resources: [String]) -> Self {
     files.append(contentsOf: resources.map { envelop($0) })
     return self
