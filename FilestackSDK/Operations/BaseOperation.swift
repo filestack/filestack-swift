@@ -10,48 +10,43 @@ import Foundation
 
 class BaseOperation: Operation {
   
-  // `isReady` property override boilerplate, as suggested by Apple
-  private var _ready: Bool = false
+  enum State {
+    case ready
+    case executing
+    case finished
+    
+    var key: String {
+      switch self {
+      case .ready:
+        return "isReady"
+      case .executing:
+        return "isExecuting"
+      case .finished:
+        return "isFinished"
+      }
+    }
+  }
+  
+  var state = State.ready {
+    willSet {
+      willChangeValue(forKey: state.key)
+      willChangeValue(forKey: newValue.key)
+    }
+    didSet {
+      didChangeValue(forKey: oldValue.key)
+      didChangeValue(forKey: state.key)
+    }
+  }
   
   override var isReady: Bool {
-    get {
-      return _ready
-    }
-    set {
-      if _ready == newValue { return }
-      willChangeValue(forKey: "isReady")
-      _ready = newValue
-      didChangeValue(forKey: "isReady")
-    }
+    return state == .ready
   }
-  
-  // `isExecuting` property override boilerplate, as suggested by Apple
-  private var _executing: Bool = false
   
   override var isExecuting: Bool {
-    get {
-      return _executing
-    }
-    set {
-      if _executing == newValue { return }
-      willChangeValue(forKey: "isExecuting")
-      _executing = newValue
-      didChangeValue(forKey: "isExecuting")
-    }
+    return state == .executing
   }
   
-  // `isFinished` property override boilerplate, as suggested by Apple
-  private var _finished: Bool = false
-  
   override var isFinished: Bool {
-    get {
-      return _finished
-    }
-    set {
-      if _finished == newValue { return }
-      willChangeValue(forKey: "isFinished")
-      _finished = newValue
-      didChangeValue(forKey: "isFinished")
-    }
+    return state == .finished
   }
 }
