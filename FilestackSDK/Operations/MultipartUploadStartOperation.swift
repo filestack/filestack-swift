@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-internal class MultipartUploadStartOperation: BaseOperation {
-  
+class MultipartUploadStartOperation: BaseOperation {
+
   let apiKey: String
   let fileName: String
   let fileSize: UInt64
@@ -35,67 +35,53 @@ internal class MultipartUploadStartOperation: BaseOperation {
     self.storeOptions = storeOptions
     self.security = security
     self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
-    
     super.init()
-    
-    self.state = .ready
   }
   
   override func main() {
-    
-    guard !isCancelled else {
-      self.state = .finished
+    if isCancelled {
+      state = .finished
       return
     }
-    
     state = .executing
-    
-    let url = URL(string: "multipart/start", relativeTo: uploadService.baseURL)!
-    
-    let multipartFormData: (MultipartFormData) -> Void = { form in
-      form.append(self.apiKey.data(using: .utf8)!, withName: "apikey")
-      form.append(self.fileName.data(using: .utf8)!, withName: "filename")
-      form.append(self.mimeType.data(using: .utf8)!, withName: "mimetype")
-      form.append(String(self.fileSize).data(using: .utf8)!, withName: "size")
-      
-      if let storeLocation = self.storeOptions.location.description.data(using: .utf8) {
-        form.append(storeLocation, withName: "store_location")
-      }
-      
-      if let storeRegionData = self.storeOptions.region?.data(using: .utf8) {
-        form.append(storeRegionData, withName: "store_region")
-      }
-      
-      if let storeContainerData = self.storeOptions.container?.data(using: .utf8) {
-        form.append(storeContainerData, withName: "store_container")
-      }
-      
-      if let storePathData = self.storeOptions.path?.data(using: .utf8) {
-        form.append(storePathData, withName: "store_path")
-      }
-      
-      if let storeAccessData = self.storeOptions.access?.description.data(using: .utf8) {
-        form.append(storeAccessData, withName: "store_access")
-      }
-      
-      if let security = self.security {
-        
-        let policyData = security.encodedPolicy.data(using: .utf8)!
-        let signatureData = security.signature.data(using: .utf8)!
-        
-        form.append(policyData, withName: "policy")
-        form.append(signatureData, withName: "signature")
-      }
-      
-      if self.useIntelligentIngestionIfAvailable {
-        // Attempt to use Intelligent Ingestion
-        form.append("true".data(using: .utf8)!, withName: "multipart")
-      }
-    }
-    
-    uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
+    uploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
       self.response = response
       self.state = .finished
+    }
+  }
+}
+
+private extension MultipartUploadStartOperation {
+  var uploadUrl: URL {
+    return URL(string: "multipart/start", relativeTo: uploadService.baseURL)!
+  }
+  
+  func multipartFormData(form: MultipartFormData) {
+    form.append(apiKey.data(using: .utf8)!, withName: "apikey")
+    form.append(fileName.data(using: .utf8)!, withName: "filename")
+    form.append(mimeType.data(using: .utf8)!, withName: "mimetype")
+    form.append(String(fileSize).data(using: .utf8)!, withName: "size")
+    if let storeLocation = storeOptions.location.description.data(using: .utf8) {
+      form.append(storeLocation, withName: "store_location")
+    }
+    if let storeRegionData = storeOptions.region?.data(using: .utf8) {
+      form.append(storeRegionData, withName: "store_region")
+    }
+    if let storeContainerData = storeOptions.container?.data(using: .utf8) {
+      form.append(storeContainerData, withName: "store_container")
+    }
+    if let storePathData = storeOptions.path?.data(using: .utf8) {
+      form.append(storePathData, withName: "store_path")
+    }
+    if let storeAccessData = storeOptions.access?.description.data(using: .utf8) {
+      form.append(storeAccessData, withName: "store_access")
+    }
+    if let security = security {
+      form.append(security.encodedPolicy.data(using: .utf8)!, withName: "policy")
+      form.append(security.signature.data(using: .utf8)!, withName: "signature")
+    }
+    if useIntelligentIngestionIfAvailable {
+      form.append("true".data(using: .utf8)!, withName: "multipart")
     }
   }
 }
