@@ -41,18 +41,17 @@ internal class MultipartUploadStartOperation: BaseOperation {
 
         super.init()
 
-        self.isReady = true
+        self.state = .ready
     }
 
     override func main() {
 
         guard !isCancelled else {
-            isExecuting = false
-            isFinished = true
+            self.state = .finished
             return
         }
-
-        isExecuting = true
+      
+        state = .executing
 
         let url = URL(string: "multipart/start", relativeTo: uploadService.baseURL)!
 
@@ -99,8 +98,7 @@ internal class MultipartUploadStartOperation: BaseOperation {
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
             self.response = response
-            self.isExecuting = false
-            self.isFinished = true
+            self.state = .finished
         }
     }
 }

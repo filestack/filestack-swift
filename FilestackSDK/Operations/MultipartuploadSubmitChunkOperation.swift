@@ -47,18 +47,17 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
 
         super.init()
 
-        isReady = true
+        self.state = .ready
     }
 
     override func main() {
 
         guard !isCancelled else {
-            isExecuting = false
-            isFinished = true
+            self.state = .finished
             return
         }
 
-        isExecuting = true
+        self.state = .executing
 
         let url = URL(string: "multipart/upload", relativeTo: uploadService.baseURL)!
 
@@ -78,15 +77,13 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
             guard !self.isCancelled && !self.isFinished else { return }
 
             guard let urlString = response.json?["url"] as? String, let url = URL(string: urlString) else {
-                self.isExecuting = false
-                self.isFinished = true
+                self.state = .finished
 
                 return
             }
 
             guard let headers = response.json?["headers"] as? [String: String] else {
-                self.isExecuting = false
-                self.isFinished = true
+                self.state = .finished
 
                 return
             }
@@ -99,8 +96,7 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
             self.uploadRequest?.response { (response) in
                 self.response = response
                 self.responseEtag = response.response?.allHeaderFields["Etag"] as? String
-                self.isExecuting = false
-                self.isFinished = true
+                self.state = .finished
             }
         }
     }
@@ -109,7 +105,6 @@ internal class MultipartUploadSubmitChunkOperation: BaseOperation {
 
         super.cancel()
         uploadRequest?.cancel()
-        isExecuting = false
-        isFinished = true
+        self.state = .finished
     }
 }

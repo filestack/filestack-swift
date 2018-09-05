@@ -87,7 +87,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
         super.init()
 
-        self.isReady = true
+        self.state = .ready
     }
 
     override func main() {
@@ -95,8 +95,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
         fileHandle = try? FileHandle(forReadingFrom: self.localURL)
 
         guard fileHandle != nil else {
-            self.isExecuting = false
-            self.isFinished = true
+            self.state = .finished
             return
         }
 
@@ -119,12 +118,11 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
     private func regularUpload() {
 
         guard !isCancelled, let fileHandle = fileHandle else {
-            isExecuting = false
-            isFinished = true
+            self.state = .finished
             return
         }
 
-        isExecuting = true
+        state = .executing
 
         fileHandle.seek(toFileOffset: self.seek)
 
@@ -146,14 +144,12 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
             guard let urlString = response.json?["url"] as? String, let url = URL(string: urlString) else {
-                self.isExecuting = false
-                self.isFinished = true
+                self.state = .finished
                 return
             }
 
             guard let headers = response.json?["headers"] as? [String: String] else {
-                self.isExecuting = false
-                self.isFinished = true
+                self.state = .finished
                 return
             }
 
@@ -163,8 +159,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                 let chunkSize = Int64(dataChunk.count)
                 self.response = response
                 self.responseEtag = response.response?.allHeaderFields["Etag"] as? String
-                self.isExecuting = false
-                self.isFinished = true
+                self.state = .finished
                 self.uploadProgress?(chunkSize)
                 self.uploadProgress = nil
             }
@@ -174,12 +169,11 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
     private func intelligentIngestionUpload() {
 
         guard !isCancelled else {
-            isExecuting = false
-            isFinished = true
+            self.state = .finished
             return
         }
 
-        isExecuting = true
+        self.state = .executing
         partChunkSize = resumableMobileChunkSize
 
         beforeCommitCheckPointOperation = BlockOperation()
@@ -246,8 +240,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
         fileHandle = nil
         uploadProgress = nil
-        isExecuting = false
-        isFinished = true
+        state = .finished
         beforeCommitCheckPointOperation = nil
     }
 
@@ -279,8 +272,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             if operation.response?.error != nil {
                 guard self.retriesLeft > 0 else {
                     self.didFail = true
-                    self.isExecuting = false
-                    self.isFinished = true
+                    self.state = .finished
                     self.chunkUploadOperationQueue.cancelAllOperations()
                     return
                 }
@@ -303,8 +295,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
                     guard partChunkSize > self.minimumPartChunkSize else {
                         self.didFail = true
-                        self.isExecuting = false
-                        self.isFinished = true
+                        self.state = .finished
                         self.chunkUploadOperationQueue.cancelAllOperations()
                         return
                     }

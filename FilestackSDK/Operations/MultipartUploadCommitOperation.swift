@@ -41,17 +41,17 @@ internal class MultipartUploadCommitOperation: BaseOperation {
 
         super.init()
 
-        self.isReady = true
+        self.state = .ready
     }
 
     override func main() {
 
         guard !isCancelled else {
-            isFinished = true
+            self.state = .finished
             return
         }
 
-        isExecuting = true
+        self.state = .executing
 
         let url = URL(string: "multipart/commit", relativeTo: uploadService.baseURL)!
 
@@ -68,7 +68,7 @@ internal class MultipartUploadCommitOperation: BaseOperation {
 
         uploadService.upload(multipartFormData: multipartFormData, url: url) { response in
             self.response = response
-            self.isFinished = true
+            self.state = .finished
         }
     }
 }
