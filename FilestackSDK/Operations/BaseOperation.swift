@@ -54,19 +54,4 @@ class BaseOperation: Operation {
       didChangeValue(forKey: "isFinished")
     }
   }
-  
-  // `isCancelled` property override boilerplate, as suggested by Apple
-  private var _cancelled: Bool = false
-  
-  override var isCancelled: Bool {
-    get {
-      return _cancelled
-    }
-    set {
-      if _cancelled == newValue { return }
-      willChangeValue(forKey: "isCancelled")
-      _cancelled = newValue
-      didChangeValue(forKey: "isCancelled")
-    }
-  }
 }

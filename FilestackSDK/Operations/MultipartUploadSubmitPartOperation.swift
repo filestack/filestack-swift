@@ -109,9 +109,9 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
 
     override func cancel() {
 
+        super.cancel()
         didFail = true
         chunkUploadOperationQueue.cancelAllOperations()
-        isCancelled = true
     }
 
     // MARK: - Private Functions
