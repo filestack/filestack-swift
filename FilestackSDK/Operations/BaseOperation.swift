@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class BaseOperation: Operation {
   
@@ -48,5 +49,17 @@ class BaseOperation: Operation {
   
   override var isFinished: Bool {
     return state == .finished
+  }
+}
+
+struct MultipartResponse {
+  let response: HTTPURLResponse?
+  let error: Error?
+  let etag: String?
+}
+
+extension MultipartFormData {
+  func append(_ string: String, withName name: String) {
+    append(string.data(using: .utf8)!, withName: name)
   }
 }

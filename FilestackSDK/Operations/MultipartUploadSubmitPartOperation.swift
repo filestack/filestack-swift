@@ -269,7 +269,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
             guard operation.isCancelled == false else { return }
 
             // Network error
-            if operation.response?.error != nil {
+            if operation.receivedResponse?.error != nil {
                 guard self.retriesLeft > 0 else {
                     self.didFail = true
                     self.state = .finished
@@ -284,7 +284,7 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
                     return
                 }
             // Server error
-            } else if let response = operation.response?.response {
+            } else if let response = operation.receivedResponse?.response {
                 switch response.statusCode {
                 case 200:
 
