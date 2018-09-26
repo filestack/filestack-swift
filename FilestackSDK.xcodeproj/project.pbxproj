@@ -75,6 +75,8 @@
 		45FA0CCD1F0B86B6008EDBCD /* CDNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CCB1F0B86B6008EDBCD /* CDNService.swift */; };
 		BC27300620DA7D1B00142174 /* SecureForWorkTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27300520DA7D1B00142174 /* SecureForWorkTransform.swift */; };
 		BC27301A20DA806200142174 /* TagsTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27301920DA806200142174 /* TagsTransform.swift */; };
+		BC522C86215BBA48005BDBCF /* MultipartInteligentUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC522C85215BBA48005BDBCF /* MultipartInteligentUploadSubmitPartOperation.swift */; };
+		BC522C9A215BBA8C005BDBCF /* MultipartRegularUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC522C99215BBA8C005BDBCF /* MultipartRegularUploadSubmitPartOperation.swift */; };
 		BC8832CC20D181A700B88EAF /* PolaroidTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832B320D181A600B88EAF /* PolaroidTransform.swift */; };
 		BC8832CD20D181A700B88EAF /* WatermarkTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832B420D181A600B88EAF /* WatermarkTransform.swift */; };
 		BC8832CE20D181A700B88EAF /* AVTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832B520D181A600B88EAF /* AVTransform.swift */; };
@@ -368,6 +370,8 @@
 		45FA0CCB1F0B86B6008EDBCD /* CDNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNService.swift; sourceTree = "<group>"; };
 		BC27300520DA7D1B00142174 /* SecureForWorkTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureForWorkTransform.swift; sourceTree = "<group>"; };
 		BC27301920DA806200142174 /* TagsTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTransform.swift; sourceTree = "<group>"; };
+		BC522C85215BBA48005BDBCF /* MultipartInteligentUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartInteligentUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
+		BC522C99215BBA8C005BDBCF /* MultipartRegularUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartRegularUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		BC8832B320D181A600B88EAF /* PolaroidTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolaroidTransform.swift; sourceTree = "<group>"; };
 		BC8832B420D181A600B88EAF /* WatermarkTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatermarkTransform.swift; sourceTree = "<group>"; };
 		BC8832B520D181A600B88EAF /* AVTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVTransform.swift; sourceTree = "<group>"; };
@@ -446,6 +450,8 @@
 				456FF4C01F27799D00E9F192 /* MultipartUploadCompleteOperation.swift */,
 				4502F7301F1F4C3A000875D6 /* MultipartUploadStartOperation.swift */,
 				459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */,
+				BC522C85215BBA48005BDBCF /* MultipartInteligentUploadSubmitPartOperation.swift */,
+				BC522C99215BBA8C005BDBCF /* MultipartRegularUploadSubmitPartOperation.swift */,
 				45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */,
 			);
 			path = Operations;
@@ -1035,6 +1041,7 @@
 				456FF4C11F27799D00E9F192 /* MultipartUploadCompleteOperation.swift in Sources */,
 				4579CD3E1F1764A500DCF37A /* TransformBlurMode.swift in Sources */,
 				45C8F2081F18B3AF001A6558 /* StorageAccess.swift in Sources */,
+				BC522C9A215BBA8C005BDBCF /* MultipartRegularUploadSubmitPartOperation.swift in Sources */,
 				BC27300620DA7D1B00142174 /* SecureForWorkTransform.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
 				BC88330D20D3EB7800B88EAF /* CompressTransform.swift in Sources */,
@@ -1055,6 +1062,7 @@
 				BC8832DB20D181A700B88EAF /* DetectFacesTransform.swift in Sources */,
 				BC8832D620D181A700B88EAF /* FlipTransform.swift in Sources */,
 				BC8832E020D181A700B88EAF /* VignetteTransform.swift in Sources */,
+				BC522C86215BBA48005BDBCF /* MultipartInteligentUploadSubmitPartOperation.swift in Sources */,
 				45965C6B1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift in Sources */,
 				BC8832EA20D238B600B88EAF /* PixelateTransform.swift in Sources */,
 				BC8832E720D181F000B88EAF /* BlurFacesTransform.swift in Sources */,
