@@ -41,6 +41,7 @@ extension MultipartUploadError: LocalizedError {
 /// :nodoc:
 @objc(FSMultipartUpload) public class MultipartUpload: NSObject {
 
+  typealias UploadProgress = (Int64) -> Void
     // MARK: - Public Properties
 
     /// Local URL of file we want to upload.
@@ -65,6 +66,8 @@ extension MultipartUploadError: LocalizedError {
     private let storeOptions: StorageOptions
     private let security: Security?
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
+
+    var totalUploadedBytes: Int64 = 0
 
     private let uploadOperationQueue: OperationQueue = {
         $0.underlyingQueue = DispatchQueue(label: "com.filestack.upload-operation-queue",
@@ -206,7 +209,6 @@ extension MultipartUploadError: LocalizedError {
         }
 
         var partsAndEtags: [Int: String] = [:]
-        var totalUploadedBytes: Int64 = 0
 
         let beforeCompleteCheckPointOperation = BlockOperation()
 
@@ -230,25 +232,18 @@ extension MultipartUploadError: LocalizedError {
         // Submit all parts
         while !shouldAbort && seekPoint < fileSize {
             part += 1
-
-            let partOperation = MultipartUploadSubmitPartOperation(seek: seekPoint,
-                                                                   localURL: localURL,
-                                                                   fileName: fileName,
-                                                                   fileSize: fileSize,
-                                                                   apiKey: apiKey,
-                                                                   part: part,
-                                                                   uri: uri,
-                                                                   region: region,
-                                                                   uploadID: uploadID,
-                                                                   storeOptions: storeOptions,
-                                                                   chunkSize: chunkSize,
-                                                                   chunkUploadConcurrency: chunkUploadConcurrency,
-                                                                   useIntelligentIngestion: shouldUseIntelligentIngestion) { uploadedBytes in
-
-                totalUploadedBytes += uploadedBytes
-                self.updateProgress(uploadedBytes: totalUploadedBytes)
-            }
-
+          
+            let partOperation = uploadSubmitPartOperation(intelligentIngestion: shouldUseIntelligentIngestion,
+                                                          seek: seekPoint,
+                                                          localUrl: localURL,
+                                                          fileName: fileName,
+                                                          fileSize: fileSize,
+                                                          part: part,
+                                                          uri: uri,
+                                                          region: region,
+                                                          uploadId: uploadID,
+                                                          chunkSize: chunkSize)
+          
             weak var weakPartOperation = partOperation
 
             let checkpointOperation = BlockOperation {
@@ -284,6 +279,50 @@ extension MultipartUploadError: LocalizedError {
         uploadOperationQueue.addOperation(beforeCompleteCheckPointOperation)
     }
 
+  private func uploadSubmitPartOperation(intelligentIngestion: Bool,
+                                         seek: UInt64,
+                                         localUrl: URL,
+                                         fileName: String,
+                                         fileSize: UInt64,
+                                         part: Int,
+                                         uri: String,
+                                         region: String,
+                                         uploadId: String,
+                                         chunkSize: Int) -> MultipartUploadSubmitPartOperation {
+    if intelligentIngestion {
+      return MultipartInteligentUploadSubmitPartOperation(seek: seek,
+                                                          localURL: localUrl,
+                                                          fileName: fileName,
+                                                          fileSize: fileSize,
+                                                          apiKey: apiKey,
+                                                          part: part,
+                                                          uri: uri,
+                                                          region: region,
+                                                          uploadID: uploadId,
+                                                          storeOptions: storeOptions,
+                                                          chunkSize: chunkSize,
+                                                          chunkUploadConcurrency: chunkUploadConcurrency,
+                                                          uploadProgress: uploadProgress)
+    } else {
+      return MultipartRegularUploadSubmitPartOperation(seek: seek,
+                                                       localURL: localUrl,
+                                                       fileName: fileName,
+                                                       fileSize: fileSize,
+                                                       apiKey: apiKey,
+                                                       part: part,
+                                                       uri: uri,
+                                                       region: region,
+                                                       uploadID: uploadId,
+                                                       chunkSize: chunkSize,
+                                                       uploadProgress: uploadProgress)
+    }
+  }
+  
+  private func uploadProgress(progress: Int64) {
+    totalUploadedBytes += progress
+    updateProgress(uploadedBytes: totalUploadedBytes)
+  }
+  
     private func addCompleteOperation(fileName: String,
                                       fileSize: UInt64,
                                       mimeType: String,

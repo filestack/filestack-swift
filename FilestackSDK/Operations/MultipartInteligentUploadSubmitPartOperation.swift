@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation {
+internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
 
   let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
   let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))

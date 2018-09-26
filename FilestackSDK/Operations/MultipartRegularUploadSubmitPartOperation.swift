@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-internal class MultipartRegularUploadSubmitPartOperation: BaseOperation {
+internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
   typealias MultiPartFormDataClosure = (MultipartFormData) -> Void
   
   let seek: UInt64
