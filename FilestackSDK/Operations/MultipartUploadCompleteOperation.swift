@@ -97,5 +97,4 @@ private extension MultipartUploadCompleteOperation {
       form.append(parts.data(using: .utf8)!, withName: "parts")
     }
   }
-
 }
