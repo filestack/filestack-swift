@@ -22,7 +22,6 @@ internal class MultipartUploadCommitOperation: BaseOperation {
 
     var response: NetworkJSONResponse?
 
-
     required init(apiKey: String,
                   fileSize: UInt64,
                   part: Int,
