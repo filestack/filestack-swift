@@ -99,13 +99,13 @@ private extension MultipartRegularUploadSubmitPartOperation {
   
   func multipartFormData(dataChunk: Data) -> MultiPartFormDataClosure {
     return { form in
-      form.append(self.apiKey.data(using: .utf8)!, withName: "apikey")
-      form.append(self.uri.data(using: .utf8)!, withName: "uri")
-      form.append(self.region.data(using: .utf8)!, withName: "region")
-      form.append(self.uploadID.data(using: .utf8)!, withName: "upload_id")
-      form.append(String(dataChunk.count).data(using: .utf8)!, withName: "size")
-      form.append(String(self.part).data(using: .utf8)!, withName: "part")
-      form.append(dataChunk.base64MD5Digest().data(using: .utf8)!, withName: "md5")
+      form.append(self.apiKey, withName: "apikey")
+      form.append(self.uri, withName: "uri")
+      form.append(self.region, withName: "region")
+      form.append(self.uploadID, withName: "upload_id")
+      form.append(String(dataChunk.count), withName: "size")
+      form.append(String(self.part), withName: "part")
+      form.append(dataChunk.base64MD5Digest(), withName: "md5")
       }
   }
   

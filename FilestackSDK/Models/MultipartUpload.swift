@@ -10,38 +10,29 @@ import Foundation
 
 /// :nodoc:
 enum MultipartUploadError: Error {
-  
   case invalidFile
   case aborted
   case error(description: String)
 }
 
 extension MultipartUploadError: LocalizedError {
-  
   public var errorDescription: String? {
-    
     switch self {
     case .invalidFile:
-      
       return "The file provided is invalid or could not be found"
-      
     case .aborted:
-      
       return "The upload operation was aborted"
-      
     case .error(let description):
-      
       return description
-      
     }
   }
 }
-
 
 /// :nodoc:
 @objc(FSMultipartUpload) public class MultipartUpload: NSObject {
   
   typealias UploadProgress = (Int64) -> Void
+  
   // MARK: - Public Properties
   
   /// Local URL of file we want to upload.
@@ -81,16 +72,16 @@ extension MultipartUploadError: LocalizedError {
   
   // MARK: - Lifecyle Functions
   
-  internal init(at localURL: URL? = nil,
-                queue: DispatchQueue = .main,
-                uploadProgress: ((Progress) -> Void)? = nil,
-                completionHandler: @escaping (NetworkJSONResponse) -> Void,
-                partUploadConcurrency: Int = 5,
-                chunkUploadConcurrency: Int = 8,
-                apiKey: String,
-                storeOptions: StorageOptions,
-                security: Security? = nil,
-                useIntelligentIngestionIfAvailable: Bool = true) {
+  init(at localURL: URL? = nil,
+       queue: DispatchQueue = .main,
+       uploadProgress: ((Progress) -> Void)? = nil,
+       completionHandler: @escaping (NetworkJSONResponse) -> Void,
+       partUploadConcurrency: Int = 5,
+       chunkUploadConcurrency: Int = 8,
+       apiKey: String,
+       storeOptions: StorageOptions,
+       security: Security? = nil,
+       useIntelligentIngestionIfAvailable: Bool = true) {
     if let localURL = localURL {
       self.localURL = localURL
     }
@@ -125,24 +116,24 @@ extension MultipartUploadError: LocalizedError {
       self.doUploadFile()
     }
   }
-  
-  // MARK: - Private Functions
-  
-  private func fail(with error: Error) {
+}
+
+private extension MultipartUpload {
+  func fail(with error: Error) {
     let errorResponse = NetworkJSONResponse(with: error)
     queue.async {
       self.completionHandler(errorResponse)
     }
   }
   
-  private func updateProgress(uploadedBytes: Int64) {
+  func updateProgress(uploadedBytes: Int64) {
     progress.completedUnitCount = uploadedBytes
     queue.async {
       self.uploadProgress?(self.progress)
     }
   }
   
-  private func doUploadFile() {
+  func doUploadFile() {
     guard let localURL = localURL else { return }
     let fileName = storeOptions.filename ?? localURL.lastPathComponent
     let mimeType = localURL.mimeType ?? "text/plain"
@@ -223,7 +214,6 @@ extension MultipartUploadError: LocalizedError {
                                   uri: uri,
                                   region: region,
                                   uploadID: uploadID,
-                                  partsAndEtags: partsAndEtags,
                                   useIntelligentIngestion: shouldUseIntelligentIngestion,
                                   retriesLeft: self.maxRetries)
       }
@@ -279,16 +269,16 @@ extension MultipartUploadError: LocalizedError {
     uploadOperationQueue.addOperation(beforeCompleteCheckPointOperation)
   }
   
-  private func uploadSubmitPartOperation(intelligentIngestion: Bool,
-                                         seek: UInt64,
-                                         localUrl: URL,
-                                         fileName: String,
-                                         fileSize: UInt64,
-                                         part: Int,
-                                         uri: String,
-                                         region: String,
-                                         uploadId: String,
-                                         chunkSize: Int) -> MultipartUploadSubmitPartOperation {
+  func uploadSubmitPartOperation(intelligentIngestion: Bool,
+                                 seek: UInt64,
+                                 localUrl: URL,
+                                 fileName: String,
+                                 fileSize: UInt64,
+                                 part: Int,
+                                 uri: String,
+                                 region: String,
+                                 uploadId: String,
+                                 chunkSize: Int) -> MultipartUploadSubmitPartOperation {
     if intelligentIngestion {
       return MultipartInteligentUploadSubmitPartOperation(seek: seek,
                                                           localURL: localUrl,
@@ -318,21 +308,19 @@ extension MultipartUploadError: LocalizedError {
     }
   }
   
-  private func uploadProgress(progress: Int64) {
+  func uploadProgress(progress: Int64) {
     totalUploadedBytes += progress
     updateProgress(uploadedBytes: totalUploadedBytes)
   }
   
-  private func addCompleteOperation(fileName: String,
-                                    fileSize: UInt64,
-                                    mimeType: String,
-                                    uri: String,
-                                    region: String,
-                                    uploadID: String,
-                                    partsAndEtags: [Int : String],
-                                    useIntelligentIngestion: Bool,
-                                    retriesLeft: Int) {
-    
+  func addCompleteOperation(fileName: String,
+                            fileSize: UInt64,
+                            mimeType: String,
+                            uri: String,
+                            region: String,
+                            uploadID: String,
+                            useIntelligentIngestion: Bool,
+                            retriesLeft: Int) {
     let completeOperation = MultipartUploadCompleteOperation(apiKey: apiKey,
                                                              fileName: fileName,
                                                              fileSize: fileSize,
@@ -341,7 +329,6 @@ extension MultipartUploadError: LocalizedError {
                                                              region: region,
                                                              uploadID: uploadID,
                                                              storeOptions: storeOptions,
-                                                             partsAndEtags: partsAndEtags,
                                                              useIntelligentIngestion: useIntelligentIngestion)
     
     weak var weakCompleteOperation = completeOperation
@@ -364,7 +351,6 @@ extension MultipartUploadError: LocalizedError {
                                       uri: uri,
                                       region: region,
                                       uploadID: uploadID,
-                                      partsAndEtags: partsAndEtags,
                                       useIntelligentIngestion: useIntelligentIngestion,
                                       retriesLeft: retriesLeft - 1)
           }

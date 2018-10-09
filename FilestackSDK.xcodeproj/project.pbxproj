@@ -446,9 +446,9 @@
 			isa = PBXGroup;
 			children = (
 				4502F7321F1F4D20000875D6 /* BaseOperation.swift */,
+				4502F7301F1F4C3A000875D6 /* MultipartUploadStartOperation.swift */,
 				4528C7451F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift */,
 				456FF4C01F27799D00E9F192 /* MultipartUploadCompleteOperation.swift */,
-				4502F7301F1F4C3A000875D6 /* MultipartUploadStartOperation.swift */,
 				459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */,
 				BC522C85215BBA48005BDBCF /* MultipartInteligentUploadSubmitPartOperation.swift */,
 				BC522C99215BBA8C005BDBCF /* MultipartRegularUploadSubmitPartOperation.swift */,

@@ -139,13 +139,13 @@ private extension MultipartInteligentUploadSubmitPartOperation {
   private func doCommit() {
     // Try to commit operation with retries.
     while !didFail && retriesLeft > 0 {
-      let commitOperation = MultipartUploadCommitOperation(apiKey: self.apiKey,
-                                                           fileSize: self.fileSize,
-                                                           part: self.part,
-                                                           uri: self.uri,
-                                                           region: self.region,
-                                                           uploadID: self.uploadID,
-                                                           storeOptions: self.storeOptions)
+      let commitOperation = MultipartUploadCommitOperation(apiKey: apiKey,
+                                                           fileSize: fileSize,
+                                                           part: part,
+                                                           uri: uri,
+                                                           region: region,
+                                                           uploadID: uploadID,
+                                                           storeOptions: storeOptions)
       
       chunkUploadOperationQueue.addOperation(commitOperation)
       chunkUploadOperationQueue.waitUntilAllOperationsAreFinished()

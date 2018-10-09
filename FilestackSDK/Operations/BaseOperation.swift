@@ -59,7 +59,8 @@ struct MultipartResponse {
 }
 
 extension MultipartFormData {
-  func append(_ string: String, withName name: String) {
-    append(string.data(using: .utf8)!, withName: name)
+  func append(_ string: String?, withName name: String) {
+    guard let data = string?.data(using: .utf8) else { return }
+    append(data, withName: name)
   }
 }

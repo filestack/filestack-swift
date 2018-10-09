@@ -57,31 +57,21 @@ private extension MultipartUploadStartOperation {
   }
   
   func multipartFormData(form: MultipartFormData) {
-    form.append(apiKey.data(using: .utf8)!, withName: "apikey")
-    form.append(fileName.data(using: .utf8)!, withName: "filename")
-    form.append(mimeType.data(using: .utf8)!, withName: "mimetype")
-    form.append(String(fileSize).data(using: .utf8)!, withName: "size")
-    if let storeLocation = storeOptions.location.description.data(using: .utf8) {
-      form.append(storeLocation, withName: "store_location")
-    }
-    if let storeRegionData = storeOptions.region?.data(using: .utf8) {
-      form.append(storeRegionData, withName: "store_region")
-    }
-    if let storeContainerData = storeOptions.container?.data(using: .utf8) {
-      form.append(storeContainerData, withName: "store_container")
-    }
-    if let storePathData = storeOptions.path?.data(using: .utf8) {
-      form.append(storePathData, withName: "store_path")
-    }
-    if let storeAccessData = storeOptions.access?.description.data(using: .utf8) {
-      form.append(storeAccessData, withName: "store_access")
-    }
+    form.append(apiKey, withName: "apikey")
+    form.append(fileName, withName: "filename")
+    form.append(mimeType, withName: "mimetype")
+    form.append(String(fileSize), withName: "size")
+    form.append(storeOptions.location.description, withName: "store_location")
+    form.append(storeOptions.region, withName: "store_region")
+    form.append(storeOptions.container, withName: "store_container")
+    form.append(storeOptions.path, withName: "store_path")
+    form.append(storeOptions.access?.description, withName: "store_access")
     if let security = security {
-      form.append(security.encodedPolicy.data(using: .utf8)!, withName: "policy")
-      form.append(security.signature.data(using: .utf8)!, withName: "signature")
+      form.append(security.encodedPolicy, withName: "policy")
+      form.append(security.signature, withName: "signature")
     }
     if useIntelligentIngestionIfAvailable {
-      form.append("true".data(using: .utf8)!, withName: "multipart")
+      form.append("true", withName: "multipart")
     }
   }
 }

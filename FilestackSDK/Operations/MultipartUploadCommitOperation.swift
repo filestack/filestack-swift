@@ -28,7 +28,6 @@ class MultipartUploadCommitOperation: BaseOperation {
                   region: String,
                   uploadID: String,
                   storeOptions: StorageOptions) {
-
         self.apiKey = apiKey
         self.fileSize = fileSize
         self.part = part
@@ -61,12 +60,12 @@ private extension MultipartUploadCommitOperation {
   }
   
   func multipartFormData(form: MultipartFormData) {
-    form.append(self.apiKey.data(using: .utf8)!, withName: "apikey")
-    form.append(self.uri.data(using: .utf8)!, withName: "uri")
-    form.append(self.region.data(using: .utf8)!, withName: "region")
-    form.append(self.uploadID.data(using: .utf8)!, withName: "upload_id")
-    form.append(String(self.fileSize).data(using: .utf8)!, withName: "size")
-    form.append(String(self.part).data(using: .utf8)!, withName: "part")
-    form.append(self.storeOptions.location.description.data(using: .utf8)!, withName: "store_location")
+    form.append(apiKey, withName: "apikey")
+    form.append(uri, withName: "uri")
+    form.append(region, withName: "region")
+    form.append(uploadID, withName: "upload_id")
+    form.append(String(fileSize), withName: "size")
+    form.append(String(part), withName: "part")
+    form.append(storeOptions.location.description, withName: "store_location")
     }
 }
