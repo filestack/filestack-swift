@@ -9,8 +9,7 @@
 import Foundation
 import Alamofire
 
-
-internal class MultipartUploadCommitOperation: BaseOperation {
+class MultipartUploadCommitOperation: BaseOperation {
 
     let apiKey: String
     let fileSize: UInt64
