@@ -72,8 +72,8 @@ private extension MultipartUploadSubmitChunkOperation {
       let headers = response.json?["headers"] as? [String: String] else {
         return
     }
-    self.uploadRequest = uploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
-    self.uploadRequest?.response(completionHandler: saveResponse)
+    uploadRequest = uploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
+    uploadRequest?.response(completionHandler: saveResponse)
   }
   
   func saveResponse(_ response: DefaultDataResponse) {

@@ -10,48 +10,48 @@ import Foundation
 import Alamofire
 
 class MultipartUploadCommitOperation: BaseOperation {
-
-    let apiKey: String
-    let fileSize: UInt64
-    let part: Int
-    let uri: String
-    let region: String
-    let uploadID: String
-    let storeOptions: StorageOptions
-
-    var response: NetworkJSONResponse?
-
-    required init(apiKey: String,
-                  fileSize: UInt64,
-                  part: Int,
-                  uri: String,
-                  region: String,
-                  uploadID: String,
-                  storeOptions: StorageOptions) {
-        self.apiKey = apiKey
-        self.fileSize = fileSize
-        self.part = part
-        self.uri = uri
-        self.region = region
-        self.uploadID = uploadID
-        self.storeOptions = storeOptions
-
-        super.init()
-
-        self.state = .ready
+  
+  let apiKey: String
+  let fileSize: UInt64
+  let part: Int
+  let uri: String
+  let region: String
+  let uploadID: String
+  let storeOptions: StorageOptions
+  
+  var response: NetworkJSONResponse?
+  
+  required init(apiKey: String,
+                fileSize: UInt64,
+                part: Int,
+                uri: String,
+                region: String,
+                uploadID: String,
+                storeOptions: StorageOptions) {
+    self.apiKey = apiKey
+    self.fileSize = fileSize
+    self.part = part
+    self.uri = uri
+    self.region = region
+    self.uploadID = uploadID
+    self.storeOptions = storeOptions
+    
+    super.init()
+    
+    self.state = .ready
+  }
+  
+  override func main() {
+    if isCancelled {
+      state = .finished
+      return
     }
-
-    override func main() {
-        guard !isCancelled else {
-            state = .finished
-            return
-        }
-        state = .executing
-        uploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
-            self.response = response
-            self.state = .finished
-        }
+    state = .executing
+    uploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
+      self.response = response
+      self.state = .finished
     }
+  }
 }
 
 private extension MultipartUploadCommitOperation {
@@ -67,5 +67,5 @@ private extension MultipartUploadCommitOperation {
     form.append(String(fileSize), withName: "size")
     form.append(String(part), withName: "part")
     form.append(storeOptions.location.description, withName: "store_location")
-    }
+  }
 }

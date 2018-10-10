@@ -61,7 +61,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
   }
   
   override func main() {
-    guard let handle = try? FileHandle(forReadingFrom: self.localURL) else {
+    guard let handle = try? FileHandle(forReadingFrom: localURL) else {
       self.state = .finished
       return
     }

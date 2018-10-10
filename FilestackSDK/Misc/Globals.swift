@@ -8,16 +8,13 @@
 
 import Foundation
 
+let cdnService = CDNService()
+let apiService = APIService()
+let processService = ProcessService()
+let uploadService = UploadService()
 
-internal let cdnService = CDNService()
-internal let apiService = APIService()
-internal let processService = ProcessService()
-internal let uploadService = UploadService()
-
-internal func attachedDescription(object: CustomStringConvertible, indent: Int = 1, spaces: Int = 4) -> String {
-
+func attachedDescription(object: CustomStringConvertible, indent: Int = 1, spaces: Int = 4) -> String {
     var components: [String] = []
-
     for (idx, line) in object.description.components(separatedBy: "\n").enumerated() {
         if idx == 0 {
             components.append(String(line))
@@ -25,6 +22,5 @@ internal func attachedDescription(object: CustomStringConvertible, indent: Int =
             components.append("\(String(repeatElement(" ", count: indent * spaces)))\(line)")
         }
     }
-
     return components.joined(separator: "\n")
 }

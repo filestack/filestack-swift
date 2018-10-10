@@ -83,7 +83,7 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
   }
   
   override func main() {
-    guard let handle = try? FileHandle(forReadingFrom: self.localURL) else {
+    guard let handle = try? FileHandle(forReadingFrom: localURL) else {
       self.state = .finished
       return
     }
@@ -100,12 +100,12 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
 
 private extension MultipartInteligentUploadSubmitPartOperation {
   func upload() {
-    guard !isCancelled else {
-      self.state = .finished
+    if isCancelled {
+      state = .finished
       return
     }
-    
-    self.state = .executing
+
+    state = .executing
     partChunkSize = resumableMobileChunkSize
     
     beforeCommitCheckPointOperation = BlockOperation()

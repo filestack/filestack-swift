@@ -48,7 +48,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
   }
   
   override func main() {
-    guard !isCancelled else {
+    if isCancelled {
       state = .finished
       return
     }
