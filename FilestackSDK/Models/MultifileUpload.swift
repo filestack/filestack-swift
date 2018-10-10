@@ -92,48 +92,48 @@ private extension MultifileUpload {
     minimalProgress.completedUnitCount = 1
     updateProgress(minimalProgress)
   }
-    
-    func totalSize() -> Int64 {
-        return Int64(uploadURLs.reduce(UInt64(0)) { sum, url in sum + (url.size() ?? 0) })
+  
+  func totalSize() -> Int64 {
+    return Int64(uploadURLs.reduce(UInt64(0)) { sum, url in sum + (url.size() ?? 0) })
+  }
+  
+  func uploadNextFile() {
+    guard
+      shouldAbort == false,
+      let nextURL = leftToUploadURLs.first else {
+        stopUpload()
+        return
     }
-    
-    func uploadNextFile() {
-        guard
-            shouldAbort == false,
-            let nextURL = leftToUploadURLs.first else {
-                stopUpload()
-                return
-        }
-        currentFileSize = Int64(nextURL.size() ?? 0)
-        currentOperation = MultipartUpload(at: nextURL,
-                                           queue: queue,
-                                           uploadProgress: { progress in self.updateProgress(progress) },
-                                           completionHandler: { response in self.finishedCurrentFile(with: response) },
-                                           partUploadConcurrency: 5,
-                                           chunkUploadConcurrency: 8,
-                                           apiKey: apiKey,
-                                           storeOptions: storeOptions,
-                                           security: security,
-                                           useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
-        currentOperation?.uploadFile()
+    currentFileSize = Int64(nextURL.size() ?? 0)
+    currentOperation = MultipartUpload(at: nextURL,
+                                       queue: queue,
+                                       uploadProgress: { progress in self.updateProgress(progress) },
+                                       completionHandler: { response in self.finishedCurrentFile(with: response) },
+                                       partUploadConcurrency: 5,
+                                       chunkUploadConcurrency: 8,
+                                       apiKey: apiKey,
+                                       storeOptions: storeOptions,
+                                       security: security,
+                                       useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
+    currentOperation?.uploadFile()
+  }
+  
+  func stopUpload() {
+    while uploadResponses.count < uploadURLs.count {
+      uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
     }
-    
-    func stopUpload() {
-        while uploadResponses.count < uploadURLs.count {
-            uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
-        }
-        queue.async { self.completionHandler?(self.uploadResponses) }
-    }
-    
-    func updateProgress(_ currentFileProgress: Progress) {
-        currentFileSize = currentFileProgress.completedUnitCount
-        queue.async { self.uploadProgress?(self.progress) }
-    }
-    
-    func finishedCurrentFile(with response: NetworkJSONResponse) {
-        finishedFilesSize += currentFileSize
-        uploadResponses.append(response)
-        leftToUploadURLs = Array(leftToUploadURLs.dropFirst())
-        uploadNextFile()
-    }
+    queue.async { self.completionHandler?(self.uploadResponses) }
+  }
+  
+  func updateProgress(_ currentFileProgress: Progress) {
+    currentFileSize = currentFileProgress.completedUnitCount
+    queue.async { self.uploadProgress?(self.progress) }
+  }
+  
+  func finishedCurrentFile(with response: NetworkJSONResponse) {
+    finishedFilesSize += currentFileSize
+    uploadResponses.append(response)
+    leftToUploadURLs = Array(leftToUploadURLs.dropFirst())
+    uploadNextFile()
+  }
 }
