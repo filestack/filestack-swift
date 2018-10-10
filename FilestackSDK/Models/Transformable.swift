@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /**
  Represents an `Transformable` object.
  
@@ -16,7 +15,6 @@ import Foundation
  about image transformations.
  */
 @objc(FSTransformable) public class Transformable: NSObject {
-  
   
   // MARK: - Public Properties
   
@@ -34,7 +32,6 @@ import Foundation
   
   /// An URL corresponding to this image transform.
   public var url: URL {
-    
     return computeURL()
   }
   
@@ -46,7 +43,7 @@ import Foundation
   
   // MARK: - Lifecyle Functions
   
-  internal init(handle: String, apiKey: String, security: Security? = nil) {
+  init(handle: String, apiKey: String, security: Security? = nil) {
     
     self.handle = handle
     self.externalURL = nil
@@ -56,7 +53,7 @@ import Foundation
     super.init()
   }
   
-  internal init(externalURL: URL, apiKey: String, security: Security? = nil) {
+  init(externalURL: URL, apiKey: String, security: Security? = nil) {
     
     self.handle = nil
     self.externalURL = externalURL
@@ -126,7 +123,7 @@ import Foundation
     if let fileName = fileName {
       options.append((key: "filename", value: fileName))
     }
-    
+
     options.append((key: "location", value: location))
     
     if let path = path {
@@ -174,42 +171,31 @@ import Foundation
     
     return self
   }
+}
+
+private extension Transformable {
   
-  
-  // MARK: - Private Functions
-  
-  private func computeURL() -> URL {
-    
-    let tasks = tasksToURLFragment()
-    
+  func computeURL() -> URL {
     if let handle = handle {
-      return processService.buildURL(tasks: tasks, handle: handle, security: security)!
+      return processService.buildURL(tasks: tasksToURLFragment(), handle: handle, security: security)!
     } else {
-      return processService.buildURL(tasks: tasks, externalURL: externalURL!, key: apiKey, security: security)!
+      return processService.buildURL(tasks: tasksToURLFragment(), externalURL: externalURL!, key: apiKey, security: security)!
     }
   }
   
-  private func sanitize(string: String) -> String {
-    
+  func sanitize(string: String) -> String {
     let allowedCharacters = CharacterSet(charactersIn: ",").inverted
-    
     return string.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
   }
   
-  private func tasksToURLFragment() -> String {
-    
+  func tasksToURLFragment() -> String {
     let tasks: [String] = transformationTasks.map {
-      
       if let options = $0.options {
         let params: [String] = options.map {
-          
           switch $0.value {
           case let array as [Any]:
-            
             return "\($0.key):[\((array.map { String(describing: $0) }).joined(separator: ","))]"
-            
           default:
-            
             if let value = $0.value as? String {
               return "\($0.key):\(sanitize(string: value))"
             } else if let value = $0.value {
@@ -219,15 +205,12 @@ import Foundation
             }
           }
         }
-        
         if params.count > 0 {
           return "\($0.name)=\(params.joined(separator: ","))"
         }
       }
-      
       return $0.name
     }
-    
     return tasks.joined(separator: "/")
   }
 }

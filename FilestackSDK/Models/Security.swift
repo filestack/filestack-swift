@@ -75,13 +75,10 @@ public extension Security {
   override var description: String {
     
     var components: [String] = []
-    
     components.append("\(super.description)(")
     components.append("    encodedPolicy: \(encodedPolicy),")
     components.append("    signature: \(signature)")
-    
     components.append(")")
-    
     return components.joined(separator: "\n")
   }
 }

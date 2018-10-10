@@ -9,8 +9,7 @@
 import Foundation
 import Alamofire
 
-
-internal class CDNService: NetworkingService {
+class CDNService: NetworkingService {
   
   let sessionManager = SessionManager.filestackDefault()
   let baseURL = Config.cdnURL
@@ -27,9 +26,7 @@ internal class CDNService: NetworkingService {
   
   func getImageTaggingRequest(type: String, handle: String, security: Security?) -> DataRequest? {
     
-    var url = baseURL
-    
-    url.appendPathComponent(type)
+    var url = baseURL.appendingPathComponent(type)
     
     if let security = security {
       url.appendPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")

@@ -8,12 +8,10 @@
 
 import Foundation
 
-
 /**
  Represents a set of storage options.
  */
 @objc(FSStorageOptions) public class StorageOptions: NSObject {
-  
   
   // MARK: - Public Properties
   
@@ -53,7 +51,6 @@ import Foundation
               path: String? = nil,
               filename: String? = nil,
               access: StorageAccess? = nil) {
-    
     self.location = location
     self.region = region
     self.container = container

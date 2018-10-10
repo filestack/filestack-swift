@@ -9,8 +9,7 @@
 import Foundation
 import Alamofire
 
-
-internal class APIService: NetworkingService {
+class APIService: NetworkingService {
   
   let sessionManager = SessionManager.filestackDefault()
   let baseURL = Config.apiURL

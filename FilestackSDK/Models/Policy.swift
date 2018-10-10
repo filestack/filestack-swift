@@ -134,11 +134,8 @@ import Foundation
   
   // MARK: - Internal Functions
   
-  internal func toJSON() throws -> Data {
-    
-    let data = try JSONSerialization.data(withJSONObject: self.toDictionary())
-    
-    return data
+  func toJSON() throws -> Data {
+    return try JSONSerialization.data(withJSONObject: self.toDictionary())
   }
   
   
@@ -194,37 +191,28 @@ public extension Policy {
     
     components.append("\(super.description)(")
     components.append("    expiry: \(expiry),")
-    
     if let call = call {
       components.append("    call: \(call)")
     }
-    
     if let handle = handle {
       components.append("    handle: \(handle)")
     }
-    
     if let url = url {
       components.append("    url: \(url)")
     }
-    
     if let maxSize = maxSize {
       components.append("    maxSize: \(maxSize)")
     }
-    
     if let minSize = minSize {
       components.append("    minSize: \(minSize)")
     }
-    
     if let path = path {
       components.append("    path: \(path)")
     }
-    
     if let container = container {
       components.append("    container: \(container)")
     }
-    
     components.append(")")
-    
     return components.joined(separator: "\n")
   }
 }
