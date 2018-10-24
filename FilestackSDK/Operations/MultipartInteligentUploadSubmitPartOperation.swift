@@ -38,14 +38,10 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
   private var partChunkSize: Int
   
   private var beforeCommitCheckPointOperation: BlockOperation?
-  
-  private let chunkUploadOperationQueue: OperationQueue = {
-    var queue = OperationQueue()
-    let name = "com.filestack.chunk-upload-operation-queue"
-    queue.underlyingQueue = DispatchQueue(label: name, qos: .utility, attributes: .concurrent)
-    return queue
-  }()
-
+  private let chunkUploadOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.chunk-upload-operation-queue",
+                                                                  qos: .utility,
+                                                                  attributes: .concurrent)
+  private let chunkUploadOperationQueue = OperationQueue()
   
   required init(seek: UInt64,
                 localURL: URL,
@@ -76,6 +72,7 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
     self.retriesLeft = maxRetries
     self.didFail = false
     self.uploadProgress = uploadProgress
+    self.chunkUploadOperationQueue.underlyingQueue = chunkUploadOperationUnderlyingQueue
     self.chunkUploadOperationQueue.maxConcurrentOperationCount = chunkUploadConcurrency
     super.init()
     

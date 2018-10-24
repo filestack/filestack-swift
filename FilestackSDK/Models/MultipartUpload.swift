@@ -60,12 +60,10 @@ extension MultipartUploadError: LocalizedError {
   
   var totalUploadedBytes: Int64 = 0
   
-  private let uploadOperationQueue: OperationQueue = {
-    $0.underlyingQueue = DispatchQueue(label: "com.filestack.upload-operation-queue",
-                                       qos: .utility,
-                                       attributes: .concurrent)
-    return $0
-  }(OperationQueue())
+  private let uploadOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.upload-operation-queue",
+                                                             qos: .utility,
+                                                             attributes: .concurrent)
+  private let uploadOperationQueue = OperationQueue()
   
   private let chunkUploadConcurrency: Int
   
@@ -94,6 +92,7 @@ extension MultipartUploadError: LocalizedError {
     self.shouldAbort = false
     self.progress = Progress(totalUnitCount: 0)
     self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
+    self.uploadOperationQueue.underlyingQueue = uploadOperationUnderlyingQueue
     self.uploadOperationQueue.maxConcurrentOperationCount = partUploadConcurrency
     self.chunkUploadConcurrency = chunkUploadConcurrency
   }
