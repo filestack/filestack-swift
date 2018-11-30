@@ -19,6 +19,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
   let region: String
   let uploadID: String
   let storeOptions: StorageOptions
+  let parts: String
   let useIntelligentIngestion: Bool
   
   var response = NetworkJSONResponse(with: MultipartUploadError.aborted)
@@ -31,6 +32,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
                 region: String,
                 uploadID: String,
                 storeOptions: StorageOptions,
+                partsAndEtags: [Int: String],
                 useIntelligentIngestion: Bool) {
     self.apiKey = apiKey
     self.fileName = fileName
@@ -40,6 +42,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
     self.region = region
     self.uploadID = uploadID
     self.storeOptions = storeOptions
+    self.parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator:";")
     self.useIntelligentIngestion = useIntelligentIngestion
     
     super.init()
@@ -81,7 +84,7 @@ private extension MultipartUploadCompleteOperation {
     if self.useIntelligentIngestion {
       form.append("true", withName: "multipart")
     } else {
-      form.append("", withName: "parts")
+      form.append(parts, withName: "parts")
     }
   }
 }
