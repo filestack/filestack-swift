@@ -27,7 +27,7 @@ git remote add upstream https://github.com/filestack/filepicker-swift.git
 
 ### Step 3: Build Carthage dependencies
 
-Make sure to run ```carthage bootstrap --cache-builds --platform iOS``` before opening the project in Xcode for the first time.
+Make sure to run ```carthage bootstrap --cache-builds --platform iOS``` before opening the project in Xcode for the first time. This will ensure that any dependent binary framework dependencies will be built and ready to be linked against when building the project from Xcode.
 
 ### Step 4: Create a new feature branch `contrib/issue-number`
 Put your code in a new feature branch. The name of the new branch should start with `contrib/`. This convention will help us to keep track of future changes from pull requests.
