@@ -166,6 +166,7 @@
 		45690CFF22A6770D00285F62 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		456FF4C01F27799D00E9F192 /* MultipartUploadCompleteOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadCompleteOperation.swift; sourceTree = "<group>"; };
 		456FF4C21F27902500E9F192 /* large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = large.jpg; path = Fixtures/large.jpg; sourceTree = "<group>"; };
+		4577DD4122A6A17700FEF43C /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformBlurMode.swift; sourceTree = "<group>"; };
 		457D5BEC1F16146B00FBD5B1 /* TransformPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPosition.swift; sourceTree = "<group>"; };
 		457D5BEE1F16147E00FBD5B1 /* TransformFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformFit.swift; sourceTree = "<group>"; };
@@ -399,6 +400,7 @@
 		45B830911F03B27A0053742A = {
 			isa = PBXGroup;
 			children = (
+				4577DD4122A6A17700FEF43C /* CONTRIBUTING.md */,
 				45690CFF22A6770D00285F62 /* README.md */,
 				45B830A61F03B3210053742A /* Carthage Dependencies */,
 				45B8309D1F03B27A0053742A /* FilestackSDK */,
