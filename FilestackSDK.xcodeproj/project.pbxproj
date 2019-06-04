@@ -31,6 +31,9 @@
 		45513FFA1F0E9739006DB972 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FF91F0E9739006DB972 /* APIService.swift */; };
 		4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551400C1F0E97E2006DB972 /* NetworkingService.swift */; };
 		455266311F1618E1009537D9 /* TransformCropMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455266301F1618E1009537D9 /* TransformCropMode.swift */; };
+		45690CD222A65FE800285F62 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCC22A65FC500285F62 /* Alamofire.framework */; };
+		45690CD322A65FE800285F62 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CB922A65FC500285F62 /* CryptoSwift.framework */; };
+		45690CD422A6600400285F62 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */; };
 		456FF4C11F27799D00E9F192 /* MultipartUploadCompleteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FF4C01F27799D00E9F192 /* MultipartUploadCompleteOperation.swift */; };
 		456FF4C31F2790C800E9F192 /* large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 456FF4C21F27902500E9F192 /* large.jpg */; };
 		4579CD3E1F1764A500DCF37A /* TransformBlurMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */; };
@@ -51,7 +54,6 @@
 		45991FA41F14C1DD0042A279 /* ProcessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45991FA31F14C1DD0042A279 /* ProcessService.swift */; };
 		459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */; };
 		45B830A01F03B27A0053742A /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B8309E1F03B27A0053742A /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B830B31F03B3310053742A /* Alamofire.framework */; };
 		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
 		45B830E31F03BCF20053742A /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E01F03BCF20053742A /* Policy.swift */; };
 		45B830E41F03BCF20053742A /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E11F03BCF20053742A /* Security.swift */; };
@@ -68,7 +70,6 @@
 		45C9E93B1F137EB200260F2A /* Transformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9E93A1F137EB200260F2A /* Transformable.swift */; };
 		45C9E94E1F1384B200260F2A /* TransformableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9E94D1F1384B200260F2A /* TransformableTests.swift */; };
 		45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */; };
-		45E2B7DF1FC3284600448ED2 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E2B7D41FC3283800448ED2 /* CryptoSwift.framework */; };
 		45F9B8C41F0B941300E04380 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F9B8C31F0B941300E04380 /* sample.jpg */; };
 		45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */; };
 		45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CC71F0B86AD008EDBCD /* Globals.swift */; };
@@ -125,173 +126,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		45B830B21F03B3310053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
-		45B830B41F03B3310053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS Tests";
-		};
-		45B830B61F03B3310053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
-			remoteInfo = "Alamofire macOS";
-		};
-		45B830B81F03B3310053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
-			remoteInfo = "Alamofire macOS Tests";
-		};
-		45B830BA1F03B3310053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS";
-		};
-		45B830BC1F03B3310053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS Tests";
-		};
-		45B830BE1F03B3310053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E4202FE01B667AA100C997FB;
-			remoteInfo = "Alamofire watchOS";
-		};
-		45B830C01F03B3380053742A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
 		45B831131F03D8140053742A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45B830921F03B27A0053742A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 45B8309A1F03B27A0053742A;
 			remoteInfo = FilestackSDK;
-		};
-		45E2B7D31FC3283800448ED2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE45519693E190098E6F3;
-			remoteInfo = CryptoSwift;
-		};
-		45E2B7D51FC3283800448ED2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE46019693E190098E6F3;
-			remoteInfo = Tests;
-		};
-		45E2B7E01FC3286D00448ED2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 754BE45419693E190098E6F3;
-			remoteInfo = CryptoSwift;
-		};
-		45FA0CB21F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 09110A4119805F4800D175E4;
-			remoteInfo = "OHHTTPStubs iOS StaticLib";
-		};
-		45FA0CB41F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 09110A5119805F4800D175E4;
-			remoteInfo = "OHHTTPStubs iOS Lib Tests";
-		};
-		45FA0CB61F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 725CD99B1A9EB65100F84C8B;
-			remoteInfo = "OHHTTPStubs iOS Framework";
-		};
-		45FA0CB81F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 093442F91B80EC4A00A91535;
-			remoteInfo = "OHHTTPStubs iOS Fmk Tests";
-		};
-		45FA0CBA1F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 095981C219806A7900807DBE;
-			remoteInfo = "OHHTTPStubs Mac Framework";
-		};
-		45FA0CBC1F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 095981D219806A7900807DBE;
-			remoteInfo = "OHHTTPStubs Mac Tests";
-		};
-		45FA0CBE1F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EAA436A51BE1598D000E9E99;
-			remoteInfo = "OHHTTPStubs tvOS Framework";
-		};
-		45FA0CC01F0B85C7008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EA100AB71BE15BE400129352;
-			remoteInfo = "OHHTTPStubs tvOS Fmk Tests";
-		};
-		45FA0CC51F0B85DA008EDBCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 725CD99A1A9EB65100F84C8B;
-			remoteInfo = "OHHTTPStubs iOS Framework";
-		};
-		BC8832A420D1771E00B88EAF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 75211F92207249D8004E41F8;
-			remoteInfo = "CryptoSwift-TestHostApp";
-		};
-		BC8832A620D1771E00B88EAF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7595C14A2072E48C00EA1A5F;
-			remoteInfo = "TestsPerformance-Mac";
-		};
-		BC8832A820D1771E00B88EAF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7564F0602072EAEB00CA5A96;
-			remoteInfo = "TestsPerformance-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -320,6 +160,9 @@
 		45513FF91F0E9739006DB972 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		4551400C1F0E97E2006DB972 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		455266301F1618E1009537D9 /* TransformCropMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformCropMode.swift; sourceTree = "<group>"; };
+		45690CB922A65FC500285F62 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		45690CCC22A65FC500285F62 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		456FF4C01F27799D00E9F192 /* MultipartUploadCompleteOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadCompleteOperation.swift; sourceTree = "<group>"; };
 		456FF4C21F27902500E9F192 /* large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = large.jpg; path = Fixtures/large.jpg; sourceTree = "<group>"; };
 		4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformBlurMode.swift; sourceTree = "<group>"; };
@@ -342,7 +185,6 @@
 		45B8309B1F03B27A0053742A /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B8309E1F03B27A0053742A /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		45B8309F1F03B27A0053742A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45B830A71F03B3300053742A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		45B830CA1F03BB6D0053742A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		45B830E01F03BCF20053742A /* Policy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Policy.swift; sourceTree = "<group>"; };
 		45B830E11F03BCF20053742A /* Security.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
@@ -360,10 +202,8 @@
 		45C9E93A1F137EB200260F2A /* Transformable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformable.swift; sourceTree = "<group>"; };
 		45C9E94D1F1384B200260F2A /* TransformableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformableTests.swift; sourceTree = "<group>"; };
 		45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
-		45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = Carthage/Checkouts/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		45F9B8C31F0B941300E04380 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sample.jpg; path = Fixtures/sample.jpg; sourceTree = "<group>"; };
 		45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResponse.swift; sourceTree = "<group>"; };
-		45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHHTTPStubs.xcodeproj; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/OHHTTPStubs.xcodeproj; sourceTree = "<group>"; };
 		45FA0CC71F0B86AD008EDBCD /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = Misc/Globals.swift; sourceTree = "<group>"; };
 		45FA0CCB1F0B86B6008EDBCD /* CDNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNService.swift; sourceTree = "<group>"; };
 		BC27300520DA7D1B00142174 /* SecureForWorkTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureForWorkTransform.swift; sourceTree = "<group>"; };
@@ -422,8 +262,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45B830C21F03B3440053742A /* Alamofire.framework in Frameworks */,
-				45E2B7DF1FC3284600448ED2 /* CryptoSwift.framework in Frameworks */,
+				45690CD222A65FE800285F62 /* Alamofire.framework in Frameworks */,
+				45690CD322A65FE800285F62 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B831121F03D8140053742A /* FilestackSDK.framework in Frameworks */,
+				45690CD422A6600400285F62 /* OHHTTPStubs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,11 +398,11 @@
 		45B830911F03B27A0053742A = {
 			isa = PBXGroup;
 			children = (
-				45B830A61F03B3210053742A /* External Dependencies */,
+				45B830A61F03B3210053742A /* Carthage Dependencies */,
 				45B8309D1F03B27A0053742A /* FilestackSDK */,
 				45B8310E1F03D8140053742A /* FilestackSDKTests */,
-				45B8309C1F03B27A0053742A /* Products */,
 				45E2B7DE1FC3284600448ED2 /* Frameworks */,
+				45B8309C1F03B27A0053742A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -590,29 +431,15 @@
 			path = FilestackSDK;
 			sourceTree = "<group>";
 		};
-		45B830A61F03B3210053742A /* External Dependencies */ = {
+		45B830A61F03B3210053742A /* Carthage Dependencies */ = {
 			isa = PBXGroup;
 			children = (
 				45B830CA1F03BB6D0053742A /* Cartfile */,
-				45B830A71F03B3300053742A /* Alamofire.xcodeproj */,
-				45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */,
-				45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */,
+				45690CCC22A65FC500285F62 /* Alamofire.framework */,
+				45690CB922A65FC500285F62 /* CryptoSwift.framework */,
+				45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */,
 			);
-			name = "External Dependencies";
-			sourceTree = "<group>";
-		};
-		45B830A81F03B3300053742A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45B830B31F03B3310053742A /* Alamofire.framework */,
-				45B830B51F03B3310053742A /* Alamofire iOS Tests.xctest */,
-				45B830B71F03B3310053742A /* Alamofire.framework */,
-				45B830B91F03B3310053742A /* Alamofire macOS Tests.xctest */,
-				45B830BB1F03B3310053742A /* Alamofire.framework */,
-				45B830BD1F03B3310053742A /* Alamofire tvOS Tests.xctest */,
-				45B830BF1F03B3310053742A /* Alamofire.framework */,
-			);
-			name = Products;
+			name = "Carthage Dependencies";
 			sourceTree = "<group>";
 		};
 		45B830DE1F03BCF20053742A /* Models */ = {
@@ -653,38 +480,11 @@
 			path = FilestackSDKTests;
 			sourceTree = "<group>";
 		};
-		45E2B7BB1FC3283800448ED2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45E2B7D41FC3283800448ED2 /* CryptoSwift.framework */,
-				BC8832A520D1771E00B88EAF /* CryptoSwift-TestHostApp.app */,
-				45E2B7D61FC3283800448ED2 /* Tests.xctest */,
-				BC8832A720D1771E00B88EAF /* TestsPerformance-Mac.xctest */,
-				BC8832A920D1771E00B88EAF /* TestsPerformance-iOS.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		45E2B7DE1FC3284600448ED2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		45FA0CA11F0B85C7008EDBCD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45FA0CB31F0B85C7008EDBCD /* libOHHTTPStubs.a */,
-				45FA0CB51F0B85C7008EDBCD /* OHHTTPStubs iOS Lib Tests.xctest */,
-				45FA0CB71F0B85C7008EDBCD /* OHHTTPStubs.framework */,
-				45FA0CB91F0B85C7008EDBCD /* OHHTTPStubs iOS Fmk Tests.xctest */,
-				45FA0CBB1F0B85C7008EDBCD /* OHHTTPStubs.framework */,
-				45FA0CBD1F0B85C7008EDBCD /* OHHTTPStubs Mac Tests.xctest */,
-				45FA0CBF1F0B85C7008EDBCD /* OHHTTPStubs.framework */,
-				45FA0CC11F0B85C7008EDBCD /* OHHTTPStubs tvOS Fmk Tests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		45FA0CC91F0B86B6008EDBCD /* Services */ = {
@@ -738,8 +538,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				45E2B7E11FC3286D00448ED2 /* PBXTargetDependency */,
-				45B830C11F03B3380053742A /* PBXTargetDependency */,
 			);
 			name = FilestackSDK;
 			productName = FilestackSDK;
@@ -757,7 +555,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				45FA0CC61F0B85DA008EDBCD /* PBXTargetDependency */,
 				45B831141F03D8140053742A /* PBXTargetDependency */,
 			);
 			name = FilestackSDKTests;
@@ -772,7 +569,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Filestack;
 				TargetAttributes = {
 					45B8309A1F03B27A0053742A = {
@@ -782,6 +579,7 @@
 					};
 					45B8310C1F03D8140053742A = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = ZBJR46PSPF;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
@@ -789,28 +587,15 @@
 			};
 			buildConfigurationList = 45B830951F03B27A0053742A /* Build configuration list for PBXProject "FilestackSDK" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 45B830911F03B27A0053742A;
 			productRefGroup = 45B8309C1F03B27A0053742A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 45B830A81F03B3300053742A /* Products */;
-					ProjectRef = 45B830A71F03B3300053742A /* Alamofire.xcodeproj */;
-				},
-				{
-					ProductGroup = 45E2B7BB1FC3283800448ED2 /* Products */;
-					ProjectRef = 45E2B7BA1FC3283800448ED2 /* CryptoSwift.xcodeproj */;
-				},
-				{
-					ProductGroup = 45FA0CA11F0B85C7008EDBCD /* Products */;
-					ProjectRef = 45FA0CA01F0B85C7008EDBCD /* OHHTTPStubs.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				45B8309A1F03B27A0053742A /* FilestackSDK */,
@@ -818,149 +603,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		45B830B31F03B3310053742A /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 45B830B21F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830B51F03B3310053742A /* Alamofire iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire iOS Tests.xctest";
-			remoteRef = 45B830B41F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830B71F03B3310053742A /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 45B830B61F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830B91F03B3310053742A /* Alamofire macOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire macOS Tests.xctest";
-			remoteRef = 45B830B81F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830BB1F03B3310053742A /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 45B830BA1F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830BD1F03B3310053742A /* Alamofire tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire tvOS Tests.xctest";
-			remoteRef = 45B830BC1F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B830BF1F03B3310053742A /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 45B830BE1F03B3310053742A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45E2B7D41FC3283800448ED2 /* CryptoSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CryptoSwift.framework;
-			remoteRef = 45E2B7D31FC3283800448ED2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45E2B7D61FC3283800448ED2 /* Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = Tests.xctest;
-			remoteRef = 45E2B7D51FC3283800448ED2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CB31F0B85C7008EDBCD /* libOHHTTPStubs.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libOHHTTPStubs.a;
-			remoteRef = 45FA0CB21F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CB51F0B85C7008EDBCD /* OHHTTPStubs iOS Lib Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "OHHTTPStubs iOS Lib Tests.xctest";
-			remoteRef = 45FA0CB41F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CB71F0B85C7008EDBCD /* OHHTTPStubs.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OHHTTPStubs.framework;
-			remoteRef = 45FA0CB61F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CB91F0B85C7008EDBCD /* OHHTTPStubs iOS Fmk Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "OHHTTPStubs iOS Fmk Tests.xctest";
-			remoteRef = 45FA0CB81F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CBB1F0B85C7008EDBCD /* OHHTTPStubs.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OHHTTPStubs.framework;
-			remoteRef = 45FA0CBA1F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CBD1F0B85C7008EDBCD /* OHHTTPStubs Mac Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "OHHTTPStubs Mac Tests.xctest";
-			remoteRef = 45FA0CBC1F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CBF1F0B85C7008EDBCD /* OHHTTPStubs.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OHHTTPStubs.framework;
-			remoteRef = 45FA0CBE1F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45FA0CC11F0B85C7008EDBCD /* OHHTTPStubs tvOS Fmk Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "OHHTTPStubs tvOS Fmk Tests.xctest";
-			remoteRef = 45FA0CC01F0B85C7008EDBCD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BC8832A520D1771E00B88EAF /* CryptoSwift-TestHostApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "CryptoSwift-TestHostApp.app";
-			remoteRef = BC8832A420D1771E00B88EAF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BC8832A720D1771E00B88EAF /* TestsPerformance-Mac.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "TestsPerformance-Mac.xctest";
-			remoteRef = BC8832A620D1771E00B88EAF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BC8832A920D1771E00B88EAF /* TestsPerformance-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "TestsPerformance-iOS.xctest";
-			remoteRef = BC8832A820D1771E00B88EAF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		45B830991F03B27A0053742A /* Resources */ = {
@@ -995,7 +637,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/bin/set-buildnumber.sh\n$SRCROOT/bin/set-version.sh";
+			shellScript = "$SRCROOT/bin/set-buildnumber.sh\n$SRCROOT/bin/set-version.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1122,25 +764,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		45B830C11F03B3380053742A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Alamofire iOS";
-			targetProxy = 45B830C01F03B3380053742A /* PBXContainerItemProxy */;
-		};
 		45B831141F03D8140053742A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 45B8309A1F03B27A0053742A /* FilestackSDK */;
 			targetProxy = 45B831131F03D8140053742A /* PBXContainerItemProxy */;
-		};
-		45E2B7E11FC3286D00448ED2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CryptoSwift;
-			targetProxy = 45E2B7E01FC3286D00448ED2 /* PBXContainerItemProxy */;
-		};
-		45FA0CC61F0B85DA008EDBCD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "OHHTTPStubs iOS Framework";
-			targetProxy = 45FA0CC51F0B85DA008EDBCD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1149,6 +776,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1197,7 +825,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1213,6 +841,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1255,7 +884,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1275,9 +904,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FilestackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LLVM_LTO = YES_THIN;
 				PRODUCT_BUNDLE_IDENTIFIER = com.filestack.FilestackSDK;
@@ -1297,9 +929,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FilestackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LLVM_LTO = YES_THIN;
 				PRODUCT_BUNDLE_IDENTIFIER = com.filestack.FilestackSDK;
@@ -1312,12 +947,15 @@
 		45B831161F03D8140053742A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FilestackSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filestack.FilestackSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -1325,12 +963,15 @@
 		45B831171F03D8140053742A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FilestackSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filestack.FilestackSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

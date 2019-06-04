@@ -42,10 +42,10 @@ internal class MultipartUploadSubmitPartOperation: BaseOperation {
     private var beforeCommitCheckPointOperation: BlockOperation?
 
     private let chunkUploadOperationQueue: OperationQueue = {
-
-        $0.underlyingQueue = DispatchQueue(label: "com.filestack.chunk-upload-operation-queue",
+        let queue = DispatchQueue(label: "com.filestack.chunk-upload-operation-queue",
                                            qos: .utility,
                                            attributes: .concurrent)
+        $0.underlyingQueue = queue
 
         return $0
     }(OperationQueue())

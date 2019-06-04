@@ -136,7 +136,7 @@ import Foundation
 
     internal func toJSON() throws -> Data {
 
-        let data = try JSONSerialization.data(withJSONObject: self.toDictionary())
+        let data = try JSONSerialization.data(withJSONObject: toDictionary(), options: .sortedKeys)
 
         return data
     }

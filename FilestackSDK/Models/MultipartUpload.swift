@@ -67,9 +67,10 @@ extension MultipartUploadError: LocalizedError {
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
 
     private let uploadOperationQueue: OperationQueue = {
-        $0.underlyingQueue = DispatchQueue(label: "com.filestack.upload-operation-queue",
-                                           qos: .utility,
-                                           attributes: .concurrent)
+        let queue = DispatchQueue(label: "com.filestack.upload-operation-queue",
+                                  qos: .utility,
+                                  attributes: .concurrent)
+        $0.underlyingQueue = queue
         return $0
     }(OperationQueue())
 
