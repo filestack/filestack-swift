@@ -10,6 +10,12 @@ This is the official Swift SDK for Filestack - API and content management system
 * [Documentation](https://www.filestack.com/docs)
 * [API Reference](https://filestack.github.io/filestack-swift/)
 
+## Requirements
+
+* Xcode 10.2 or later
+* Swift 4.2 / Objective-C
+* iOS 11 or later
+
 ## Installing
 
 ### CocoaPods
@@ -22,7 +28,7 @@ To integrate FilestackSDK into your Xcode project using CocoaPods, specify it in
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '11.0'
 use_frameworks!
 
 target '<Your Target Name>' do
