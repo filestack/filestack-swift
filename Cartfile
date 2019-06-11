@@ -1,2 +1,3 @@
-github "Alamofire/Alamofire" "4.7.3"
-github "krzyzanowskim/CryptoSwift" "0.13.0"
+github "Alamofire/Alamofire" ~> 4.8
+github "krzyzanowskim/CryptoSwift" ~> 0.15.0
+
