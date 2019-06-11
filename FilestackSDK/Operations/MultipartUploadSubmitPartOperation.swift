@@ -12,7 +12,7 @@ import Alamofire
 typealias MultipartUploadSubmitPartOperation = MultipartUploadSubmitPartProtocol & BaseOperation
 
 protocol MultipartUploadSubmitPartProtocol: class {
-  var part: Int {get}
-  var responseEtag: String? {get}
-  var didFail: Bool {get}
+    var part: Int {get}
+    var responseEtag: String? {get}
+    var didFail: Bool {get}
 }

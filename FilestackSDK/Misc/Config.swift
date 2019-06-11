@@ -8,16 +8,18 @@
 
 import Foundation
 
-struct Config {
-  
-  static let apiURL = URL(string: "https://www.filestackapi.com/api")!
-  static let cdnURL = URL(string: "https://cdn.filestackcontent.com")!
-  static let processURL = URL(string: "https://process.filestackapi.com")!
-  static let uploadURL = URL(string: "https://upload.filestackapi.com")!
-  
-  static let filePath = "file"
-  static let storePath = "store"
-  static let metadataPath = "metadata"
-  
-  static let validHTTPResponseCodes = Array(200..<300)
+
+/// :nodoc:
+public struct Config {
+
+    public static let apiURL = URL(string: "https://www.filestackapi.com/api")!
+    public static let cdnURL = URL(string: "https://cdn.filestackcontent.com")!
+    public static let processURL = URL(string: "https://process.filestackapi.com")!
+    public static let uploadURL = URL(string: "https://upload.filestackapi.com")!
+
+    public static let filePath = "file"
+    public static let storePath = "store"
+    public static let metadataPath = "metadata"
+
+    public static let validHTTPResponseCodes = Array(200..<300)
 }

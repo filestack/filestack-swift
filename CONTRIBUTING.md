@@ -25,7 +25,11 @@ cd filepicker-swift
 git remote add upstream https://github.com/filestack/filepicker-swift.git
 ```
 
-### Step 3: Create a new feature branch `contrib/issue-number`
+### Step 3: Build Carthage dependencies
+
+Make sure to run ```carthage bootstrap --cache-builds --platform iOS``` before opening the project in Xcode for the first time. This will ensure that any dependent binary framework dependencies will be built and ready to be linked against when building the project from Xcode.
+
+### Step 4: Create a new feature branch `contrib/issue-number`
 Put your code in a new feature branch. The name of the new branch should start with `contrib/`. This convention will help us to keep track of future changes from pull requests.
 ```
 git checkout -b contrib/issue-number tags/tag-number
@@ -35,7 +39,7 @@ Note that tags/tag-number would correspond with any of the tags (for example 1.0
 git checkout -b contrib/issue-186 tags/1.0.X
 ```
 
-### Step 4: Committing your changes
+### Step 5: Committing your changes
 First of all, make sure that git is configured with your complete name and email address. It is desirable to use the same email of your Github account, this will help to identify the contributions:
 ```
 git config --global user.name "Your Name"
@@ -65,14 +69,14 @@ Verify that your changes are actually working by adding the required unit tests.
 nosetests
 ```
 
-### Step 5: Push your changes
+### Step 6: Push your changes
 
 Push your changes to your forked project with:
 ```
 git push origin contrib/issue-186
 ```
 
-### Step 6: Create and submit a pull request
+### Step 7: Create and submit a pull request
 Go to your forked project on GitHub, select your feature branch and click the “Compare, review, create a pull request button”. 
 
 
