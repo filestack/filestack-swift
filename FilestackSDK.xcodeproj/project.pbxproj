@@ -72,6 +72,9 @@
 		45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */; };
 		45E07AAA22AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */; };
 		45E07AAB22AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA922AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift */; };
+		45E07AB022AFC15300CD4573 /* Alamofire.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCC22A65FC500285F62 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45E07AB122AFC15300CD4573 /* CryptoSwift.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CB922A65FC500285F62 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45E07AB222AFC15300CD4573 /* OHHTTPStubs.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45F9B8C41F0B941300E04380 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F9B8C31F0B941300E04380 /* sample.jpg */; };
 		45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */; };
 		45FA0CC81F0B86AD008EDBCD /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA0CC71F0B86AD008EDBCD /* Globals.swift */; };
@@ -136,6 +139,22 @@
 			remoteInfo = FilestackSDK;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		45E07AAF22AFC14600CD4573 /* Copy Embedded Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				45E07AB022AFC15300CD4573 /* Alamofire.framework in Copy Embedded Frameworks */,
+				45E07AB122AFC15300CD4573 /* CryptoSwift.framework in Copy Embedded Frameworks */,
+				45E07AB222AFC15300CD4573 /* OHHTTPStubs.framework in Copy Embedded Frameworks */,
+			);
+			name = "Copy Embedded Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4502F7301F1F4C3A000875D6 /* MultipartUploadStartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadStartOperation.swift; sourceTree = "<group>"; };
@@ -561,6 +580,7 @@
 				45B831091F03D8140053742A /* Sources */,
 				45B8310A1F03D8140053742A /* Frameworks */,
 				45B8310B1F03D8140053742A /* Resources */,
+				45E07AAF22AFC14600CD4573 /* Copy Embedded Frameworks */,
 			);
 			buildRules = (
 			);

@@ -8,7 +8,7 @@
 
 import XCTest
 import OHHTTPStubs
-@testable import Alamofire
+import Alamofire
 @testable import FilestackSDK
 
 

@@ -10,7 +10,7 @@ import XCTest
 import OHHTTPStubs
 
 @testable import FilestackSDK
-@testable import Alamofire
+import Alamofire
 
 
 class FileLinkTests: XCTestCase {
