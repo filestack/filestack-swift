@@ -23,6 +23,8 @@ script:
   - xcodebuild -showsdks
   - carthage version
 
+  # Carthage build
+  - carthage bootstrap --cache-builds --platform iOS
   # Build Framework in Debug and Run Tests
   - xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
   - travis_retry xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Debug test-without-building | xcpretty;
