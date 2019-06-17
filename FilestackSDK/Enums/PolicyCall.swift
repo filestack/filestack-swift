@@ -21,7 +21,7 @@ public extension PolicyCall {
 
     internal static func all() -> [PolicyCall] {
 
-        return [.pick, .read, .stat, .write, .writeURL, .store, .convert, .remove, .exif]
+        return [.pick, .read, .stat, .write, .writeURL, .store, .convert, .remove, .exif, .runWorkflow]
     }
 
     internal func toArray() -> [String] {
@@ -74,6 +74,10 @@ public extension PolicyCall {
         case PolicyCall.exif:
 
             return "exif"
+
+        case PolicyCall.runWorkflow:
+
+            return "runWorkflow"
 
         default:
 

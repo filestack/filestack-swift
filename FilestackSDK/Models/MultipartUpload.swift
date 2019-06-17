@@ -331,6 +331,7 @@ private extension MultipartUpload {
                                                                  uploadID: uploadID,
                                                                  storeOptions: storeOptions,
                                                                  partsAndEtags: partsAndEtags,
+                                                                 security: security,
                                                                  useIntelligentIngestion: useIntelligentIngestion)
 
         weak var weakCompleteOperation = completeOperation

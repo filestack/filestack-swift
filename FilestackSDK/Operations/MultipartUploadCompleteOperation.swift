@@ -19,6 +19,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
     let region: String
     let uploadID: String
     let storeOptions: StorageOptions
+    let security: Security?
     let useIntelligentIngestion: Bool
     let parts: String
 
@@ -33,6 +34,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
                   uploadID: String,
                   storeOptions: StorageOptions,
                   partsAndEtags: [Int: String],
+                  security: Security? = nil,
                   useIntelligentIngestion: Bool) {
         self.apiKey = apiKey
         self.fileName = fileName
@@ -43,6 +45,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
         self.uploadID = uploadID
         self.storeOptions = storeOptions
         self.parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator:";")
+        self.security = security
         self.useIntelligentIngestion = useIntelligentIngestion
 
         super.init()
@@ -81,6 +84,17 @@ private extension MultipartUploadCompleteOperation {
         form.append(storeOptions.container, withName: "store_container")
         form.append(storeOptions.path, withName: "store_path")
         form.append(storeOptions.access?.description, withName: "store_access")
+
+        if let workflows = storeOptions.workflows {
+            let joinedWorkflows = "[\((workflows.map { "\"\($0)\"" }).joined(separator: ","))]"
+            form.append(joinedWorkflows, withName: "workflows")
+        }
+
+        if let security = security {
+            form.append(security.encodedPolicy, withName: "policy")
+            form.append(security.signature, withName: "signature")
+        }
+
         if self.useIntelligentIngestion {
             form.append("true", withName: "multipart")
         } else {

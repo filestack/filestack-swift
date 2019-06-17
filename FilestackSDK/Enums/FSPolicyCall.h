@@ -40,4 +40,7 @@ typedef NS_OPTIONS(NSUInteger, FSPolicyCall) {
 
     /// Allows exif metadata to be accessed.
     FSPolicyCallExif = 1 << 8,
+
+    /// Allows workflows to be run.
+    FSPolicyCallRunWorkflow = 1 << 9,
 };

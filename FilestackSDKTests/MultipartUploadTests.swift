@@ -165,6 +165,42 @@ class MultipartUploadTests: XCTestCase {
         XCTAssertNotNil(error)
     }
 
+    func testMultiPartUploadWithWorkflows() {
+        var hitCount = 0
+        let workflows = ["workflow-1", "workflow-2", "workflow-3"]
+
+        stubRegularMultipartRequest(hitCount: &hitCount, workflows: workflows)
+
+        let expectation = self.expectation(description: "request should succeed")
+        let storeOptions = StorageOptions(location: .s3, workflows: workflows)
+
+        var response: NetworkJSONResponse?
+        client.multiPartUpload(from: largeFileUrl, storeOptions: storeOptions, useIntelligentIngestionIfAvailable: true) { (resp) in
+            response = resp
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(hitCount, 1)
+        XCTAssertNotNil(response?.json)
+
+        let json: [String: Any]! = response?.json
+
+        XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(json["size"] as? Int, MultipartUploadTests.largeFileSize)
+        XCTAssertEqual(json["filename"] as? String, "large.jpg")
+        XCTAssertEqual(json["status"] as? String, "Stored")
+        XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(json["mimetype"] as? String, "image/jpeg")
+
+        let returnedWorkflows: [String: Any]! = json["workflows"] as? [String: Any]
+
+        XCTAssertNotNil(returnedWorkflows["workflow-1"])
+        XCTAssertNotNil(returnedWorkflows["workflow-2"])
+        XCTAssertNotNil(returnedWorkflows["workflow-3"])
+    }
+
     func testMultiFileUploadWithOneFile() {
         var hitCount = 0
         stubRegularMultipartRequest(hitCount: &hitCount)
@@ -248,11 +284,11 @@ class MultipartUploadTests: XCTestCase {
 }
 
 private extension MultipartUploadTests {
-    func stubRegularMultipartRequest(hitCount: inout Int) {
+    func stubRegularMultipartRequest(hitCount: inout Int, workflows: [String]? = nil) {
         stubMultipartStartRequest(supportsIntelligentIngestion: false)
         stubMultipartPostPartRequest(parts: ["PART-1"], hitCount: &hitCount)
         stubMultipartPutRequest(part: "PART-1")
-        stubMultipartCompleteRequest()
+        stubMultipartCompleteRequest(workflows: workflows)
     }
 
     func stubMultipartStartRequest(supportsIntelligentIngestion: Bool) {
@@ -329,7 +365,7 @@ private extension MultipartUploadTests {
         hitCount += 1
     }
 
-    func stubMultipartCompleteRequest(requestTime: TimeInterval = 0, responseTime: TimeInterval = 0) {
+    func stubMultipartCompleteRequest(requestTime: TimeInterval = 0, responseTime: TimeInterval = 0, workflows: [String]? = nil) {
         let uploadMultipartCompleteStubConditions = isScheme(Config.uploadURL.scheme!) &&
             isHost(Config.uploadURL.host!) &&
             isPath("/multipart/complete") &&
@@ -337,12 +373,22 @@ private extension MultipartUploadTests {
 
         stub(condition: uploadMultipartCompleteStubConditions) { _ in
             let headers = ["Content-Type": "application/json"]
-            let json: [String: Any] = ["handle": "6GKA0wnQWO7tKaGu2YXA",
+            var json: [String: Any] = ["handle": "6GKA0wnQWO7tKaGu2YXA",
                                        "size": MultipartUploadTests.largeFileSize,
                                        "filename": "large.jpg",
                                        "status": "Stored",
                                        "url": "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA",
                                        "mimetype": "image/jpeg"]
+
+            if let workflows = workflows {
+                // Add workflows to JSON response with a fixed jobid.
+                var workflowsDic: [String: [String: String]] = [:]
+                for workflow in workflows {
+                    workflowsDic[workflow] = ["jobid": "some-jobid"]
+                }
+                json["workflows"] = workflowsDic
+            }
+
             let response = OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
             response.requestTime = requestTime
             response.responseTime = responseTime
