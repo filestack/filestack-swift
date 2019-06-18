@@ -56,6 +56,7 @@
 		45965C6B1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */; };
 		45991FA41F14C1DD0042A279 /* ProcessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45991FA31F14C1DD0042A279 /* ProcessService.swift */; };
 		459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */; };
+		45A07B3122B91A52003128B0 /* DocumentDetectionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */; };
 		45B830A01F03B27A0053742A /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B8309E1F03B27A0053742A /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
 		45B830E31F03BCF20053742A /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E01F03BCF20053742A /* Policy.swift */; };
@@ -211,6 +212,7 @@
 		45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45991FA31F14C1DD0042A279 /* ProcessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessService.swift; sourceTree = "<group>"; };
 		459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartuploadSubmitChunkOperation.swift; sourceTree = "<group>"; };
+		45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetectionTransform.swift; sourceTree = "<group>"; };
 		45B8309B1F03B27A0053742A /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B8309E1F03B27A0053742A /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		45B8309F1F03B27A0053742A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				BC8832B620D181A600B88EAF /* CropFacesTransform.swift */,
 				BC8832BC20D181A600B88EAF /* CropTransform.swift */,
 				BC8832C220D181A700B88EAF /* DetectFacesTransform.swift */,
+				45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */,
 				BC88330420D3E08000B88EAF /* EnhanceTransform.swift */,
 				BC8832BD20D181A600B88EAF /* FlipTransform.swift */,
 				BC8832C420D181A700B88EAF /* FlopTransform.swift */,
@@ -737,6 +740,7 @@
 				454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */,
 				BC8832E220D181A700B88EAF /* QualityTransform.swift in Sources */,
 				BC8832DB20D181A700B88EAF /* DetectFacesTransform.swift in Sources */,
+				45A07B3122B91A52003128B0 /* DocumentDetectionTransform.swift in Sources */,
 				BC8832D620D181A700B88EAF /* FlipTransform.swift in Sources */,
 				454B22F322B8DD0C00A7A93E /* PDFInfoTransform.swift in Sources */,
 				BC8832E020D181A700B88EAF /* VignetteTransform.swift in Sources */,

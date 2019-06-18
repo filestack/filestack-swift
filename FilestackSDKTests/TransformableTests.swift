@@ -1365,5 +1365,33 @@ class TransformableTests: XCTestCase {
         XCTAssertEqual(transformable.url, expectedURL)
     }
 
-}
+    func testDocumentDetectionTransformationURL() {
+        transformable.add(transform: DocumentDetectionTransform()
+            .coords(false)
+            .preprocess(true))
 
+        let expectedURL = Config.processURL
+            .appendingPathComponent(
+                "doc_detection=coords:false,preprocess:true"
+            )
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testDocumentDetectionTransformationURLWithSecurityAndExternalURL() {
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+
+        let transformable = client.transformable(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
+            .add(transform: DocumentDetectionTransform().coords(false).preprocess(true))
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("MY-API-KEY")
+            .appendingPathComponent("doc_detection=coords:false,preprocess:true")
+            .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
+            .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+}
