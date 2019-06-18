@@ -4,6 +4,9 @@ branches:
   only:
     - master
     - develop
+cache:
+  directories:
+  - Carthage
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
