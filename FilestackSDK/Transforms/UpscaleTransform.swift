@@ -14,7 +14,7 @@ import Foundation
 @objc(FSUpscaleTransform) public class UpscaleTransform: Transform {
 
     /**
-        Initializes a `TornEdgesTransform` object.
+        Initializes an `UpscaleTransform` object.
      */
     public init() {
         super.init(name: "upscale")
