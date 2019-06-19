@@ -9,14 +9,14 @@
 import Foundation
 
 /**
- Removes the red eye effect from photos.
+    Removes the red eye effect from photos.
  */
 @objc(FSRedEyeRemovalTransform) public class RedEyeRemovalTransform: Transform {
-  
-  /**
-   Initializes a `RedEyeRemovalTransform` object.
-   */
-  public init() {
-    super.init(name: "redeye")
-  }
+
+    /**
+        Initializes a `RedEyeRemovalTransform` object.
+     */
+    public init() {
+        super.init(name: "redeye")
+    }
 }

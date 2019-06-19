@@ -9,14 +9,14 @@
 import Foundation
 
 /**
- Converts the image to monochrome.
+    Converts the image to monochrome.
  */
 @objc(FSMonochromeTransform) public class MonochromeTransform: Transform {
-  
-  /**
-   Initializes a `MonochromeTransform` object.
-   */
-  public init() {
-    super.init(name: "monochrome")
-  }
+
+    /**
+        Initializes a `MonochromeTransform` object.
+     */
+    public init() {
+        super.init(name: "monochrome")
+    }
 }

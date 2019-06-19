@@ -9,15 +9,14 @@
 import Foundation
 
 /**
- Returns JSON with flag saying if image if safe to display.
- Possible values: { "sfw": true } or { "sfw": false } depending on detected content.
+    Returns whether the image if safe to display.
  */
 @objc(FSSecureForWorkTransform) public class SecureForWorkTransform: Transform {
-  
-  /**
-   Initializes a `SecureForWorkTransform` object.
-   */
-  public init() {
-    super.init(name: "sfw")
-  }
+
+    /**
+        Initializes a `SecureForWorkTransform` object.
+     */
+    public init() {
+        super.init(name: "sfw")
+    }
 }

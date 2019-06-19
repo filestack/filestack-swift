@@ -10,7 +10,8 @@ import Foundation
 
 /**
     Gets information about a PDF document.
-    For more documentation see: https://www.filestack.com/docs/api/processing/#pdf-info
+
+    For more information see https://www.filestack.com/docs/api/processing/#pdf-info
  */
 @objc(FSPDFInfoTransform) public class PDFInfoTransform: Transform {
 

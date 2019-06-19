@@ -9,39 +9,39 @@
 import Foundation
 
 /**
- Upscalling image making it two times bigger.
+    Upscales the image making it two times bigger.
  */
 @objc(FSUpscaleTransform) public class UpscaleTransform: Transform {
-  
-  /**
-   Initializes a `TornEdgesTransform` object.
-   */
-  public init() {
-    super.init(name: "upscale")
-  }
-  
-  /**
-   Turn off resizing of image.
-   */
-  @discardableResult public func noUpscale() -> Self {
-    return appending(key: "upscale", value: false)
-  }
-  
-  /**
-   Adds the `noise` option.
-   
-   - Parameter value: An `TransformNoiseMode` value.
-   */
-  @discardableResult public func noise(_ value: TransformNoiseMode) -> Self {
-    return appending(key: "noise", value: value)
-  }
-  
-  /**
-   Adds the `style` option.
-   
-   - Parameter value: An `TransformStyleMode` value.
-   */
-  @discardableResult public func style(_ value: TransformStyleMode) -> Self {
-    return appending(key: "style", value: value)
-  }
+
+    /**
+        Initializes a `TornEdgesTransform` object.
+     */
+    public init() {
+        super.init(name: "upscale")
+    }
+
+    /**
+        Turns off resizing of image.
+     */
+    @discardableResult public func noUpscale() -> Self {
+        return appending(key: "upscale", value: false)
+    }
+
+    /**
+        Adds the `noise` option.
+
+        - Parameter value: An `TransformNoiseMode` value.
+     */
+    @discardableResult public func noise(_ value: TransformNoiseMode) -> Self {
+        return appending(key: "noise", value: value)
+    }
+
+    /**
+        Adds the `style` option.
+
+        - Parameter value: An `TransformStyleMode` value.
+     */
+    @discardableResult public func style(_ value: TransformStyleMode) -> Self {
+        return appending(key: "style", value: value)
+    }
 }

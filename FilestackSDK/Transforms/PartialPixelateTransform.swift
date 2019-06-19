@@ -9,17 +9,20 @@
 import Foundation
 
 /**
- Change image brightness, saturation and hue.
+    Changes image brightness, saturation and hue.
  */
 @objc(FSPartialPixelateTransform) public class PartialPixelateTransform: Transform, PartialCoverTransformExtension {
-  
-  /**
-   Initializes a `PartialPixelateTransform` object.
-   */
-  public init(objects: [CGRect]) {
-    super.init(name: "partial_pixelate")
-    let values = objects
-      .map { "[\(Int($0.origin.x)),\(Int($0.origin.y)),\(Int($0.size.width)),\(Int($0.size.height))]" }
-    options.append((key: "objects", value: values))
-  }
+
+    /**
+        Initializes a `PartialPixelateTransform` object.
+     */
+    public init(objects: [CGRect]) {
+        super.init(name: "partial_pixelate")
+
+        let values = objects.map {
+            "[\(Int($0.origin.x)),\(Int($0.origin.y)),\(Int($0.size.width)),\(Int($0.size.height))]"
+        }
+
+        options.append((key: "objects", value: values))
+    }
 }

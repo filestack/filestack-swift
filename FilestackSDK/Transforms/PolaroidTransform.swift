@@ -9,42 +9,42 @@
 import Foundation
 
 /**
- Applies a Polaroid border effect to the image.
+    Applies a Polaroid border effect to the image.
  */
 @objc(FSPolaroidTransform) public class PolaroidTransform: Transform {
-  
-  /**
-   Initializes a `PolaroidTransform` object.
-   */
-  public init() {
-    super.init(name: "polaroid")
-  }
-  
-  /**
-   Adds the `color` option.
-   
-   - Parameter value: Sets the Polaroid frame color.
-   */
-  @discardableResult public func color(_ value: UIColor) -> Self {
-    return appending(key: "color", value: value.hexString)
-  }
-  
-  /**
-   Adds the `rotate` option.
-   
-   - Parameter value: The degree by which to rotate the image clockwise. Valid range: `0...359`
-   */
-  @discardableResult public func rotate(_ value: Int) -> Self {
-    return appending(key: "rotate", value: value)
-  }
-  
-  /**
-   Adds the `background` option.
-   
-   - Parameter value: Sets the background color to display behind the Polaroid if
-   it has been rotated at all.
-   */
-  @discardableResult public func background(_ value: UIColor) -> Self {
-    return appending(key: "background", value: value.hexString)
-  }
+
+    /**
+        Initializes a `PolaroidTransform` object.
+     */
+    public init() {
+        super.init(name: "polaroid")
+    }
+
+    /**
+        Adds the `color` option.
+
+        - Parameter value: Sets the Polaroid frame color.
+     */
+    @discardableResult public func color(_ value: UIColor) -> Self {
+        return appending(key: "color", value: value.hexString)
+    }
+
+    /**
+        Adds the `rotate` option.
+
+        - Parameter value: The degree by which to rotate the image clockwise. Valid range: `0...359`
+     */
+    @discardableResult public func rotate(_ value: Int) -> Self {
+        return appending(key: "rotate", value: value)
+    }
+
+    /**
+        Adds the `background` option.
+
+        - Parameter value: Sets the background color to display behind the Polaroid if
+        it has been rotated at all.
+     */
+    @discardableResult public func background(_ value: UIColor) -> Self {
+        return appending(key: "background", value: value.hexString)
+    }
 }

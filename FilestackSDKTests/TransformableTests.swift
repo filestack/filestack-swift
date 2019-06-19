@@ -27,8 +27,8 @@ class TransformableTests: XCTestCase {
         OHHTTPStubs.removeAllStubs()
     }
 
-    func testAsciiTransformationUrl() {
-        transformable.add(transform: AsciiTransform().background(.red).foreground(.blue).size(50))
+    func testASCIITransformationUrl() {
+        transformable.add(transform: ASCIITransform().background(.red).foreground(.blue).size(50))
 
         let expectedUrl = Config.processURL
             .appendingPathComponent("ascii=background:FF0000FF,foreground:0000FFFF,size:50")
@@ -37,8 +37,8 @@ class TransformableTests: XCTestCase {
         XCTAssertEqual(transformable.url, expectedUrl)
     }
 
-    func testAsciiWithReverseTransformationUrl() {
-        transformable.add(transform: AsciiTransform().background(.red).foreground(.blue).reverse())
+    func testASCIIWithReverseTransformationUrl() {
+        transformable.add(transform: ASCIITransform().background(.red).foreground(.blue).reverse())
 
         let expectedUrl = Config.processURL
             .appendingPathComponent("ascii=background:FF0000FF,foreground:0000FFFF,colored:true,reverse:true")
@@ -172,8 +172,8 @@ class TransformableTests: XCTestCase {
         XCTAssertEqual(transformable.url, expectedUrl)
     }
 
-    func testProgressiveJpegTransformationUrl() {
-        transformable.add(transform: ProgressiveJpegTransform().quality(15).metadata(true))
+    func testProgressiveJPEGTransformationUrl() {
+        transformable.add(transform: ProgressiveJPEGTransform().quality(15).metadata(true))
 
         let expectedUrl = Config.processURL
             .appendingPathComponent("pjpg=quality:15,metadata:true")
@@ -202,8 +202,8 @@ class TransformableTests: XCTestCase {
         XCTAssertEqual(transformable.url, expectedUrl)
     }
 
-    func testUrlScreenshotTransformationUrl() {
-        transformable.add(transform: UrlScreenshotTransform().mobileAgent().windowMode().width(1).height(2).delay(5).orientation(.landscape).device("test"))
+    func testURLScreenshotTransformationUrl() {
+        transformable.add(transform: URLScreenshotTransform().mobileAgent().windowMode().width(1).height(2).delay(5).orientation(.landscape).device("test"))
 
         let expectedUrl = Config.processURL
             .appendingPathComponent("urlscreenshot=agent:mobile,mode:window,width:1,height:2,delay:5,orientation:landscape,device:test")
@@ -506,41 +506,41 @@ class TransformableTests: XCTestCase {
         XCTAssertEqual(transformable.url, expectedURL)
     }
 
-    func testRoundCornersTransformationURL() {
-        transformable.add(transform: RoundCornersTransform().radius(150).blur(0.8).background(.black))
+    func testRoundedCornersTransformationURL() {
+        transformable.add(transform: RoundedCornersTransform().radius(150).blur(0.8).background(.black))
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
+            .appendingPathComponent("rounded_corners=radius:150,blur:0.8,background:000000FF")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
 
-    func testRoundCornersTransformationWithoutArgumentsURL() {
-        transformable.add(transform: RoundCornersTransform())
+    func testRoundedCornersTransformationWithoutArgumentsURL() {
+        transformable.add(transform: RoundedCornersTransform())
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("round_corners")
+            .appendingPathComponent("rounded_corners")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
 
-    func testRoundCornersMaxRadiusTransformationURL() {
-        transformable.add(transform: RoundCornersTransform().maxRadius().blur(0.25).background(.white))
+    func testRoundedCornersMaxRadiusTransformationURL() {
+        transformable.add(transform: RoundedCornersTransform().maxRadius().blur(0.25).background(.white))
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("round_corners=radius:max,blur:0.25,background:FFFFFFFF")
+            .appendingPathComponent("rounded_corners=radius:max,blur:0.25,background:FFFFFFFF")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
 
-    func testRoundCornersMaxRadiusTransformationWithoutArgumentsURL() {
-        transformable.add(transform: RoundCornersTransform().maxRadius())
+    func testRoundedCornersMaxRadiusTransformationWithoutArgumentsURL() {
+        transformable.add(transform: RoundedCornersTransform().maxRadius())
 
         let expectedURL = Config.processURL
-            .appendingPathComponent("round_corners=radius:max")
+            .appendingPathComponent("rounded_corners=radius:max")
             .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(transformable.url, expectedURL)
@@ -1018,7 +1018,7 @@ class TransformableTests: XCTestCase {
                 .buffer(200)
                 .blur(0.25)
                 .type(.oval))
-            .add(transform: RoundCornersTransform().radius(150).blur(0.8).background(.black))
+            .add(transform: RoundedCornersTransform().radius(150).blur(0.8).background(.black))
             .add(transform: VignetteTransform().amount(80).blurMode(.gaussian).background(.black))
             .add(transform: PolaroidTransform().color(.white).rotate(33).background(.black))
             .add(transform: TornEdgesTransform().spread(start: 5, end: 25).background(.blue))
@@ -1068,7 +1068,7 @@ class TransformableTests: XCTestCase {
             .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
             .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[4]")
             .appendingPathComponent("pixelate_faces=faces:[3],minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
-            .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
+            .appendingPathComponent("rounded_corners=radius:150,blur:0.8,background:000000FF")
             .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
             .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
             .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
@@ -1127,7 +1127,7 @@ class TransformableTests: XCTestCase {
                 .buffer(200)
                 .blur(0.25)
                 .type(.oval))
-            .add(transform: RoundCornersTransform().radius(150).blur(0.8).background(.black))
+            .add(transform: RoundedCornersTransform().radius(150).blur(0.8).background(.black))
             .add(transform: VignetteTransform().amount(80).blurMode(.gaussian).background(.black))
             .add(transform: PolaroidTransform().color(.white).rotate(33).background(.black))
             .add(transform: TornEdgesTransform().spread(start: 5, end: 25).background(.blue))
@@ -1178,7 +1178,7 @@ class TransformableTests: XCTestCase {
             .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
             .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[4]")
             .appendingPathComponent("pixelate_faces=faces:[3],minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
-            .appendingPathComponent("round_corners=radius:150,blur:0.8,background:000000FF")
+            .appendingPathComponent("rounded_corners=radius:150,blur:0.8,background:000000FF")
             .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
             .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
             .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
@@ -1391,6 +1391,58 @@ class TransformableTests: XCTestCase {
             .appendingPathComponent("doc_detection=coords:false,preprocess:true")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testFallbackTransformationURL() {
+        transformable.add(transform: FallbackTransform()
+            .cache(10)
+            .handle("MY-FALLBACK-HANDLE"))
+
+        transformable.add(transform: DocumentDetectionTransform()
+            .coords(false)
+            .preprocess(true))
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("fallback=cache:10,handle:MY-FALLBACK-HANDLE")
+            .appendingPathComponent("doc_detection=coords:false,preprocess:true")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testFallbackTransformationURLWithSecurityAndExternalURL() {
+        let security = Seeds.Securities.basic
+        let client = Client(apiKey: "MY-API-KEY", security: security)
+
+        let transformable = client.transformable(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
+
+        transformable.add(transform: FallbackTransform()
+            .cache(10)
+            .handle("MY-FALLBACK-HANDLE"))
+
+        transformable.add(transform: DocumentDetectionTransform()
+            .coords(false)
+            .preprocess(true))
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("MY-API-KEY")
+            .appendingPathComponent("fallback=cache:10,handle:MY-FALLBACK-HANDLE")
+            .appendingPathComponent("doc_detection=coords:false,preprocess:true")
+            .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
+            .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+
+    func testImageSizeTransformationURL() {
+        transformable.add(transform: ImageSizeTransform())
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("imagesize")
+            .appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
