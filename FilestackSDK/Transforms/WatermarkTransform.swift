@@ -20,7 +20,8 @@ import Foundation
      */
     public init(file: String) {
         super.init(name: "watermark")
-        options.append((key: "file", value: file))
+
+        appending(key: "file", value: file)
     }
 
     /**

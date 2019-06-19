@@ -28,7 +28,7 @@ import Foundation
         it will count against your conversion quota.
      */
     @discardableResult public func turnOff() -> Self {
-        options.removeAll()
+        removeAllOptions()
         return appending(key: "false", value: nil)
     }
 

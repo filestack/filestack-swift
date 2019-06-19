@@ -18,7 +18,8 @@ import Foundation
      */
     public init() {
         super.init(name: "rotate")
-        options.append((key: "deg", value: "exif"))
+
+        appending(key: "deg", value: "exif")
     }
 
     /**
@@ -28,7 +29,8 @@ import Foundation
      */
     public init(deg: Int) {
         super.init(name: "rotate")
-        options.append((key: "deg", value: deg))
+
+        appending(key: "deg", value: deg)
     }
 
     /**

@@ -23,7 +23,7 @@ import Foundation
      */
     public init(x: Int, y: Int, width: Int, height: Int) {
         super.init(name: "crop")
-        
-        options.append((key: "dim", value: [x, y, width, height]))
+
+        appending(key: "dim", value: [x, y, width, height])
     }
 }

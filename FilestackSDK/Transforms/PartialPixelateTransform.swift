@@ -23,6 +23,6 @@ import Foundation
             "[\(Int($0.origin.x)),\(Int($0.origin.y)),\(Int($0.size.width)),\(Int($0.size.height))]"
         }
 
-        options.append((key: "objects", value: values))
+        appending(key: "objects", value: values)
     }
 }
