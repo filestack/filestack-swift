@@ -19,15 +19,13 @@ env:
     - DESTINATION="OS=11.4,name=iPhone X"        SCHEME="$IOS_FRAMEWORK_SCHEME"
 before_install:
   - brew install carthage
-  - carthage bootstrap --no-build --use-submodules --verbose
+  - carthage bootstrap --cache-builds --platform iOS --verbose
 script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
   - carthage version
 
-  # Carthage build
-  - carthage bootstrap --cache-builds --platform iOS
   # Build Framework in Debug and Run Tests
   - xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
   - travis_retry xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Debug test-without-building | xcpretty;
