@@ -30,5 +30,5 @@ script:
   - xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
   - travis_retry xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -configuration Debug test-without-building | xcpretty;
 
-after_success:
-   - sleep 30
+#after_success:
+#   - sleep 30
