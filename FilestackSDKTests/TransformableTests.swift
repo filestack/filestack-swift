@@ -1203,7 +1203,6 @@ class TransformableTests: XCTestCase {
     }
 
     func testStoreImageTransformation() {
-
         stub(condition: processStubConditions) { _ in
 
             let json: [String: Any] = [
@@ -1227,48 +1226,38 @@ class TransformableTests: XCTestCase {
         let transformable = client.transformable(handle: "MY-HANDLE")
             .add(transform: CropTransform(x: 301, y: 269, width: 1226, height: 1100))
 
+        let storageOptions = StorageOptions(location: .s3,
+                                            region: "us-east-1",
+                                            container: "filestack-web-demo",
+                                            path: "my/custom/path/",
+                                            filename: "custom_flower_crop.jpg",
+                                            access: .public)
+
         let expectedURL = Config.processURL
-            .appendingPathComponent(
-                "store=filename:custom_flower_crop.jpg,location:S3,path:my/custom/path/," +
-                "container:filestack-web-demo,region:us-east-1,access:public,base64decode:true"
-            )
+            .appendingPathComponent("store=location:S3,region:us-east-1,container:filestack-web-demo,path:my/custom/path/,filename:custom_flower_crop.jpg,access:public,base64decode:true")
             .appendingPathComponent("crop=dim:[301,269,1226,1100]")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("MY-HANDLE")
 
-        var aFileLink: FileLink?
-        var aResponse: NetworkJSONResponse?
+        let transform = transformable.store(using: storageOptions, base64Decode: true) { fileLink, response in
+            expectation.fulfill()
 
-        let transform = transformable.store(fileName: "custom_flower_crop.jpg",
-                                            location: .s3,
-                                            path: "my/custom/path/",
-                                            container: "filestack-web-demo",
-                                            region: "us-east-1",
-                                            access: .public,
-                                            base64Decode: true) { fileLink, response in
+            XCTAssertEqual(response.request?.url, expectedURL)
+            XCTAssertEqual(response.response?.statusCode, 200)
+            XCTAssertNil(response.error)
 
-                                                aFileLink = fileLink
-                                                aResponse = response
-
-                                                expectation.fulfill()
+            XCTAssertNotNil(fileLink)
+            XCTAssertEqual(fileLink?.apiKey, "MY-API-KEY")
+            XCTAssertEqual(fileLink?.handle, "lv3P2Q4QN2aluHLGhgAV")
+            XCTAssertEqual(fileLink?.security, security)
         }
 
         XCTAssertEqual(transform.url, expectedURL)
 
         waitForExpectations(timeout: 10, handler: nil)
-
-        XCTAssertEqual(aResponse?.request?.url, expectedURL)
-        XCTAssertEqual(aResponse?.response?.statusCode, 200)
-        XCTAssertNil(aResponse?.error)
-
-        XCTAssertNotNil(aFileLink)
-        XCTAssertEqual(aFileLink?.apiKey, "MY-API-KEY")
-        XCTAssertEqual(aFileLink?.handle, "lv3P2Q4QN2aluHLGhgAV")
-        XCTAssertEqual(aFileLink?.security, security)
     }
 
     func testFailedStoreImageTransformation() {
-
         stub(condition: processStubConditions) { _ in
             return OHHTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
         }
@@ -1279,29 +1268,23 @@ class TransformableTests: XCTestCase {
         let transformable = client.transformable(handle: "MY-HANDLE")
             .add(transform: CropTransform(x: 301, y: 269, width: 1226, height: 1100))
 
+        let storageOptions = StorageOptions(location: .s3, access: .public)
+
         let expectedURL = Config.processURL
             .appendingPathComponent("store=location:S3,access:public,base64decode:false")
             .appendingPathComponent("crop=dim:[301,269,1226,1100]")
             .appendingPathComponent("MY-HANDLE")
 
-        var aFileLink: FileLink?
-        var aResponse: NetworkJSONResponse?
-
-        transformable.store(location: .s3, access: .public, base64Decode: false) { fileLink, response in
-
-            aFileLink = fileLink
-            aResponse = response
-
+        transformable.store(using: storageOptions, base64Decode: false) { fileLink, response in
             expectation.fulfill()
+
+            XCTAssertNil(fileLink)
+            XCTAssertEqual(response.request?.url, expectedURL)
+            XCTAssertEqual(response.response?.statusCode, 500)
+            XCTAssertNotNil(response.error)
         }
 
         waitForExpectations(timeout: 10, handler: nil)
-
-        XCTAssertEqual(aResponse?.request?.url, expectedURL)
-        XCTAssertEqual(aResponse?.response?.statusCode, 500)
-        XCTAssertNotNil(aResponse?.error)
-
-        XCTAssertNil(aFileLink)
     }
 
     func testPDFInfoDocumentTransformationURL() {
