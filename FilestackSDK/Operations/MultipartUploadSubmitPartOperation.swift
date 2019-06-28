@@ -6,13 +6,13 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 typealias MultipartUploadSubmitPartOperation = MultipartUploadSubmitPartProtocol & BaseOperation
 
-protocol MultipartUploadSubmitPartProtocol: class {
-    var part: Int {get}
-    var responseEtag: String? {get}
-    var didFail: Bool {get}
+protocol MultipartUploadSubmitPartProtocol: AnyObject {
+    var part: Int { get }
+    var responseEtag: String? { get }
+    var didFail: Bool { get }
 }

@@ -12,7 +12,6 @@ import Foundation
  Represents a set of storage options.
  */
 @objc(FSStorageOptions) public class StorageOptions: NSObject {
-
     // MARK: - Public Properties
 
     /// An `StorageLocation` value. Valid options are `.s3`, `.dropbox`, `.rackspace`, `.azure`, `.gcs`.
@@ -42,7 +41,6 @@ import Foundation
 
     /// Convenience initializer (for Objective-C).
     @objc public convenience init(location: StorageLocation) {
-
         self.init(location: location, region: nil, container: nil, path: nil, filename: nil, access: nil)
     }
 

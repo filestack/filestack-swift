@@ -6,8 +6,8 @@
 //  Copyright © 2018 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
     typealias MultiPartFormDataClosure = (MultipartFormData) -> Void
@@ -53,16 +53,16 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
         self.region = region
         self.uploadID = uploadID
         self.chunkSize = chunkSize
-        self.didFail = false
+        didFail = false
         self.uploadProgress = uploadProgress
         super.init()
 
-        self.state = .ready
+        state = .ready
     }
 
     override func main() {
         guard let handle = try? FileHandle(forReadingFrom: localURL) else {
-            self.state = .finished
+            state = .finished
             return
         }
         fileHandle = handle
@@ -78,13 +78,13 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
 private extension MultipartRegularUploadSubmitPartOperation {
     func upload() {
         guard !isCancelled, let fileHandle = fileHandle else {
-            self.state = .finished
+            state = .finished
             return
         }
 
         state = .executing
 
-        fileHandle.seek(toFileOffset: self.seek)
+        fileHandle.seek(toFileOffset: seek)
 
         let dataChunk = fileHandle.readData(ofLength: chunkSize)
 
@@ -136,4 +136,3 @@ private extension MultipartRegularUploadSubmitPartOperation {
         return URL(string: urlString)
     }
 }
-

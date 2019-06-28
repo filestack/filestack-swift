@@ -8,13 +8,10 @@
 
 import Foundation
 
-
 /**
-    Represents an image transform crop type.
+ Represents an image transform crop type.
  */
 @objc(FSTransformCropMode) public enum TransformCropMode: UInt, CustomStringConvertible {
-
-
     /// Thumb
     case thumb
 
@@ -24,12 +21,10 @@ import Foundation
     /// Fill
     case fill
 
-
     // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {
-
         switch self {
         case .thumb:
 
@@ -42,7 +37,6 @@ import Foundation
         case .fill:
 
             return "fill"
-
         }
     }
 }

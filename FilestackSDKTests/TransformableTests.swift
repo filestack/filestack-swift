@@ -6,13 +6,12 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import XCTest
 import OHHTTPStubs
+import XCTest
 
 @testable import FilestackSDK
 
 class TransformableTests: XCTestCase {
-
     private let processStubConditions = isScheme(Config.processURL.scheme!) && isHost(Config.processURL.host!)
     private let client = Client(apiKey: "My-API-KEY")
 
@@ -403,7 +402,7 @@ class TransformableTests: XCTestCase {
     }
 
     func testCropFacesTransformationWithFacesArrayURL() {
-        transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([1,2,3,4]))
+        transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([1, 2, 3, 4]))
 
         let expectedURL = Config.processURL
             .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[1,2,3,4]")
@@ -440,7 +439,7 @@ class TransformableTests: XCTestCase {
 
     func testPixelateFacesTransformationWithFacesArrayURL() {
         transformable.add(transform: PixelateFacesTransform()
-            .faces([1,3,5])
+            .faces([1, 3, 5])
             .minSize(0.25)
             .maxSize(0.45)
             .buffer(200)
@@ -484,7 +483,7 @@ class TransformableTests: XCTestCase {
 
     func testPixelateFacesTransformationWithOptionals2URL() {
         transformable.add(transform: PixelateFacesTransform()
-            .faces([1,3,5])
+            .faces([1, 3, 5])
             .buffer(320))
 
         let expectedURL = Config.processURL
@@ -829,7 +828,7 @@ class TransformableTests: XCTestCase {
         let expectedURL = Config.processURL
             .appendingPathComponent(
                 "output=format:pdf,background:FFFFFFFF,page:1,density:100,compress:true,quality:85,strip:true," +
-                "colorspace:input,secure:true,docinfo:true,pageformat:letter,pageorientation:portrait"
+                    "colorspace:input,secure:true,docinfo:true,pageformat:letter,pageorientation:portrait"
             )
             .appendingPathComponent("MY-HANDLE")
 
@@ -918,7 +917,7 @@ class TransformableTests: XCTestCase {
             .audioChannels(2)
             .clipLength("00:02:30")
             .clipOffset("00:00:05")
-            .watermarkURL(URL(string:"https://SOME-EXTERNAL-URL")!)
+            .watermarkURL(URL(string: "https://SOME-EXTERNAL-URL")!)
             .watermarkTop(20)
             .watermarkRight(20)
             .watermarkWidth(256)
@@ -933,7 +932,7 @@ class TransformableTests: XCTestCase {
                     "audio_bitrate:320,audio_samplerate:44100,audio_channels:2," +
                     "clip_length:00:02:30,clip_offset:00:00:05," +
                     "watermark_url:https://SOME-EXTERNAL-URL,watermark_top:20,watermark_right:20," +
-                "watermark_width:256,watermark_height:256"
+                    "watermark_width:256,watermark_height:256"
             )
             .appendingPathComponent("MY-HANDLE")
 
@@ -978,7 +977,7 @@ class TransformableTests: XCTestCase {
                     "extname:m4a,filename:chapter_1,location:S3,path:/myfiles/chapter_1.m4a," +
                     "access:public,container:user-audios," +
                     "audio_bitrate:320,audio_samplerate:44100,audio_channels:2," +
-                "clip_length:00:02:30,clip_offset:00:00:05"
+                    "clip_length:00:02:30,clip_offset:00:00:05"
             )
             .appendingPathComponent("MY-HANDLE")
 
@@ -1093,7 +1092,6 @@ class TransformableTests: XCTestCase {
     }
 
     func testTransfomationURLWithExternalURL() {
-
         let client = Client(apiKey: "MY-API-KEY")
 
         let transformable = client.transformable(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
@@ -1108,7 +1106,6 @@ class TransformableTests: XCTestCase {
     }
 
     func testChainedTransformationsURLWithExternalURL() {
-
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-API-KEY", security: security)
 
@@ -1210,10 +1207,10 @@ class TransformableTests: XCTestCase {
                 "filename": "custom_flower_crop.jpg",
                 "width": 1226,
                 "height": 1100,
-                "size": 215693,
+                "size": 215_693,
                 "key": "my/custom/path/lv3P2Q4QN2aluHLGhgAV_custom_flower_crop.jpg",
                 "type": "image/jpeg",
-                "url": "https://cdn.filestackcontent.com/lv3P2Q4QN2aluHLGhgAV"
+                "url": "https://cdn.filestackcontent.com/lv3P2Q4QN2aluHLGhgAV",
             ]
 
             return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: nil)
@@ -1259,7 +1256,7 @@ class TransformableTests: XCTestCase {
 
     func testFailedStoreImageTransformation() {
         stub(condition: processStubConditions) { _ in
-            return OHHTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
+            OHHTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -1294,11 +1291,10 @@ class TransformableTests: XCTestCase {
         transformable.add(transform: PDFInfoTransform()
             .colorInfo())
 
-
         let expectedURL = Config.processURL
             .appendingPathComponent(
                 "output=format:pdf/" +
-                "pdfinfo=colorinfo:true"
+                    "pdfinfo=colorinfo:true"
             )
             .appendingPathComponent("MY-HANDLE")
 
@@ -1312,13 +1308,12 @@ class TransformableTests: XCTestCase {
         transformable.add(transform: PDFConvertTransform()
             .pageOrientation(.landscape)
             .pageFormat(.a3)
-            .pages([2,3,4]))
-
+            .pages([2, 3, 4]))
 
         let expectedURL = Config.processURL
             .appendingPathComponent(
                 "output=format:pdf/" +
-                "pdfconvert=pageorientation:landscape,pageformat:a3,pages:[2,3,4]"
+                    "pdfconvert=pageorientation:landscape,pageformat:a3,pages:[2,3,4]"
             )
             .appendingPathComponent("MY-HANDLE")
 
@@ -1332,16 +1327,15 @@ class TransformableTests: XCTestCase {
         transformable.add(transform: PDFConvertTransform()
             .pageOrientation(.landscape)
             .pageFormat(.a3)
-            .pages([2,3,4]))
+            .pages([2, 3, 4]))
 
         transformable.add(transform: PDFMonochromeTransform())
-
 
         let expectedURL = Config.processURL
             .appendingPathComponent(
                 "output=format:pdf/" +
-                "pdfconvert=pageorientation:landscape,pageformat:a3,pages:[2,3,4]/" +
-                "monochrome"
+                    "pdfconvert=pageorientation:landscape,pageformat:a3,pages:[2,3,4]/" +
+                    "monochrome"
             )
             .appendingPathComponent("MY-HANDLE")
 
@@ -1418,7 +1412,6 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
-
 
     func testImageSizeTransformationURL() {
         transformable.add(transform: ImageSizeTransform())

@@ -9,13 +9,10 @@
 import XCTest
 @testable import FilestackSDK
 
-
 class NetworkingServiceTest: XCTestCase {
-        
     let services: [NetworkingService] = [APIService(), CDNService()]
 
     func testBuildURL() {
-
         for service in services {
             let outputURL = service.buildURL()
             let expectedURL = service.baseURL
@@ -25,7 +22,6 @@ class NetworkingServiceTest: XCTestCase {
     }
 
     func testBaseURLWithHandleURL() {
-
         for service in services {
             let outputURL = service.buildURL(handle: "SOME-HANDLE")
 
@@ -34,7 +30,6 @@ class NetworkingServiceTest: XCTestCase {
     }
 
     func testGetURLWithBasePathAndHandleURL() {
-
         for service in services {
             let outputURL = service.buildURL(handle: "SOME-HANDLE", path: "some/path")
 
@@ -43,14 +38,13 @@ class NetworkingServiceTest: XCTestCase {
     }
 
     func testGetURLWithBasePathHandleAndSecurityURL() {
-
         let security = Seeds.Securities.basic
 
         for service in services {
             let outputURL = service.buildURL(handle: "SOME-HANDLE", path: "some/path", security: security)
 
             XCTAssertEqual("\(service.baseURL.absoluteString)/some/path/SOME-HANDLE" +
-                           "?policy=\(security.encodedPolicy)&signature=\(security.signature)",
+                "?policy=\(security.encodedPolicy)&signature=\(security.signature)",
                            outputURL?.absoluteString)
         }
     }

@@ -8,15 +8,13 @@
 
 import Foundation
 
-
 /**
-    Represents a cloud storage location type.
+ Represents a cloud storage location type.
 
-    See [CloudStorage](https://www.filestack.com/docs/cloud-storage/) for more information 
-    about cloud storage locations.
+ See [CloudStorage](https://www.filestack.com/docs/cloud-storage/) for more information
+ about cloud storage locations.
  */
 @objc(FSStorageLocation) public enum StorageLocation: UInt, CustomStringConvertible {
-
     /// Amazon S3
     case s3
 
@@ -32,12 +30,10 @@ import Foundation
     /// Google Cloud Storage
     case gcs
 
-    
     // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {
-
         switch self {
         case .s3:
 
@@ -58,7 +54,6 @@ import Foundation
         case .gcs:
 
             return "gcs"
-
         }
     }
 }

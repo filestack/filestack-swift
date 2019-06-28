@@ -12,7 +12,6 @@ import Foundation
  Represents an image transform page format type.
  */
 @objc(FSTransformPageFormat) public enum TransformPageFormat: UInt, CustomStringConvertible {
-
     /// A2
     case a2
 

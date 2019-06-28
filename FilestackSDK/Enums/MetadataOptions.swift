@@ -8,25 +8,21 @@
 
 import Foundation
 
-
 /**
-    Represents a metadata option.
+ Represents a metadata option.
  */
 public typealias MetadataOptions = FSMetadataOptions
 
 public extension MetadataOptions {
-
     internal static func all() -> [MetadataOptions] {
-
         return [
             .size, .mimeType, .fileName, .width, .height, .uploaded, .writeable, .cloud,
             .sourceURL, .MD5, .SHA224, .SHA256, .SHA384, .SHA512, .location, .path,
-            .container, .exif
+            .container, .exif,
         ]
     }
 
     internal func toArray() -> [String] {
-
         let ops: [String] = type(of: self).all().compactMap {
             guard contains($0) else {
                 return nil
@@ -38,7 +34,6 @@ public extension MetadataOptions {
     }
 
     private func stringValue() -> String? {
-
         switch self {
         case MetadataOptions.size:
 

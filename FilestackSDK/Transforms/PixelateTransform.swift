@@ -9,21 +9,20 @@
 import Foundation
 
 /**
-    Pixelates the image.
+ Pixelates the image.
  */
 @objc(FSPixelateTransform) public class PixelateTransform: Transform {
-
     /**
-        Initializes a `PixelateTransform` object.
+     Initializes a `PixelateTransform` object.
      */
     public init() {
         super.init(name: "pixelate")
     }
 
     /**
-        Adds `amount` option.
+     Adds `amount` option.
 
-        - Parameter value: Valid range: `2...100`
+     - Parameter value: Valid range: `2...100`
      */
     @discardableResult public func amount(_ value: Int = 2) -> Self {
         return appending(key: "amount", value: value)

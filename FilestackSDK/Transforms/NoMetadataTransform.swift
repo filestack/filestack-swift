@@ -9,12 +9,11 @@
 import Foundation
 
 /**
-    Removes any metadata embedded in an image.
+ Removes any metadata embedded in an image.
  */
 @objc(FSNoMetadataTransform) public class NoMetadataTransform: Transform {
-
     /**
-        Initializes a `NoMetadataTransform` object.
+     Initializes a `NoMetadataTransform` object.
      */
     public init() {
         super.init(name: "no_metadata")

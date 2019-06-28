@@ -13,7 +13,6 @@ typealias Task = (name: String, options: [TaskOption]?)
 
 /// :nodoc:
 @objc(FSTransform) public class Transform: NSObject {
-
     private var options = [TaskOption]()
     private let name: String
 
@@ -83,7 +82,6 @@ extension Transform {
 }
 
 extension Transform {
-
     @discardableResult func appending(key: String, value: Any?) -> Self {
         options.append((key: key, value: value))
 

@@ -9,18 +9,17 @@
 import Foundation
 
 /**
-    The collage task accepts an array of Filestack file handles, storage aliases, or external URLs.
-    These files are appended in given order to the base file of the transformation URL.
-    Altogther the base image and the passed files are the images that will comprise the collage.
-    The order in which they are added dictates how the images will be arranged.
+ The collage task accepts an array of Filestack file handles, storage aliases, or external URLs.
+ These files are appended in given order to the base file of the transformation URL.
+ Altogther the base image and the passed files are the images that will comprise the collage.
+ The order in which they are added dictates how the images will be arranged.
  */
 @objc(FSCollageTransform) public class CollageTransform: Transform {
-
     /**
-        Initializes a `CollageTransform` object.
+     Initializes a `CollageTransform` object.
 
-        - Parameter size: Valid range: `1...10000` x `1...10000`
-        - Parameter collection: CollageTransformCollection with added handles or direct links to images.
+     - Parameter size: Valid range: `1...10000` x `1...10000`
+     - Parameter collection: CollageTransformCollection with added handles or direct links to images.
      */
     init(size: CGSize, collection: CollageTransformCollection) {
         super.init(name: "collage")
@@ -30,46 +29,44 @@ import Foundation
     }
 
     /**
-        Adds the `margin` option.
+     Adds the `margin` option.
 
-        - Parameter value: Valid range: `1...100`
+     - Parameter value: Valid range: `1...100`
      */
     @discardableResult public func margin(_ value: Int) -> Self {
         return appending(key: "margin", value: value)
     }
 
     /**
-        Adds the `color` option.
+     Adds the `color` option.
 
-        - Parameter value: Sets the background color to display behind the images.
+     - Parameter value: Sets the background color to display behind the images.
      */
     @discardableResult public func color(_ value: UIColor) -> Self {
         return appending(key: "color", value: value.hexString)
     }
 
     /**
-        Changes the `fit` option to every image from `auto` to `crop`.
+     Changes the `fit` option to every image from `auto` to `crop`.
      */
     @discardableResult public func cropFit() -> Self {
         return appending(key: "fit", value: TransformFit.crop)
     }
 
     /**
-        Adds the `autorotate` option.
+     Adds the `autorotate` option.
      */
     @discardableResult public func autorotate() -> Self {
         return appending(key: "autorotate", value: true)
     }
-
 }
 
 /**
-    Class that is used for creating and sanitizing collection of file handles, storage aliases, or external urls.
+ Class that is used for creating and sanitizing collection of file handles, storage aliases, or external urls.
 
-    See also `CollageTransform`.
+ See also `CollageTransform`.
  */
 @objc(FSCollageTransformCollection) public class CollageTransformCollection: NSObject {
-
     var files = [String]()
 
     /// Adding one resource to collection.

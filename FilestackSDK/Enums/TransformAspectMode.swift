@@ -8,12 +8,10 @@
 
 import Foundation
 
-
 /**
-    Represents an image transform aspect type.
+ Represents an image transform aspect type.
  */
 @objc(FSTransformAspectMode) public enum TransformAspectMode: UInt, CustomStringConvertible {
-
     /// Preserve
     case preserve
 
@@ -29,12 +27,10 @@ import Foundation
     /// Crop
     case crop
 
-    
     // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {
-
         switch self {
         case .preserve:
 
@@ -55,7 +51,6 @@ import Foundation
         case .crop:
 
             return "crop"
-
         }
     }
 }

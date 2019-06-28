@@ -6,11 +6,10 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 class MultipartUploadCommitOperation: BaseOperation {
-
     let apiKey: String
     let fileSize: UInt64
     let part: Int
@@ -38,7 +37,7 @@ class MultipartUploadCommitOperation: BaseOperation {
 
         super.init()
 
-        self.state = .ready
+        state = .ready
     }
 
     override func main() {

@@ -6,13 +6,12 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Foundation
 import CryptoSwift
+import Foundation
 
 extension Data {
-  
-  /// Base64-encoded 128-bit MD5 digest (according to RFC 1864)
-  internal func base64MD5Digest() -> String {
-    return md5().base64EncodedString(options: [])
-  }
+    /// Base64-encoded 128-bit MD5 digest (according to RFC 1864)
+    internal func base64MD5Digest() -> String {
+        return md5().base64EncodedString(options: [])
+    }
 }

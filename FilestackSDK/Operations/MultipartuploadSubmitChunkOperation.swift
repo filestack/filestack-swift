@@ -6,11 +6,10 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 class MultipartUploadSubmitChunkOperation: BaseOperation {
-
     let partOffset: UInt64
     let dataChunk: Data
     let apiKey: String
@@ -67,7 +66,7 @@ private extension MultipartUploadSubmitChunkOperation {
             let urlString = response.json?["url"] as? String,
             let url = URL(string: urlString),
             let headers = response.json?["headers"] as? [String: String] else {
-                return
+            return
         }
 
         uploadRequest = uploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)

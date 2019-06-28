@@ -8,24 +8,20 @@
 
 import Foundation
 
-
 /**
-    Represents a policy call type.
+ Represents a policy call type.
 
-    See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
-    information about policy calls.
+ See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
+ information about policy calls.
  */
 public typealias PolicyCall = FSPolicyCall
 
 public extension PolicyCall {
-
     internal static func all() -> [PolicyCall] {
-
         return [.pick, .read, .stat, .write, .writeURL, .store, .convert, .remove, .exif, .runWorkflow]
     }
 
     internal func toArray() -> [String] {
-
         let ops: [String] = type(of: self).all().compactMap {
             guard contains($0) else {
                 return nil
@@ -37,7 +33,6 @@ public extension PolicyCall {
     }
 
     private func stringValue() -> String? {
-
         switch self {
         case PolicyCall.pick:
 

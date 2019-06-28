@@ -8,12 +8,10 @@
 
 import Foundation
 
-
 /**
-    Represents an image transform fit type.
+ Represents an image transform fit type.
  */
 @objc(FSTransformFit) public enum TransformFit: UInt, CustomStringConvertible {
-
     /// Clip
     case clip
 
@@ -26,12 +24,10 @@ import Foundation
     /// Max
     case max
 
-
     // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {
-
         switch self {
         case .clip:
 

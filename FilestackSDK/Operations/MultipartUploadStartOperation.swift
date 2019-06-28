@@ -6,11 +6,10 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 class MultipartUploadStartOperation: BaseOperation {
-
     let apiKey: String
     let fileName: String
     let fileSize: UInt64

@@ -6,11 +6,10 @@
 //  Copyright © 2018 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
-
     let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
     let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
     let minimumPartChunkSize = 32768
@@ -67,21 +66,21 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
         self.uploadID = uploadID
         self.storeOptions = storeOptions
         self.chunkSize = chunkSize
-        self.partChunkSize = 0
-        self.maxRetries = 5
-        self.retriesLeft = maxRetries
-        self.didFail = false
+        partChunkSize = 0
+        maxRetries = 5
+        retriesLeft = maxRetries
+        didFail = false
         self.uploadProgress = uploadProgress
-        self.chunkUploadOperationQueue.underlyingQueue = chunkUploadOperationUnderlyingQueue
-        self.chunkUploadOperationQueue.maxConcurrentOperationCount = chunkUploadConcurrency
+        chunkUploadOperationQueue.underlyingQueue = chunkUploadOperationUnderlyingQueue
+        chunkUploadOperationQueue.maxConcurrentOperationCount = chunkUploadConcurrency
         super.init()
 
-        self.state = .ready
+        state = .ready
     }
 
     override func main() {
         guard let handle = try? FileHandle(forReadingFrom: localURL) else {
-            self.state = .finished
+            state = .finished
             return
         }
         fileHandle = handle
@@ -121,8 +120,8 @@ private extension MultipartInteligentUploadSubmitPartOperation {
 
             guard let chunkOperation = addChunkOperation(partOffset: partOffset,
                                                          partChunkSize: partChunkSize) else {
-                                                            // EOF condition
-                                                            break
+                // EOF condition
+                break
             }
 
             partOffset += UInt64(chunkOperation.dataChunk.count)
@@ -135,7 +134,7 @@ private extension MultipartInteligentUploadSubmitPartOperation {
 
     private func doCommit() {
         // Try to commit operation with retries.
-        while !didFail && retriesLeft > 0 {
+        while !didFail, retriesLeft > 0 {
             let commitOperation = MultipartUploadCommitOperation(apiKey: apiKey,
                                                                  fileSize: fileSize,
                                                                  part: part,
@@ -151,8 +150,8 @@ private extension MultipartInteligentUploadSubmitPartOperation {
             let isNetworkError = jsonResponse?.response == nil && jsonResponse?.error != nil
 
             // Check for any error response.
-            if (jsonResponse?.response?.statusCode != 200 || isNetworkError) && retriesLeft > 0 {
-                let delay = isNetworkError ? 0 : pow(2, Double(self.maxRetries - retriesLeft))
+            if jsonResponse?.response?.statusCode != 200 || isNetworkError, retriesLeft > 0 {
+                let delay = isNetworkError ? 0 : pow(2, Double(maxRetries - retriesLeft))
                 // Retrying in `delay` seconds
                 Thread.sleep(forTimeInterval: delay)
             } else {
@@ -175,10 +174,10 @@ private extension MultipartInteligentUploadSubmitPartOperation {
     private func addChunkOperation(partOffset: UInt64, partChunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
         guard let fileHandle = fileHandle else { return nil }
 
-        fileHandle.seek(toFileOffset: self.seek + partOffset)
+        fileHandle.seek(toFileOffset: seek + partOffset)
         let dataChunk = fileHandle.readData(ofLength: partChunkSize)
 
-        guard dataChunk.count > 0 else { return nil }
+        guard !dataChunk.isEmpty else { return nil }
 
         let operation = chunkOperation(partOffset: partOffset, dataChunk: dataChunk)
 
@@ -219,7 +218,7 @@ private extension MultipartInteligentUploadSubmitPartOperation {
                     self.partChunkSize = newPartChunkSize
                     var localPartOffset = operation.partOffset
 
-                    for _ in 1...2 {
+                    for _ in 1 ... 2 {
                         guard self.addChunkOperation(partOffset: localPartOffset,
                                                      partChunkSize: newPartChunkSize) != nil else { break }
 

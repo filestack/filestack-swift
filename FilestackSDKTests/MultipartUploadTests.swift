@@ -6,13 +6,13 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import XCTest
 import OHHTTPStubs
+import XCTest
 @testable import FilestackSDK
 
 class MultipartUploadTests: XCTestCase {
-    static private let largeFileSize: Int = 6034668
-    static private let sampleFileSize: Int = 200367
+    private static let largeFileSize: Int = 6_034_668
+    private static let sampleFileSize: Int = 200_367
     private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     private let chunkSize = 1 * Int(pow(Double(1024), Double(2)))
     private let partSize = 8 * Int(pow(Double(1024), Double(2)))
@@ -38,7 +38,7 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var response: NetworkJSONResponse?
-        client.multiPartUpload(from: largeFileUrl, useIntelligentIngestionIfAvailable: false) { (resp) in
+        client.multiPartUpload(from: largeFileUrl, useIntelligentIngestionIfAvailable: false) { resp in
             response = resp
             expectation.fulfill()
         }
@@ -72,7 +72,7 @@ class MultipartUploadTests: XCTestCase {
             }
         }
 
-        client.multiPartUpload(from: largeFileUrl, uploadProgress: progressHandler) { (resp) in
+        client.multiPartUpload(from: largeFileUrl, uploadProgress: progressHandler) { resp in
             json = resp.json
             expectation.fulfill()
         }
@@ -98,7 +98,7 @@ class MultipartUploadTests: XCTestCase {
 
         var error: Error!
 
-        let multipartUpload = client.multiPartUpload(from: sampleFileUrl, uploadProgress: nil) { (resp) in
+        let multipartUpload = client.multiPartUpload(from: sampleFileUrl, uploadProgress: nil) { resp in
             error = resp.error
             expectation.fulfill()
         }
@@ -128,7 +128,7 @@ class MultipartUploadTests: XCTestCase {
 
         var response: NetworkJSONResponse?
 
-        client.multiPartUpload(from: largeFileUrl, useIntelligentIngestionIfAvailable: true) { (resp) in
+        client.multiPartUpload(from: largeFileUrl, useIntelligentIngestionIfAvailable: true) { resp in
             response = resp
             expectation.fulfill()
         }
@@ -155,7 +155,7 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var error: Error?
-        client.multiPartUpload(from: sampleFileUrl) { (resp) in
+        client.multiPartUpload(from: sampleFileUrl) { resp in
             error = resp.error
             expectation.fulfill()
         }
@@ -175,7 +175,7 @@ class MultipartUploadTests: XCTestCase {
         let storeOptions = StorageOptions(location: .s3, workflows: workflows)
 
         var response: NetworkJSONResponse?
-        client.multiPartUpload(from: largeFileUrl, storeOptions: storeOptions, useIntelligentIngestionIfAvailable: true) { (resp) in
+        client.multiPartUpload(from: largeFileUrl, storeOptions: storeOptions, useIntelligentIngestionIfAvailable: true) { resp in
             response = resp
             expectation.fulfill()
         }
@@ -208,7 +208,7 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var responses: [NetworkJSONResponse]!
-        client.multiFileUpload(from: [sampleFileUrl], useIntelligentIngestionIfAvailable: false) { (resp) in
+        client.multiFileUpload(from: [sampleFileUrl], useIntelligentIngestionIfAvailable: false) { resp in
             responses = resp
             expectation.fulfill()
         }
@@ -224,7 +224,6 @@ class MultipartUploadTests: XCTestCase {
         XCTAssertEqual(json["status"] as? String, "Stored")
         XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(json["mimetype"] as? String, "image/jpeg")
-
     }
 
     func testMultiFileUploadWithFewFile() {
@@ -234,7 +233,7 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var responses: [NetworkJSONResponse]!
-        client.multiFileUpload(from: [sampleFileUrl, sampleFileUrl], useIntelligentIngestionIfAvailable: false) { (resp) in
+        client.multiFileUpload(from: [sampleFileUrl, sampleFileUrl], useIntelligentIngestionIfAvailable: false) { resp in
             responses = resp
             expectation.fulfill()
         }
@@ -251,7 +250,7 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var responses: [NetworkJSONResponse]!
-        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false, startUploadImmediately: false) { (resp) in
+        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false, startUploadImmediately: false) { resp in
             responses = resp
             expectation.fulfill()
         }
@@ -270,7 +269,7 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var responses: [NetworkJSONResponse]!
-        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false, startUploadImmediately: false) { (resp) in
+        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false, startUploadImmediately: false) { resp in
             responses = resp
             expectation.fulfill()
         }
@@ -423,15 +422,15 @@ private extension MultipartUploadTests {
 
     func json(partName: String) -> [String: Any] {
         let authorization = """
-    AWS4-HMAC-SHA256 Credential=AKIAIBGGXL3I2XTGV4IQ/20170726/us-east-1/s3/aws4_request, \
-    SignedHeaders=content-length;content-md5;host;x-amz-date, \
-    Signature=6638349931141536177e23f93b4eade99113ccc27ff96cc414b90dee260841c2
-    """
+        AWS4-HMAC-SHA256 Credential=AKIAIBGGXL3I2XTGV4IQ/20170726/us-east-1/s3/aws4_request, \
+        SignedHeaders=content-length;content-md5;host;x-amz-date, \
+        Signature=6638349931141536177e23f93b4eade99113ccc27ff96cc414b90dee260841c2
+        """
         return ["location_url": "upload-eu-west-1.filestackapi.com",
                 "url": "https://s3.amazonaws.com/\(partName)",
-            "headers": ["Authorization": authorization,
-                        "Content-MD5": "yWCet0EAi8FVbzQfk3oofg==",
-                        "x-amz-content-sha256": "UNSIGNED-PAYLOAD",
-                        "x-amz-date": "20170726T095615Z"]]
+                "headers": ["Authorization": authorization,
+                            "Content-MD5": "yWCet0EAi8FVbzQfk3oofg==",
+                            "x-amz-content-sha256": "UNSIGNED-PAYLOAD",
+                            "x-amz-date": "20170726T095615Z"]]
     }
 }

@@ -8,12 +8,10 @@
 
 import Foundation
 
-
 /**
-    Represents an image transform alignment type.
+ Represents an image transform alignment type.
  */
 @objc(FSTransformAlign) public enum TransformAlign: UInt, CustomStringConvertible {
-
     /// Center
     case center
 
@@ -32,12 +30,10 @@ import Foundation
     /// Faces
     case faces
 
-
     // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {
-
         switch self {
         case .center:
 
@@ -62,7 +58,6 @@ import Foundation
         case .faces:
 
             return "faces"
-
         }
     }
 }

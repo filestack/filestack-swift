@@ -9,11 +9,8 @@
 import XCTest
 @testable import FilestackSDK
 
-
 class ClientTests: XCTestCase {
-
     func testInitializerWithApiKey() {
-
         let client = Client(apiKey: "MY-API-KEY")
 
         XCTAssertEqual(client.apiKey, "MY-API-KEY")
@@ -22,7 +19,6 @@ class ClientTests: XCTestCase {
     }
 
     func testInitializerWithApiKeyAndSecurity() {
-
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-OTHER-API-KEY", security: security)
 
@@ -32,7 +28,6 @@ class ClientTests: XCTestCase {
     }
 
     func testInitializerWithApiKeySecurityAndStorage() {
-
         let security = Seeds.Securities.basic
         let client = Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
 
@@ -40,5 +35,4 @@ class ClientTests: XCTestCase {
         XCTAssertEqual(client.security, security)
         XCTAssertEqual(client.storage, .s3)
     }
-
 }

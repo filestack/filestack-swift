@@ -6,11 +6,10 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 class MultipartUploadCompleteOperation: BaseOperation {
-
     let apiKey: String
     let fileName: String
     let fileSize: UInt64
@@ -44,13 +43,13 @@ class MultipartUploadCompleteOperation: BaseOperation {
         self.region = region
         self.uploadID = uploadID
         self.storeOptions = storeOptions
-        self.parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator:";")
+        parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
         self.security = security
         self.useIntelligentIngestion = useIntelligentIngestion
 
         super.init()
 
-        self.state = .ready
+        state = .ready
     }
 
     override func main() {
@@ -95,7 +94,7 @@ private extension MultipartUploadCompleteOperation {
             form.append(security.signature, withName: "signature")
         }
 
-        if self.useIntelligentIngestion {
+        if useIntelligentIngestion {
             form.append("true", withName: "multipart")
         } else {
             form.append(parts, withName: "parts")

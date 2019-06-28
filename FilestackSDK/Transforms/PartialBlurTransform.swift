@@ -9,12 +9,11 @@
 import Foundation
 
 /**
-    Changes image brightness, saturation and hue.
+ Changes image brightness, saturation and hue.
  */
 @objc(FSPartialBlurTransform) public class PartialBlurTransform: Transform, PartialCoverTransformExtension {
-
     /**
-        Initializes a `PartialBlurTransform` object.
+     Initializes a `PartialBlurTransform` object.
      */
     public init(objects: [CGRect]) {
         super.init(name: "partial_blur")

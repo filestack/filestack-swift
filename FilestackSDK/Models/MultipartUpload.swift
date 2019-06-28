@@ -22,7 +22,7 @@ extension MultipartUploadError: LocalizedError {
             return "The file provided is invalid or could not be found"
         case .aborted:
             return "The upload operation was aborted"
-        case .error(let description):
+        case let .error(description):
             return description
         }
     }
@@ -30,7 +30,6 @@ extension MultipartUploadError: LocalizedError {
 
 /// :nodoc:
 @objc(FSMultipartUpload) public class MultipartUpload: NSObject {
-
     typealias UploadProgress = (Int64) -> Void
 
     // MARK: - Public Properties
@@ -67,7 +66,6 @@ extension MultipartUploadError: LocalizedError {
 
     private let chunkUploadConcurrency: Int
 
-
     // MARK: - Lifecyle Functions
 
     init(at localURL: URL? = nil,
@@ -89,11 +87,11 @@ extension MultipartUploadError: LocalizedError {
         self.apiKey = apiKey
         self.storeOptions = storeOptions
         self.security = security
-        self.shouldAbort = false
-        self.progress = Progress(totalUnitCount: 0)
+        shouldAbort = false
+        progress = Progress(totalUnitCount: 0)
         self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
-        self.uploadOperationQueue.underlyingQueue = uploadOperationUnderlyingQueue
-        self.uploadOperationQueue.maxConcurrentOperationCount = partUploadConcurrency
+        uploadOperationQueue.underlyingQueue = uploadOperationUnderlyingQueue
+        uploadOperationQueue.maxConcurrentOperationCount = partUploadConcurrency
         self.chunkUploadConcurrency = chunkUploadConcurrency
     }
 
@@ -178,8 +176,8 @@ private extension MultipartUpload {
         guard let uri = json["uri"] as? String,
             let region = json["region"] as? String,
             let uploadID = json["upload_id"] as? String else {
-                fail(with: MultipartUploadError.aborted)
-                return
+            fail(with: MultipartUploadError.aborted)
+            return
         }
 
         // Detect whether intelligent ingestion is available.
@@ -220,7 +218,7 @@ private extension MultipartUpload {
         }
 
         // Submit all parts
-        while !shouldAbort && seekPoint < fileSize {
+        while !shouldAbort, seekPoint < fileSize {
             part += 1
 
             let partOperation = uploadSubmitPartOperation(intelligentIngestion: shouldUseIntelligentIngestion,

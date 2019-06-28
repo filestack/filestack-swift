@@ -8,24 +8,20 @@
 
 import Foundation
 
-
 /**
-    Represents an image transform blur type.
+ Represents an image transform blur type.
  */
 @objc(FSTransformBlurMode) public enum TransformBlurMode: UInt, CustomStringConvertible {
-
     /// Linear
     case linear
 
     /// Gaussian
     case gaussian
 
-
     // MARK: - CustomStringConvertible
 
     /// Returns a `String` representation of self.
     public var description: String {
-
         switch self {
         case .linear:
 
@@ -34,7 +30,6 @@ import Foundation
         case .gaussian:
 
             return "gaussian"
-
         }
     }
 }

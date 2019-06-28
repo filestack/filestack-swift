@@ -9,39 +9,38 @@
 import Foundation
 
 /**
-    Converts a PDF to a specific orientation, page format, and, optionally, extracts specific pages.
+ Converts a PDF to a specific orientation, page format, and, optionally, extracts specific pages.
  */
 @objc(FSPDFConvertTransform) public class PDFConvertTransform: Transform {
-
     /**
-        Initializes a `PDFConvertTransform` object.
+     Initializes a `PDFConvertTransform` object.
      */
     public init() {
         super.init(name: "pdfconvert")
     }
 
     /**
-        Adds the `pageOrientation` option.
+     Adds the `pageOrientation` option.
 
-        - Parameter value: A `TransformPageOrientation` value.
+     - Parameter value: A `TransformPageOrientation` value.
      */
     @discardableResult public func pageOrientation(_ value: TransformPageOrientation) -> Self {
         return appending(key: "pageorientation", value: value)
     }
 
     /**
-         Adds the `pageFormat` option.
+     Adds the `pageFormat` option.
 
-         - Parameter value: A `TransformPageFormat` value.
+     - Parameter value: A `TransformPageFormat` value.
      */
     @discardableResult public func pageFormat(_ value: TransformPageFormat) -> Self {
         return appending(key: "pageformat", value: value)
     }
 
     /**
-         Adds the `pages` option.
+     Adds the `pages` option.
 
-         - Parameter value: An array of page numbers.
+     - Parameter value: An array of page numbers.
      */
     @discardableResult func pages(_ value: [Int]) -> Self {
         return appending(key: "pages", value: value)

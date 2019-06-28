@@ -6,15 +6,12 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import XCTest
 import CryptoSwift
+import XCTest
 @testable import FilestackSDK
 
-
 class SecurityTests: XCTestCase {
-    
     func testConvenienceInitializerWithPolicyAndAppSecret() {
-
         let policy = Seeds.Policies.basic
 
         var security: Security!
@@ -33,7 +30,6 @@ class SecurityTests: XCTestCase {
     }
 
     func testDefaultInitializer() {
-
         let security = Security(encodedPolicy: "ENCODED-POLICY", signature: "SIGNATURE")
 
         XCTAssertEqual(security.encodedPolicy, "ENCODED-POLICY")

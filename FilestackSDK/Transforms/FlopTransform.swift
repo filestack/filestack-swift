@@ -9,12 +9,11 @@
 import Foundation
 
 /**
-    Flips/mirrors the image horizontally.
+ Flips/mirrors the image horizontally.
  */
 @objc(FSFlopTransform) public class FlopTransform: Transform {
-
     /**
-        Initializes a `FlopTransform` object.
+     Initializes a `FlopTransform` object.
      */
     public init() {
         super.init(name: "flop")

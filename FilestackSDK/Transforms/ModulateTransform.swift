@@ -9,39 +9,38 @@
 import Foundation
 
 /**
-    Changes the image brightness, saturation and hue.
+ Changes the image brightness, saturation and hue.
  */
 @objc(FSModulateTransform) public class ModulateTransform: Transform {
-
     /**
-        Initializes a `ModulateTransform` object.
+     Initializes a `ModulateTransform` object.
      */
     public init() {
         super.init(name: "modulate")
     }
 
     /**
-        Adds `brightness` option.
+     Adds `brightness` option.
 
-        - Parameter value: Valid range: `0...10000`
+     - Parameter value: Valid range: `0...10000`
      */
     @discardableResult public func brightness(_ value: Int) -> Self {
         return appending(key: "brightness", value: value)
     }
 
     /**
-        Adds `saturation` option.
+     Adds `saturation` option.
 
-        - Parameter value: Valid range: `0...10000`
+     - Parameter value: Valid range: `0...10000`
      */
     @discardableResult public func saturation(_ value: Int) -> Self {
         return appending(key: "saturation", value: value)
     }
 
     /**
-        Adds `hue` option.
+     Adds `hue` option.
 
-        - Parameter value: Valid range: `0...359`
+     - Parameter value: Valid range: `0...359`
      */
     @discardableResult public func hue(_ value: Int) -> Self {
         return appending(key: "hue", value: value)

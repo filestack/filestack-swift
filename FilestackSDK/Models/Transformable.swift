@@ -9,13 +9,12 @@
 import Foundation
 
 /**
-    Represents an `Transformable` object.
+ Represents an `Transformable` object.
 
-    See [Image Transformations Overview](https://www.filestack.com/docs/image-transformations) for more information
-    about image transformations.
+ See [Image Transformations Overview](https://www.filestack.com/docs/image-transformations) for more information
+ about image transformations.
  */
 @objc(FSTransformable) public class Transformable: NSObject {
-
     // MARK: - Public Properties
 
     /// An API key obtained from the Developer Portal.
@@ -35,18 +34,15 @@ import Foundation
         return computeURL()
     }
 
-
     // MARK: - Private Properties
 
     private var transformationTasks: [Task] = [Task]()
 
-
     // MARK: - Lifecyle Functions
 
     init(handle: String, apiKey: String, security: Security? = nil) {
-
         self.handle = handle
-        self.externalURL = nil
+        externalURL = nil
         self.apiKey = apiKey
         self.security = security
 
@@ -54,8 +50,7 @@ import Foundation
     }
 
     init(externalURL: URL, apiKey: String, security: Security? = nil) {
-
-        self.handle = nil
+        handle = nil
         self.externalURL = externalURL
         self.apiKey = apiKey
         self.security = security
@@ -63,26 +58,23 @@ import Foundation
         super.init()
     }
 
-
     // MARK: - Public Functions
 
     /**
-        Adds a new transformation to the transformation chain.
+     Adds a new transformation to the transformation chain.
 
-        - Parameter transform: The `Transform` to add.
+     - Parameter transform: The `Transform` to add.
      */
     @objc(add:) @discardableResult public func add(transform: Transform) -> Self {
-
         transformationTasks.append(transform.task)
 
         return self
     }
 
     /**
-        Includes detailed information about the transformation request.
+     Includes detailed information about the transformation request.
      */
     @discardableResult public func debug() -> Self {
-
         let task = Task(name: "debug", options: nil)
 
         transformationTasks.insert(task, at: 0)
@@ -91,14 +83,14 @@ import Foundation
     }
 
     /**
-        Stores a copy of the transformation results to your preferred filestore.
+     Stores a copy of the transformation results to your preferred filestore.
 
-        - Parameter options: An `StorageOptions` value.
-        - Parameter base64Decode: Specify that you want the data to be first decoded from base64
-        before being written to the file. For example, if you have base64 encoded image data,
-        you can use this flag to first decode the data before writing the image file.
-        - Parameter queue: The queue on which the completion handler is dispatched.
-        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     - Parameter options: An `StorageOptions` value.
+     - Parameter base64Decode: Specify that you want the data to be first decoded from base64
+     before being written to the file. For example, if you have base64 encoded image data,
+     you can use this flag to first decode the data before writing the image file.
+     - Parameter queue: The queue on which the completion handler is dispatched.
+     - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     @discardableResult public func store(using options: StorageOptions,
                                          base64Decode: Bool = false,
@@ -136,14 +128,13 @@ import Foundation
 
         request.validate(statusCode: Config.validHTTPResponseCodes)
 
-        request.responseJSON(queue: queue ?? .main) { (response) in
+        request.responseJSON(queue: queue ?? .main) { response in
             let jsonResponse = NetworkJSONResponse(with: response)
             var fileLink: FileLink?
 
             if let json = jsonResponse.json,
                 let urlString = json["url"] as? String,
                 let url = URL(string: urlString) {
-
                 fileLink = FileLink(handle: url.lastPathComponent, apiKey: self.apiKey, security: self.security)
             }
 
@@ -156,22 +147,22 @@ import Foundation
     }
 
     /**
-        Stores a copy of the transformation results to your preferred filestore.
+     Stores a copy of the transformation results to your preferred filestore.
 
-        - Parameter fileName: Change or set the filename for the converted file.
-        - Parameter location: An `StorageLocation` value.
-        - Parameter path: Where to store the file in your designated container. For S3, this is
-        the key where the file will be stored at.
-        - Parameter container: The name of the bucket or container to write files to.
-        - Parameter region: S3 specific parameter. The name of the S3 region your bucket is located
-        in. All regions except for `eu-central-1` (Frankfurt), `ap-south-1` (Mumbai),
-        and `ap-northeast-2` (Seoul) will work.
-        - Parameter access: An `StorageAccess` value.
-        - Parameter base64Decode: Specify that you want the data to be first decoded from base64
-        before being written to the file. For example, if you have base64 encoded image data,
-        you can use this flag to first decode the data before writing the image file.
-        - Parameter queue: The queue on which the completion handler is dispatched.
-        - Parameter completionHandler: Adds a handler to be called once the request has finished.
+     - Parameter fileName: Change or set the filename for the converted file.
+     - Parameter location: An `StorageLocation` value.
+     - Parameter path: Where to store the file in your designated container. For S3, this is
+     the key where the file will be stored at.
+     - Parameter container: The name of the bucket or container to write files to.
+     - Parameter region: S3 specific parameter. The name of the S3 region your bucket is located
+     in. All regions except for `eu-central-1` (Frankfurt), `ap-south-1` (Mumbai),
+     and `ap-northeast-2` (Seoul) will work.
+     - Parameter access: An `StorageAccess` value.
+     - Parameter base64Decode: Specify that you want the data to be first decoded from base64
+     before being written to the file. For example, if you have base64 encoded image data,
+     you can use this flag to first decode the data before writing the image file.
+     - Parameter queue: The queue on which the completion handler is dispatched.
+     - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
     @available(*, deprecated, message: "Use the new store(using:base64Decode:queue:completionHandler) instead")
     @discardableResult public func store(fileName: String? = nil,
@@ -195,7 +186,6 @@ import Foundation
 }
 
 private extension Transformable {
-
     func computeURL() -> URL {
         if let handle = handle {
             return processService.buildURL(tasks: tasksToURLFragment(), handle: handle, security: security)!
@@ -226,7 +216,7 @@ private extension Transformable {
                         }
                     }
                 }
-                if params.count > 0 {
+                if !params.isEmpty {
                     return "\($0.name)=\(params.joined(separator: ","))"
                 }
             }

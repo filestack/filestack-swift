@@ -9,11 +9,8 @@
 import XCTest
 @testable import FilestackSDK
 
-
 class PolicyTests: XCTestCase {
-    
     func testMinimalPolicyInstantiationAndJSONEncoding() {
-
         let policy = Seeds.Policies.minimal
 
         var jsonData: Data!
@@ -36,7 +33,6 @@ class PolicyTests: XCTestCase {
     }
 
     func testBasicPolicyInstantiationAndJSONEncoding() {
-
         let policy = Seeds.Policies.basic
 
         var jsonData: Data!

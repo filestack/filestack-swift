@@ -9,21 +9,16 @@
 import XCTest
 @testable import FilestackSDK
 
-
 class URLSizeTests: XCTestCase {
-    
     func testExistingLocalURLSize() {
-
         let localURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
 
-        XCTAssertEqual(localURL.size(), 200367)
+        XCTAssertEqual(localURL.size(), 200_367)
     }
 
     func testUnexistingLocalURLSize() {
-
         let localURL = URL(string: "file://UNEXISTING-PATH/file.txt")!
 
         XCTAssertNil(localURL.size())
     }
-
 }

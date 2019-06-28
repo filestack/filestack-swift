@@ -9,13 +9,12 @@
 import Foundation
 
 /**
-    Smartly analyzes a photo and performs color correction and other enhancements to improve the overall
-    quality of the image.
+ Smartly analyzes a photo and performs color correction and other enhancements to improve the overall
+ quality of the image.
  */
 @objc(FSEnhanceTransform) public class EnhanceTransform: Transform {
-
     /**
-        Initializes a `EnhanceTransform` object.
+     Initializes a `EnhanceTransform` object.
      */
     public init() {
         super.init(name: "enhance")

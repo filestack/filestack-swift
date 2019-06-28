@@ -9,17 +9,16 @@
 import Foundation
 
 /**
-    Crops the image to a specified rectangle.
+ Crops the image to a specified rectangle.
  */
 @objc(FSCropTransform) public class CropTransform: Transform {
-
     /**
-        Initializes a `CropTransform` object.
+     Initializes a `CropTransform` object.
 
-        - Parameter x: The starting point X coordinate.
-        - Parameter y: The starting point Y coordinate.
-        - Parameter width: The output image's width.
-        - Parameter height: The output image's height.
+     - Parameter x: The starting point X coordinate.
+     - Parameter y: The starting point Y coordinate.
+     - Parameter width: The output image's width.
+     - Parameter height: The output image's height.
      */
     public init(x: Int, y: Int, width: Int, height: Int) {
         super.init(name: "crop")

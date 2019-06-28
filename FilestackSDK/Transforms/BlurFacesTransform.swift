@@ -9,21 +9,20 @@
 import Foundation
 
 /**
-    Blur selected faces contained inside an image.
+ Blur selected faces contained inside an image.
  */
 @objc(FSBlurFacesTransform) public class BlurFacesTransform: Transform, CoverFacesTransformExtension {
-
     /**
-        Initializes a `BlurFacesTransform` object.
+     Initializes a `BlurFacesTransform` object.
      */
     public init() {
         super.init(name: "blur_faces")
     }
 
     /**
-        Adds `amount` option.
+     Adds `amount` option.
 
-        - Parameter value: Valid range: `0...20`
+     - Parameter value: Valid range: `0...20`
      */
     @discardableResult func amount(_ value: Float) -> Self {
         return appending(key: "amount", value: value)

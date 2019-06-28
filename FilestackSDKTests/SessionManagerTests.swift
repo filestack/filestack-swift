@@ -6,22 +6,18 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import XCTest
-import OHHTTPStubs
 import Alamofire
+import OHHTTPStubs
+import XCTest
 @testable import FilestackSDK
 
-
 class SessionManagerTests: XCTestCase {
-
     override func tearDown() {
-
         super.tearDown()
         OHHTTPStubs.removeAllStubs()
     }
 
     func testFilestackDefaultCustomHTTPHeaders() {
-
         let session = SessionManager.filestackDefault()
         let requestURL = URL(string: "https://SOME-URL-HERE")!
         let expectation = self.expectation(description: "request should succeed")

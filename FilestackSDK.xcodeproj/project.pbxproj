@@ -584,6 +584,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45B830A31F03B27A0053742A /* Build configuration list for PBXNativeTarget "FilestackSDK" */;
 			buildPhases = (
+				45CDA04C22C666E4008DF3F4 /* Run SwiftFormat */,
 				45B830961F03B27A0053742A /* Sources */,
 				45B830971F03B27A0053742A /* Frameworks */,
 				45B830981F03B27A0053742A /* Headers */,
@@ -694,6 +695,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/bin/set-buildnumber.sh\n$SRCROOT/bin/set-version.sh\n";
+		};
+		45CDA04C22C666E4008DF3F4 /* Run SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftFormat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/bin/apply-swiftformat.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -12,20 +12,19 @@ import Foundation
  Represents an image transform style type.
  */
 @objc(FSTransformStyleMode) public enum TransformStyleMode: UInt, CustomStringConvertible {
-  
-  /// Artwork
-  case artwork
-  
-  /// Photo
-  case photo
-  
-  // MARK: - CustomStringConvertible
-  
-  /// Returns a `String` representation of self.
-  public var description: String {
-    switch self {
-    case .artwork: return "artwork"
-    case .photo: return "photo"
+    /// Artwork
+    case artwork
+
+    /// Photo
+    case photo
+
+    // MARK: - CustomStringConvertible
+
+    /// Returns a `String` representation of self.
+    public var description: String {
+        switch self {
+        case .artwork: return "artwork"
+        case .photo: return "photo"
+        }
     }
-  }
 }

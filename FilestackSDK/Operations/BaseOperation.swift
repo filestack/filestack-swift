@@ -6,11 +6,10 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 class BaseOperation: Operation {
-
     enum State {
         case ready
         case executing
