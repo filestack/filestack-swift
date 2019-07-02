@@ -37,8 +37,8 @@ import Foundation
     private var currentOperation: MultipartUpload?
 
     private let queue: DispatchQueue
-    private let uploadProgress: ((Progress) -> Void)?
-    private let completionHandler: (([NetworkJSONResponse]) -> Void)?
+    private var uploadProgress: ((Progress) -> Void)?
+    private var completionHandler: (([NetworkJSONResponse]) -> Void)?
     private let apiKey: String
     private let storeOptions: StorageOptions
     private let security: Security?
@@ -52,9 +52,9 @@ import Foundation
          security: Security? = nil,
          useIntelligentIngestionIfAvailable: Bool = true) {
         let urls = uploadURLs ?? []
-        shouldAbort = false
+        self.shouldAbort = false
         self.uploadURLs = urls
-        leftToUploadURLs = urls
+        self.leftToUploadURLs = urls
         self.queue = queue
         self.uploadProgress = uploadProgress
         self.completionHandler = completionHandler
@@ -62,8 +62,8 @@ import Foundation
         self.storeOptions = storeOptions
         self.security = security
         self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
-        finishedFilesSize = 0
-        currentFileSize = 0
+        self.finishedFilesSize = 0
+        self.currentFileSize = 0
     }
 
     // MARK: - Public Functions
@@ -74,6 +74,7 @@ import Foundation
     @objc public func cancel() {
         shouldAbort = true
         currentOperation?.cancel()
+        stopUpload()
     }
 
     /**
@@ -100,8 +101,8 @@ private extension MultifileUpload {
         guard
             shouldAbort == false,
             let nextURL = leftToUploadURLs.first else {
-            stopUpload()
-            return
+                stopUpload()
+                return
         }
         currentFileSize = Int64(nextURL.size() ?? 0)
         currentOperation = MultipartUpload(at: nextURL,
@@ -121,7 +122,15 @@ private extension MultifileUpload {
         while uploadResponses.count < uploadURLs.count {
             uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
         }
-        queue.async { self.completionHandler?(self.uploadResponses) }
+
+        queue.async {
+            self.completionHandler?(self.uploadResponses)
+            // To ensure this object can be properly deallocated we must ensure that any closures are niled,
+            // and `currentOperation` object is niled as well.
+            self.completionHandler = nil
+            self.uploadProgress = nil
+            self.currentOperation = nil
+        }
     }
 
     func updateProgress(_ currentFileProgress: Progress) {
