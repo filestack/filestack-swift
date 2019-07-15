@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+Version 2.0 *(2019-06-15)*
+----------------------------
+
+- Added synchronous document transformations support.
+- Added workflows support.
+- Added several missing typealiases to `Transform`.
+- Fixed multipart upload failure during the complete operation stage (PR #12.)
+- Fixed some memory leaks in multipart uploads.
+- Deprecated `store(fileName:,location:,path:,container:,region:,access:,base64Decode:,queue:,completionHandler:)` (now `store(using:,base64Decode:,queue:,completionHandler:)`) in `Transformable` class.
+- `RoundedCornersTransform` transformation is now working as expected (was `RoundCornersTransform` before.)
+- Deprecated `AsciiTransform` (now `ASCIITransform`).
+- Deprecated `ProgressiveJpegTransform` (now `ProgressiveJPEGTransform`).
+- Deprecated `RoundCornersTransform` (now `RoundedCornersTransform`).
+- Deprecated `UrlScreenshotTransform` (now `URLScreenshotTransform`).
+- Dropped support for iOS versions earlier than 11.0.
+- Dropped support for Swift versions earlier than 4.2.
+
 Version 1.2.7 *(2018-07-18)*
 ----------------------------
 
