@@ -1452,4 +1452,47 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
+
+    func testMinifyJSTransformationURL() {
+        transformable.add(transform: MinifyJSTransform())
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("minify_js")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testMinifyJSTransformationWithOptionalsURL() {
+        transformable.add(transform: MinifyJSTransform()
+            .booleans(true)
+            .builtIns(false)
+            .consecutiveAdds(true)
+            .deadcode(false)
+            .evaluate(true)
+            .flipComparisons(false)
+            .guards(true)
+            .infinity(false)
+            .mangle(true)
+            .memberExpressions(false)
+            .mergeVars(true)
+            .numericLiterals(false)
+            .propertyLiterals(true)
+            .regexpConstructors(false)
+            .removeConsole(true)
+            .removeDebugger(false)
+            .removeUndefined(true)
+            .simplify(false)
+            .simplifyComparisons(true)
+            .typeConstructors(false)
+            .undefinedToVoid(true))
+
+        let expectedURL = Config.processURL.appendingPathComponent("minify_js=booleans:true,builtIns:false," +
+            "consecutiveAdds:true,deadcode:false,evaluate:true,flipComparisons:false,guards:true,infinity:false," +
+            "mangle:true,memberExpressions:false,mergeVars:true,numericLiterals:false,propertyLiterals:true," + "regexpConstructors:false,removeConsole:true,removeDebugger:false,removeUndefined:true,simplify:false," +
+            "simplifyComparisons:true,typeConstructors:false,undefinedToVoid:true")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
 }

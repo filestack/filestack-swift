@@ -48,6 +48,7 @@ extension Transform {
     typealias Flip = FlipTransform
     typealias Flop = FlopTransform
     typealias ImageSize = ImageSizeTransform
+    typealias MinifyJS = MinifyJSTransform
     typealias Modulate = ModulateTransform
     typealias Monochrome = MonochromeTransform
     typealias Negative = NegativeTransform
