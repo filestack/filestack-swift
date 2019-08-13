@@ -1489,7 +1489,8 @@ class TransformableTests: XCTestCase {
 
         let expectedURL = Config.processURL.appendingPathComponent("minify_js=booleans:true,builtIns:false," +
             "consecutiveAdds:true,deadcode:false,evaluate:true,flipComparisons:false,guards:true,infinity:false," +
-            "mangle:true,memberExpressions:false,mergeVars:true,numericLiterals:false,propertyLiterals:true," + "regexpConstructors:false,removeConsole:true,removeDebugger:false,removeUndefined:true,simplify:false," +
+            "mangle:true,memberExpressions:false,mergeVars:true,numericLiterals:false,propertyLiterals:true," +
+            "regexpConstructors:false,removeConsole:true,removeDebugger:false,removeUndefined:true,simplify:false," +
             "simplifyComparisons:true,typeConstructors:false,undefinedToVoid:true")
             .appendingPathComponent("MY-HANDLE")
 
