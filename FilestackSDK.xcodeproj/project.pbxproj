@@ -79,7 +79,7 @@
 		45D803AF2302BA1B00762A87 /* OCRTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803AE2302BA1B00762A87 /* OCRTransform.swift */; };
 		45D803B12302C18B00762A87 /* AutoImageTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803B02302C18B00762A87 /* AutoImageTransform.swift */; };
 		45D803B32302C27900762A87 /* MinifyJSTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803B22302C27900762A87 /* MinifyJSTransform.swift */; };
-		45D803B52302CFE300762A87 /* MinifyCSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803B42302CFE300762A87 /* MinifyCSS.swift */; };
+		45D803B52302CFE300762A87 /* MinifyCSSTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803B42302CFE300762A87 /* MinifyCSSTransform.swift */; };
 		45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */; };
 		45E07AAA22AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */; };
 		45E07AAB22AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA922AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift */; };
@@ -245,7 +245,7 @@
 		45D803AE2302BA1B00762A87 /* OCRTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTransform.swift; sourceTree = "<group>"; };
 		45D803B02302C18B00762A87 /* AutoImageTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoImageTransform.swift; sourceTree = "<group>"; };
 		45D803B22302C27900762A87 /* MinifyJSTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinifyJSTransform.swift; sourceTree = "<group>"; };
-		45D803B42302CFE300762A87 /* MinifyCSS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinifyCSS.swift; sourceTree = "<group>"; };
+		45D803B42302CFE300762A87 /* MinifyCSSTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinifyCSSTransform.swift; sourceTree = "<group>"; };
 		45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartRegularUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45E07AA922AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartInteligentUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
@@ -366,7 +366,7 @@
 				BC8832BD20D181A600B88EAF /* FlipTransform.swift */,
 				BC8832C420D181A700B88EAF /* FlopTransform.swift */,
 				4596206F22BA338E00D58036 /* ImageSizeTransform.swift */,
-				45D803B42302CFE300762A87 /* MinifyCSS.swift */,
+				45D803B42302CFE300762A87 /* MinifyCSSTransform.swift */,
 				45D803B22302C27900762A87 /* MinifyJSTransform.swift */,
 				BC8832EF20D264CF00B88EAF /* ModulateTransform.swift */,
 				BC8832BE20D181A600B88EAF /* MonochromeTransform.swift */,
@@ -797,7 +797,7 @@
 				454B22F322B8DD0C00A7A93E /* PDFInfoTransform.swift in Sources */,
 				BC8832E020D181A700B88EAF /* VignetteTransform.swift in Sources */,
 				45965C6B1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift in Sources */,
-				45D803B52302CFE300762A87 /* MinifyCSS.swift in Sources */,
+				45D803B52302CFE300762A87 /* MinifyCSSTransform.swift in Sources */,
 				BC8832EA20D238B600B88EAF /* PixelateTransform.swift in Sources */,
 				BC8832E720D181F000B88EAF /* BlurFacesTransform.swift in Sources */,
 				45050F4C1F2B49C100B4E3C3 /* Data+Base64MD5Digest.swift in Sources */,

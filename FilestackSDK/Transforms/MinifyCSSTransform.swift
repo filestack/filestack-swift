@@ -1,5 +1,5 @@
 //
-//  MinifyCSS.swift
+//  MinifyCSSTransform.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 13/08/2019.
