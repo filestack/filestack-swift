@@ -27,6 +27,7 @@ typealias Task = (name: String, options: [TaskOption]?)
 
 extension Transform {
     typealias ASCII = ASCIITransform
+    typealias AutoImage = AutoImageTransform
     typealias AV = AVTransform
     typealias BlackAndWhite = BlackAndWhiteTransform
     typealias BlurFaces = BlurFacesTransform

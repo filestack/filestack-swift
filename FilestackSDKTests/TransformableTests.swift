@@ -1442,4 +1442,14 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
+
+    func testAutoImageTransformationURL() {
+        transformable.add(transform: AutoImageTransform())
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("auto_image")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
 }
