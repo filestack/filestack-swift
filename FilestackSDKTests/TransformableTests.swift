@@ -1432,4 +1432,14 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
+
+    func testOCRTransformationURL() {
+        transformable.add(transform: OCRTransform())
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("ocr")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
 }

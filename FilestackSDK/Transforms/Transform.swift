@@ -51,6 +51,7 @@ extension Transform {
     typealias Monochrome = MonochromeTransform
     typealias Negative = NegativeTransform
     typealias NoMetadata = NoMetadataTransform
+    typealias OCR = OCRTransform
     typealias OilPaint = OilPaintTransform
     typealias PartialBlur = PartialBlurTransform
     typealias PartialPixelate = PartialPixelateTransform
