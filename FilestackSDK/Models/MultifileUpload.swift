@@ -101,8 +101,8 @@ private extension MultifileUpload {
         guard
             shouldAbort == false,
             let nextURL = leftToUploadURLs.first else {
-                stopUpload()
-                return
+            stopUpload()
+            return
         }
         currentFileSize = Int64(nextURL.size() ?? 0)
         currentOperation = MultipartUpload(at: nextURL,
