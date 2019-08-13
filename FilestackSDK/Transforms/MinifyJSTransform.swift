@@ -13,7 +13,7 @@ import Foundation
  */
 @objc(FSMinifyJSTransform) public class MinifyJSTransform: Transform {
     /**
-     Initializes an `MinifyJSTransform` object.
+     Initializes a `MinifyJSTransform` object.
      */
     public init() {
         super.init(name: "minify_js")
