@@ -1495,4 +1495,26 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
+
+    func testMinifyCSSTransformationURL() {
+        transformable.add(transform: MinifyCSSTransform())
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("minify_css")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testMinifyCSSTransformationWithOptionsURL() {
+        transformable.add(transform: MinifyCSSTransform()
+            .level(1)
+            .gzip(true))
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("minify_css=level:1,gzip:true")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
 }
