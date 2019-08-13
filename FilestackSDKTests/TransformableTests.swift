@@ -1422,4 +1422,14 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
+
+    func testCopyrightTransformationURL() {
+        transformable.add(transform: CopyrightTransform())
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("copyright")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
 }

@@ -37,6 +37,7 @@ extension Transform {
     typealias Collage = CollageTransform
     typealias Compress = CompressTransform
     typealias Convert = ConvertTransform
+    typealias Copyright = CopyrightTransform
     typealias CropFaces = CropFacesTransform
     typealias Crop = CropTransform
     typealias DetectFaces = DetectFacesTransform
