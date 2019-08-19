@@ -16,6 +16,7 @@
 		45107CA01F4D6B0E00250ABE /* MultipartUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107C9F1F4D6B0E00250ABE /* MultipartUploadTests.swift */; };
 		4512EB811FA7655F003A8C38 /* StorageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4512EB801FA7655F003A8C38 /* StorageOptions.swift */; };
 		4513903E230ABB5C00F3FA06 /* AnimateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513903D230ABB5C00F3FA06 /* AnimateTransform.swift */; };
+		45139040230AC4A500F3FA06 /* TransformEnhancePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513903F230AC4A500F3FA06 /* TransformEnhancePreset.swift */; };
 		452055401F4AE87D00A6795D /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 4520553F1F4AE7B900A6795D /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		452055421F4B191900A6795D /* RotateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452055411F4B191900A6795D /* RotateTransform.swift */; };
 		4528C7461F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4528C7451F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift */; };
@@ -178,6 +179,7 @@
 		45107C9F1F4D6B0E00250ABE /* MultipartUploadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartUploadTests.swift; sourceTree = "<group>"; };
 		4512EB801FA7655F003A8C38 /* StorageOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageOptions.swift; sourceTree = "<group>"; };
 		4513903D230ABB5C00F3FA06 /* AnimateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTransform.swift; sourceTree = "<group>"; };
+		4513903F230AC4A500F3FA06 /* TransformEnhancePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformEnhancePreset.swift; sourceTree = "<group>"; };
 		4520553F1F4AE7B900A6795D /* FSPolicyCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
 		452055411F4B191900A6795D /* RotateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotateTransform.swift; path = FilestackSDK/Transforms/RotateTransform.swift; sourceTree = SOURCE_ROOT; };
 		4528C7451F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadCommitOperation.swift; sourceTree = "<group>"; };
@@ -435,14 +437,15 @@
 				4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */,
 				452D715E1F17A51B0037E1BB /* TransformColorSpace.swift */,
 				455266301F1618E1009537D9 /* TransformCropMode.swift */,
+				4513903F230AC4A500F3FA06 /* TransformEnhancePreset.swift */,
 				BC88330A20D3E36A00B88EAF /* TransformFiletype.swift */,
 				457D5BEE1F16147E00FBD5B1 /* TransformFit.swift */,
 				BC8832FF20D3DCB600B88EAF /* TransformNoiseMode.swift */,
 				452D715A1F17A49D0037E1BB /* TransformPageFormat.swift */,
 				452D715C1F17A4DB0037E1BB /* TransformPageOrientation.swift */,
+				457D5BEC1F16146B00FBD5B1 /* TransformPosition.swift */,
 				450E433B1F161DE500E46B56 /* TransformShapeType.swift */,
 				BC88330120D3DF7900B88EAF /* TransformStyleMode.swift */,
-				457D5BEC1F16146B00FBD5B1 /* TransformPosition.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				BC27300620DA7D1B00142174 /* SecureForWorkTransform.swift in Sources */,
 				45B830E41F03BCF20053742A /* Security.swift in Sources */,
 				45D803B32302C27900762A87 /* MinifyJSTransform.swift in Sources */,
+				45139040230AC4A500F3FA06 /* TransformEnhancePreset.swift in Sources */,
 				BC88330D20D3EB7800B88EAF /* CompressTransform.swift in Sources */,
 				BC8832FA20D3C90D00B88EAF /* CollageTransform.swift in Sources */,
 				BC88330520D3E08000B88EAF /* EnhanceTransform.swift in Sources */,

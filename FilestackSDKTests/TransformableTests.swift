@@ -117,6 +117,17 @@ class TransformableTests: XCTestCase {
         XCTAssertEqual(transformable.url, expectedUrl)
     }
 
+    func testEnhanceTransformationWithPresetsUrl() {
+        transformable.add(transform: EnhanceTransform()
+            .preset(.beautifyPlus))
+
+        let expectedUrl = Config.processURL
+            .appendingPathComponent("enhance=preset:beautify_plus")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedUrl)
+    }
+
     func testModulateTransformationUrl() {
         transformable.add(transform: ModulateTransform().brightness(50).hue(60).saturation(200))
 
