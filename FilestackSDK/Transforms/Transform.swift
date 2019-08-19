@@ -26,6 +26,7 @@ typealias Task = (name: String, options: [TaskOption]?)
 }
 
 extension Transform {
+    typealias Animate = AnimateTransform
     typealias ASCII = ASCIITransform
     typealias AutoImage = AutoImageTransform
     typealias AV = AVTransform

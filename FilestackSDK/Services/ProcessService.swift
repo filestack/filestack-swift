@@ -13,7 +13,9 @@ internal class ProcessService: NetworkingService {
     let sessionManager = SessionManager.filestackDefault()
     let baseURL = Config.processURL
 
-    func buildURL(tasks: String? = nil, handle: String, security: Security? = nil) -> URL? {
+    func buildURL(tasks: String? = nil, handles: [String], security: Security? = nil) -> URL? {
+        guard !handles.isEmpty else { return nil }
+
         var url = baseURL
 
         if let tasks = tasks {
@@ -25,7 +27,12 @@ internal class ProcessService: NetworkingService {
                                     isDirectory: false)
         }
 
-        url.appendPathComponent(handle, isDirectory: false)
+        if handles.count == 1, let handle = handles.first {
+            // Most common case
+            url.appendPathComponent(handle, isDirectory: false)
+        } else {
+            url.appendPathComponent("[\((handles.map { $0 }).joined(separator: ","))]", isDirectory: false)
+        }
 
         return url
     }

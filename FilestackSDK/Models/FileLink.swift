@@ -310,7 +310,7 @@ import Foundation
      Returns an `Transformable` corresponding to this `FileLink`.
      */
     public func transformable() -> Transformable {
-        return Transformable(handle: handle, apiKey: apiKey, security: security)
+        return Transformable(handles: [handle], apiKey: apiKey, security: security)
     }
 
     // MARK: - Private Functions

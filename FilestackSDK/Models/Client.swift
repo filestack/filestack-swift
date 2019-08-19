@@ -71,18 +71,29 @@ import Foundation
     }
 
     /**
-     An `Transformable` object for a Filestack handle.
+     A `Transformable` object for a Filestack handle.
 
      - SeeAlso: `Transformable`
 
      - Parameter handle: A Filestack handle.
      */
     public func transformable(handle: String) -> Transformable {
-        return Transformable(handle: handle, apiKey: apiKey, security: security)
+        return Transformable(handles: [handle], apiKey: apiKey, security: security)
     }
 
     /**
-     An `Transformable` object for an external URL.
+     A `Transformable` object for an array of Filestack handles.
+
+     - SeeAlso: `Transformable`
+
+     - Parameter handles: An array of Filestack handles.
+     */
+    public func transformable(handles: [String]) -> Transformable {
+        return Transformable(handles: handles, apiKey: apiKey, security: security)
+    }
+
+    /**
+     A `Transformable` object for an external URL.
 
      - SeeAlso: `Transformable`
 

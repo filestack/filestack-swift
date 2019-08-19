@@ -1518,4 +1518,23 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
+
+    func testAnimateTransformationURL() {
+        let transformable = client.transformable(handles: ["HANDLE1", "HANDLE2", "HANDLE3", "HANDLE4", "HANDLE5"])
+
+        transformable.add(transform: AnimateTransform()
+            .delay(150)
+            .loop(0)
+            .width(200)
+            .height(300)
+            .fit(.crop)
+            .align([.middle, .center])
+            .background("transparent"))
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("animate=delay:150,loop:0,width:200,height:300,fit:crop,align:[middle,center],background:transparent")
+            .appendingPathComponent("[HANDLE1,HANDLE2,HANDLE3,HANDLE4,HANDLE5]")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
 }

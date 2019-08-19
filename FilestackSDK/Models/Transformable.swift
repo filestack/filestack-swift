@@ -24,7 +24,12 @@ import Foundation
     public let security: Security?
 
     /// A Filestack Handle. `nil` by default.
-    public let handle: String?
+    public var handle: String? {
+        return handles?.first
+    }
+
+    /// An array of Filestack Handles. `nil` by deafult.
+    public let handles: [String]?
 
     /// An external URL. `nil` by default.
     public let externalURL: URL?
@@ -40,9 +45,9 @@ import Foundation
 
     // MARK: - Lifecyle Functions
 
-    init(handle: String, apiKey: String, security: Security? = nil) {
-        self.handle = handle
-        externalURL = nil
+    init(handles: [String], apiKey: String, security: Security? = nil) {
+        self.handles = handles
+        self.externalURL = nil
         self.apiKey = apiKey
         self.security = security
 
@@ -50,7 +55,7 @@ import Foundation
     }
 
     init(externalURL: URL, apiKey: String, security: Security? = nil) {
-        handle = nil
+        self.handles = nil
         self.externalURL = externalURL
         self.apiKey = apiKey
         self.security = security
@@ -187,8 +192,8 @@ import Foundation
 
 private extension Transformable {
     func computeURL() -> URL {
-        if let handle = handle {
-            return processService.buildURL(tasks: tasksToURLFragment(), handle: handle, security: security)!
+        if let handles = handles {
+            return processService.buildURL(tasks: tasksToURLFragment(), handles: handles, security: security)!
         } else {
             return processService.buildURL(tasks: tasksToURLFragment(), externalURL: externalURL!, key: apiKey, security: security)!
         }
