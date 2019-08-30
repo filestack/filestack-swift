@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+Version 2.0.1 *(2019-08-30)*
+----------------------------
+
+- Added animate transform.
+- Added minify CSS transform.
+- Added minify JS transform.
+- Added auto image transform.
+- Added OCR transform.
+- Added copyright transform.
+- Added presets to enhance transform (see `TransformEnhancePreset`).
+
 Version 2.0 *(2019-06-15)*
 ----------------------------
 
