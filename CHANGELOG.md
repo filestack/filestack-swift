@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 2.0.2 *(2019-08-31)*
+----------------------------
+
+- Added support for transformations that take multiple handles or external URLs as input to `Client` (see `transformable(handles:)` and  `transformable(externalURLs:)`.)
+
 Version 2.0.1 *(2019-08-30)*
 ----------------------------
 
