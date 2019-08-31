@@ -25,14 +25,31 @@ import Foundation
 
     /// A Filestack Handle. `nil` by default.
     public var handle: String? {
-        return handles?.first
+        return usingExternalURLs ? nil : sources.first
     }
 
     /// An array of Filestack Handles. `nil` by deafult.
-    public let handles: [String]?
+    public var handles: [String]? {
+        return usingExternalURLs ? nil : sources
+    }
 
     /// An external URL. `nil` by default.
-    public let externalURL: URL?
+    public var externalURL: URL? {
+        if usingExternalURLs, let source = sources.first {
+            return URL(string: source)
+        } else {
+            return nil
+        }
+    }
+
+    /// An array of external URLs. `nil` by default.
+    public var externalURLs: [URL]? {
+        if usingExternalURLs {
+            return sources.compactMap { URL(string: $0) }
+        } else {
+            return nil
+        }
+    }
 
     /// An URL corresponding to this image transform.
     public var url: URL {
@@ -42,23 +59,25 @@ import Foundation
     // MARK: - Private Properties
 
     private var transformationTasks: [Task] = [Task]()
+    private var sources: [String]
+    private var usingExternalURLs: Bool
 
     // MARK: - Lifecyle Functions
 
     init(handles: [String], apiKey: String, security: Security? = nil) {
-        self.handles = handles
-        self.externalURL = nil
+        self.sources = handles
         self.apiKey = apiKey
         self.security = security
+        self.usingExternalURLs = false
 
         super.init()
     }
 
-    init(externalURL: URL, apiKey: String, security: Security? = nil) {
-        self.handles = nil
-        self.externalURL = externalURL
+    init(externalURLs: [URL], apiKey: String, security: Security? = nil) {
+        self.sources = externalURLs.map { $0.absoluteString }
         self.apiKey = apiKey
         self.security = security
+        self.usingExternalURLs = true
 
         super.init()
     }
@@ -192,11 +211,8 @@ import Foundation
 
 private extension Transformable {
     func computeURL() -> URL {
-        if let handles = handles {
-            return processService.buildURL(tasks: tasksToURLFragment(), handles: handles, security: security)!
-        } else {
-            return processService.buildURL(tasks: tasksToURLFragment(), externalURL: externalURL!, key: apiKey, security: security)!
-        }
+        let key = usingExternalURLs ? apiKey : nil
+        return processService.buildURL(tasks: tasksToURLFragment(), sources: sources, key: key, security: security)!
     }
 
     func sanitize(string: String) -> String {

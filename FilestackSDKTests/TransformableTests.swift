@@ -26,6 +26,39 @@ class TransformableTests: XCTestCase {
         OHHTTPStubs.removeAllStubs()
     }
 
+    func testSingleHandleTransformation() {
+        let handle = "HANDLE1"
+        let transformable = client.transformable(handle: handle)
+
+        XCTAssertEqual(transformable.handle, handle)
+    }
+
+    func testMultipleHandleTransformation() {
+        let handles = ["HANDLE1", "HANDLE2", "HANDLE3"]
+        let transformable = client.transformable(handles: handles)
+
+        XCTAssertEqual(transformable.handles, handles)
+    }
+
+    func testSingleExternalURLTransformation() {
+        let externalURL = URL(string: "https://some.tld/1.jpg")!
+        let transformable = client.transformable(externalURL: externalURL)
+
+        XCTAssertEqual(transformable.externalURL, externalURL)
+    }
+
+    func testMultipleExternalURLsTransformation() {
+        let externalURLs = [
+            URL(string: "https://some.tld/1.jpg")!,
+            URL(string: "https://some.tld/2.jpg")!,
+            URL(string: "https://some.tld/3.jpg")!,
+        ]
+
+        let transformable = client.transformable(externalURLs: externalURLs)
+
+        XCTAssertEqual(transformable.externalURLs, externalURLs)
+    }
+
     func testASCIITransformationUrl() {
         transformable.add(transform: ASCIITransform().background(.red).foreground(.blue).size(50))
 
@@ -1112,6 +1145,26 @@ class TransformableTests: XCTestCase {
             .appendingPathComponent("MY-API-KEY")
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
             .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testTransfomationURLWithExternalURLs() {
+        let client = Client(apiKey: "MY-API-KEY")
+
+        let externalURLs = [
+            URL(string: "https://some.tld/1.jpg")!,
+            URL(string: "https://some.tld/2.jpg")!,
+            URL(string: "https://some.tld/3.jpg")!,
+        ]
+
+        let transformable = client.transformable(externalURLs: externalURLs)
+            .add(transform: AnimateTransform().width(50).height(25).fit(.crop).align(.bottom))
+
+        let expectedURL = Config.processURL
+            .appendingPathComponent("MY-API-KEY")
+            .appendingPathComponent("animate=width:50,height:25,fit:crop,align:[bottom]")
+            .appendingPathComponent("[https://some.tld/1.jpg,https://some.tld/2.jpg,https://some.tld/3.jpg]")
 
         XCTAssertEqual(transformable.url, expectedURL)
     }

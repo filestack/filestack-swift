@@ -13,10 +13,12 @@ internal class ProcessService: NetworkingService {
     let sessionManager = SessionManager.filestackDefault()
     let baseURL = Config.processURL
 
-    func buildURL(tasks: String? = nil, handles: [String], security: Security? = nil) -> URL? {
-        guard !handles.isEmpty else { return nil }
-
+    func buildURL(tasks: String? = nil, sources: [String], key: String? = nil, security: Security? = nil) -> URL? {
         var url = baseURL
+
+        if let key = key {
+            url.appendPathComponent(key, isDirectory: false)
+        }
 
         if let tasks = tasks {
             url.appendPathComponent(tasks, isDirectory: false)
@@ -27,31 +29,12 @@ internal class ProcessService: NetworkingService {
                                     isDirectory: false)
         }
 
-        if handles.count == 1, let handle = handles.first {
+        if sources.count == 1, let source = sources.first {
             // Most common case
-            url.appendPathComponent(handle, isDirectory: false)
+            url.appendPathComponent(source, isDirectory: false)
         } else {
-            url.appendPathComponent("[\((handles.map { $0 }).joined(separator: ","))]", isDirectory: false)
+            url.appendPathComponent("[\((sources.map { $0 }).joined(separator: ","))]", isDirectory: false)
         }
-
-        return url
-    }
-
-    func buildURL(tasks: String? = nil, externalURL: URL, key: String, security: Security? = nil) -> URL? {
-        var url = baseURL
-
-        url.appendPathComponent(key, isDirectory: false)
-
-        if let tasks = tasks {
-            url.appendPathComponent(tasks, isDirectory: false)
-        }
-
-        if let security = security {
-            url.appendPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)",
-                                    isDirectory: false)
-        }
-
-        url.appendPathComponent(externalURL.absoluteString, isDirectory: false)
 
         return url
     }

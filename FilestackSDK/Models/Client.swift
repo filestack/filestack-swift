@@ -100,7 +100,18 @@ import Foundation
      - Parameter externalURL: An external URL.
      */
     public func transformable(externalURL: URL) -> Transformable {
-        return Transformable(externalURL: externalURL, apiKey: apiKey, security: security)
+        return Transformable(externalURLs: [externalURL], apiKey: apiKey, security: security)
+    }
+
+    /**
+     A `Transformable` object for an array of external URLs.
+
+     - SeeAlso: `Transformable`
+
+     - Parameter externalURLs: An array of external URLs.
+     */
+    public func transformable(externalURLs: [URL]) -> Transformable {
+        return Transformable(externalURLs: externalURLs, apiKey: apiKey, security: security)
     }
 
     /**
