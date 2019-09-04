@@ -108,7 +108,7 @@ extension MultipartUploadError: LocalizedError {
         fail(with: MultipartUploadError.aborted)
     }
 
-    public func uploadFile() {
+    @objc public func uploadFile() {
         uploadQueue.async {
             self.doUploadFile()
         }

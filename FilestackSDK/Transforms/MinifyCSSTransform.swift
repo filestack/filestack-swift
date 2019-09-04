@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `MinifyCSSTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "minify_css")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: Minification level.
      */
-    @discardableResult public func level(_ value: Int) -> Self {
+    @objc @discardableResult public func level(_ value: Int) -> Self {
         return appending(key: "level", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: Whether to compress file and add content encoding gzip header.
      */
-    @discardableResult public func gzip(_ value: Bool) -> Self {
+    @objc @discardableResult public func gzip(_ value: Bool) -> Self {
         return appending(key: "gzip", value: value)
     }
 }

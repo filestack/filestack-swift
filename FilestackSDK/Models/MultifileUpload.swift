@@ -13,7 +13,7 @@ import Foundation
     // MARK: - Public Properties
 
     /// Array of local URLs of files we want to upload.
-    public var uploadURLs: [URL] {
+    @objc public var uploadURLs: [URL] {
         didSet {
             leftToUploadURLs = uploadURLs
         }

@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes an `ImageSizeTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "imagesize")
     }
 }

@@ -16,7 +16,7 @@ import Foundation
     /**
      Initializes an `OCRTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "ocr")
     }
 }

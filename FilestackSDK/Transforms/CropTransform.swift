@@ -20,7 +20,7 @@ import Foundation
      - Parameter width: The output image's width.
      - Parameter height: The output image's height.
      */
-    public init(x: Int, y: Int, width: Int, height: Int) {
+    @objc public init(x: Int, y: Int, width: Int, height: Int) {
         super.init(name: "crop")
 
         appending(key: "dim", value: [x, y, width, height])

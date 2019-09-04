@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `PolaroidTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "polaroid")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: Sets the Polaroid frame color.
      */
-    @discardableResult public func color(_ value: UIColor) -> Self {
+    @objc @discardableResult public func color(_ value: UIColor) -> Self {
         return appending(key: "color", value: value.hexString)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: The degree by which to rotate the image clockwise. Valid range: `0...359`
      */
-    @discardableResult public func rotate(_ value: Int) -> Self {
+    @objc @discardableResult public func rotate(_ value: Int) -> Self {
         return appending(key: "rotate", value: value)
     }
 
@@ -43,7 +43,7 @@ import Foundation
      - Parameter value: Sets the background color to display behind the Polaroid if
      it has been rotated at all.
      */
-    @discardableResult public func background(_ value: UIColor) -> Self {
+    @objc @discardableResult public func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }

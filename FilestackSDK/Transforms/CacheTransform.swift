@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `CacheTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "cache")
     }
 
@@ -26,7 +26,7 @@ import Foundation
      This setting is only recommended for testing purposes because every time a URL using cache=false loads,
      it will count against your conversion quota.
      */
-    @discardableResult public func turnOff() -> Self {
+    @objc @discardableResult public func turnOff() -> Self {
         removeAllOptions()
         return appending(key: "false", value: nil)
     }
@@ -36,7 +36,7 @@ import Foundation
 
      - Parameter value: Set the length in seconds to cache the file for. Valid range: 1...31536000
      */
-    @discardableResult public func expiry(_ value: Int) -> Self {
+    @objc @discardableResult public func expiry(_ value: Int) -> Self {
         return appending(key: "expiry", value: value)
     }
 
@@ -45,7 +45,7 @@ import Foundation
 
      - Parameter value: Set the maximum length (1 year) to cache the file for.
      */
-    @discardableResult public func maxExpiry() -> Self {
+    @objc @discardableResult public func maxExpiry() -> Self {
         return appending(key: "expiry", value: "max")
     }
 }

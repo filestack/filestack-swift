@@ -16,7 +16,7 @@ import Foundation
     /**
      Initializes a `CopyrightTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "copyright")
     }
 }

@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `PixelateTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "pixelate")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: Valid range: `2...100`
      */
-    @discardableResult public func amount(_ value: Int = 2) -> Self {
+    @objc @discardableResult public func amount(_ value: Int = 2) -> Self {
         return appending(key: "amount", value: value)
     }
 }

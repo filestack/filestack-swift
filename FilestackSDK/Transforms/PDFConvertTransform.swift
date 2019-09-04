@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `PDFConvertTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "pdfconvert")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: A `TransformPageOrientation` value.
      */
-    @discardableResult public func pageOrientation(_ value: TransformPageOrientation) -> Self {
+    @objc @discardableResult public func pageOrientation(_ value: TransformPageOrientation) -> Self {
         return appending(key: "pageorientation", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: A `TransformPageFormat` value.
      */
-    @discardableResult public func pageFormat(_ value: TransformPageFormat) -> Self {
+    @objc @discardableResult public func pageFormat(_ value: TransformPageFormat) -> Self {
         return appending(key: "pageformat", value: value)
     }
 
@@ -42,7 +42,7 @@ import Foundation
 
      - Parameter value: An array of page numbers.
      */
-    @discardableResult func pages(_ value: [Int]) -> Self {
+    @objc @discardableResult func pages(_ value: [Int]) -> Self {
         return appending(key: "pages", value: value)
     }
 }

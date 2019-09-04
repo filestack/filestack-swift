@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `MonochromeTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "monochrome")
     }
 }

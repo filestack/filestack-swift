@@ -17,7 +17,7 @@ import Foundation
 
      - Parameter file: The Filestack handle of the image that you want to layer on top of another image as a watermark.
      */
-    public init(file: String) {
+    @objc public init(file: String) {
         super.init(name: "watermark")
 
         appending(key: "file", value: file)
@@ -29,7 +29,7 @@ import Foundation
      - Parameter value: The size of the overlayed image as a percentage of its original size.
      Valid range: `1...500`
      */
-    @discardableResult public func size(_ value: Int) -> Self {
+    @objc @discardableResult public func size(_ value: Int) -> Self {
         return appending(key: "size", value: value)
     }
 
@@ -38,7 +38,7 @@ import Foundation
 
      - Parameter value: The position of the overlayed image. These values can be paired as well like position: [.top, .right].
      */
-    @discardableResult public func position(_ value: TransformPosition) -> Self {
+    @objc @discardableResult public func position(_ value: TransformPosition) -> Self {
         return appending(key: "position", value: value.toArray())
     }
 }

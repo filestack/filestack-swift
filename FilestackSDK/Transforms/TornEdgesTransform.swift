@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `TornEdgesTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "torn_edges")
     }
 
@@ -25,7 +25,7 @@ import Foundation
      - Parameter start: The spread's start value.
      - Parameter end: The spread's end value.
      */
-    @discardableResult public func spread(start: Int, end: Int) -> Self {
+    @objc @discardableResult public func spread(start: Int, end: Int) -> Self {
         return appending(key: "spread", value: [start, end])
     }
 
@@ -34,7 +34,7 @@ import Foundation
 
      - Parameter value: Sets the background color to display behind the torn edge effect.
      */
-    @discardableResult public func background(_ value: UIColor) -> Self {
+    @objc @discardableResult public func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }

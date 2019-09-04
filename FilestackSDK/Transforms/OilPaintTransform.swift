@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes an `OilPaintTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "oil_paint")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: Valid range: `2...100`
      */
-    @discardableResult public func amount(_ value: Int) -> Self {
+    @objc @discardableResult public func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 }

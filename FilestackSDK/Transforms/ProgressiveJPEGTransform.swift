@@ -21,7 +21,7 @@ import Foundation
     /**
      Initializes a `ProgressiveJPEGTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "pjpg")
     }
 
@@ -30,7 +30,7 @@ import Foundation
 
      - Parameter value: You can set the quality of output file. Valid range: `1...100`
      */
-    @discardableResult public func quality(_ value: Int) -> Self {
+    @objc @discardableResult public func quality(_ value: Int) -> Self {
         return appending(key: "quality", value: value)
     }
 
@@ -39,7 +39,7 @@ import Foundation
 
      - Parameter value: Sets if we want to keep metadata while cnverting.
      */
-    @discardableResult public func metadata(_ value: Bool) -> Self {
+    @objc @discardableResult public func metadata(_ value: Bool) -> Self {
         return appending(key: "metadata", value: value)
     }
 }

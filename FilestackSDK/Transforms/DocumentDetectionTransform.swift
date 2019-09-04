@@ -18,7 +18,7 @@ import Foundation
     /**
      Initializes a `DocumentDetectionTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "doc_detection")
     }
 
@@ -27,7 +27,7 @@ import Foundation
 
      - Parameter value: If true, it returns the coordinates of the detected document in the image.
      */
-    @discardableResult public func coords(_ value: Bool) -> Self {
+    @objc @discardableResult public func coords(_ value: Bool) -> Self {
         return appending(key: "coords", value: value)
     }
 
@@ -36,7 +36,7 @@ import Foundation
 
      - Parameter value: If true, it returns the preprocessed image, otherwise the warped one will be returned instead.
      */
-    @discardableResult public func preprocess(_ value: Bool) -> Self {
+    @objc @discardableResult public func preprocess(_ value: Bool) -> Self {
         return appending(key: "preprocess", value: value)
     }
 }

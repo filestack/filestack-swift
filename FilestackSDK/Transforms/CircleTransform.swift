@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `CircleTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "circle")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: Sets the background color to display behind the image.
      */
-    @discardableResult public func background(_ value: UIColor) -> Self {
+    @objc @discardableResult public func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }

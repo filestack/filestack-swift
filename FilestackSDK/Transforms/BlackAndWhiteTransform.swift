@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `BlackAndWhiteTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "blackwhite")
     }
 
@@ -25,7 +25,7 @@ import Foundation
      - Parameter value: Controls the balance between black and white (contrast) in
      the returned image. Valid range: `1...100`
      */
-    @discardableResult public func threshold(_ value: Int) -> Self {
+    @objc @discardableResult public func threshold(_ value: Int) -> Self {
         return appending(key: "threshold", value: value)
     }
 }

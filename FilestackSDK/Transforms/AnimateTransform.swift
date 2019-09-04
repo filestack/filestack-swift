@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes an `AnimateTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "animate")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: The delay between frames (in milliseconds). Valid range: `1...1000`
      */
-    @discardableResult public func delay(_ value: Int) -> Self {
+    @objc @discardableResult public func delay(_ value: Int) -> Self {
         return appending(key: "delay", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: How many times images should be displayed. Use 0 to loop forever.
      */
-    @discardableResult public func loop(_ value: Int) -> Self {
+    @objc @discardableResult public func loop(_ value: Int) -> Self {
         return appending(key: "loop", value: value)
     }
 
@@ -42,7 +42,7 @@ import Foundation
 
      - Parameter value: The new width in pixels. Valid range: `1...10000`
      */
-    @discardableResult public func width(_ value: Int) -> Self {
+    @objc @discardableResult public func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -51,7 +51,7 @@ import Foundation
 
      - Parameter value: The new height in pixels. Valid range: `1...10000`
      */
-    @discardableResult public func height(_ value: Int) -> Self {
+    @objc @discardableResult public func height(_ value: Int) -> Self {
         return appending(key: "height", value: value)
     }
 
@@ -60,7 +60,7 @@ import Foundation
 
      - Parameter value: A `TransformFit` value.
      */
-    @discardableResult public func fit(_ value: TransformFit) -> Self {
+    @objc @discardableResult public func fit(_ value: TransformFit) -> Self {
         return appending(key: "fit", value: value)
     }
 
@@ -69,7 +69,7 @@ import Foundation
 
      - Parameter value: A `TransformPosition` value.
      */
-    @discardableResult public func align(_ value: TransformPosition) -> Self {
+    @objc @discardableResult public func align(_ value: TransformPosition) -> Self {
         return appending(key: "align", value: value.toArray())
     }
 
@@ -78,7 +78,7 @@ import Foundation
 
      - Parameter value: A color such as `transparent`, `black`, `white`, `red`, etc.
      */
-    @discardableResult public func background(_ value: String) -> Self {
+    @objc @discardableResult public func background(_ value: String) -> Self {
         return appending(key: "background", value: value)
     }
 }

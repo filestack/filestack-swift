@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `ShadowTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "shadow")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: Sets the level of blur for the shadow effect. Valid range: `0...20`
      */
-    @discardableResult public func blur(_ value: Int) -> Self {
+    @objc @discardableResult public func blur(_ value: Int) -> Self {
         return appending(key: "blur", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: Sets the opacity level of the shadow effect. Vaid range: `0 to 100`
      */
-    @discardableResult public func opacity(_ value: Int) -> Self {
+    @objc @discardableResult public func opacity(_ value: Int) -> Self {
         return appending(key: "opacity", value: value)
     }
 
@@ -43,7 +43,7 @@ import Foundation
      - Parameter x: Sets the shadow's X offset. Valid range: `-1000 to 1000`
      - Parameter y: Sets the shadow's Y offset. Valid range: `-1000 to 1000`
      */
-    @discardableResult public func vector(x: Int, y: Int) -> Self {
+    @objc @discardableResult public func vector(x: Int, y: Int) -> Self {
         return appending(key: "vector", value: [x, y])
     }
 
@@ -52,7 +52,7 @@ import Foundation
 
      - Parameter value: Sets the shadow color.
      */
-    @discardableResult public func color(_ value: UIColor) -> Self {
+    @objc @discardableResult public func color(_ value: UIColor) -> Self {
         return appending(key: "color", value: value.hexString)
     }
 
@@ -62,7 +62,7 @@ import Foundation
      - Parameter value: Sets the background color to display behind the image,
      like a matte the shadow is cast on.
      */
-    @discardableResult public func background(_ value: UIColor) -> Self {
+    @objc @discardableResult public func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }

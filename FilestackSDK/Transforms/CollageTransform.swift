@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: Valid range: `1...100`
      */
-    @discardableResult public func margin(_ value: Int) -> Self {
+    @objc @discardableResult public func margin(_ value: Int) -> Self {
         return appending(key: "margin", value: value)
     }
 
@@ -42,21 +42,21 @@ import Foundation
 
      - Parameter value: Sets the background color to display behind the images.
      */
-    @discardableResult public func color(_ value: UIColor) -> Self {
+    @objc @discardableResult public func color(_ value: UIColor) -> Self {
         return appending(key: "color", value: value.hexString)
     }
 
     /**
      Changes the `fit` option to every image from `auto` to `crop`.
      */
-    @discardableResult public func cropFit() -> Self {
+    @objc @discardableResult public func cropFit() -> Self {
         return appending(key: "fit", value: TransformFit.crop)
     }
 
     /**
      Adds the `autorotate` option.
      */
-    @discardableResult public func autorotate() -> Self {
+    @objc @discardableResult public func autorotate() -> Self {
         return appending(key: "autorotate", value: true)
     }
 }
@@ -73,7 +73,7 @@ import Foundation
     ///
     /// - Parameter resource: File handle, storage aliase, or external url passed as String.
     /// - Returns: self
-    @discardableResult public func add(_ resource: String) -> Self {
+    @objc(addResource:) @discardableResult public func add(_ resource: String) -> Self {
         return add([resource])
     }
 
@@ -81,7 +81,7 @@ import Foundation
     ///
     /// - Parameter resources: Array of file handles, storage aliase, or external url passed as String.
     /// - Returns: self
-    @discardableResult public func add(_ resources: [String]) -> Self {
+    @objc(addResources:) @discardableResult public func add(_ resources: [String]) -> Self {
         files.append(contentsOf: resources.map { envelop($0) })
         return self
     }

@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `SepiaTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "sepia")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: The value to set the sepia tone to. Valid range: `0...100`
      */
-    @discardableResult public func tone(_ value: Int) -> Self {
+    @objc @discardableResult public func tone(_ value: Int) -> Self {
         return appending(key: "tone", value: value)
     }
 }

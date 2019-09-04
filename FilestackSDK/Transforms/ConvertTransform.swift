@@ -17,7 +17,7 @@ import Foundation
     /**
      Initializes a `ConvertTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "output")
     }
 
@@ -26,7 +26,7 @@ import Foundation
 
      - Parameter value: The format to which you would like to convert the file.
      */
-    @discardableResult public func format(_ value: TransformFiletype) -> Self {
+    @objc @discardableResult public func format(_ value: TransformFiletype) -> Self {
         return appending(key: "format", value: value)
     }
 
@@ -36,7 +36,7 @@ import Foundation
      - Parameter value: Set a background color when converting transparent .png files
      into other file types.
      */
-    @discardableResult public func background(_ value: UIColor) -> Self {
+    @objc @discardableResult public func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 
@@ -47,7 +47,7 @@ import Foundation
      or PowerPoint file, you can extract a specific page using the page parameter.
      Valid range: `1...99999`
      */
-    @discardableResult public func page(_ value: Int) -> Self {
+    @objc @discardableResult public func page(_ value: Int) -> Self {
         return appending(key: "page", value: value)
     }
 
@@ -57,7 +57,7 @@ import Foundation
      - Parameter value: You can adjust the density when converting documents like PowerPoint,
      PDF, AI and EPS files to image formats like JPG or PNG. Valid range: `1...500`
      */
-    @discardableResult public func density(_ value: Int) -> Self {
+    @objc @discardableResult public func density(_ value: Int) -> Self {
         return appending(key: "density", value: value)
     }
 
@@ -65,7 +65,7 @@ import Foundation
      Adds the `compress` option.
      Takes advantage of Filestack's image compression which utilizes JPEGtran and OptiPNG.
      */
-    @discardableResult public func compress() -> Self {
+    @objc @discardableResult public func compress() -> Self {
         return appending(key: "compress", value: true)
     }
 
@@ -75,7 +75,7 @@ import Foundation
      - Parameter value: You can change the quality (and reduce the file size) of JPEG images
      by using the quality parameter. Valid range: `1...100`
      */
-    @discardableResult public func quality(_ value: Int) -> Self {
+    @objc @discardableResult public func quality(_ value: Int) -> Self {
         return appending(key: "quality", value: value)
     }
 
@@ -83,7 +83,7 @@ import Foundation
      Adds the `quality` option with value set to "input".
      Used for JPG images if we want output file to have same quality as original one.
      */
-    @discardableResult public func preserveInputQuality() -> Self {
+    @objc @discardableResult public func preserveInputQuality() -> Self {
         return appending(key: "quality", value: "input")
     }
 
@@ -91,7 +91,7 @@ import Foundation
      Adds the `strip` option.
      Remove embedded file metadata.
      */
-    @discardableResult public func strip() -> Self {
+    @objc @discardableResult public func strip() -> Self {
         return appending(key: "strip", value: true)
     }
 
@@ -100,7 +100,7 @@ import Foundation
 
      - Parameter value: An `TransformColorSpace` value.
      */
-    @discardableResult public func colorSpace(_ value: TransformColorSpace) -> Self {
+    @objc @discardableResult public func colorSpace(_ value: TransformColorSpace) -> Self {
         return appending(key: "colorspace", value: value)
     }
 
@@ -109,7 +109,7 @@ import Foundation
      Applies to conversions of HTML and SVG sources only.
      When the secure parameter is set to true, the HTML or SVG file will be stripped of any insecure tags.
      */
-    @discardableResult public func secure() -> Self {
+    @objc @discardableResult public func secure() -> Self {
         return appending(key: "secure", value: true)
     }
 
@@ -118,7 +118,7 @@ import Foundation
      Gives information about a document, such as the number of pages and the dimensions of the file.
      This information is delivered as a JSON object.
      */
-    @discardableResult public func docInfo() -> Self {
+    @objc @discardableResult public func docInfo() -> Self {
         return appending(key: "docinfo", value: true)
     }
 
@@ -127,7 +127,7 @@ import Foundation
 
      - Parameter value: An `TransformPageFormat` value.
      */
-    @discardableResult public func pageFormat(_ value: TransformPageFormat) -> Self {
+    @objc @discardableResult public func pageFormat(_ value: TransformPageFormat) -> Self {
         return appending(key: "pageformat", value: value)
     }
 
@@ -136,7 +136,7 @@ import Foundation
 
      - Parameter value: An `TransformPageOrientation` value.
      */
-    @discardableResult public func pageOrientation(_ value: TransformPageOrientation) -> Self {
+    @objc @discardableResult public func pageOrientation(_ value: TransformPageOrientation) -> Self {
         return appending(key: "pageorientation", value: value)
     }
 }

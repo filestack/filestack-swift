@@ -25,7 +25,7 @@ typealias Task = (name: String, options: [TaskOption]?)
     }
 }
 
-extension Transform {
+public extension Transform {
     typealias Animate = AnimateTransform
     typealias ASCII = ASCIITransform
     typealias AutoImage = AutoImageTransform
@@ -81,10 +81,6 @@ extension Transform {
     typealias Vignette = VignetteTransform
     typealias Watermark = WatermarkTransform
     typealias Zip = ZipTransform
-
-    // Deprecations
-    @available(*, deprecated, renamed: "RoundedCorners") typealias RoundCorners = RoundedCorners
-    @available(*, deprecated, renamed: "URLScreenshot") typealias UrlScreenshot = URLScreenshot
 }
 
 extension Transform {

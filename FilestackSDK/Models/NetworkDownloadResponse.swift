@@ -16,19 +16,19 @@ import Foundation
     // MARK: - Properties
 
     /// The URL request sent to the server.
-    public let request: URLRequest?
+    @objc public let request: URLRequest?
 
     /// The server's response to the URL request.
-    public let response: HTTPURLResponse?
+    @objc public let response: HTTPURLResponse?
 
     /// The temporary destination URL of the data returned from the server.
-    public let temporaryURL: URL?
+    @objc public let temporaryURL: URL?
 
     /// The final destination URL of the data returned from the server if it was moved.
-    public let destinationURL: URL?
+    @objc public let destinationURL: URL?
 
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
-    public var error: Error?
+    @objc public var error: Error?
 
     // MARK: - Lifecyle Functions
 

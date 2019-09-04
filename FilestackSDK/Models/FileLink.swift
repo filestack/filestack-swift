@@ -25,10 +25,10 @@ import Foundation
     public let security: Security?
 
     /// A Filestack Handle. `nil` by default.
-    public let handle: String
+    @objc public let handle: String
 
     /// A Filestack CDN URL corresponding to this `FileLink`.
-    public lazy var url: URL = {
+    @objc public lazy var url: URL = {
         cdnService.buildURL(handle: self.handle, security: self.security)!
     }()
 
@@ -54,10 +54,10 @@ import Foundation
      of the Request as data is read from the server. `nil` by default.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func getContent(parameters: [String: Any]? = nil,
-                           queue: DispatchQueue? = .main,
-                           downloadProgress: ((Progress) -> Void)? = nil,
-                           completionHandler: @escaping (NetworkDataResponse) -> Void) {
+    @objc public func getContent(parameters: [String: Any]? = nil,
+                                 queue: DispatchQueue? = .main,
+                                 downloadProgress: ((Progress) -> Void)? = nil,
+                                 completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = cdnService.getDataRequest(handle: handle,
                                                       path: nil,
                                                       parameters: parameters,
@@ -87,8 +87,8 @@ import Foundation
      - Parameter queue: The queue on which the completion handler is dispatched.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func getTags(queue: DispatchQueue? = .main,
-                        completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+    @objc public func getTags(queue: DispatchQueue? = .main,
+                              completionHandler: @escaping (NetworkJSONResponse) -> Void) {
         guard let request = cdnService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
             return
         }
@@ -107,8 +107,8 @@ import Foundation
      - Parameter queue: The queue on which the completion handler is dispatched.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func getSafeForWork(queue: DispatchQueue? = .main,
-                               completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+    @objc public func getSafeForWork(queue: DispatchQueue? = .main,
+                                     completionHandler: @escaping (NetworkJSONResponse) -> Void) {
         guard let request = cdnService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
             return
         }
@@ -163,11 +163,11 @@ import Foundation
      of the Request as data is read from the server. `nil` by default.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func download(destinationURL: URL,
-                         parameters: [String: Any]? = nil,
-                         queue: DispatchQueue? = .main,
-                         downloadProgress: ((Progress) -> Void)? = nil,
-                         completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
+    @objc public func download(destinationURL: URL,
+                               parameters: [String: Any]? = nil,
+                               queue: DispatchQueue? = .main,
+                               downloadProgress: ((Progress) -> Void)? = nil,
+                               completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
         let downloadDestination: DownloadRequest.DownloadFileDestination = { _, _ in
 
             let downloadOptions: DownloadRequest.DownloadOptions = [
@@ -213,9 +213,9 @@ import Foundation
      - Parameter queue: The queue on which the completion handler is dispatched.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func delete(parameters: [String: Any]? = nil,
-                       queue: DispatchQueue? = .main,
-                       completionHandler: @escaping (NetworkDataResponse) -> Void) {
+    @objc public func delete(parameters: [String: Any]? = nil,
+                             queue: DispatchQueue? = .main,
+                             completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = apiService.deleteRequest(handle: handle,
                                                      path: Config.filePath,
                                                      parameters: ensureAPIKey(parameters),
@@ -245,11 +245,11 @@ import Foundation
      of the Request as data is written on the server. `nil` by default.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func overwrite(parameters: [String: Any]? = nil,
-                          fileURL: URL,
-                          queue: DispatchQueue? = .main,
-                          uploadProgress: ((Progress) -> Void)? = nil,
-                          completionHandler: @escaping (NetworkDataResponse) -> Void) {
+    @objc public func overwrite(parameters: [String: Any]? = nil,
+                                fileURL: URL,
+                                queue: DispatchQueue? = .main,
+                                uploadProgress: ((Progress) -> Void)? = nil,
+                                completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = apiService.overwriteRequest(handle: handle,
                                                         path: Config.filePath,
                                                         parameters: parameters,
@@ -286,10 +286,10 @@ import Foundation
      - Parameter remoteURL: A remote `URL` whose content will replace the existing remote content.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    public func overwrite(parameters: [String: Any]? = nil,
-                          remoteURL: URL,
-                          queue: DispatchQueue? = .main,
-                          completionHandler: @escaping (NetworkDataResponse) -> Void) {
+    @objc public func overwrite(parameters: [String: Any]? = nil,
+                                remoteURL: URL,
+                                queue: DispatchQueue? = .main,
+                                completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = apiService.overwriteRequest(handle: handle,
                                                         path: Config.filePath,
                                                         parameters: parameters,
@@ -309,7 +309,7 @@ import Foundation
     /**
      Returns an `Transformable` corresponding to this `FileLink`.
      */
-    public func transformable() -> Transformable {
+    @objc public func transformable() -> Transformable {
         return Transformable(handles: [handle], apiKey: apiKey, security: security)
     }
 

@@ -17,14 +17,14 @@ import Foundation
     /**
      Initializes a `PDFInfoTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "pdfinfo")
     }
 
     /**
      Adds the `colorinfo` option.
      */
-    @discardableResult public func colorInfo() -> Self {
+    @objc @discardableResult public func colorInfo() -> Self {
         return appending(key: "colorinfo", value: true)
     }
 }

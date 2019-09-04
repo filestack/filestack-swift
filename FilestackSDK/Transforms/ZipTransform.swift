@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `ZipTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "zip")
     }
 }

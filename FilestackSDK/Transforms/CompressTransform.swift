@@ -20,7 +20,7 @@ import Foundation
     /**
      Initializes a `CompressTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "compress")
     }
 
@@ -29,7 +29,7 @@ import Foundation
 
      - Parameter value: Sets if we want to keep metadata while compressing.
      */
-    @discardableResult public func metadata(_ value: Bool) -> Self {
+    @objc @discardableResult public func metadata(_ value: Bool) -> Self {
         return appending(key: "metadata", value: value)
     }
 }

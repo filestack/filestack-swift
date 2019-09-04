@@ -36,7 +36,7 @@ import Foundation
     /**
      Initializes a `TagsTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "tags")
     }
 }

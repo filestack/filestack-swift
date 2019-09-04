@@ -66,7 +66,7 @@ import Foundation
 
      - Parameter handle: A Filestack handle.
      */
-    public func fileLink(for handle: String) -> FileLink {
+    @objc public func fileLink(for handle: String) -> FileLink {
         return FileLink(handle: handle, apiKey: apiKey, security: security)
     }
 
@@ -77,7 +77,7 @@ import Foundation
 
      - Parameter handle: A Filestack handle.
      */
-    public func transformable(handle: String) -> Transformable {
+    @objc public func transformable(handle: String) -> Transformable {
         return Transformable(handles: [handle], apiKey: apiKey, security: security)
     }
 
@@ -88,7 +88,7 @@ import Foundation
 
      - Parameter handles: An array of Filestack handles.
      */
-    public func transformable(handles: [String]) -> Transformable {
+    @objc public func transformable(handles: [String]) -> Transformable {
         return Transformable(handles: handles, apiKey: apiKey, security: security)
     }
 
@@ -99,7 +99,7 @@ import Foundation
 
      - Parameter externalURL: An external URL.
      */
-    public func transformable(externalURL: URL) -> Transformable {
+    @objc public func transformable(externalURL: URL) -> Transformable {
         return Transformable(externalURLs: [externalURL], apiKey: apiKey, security: security)
     }
 
@@ -110,7 +110,7 @@ import Foundation
 
      - Parameter externalURLs: An array of external URLs.
      */
-    public func transformable(externalURLs: [URL]) -> Transformable {
+    @objc public func transformable(externalURLs: [URL]) -> Transformable {
         return Transformable(externalURLs: externalURLs, apiKey: apiKey, security: security)
     }
 
@@ -129,13 +129,13 @@ import Foundation
      of the upload process as data is uploaded to the server. `nil` by default.
      - Parameter completionHandler: Adds a handler to be called once the upload has finished.
      */
-    @discardableResult public func multiPartUpload(from localURL: URL? = nil,
-                                                   storeOptions: StorageOptions = StorageOptions(location: .s3),
-                                                   useIntelligentIngestionIfAvailable: Bool = true,
-                                                   queue: DispatchQueue = .main,
-                                                   startUploadImmediately: Bool = true,
-                                                   uploadProgress: ((Progress) -> Void)? = nil,
-                                                   completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
+    @objc @discardableResult public func multiPartUpload(from localURL: URL? = nil,
+                                                         storeOptions: StorageOptions = StorageOptions(location: .s3),
+                                                         useIntelligentIngestionIfAvailable: Bool = true,
+                                                         queue: DispatchQueue = .main,
+                                                         startUploadImmediately: Bool = true,
+                                                         uploadProgress: ((Progress) -> Void)? = nil,
+                                                         completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
         let mpu = MultipartUpload(at: localURL,
                                   queue: queue,
                                   uploadProgress: uploadProgress,
@@ -168,13 +168,13 @@ import Foundation
      of the upload process as data is uploaded to the server. `nil` by default.
      - Parameter completionHandler: Adds a handler to be called once the upload of all files has finished.
      */
-    @discardableResult public func multiFileUpload(from localURLs: [URL]? = nil,
-                                                   storeOptions: StorageOptions = StorageOptions(location: .s3),
-                                                   useIntelligentIngestionIfAvailable: Bool = true,
-                                                   queue: DispatchQueue = .main,
-                                                   startUploadImmediately: Bool = true,
-                                                   uploadProgress: ((Progress) -> Void)? = nil,
-                                                   completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
+    @objc @discardableResult public func multiFileUpload(from localURLs: [URL]? = nil,
+                                                         storeOptions: StorageOptions = StorageOptions(location: .s3),
+                                                         useIntelligentIngestionIfAvailable: Bool = true,
+                                                         queue: DispatchQueue = .main,
+                                                         startUploadImmediately: Bool = true,
+                                                         uploadProgress: ((Progress) -> Void)? = nil,
+                                                         completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
         let mfu = MultifileUpload(with: localURLs,
                                   queue: queue,
                                   uploadProgress: uploadProgress,
@@ -183,9 +183,11 @@ import Foundation
                                   storeOptions: storeOptions,
                                   security: security,
                                   useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
+
         if startUploadImmediately {
             mfu.uploadFiles()
         }
+
         return mfu
     }
 }

@@ -34,7 +34,7 @@ import Foundation
      - Parameter policy: A configured `Policy` object.
      - Parameter appSecret: A secret taken from the developer portal.
      */
-    public convenience init(policy: Policy, appSecret: String) throws {
+    @objc public convenience init(policy: Policy, appSecret: String) throws {
         let policyJSON: Data = try policy.toJSON()
         let encodedPolicy: String = policyJSON.base64EncodedString()
 
@@ -53,7 +53,7 @@ import Foundation
      - Parameter encodedPolicy: An encoded policy.
      - Parameter signature: A computed signature.
      */
-    public init(encodedPolicy: String, signature: String) {
+    @objc public init(encodedPolicy: String, signature: String) {
         self.encodedPolicy = encodedPolicy
         self.signature = signature
     }

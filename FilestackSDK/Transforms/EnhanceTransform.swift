@@ -16,7 +16,7 @@ import Foundation
     /**
      Initializes a `EnhanceTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "enhance")
     }
 
@@ -25,7 +25,7 @@ import Foundation
 
      - Parameter value: The preset to use for enhancing the image. Only available on Pro plans or higher.
      */
-    @discardableResult public func preset(_ value: TransformEnhancePreset) -> Self {
+    @objc @discardableResult public func preset(_ value: TransformEnhancePreset) -> Self {
         return appending(key: "preset", value: value)
     }
 }

@@ -16,16 +16,16 @@ import Foundation
     // MARK: - Properties
 
     /// The URL request sent to the server.
-    public let request: URLRequest?
+    @objc public let request: URLRequest?
 
     /// The server's response to the URL request.
-    public let response: HTTPURLResponse?
+    @objc public let response: HTTPURLResponse?
 
     /// The data returned by the server.
-    public let data: Data?
+    @objc public let data: Data?
 
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
-    public var error: Error?
+    @objc public var error: Error?
 
     // MARK: - Lifecyle Functions
 

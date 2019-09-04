@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `ResizeTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "resize")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: The new width in pixels. Valid range: `1...10000`
      */
-    @discardableResult public func width(_ value: Int) -> Self {
+    @objc @discardableResult public func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: The new height in pixels. Valid range: `1...10000`
      */
-    @discardableResult public func height(_ value: Int) -> Self {
+    @objc @discardableResult public func height(_ value: Int) -> Self {
         return appending(key: "height", value: value)
     }
 
@@ -42,7 +42,7 @@ import Foundation
 
      - Parameter value: An `TransformFit` value.
      */
-    @discardableResult public func fit(_ value: TransformFit) -> Self {
+    @objc @discardableResult public func fit(_ value: TransformFit) -> Self {
         return appending(key: "fit", value: value)
     }
 
@@ -51,7 +51,7 @@ import Foundation
 
      - Parameter value: An `TransformAlign` value.
      */
-    @discardableResult public func align(_ value: TransformAlign) -> Self {
+    @objc @discardableResult public func align(_ value: TransformAlign) -> Self {
         return appending(key: "align", value: value)
     }
 }

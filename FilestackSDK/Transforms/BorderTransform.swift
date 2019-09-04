@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `BorderTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "border")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: Sets the width in pixels of the border to render around the image. Valid range: `1...1000`
      */
-    @discardableResult public func width(_ value: Int) -> Self {
+    @objc @discardableResult public func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: Sets the color of the border to render around the image.
      */
-    @discardableResult public func color(_ value: UIColor) -> Self {
+    @objc @discardableResult public func color(_ value: UIColor) -> Self {
         return appending(key: "color", value: value.hexString)
     }
 
@@ -42,7 +42,7 @@ import Foundation
 
      - Parameter value: Sets the background color to display behind the image.
      */
-    @discardableResult public func background(_ value: UIColor) -> Self {
+    @objc @discardableResult public func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }

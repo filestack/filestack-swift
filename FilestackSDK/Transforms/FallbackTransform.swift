@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `FallbackTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "fallback")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: the HANDLE of the file that should be returned.
      */
-    @discardableResult public func handle(_ value: String) -> Self {
+    @objc @discardableResult public func handle(_ value: String) -> Self {
         return appending(key: "handle", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: The number of seconds fallback response should be cached in CDN.
      */
-    @discardableResult public func cache(_ value: Int) -> Self {
+    @objc @discardableResult public func cache(_ value: Int) -> Self {
         return appending(key: "cache", value: value)
     }
 }

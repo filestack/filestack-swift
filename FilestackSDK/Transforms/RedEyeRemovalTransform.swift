@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `RedEyeRemovalTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "redeye")
     }
 }

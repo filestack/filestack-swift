@@ -16,7 +16,7 @@ import Foundation
     /**
      Initializes an `AutoImageTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "auto_image")
     }
 }

@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `NoMetadataTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "no_metadata")
     }
 }

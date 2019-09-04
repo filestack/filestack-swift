@@ -45,13 +45,13 @@ import Foundation
     }
 
     /// Default initializer.
-    public init(location: StorageLocation,
-                region: String? = nil,
-                container: String? = nil,
-                path: String? = nil,
-                filename: String? = nil,
-                access: StorageAccess? = nil,
-                workflows: [String]? = nil) {
+    @nonobjc public init(location: StorageLocation,
+                         region: String? = nil,
+                         container: String? = nil,
+                         path: String? = nil,
+                         filename: String? = nil,
+                         access: StorageAccess? = nil,
+                         workflows: [String]? = nil) {
         self.location = location
         self.region = region
         self.container = container

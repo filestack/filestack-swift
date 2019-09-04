@@ -120,14 +120,12 @@
 		BC8832E320D181A700B88EAF /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832CA20D181A700B88EAF /* Transform.swift */; };
 		BC8832E420D181A700B88EAF /* CircleTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832CB20D181A700B88EAF /* CircleTransform.swift */; };
 		BC8832E720D181F000B88EAF /* BlurFacesTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832E520D181F000B88EAF /* BlurFacesTransform.swift */; };
-		BC8832E820D181F000B88EAF /* CoverFacesTransformExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832E620D181F000B88EAF /* CoverFacesTransformExtension.swift */; };
 		BC8832EA20D238B600B88EAF /* PixelateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832E920D238B600B88EAF /* PixelateTransform.swift */; };
 		BC8832EC20D239A900B88EAF /* OilPaintTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832EB20D239A900B88EAF /* OilPaintTransform.swift */; };
 		BC8832EE20D23A0A00B88EAF /* NegativeTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832ED20D23A0A00B88EAF /* NegativeTransform.swift */; };
 		BC8832F020D264CF00B88EAF /* ModulateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832EF20D264CF00B88EAF /* ModulateTransform.swift */; };
 		BC8832F220D266F100B88EAF /* PartialPixelateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832F120D266F100B88EAF /* PartialPixelateTransform.swift */; };
 		BC8832F420D267B300B88EAF /* PartialBlurTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832F320D267B300B88EAF /* PartialBlurTransform.swift */; };
-		BC8832F620D2680A00B88EAF /* PartialCoverTransformExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832F520D2680A00B88EAF /* PartialCoverTransformExtension.swift */; };
 		BC8832F820D27A7B00B88EAF /* ASCIITransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832F720D27A7B00B88EAF /* ASCIITransform.swift */; };
 		BC8832FA20D3C90D00B88EAF /* CollageTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832F920D3C90D00B88EAF /* CollageTransform.swift */; };
 		BC8832FC20D3D92C00B88EAF /* URLScreenshotTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8832FB20D3D92C00B88EAF /* URLScreenshotTransform.swift */; };
@@ -285,14 +283,12 @@
 		BC8832CA20D181A700B88EAF /* Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		BC8832CB20D181A700B88EAF /* CircleTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransform.swift; sourceTree = "<group>"; };
 		BC8832E520D181F000B88EAF /* BlurFacesTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurFacesTransform.swift; sourceTree = "<group>"; };
-		BC8832E620D181F000B88EAF /* CoverFacesTransformExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFacesTransformExtension.swift; sourceTree = "<group>"; };
 		BC8832E920D238B600B88EAF /* PixelateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelateTransform.swift; sourceTree = "<group>"; };
 		BC8832EB20D239A900B88EAF /* OilPaintTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OilPaintTransform.swift; sourceTree = "<group>"; };
 		BC8832ED20D23A0A00B88EAF /* NegativeTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegativeTransform.swift; sourceTree = "<group>"; };
 		BC8832EF20D264CF00B88EAF /* ModulateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulateTransform.swift; sourceTree = "<group>"; };
 		BC8832F120D266F100B88EAF /* PartialPixelateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialPixelateTransform.swift; sourceTree = "<group>"; };
 		BC8832F320D267B300B88EAF /* PartialBlurTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialBlurTransform.swift; sourceTree = "<group>"; };
-		BC8832F520D2680A00B88EAF /* PartialCoverTransformExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialCoverTransformExtension.swift; sourceTree = "<group>"; };
 		BC8832F720D27A7B00B88EAF /* ASCIITransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCIITransform.swift; sourceTree = "<group>"; };
 		BC8832F920D3C90D00B88EAF /* CollageTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageTransform.swift; sourceTree = "<group>"; };
 		BC8832FB20D3D92C00B88EAF /* URLScreenshotTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLScreenshotTransform.swift; sourceTree = "<group>"; };
@@ -405,7 +401,6 @@
 				BC8832C720D181A700B88EAF /* VignetteTransform.swift */,
 				BC8832B420D181A600B88EAF /* WatermarkTransform.swift */,
 				458D66CC1F4B31E4001770FB /* ZipTransform.swift */,
-				4596207122BA38AA00D58036 /* Extensions */,
 			);
 			path = Transforms;
 			sourceTree = "<group>";
@@ -458,15 +453,6 @@
 				45FA0CC71F0B86AD008EDBCD /* Globals.swift */,
 			);
 			name = Misc;
-			sourceTree = "<group>";
-		};
-		4596207122BA38AA00D58036 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				BC8832E620D181F000B88EAF /* CoverFacesTransformExtension.swift */,
-				BC8832F520D2680A00B88EAF /* PartialCoverTransformExtension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		45B830911F03B27A0053742A = {
@@ -790,7 +776,6 @@
 				4528C7461F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift in Sources */,
 				BC8832D420D181A700B88EAF /* BlackAndWhiteTransform.swift in Sources */,
 				4502F7311F1F4C3A000875D6 /* MultipartUploadStartOperation.swift in Sources */,
-				BC8832F620D2680A00B88EAF /* PartialCoverTransformExtension.swift in Sources */,
 				BC8832DA20D181A700B88EAF /* NoMetadataTransform.swift in Sources */,
 				BC8832DF20D181A700B88EAF /* RoundedCornersTransform.swift in Sources */,
 				457D5BED1F16146B00FBD5B1 /* TransformPosition.swift in Sources */,
@@ -823,7 +808,6 @@
 				45E07AAB22AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift in Sources */,
 				45341A8D1F1E170C00DC7B79 /* URL+mimeType.swift in Sources */,
 				BC8832E420D181A700B88EAF /* CircleTransform.swift in Sources */,
-				BC8832E820D181F000B88EAF /* CoverFacesTransformExtension.swift in Sources */,
 				BC88330220D3DF7900B88EAF /* TransformStyleMode.swift in Sources */,
 				45513FFA1F0E9739006DB972 /* APIService.swift in Sources */,
 				4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */,

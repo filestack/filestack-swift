@@ -17,21 +17,21 @@ import Foundation
     /**
      Initializes a `URLScreenshotTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "urlscreenshot")
     }
 
     /**
      Changes the `agent` option from `desktop` to `mobile`.
      */
-    @discardableResult public func mobileAgent() -> Self {
+    @objc @discardableResult public func mobileAgent() -> Self {
         return appending(key: "agent", value: "mobile")
     }
 
     /**
      Changes the `mode` option from `all` to `window`.
      */
-    @discardableResult public func windowMode() -> Self {
+    @objc @discardableResult public func windowMode() -> Self {
         return appending(key: "mode", value: "window")
     }
 
@@ -40,7 +40,7 @@ import Foundation
 
      - Parameter value: The new width in pixels. Valid range: `1...10000`
      */
-    @discardableResult public func width(_ value: Int) -> Self {
+    @objc @discardableResult public func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -49,7 +49,7 @@ import Foundation
 
      - Parameter value: The new height in pixels. Valid range: `1...10000`
      */
-    @discardableResult public func height(_ value: Int) -> Self {
+    @objc @discardableResult public func height(_ value: Int) -> Self {
         return appending(key: "height", value: value)
     }
 
@@ -58,7 +58,7 @@ import Foundation
 
      - Parameter value: Delay after which screenshot will be captured. Valid range: `1...20000`
      */
-    @discardableResult public func delay(_ value: Int) -> Self {
+    @objc @discardableResult public func delay(_ value: Int) -> Self {
         return appending(key: "delay", value: value)
     }
 
@@ -67,7 +67,7 @@ import Foundation
 
      - Parameter value: Orientation for which screenshot will be captured.
      */
-    @discardableResult public func orientation(_ value: TransformPageOrientation) -> Self {
+    @objc @discardableResult public func orientation(_ value: TransformPageOrientation) -> Self {
         return appending(key: "orientation", value: value)
     }
 
@@ -76,7 +76,7 @@ import Foundation
 
      - Parameter value: Device for which screenshot will be captured.
      */
-    @discardableResult public func device(_ value: String) -> Self {
+    @objc @discardableResult public func device(_ value: String) -> Self {
         return appending(key: "device", value: value)
     }
 }

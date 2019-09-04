@@ -15,14 +15,14 @@ import Foundation
     /**
      Initializes an `UpscaleTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "upscale")
     }
 
     /**
      Turns off resizing of image.
      */
-    @discardableResult public func noUpscale() -> Self {
+    @objc @discardableResult public func noUpscale() -> Self {
         return appending(key: "upscale", value: false)
     }
 
@@ -31,7 +31,7 @@ import Foundation
 
      - Parameter value: An `TransformNoiseMode` value.
      */
-    @discardableResult public func noise(_ value: TransformNoiseMode) -> Self {
+    @objc @discardableResult public func noise(_ value: TransformNoiseMode) -> Self {
         return appending(key: "noise", value: value)
     }
 
@@ -40,7 +40,7 @@ import Foundation
 
      - Parameter value: An `TransformStyleMode` value.
      */
-    @discardableResult public func style(_ value: TransformStyleMode) -> Self {
+    @objc @discardableResult public func style(_ value: TransformStyleMode) -> Self {
         return appending(key: "style", value: value)
     }
 }

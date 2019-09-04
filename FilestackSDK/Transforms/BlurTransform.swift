@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `BlurTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "blur")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: The amount to blur the image. Valid range: `1...20`
      */
-    @discardableResult public func amount(_ value: Int) -> Self {
+    @objc @discardableResult public func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 }

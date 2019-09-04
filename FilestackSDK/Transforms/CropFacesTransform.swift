@@ -15,7 +15,7 @@ import Foundation
     /**
      Initializes a `CropFacesTransform` object.
      */
-    public init() {
+    @objc public init() {
         super.init(name: "crop_faces")
     }
 
@@ -24,7 +24,7 @@ import Foundation
 
      - Parameter value: An `TransformCropMode` value.
      */
-    @discardableResult public func mode(_ value: TransformCropMode) -> Self {
+    @objc @discardableResult public func mode(_ value: TransformCropMode) -> Self {
         return appending(key: "mode", value: value)
     }
 
@@ -33,7 +33,7 @@ import Foundation
 
      - Parameter value: The crop's width.
      */
-    @discardableResult public func width(_ value: Int) -> Self {
+    @objc @discardableResult public func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -42,7 +42,7 @@ import Foundation
 
      - Parameter value: The crop's height.
      */
-    @discardableResult public func height(_ value: Int) -> Self {
+    @objc @discardableResult public func height(_ value: Int) -> Self {
         return appending(key: "height", value: value)
     }
 
@@ -52,7 +52,7 @@ import Foundation
      - Parameter value: This parameter is used to weed out objects that most likely
      are not faces. Valid range: `0.01...10000`
      */
-    @discardableResult public func minSize(_ value: Float) -> Self {
+    @objc @discardableResult public func minSize(_ value: Float) -> Self {
         return appending(key: "minsize", value: value)
     }
 
@@ -62,14 +62,14 @@ import Foundation
      - Parameter value: This parameter is used to weed out objects that most likely
      are not faces. Valid range: `0.01...10000`
      */
-    @discardableResult public func maxSize(_ value: Float) -> Self {
+    @objc @discardableResult public func maxSize(_ value: Float) -> Self {
         return appending(key: "maxsize", value: value)
     }
 
     /**
      Adds the `faces` option with value `all`.
      */
-    @discardableResult public func allFaces() -> Self {
+    @objc @discardableResult public func allFaces() -> Self {
         return appending(key: "faces", value: "all")
     }
 
@@ -79,7 +79,7 @@ import Foundation
      - Parameter value: Adjusts the buffer around the face object as a percentage of
      the original object. Valid range: `0...1000`
      */
-    @discardableResult func buffer(_ value: Int) -> Self {
+    @objc @discardableResult func buffer(_ value: Int) -> Self {
         return appending(key: "buffer", value: value)
     }
 
@@ -88,7 +88,7 @@ import Foundation
 
      - Parameter value: The faces to be included in the crop.
      */
-    @discardableResult public func faces(_ value: [Int]) -> Self {
+    @objc @discardableResult public func faces(_ value: [Int]) -> Self {
         return appending(key: "faces", value: value)
     }
 }

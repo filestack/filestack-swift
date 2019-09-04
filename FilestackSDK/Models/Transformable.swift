@@ -52,7 +52,7 @@ import Foundation
     }
 
     /// An URL corresponding to this image transform.
-    public var url: URL {
+    @objc public var url: URL {
         return computeURL()
     }
 
