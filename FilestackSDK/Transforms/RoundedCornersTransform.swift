@@ -11,7 +11,7 @@ import Foundation
 /**
  Rounds the image's corners.
  */
-@objc(FSRoundCornersTransform) public class RoundedCornersTransform: Transform {
+@objc(FSRoundedCornersTransform) public class RoundedCornersTransform: Transform {
     /**
      Initializes a `RoundedCornersTransform` object.
      */

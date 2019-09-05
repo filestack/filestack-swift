@@ -44,6 +44,11 @@ import Foundation
         self.init(location: location, region: nil, container: nil, path: nil, filename: nil, access: nil)
     }
 
+    /// Convenience initializer (for Objective-C).
+    @objc public convenience init(location: StorageLocation, access: StorageAccess) {
+        self.init(location: location, region: nil, container: nil, path: nil, filename: nil, access: access)
+    }
+
     /// Default initializer.
     @nonobjc public init(location: StorageLocation,
                          region: String? = nil,

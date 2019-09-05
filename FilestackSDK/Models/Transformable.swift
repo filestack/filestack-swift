@@ -24,17 +24,17 @@ import Foundation
     public let security: Security?
 
     /// A Filestack Handle. `nil` by default.
-    public var handle: String? {
+    @objc public var handle: String? {
         return usingExternalURLs ? nil : sources.first
     }
 
     /// An array of Filestack Handles. `nil` by deafult.
-    public var handles: [String]? {
+    @objc public var handles: [String]? {
         return usingExternalURLs ? nil : sources
     }
 
     /// An external URL. `nil` by default.
-    public var externalURL: URL? {
+    @objc public var externalURL: URL? {
         if usingExternalURLs, let source = sources.first {
             return URL(string: source)
         } else {
@@ -43,7 +43,7 @@ import Foundation
     }
 
     /// An array of external URLs. `nil` by default.
-    public var externalURLs: [URL]? {
+    @objc public var externalURLs: [URL]? {
         if usingExternalURLs {
             return sources.compactMap { URL(string: $0) }
         } else {
@@ -98,7 +98,7 @@ import Foundation
     /**
      Includes detailed information about the transformation request.
      */
-    @discardableResult public func debug() -> Self {
+    @objc @discardableResult public func debug() -> Self {
         let task = Task(name: "debug", options: nil)
 
         transformationTasks.insert(task, at: 0)
@@ -116,7 +116,7 @@ import Foundation
      - Parameter queue: The queue on which the completion handler is dispatched.
      - Parameter completionHandler: Adds a handler to be called once the request has finished.
      */
-    @discardableResult public func store(using options: StorageOptions,
+    @objc @discardableResult public func store(using options: StorageOptions,
                                          base64Decode: Bool = false,
                                          queue: DispatchQueue? = .main,
                                          completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
