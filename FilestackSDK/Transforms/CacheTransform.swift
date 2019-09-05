@@ -22,7 +22,7 @@ import Foundation
     /**
      Adds the `false` option.
 
-     - Parameter value: Set cache to false to ensure that you always receive a newly converted file.
+     Set cache to false to ensure that you always receive a newly converted file.
      This setting is only recommended for testing purposes because every time a URL using cache=false loads,
      it will count against your conversion quota.
      */
@@ -43,7 +43,7 @@ import Foundation
     /**
      Adds the `expiry` option.
 
-     - Parameter value: Set the maximum length (1 year) to cache the file for.
+     Set the maximum length (1 year) to cache the file for.
      */
     @objc @discardableResult public func maxExpiry() -> Self {
         return appending(key: "expiry", value: "max")
