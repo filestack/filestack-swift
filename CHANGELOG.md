@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 2.1 *(2019-09-05)*
+----------------------------
+
+- Restored Objective-C support.
+- Made `Transform` typealiases publicly available.
+- Minor documentation fixes.
+
 Version 2.0.2 *(2019-08-31)*
 ----------------------------
 
