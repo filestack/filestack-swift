@@ -1,6 +1,390 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 29,
+      "symbol": "Transform.Animate",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 30,
+      "symbol": "Transform.ASCII",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 31,
+      "symbol": "Transform.AutoImage",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 32,
+      "symbol": "Transform.AV",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 33,
+      "symbol": "Transform.BlackAndWhite",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 34,
+      "symbol": "Transform.BlurFaces",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 35,
+      "symbol": "Transform.Blur",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 36,
+      "symbol": "Transform.Border",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 37,
+      "symbol": "Transform.Cache",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 38,
+      "symbol": "Transform.Circle",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 39,
+      "symbol": "Transform.Collage",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 40,
+      "symbol": "Transform.Compress",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 41,
+      "symbol": "Transform.Convert",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 42,
+      "symbol": "Transform.Copyright",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 43,
+      "symbol": "Transform.CropFaces",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 44,
+      "symbol": "Transform.Crop",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 45,
+      "symbol": "Transform.DetectFaces",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 46,
+      "symbol": "Transform.DocumentDetection",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 47,
+      "symbol": "Transform.Enhance",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 48,
+      "symbol": "Transform.Fallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 49,
+      "symbol": "Transform.Flip",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 50,
+      "symbol": "Transform.Flop",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 51,
+      "symbol": "Transform.ImageSize",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 52,
+      "symbol": "Transform.MinifyCSS",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 53,
+      "symbol": "Transform.MinifyJS",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 54,
+      "symbol": "Transform.Modulate",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 55,
+      "symbol": "Transform.Monochrome",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 56,
+      "symbol": "Transform.Negative",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 57,
+      "symbol": "Transform.NoMetadata",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 58,
+      "symbol": "Transform.OCR",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 59,
+      "symbol": "Transform.OilPaint",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 60,
+      "symbol": "Transform.PartialBlur",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 61,
+      "symbol": "Transform.PartialPixelate",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 62,
+      "symbol": "Transform.PDFConvert",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 63,
+      "symbol": "Transform.PDFInfo",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 64,
+      "symbol": "Transform.PDFMonochrome",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 65,
+      "symbol": "Transform.PixelateFaces",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 66,
+      "symbol": "Transform.Pixelate",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 67,
+      "symbol": "Transform.Polaroid",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 68,
+      "symbol": "Transform.ProgressiveJPEG",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 69,
+      "symbol": "Transform.Quality",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 70,
+      "symbol": "Transform.RedEyeRemoval",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 71,
+      "symbol": "Transform.Resize",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 72,
+      "symbol": "Transform.Rotate",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 73,
+      "symbol": "Transform.RoundedCorners",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 74,
+      "symbol": "Transform.SecureForWork",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 75,
+      "symbol": "Transform.Sepia",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 76,
+      "symbol": "Transform.Shadow",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 77,
+      "symbol": "Transform.Sharpen",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 78,
+      "symbol": "Transform.TornEdges",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 79,
+      "symbol": "Transform.Upscale",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 80,
+      "symbol": "Transform.URLScreenshot",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 81,
+      "symbol": "Transform.Vignette",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 82,
+      "symbol": "Transform.Watermark",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Transforms/Transform.swift",
+      "line": 83,
+      "symbol": "Transform.Zip",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/ruben/src/filestack/filestack-swift"
 }
