@@ -15,7 +15,7 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
     let minimumPartChunkSize = 32768
 
     let seek: UInt64
-    let localURL: URL
+    let reader: UploadableReader
     let fileName: String
     let fileSize: UInt64
     let apiKey: String
@@ -33,7 +33,7 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
     var didFail: Bool
 
     private var retriesLeft: Int
-    private var fileHandle: FileHandle?
+    // private var fileHandle: FileHandle?
     private var partChunkSize: Int
 
     private var beforeCommitCheckPointOperation: BlockOperation?
@@ -43,7 +43,7 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
     private let chunkUploadOperationQueue = OperationQueue()
 
     required init(seek: UInt64,
-                  localURL: URL,
+                  reader: UploadableReader,
                   fileName: String,
                   fileSize: UInt64,
                   apiKey: String,
@@ -56,7 +56,7 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
                   chunkUploadConcurrency: Int,
                   uploadProgress: @escaping ((Int64) -> Void)) {
         self.seek = seek
-        self.localURL = localURL
+        self.reader = reader
         self.fileName = fileName
         self.fileSize = fileSize
         self.apiKey = apiKey
@@ -66,24 +66,26 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
         self.uploadID = uploadID
         self.storeOptions = storeOptions
         self.chunkSize = chunkSize
-        partChunkSize = 0
-        maxRetries = 5
-        retriesLeft = maxRetries
-        didFail = false
+        self.partChunkSize = 0
+        self.maxRetries = 5
+        self.retriesLeft = maxRetries
+        self.didFail = false
         self.uploadProgress = uploadProgress
+
         chunkUploadOperationQueue.underlyingQueue = chunkUploadOperationUnderlyingQueue
         chunkUploadOperationQueue.maxConcurrentOperationCount = chunkUploadConcurrency
+
         super.init()
 
         state = .ready
     }
 
     override func main() {
-        guard let handle = try? FileHandle(forReadingFrom: localURL) else {
-            state = .finished
-            return
-        }
-        fileHandle = handle
+//        guard let handle = try? FileHandle(forReadingFrom: localURL) else {
+//            state = .finished
+//            return
+//        }
+//        fileHandle = handle
         upload()
     }
 
@@ -165,17 +167,16 @@ private extension MultipartInteligentUploadSubmitPartOperation {
             didFail = true
         }
 
-        fileHandle = nil
+        // fileHandle = nil
         uploadProgress = nil
         state = .finished
         beforeCommitCheckPointOperation = nil
     }
 
     private func addChunkOperation(partOffset: UInt64, partChunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
-        guard let fileHandle = fileHandle else { return nil }
-
-        fileHandle.seek(toFileOffset: seek + partOffset)
-        let dataChunk = fileHandle.readData(ofLength: partChunkSize)
+        // guard let fileHandle = fileHandle else { return nil }
+        reader.seek(position: seek + partOffset)
+        let dataChunk = reader.read(amount: partChunkSize)
 
         guard !dataChunk.isEmpty else { return nil }
 

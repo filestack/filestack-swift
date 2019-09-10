@@ -114,104 +114,73 @@ import Foundation
         return Transformable(externalURLs: externalURLs, apiKey: apiKey, security: security)
     }
 
-    /**
-     Uploads a file directly to a given storage location (currently only S3 is supported.)
+    /// Uploads a single file directly to a given storage location.
+    ///
+    /// Currently the only storage location supported is Amazon S3.
+    ///
+    /// - Important:
+    /// If your uploadable can not return a MIME type (e.g. when passing `Data` as the uploadable), you **must** pass
+    /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
+    /// uploadable, otherwise `text/plain` will be assumed.
+    ///
+    /// - Parameter uploadable: An item to upload conforming to `Uploadable`.
+    /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)
+    /// - Parameter queue: The queue on which the upload progress and completion handlers are dispatched.
+    /// - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
+    /// of the upload process as data is uploaded to the server. `nil` by default.
+    /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
+    ///
+    /// - Returns: A `MultipartUpload` object that allows monitoring progress, cancelling the upload request, etc.
+    @discardableResult
+    public func upload(using uploadable: Uploadable,
+                       options: UploadOptions = .defaults,
+                       queue: DispatchQueue = .main,
+                       uploadProgress: ((Progress) -> Void)? = nil,
+                       completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
+        let mpu = MultipartUpload(using: uploadable, options: options, queue: queue, apiKey: apiKey, security: security)
 
-     - Parameter localURL: The URL of the local file to be uploaded.
-     - Parameter storeOptions: An object containing the store options (e.g. location, region, container, access, etc.)
-     If none given, S3 location with default options is assumed.
-     - Parameter useIntelligentIngestionIfAvailable: Attempts to use Intelligent Ingestion
-     for file uploading. Defaults to `true`.
-     - Parameter queue: The queue on which the upload progress and completion handlers are
-     dispatched.
-     - Parameter startUploadImmediately: Whether the upload should start immediately. Defaults to true.
-     - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
-     of the upload process as data is uploaded to the server. `nil` by default.
-     - Parameter completionHandler: Adds a handler to be called once the upload has finished.
-     */
-    @objc @discardableResult public func multiPartUpload(from localURL: URL? = nil,
-                                                         storeOptions: StorageOptions = StorageOptions(location: .s3),
-                                                         useIntelligentIngestionIfAvailable: Bool = true,
-                                                         queue: DispatchQueue = .main,
-                                                         startUploadImmediately: Bool = true,
-                                                         uploadProgress: ((Progress) -> Void)? = nil,
-                                                         completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
-        let mpu = MultipartUpload(at: localURL,
-                                  queue: queue,
-                                  uploadProgress: uploadProgress,
-                                  completionHandler: completionHandler,
-                                  partUploadConcurrency: 5,
-                                  chunkUploadConcurrency: 8,
-                                  apiKey: apiKey,
-                                  storeOptions: storeOptions,
-                                  security: security,
-                                  useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
+        mpu.uploadProgress = uploadProgress
+        mpu.completionHandler = completionHandler
 
-        if startUploadImmediately {
-            mpu.uploadFile()
+        if options.startImmediately {
+            mpu.start()
         }
 
         return mpu
     }
 
-    /**
-     Uploads multiple files to given storage location.
+    /// Uploads multiple files to given storage location.
+    ///
+    /// Currently the only storage location supported is Amazon S3.
+    ///
+    /// - Important:
+    /// If your uploadable can not return a MIME type (e.g. when passing `Data` as the uploadable), you **must** pass
+    /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
+    /// uploadable, otherwise `text/plain` will be assumed.
+    ///
+    /// - Parameter uploadables: An array of items to upload conforming to `Uploadable`.
+    /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)
+    /// - Parameter queue: The queue on which the upload progress and completion handlers are dispatched.
+    /// - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
+    /// of the upload process as data is uploaded to the server. `nil` by default.
+    /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
+    ///
+    /// - Returns: A `MultifileUpload` object that allows monitoring progress, cancelling the upload request, etc.
+    @discardableResult
+    public func upload(using uploadables: [Uploadable],
+                       options: UploadOptions = .defaults,
+                       queue: DispatchQueue = .main,
+                       uploadProgress: ((Progress) -> Void)? = nil,
+                       completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
+        let mpu = MultifileUpload(using: uploadables, options: options, queue: queue, apiKey: apiKey, security: security)
 
-     - Parameter localURLs: Array of URLs of local files to upload.
-     - Parameter storeOptions: An object containing the store options (e.g. location, region, container, access, etc.)
-     - Parameter useIntelligentIngestionIfAvailable: Attempts to use Intelligent Ingestion
-     for file uploading. Defaults to `true`.
-     - Parameter queue: The queue on which the upload progress and completion handlers are
-     dispatched.
-     - Parameter startUploadImmediately: Whether the upload should start immediately. Defaults to true.
-     - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
-     of the upload process as data is uploaded to the server. `nil` by default.
-     - Parameter completionHandler: Adds a handler to be called once the upload of all files has finished.
-     */
-    @objc @discardableResult public func multiFileUpload(from localURLs: [URL]? = nil,
-                                                         storeOptions: StorageOptions = StorageOptions(location: .s3),
-                                                         useIntelligentIngestionIfAvailable: Bool = true,
-                                                         queue: DispatchQueue = .main,
-                                                         startUploadImmediately: Bool = true,
-                                                         uploadProgress: ((Progress) -> Void)? = nil,
-                                                         completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
-        let mfu = MultifileUpload(with: localURLs,
-                                  queue: queue,
-                                  uploadProgress: uploadProgress,
-                                  completionHandler: completionHandler,
-                                  apiKey: apiKey,
-                                  storeOptions: storeOptions,
-                                  security: security,
-                                  useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
+        mpu.uploadProgress = uploadProgress
+        mpu.completionHandler = completionHandler
 
-        if startUploadImmediately {
-            mfu.uploadFiles()
+        if options.startImmediately {
+            mpu.start()
         }
 
-        return mfu
-    }
-}
-
-public extension Client {
-    // MARK: - CustomStringConvertible
-
-    /// Returns a `String` representation of self.
-    override var description: String {
-        var components: [String] = []
-
-        components.append("\(super.description)(")
-        components.append("    apiKey: \(apiKey),")
-
-        if let security = security {
-            components.append("    security: \(attachedDescription(object: security))")
-        }
-
-        if let storage = storage {
-            components.append("    storage: \(String(describing: storage))")
-        }
-
-        components.append(")")
-
-        return components.joined(separator: "\n")
+        return mpu
     }
 }

@@ -13,7 +13,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     typealias MultiPartFormDataClosure = (MultipartFormData) -> Void
 
     let seek: UInt64
-    let localURL: URL
+    let reader: UploadableReader
     let fileName: String
     let fileSize: UInt64
     let apiKey: String
@@ -28,12 +28,12 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     var responseEtag: String?
     var didFail: Bool
 
-    private var fileHandle: FileHandle?
+    // private var fileHandle: FileHandle?
 
     private var beforeCommitCheckPointOperation: BlockOperation?
 
     required init(seek: UInt64,
-                  localURL: URL,
+                  reader: UploadableReader,
                   fileName: String,
                   fileSize: UInt64,
                   apiKey: String,
@@ -44,7 +44,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
                   chunkSize: Int,
                   uploadProgress: @escaping ((Int64) -> Void)) {
         self.seek = seek
-        self.localURL = localURL
+        self.reader = reader
         self.fileName = fileName
         self.fileSize = fileSize
         self.apiKey = apiKey
@@ -53,19 +53,20 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
         self.region = region
         self.uploadID = uploadID
         self.chunkSize = chunkSize
-        didFail = false
+        self.didFail = false
         self.uploadProgress = uploadProgress
+
         super.init()
 
         state = .ready
     }
 
     override func main() {
-        guard let handle = try? FileHandle(forReadingFrom: localURL) else {
-            state = .finished
-            return
-        }
-        fileHandle = handle
+//        guard let handle = try? FileHandle(forReadingFrom: localURL) else {
+//            state = .finished
+//            return
+//        }
+//        fileHandle = handle
         upload()
     }
 
@@ -77,18 +78,15 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
 
 private extension MultipartRegularUploadSubmitPartOperation {
     func upload() {
-        guard !isCancelled, let fileHandle = fileHandle else {
+        guard !isCancelled else {
             state = .finished
             return
         }
 
         state = .executing
 
-        fileHandle.seek(toFileOffset: seek)
-
-        let dataChunk = fileHandle.readData(ofLength: chunkSize)
-
-        fileHandle.closeFile()
+        reader.seek(position: seek)
+        let dataChunk = reader.read(amount: chunkSize)
 
         let url = URL(string: "multipart/upload", relativeTo: uploadService.baseURL)!
 

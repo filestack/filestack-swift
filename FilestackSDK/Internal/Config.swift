@@ -8,7 +8,6 @@
 
 import Foundation
 
-/// :nodoc:
 struct Config {
     static let apiURL = URL(string: "https://www.filestackapi.com/api")!
     static let cdnURL = URL(string: "https://cdn.filestackcontent.com")!

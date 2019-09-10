@@ -1,5 +1,5 @@
 //
-//  MultipartUploadTests.swift
+//  UploadTests.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 23/08/2017.
@@ -10,7 +10,7 @@ import OHHTTPStubs
 import XCTest
 @testable import FilestackSDK
 
-class MultipartUploadTests: XCTestCase {
+class UploadTests: XCTestCase {
     private static let largeFileSize: Int = 6_034_668
     private static let sampleFileSize: Int = 200_367
     private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -54,7 +54,7 @@ class MultipartUploadTests: XCTestCase {
 
         XCTAssertEqual(hitCount, 1)
         XCTAssertEqual(response?.json?["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(response?.json?["size"] as? Int, MultipartUploadTests.largeFileSize)
+        XCTAssertEqual(response?.json?["size"] as? Int, UploadTests.largeFileSize)
         XCTAssertEqual(response?.json?["filename"] as? String, "large.jpg")
         XCTAssertEqual(response?.json?["status"] as? String, "Stored")
         XCTAssertEqual(response?.json?["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
@@ -74,7 +74,7 @@ class MultipartUploadTests: XCTestCase {
         var json: [String: Any]!
 
         let progressHandler: ((Progress) -> Void) = { progress in
-            if progress.completedUnitCount == MultipartUploadTests.largeFileSize {
+            if progress.completedUnitCount == UploadTests.largeFileSize {
                 progressExpectation.fulfill()
             }
         }
@@ -87,7 +87,7 @@ class MultipartUploadTests: XCTestCase {
         waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(json["size"] as? Int, MultipartUploadTests.largeFileSize)
+        XCTAssertEqual(json["size"] as? Int, UploadTests.largeFileSize)
         XCTAssertEqual(json["filename"] as? String, "large.jpg")
         XCTAssertEqual(json["status"] as? String, "Stored")
         XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
@@ -201,7 +201,7 @@ class MultipartUploadTests: XCTestCase {
         let json: [String: Any]! = response?.json
 
         XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(json["size"] as? Int, MultipartUploadTests.largeFileSize)
+        XCTAssertEqual(json["size"] as? Int, UploadTests.largeFileSize)
         XCTAssertEqual(json["filename"] as? String, "large.jpg")
         XCTAssertEqual(json["status"] as? String, "Stored")
         XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
@@ -237,7 +237,7 @@ class MultipartUploadTests: XCTestCase {
         XCTAssertEqual(responses.count, 1)
         let json = responses.first!.json!
         XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(json["size"] as? Int, MultipartUploadTests.largeFileSize)
+        XCTAssertEqual(json["size"] as? Int, UploadTests.largeFileSize)
         XCTAssertEqual(json["filename"] as? String, "large.jpg")
         XCTAssertEqual(json["status"] as? String, "Stored")
         XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
@@ -283,7 +283,7 @@ class MultipartUploadTests: XCTestCase {
             expectation.fulfill()
         }
 
-        mfu.uploadFiles()
+        mfu.start()
 
         waitForExpectations(timeout: 15, handler: nil)
 
@@ -291,7 +291,7 @@ class MultipartUploadTests: XCTestCase {
     }
 }
 
-private extension MultipartUploadTests {
+private extension UploadTests {
     func stubRegularMultipartRequest(hitCount: inout Int, workflows: [String]? = nil) {
         stubMultipartStartRequest(supportsIntelligentIngestion: false)
         stubMultipartPostPartRequest(parts: ["PART-1"], hitCount: &hitCount)
@@ -382,7 +382,7 @@ private extension MultipartUploadTests {
         stub(condition: uploadMultipartCompleteStubConditions) { _ in
             let headers = ["Content-Type": "application/json"]
             var json: [String: Any] = ["handle": "6GKA0wnQWO7tKaGu2YXA",
-                                       "size": MultipartUploadTests.largeFileSize,
+                                       "size": UploadTests.largeFileSize,
                                        "filename": "large.jpg",
                                        "status": "Stored",
                                        "url": "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA",

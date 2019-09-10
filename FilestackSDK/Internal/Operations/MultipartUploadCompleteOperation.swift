@@ -19,7 +19,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
     let uploadID: String
     let storeOptions: StorageOptions
     let security: Security?
-    let useIntelligentIngestion: Bool
+    let preferIntelligentIngestion: Bool
     let parts: String
 
     var response = NetworkJSONResponse(with: MultipartUploadError.aborted)
@@ -34,7 +34,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
                   storeOptions: StorageOptions,
                   partsAndEtags: [Int: String],
                   security: Security? = nil,
-                  useIntelligentIngestion: Bool) {
+                  preferIntelligentIngestion: Bool) {
         self.apiKey = apiKey
         self.fileName = fileName
         self.fileSize = fileSize
@@ -45,7 +45,7 @@ class MultipartUploadCompleteOperation: BaseOperation {
         self.storeOptions = storeOptions
         parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
         self.security = security
-        self.useIntelligentIngestion = useIntelligentIngestion
+        self.preferIntelligentIngestion = preferIntelligentIngestion
 
         super.init()
 
@@ -94,7 +94,7 @@ private extension MultipartUploadCompleteOperation {
             form.append(security.signature, withName: "signature")
         }
 
-        if useIntelligentIngestion {
+        if preferIntelligentIngestion {
             form.append("true", withName: "multipart")
         } else {
             form.append(parts, withName: "parts")

@@ -31,6 +31,9 @@ import Foundation
     /// The desired filename.
     public var filename: String?
 
+    /// The file's MIME type.
+    public var mimeType: String?
+
     /// An `StorageAccess` value. Valid options are `.public` or `.private`.
     public var access: StorageAccess?
 

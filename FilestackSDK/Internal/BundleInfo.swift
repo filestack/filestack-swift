@@ -30,6 +30,7 @@ final class BundleInfo {
         guard let buildDate = buildDate, let name = name, let version = version, let buildNumber = buildNumber else {
             return nil
         }
+
         return "\(name) \(version) (build \(buildNumber)) built on \(buildDate)."
     }
 }

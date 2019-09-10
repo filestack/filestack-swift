@@ -34,72 +34,53 @@ extension MultipartUploadError: LocalizedError {
 
     // MARK: - Public Properties
 
-    /// Local URL of file we want to upload.
-    public var localURL: URL?
+    /// The overall upload progress.
+    public var progress: Progress
 
     // MARK: - Internal Properties
 
-    let regularChunkSize = 5 * Int(pow(Double(1024), Double(2)))
-    let resumableChunkSize = 8 * Int(pow(Double(1024), Double(2)))
-    let maxRetries = 5
+    public var uploadProgress: ((Progress) -> Void)?
+    public var completionHandler: ((NetworkJSONResponse) -> Void)?
 
     // MARK: - Private Properties
 
-    private var progress: Progress
+    private var uploadable: Uploadable
     private var shouldAbort: Bool
-    private var useIntelligentIngestionIfAvailable: Bool
+    private var totalUploadedBytes: Int64 = 0
 
     private let queue: DispatchQueue
-    private let uploadProgress: ((Progress) -> Void)?
-    private let completionHandler: (NetworkJSONResponse) -> Void
     private let apiKey: String
-    private let storeOptions: StorageOptions
+    private let options: UploadOptions
     private let security: Security?
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
-
-    var totalUploadedBytes: Int64 = 0
-
+    private let maxRetries = 5
     private let uploadOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.upload-operation-queue",
                                                                qos: .utility,
                                                                attributes: .concurrent)
     private let uploadOperationQueue = OperationQueue()
 
-    private let chunkUploadConcurrency: Int
-
     // MARK: - Lifecyle Functions
 
-    init(at localURL: URL? = nil,
+    init(using uploadable: Uploadable,
+         options: UploadOptions,
          queue: DispatchQueue = .main,
-         uploadProgress: ((Progress) -> Void)? = nil,
-         completionHandler: @escaping (NetworkJSONResponse) -> Void,
-         partUploadConcurrency: Int = 5,
-         chunkUploadConcurrency: Int = 8,
          apiKey: String,
-         storeOptions: StorageOptions,
-         security: Security? = nil,
-         useIntelligentIngestionIfAvailable: Bool = true) {
-        if let localURL = localURL {
-            self.localURL = localURL
-        }
+         security: Security? = nil) {
+        self.uploadable = uploadable
         self.queue = queue
-        self.uploadProgress = uploadProgress
-        self.completionHandler = completionHandler
         self.apiKey = apiKey
-        self.storeOptions = storeOptions
+        self.options = options
         self.security = security
-        shouldAbort = false
-        progress = Progress(totalUnitCount: 0)
-        self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
+        self.shouldAbort = false
+        self.progress = Progress(totalUnitCount: 0)
+
         uploadOperationQueue.underlyingQueue = uploadOperationUnderlyingQueue
-        uploadOperationQueue.maxConcurrentOperationCount = partUploadConcurrency
-        self.chunkUploadConcurrency = chunkUploadConcurrency
+        uploadOperationQueue.maxConcurrentOperationCount = options.partUploadConcurrency
     }
 
     // MARK: - Public Functions
 
-    /**
-     Cancels a multipart upload request.
-     */
+    /// Cancels upload.
     @objc public func cancel() {
         uploadQueue.sync {
             shouldAbort = true
@@ -108,38 +89,45 @@ extension MultipartUploadError: LocalizedError {
         fail(with: MultipartUploadError.aborted)
     }
 
-    @objc public func uploadFile() {
+    /// Starts upload.
+    @objc public func start() {
         uploadQueue.async {
             self.doUploadFile()
         }
+    }
+
+    /// :nodoc:
+    @available(*, deprecated, message: "Marked for removal in version 3.0. Use start() instead.")
+    @objc public func uploadFile() {
+        start()
     }
 }
 
 private extension MultipartUpload {
     func fail(with error: Error) {
-        let errorResponse = NetworkJSONResponse(with: error)
         queue.async {
-            self.completionHandler(errorResponse)
+            self.completionHandler?(NetworkJSONResponse(with: error))
         }
     }
 
     func updateProgress(uploadedBytes: Int64) {
         progress.completedUnitCount = uploadedBytes
+
         queue.async {
             self.uploadProgress?(self.progress)
         }
     }
 
     func doUploadFile() {
-        guard let localURL = localURL else { return }
-        let fileName = storeOptions.filename ?? localURL.lastPathComponent
-        let mimeType = localURL.mimeType ?? "text/plain"
-        var shouldUseIntelligentIngestion = false
+        let fileName = options.storeOptions.filename ?? UUID().uuidString
+        let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
 
-        guard !fileName.isEmpty, let fileSize = localURL.size() else {
+        guard let fileSize = uploadable.size, !fileName.isEmpty else {
             fail(with: MultipartUploadError.invalidFile)
             return
         }
+
+        var preferIntelligentIngestion = false
 
         progress = Progress(totalUnitCount: Int64(fileSize))
 
@@ -147,9 +135,9 @@ private extension MultipartUpload {
                                                            fileName: fileName,
                                                            fileSize: fileSize,
                                                            mimeType: mimeType,
-                                                           storeOptions: storeOptions,
+                                                           storeOptions: options.storeOptions,
                                                            security: security,
-                                                           useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
+                                                           useIntelligentIngestionIfAvailable: options.preferIntelligentIngestion)
 
         if shouldAbort {
             fail(with: MultipartUploadError.aborted)
@@ -183,19 +171,13 @@ private extension MultipartUpload {
         // Detect whether intelligent ingestion is available.
         // The JSON payload should contain an "upload_type" field with value "intelligent_ingestion".
         if let uploadType = json["upload_type"] as? String, uploadType == "intelligent_ingestion" {
-            shouldUseIntelligentIngestion = true
+            preferIntelligentIngestion = true
         }
+
+        let chunkSize: Int = options.chunkSize
 
         var part: Int = 0
-        var chunkSize: Int
         var seekPoint: UInt64 = 0
-
-        if shouldUseIntelligentIngestion {
-            chunkSize = resumableChunkSize
-        } else {
-            chunkSize = regularChunkSize
-        }
-
         var partsAndEtags: [Int: String] = [:]
 
         let beforeCompleteCheckPointOperation = BlockOperation()
@@ -212,7 +194,7 @@ private extension MultipartUpload {
                                           region: region,
                                           uploadID: uploadID,
                                           partsAndEtags: partsAndEtags,
-                                          useIntelligentIngestion: shouldUseIntelligentIngestion,
+                                          preferIntelligentIngestion: preferIntelligentIngestion,
                                           retriesLeft: self.maxRetries)
             }
         }
@@ -221,9 +203,14 @@ private extension MultipartUpload {
         while !shouldAbort, seekPoint < fileSize {
             part += 1
 
-            let partOperation = uploadSubmitPartOperation(intelligentIngestion: shouldUseIntelligentIngestion,
+            guard let reader = uploadable.reader else {
+                self.shouldAbort = true
+                continue
+            }
+
+            let partOperation = uploadSubmitPartOperation(intelligentIngestion: preferIntelligentIngestion,
                                                           seek: seekPoint,
-                                                          localUrl: localURL,
+                                                          reader: reader,
                                                           fileName: fileName,
                                                           fileSize: fileSize,
                                                           part: part,
@@ -241,7 +228,7 @@ private extension MultipartUpload {
                     self.shouldAbort = true
                 }
 
-                if !shouldUseIntelligentIngestion {
+                if !preferIntelligentIngestion {
                     if let responseEtag = partOperation.responseEtag {
                         partsAndEtags[partOperation.part] = responseEtag
                     } else {
@@ -269,7 +256,7 @@ private extension MultipartUpload {
 
     func uploadSubmitPartOperation(intelligentIngestion: Bool,
                                    seek: UInt64,
-                                   localUrl: URL,
+                                   reader: UploadableReader,
                                    fileName: String,
                                    fileSize: UInt64,
                                    part: Int,
@@ -279,7 +266,7 @@ private extension MultipartUpload {
                                    chunkSize: Int) -> MultipartUploadSubmitPartOperation {
         if intelligentIngestion {
             return MultipartInteligentUploadSubmitPartOperation(seek: seek,
-                                                                localURL: localUrl,
+                                                                reader: reader,
                                                                 fileName: fileName,
                                                                 fileSize: fileSize,
                                                                 apiKey: apiKey,
@@ -287,13 +274,13 @@ private extension MultipartUpload {
                                                                 uri: uri,
                                                                 region: region,
                                                                 uploadID: uploadId,
-                                                                storeOptions: storeOptions,
+                                                                storeOptions: options.storeOptions,
                                                                 chunkSize: chunkSize,
-                                                                chunkUploadConcurrency: chunkUploadConcurrency,
+                                                                chunkUploadConcurrency: options.chunkUploadConcurrency,
                                                                 uploadProgress: uploadProgress)
         } else {
             return MultipartRegularUploadSubmitPartOperation(seek: seek,
-                                                             localURL: localUrl,
+                                                             reader: reader,
                                                              fileName: fileName,
                                                              fileSize: fileSize,
                                                              apiKey: apiKey,
@@ -318,7 +305,7 @@ private extension MultipartUpload {
                               region: String,
                               uploadID: String,
                               partsAndEtags: [Int: String],
-                              useIntelligentIngestion: Bool,
+                              preferIntelligentIngestion: Bool,
                               retriesLeft: Int) {
         let completeOperation = MultipartUploadCompleteOperation(apiKey: apiKey,
                                                                  fileName: fileName,
@@ -327,10 +314,10 @@ private extension MultipartUpload {
                                                                  uri: uri,
                                                                  region: region,
                                                                  uploadID: uploadID,
-                                                                 storeOptions: storeOptions,
+                                                                 storeOptions: options.storeOptions,
                                                                  partsAndEtags: partsAndEtags,
                                                                  security: security,
-                                                                 useIntelligentIngestion: useIntelligentIngestion)
+                                                                 preferIntelligentIngestion: preferIntelligentIngestion)
 
         weak var weakCompleteOperation = completeOperation
 
@@ -353,7 +340,7 @@ private extension MultipartUpload {
                                                   region: region,
                                                   uploadID: uploadID,
                                                   partsAndEtags: partsAndEtags,
-                                                  useIntelligentIngestion: useIntelligentIngestion,
+                                                  preferIntelligentIngestion: preferIntelligentIngestion,
                                                   retriesLeft: retriesLeft - 1)
                     }
                 } else {
@@ -363,7 +350,7 @@ private extension MultipartUpload {
             } else {
                 // Return response to the user.
                 self.queue.async {
-                    self.completionHandler(jsonResponse)
+                    self.completionHandler?(jsonResponse)
                 }
             }
         }

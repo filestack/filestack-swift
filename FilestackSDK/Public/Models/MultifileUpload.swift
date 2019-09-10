@@ -12,114 +12,114 @@ import Foundation
 @objc(FSMultifileUpload) public class MultifileUpload: NSObject {
     // MARK: - Public Properties
 
-    /// Array of local URLs of files we want to upload.
-    @objc public var uploadURLs: [URL] {
-        didSet {
-            leftToUploadURLs = uploadURLs
-        }
-    }
+    /// The overall upload progress.
+    public lazy var progress: Progress = {
+        Progress(totalUnitCount: Int64(totalSize))
+    }()
+
+    // MARK: - Internal Properties
+
+    public var uploadProgress: ((Progress) -> Void)?
+    public var completionHandler: (([NetworkJSONResponse]) -> Void)?
 
     // MARK: - Private Properties
 
-    private var leftToUploadURLs: [URL] = []
+    private let uploadables: [Uploadable]
+    private var pendingUploadables: [Uploadable]
+
     private var uploadResponses: [NetworkJSONResponse] = []
 
     private var finishedFilesSize: Int64
     private var currentFileSize: Int64
-    private var progress: Progress {
-        let progress = Progress(totalUnitCount: totalSize())
-        progress.completedUnitCount = finishedFilesSize + currentFileSize
-        return progress
-    }
 
     private var shouldAbort: Bool
-    private var useIntelligentIngestionIfAvailable: Bool
     private var currentOperation: MultipartUpload?
 
     private let queue: DispatchQueue
-    private var uploadProgress: ((Progress) -> Void)?
-    private var completionHandler: (([NetworkJSONResponse]) -> Void)?
     private let apiKey: String
-    private let storeOptions: StorageOptions
+    private let options: UploadOptions
     private let security: Security?
 
-    init(with uploadURLs: [URL]?,
+    init(using uploadables: [Uploadable],
+         options: UploadOptions,
          queue: DispatchQueue = .main,
-         uploadProgress: ((Progress) -> Void)? = nil,
-         completionHandler: @escaping ([NetworkJSONResponse]) -> Void,
          apiKey: String,
-         storeOptions: StorageOptions,
-         security: Security? = nil,
-         useIntelligentIngestionIfAvailable: Bool = true) {
-        let urls = uploadURLs ?? []
+         security: Security? = nil) {
+        self.uploadables = uploadables
+        self.pendingUploadables = uploadables
+        self.options = options
         self.shouldAbort = false
-        self.uploadURLs = urls
-        self.leftToUploadURLs = urls
         self.queue = queue
-        self.uploadProgress = uploadProgress
-        self.completionHandler = completionHandler
         self.apiKey = apiKey
-        self.storeOptions = storeOptions
         self.security = security
-        self.useIntelligentIngestionIfAvailable = useIntelligentIngestionIfAvailable
         self.finishedFilesSize = 0
         self.currentFileSize = 0
     }
 
     // MARK: - Public Functions
 
-    /**
-     Cancels multifile upload request. Canceling won't delete already uploaded files - only cancel current upload and upload of all files not uploaded yet. This will trigger completionHandler.
-     */
+    /// Cancels upload.
+    ///
+    /// Please notice that any already uploaded files **will not** be deleted —
+    /// only the current file being uploaded (if any) and any pending files will be affected.
+    ///
+    /// This will trigger `completionHandler`.
     @objc public func cancel() {
         shouldAbort = true
         currentOperation?.cancel()
         stopUpload()
     }
 
-    /**
-     Start uploading files.
-     */
-    @objc public func uploadFiles() {
+    /// Starts upload.
+    @objc public func start() {
         uploadNextFile()
         showMinimalProgress()
+    }
+
+    /// :nodoc:
+    @available(*, deprecated, message: "Marked for removal in version 3.0. Use start() instead.")
+    @objc public func uploadFiles() {
+        start()
     }
 }
 
 private extension MultifileUpload {
+    var totalSize: UInt64 {
+        return (uploadables.compactMap { $0.size }).reduce(UInt64(0)) { sum, size in sum + size }
+    }
+
     func showMinimalProgress() {
         let minimalProgress = Progress(totalUnitCount: 100)
         minimalProgress.completedUnitCount = 1
         updateProgress(minimalProgress)
     }
 
-    func totalSize() -> Int64 {
-        return Int64(uploadURLs.reduce(UInt64(0)) { sum, url in sum + (url.size() ?? 0) })
-    }
-
     func uploadNextFile() {
-        guard
-            shouldAbort == false,
-            let nextURL = leftToUploadURLs.first else {
+        guard shouldAbort == false, let nextUploadable = pendingUploadables.first, let size = nextUploadable.size else {
             stopUpload()
             return
         }
-        currentFileSize = Int64(nextURL.size() ?? 0)
-        currentOperation = MultipartUpload(at: nextURL,
+
+        currentFileSize = Int64(size)
+        currentOperation = MultipartUpload(using: nextUploadable,
+                                           options: options,
                                            queue: queue,
-                                           uploadProgress: { progress in self.updateProgress(progress) },
-                                           completionHandler: { response in self.finishedCurrentFile(with: response) },
-                                           partUploadConcurrency: 5,
-                                           chunkUploadConcurrency: 8,
                                            apiKey: apiKey,
-                                           storeOptions: storeOptions,
-                                           security: security,
-                                           useIntelligentIngestionIfAvailable: useIntelligentIngestionIfAvailable)
-        currentOperation?.uploadFile()
+                                           security: security)
+
+        currentOperation?.uploadProgress = { progress in
+            self.updateProgress(progress)
+        }
+
+        currentOperation?.completionHandler = { response in
+            self.finishedCurrentFile(with: response)
+        }
+
+        currentOperation?.start()
     }
 
     func stopUpload() {
-        while uploadResponses.count < uploadURLs.count {
+        while uploadResponses.count < pendingUploadables.count {
             uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
         }
 
@@ -135,13 +135,17 @@ private extension MultifileUpload {
 
     func updateProgress(_ currentFileProgress: Progress) {
         currentFileSize = currentFileProgress.completedUnitCount
-        queue.async { self.uploadProgress?(self.progress) }
+        progress.completedUnitCount = finishedFilesSize + currentFileSize
+
+        queue.async {
+            self.uploadProgress?(self.progress)
+        }
     }
 
     func finishedCurrentFile(with response: NetworkJSONResponse) {
         finishedFilesSize += currentFileSize
         uploadResponses.append(response)
-        leftToUploadURLs = Array(leftToUploadURLs.dropFirst())
+        pendingUploadables = Array(pendingUploadables.dropFirst())
         uploadNextFile()
     }
 }
