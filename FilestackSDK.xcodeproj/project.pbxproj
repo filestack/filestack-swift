@@ -93,7 +93,7 @@
 		45D803B52302CFE300762A87 /* MinifyCSSTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803B42302CFE300762A87 /* MinifyCSSTransform.swift */; };
 		45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */; };
 		45E07AAA22AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */; };
-		45E07AAB22AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA922AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift */; };
+		45E07AAB22AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA922AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift */; };
 		45E07AB022AFC15300CD4573 /* Alamofire.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCC22A65FC500285F62 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45E07AB122AFC15300CD4573 /* CryptoSwift.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CB922A65FC500285F62 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45E07AB222AFC15300CD4573 /* OHHTTPStubs.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -268,7 +268,7 @@
 		45D803B42302CFE300762A87 /* MinifyCSSTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinifyCSSTransform.swift; sourceTree = "<group>"; };
 		45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartRegularUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
-		45E07AA922AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartInteligentUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
+		45E07AA922AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartIntelligentUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45F9B8C31F0B941300E04380 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sample.jpg; path = Fixtures/sample.jpg; sourceTree = "<group>"; };
 		45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResponse.swift; sourceTree = "<group>"; };
 		45FA0CC71F0B86AD008EDBCD /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				4502F7321F1F4D20000875D6 /* BaseOperation.swift */,
-				45E07AA922AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift */,
+				45E07AA922AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift */,
 				45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */,
 				4528C7451F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift */,
 				456FF4C01F27799D00E9F192 /* MultipartUploadCompleteOperation.swift */,
@@ -899,7 +899,7 @@
 				BC8832FE20D3DBCA00B88EAF /* UpscaleTransform.swift in Sources */,
 				454CC1C81F0D10D2005821AC /* BundleInfo.swift in Sources */,
 				BCDB405220A9A87C00148136 /* MultifileUpload.swift in Sources */,
-				45E07AAB22AFA58000CD4573 /* MultipartInteligentUploadSubmitPartOperation.swift in Sources */,
+				45E07AAB22AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift in Sources */,
 				BC8832E420D181A700B88EAF /* CircleTransform.swift in Sources */,
 				BC88330220D3DF7900B88EAF /* TransformStyleMode.swift in Sources */,
 				45513FFA1F0E9739006DB972 /* APIService.swift in Sources */,

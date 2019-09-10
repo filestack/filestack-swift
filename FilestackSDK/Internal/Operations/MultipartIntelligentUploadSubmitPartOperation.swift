@@ -1,5 +1,5 @@
 //
-//  MultipartInteligentUploadSubmitPartOperation.swift
+//  MultipartIntelligentUploadSubmitPartOperation.swift
 //  FilestackSDK
 //
 //  Created by Mihály Papp on 26/09/2018.
@@ -9,7 +9,7 @@
 import Alamofire
 import Foundation
 
-internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
+internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
     let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
     let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
     let minimumPartChunkSize = 32768
@@ -90,7 +90,7 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
     }
 }
 
-private extension MultipartInteligentUploadSubmitPartOperation {
+private extension MultipartIntelligentUploadSubmitPartOperation {
     func upload() {
         if isCancelled {
             state = .finished

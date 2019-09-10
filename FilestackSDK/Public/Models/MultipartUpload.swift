@@ -265,19 +265,19 @@ private extension MultipartUpload {
                                    uploadId: String,
                                    chunkSize: Int) -> MultipartUploadSubmitPartOperation {
         if intelligentIngestion {
-            return MultipartInteligentUploadSubmitPartOperation(seek: seek,
-                                                                reader: reader,
-                                                                fileName: fileName,
-                                                                fileSize: fileSize,
-                                                                apiKey: apiKey,
-                                                                part: part,
-                                                                uri: uri,
-                                                                region: region,
-                                                                uploadID: uploadId,
-                                                                storeOptions: options.storeOptions,
-                                                                chunkSize: chunkSize,
-                                                                chunkUploadConcurrency: options.chunkUploadConcurrency,
-                                                                uploadProgress: uploadProgress)
+            return MultipartIntelligentUploadSubmitPartOperation(seek: seek,
+                                                                 reader: reader,
+                                                                 fileName: fileName,
+                                                                 fileSize: fileSize,
+                                                                 apiKey: apiKey,
+                                                                 part: part,
+                                                                 uri: uri,
+                                                                 region: region,
+                                                                 uploadID: uploadId,
+                                                                 storeOptions: options.storeOptions,
+                                                                 chunkSize: chunkSize,
+                                                                 chunkUploadConcurrency: options.chunkUploadConcurrency,
+                                                                 uploadProgress: uploadProgress)
         } else {
             return MultipartRegularUploadSubmitPartOperation(seek: seek,
                                                              reader: reader,
