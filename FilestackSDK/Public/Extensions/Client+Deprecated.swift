@@ -9,6 +9,7 @@
 import Foundation
 
 extension Client {
+    /// :nodoc:
     @objc
     @available(*, deprecated, message: "Marked for removal in version 3.0. Please use upload(using:options:queue:uploadProgress:completionHandler:) instead")
     public func multiPartUpload(from localURL: URL,
@@ -29,6 +30,7 @@ extension Client {
                       completionHandler: completionHandler)
     }
 
+    /// :nodoc:
     @objc
     @available(*, deprecated, message: "Marked for removal in version 3.0. Please use upload(using:options:queue:uploadProgress:completionHandler:) instead")
     public func multiFileUpload(from localURLs: [URL],
