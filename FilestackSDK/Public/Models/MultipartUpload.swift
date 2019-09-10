@@ -42,8 +42,8 @@ extension MultipartUploadError: LocalizedError {
 
     // MARK: - Internal Properties
 
-    public var uploadProgress: ((Progress) -> Void)?
-    public var completionHandler: ((NetworkJSONResponse) -> Void)?
+    internal var uploadProgress: ((Progress) -> Void)?
+    internal var completionHandler: ((NetworkJSONResponse) -> Void)?
 
     // MARK: - Private Properties
 
