@@ -437,14 +437,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		457B179C23281EB80033BDB1 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				457B179D23281EC50033BDB1 /* UploadStatus.swift */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
 		457D5BDA1F16144B00FBD5B1 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +458,7 @@
 				457D5BEC1F16146B00FBD5B1 /* TransformPosition.swift */,
 				450E433B1F161DE500E46B56 /* TransformShapeType.swift */,
 				BC88330120D3DF7900B88EAF /* TransformStyleMode.swift */,
+				457B179D23281EC50033BDB1 /* UploadStatus.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -474,7 +467,6 @@
 			isa = PBXGroup;
 			children = (
 				4589A4871F0A4B1900C39405 /* Config.swift */,
-				457B179C23281EB80033BDB1 /* Enums */,
 				454CC1C91F0D1151005821AC /* Extensions */,
 				4502F71E1F1F4C28000875D6 /* Operations */,
 				45B63B0123279E3F0040BFBB /* Protocols */,
@@ -487,10 +479,10 @@
 		45B63AFF23279CBD0040BFBB /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				45B63B172327D6CC0040BFBB /* Objective-C */,
 				457D5BDA1F16144B00FBD5B1 /* Enums */,
 				45B63B122327D2640040BFBB /* Extensions */,
 				45B830DE1F03BCF20053742A /* Models */,
+				45B63B172327D6CC0040BFBB /* Objective-C */,
 				45B63B0223279E5D0040BFBB /* Protocols */,
 				452055431F4B192000A6795D /* Transforms */,
 			);
