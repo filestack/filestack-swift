@@ -328,24 +328,11 @@ import Foundation
     }
 }
 
-public extension FileLink {
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible
 
-    /// Returns a `String` representation of self.
-    override var description: String {
-        var components: [String] = []
-
-        components.append("(")
-        components.append("apiKey: \(apiKey), ")
-        components.append("handle: \(handle), ")
-        components.append("url: \(url.absoluteString), ")
-
-        if let security = security {
-            components.append("security: \(String(describing: security))")
-        }
-
-        components.append(")")
-
-        return components.joined()
+extension FileLink {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self)
     }
 }

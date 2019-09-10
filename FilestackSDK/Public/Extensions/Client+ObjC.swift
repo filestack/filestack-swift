@@ -9,6 +9,8 @@
 import Foundation
 
 extension Client {
+    // MARK: - Objective-C Compatibility
+
     /// Uploads a single local URL directly to a given storage location.
     ///
     /// Currently the only storage location supported is Amazon S3.
@@ -18,9 +20,8 @@ extension Client {
     /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
     /// uploadable, otherwise `text/plain` will be assumed.
     ///
-    /// - Important:
-    /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
-    /// using `upload(using:options:queue:uploadProgress:completionHandler:)` instead.
+    /// - Note: This function is made available especially for Objective-C SDK users. If you are using Swift,
+    /// you might want to use `upload(using:options:queue:uploadProgress:completionHandler:)` instead.
     ///
     /// - Parameter localURL: The URL of the local file to be uploaded.
     /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)
@@ -51,9 +52,8 @@ extension Client {
     /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
     /// uploadable, otherwise `text/plain` will be assumed.
     ///
-    /// - Important:
-    /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
-    /// using `upload(using:options:queue:uploadProgress:completionHandler:)` instead.
+    /// - Note: This function is made available especially for Objective-C SDK users. If you are using Swift,
+    /// you might want to use `upload(using:options:queue:uploadProgress:completionHandler:)` instead.
     ///
     /// - Parameter localURLs: The URL of the local file to be uploaded.
     /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)
@@ -84,9 +84,8 @@ extension Client {
     /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
     /// uploadable, otherwise `text/plain` will be assumed.
     ///
-    /// - Important:
-    /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
-    /// using `upload(using:options:queue:uploadProgress:completionHandler:)` instead.
+    /// - Note: This function is made available especially for Objective-C SDK users. If you are using Swift,
+    /// you might want to use `upload(using:options:queue:uploadProgress:completionHandler:)` instead.
     ///
     /// - Parameter data: The data to be uploaded.
     /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)
@@ -117,9 +116,8 @@ extension Client {
     /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
     /// uploadable, otherwise `text/plain` will be assumed.
     ///
-    /// - Important:
-    /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
-    /// using `upload(using:options:queue:uploadProgress:completionHandler:)` instead.
+    /// - Note: This function is made available especially for Objective-C SDK users.
+    /// If you are using Swift, you might want to use `add(uploadables:)` instead.
     ///
     /// - Parameter multipleData: The array of data objects to be uploaded.
     /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)

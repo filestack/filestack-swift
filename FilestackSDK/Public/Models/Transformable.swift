@@ -18,10 +18,10 @@ import Foundation
     // MARK: - Public Properties
 
     /// An API key obtained from the Developer Portal.
-    public let apiKey: String
+    @objc public let apiKey: String
 
     /// A `Security` object. `nil` by default.
-    public let security: Security?
+    @objc public let security: Security?
 
     /// A Filestack Handle. `nil` by default.
     @objc public var handle: String? {
@@ -212,5 +212,14 @@ private extension Transformable {
             return $0.name
         }
         return tasks.joined(separator: "/")
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension Transformable {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self)
     }
 }

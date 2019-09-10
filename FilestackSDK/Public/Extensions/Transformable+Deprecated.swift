@@ -9,6 +9,8 @@
 import Foundation
 
 extension Transformable {
+    // MARK: - Deprecated
+
     /**
      Stores a copy of the transformation results to your preferred filestore.
 

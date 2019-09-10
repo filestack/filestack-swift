@@ -71,3 +71,12 @@ import Foundation
         super.init()
     }
 }
+
+// MARK: - CustomStringConvertible
+
+extension StorageOptions {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self)
+    }
+}

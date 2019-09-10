@@ -8,7 +8,8 @@
 
 import Foundation
 
-@objc(FSUploadStatus) public enum UploadStatus: UInt, CustomStringConvertible {
+/// Represents the current status of an upload.
+@objc(FSUploadStatus) public enum UploadStatus: UInt {
     /// Not started
     case notStarted
 
@@ -23,10 +24,12 @@ import Foundation
 
     /// Failed
     case failed
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible
 
-    /// Returns a `String` representation of self.
+extension UploadStatus: CustomStringConvertible {
+    /// :nodoc:
     public var description: String {
         switch self {
         case .notStarted:

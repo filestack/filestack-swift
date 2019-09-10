@@ -8,25 +8,25 @@
 
 import Foundation
 
-/// Represents a set of upload options to pass to `Client` upload functions.
+/// Represents a set of options for uploading items to a given storage location.
 @objc(FSUploadOptions) public class UploadOptions: NSObject {
     /// Attempts to use Intelligent Ingestion when enabled.
-    public let preferIntelligentIngestion: Bool
+    @objc public var preferIntelligentIngestion: Bool
 
     /// Whether the upload should start immediately.
-    public let startImmediately: Bool
+    @objc public var startImmediately: Bool
 
     /// An object containing the store options (e.g. location, region, container, access, etc.)
-    public let storeOptions: StorageOptions
+    @objc public var storeOptions: StorageOptions
 
     /// The chunksize in bytes to use.
-    public let chunkSize: Int
+    @objc public var chunkSize: Int
 
     /// How many parts should be uploaded concurrently
-    public let partUploadConcurrency: Int
+    @objc public var partUploadConcurrency: Int
 
     /// How many chunks should be uploaded concurrently per part
-    public let chunkUploadConcurrency: Int
+    @objc public var chunkUploadConcurrency: Int
 
     /// Default initializer.
     public init(preferIntelligentIngestion: Bool,
@@ -59,4 +59,13 @@ import Foundation
                       storeOptions: StorageOptions(location: .s3, access: .private),
                       chunkSize: defaultChunkSize)
     }()
+}
+
+// MARK: - CustomStringConvertible
+
+extension UploadOptions {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self)
+    }
 }

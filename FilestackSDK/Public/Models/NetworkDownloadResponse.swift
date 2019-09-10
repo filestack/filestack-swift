@@ -33,25 +33,21 @@ import Foundation
     // MARK: - Lifecycle Functions
 
     internal init(with downloadResponse: DownloadResponse<Data>) {
-        request = downloadResponse.request
-        response = downloadResponse.response
-        temporaryURL = downloadResponse.temporaryURL
-        destinationURL = downloadResponse.destinationURL
-        error = downloadResponse.error
+        self.request = downloadResponse.request
+        self.response = downloadResponse.response
+        self.temporaryURL = downloadResponse.temporaryURL
+        self.destinationURL = downloadResponse.destinationURL
+        self.error = downloadResponse.error
 
         super.init()
     }
 }
 
-extension NetworkDownloadResponse {
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible
 
-    /// Returns a `String` representation of self.
+extension NetworkDownloadResponse {
+    /// :nodoc:
     public override var description: String {
-        return "(request: \(String(describing: request))," +
-            "response: \(String(describing: response)), " +
-            "temporaryURL: \(String(describing: temporaryURL)), " +
-            "destinationURL: \(String(describing: destinationURL)), " +
-            "error: \(String(describing: error)))"
+        return Tools.describe(subject: self)
     }
 }

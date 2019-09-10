@@ -426,8 +426,7 @@ private extension UploadTests {
     }
 
     var client: Client {
-        let security = Seeds.Securities.basic
-        return Client(apiKey: "MY-OTHER-API-KEY", security: security, storage: .s3)
+        return Client(apiKey: "MY-OTHER-API-KEY", security: Seeds.Securities.basic)
     }
 
     func json(partName: String) -> [String: Any] {

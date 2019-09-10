@@ -45,23 +45,20 @@ import Foundation
     }
 
     internal init(with error: Error) {
-        request = nil
-        response = nil
-        json = nil
+        self.request = nil
+        self.response = nil
+        self.json = nil
         self.error = error
 
         super.init()
     }
 }
 
-extension NetworkJSONResponse {
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible
 
-    /// Returns a `String` representation of self.
+extension NetworkJSONResponse {
+    /// :nodoc:
     public override var description: String {
-        return "(request: \(String(describing: request))," +
-            "response: \(String(describing: response)), " +
-            "json: \(String(describing: json)), " +
-            "error: \(String(describing: error)))"
+        return Tools.describe(subject: self)
     }
 }

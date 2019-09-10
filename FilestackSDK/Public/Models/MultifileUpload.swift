@@ -8,7 +8,13 @@
 
 import Foundation
 
-/// :nodoc:
+/// This class allows uploading multiple `Uploadable` items to a given storage location.
+///
+/// Features:
+///
+/// - Ability to track upload progress (see the `progress` property)
+/// - Ability to add `Uploadables` at any time before the upload starts (see `add(uploadables:)`)
+/// - Ability to cancel the upload process (see `cancel()`)
 @objc(FSMultifileUpload) public class MultifileUpload: NSObject {
     // MARK: - Public Properties
 
@@ -65,7 +71,10 @@ import Foundation
 
     /// Adds items to be uploaded.
     ///
-    /// You should use this only before your upload starts.
+    /// - Important: Any items added after the upload process started will be ignored.
+    ///
+    /// - Parameter uploadables: An array of `Uploadable` items to upload.
+    /// - Returns: True on success, false otherwise.
     @discardableResult public func add(uploadables: [Uploadable]) -> Bool {
         switch currentStatus {
         case .notStarted:
@@ -80,10 +89,12 @@ import Foundation
 
     /// Cancels upload.
     ///
-    /// Please notice that any already uploaded files **will not** be deleted —
+    /// - Important: Any already uploaded files **will not** be deleted —
     /// only the current file being uploaded (if any) and any pending files will be affected.
     ///
     /// This will trigger `completionHandler`.
+    ///
+    /// - Returns: True on success, false otherwise.
     @objc
     @discardableResult public func cancel() -> Bool {
         switch currentStatus {
@@ -99,6 +110,8 @@ import Foundation
     }
 
     /// Starts upload.
+    ///
+    /// - Returns: True on success, false otherwise.
     @objc
     @discardableResult public func start() -> Bool {
         switch currentStatus {
@@ -191,5 +204,14 @@ private extension MultifileUpload {
         uploadResponses.append(response)
         pendingUploadables = Array(pendingUploadables.dropFirst())
         uploadNextFile()
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension MultifileUpload {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self, only: ["currentStatus"])
     }
 }

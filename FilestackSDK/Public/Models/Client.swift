@@ -16,13 +16,10 @@ import Foundation
     // MARK: - Properties
 
     /// An API key obtained from the [Developer Portal](http://dev.filestack.com).
-    public let apiKey: String
+    @objc public let apiKey: String
 
     /// A `Security` object. `nil` by default.
-    public let security: Security?
-
-    /// A `StorageLocation` object. `nil` by default.
-    public let storage: StorageLocation?
+    @objc public let security: Security?
 
     // MARK: - Lifecycle Functions
 
@@ -37,24 +34,15 @@ import Foundation
     @objc public init(apiKey: String, security: Security? = nil) {
         self.apiKey = apiKey
         self.security = security
-        storage = nil
 
         super.init()
     }
 
-    /**
-     Initializer with security and storage location.
-
-     - SeeAlso: `Security`
-
-     - Parameter apiKey: An API key obtained from the Developer Portal.
-     - Parameter security: A `Security` object. `nil` by default.
-     - Parameter storage: A `StorageLocation` object.
-     */
-    @objc public init(apiKey: String, security: Security? = nil, storage: StorageLocation) {
+    /// :nodoc:
+    @available(*, deprecated, message: "Marked for removal in version 3.0. Please use `init(apiKey:security:)` instead.")
+    @objc public init(apiKey: String, security: Security? = nil, storage _: StorageLocation) {
         self.apiKey = apiKey
         self.security = security
-        self.storage = storage
 
         super.init()
     }
@@ -183,5 +171,14 @@ import Foundation
         }
 
         return mpu
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension Client {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self)
     }
 }

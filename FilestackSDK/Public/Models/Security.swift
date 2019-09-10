@@ -59,16 +59,11 @@ import Foundation
     }
 }
 
-public extension Security {
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible
 
-    /// Returns a `String` representation of self.
-    override var description: String {
-        var components: [String] = []
-        components.append("\(super.description)(")
-        components.append("    encodedPolicy: \(encodedPolicy),")
-        components.append("    signature: \(signature)")
-        components.append(")")
-        return components.joined(separator: "\n")
+extension Security {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self)
     }
 }

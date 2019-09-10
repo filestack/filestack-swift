@@ -9,25 +9,29 @@
 import Foundation
 
 extension MultifileUpload {
+    // MARK: - Objective-C Compatibility
+
     /// Adds multiple local URLs to be uploaded.
     ///
-    /// You should use this only before your upload starts.
+    /// - Important: Any items added after the upload process started will be ignored.
     ///
-    /// - Important:
-    /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
-    /// using `add(uploadables:)` instead.
-    @objc(addMultipleURLs:) public func add(uploadables: [NSURL]) -> Bool {
-        return add(uploadables: uploadables.map { $0 as URL })
+    /// - Note: This function is made available especially for Objective-C SDK users.
+    /// If you are using Swift, you might want to use `add(uploadables:)` instead.
+    ///
+    /// - Parameter urls: An array of NSURL objects to upload.
+    @objc public func add(urls: [NSURL]) -> Bool {
+        return add(uploadables: urls.map { $0 as URL })
     }
 
     /// Adds multiple Data items to be uploaded.
     ///
-    /// You should use this only before your upload starts.
+    /// - Important: Any items added after the upload process started will be ignored.
     ///
-    /// - Important:
-    /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
-    /// using `add(uploadables:)` instead.
-    @objc(addMultipleData:) public func add(uploadables: [NSData]) -> Bool {
-        return add(uploadables: uploadables.map { $0 as Data })
+    /// - Note: This function is made available especially for Objective-C SDK users.
+    /// If you are using Swift, you might want to use `add(uploadables:)` instead.
+    ///
+    /// - Parameter multipleData: An array of NSData objects to upload.
+    @objc public func add(multipleData: [NSData]) -> Bool {
+        return add(uploadables: multipleData.map { $0 as Data })
     }
 }

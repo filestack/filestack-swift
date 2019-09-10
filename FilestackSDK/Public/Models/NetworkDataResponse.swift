@@ -30,23 +30,20 @@ import Foundation
     // MARK: - Lifecycle Functions
 
     internal init(with dataResponse: DataResponse<Data>) {
-        request = dataResponse.request
-        response = dataResponse.response
-        data = dataResponse.data
-        error = dataResponse.error
+        self.request = dataResponse.request
+        self.response = dataResponse.response
+        self.data = dataResponse.data
+        self.error = dataResponse.error
 
         super.init()
     }
 }
 
-extension NetworkDataResponse {
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible
 
-    /// Returns a `String` representation of self.
+extension NetworkDataResponse {
+    /// :nodoc:
     public override var description: String {
-        return "(request: \(String(describing: request))," +
-            "response: \(String(describing: response)), " +
-            "data: \(String(describing: data)), " +
-            "error: \(String(describing: error)))"
+        return Tools.describe(subject: self)
     }
 }

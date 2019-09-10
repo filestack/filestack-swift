@@ -28,7 +28,12 @@ extension MultipartUploadError: LocalizedError {
     }
 }
 
-/// :nodoc:
+/// This class allows uploading an `Uploadable` item to a given storage location.
+///
+/// Features:
+///
+/// - Ability to track upload progress (see the `progress` property)
+/// - Ability to cancel the upload process (see `cancel()`)
 @objc(FSMultipartUpload) public class MultipartUpload: NSObject {
     typealias UploadProgress = (Int64) -> Void
 
@@ -84,6 +89,8 @@ extension MultipartUploadError: LocalizedError {
     // MARK: - Public Functions
 
     /// Cancels upload.
+    ///
+    /// - Returns: True on success, false otherwise.
     @objc
     @discardableResult public func cancel() -> Bool {
         switch currentStatus {
@@ -102,6 +109,8 @@ extension MultipartUploadError: LocalizedError {
     }
 
     /// Starts upload.
+    ///
+    /// - Returns: True on success, false otherwise.
     @objc
     @discardableResult public func start() -> Bool {
         switch currentStatus {
@@ -385,5 +394,14 @@ private extension MultipartUpload {
         checkpointOperation.addDependency(completeOperation)
         uploadOperationQueue.addOperation(completeOperation)
         uploadOperationQueue.addOperation(checkpointOperation)
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension MultipartUpload {
+    /// :nodoc:
+    public override var description: String {
+        return Tools.describe(subject: self, only: ["currentStatus"])
     }
 }
