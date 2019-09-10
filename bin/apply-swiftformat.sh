@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [[ "${CI}" ]]; then
+    echo "CI environment detected. Skipping SwiftFormat."
+    exit 0
+fi
+
 if ! which swiftformat >/dev/null; then
     if which brew >/dev/null; then
         brew update && brew install swiftformat
