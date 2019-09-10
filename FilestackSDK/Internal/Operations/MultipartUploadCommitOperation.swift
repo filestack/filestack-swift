@@ -46,7 +46,7 @@ class MultipartUploadCommitOperation: BaseOperation {
             return
         }
         state = .executing
-        uploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
+        UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
             self.response = response
             self.state = .finished
         }
@@ -55,7 +55,7 @@ class MultipartUploadCommitOperation: BaseOperation {
 
 private extension MultipartUploadCommitOperation {
     var uploadUrl: URL {
-        return URL(string: "multipart/commit", relativeTo: uploadService.baseURL)!
+        return URL(string: "multipart/commit", relativeTo: UploadService.baseURL)!
     }
 
     func multipartFormData(form: MultipartFormData) {

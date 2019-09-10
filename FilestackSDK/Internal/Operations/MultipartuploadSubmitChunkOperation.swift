@@ -48,7 +48,7 @@ class MultipartUploadSubmitChunkOperation: BaseOperation {
             return
         }
         state = .executing
-        uploadService.upload(multipartFormData: multipartFormData, url: uploadUrl, completionHandler: uploadDidFinish)
+        UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl, completionHandler: uploadDidFinish)
     }
 
     override func cancel() {
@@ -69,7 +69,7 @@ private extension MultipartUploadSubmitChunkOperation {
             return
         }
 
-        uploadRequest = uploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
+        uploadRequest = UploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
 
         uploadRequest?.response { response in
             self.saveResponse(response)
@@ -84,7 +84,7 @@ private extension MultipartUploadSubmitChunkOperation {
     }
 
     var uploadUrl: URL {
-        return URL(string: "multipart/upload", relativeTo: uploadService.baseURL)!
+        return URL(string: "multipart/upload", relativeTo: UploadService.baseURL)!
     }
 
     func multipartFormData(form: MultipartFormData) {

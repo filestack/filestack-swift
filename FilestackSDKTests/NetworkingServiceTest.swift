@@ -10,7 +10,7 @@ import XCTest
 @testable import FilestackSDK
 
 class NetworkingServiceTest: XCTestCase {
-    let services: [NetworkingService] = [APIService(), CDNService()]
+    let services: [NetworkingService.Type] = [APIService.self, CDNService.self]
 
     func testBuildURL() {
         for service in services {

@@ -9,34 +9,34 @@
 import Alamofire
 import Foundation
 
-class APIService: NetworkingService {
-    let sessionManager = SessionManager.filestackDefault()
-    let baseURL = Config.apiURL
+final class APIService: NetworkingService {
+    static let sessionManager = SessionManager.filestackDefault
+    static let baseURL = Config.apiURL
 
-    func deleteRequest(handle: String,
-                       path: String?,
-                       parameters: [String: Any]?,
-                       security: Security?) -> DataRequest? {
+    static func deleteRequest(handle: String,
+                              path: String?,
+                              parameters: [String: Any]?,
+                              security: Security?) -> DataRequest? {
         guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
 
         return sessionManager.request(url, method: .delete, parameters: parameters)
     }
 
-    func overwriteRequest(handle: String,
-                          path: String?,
-                          parameters _: [String: Any]?,
-                          fileURL: URL,
-                          security: Security?) -> UploadRequest? {
+    static func overwriteRequest(handle: String,
+                                 path: String?,
+                                 parameters _: [String: Any]?,
+                                 fileURL: URL,
+                                 security: Security?) -> UploadRequest? {
         guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
 
         return sessionManager.upload(fileURL, to: url)
     }
 
-    func overwriteRequest(handle: String,
-                          path: String?,
-                          parameters: [String: Any]?,
-                          remoteURL: URL,
-                          security: Security?) -> DataRequest? {
+    static func overwriteRequest(handle: String,
+                                 path: String?,
+                                 parameters: [String: Any]?,
+                                 remoteURL: URL,
+                                 security: Security?) -> DataRequest? {
         guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
 
         var parameters = parameters ?? [String: Any]()

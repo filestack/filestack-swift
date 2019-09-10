@@ -18,13 +18,12 @@ class SessionManagerTests: XCTestCase {
     }
 
     func testFilestackDefaultCustomHTTPHeaders() {
-        let session = SessionManager.filestackDefault()
+        let session = SessionManager.filestackDefault
         let requestURL = URL(string: "https://SOME-URL-HERE")!
         let expectation = self.expectation(description: "request should succeed")
         var dataRequest: URLRequest?
 
         stub(condition: isScheme(requestURL.scheme!) && isHost(requestURL.host!)) { req in
-
             dataRequest = req
             expectation.fulfill()
 
@@ -39,7 +38,10 @@ class SessionManagerTests: XCTestCase {
 
         waitForExpectations(timeout: 5, handler: nil)
 
-        let shortVersionString = BundleInfo.version!
+        guard let shortVersionString = Bundle(for: Client.self).infoDictionary?["CFBundleShortVersionString"] as? String else {
+            XCTFail("Unable to extract CFBundleShortVersionString.")
+            return
+        }
 
         XCTAssertEqual(dataRequest?.value(forHTTPHeaderField: "User-Agent"), "filestack-swift \(shortVersionString)")
         XCTAssertEqual(dataRequest?.value(forHTTPHeaderField: "Filestack-Source"), "Swift-\(shortVersionString)")

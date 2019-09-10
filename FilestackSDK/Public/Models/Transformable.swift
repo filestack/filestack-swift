@@ -154,7 +154,7 @@ import Foundation
         transformationTasks.insert(task, at: 0)
 
         // Create and perform post request
-        guard let request = processService.request(url: url, method: .post) else { return self }
+        guard let request = ProcessService.request(url: url, method: .post) else { return self }
 
         request.validate(statusCode: Config.validHTTPResponseCodes)
 
@@ -180,7 +180,7 @@ import Foundation
 private extension Transformable {
     func computeURL() -> URL {
         let key = usingExternalURLs ? apiKey : nil
-        return processService.buildURL(tasks: tasksToURLFragment(), sources: sources, key: key, security: security)!
+        return ProcessService.buildURL(tasks: tasksToURLFragment(), sources: sources, key: key, security: security)!
     }
 
     func sanitize(string: String) -> String {

@@ -9,20 +9,20 @@
 import Alamofire
 import Foundation
 
-class CDNService: NetworkingService {
-    let sessionManager = SessionManager.filestackDefault()
-    let baseURL = Config.cdnURL
+final class CDNService: NetworkingService {
+    static let sessionManager = SessionManager.filestackDefault
+    static let baseURL = Config.cdnURL
 
-    func getDataRequest(handle: String,
-                        path: String?,
-                        parameters: [String: Any]?,
-                        security: Security?) -> DataRequest? {
+    static func getDataRequest(handle: String,
+                               path: String?,
+                               parameters: [String: Any]?,
+                               security: Security?) -> DataRequest? {
         guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
 
         return sessionManager.request(url, method: .get, parameters: parameters)
     }
 
-    func getImageTaggingRequest(type: String, handle: String, security: Security?) -> DataRequest? {
+    static func getImageTaggingRequest(type: String, handle: String, security: Security?) -> DataRequest? {
         var url = baseURL.appendingPathComponent(type)
 
         if let security = security {
@@ -34,11 +34,11 @@ class CDNService: NetworkingService {
         return sessionManager.request(url, method: .get, parameters: nil)
     }
 
-    func downloadRequest(handle: String,
-                         path: String?,
-                         parameters: [String: Any]?,
-                         security: Security?,
-                         downloadDestination: DownloadRequest.DownloadFileDestination?) -> DownloadRequest? {
+    static func downloadRequest(handle: String,
+                                path: String?,
+                                parameters: [String: Any]?,
+                                security: Security?,
+                                downloadDestination: DownloadRequest.DownloadFileDestination?) -> DownloadRequest? {
         guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
 
         return sessionManager.download(url, method: .get, parameters: parameters, to: downloadDestination)

@@ -81,9 +81,9 @@ private extension MultipartRegularUploadSubmitPartOperation {
         reader.seek(position: seek)
         let dataChunk = reader.read(amount: chunkSize)
 
-        let url = URL(string: "multipart/upload", relativeTo: uploadService.baseURL)!
+        let url = URL(string: "multipart/upload", relativeTo: UploadService.baseURL)!
 
-        uploadService.upload(multipartFormData: multipartFormData(dataChunk: dataChunk),
+        UploadService.upload(multipartFormData: multipartFormData(dataChunk: dataChunk),
                              url: url,
                              completionHandler: uploadResponseHandler(dataChunk: dataChunk))
     }
@@ -119,7 +119,7 @@ private extension MultipartRegularUploadSubmitPartOperation {
 
     func uploadRequest(with json: [String: Any]?, dataChunk: Data) -> UploadRequest? {
         guard let url = url(from: json), let headers = json?["headers"] as? [String: String] else { return nil }
-        return uploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
+        return UploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
     }
 
     func url(from json: [String: Any]?) -> URL? {

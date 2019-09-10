@@ -13,19 +13,19 @@ public extension Client {
     override var description: String {
         var components: [String] = []
 
-        components.append("\(super.description)(")
-        components.append("    apiKey: \(apiKey),")
+        components.append("(")
+        components.append("apiKey: \(apiKey), ")
 
         if let security = security {
-            components.append("    security: \(attachedDescription(object: security))")
+            components.append("security: \(String(describing: security)), ")
         }
 
         if let storage = storage {
-            components.append("    storage: \(String(describing: storage))")
+            components.append("storage: \(String(describing: storage))")
         }
 
         components.append(")")
 
-        return components.joined(separator: "\n")
+        return components.joined()
     }
 }

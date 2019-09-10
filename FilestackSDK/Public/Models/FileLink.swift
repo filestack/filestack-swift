@@ -29,7 +29,7 @@ import Foundation
 
     /// A Filestack CDN URL corresponding to this `FileLink`.
     @objc public lazy var url: URL = {
-        cdnService.buildURL(handle: self.handle, security: self.security)!
+        CDNService.buildURL(handle: self.handle, security: self.security)!
     }()
 
     // MARK: - Lifecyle Functions
@@ -58,7 +58,7 @@ import Foundation
                                  queue: DispatchQueue? = .main,
                                  downloadProgress: ((Progress) -> Void)? = nil,
                                  completionHandler: @escaping (NetworkDataResponse) -> Void) {
-        guard let request = cdnService.getDataRequest(handle: handle,
+        guard let request = CDNService.getDataRequest(handle: handle,
                                                       path: nil,
                                                       parameters: parameters,
                                                       security: security) else {
@@ -89,7 +89,7 @@ import Foundation
      */
     @objc public func getTags(queue: DispatchQueue? = .main,
                               completionHandler: @escaping (NetworkJSONResponse) -> Void) {
-        guard let request = cdnService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
+        guard let request = CDNService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
             return
         }
 
@@ -109,7 +109,7 @@ import Foundation
      */
     @objc public func getSafeForWork(queue: DispatchQueue? = .main,
                                      completionHandler: @escaping (NetworkJSONResponse) -> Void) {
-        guard let request = cdnService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
+        guard let request = CDNService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
             return
         }
 
@@ -135,12 +135,12 @@ import Foundation
             URLQueryItem(name: $0.description, value: "true")
         }
 
-        guard let url = apiService.buildURL(handle: handle,
+        guard let url = APIService.buildURL(handle: handle,
                                             path: "file",
                                             extra: "metadata",
                                             queryItems: optionQueryItems,
                                             security: security),
-            let request = apiService.request(url: url, method: .get) else {
+            let request = APIService.request(url: url, method: .get) else {
             return
         }
 
@@ -178,7 +178,7 @@ import Foundation
             return (destinationURL: destinationURL, options: downloadOptions)
         }
 
-        guard let request = cdnService.downloadRequest(handle: handle,
+        guard let request = CDNService.downloadRequest(handle: handle,
                                                        path: nil,
                                                        parameters: parameters,
                                                        security: security,
@@ -216,7 +216,7 @@ import Foundation
     @objc public func delete(parameters: [String: Any]? = nil,
                              queue: DispatchQueue? = .main,
                              completionHandler: @escaping (NetworkDataResponse) -> Void) {
-        guard let request = apiService.deleteRequest(handle: handle,
+        guard let request = APIService.deleteRequest(handle: handle,
                                                      path: Config.filePath,
                                                      parameters: ensureAPIKey(parameters),
                                                      security: security) else {
@@ -250,7 +250,7 @@ import Foundation
                                 queue: DispatchQueue? = .main,
                                 uploadProgress: ((Progress) -> Void)? = nil,
                                 completionHandler: @escaping (NetworkDataResponse) -> Void) {
-        guard let request = apiService.overwriteRequest(handle: handle,
+        guard let request = APIService.overwriteRequest(handle: handle,
                                                         path: Config.filePath,
                                                         parameters: parameters,
                                                         fileURL: fileURL,
@@ -290,7 +290,7 @@ import Foundation
                                 remoteURL: URL,
                                 queue: DispatchQueue? = .main,
                                 completionHandler: @escaping (NetworkDataResponse) -> Void) {
-        guard let request = apiService.overwriteRequest(handle: handle,
+        guard let request = APIService.overwriteRequest(handle: handle,
                                                         path: Config.filePath,
                                                         parameters: parameters,
                                                         remoteURL: remoteURL,
@@ -335,17 +335,17 @@ public extension FileLink {
     override var description: String {
         var components: [String] = []
 
-        components.append("\(super.description)(")
-        components.append("    apiKey: \(apiKey),")
-        components.append("    handle: \(handle),")
-        components.append("    url: \(url.absoluteString)")
+        components.append("(")
+        components.append("apiKey: \(apiKey), ")
+        components.append("handle: \(handle), ")
+        components.append("url: \(url.absoluteString), ")
 
         if let security = security {
-            components.append("    security: \(attachedDescription(object: security))")
+            components.append("security: \(String(describing: security))")
         }
 
         components.append(")")
 
-        return components.joined(separator: "\n")
+        return components.joined()
     }
 }

@@ -43,7 +43,7 @@ class MultipartUploadStartOperation: BaseOperation {
             return
         }
         state = .executing
-        uploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
+        UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
             self.response = response
             self.state = .finished
         }
@@ -52,7 +52,7 @@ class MultipartUploadStartOperation: BaseOperation {
 
 private extension MultipartUploadStartOperation {
     var uploadUrl: URL {
-        return URL(string: "multipart/start", relativeTo: uploadService.baseURL)!
+        return URL(string: "multipart/start", relativeTo: UploadService.baseURL)!
     }
 
     func multipartFormData(form: MultipartFormData) {
