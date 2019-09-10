@@ -19,6 +19,8 @@ class MultipartUploadTests: XCTestCase {
     private var currentPart = 1
     private var currentOffset = 0
 
+    private let defaultStoreOptions = StorageOptions(location: .s3, access: .private)
+
     override func setUp() {
         currentPart = 1
         currentOffset = 0
@@ -38,7 +40,12 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var response: NetworkJSONResponse?
-        client.multiPartUpload(from: largeFileUrl, useIntelligentIngestionIfAvailable: false) { resp in
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
+                                          startImmediately: true,
+                                          storeOptions: defaultStoreOptions)
+
+        client.upload(using: largeFileURL, options: uploadOptions) { resp in
             response = resp
             expectation.fulfill()
         }
@@ -72,7 +79,7 @@ class MultipartUploadTests: XCTestCase {
             }
         }
 
-        client.multiPartUpload(from: largeFileUrl, uploadProgress: progressHandler) { resp in
+        client.upload(using: largeFileURL, uploadProgress: progressHandler) { resp in
             json = resp.json
             expectation.fulfill()
         }
@@ -98,7 +105,7 @@ class MultipartUploadTests: XCTestCase {
 
         var error: Error!
 
-        let multipartUpload = client.multiPartUpload(from: sampleFileUrl, uploadProgress: nil) { resp in
+        let multipartUpload = client.upload(using: sampleFileURL) { resp in
             error = resp.error
             expectation.fulfill()
         }
@@ -128,7 +135,7 @@ class MultipartUploadTests: XCTestCase {
 
         var response: NetworkJSONResponse?
 
-        client.multiPartUpload(from: largeFileUrl, useIntelligentIngestionIfAvailable: true) { resp in
+        client.upload(using: largeFileURL) { resp in
             response = resp
             expectation.fulfill()
         }
@@ -155,7 +162,8 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var error: Error?
-        client.multiPartUpload(from: sampleFileUrl) { resp in
+
+        client.upload(using: sampleFileURL) { resp in
             error = resp.error
             expectation.fulfill()
         }
@@ -168,14 +176,19 @@ class MultipartUploadTests: XCTestCase {
     func testMultiPartUploadWithWorkflows() {
         var hitCount = 0
         let workflows = ["workflow-1", "workflow-2", "workflow-3"]
+        let storeOptions = StorageOptions(location: .s3, workflows: workflows)
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: true,
+                                          startImmediately: true,
+                                          storeOptions: storeOptions)
 
         stubRegularMultipartRequest(hitCount: &hitCount, workflows: workflows)
 
         let expectation = self.expectation(description: "request should succeed")
-        let storeOptions = StorageOptions(location: .s3, workflows: workflows)
 
         var response: NetworkJSONResponse?
-        client.multiPartUpload(from: largeFileUrl, storeOptions: storeOptions, useIntelligentIngestionIfAvailable: true) { resp in
+
+        client.upload(using: largeFileURL, options: uploadOptions) { resp in
             response = resp
             expectation.fulfill()
         }
@@ -208,7 +221,12 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var responses: [NetworkJSONResponse]!
-        client.multiFileUpload(from: [sampleFileUrl], useIntelligentIngestionIfAvailable: false) { resp in
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
+                                          startImmediately: true,
+                                          storeOptions: defaultStoreOptions)
+
+        client.upload(using: [sampleFileURL], options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
@@ -233,7 +251,12 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var responses: [NetworkJSONResponse]!
-        client.multiFileUpload(from: [sampleFileUrl, sampleFileUrl], useIntelligentIngestionIfAvailable: false) { resp in
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
+                                          startImmediately: true,
+                                          storeOptions: defaultStoreOptions)
+
+        client.upload(using: [sampleFileURL, sampleFileURL], options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
@@ -250,35 +273,21 @@ class MultipartUploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
 
         var responses: [NetworkJSONResponse]!
-        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false, startUploadImmediately: false) { resp in
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
+                                          startImmediately: false,
+                                          storeOptions: defaultStoreOptions)
+
+        let mfu = client.upload(using: [sampleFileURL, sampleFileURL], options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
-        mfu.uploadURLs = [sampleFileUrl, sampleFileUrl]
+
         mfu.uploadFiles()
 
         waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(responses.count, 2)
-    }
-
-    func testMultiFileUploadWithoutURLs() {
-        var hitCount = 0
-        stubRegularMultipartRequest(hitCount: &hitCount)
-
-        let expectation = self.expectation(description: "request should succeed")
-
-        var responses: [NetworkJSONResponse]!
-        let mfu = client.multiFileUpload(useIntelligentIngestionIfAvailable: false, startUploadImmediately: false) { resp in
-            responses = resp
-            expectation.fulfill()
-        }
-        mfu.uploadURLs = []
-        mfu.uploadFiles()
-
-        waitForExpectations(timeout: 15, handler: nil)
-
-        XCTAssertEqual(responses.count, 0)
     }
 }
 
@@ -407,11 +416,11 @@ private extension MultipartUploadTests {
         }
     }
 
-    var sampleFileUrl: URL {
+    var sampleFileURL: URL {
         return Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
     }
 
-    var largeFileUrl: URL {
+    var largeFileURL: URL {
         return Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
     }
 
