@@ -28,7 +28,10 @@ extension MultipartUploadError: LocalizedError {
     }
 }
 
-/// This class allows uploading an `Uploadable` item to a given storage location.
+/// This class allows uploading a single `Uploadable` item to a given storage location.
+///
+/// Please notice this class can not be directly instantiated. Instances of this class are
+/// returned by the upload functions in `Client`.
 ///
 /// Features:
 ///

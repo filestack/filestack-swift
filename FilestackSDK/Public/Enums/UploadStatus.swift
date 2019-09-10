@@ -10,19 +10,19 @@ import Foundation
 
 /// Represents the current status of an upload.
 @objc(FSUploadStatus) public enum UploadStatus: UInt {
-    /// Not started
+    /// Upload has not started.
     case notStarted
 
-    /// In progress
+    /// Upload is currently in progress.
     case inProgress
 
-    /// Completed
+    /// Upload has completed.
     case completed
 
-    /// Cancelled
+    /// Upload was cancelled.
     case cancelled
 
-    /// Failed
+    /// Upload failed.
     case failed
 }
 

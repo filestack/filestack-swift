@@ -10,11 +10,15 @@ import Foundation
 
 /// This class allows uploading multiple `Uploadable` items to a given storage location.
 ///
+/// Please notice this class can not be directly instantiated. Instances of this class are
+/// returned by the upload functions in `Client`.
+///
 /// Features:
 ///
 /// - Ability to track upload progress (see the `progress` property)
-/// - Ability to add `Uploadables` at any time before the upload starts (see `add(uploadables:)`)
+/// - Ability to add `Uploadable` items at any time before the upload starts (see `add(uploadables:)`)
 /// - Ability to cancel the upload process (see `cancel()`)
+///
 @objc(FSMultifileUpload) public class MultifileUpload: NSObject {
     // MARK: - Public Properties
 
