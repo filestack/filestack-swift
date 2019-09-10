@@ -40,7 +40,7 @@ import Foundation
     /// An array of workflow IDs to trigger for each upload.
     public var workflows: [String]?
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     /// Convenience initializer (for Objective-C).
     @objc public convenience init(location: StorageLocation) {

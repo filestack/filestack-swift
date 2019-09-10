@@ -24,7 +24,7 @@ import Foundation
     /// A `StorageLocation` object. `nil` by default.
     public let storage: StorageLocation?
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     /**
      Default initializer.

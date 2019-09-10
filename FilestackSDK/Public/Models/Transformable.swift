@@ -62,7 +62,7 @@ import Foundation
     private var sources: [String]
     private var usingExternalURLs: Bool
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     init(handles: [String], apiKey: String, security: Security? = nil) {
         self.sources = handles

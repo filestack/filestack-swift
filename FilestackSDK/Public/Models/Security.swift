@@ -24,7 +24,7 @@ import Foundation
     /// A computed signature.
     public let signature: String
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     /**
      A convenience initializer that takes a `Policy` and an `appSecret` as parameters.

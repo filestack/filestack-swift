@@ -32,7 +32,7 @@ import Foundation
         CDNService.buildURL(handle: self.handle, security: self.security)!
     }()
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     internal init(handle: String, apiKey: String, security: Security? = nil) {
         self.handle = handle

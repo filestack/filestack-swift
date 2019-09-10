@@ -30,7 +30,7 @@ import Foundation
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
     @objc public var error: Error?
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     internal init(with downloadResponse: DownloadResponse<Data>) {
         request = downloadResponse.request

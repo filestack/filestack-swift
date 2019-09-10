@@ -62,7 +62,7 @@ extension MultipartUploadError: LocalizedError {
                                                                attributes: .concurrent)
     private let uploadOperationQueue = OperationQueue()
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     init(using uploadable: Uploadable,
          options: UploadOptions,

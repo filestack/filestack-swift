@@ -43,7 +43,7 @@ import Foundation
     private let options: UploadOptions
     private let security: Security?
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     init(using uploadables: [Uploadable]? = nil,
          options: UploadOptions,

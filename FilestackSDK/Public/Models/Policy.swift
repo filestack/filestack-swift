@@ -74,7 +74,7 @@ import Foundation
      */
     public var container: String?
 
-    // MARK: - Lifecyle Functions
+    // MARK: - Lifecycle Functions
 
     /**
      Convenience initializer with expiry time.
