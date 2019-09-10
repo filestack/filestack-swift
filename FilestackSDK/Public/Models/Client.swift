@@ -114,7 +114,7 @@ import Foundation
         return Transformable(externalURLs: externalURLs, apiKey: apiKey, security: security)
     }
 
-    /// Uploads a single file directly to a given storage location.
+    /// Uploads a single `Uploadable` to a given storage location.
     ///
     /// Currently the only storage location supported is Amazon S3.
     ///
@@ -149,14 +149,14 @@ import Foundation
         return mpu
     }
 
-    /// Uploads multiple files to given storage location.
+    /// Uploads an array of `Uploadable` items to a given storage location.
     ///
     /// Currently the only storage location supported is Amazon S3.
     ///
     /// - Important:
-    /// If your uploadable can not return a MIME type (e.g. when passing `Data` as the uploadable), you **must** pass
+    /// If your uploadables can not return a MIME type (e.g. when passing `Data` as the uploadable), you **must** pass
     /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
-    /// uploadable, otherwise `text/plain` will be assumed.
+    /// uploadables, otherwise `text/plain` will be assumed.
     ///
     /// - Parameter uploadables: An array of items to upload conforming to `Uploadable`.
     /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)
