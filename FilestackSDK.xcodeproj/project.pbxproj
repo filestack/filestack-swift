@@ -39,6 +39,7 @@
 		456FF4C11F27799D00E9F192 /* MultipartUploadCompleteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FF4C01F27799D00E9F192 /* MultipartUploadCompleteOperation.swift */; };
 		456FF4C31F2790C800E9F192 /* large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 456FF4C21F27902500E9F192 /* large.jpg */; };
 		4579CD3E1F1764A500DCF37A /* TransformBlurMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */; };
+		457B179E23281EC50033BDB1 /* UploadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B179D23281EC50033BDB1 /* UploadStatus.swift */; };
 		457D5BED1F16146B00FBD5B1 /* TransformPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BEC1F16146B00FBD5B1 /* TransformPosition.swift */; };
 		457D5BEF1F16147E00FBD5B1 /* TransformFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BEE1F16147E00FBD5B1 /* TransformFit.swift */; };
 		457D5BF11F1614A800FBD5B1 /* TransformAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BF01F1614A800FBD5B1 /* TransformAlign.swift */; };
@@ -211,6 +212,7 @@
 		456FF4C21F27902500E9F192 /* large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = large.jpg; path = Fixtures/large.jpg; sourceTree = "<group>"; };
 		4577DD4122A6A17700FEF43C /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformBlurMode.swift; sourceTree = "<group>"; };
+		457B179D23281EC50033BDB1 /* UploadStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadStatus.swift; sourceTree = "<group>"; };
 		457D5BEC1F16146B00FBD5B1 /* TransformPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPosition.swift; sourceTree = "<group>"; };
 		457D5BEE1F16147E00FBD5B1 /* TransformFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformFit.swift; sourceTree = "<group>"; };
 		457D5BF01F1614A800FBD5B1 /* TransformAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformAlign.swift; sourceTree = "<group>"; };
@@ -435,6 +437,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		457B179C23281EB80033BDB1 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				457B179D23281EC50033BDB1 /* UploadStatus.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		457D5BDA1F16144B00FBD5B1 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				4589A4871F0A4B1900C39405 /* Config.swift */,
+				457B179C23281EB80033BDB1 /* Enums */,
 				454CC1C91F0D1151005821AC /* Extensions */,
 				4502F71E1F1F4C28000875D6 /* Operations */,
 				45B63B0123279E3F0040BFBB /* Protocols */,
@@ -815,6 +826,7 @@
 				4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */,
 				45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */,
 				45C3639223280DC40064EC93 /* MultifileUpload+ObjC.swift in Sources */,
+				457B179E23281EC50033BDB1 /* UploadStatus.swift in Sources */,
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
 				BC8832D720D181A700B88EAF /* MonochromeTransform.swift in Sources */,
 				BC8832E120D181A700B88EAF /* ResizeTransform.swift in Sources */,

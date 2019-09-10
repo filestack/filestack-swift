@@ -16,8 +16,8 @@ extension MultifileUpload {
     /// - Important:
     /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
     /// using `add(uploadables:)` instead.
-    @objc(addMultipleURLs:) public func add(uploadables: [NSURL]) {
-        add(uploadables: uploadables.map { $0 as URL })
+    @objc(addMultipleURLs:) public func add(uploadables: [NSURL]) -> Bool {
+        return add(uploadables: uploadables.map { $0 as URL })
     }
 
     /// Adds multiple Data items to be uploaded.
@@ -27,7 +27,7 @@ extension MultifileUpload {
     /// - Important:
     /// This function is made available especially for Objective-C SDK users, if you are using Swift, you may prefer
     /// using `add(uploadables:)` instead.
-    @objc(addMultipleData:) public func add(uploadables: [NSData]) {
-        add(uploadables: uploadables.map { $0 as Data })
+    @objc(addMultipleData:) public func add(uploadables: [NSData]) -> Bool {
+        return add(uploadables: uploadables.map { $0 as Data })
     }
 }

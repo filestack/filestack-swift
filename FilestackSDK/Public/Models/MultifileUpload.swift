@@ -13,9 +13,12 @@ import Foundation
     // MARK: - Public Properties
 
     /// The overall upload progress.
-    public lazy var progress: Progress = {
+    @objc public lazy var progress: Progress = {
         Progress(totalUnitCount: Int64(totalSize))
     }()
+
+    /// Current upload status.
+    @objc public private(set) var currentStatus: UploadStatus = .notStarted
 
     // MARK: - Internal Properties
 
@@ -61,10 +64,15 @@ import Foundation
     /// Adds items to be uploaded.
     ///
     /// You should use this only before your upload starts.
-    public func add(uploadables: [Uploadable]) {
-        if currentOperation == nil {
+    @discardableResult public func add(uploadables: [Uploadable]) -> Bool {
+        switch currentStatus {
+        case .notStarted:
             self.uploadables.append(contentsOf: uploadables)
             pendingUploadables.append(contentsOf: uploadables)
+
+            return true
+        default:
+            return false
         }
     }
 
@@ -74,17 +82,31 @@ import Foundation
     /// only the current file being uploaded (if any) and any pending files will be affected.
     ///
     /// This will trigger `completionHandler`.
-    @objc public func cancel() {
-        shouldAbort = true
-        currentOperation?.cancel()
-        stopUpload()
+    @objc
+    @discardableResult public func cancel() -> Bool {
+        switch currentStatus {
+        case .inProgress:
+            shouldAbort = true
+            currentOperation?.cancel()
+            stopUpload()
+
+            return true
+        default:
+            return false
+        }
     }
 
     /// Starts upload.
-    @objc public func start() {
-        if !pendingUploadables.isEmpty {
+    @objc
+    @discardableResult public func start() -> Bool {
+        switch currentStatus {
+        case .notStarted:
             uploadNextFile()
             showMinimalProgress()
+
+            return true
+        default:
+            return false
         }
     }
 
@@ -107,6 +129,8 @@ private extension MultifileUpload {
     }
 
     func uploadNextFile() {
+        currentStatus = .inProgress
+
         guard shouldAbort == false, let nextUploadable = pendingUploadables.first, let size = nextUploadable.size else {
             stopUpload()
             return
@@ -131,6 +155,12 @@ private extension MultifileUpload {
     }
 
     func stopUpload() {
+        if progress.completedUnitCount == progress.totalUnitCount {
+            currentStatus = .completed
+        } else {
+            currentStatus = .cancelled
+        }
+
         while uploadResponses.count < pendingUploadables.count {
             uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
         }
