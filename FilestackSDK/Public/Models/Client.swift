@@ -158,7 +158,8 @@ import Foundation
     /// a custom `UploadOptions` with custom `storeOptions` initialized with a `mimeType` that better represents your
     /// uploadables, otherwise `text/plain` will be assumed.
     ///
-    /// - Parameter uploadables: An array of items to upload conforming to `Uploadable`.
+    /// - Parameter uploadables: An array of items to upload conforming to `Uploadable`. May be `nil` if you intend to
+    /// add them later to the returned `MultifileUpload` object.
     /// - Parameter options: A set of upload options (see `UploadOptions` for more information.)
     /// - Parameter queue: The queue on which the upload progress and completion handlers are dispatched.
     /// - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
@@ -167,7 +168,7 @@ import Foundation
     ///
     /// - Returns: A `MultifileUpload` object that allows monitoring progress, cancelling the upload request, etc.
     @discardableResult
-    public func upload(using uploadables: [Uploadable],
+    public func upload(using uploadables: [Uploadable]? = nil,
                        options: UploadOptions = .defaults,
                        queue: DispatchQueue = .main,
                        uploadProgress: ((Progress) -> Void)? = nil,

@@ -278,11 +278,12 @@ class UploadTests: XCTestCase {
                                           startImmediately: false,
                                           storeOptions: defaultStoreOptions)
 
-        let mfu = client.upload(using: [sampleFileURL, sampleFileURL], options: uploadOptions) { resp in
+        let mfu = client.upload(options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
 
+        mfu.add(uploadables: [sampleFileURL, sampleFileURL])
         mfu.start()
 
         waitForExpectations(timeout: 15, handler: nil)

@@ -80,6 +80,7 @@
 		45B831201F03E52B0053742A /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8311F1F03E52B0053742A /* Seeds.swift */; };
 		45B831221F03F1C90053742A /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831211F03F1C90053742A /* Client.swift */; };
 		45B831241F03F4300053742A /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831231F03F4300053742A /* ClientTests.swift */; };
+		45C3639223280DC40064EC93 /* MultifileUpload+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3639123280DC40064EC93 /* MultifileUpload+ObjC.swift */; };
 		45C3BB261F0E9B3500856883 /* NetworkingServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */; };
 		45C3EA0F1F262ED30003598D /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3EA0E1F262ED30003598D /* MetadataOptions.swift */; };
 		45C8F2061F18B279001A6558 /* TransformAspectMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8F2051F18B279001A6558 /* TransformAspectMode.swift */; };
@@ -254,6 +255,7 @@
 		45B8311F1F03E52B0053742A /* Seeds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeds.swift; sourceTree = "<group>"; };
 		45B831211F03F1C90053742A /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		45B831231F03F4300053742A /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
+		45C3639123280DC40064EC93 /* MultifileUpload+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultifileUpload+ObjC.swift"; sourceTree = "<group>"; };
 		45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceTest.swift; sourceTree = "<group>"; };
 		45C3EA0E1F262ED30003598D /* MetadataOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
 		45C8F2051F18B279001A6558 /* TransformAspectMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformAspectMode.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				45B63B202327E06C0040BFBB /* Client+Deprecated.swift */,
 				45B63B1E2327DA410040BFBB /* Client+ObjC.swift */,
 				45B63B152327D2870040BFBB /* Data+Uploadable.swift */,
+				45C3639123280DC40064EC93 /* MultifileUpload+ObjC.swift */,
 				45B63B242327F1770040BFBB /* Transformable+Deprecated.swift */,
 				45B63B132327D26F0040BFBB /* URL+Uploadable.swift */,
 			);
@@ -811,6 +814,7 @@
 				458D66CD1F4B31E4001770FB /* ZipTransform.swift in Sources */,
 				4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */,
 				45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */,
+				45C3639223280DC40064EC93 /* MultifileUpload+ObjC.swift in Sources */,
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
 				BC8832D720D181A700B88EAF /* MonochromeTransform.swift in Sources */,
 				BC8832E120D181A700B88EAF /* ResizeTransform.swift in Sources */,

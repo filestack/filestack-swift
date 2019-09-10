@@ -24,7 +24,7 @@ import Foundation
 
     // MARK: - Private Properties
 
-    private let uploadables: [Uploadable]
+    private var uploadables: [Uploadable]
     private var pendingUploadables: [Uploadable]
 
     private var uploadResponses: [NetworkJSONResponse] = []
@@ -40,13 +40,13 @@ import Foundation
     private let options: UploadOptions
     private let security: Security?
 
-    init(using uploadables: [Uploadable],
+    init(using uploadables: [Uploadable]? = nil,
          options: UploadOptions,
          queue: DispatchQueue = .main,
          apiKey: String,
          security: Security? = nil) {
-        self.uploadables = uploadables
-        self.pendingUploadables = uploadables
+        self.uploadables = uploadables ?? []
+        self.pendingUploadables = uploadables ?? []
         self.options = options
         self.shouldAbort = false
         self.queue = queue
@@ -57,6 +57,16 @@ import Foundation
     }
 
     // MARK: - Public Functions
+
+    /// Adds items to be uploaded.
+    ///
+    /// You should use this only before your upload starts.
+    public func add(uploadables: [Uploadable]) {
+        if currentOperation == nil {
+            self.uploadables.append(contentsOf: uploadables)
+            pendingUploadables.append(contentsOf: uploadables)
+        }
+    }
 
     /// Cancels upload.
     ///
@@ -72,8 +82,10 @@ import Foundation
 
     /// Starts upload.
     @objc public func start() {
-        uploadNextFile()
-        showMinimalProgress()
+        if !pendingUploadables.isEmpty {
+            uploadNextFile()
+            showMinimalProgress()
+        }
     }
 
     /// :nodoc:
