@@ -11,6 +11,6 @@ Pod::Spec.new do |spec|
 
   spec.source_files = 'FilestackSDK/**/*.{h,swift}'
 
-  spec.dependency 'Alamofire', '~> 4.8'
-  spec.dependency 'CryptoSwift', '~> 0.15.0'
+  spec.dependency 'Alamofire', '~> 4.9'
+  spec.dependency 'CryptoSwift', '~> 1.0'
 end
