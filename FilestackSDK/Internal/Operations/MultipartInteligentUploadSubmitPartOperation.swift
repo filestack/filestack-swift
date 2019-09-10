@@ -33,7 +33,6 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
     var didFail: Bool
 
     private var retriesLeft: Int
-    // private var fileHandle: FileHandle?
     private var partChunkSize: Int
 
     private var beforeCommitCheckPointOperation: BlockOperation?
@@ -81,11 +80,6 @@ internal class MultipartInteligentUploadSubmitPartOperation: BaseOperation, Mult
     }
 
     override func main() {
-//        guard let handle = try? FileHandle(forReadingFrom: localURL) else {
-//            state = .finished
-//            return
-//        }
-//        fileHandle = handle
         upload()
     }
 
@@ -174,7 +168,6 @@ private extension MultipartInteligentUploadSubmitPartOperation {
     }
 
     private func addChunkOperation(partOffset: UInt64, partChunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
-        // guard let fileHandle = fileHandle else { return nil }
         reader.seek(position: seek + partOffset)
         let dataChunk = reader.read(amount: partChunkSize)
 

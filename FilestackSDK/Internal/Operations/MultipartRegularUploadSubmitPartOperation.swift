@@ -28,8 +28,6 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     var responseEtag: String?
     var didFail: Bool
 
-    // private var fileHandle: FileHandle?
-
     private var beforeCommitCheckPointOperation: BlockOperation?
 
     required init(seek: UInt64,
@@ -62,11 +60,6 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     }
 
     override func main() {
-//        guard let handle = try? FileHandle(forReadingFrom: localURL) else {
-//            state = .finished
-//            return
-//        }
-//        fileHandle = handle
         upload()
     }
 
