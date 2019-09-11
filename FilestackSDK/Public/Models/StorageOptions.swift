@@ -15,30 +15,30 @@ import Foundation
     // MARK: - Public Properties
 
     /// An `StorageLocation` value. Valid options are `.s3`, `.dropbox`, `.rackspace`, `.azure`, `.gcs`.
-    public let location: StorageLocation
+    @objc public let location: StorageLocation
 
     /// A region name, e.g. "us-east-1".
-    public var region: String?
+    @objc public var region: String?
 
     /// The bucket or container in the specified file store where the file should end up.
-    public var container: String?
+    @objc public var container: String?
 
     /// For S3, this is the key where the file will be stored at. By default, Filestack stores
     /// the file at the root at a unique id, followed by an underscore, followed by the
     /// filename, for example: `3AB239102DB_myvideo.mp4`.
-    public var path: String?
+    @objc public var path: String?
 
     /// The desired filename.
-    public var filename: String?
+    @objc public var filename: String?
 
     /// The file's MIME type.
-    public var mimeType: String?
+    @objc public var mimeType: String?
 
     /// An `StorageAccess` value. Valid options are `.public` or `.private`.
     public var access: StorageAccess?
 
     /// An array of workflow IDs to trigger for each upload.
-    public var workflows: [String]?
+    @objc public var workflows: [String]?
 
     // MARK: - Lifecycle Functions
 
@@ -58,6 +58,7 @@ import Foundation
                          container: String? = nil,
                          path: String? = nil,
                          filename: String? = nil,
+                         mimeType: String? = nil,
                          access: StorageAccess? = nil,
                          workflows: [String]? = nil) {
         self.location = location
@@ -65,11 +66,17 @@ import Foundation
         self.container = container
         self.path = path
         self.filename = filename
+        self.mimeType = mimeType
         self.access = access
         self.workflows = workflows
 
         super.init()
     }
+
+    /// A default set of storage options.
+    @objc public static var defaults: StorageOptions = {
+        StorageOptions(location: .s3, access: .private)
+    }()
 }
 
 // MARK: - CustomStringConvertible

@@ -29,9 +29,9 @@ import Foundation
     @objc public var chunkUploadConcurrency: Int
 
     /// Default initializer.
-    public init(preferIntelligentIngestion: Bool,
+    @objc public init(preferIntelligentIngestion: Bool,
                 startImmediately: Bool,
-                storeOptions: StorageOptions,
+                storeOptions: StorageOptions = .defaults,
                 chunkSize: Int = UploadOptions.defaultChunkSize,
                 partUploadConcurrency: Int = UploadOptions.defaultPartUploadConcurrency,
                 chunkUploadConcurrency: Int = UploadOptions.defaultChunkUploadConcurrency) {
@@ -44,20 +44,17 @@ import Foundation
     }
 
     /// Default chunk size (5 megabytes)
-    public static var defaultChunkSize: Int = 5 * Int(pow(Double(1024), Double(2)))
+    @objc public static var defaultChunkSize: Int = 5 * Int(pow(Double(1024), Double(2)))
 
     /// Default part upload concurrency
-    public static var defaultPartUploadConcurrency: Int = 5
+    @objc public static var defaultPartUploadConcurrency: Int = 5
 
     /// Default chunk upload concurrency per part
-    public static var defaultChunkUploadConcurrency: Int = 8
+    @objc public static var defaultChunkUploadConcurrency: Int = 8
 
     /// A default set of upload options.
-    public static var defaults: UploadOptions = {
-        UploadOptions(preferIntelligentIngestion: true,
-                      startImmediately: true,
-                      storeOptions: StorageOptions(location: .s3, access: .private),
-                      chunkSize: defaultChunkSize)
+    @objc public static var defaults: UploadOptions = {
+        UploadOptions(preferIntelligentIngestion: true, startImmediately: true)
     }()
 }
 
