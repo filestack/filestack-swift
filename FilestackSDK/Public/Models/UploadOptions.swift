@@ -30,11 +30,11 @@ import Foundation
 
     /// Default initializer.
     @objc public init(preferIntelligentIngestion: Bool,
-                startImmediately: Bool,
-                storeOptions: StorageOptions = .defaults,
-                chunkSize: Int = UploadOptions.defaultChunkSize,
-                partUploadConcurrency: Int = UploadOptions.defaultPartUploadConcurrency,
-                chunkUploadConcurrency: Int = UploadOptions.defaultChunkUploadConcurrency) {
+                      startImmediately: Bool,
+                      storeOptions: StorageOptions = .defaults,
+                      chunkSize: Int = UploadOptions.defaultChunkSize,
+                      partUploadConcurrency: Int = UploadOptions.defaultPartUploadConcurrency,
+                      chunkUploadConcurrency: Int = UploadOptions.defaultChunkUploadConcurrency) {
         self.preferIntelligentIngestion = preferIntelligentIngestion
         self.startImmediately = startImmediately
         self.storeOptions = storeOptions
