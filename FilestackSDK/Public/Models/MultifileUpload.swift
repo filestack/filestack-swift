@@ -101,16 +101,13 @@ import Foundation
     /// - Returns: True on success, false otherwise.
     @objc
     @discardableResult public func cancel() -> Bool {
-        switch currentStatus {
-        case .inProgress:
-            shouldAbort = true
-            currentOperation?.cancel()
-            stopUpload()
+        guard currentStatus != .cancelled else { return false }
 
-            return true
-        default:
-            return false
-        }
+        shouldAbort = true
+        currentOperation?.cancel()
+        stopUpload()
+
+        return true
     }
 
     /// Starts upload.

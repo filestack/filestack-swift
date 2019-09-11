@@ -96,19 +96,20 @@ extension MultipartUploadError: LocalizedError {
     /// - Returns: True on success, false otherwise.
     @objc
     @discardableResult public func cancel() -> Bool {
-        switch currentStatus {
-        case .inProgress:
-            uploadQueue.sync {
-                shouldAbort = true
-                uploadOperationQueue.cancelAllOperations()
-            }
-            fail(with: MultipartUploadError.aborted)
-            currentStatus = .cancelled
+        guard currentStatus != .cancelled else { return false }
 
-            return true
-        default:
-            return false
+        uploadQueue.sync {
+            shouldAbort = true
+            uploadOperationQueue.cancelAllOperations()
+            currentStatus = .cancelled
         }
+
+        queue.async {
+            self.completionHandler?(NetworkJSONResponse(with: MultipartUploadError.aborted))
+            self.completionHandler = nil
+        }
+
+        return true
     }
 
     /// Starts upload.
