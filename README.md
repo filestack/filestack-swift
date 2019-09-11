@@ -22,23 +22,27 @@ This is the official Swift SDK for Filestack - API and content management system
 
 [CocoaPods](http://cocoapods.org/) is a dependency manager for Cocoa projects. You can install it with the following command:
 
-`$ gem install cocoapods`
+```shell
+$ gem install cocoapods
+```
 
 To integrate FilestackSDK into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-```
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'FilestackSDK', '~> 2.0'
+    pod 'FilestackSDK', '~> 2.2'
 end
 ```
 
 Then, run the following command:
 
-`$ pod install`
+```shell
+$ pod install
+```
 
 ### Carthage
 
@@ -46,14 +50,14 @@ Then, run the following command:
 
 You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
 
-```
+```shell
 $ brew update
 $ brew install carthage
 ```
 
 To integrate FilestackSDK into your Xcode project using Carthage, specify it in your `Cartfile`:
 
-`github "filestack/filestack-swift" ~> 2.0`
+`github "filestack/filestack-swift" ~> 2.2`
 
 Run `carthage update` to build the framework and drag the built `FilestackSDK.framework` into your Xcode project. Additionally, add `FilestackSDK.framework`, `Alamofire.framework` and `CryptoSwift.framework` to the embedded frameworks build phase of your app's target.
 
@@ -63,7 +67,9 @@ Run `carthage update` to build the framework and drag the built `FilestackSDK.fr
 
 Open up Terminal, cd into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
 
-`$ git init`
+```shell
+$ git init
+```
 
 Add FilestackSDK and its dependencies as git submodules by running the following commands:
 
@@ -88,7 +94,8 @@ Repeat the same process for adding `Alamofire` and `CryptoSwift` dependent frame
 
 ## Usage
 
-### Integration into a Swift project
+<details>
+<summary>Integration into a Swift project</summary>
 
 1. Import the framework into your code:
 
@@ -116,7 +123,10 @@ Repeat the same process for adding `Alamofire` and `CryptoSwift` dependent frame
     let client = Client(apiKey: "YOUR-API-KEY", security: security)
     ```
 
-### Integration into an Objective-C project
+</details>
+
+<details>
+<summary>Integration into an Objective-C project</summary>
 
 1. Import the framework into your code:
 
@@ -154,134 +164,114 @@ Repeat the same process for adding `Alamofire` and `CryptoSwift` dependent frame
     ```
 
 For more information, please consult our [API Reference](https://filestack.github.io/filestack-swift/).
+</details>
 
-### Uploading files directly to a storage location
+<details>
+<summary>Uploading files directly to a storage location</summary>
 
 Both regular and Intelligent Ingestion uploads use the same API function available in the `Client` class. However, if your account has Intelligent Ingestion support enabled and you prefer using the regular uploading mechanism, you could disable it by setting the `useIntelligentIngestionIfAvailable` argument to `false` (see the relevant examples below.)
 
-#### Swift Example
+<details>
+<summary>Swift Example</summary>
 
 ```swift
-// Initialize a `Policy` with the expiry time and permissions you need.
-let oneDayInSeconds: TimeInterval = 60 * 60 * 24 // expires tomorrow
-let policy = Policy(// Set your expiry time (24 hours in our case)
-                    expiry: Date(timeIntervalSinceNow: oneDayInSeconds),
-                    // Set the permissions you want your policy to have
-                    call: [.pick, .read, .store])
+// Define upload options (see `UploadOptions` for all the available options)
+// Here we use `.defaults` which implies:
+// * preferIntelligentIngestion = true
+// * startImmediately = true
+// * storeOptions = StorageOptions(location: .s3, access: .private)
+// * defaultPartUploadConcurrency = 5
+// * defaultChunkUploadConcurrency = 8
+// * chunkSize = 5mbs 
+let uploadOptions = UploadOptions.defaults
+// For instance, if you don't want to use Intelligent Ingestion regardless of whether it is available:
+uploadOptions.preferIntelligentIngestion = false
+// You may also easily override the default store options:
+uploadOptions.storeOptions = StorageOptions(// Store location (e.g. S3, Dropbox, Rackspace, Azure, Google Cloud Storage)
+                                            location: .s3,
+                                            // AWS Region for S3 (e.g. "us-east-1", "eu-west-1", "ap-northeast-1", etc.)
+                                            region: "us-east-1",
+                                            // The name of your S3 bucket
+                                            container: "YOUR-S3-BUCKET",
+                                            // Destination path in the store.
+                                            // You may use a path to a folder (e.g. /public/) or,
+                                            // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
+                                            // When using a path to a folder, the uploaded file will be stored at that folder using a
+                                            // filename derived from the original filename.
+                                            // When using a path to a filename, the uploaded file will be stored at the given path
+                                            // using the filename indicated in the path.
+                                            path: "/public/oncorhynchus.jpg",
+                                            // Custom MIME type (useful when uploadable has no way of knowing its MIME type)
+                                            mimeType: "image/jpg",
+                                            // Access permissions (either public or private)
+                                            access: .public,
+                                            // An array of workflow IDs to trigger for each upload
+                                            workflows: ["WF-1", "WF-2"]
+                                            )
 
-// Initialize a `Security` object by providing a `Policy` object and your app secret.
-// You can find and/or enable your app secret in the Developer Portal.
-guard let security = try? Security(policy: policy, appSecret: "YOUR-APP-SECRET") else {
-    return
-}
+let uploadable = URL(...) // may also be Data or arrays of URL or Data.
 
-// Get an URL pointing to the local file you would like to upload.
-guard let localURL = Bundle.main.url(forResource: "YOUR-IMAGE", withExtension: "jpg") else {
-    return
-}
+// Call the function in your `Client` instance that takes care of uploading your Uploadable.
+// Please notice that most arguments have sensible defaults and may be ommited.
+let mpu = client.upload(// You may pass an URL, Data or arrays of URL or Data
+                        using: uploadable,
+                        // Set the upload options here. If none given, `UploadOptions.defaults` 
+                        // is assumed.
+                        options: uploadOptions,
+                        // Set the dispatch queue where you want your upload progress
+                        // and completion handlers to be called.
+                        // Remember that any UI updates should be performed on the
+                        // main queue.
+                        // You can omit this parameter, and the main queue will be
+                        // used by default.
+                        queue: .main,
+                        // Set your upload progress handler here (optional)
+                        uploadProgress: { progress in
+                            // Here you may update the UI to reflect the upload progress.
+                        	print("Progress: \(progress)")
+                        }) { response in
+                            // Try to obtain Filestack handle
+                            if let json = response?.json, let handle = json["handle"] as? String {
+                                // Use Filestack handle
+                            } else if let error = response?.error {
+                                // Handle error
+                            }
+                        }
 
-// Initialize your `Client` object by passing a valid API key, and security options.
-let client = Client(apiKey: "YOUR-API-KEY", security: security)
+// Start upload (only useful when `startImmediately` option is `false`)
+mpu.start()
 
-let uploadProgress: (Progress) -> Void = { progress in
-    // Here you may update the UI to reflect the upload progress.
-	print("Progress: \(progress)")
-}
+// Cancel ongoing upload.
+mpu.cancel()
 
-// Store options
-let storeOptions: StorageOptions = StorageOptions(// Store location (e.g. S3, Dropbox, Rackspace, Azure, Google Cloud Storage)
-                                                  location: .s3,
-                                                  // AWS Region for S3 (e.g. "us-east-1", "eu-west-1", "ap-northeast-1", etc.)
-                                                  region: "us-east-1",
-                                                  // The name of your S3 bucket
-                                                  container: "YOUR-S3-BUCKET",
-                                                  // Destination path in the store.
-                                                  // You may use a path to a folder (e.g. /public/) or,
-                                                  // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
-                                                  // When using a path to a folder, the uploaded file will be stored at that folder using a
-                                                  // filename derived from the original filename.
-                                                  // When using a path to a filename, the uploaded file will be stored at the given path
-                                                  // using the filename indicated in the path.
-                                                  path: "/public/oncorhynchus.jpg",
-                                                  // Access permissions (either public or private)
-                                                  access: .public)
-
-// Call the function in your `Client` instance that takes care of file uploading.
-// Please notice that some of the parameters are optional and have default values.
-let multiPartUpload = client.multiPartUpload(// Set the URL pointing to the local file you want to upload.
-                                             from: localURL,
-                                             // Set the destination storage location here.
-                                             // If none given, S3 location with default options is assumed.
-                                             storeOptions: storeOptions,
-                                             // Set to `false` if you don't want to use
-                                             // Intelligent Ingestion regardless of whether it is available
-                                             // for you.
-                                             useIntelligentIngestionIfAvailable: true,
-                                             // Set the dispatch queue where you want your upload progress
-                                             // and completion handlers to be called.
-                                             // Remember that any UI updates should be performed on the
-                                             // main queue.
-                                             // You can omit this parameter, and the main queue will be
-                                             // used by default.
-                                             queue: .main,
-                                             // Set your upload progress handler here (optional)
-                                             uploadProgress: uploadProgress) { response in
-    // Try to obtain Filestack handle
-    if let json = response?.json, let handle = json["handle"] as? String {
-        // Use Filestack handle
-    } else if let error = response?.error {
-        // Handle error
-    }
-}
-
-// Cancelling ongoing multipart upload.
-multipartUpload.cancel()
+// Query progress.
+mpu.progress // returns a `Progress` object
 ```
+</details>
 
-#### Objective-C Example
+<details>
+<summary>Objective-C Example</summary>
 
 ```objective-c
-// Initialize a `FSPolicy` object with the expiry time and permissions you need.
-NSTimeInterval oneDayInSeconds = 60 * 60 * 24; // expires tomorrow
-NSDate *expiryDate = [[NSDate alloc] initWithTimeIntervalSinceNow:oneDayInSeconds];
-FSPolicyCall permissions = FSPolicyCallPick | FSPolicyCallRead | FSPolicyCallStore;
+// Define upload options (see `FSUploadOptions` for all the available options)
+// Here we use `.defaults` which implies:
+// * preferIntelligentIngestion = true
+// * startImmediately = true
+// * storeOptions = FSStorageOptions.defaults (= location:S3, access:private)
+// * defaultPartUploadConcurrency = 5
+// * defaultChunkUploadConcurrency = 8
+// * chunkSize = 5mbs
+FSUploadOptions *uploadOptions = FSUploadOptions.defaults;
 
-FSPolicy *policy = [[FSPolicy alloc] initWithExpiry:expiryDate
-                                               call:permissions];
+// For instance, if you don't want to use Intelligent Ingestion regardless of whether it is available:
+uploadOptions.preferIntelligentIngestion = NO;
 
-NSError *error;
-
-// Initialize a `Security` object by providing a `FSPolicy` object and your app secret.
-// You can find and/or enable your app secret in the Developer Portal.
-FSSecurity *security = [[FSSecurity alloc] initWithPolicy:policy
-                                                appSecret:@"YOUR-APP-SECRET"
-                                                    error:&error];
-
-if (error != nil) {
-    NSLog(@"Error instantiating policy object: %@", error.localizedDescription);
-    return;
-}
-
-// Get an URL pointing to the local file you would like to upload.
-NSURL *localURL = [[NSBundle mainBundle] URLForResource:@"YOUR-IMAGE"
-                                          withExtension:@"jpg"];
-
-// Initialize your `FSClient` object by passing a valid API key, and security options.
-FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
-                                           security:security];
-
-
-void (^uploadProgress)(NSProgress *) = ^(NSProgress *progress) {
-    // Here you may update the UI to reflect the upload progress.
-    NSLog(@"Progress: %@", progress);
-};
-
-// Store options, initialized with a storage location (e.g. S3, Dropbox, Rackspace, Azure, Google Cloud Storage)
-FSStorageOptions *storeOptions = [[FSStorageOptions alloc] initWithLocation:FSStorageLocationS3];
+// You may also easily override the default store options:
+uploadOptions.storeOptions = [[FSStorageOptions alloc] initWithLocation:FSStorageLocationS3 access:FSStorageAccessPrivate];
 // AWS Region for S3 (e.g. "us-east-1", "eu-west-1", "ap-northeast-1", etc.)
-storeOptions.region = @"us-east-1";
+uploadOptions.storeOptions.region = @"us-east-1";
 // The name of your S3 bucket
-storeOptions.container = @"YOUR-S3-BUCKET";
+uploadOptions.storeOptions.container = @"YOUR-S3-BUCKET";
 // Destination path in the store.
 // You may use a path to a folder (e.g. /public/) or,
 // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
@@ -289,35 +279,53 @@ storeOptions.container = @"YOUR-S3-BUCKET";
 // filename derived from the original filename.
 // When using a path to a filename, the uploaded file will be stored at the given path
 // using the filename indicated in the path.
-storeOptions.path = @"/public/oncorhynchus.jpg";
-// Access permissions (either public or private)
-storeOptions.access = FSStorageAccessPublic;
+uploadOptions.storeOptions.path = @"/public/oncorhynchus.jpg";
+// Custom MIME type (useful when uploadable has no way of knowing its MIME type)
+uploadOptions.storeOptions.mimeType = @"image/jpg";
+// An array of workflow IDs to trigger for each upload
+uploadOptions.storeOptions.workflows = @[@"WF-1", @"WF-2"];
 
-// Call the function in your `FSClient` instance that takes care of file uploading.
-// Please notice that some of the parameters are optional and have default values.
-MultipartUpload *multipartUpload = [client multiPartUploadFrom:localURL
-                                                  storeOptions: storeOptions,
-                            useIntelligentIngestionIfAvailable:YES
-                                                         queue:dispatch_get_main_queue()
-                                                uploadProgress:uploadProgress
-             completionHandler:^(FSNetworkJSONResponse * _Nullable response) {
-                 NSDictionary *jsonResponse = response.json;
-                 NSString *handle = jsonResponse[@"handle"];
-                 NSError *error = response.error;
+// Some local URL to be uploaded
+NSURL *someURL = ...;
 
-                 if (handle) {
-                     // Use Filestack handle
-                     NSLog(@"Handle is: %@", handle);
-                 } else if (error) {
-                     // Handle error
-                     NSLog(@"Error is: %@", error);
-                 }
-             }
+FSMultipartUpload *mpu = [client uploadURLUsing:someURL
+                                        options:uploadOptions
+                                        queue:dispatch_get_main_queue()
+                               uploadProgress:^(NSProgress * _Nonnull progress) {
+                                   // Here you may update the UI to reflect the upload progress.
+                                   NSLog(@"Progress: %@", progress);
+                               }
+                              completionHandler:^(FSNetworkJSONResponse * _Nullable response) {
+         NSDictionary *jsonResponse = response.json;
+         NSString *handle = jsonResponse[@"handle"];
+         NSError *error = response.error;
+
+         if (handle) {
+             // Use Filestack handle
+             NSLog(@"Handle is: %@", handle);
+         } else if (error) {
+             // Handle error
+             NSLog(@"Error is: %@", error);
+         }
+     }
 ];
 
-// Cancelling ongoing multipart upload.
-[multipartUpload cancel];
+// Other alternative uploading methods are available in `FSClient`:
+// - For multiple URL uploading: `uploadMultipleURLs:options:queue:uploadProgress:completionHandler:)`
+// - For data uploading: `uploadDataUsing:options:queue:uploadProgress:completionHandler:)`
+// - For multiple data uploading: `uploadMultipleDataUsing:options:queue:uploadProgress:completionHandler:)`
+
+// Start upload (only useful when `startImmediately` option is `false`)
+[mpu start];
+
+// Cancel ongoing upload.
+[mpu cancel];
+
+// Query progress.
+mpu.progress // returns an `NSProgress` object
 ```
+</details>
+</details>
 
 ## Versioning
 
