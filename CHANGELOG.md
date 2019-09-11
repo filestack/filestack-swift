@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+Version 2.2 *unreleased*
+----------------------------
+
+- Added `upload(using:options:queue:uploadProgress:completionHandler:)` taking one or multiple `Uploadable` items as input to Client and deprecated `multiPartUpload(...)` and `multiFileUpload(...)`.
+- Added equivalent new upload functionality for Objective-C that allows uploads of one or several local `NSURL` or  `NSData`.
+- Exposed `progress` property in `MultipartUpload` and `MultifileUpload` classes.
+- Added `UploadOptions` class that allows customizing the upload behavior in a much more fine-grained way.
+- Added current status tracking to `MultipartUpload` and `MultifileUpload`  via `currentStatus` property.
+- Changed `add(uploadables:)`, `cancel()` and `start()` in `MultipartUpload` and `MultifileUpload` so they return a `Bool` value.
+- Added `CustomStringConvertible` conformance to most public classes using newly added helper `Tools.describe(subject:only:except:)`.
+- Removed unused `storage` property from `Client` and marked `init(apiKey:security:storage:)` as deprecated.
+- Updated `Alamofire` dependency to `~> 4.9`.
+- Updated `CryptoSwift` dependency to `~> 1.0`.
+- Added static `defaults` function to StorageOptions defaulting to (location: .S3, access: .private)
+- Exposed more API to Objective-C.
+- Improved documentation.
+
 Version 2.1 *(2019-09-05)*
 ----------------------------
 
