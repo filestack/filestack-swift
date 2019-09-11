@@ -12,20 +12,18 @@ import Foundation
 extension SessionManager {
     static var filestackDefault: SessionManager = {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = additionalHeaders
+        var defaultHeaders = SessionManager.defaultHTTPHeaders
+
+        defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
+        defaultHeaders["Filestack-Source"] = "Swift-\(shortVersionString)"
+
+        configuration.httpShouldUsePipelining = true
+        configuration.httpAdditionalHeaders = defaultHeaders
 
         return SessionManager(configuration: configuration)
     }()
 
     // MARK: - Private Functions
-
-    private class var additionalHeaders: HTTPHeaders {
-        var defaultHeaders = SessionManager.defaultHTTPHeaders
-        defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
-        defaultHeaders["Filestack-Source"] = "Swift-\(shortVersionString)"
-
-        return defaultHeaders
-    }
 
     private class var shortVersionString: String {
         return Bundle(for: Client.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
