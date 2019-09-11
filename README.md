@@ -169,7 +169,9 @@ For more information, please consult our [API Reference](https://filestack.githu
 <details>
 <summary>Uploading files directly to a storage location</summary>
 
+<p>
 Both regular and Intelligent Ingestion uploads use the same API function available in the `Client` class. However, if your account has Intelligent Ingestion support enabled and you prefer using the regular uploading mechanism, you could disable it by setting the `useIntelligentIngestionIfAvailable` argument to `false` (see the relevant examples below.)
+</p>
 
 <details>
 <summary>Swift Example</summary>
