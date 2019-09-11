@@ -11,7 +11,7 @@ import Foundation
 
 final class ProcessService: NetworkingService {
     static let sessionManager = SessionManager.filestackDefault
-    static let baseURL = Config.processURL
+    static let baseURL = Constants.processURL
 
     static func buildURL(tasks: String? = nil, sources: [String], key: String? = nil, security: Security? = nil) -> URL? {
         var url = baseURL

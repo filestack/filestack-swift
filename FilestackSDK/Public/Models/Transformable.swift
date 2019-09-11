@@ -156,7 +156,7 @@ import Foundation
         // Create and perform post request
         guard let request = ProcessService.request(url: url, method: .post) else { return self }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseJSON(queue: queue ?? .main) { response in
             let jsonResponse = NetworkJSONResponse(with: response)

@@ -11,7 +11,7 @@ import Foundation
 
 final class CDNService: NetworkingService {
     static let sessionManager = SessionManager.filestackDefault
-    static let baseURL = Config.cdnURL
+    static let baseURL = Constants.cdnURL
 
     static func getDataRequest(handle: String,
                                path: String?,

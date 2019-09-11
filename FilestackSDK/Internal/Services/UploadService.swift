@@ -11,7 +11,7 @@ import Foundation
 
 final class UploadService: NetworkingService {
     static let sessionManager = SessionManager.filestackDefault
-    static let baseURL = Config.uploadURL
+    static let baseURL = Constants.uploadURL
 
     static func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
                        url: URL,

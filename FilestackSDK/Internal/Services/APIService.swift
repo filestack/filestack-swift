@@ -11,7 +11,7 @@ import Foundation
 
 final class APIService: NetworkingService {
     static let sessionManager = SessionManager.filestackDefault
-    static let baseURL = Config.apiURL
+    static let baseURL = Constants.apiURL
 
     static func deleteRequest(handle: String,
                               path: String?,

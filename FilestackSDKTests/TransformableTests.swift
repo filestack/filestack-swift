@@ -12,7 +12,7 @@ import XCTest
 @testable import FilestackSDK
 
 class TransformableTests: XCTestCase {
-    private let processStubConditions = isScheme(Config.processURL.scheme!) && isHost(Config.processURL.host!)
+    private let processStubConditions = isScheme(Constants.processURL.scheme!) && isHost(Constants.processURL.host!)
     private let client = Client(apiKey: "My-API-KEY")
 
     private var transformable: Transformable!
@@ -62,7 +62,7 @@ class TransformableTests: XCTestCase {
     func testASCIITransformationUrl() {
         transformable.add(transform: ASCIITransform().background(.red).foreground(.blue).size(50))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("ascii=background:FF0000FF,foreground:0000FFFF,size:50")
             .appendingPathComponent("MY-HANDLE")
 
@@ -72,7 +72,7 @@ class TransformableTests: XCTestCase {
     func testASCIIWithReverseTransformationUrl() {
         transformable.add(transform: ASCIITransform().background(.red).foreground(.blue).reverse())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("ascii=background:FF0000FF,foreground:0000FFFF,colored:true,reverse:true")
             .appendingPathComponent("MY-HANDLE")
 
@@ -82,7 +82,7 @@ class TransformableTests: XCTestCase {
     func testBlurFacesTransformationUrl() {
         transformable.add(transform: BlurFacesTransform().amount(30))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("blur_faces=amount:30.0")
             .appendingPathComponent("MY-HANDLE")
 
@@ -92,7 +92,7 @@ class TransformableTests: XCTestCase {
     func testCacheTransformationUrl() {
         transformable.add(transform: CacheTransform().expiry(3600))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("cache=expiry:3600")
             .appendingPathComponent("MY-HANDLE")
 
@@ -102,7 +102,7 @@ class TransformableTests: XCTestCase {
     func testCacheTransformationWithMaxExpiryUrl() {
         transformable.add(transform: CacheTransform().maxExpiry())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("cache=expiry:max")
             .appendingPathComponent("MY-HANDLE")
 
@@ -112,7 +112,7 @@ class TransformableTests: XCTestCase {
     func testTurningOffCacheTransformationUrl() {
         transformable.add(transform: CacheTransform().maxExpiry().turnOff())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("cache=false")
             .appendingPathComponent("MY-HANDLE")
 
@@ -123,7 +123,7 @@ class TransformableTests: XCTestCase {
         let collection = CollageTransformCollection().add(["HANDLE-1", "HANDLE-2"])
         transformable.add(transform: CollageTransform(size: CGSize(width: 15, height: 35), collection: collection).margin(40).color(.red).cropFit().autorotate())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("collage=width:15,height:35,files:[\"HANDLE-1\",\"HANDLE-2\"],margin:40,color:FF0000FF,fit:crop,autorotate:true")
             .appendingPathComponent("MY-HANDLE")
 
@@ -133,7 +133,7 @@ class TransformableTests: XCTestCase {
     func testCompressTransformationUrl() {
         transformable.add(transform: CompressTransform().metadata(true))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("compress=metadata:true")
             .appendingPathComponent("MY-HANDLE")
 
@@ -143,7 +143,7 @@ class TransformableTests: XCTestCase {
     func testEnhanceTransformationUrl() {
         transformable.add(transform: EnhanceTransform())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("enhance")
             .appendingPathComponent("MY-HANDLE")
 
@@ -154,7 +154,7 @@ class TransformableTests: XCTestCase {
         transformable.add(transform: EnhanceTransform()
             .preset(.beautifyPlus))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("enhance=preset:beautify_plus")
             .appendingPathComponent("MY-HANDLE")
 
@@ -164,7 +164,7 @@ class TransformableTests: XCTestCase {
     func testModulateTransformationUrl() {
         transformable.add(transform: ModulateTransform().brightness(50).hue(60).saturation(200))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("modulate=brightness:50,hue:60,saturation:200")
             .appendingPathComponent("MY-HANDLE")
 
@@ -174,7 +174,7 @@ class TransformableTests: XCTestCase {
     func testNegativeTransformationUrl() {
         transformable.add(transform: NegativeTransform())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("negative")
             .appendingPathComponent("MY-HANDLE")
 
@@ -184,7 +184,7 @@ class TransformableTests: XCTestCase {
     func testOilPaintTransformationUrl() {
         transformable.add(transform: OilPaintTransform().amount(13))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("oil_paint=amount:13")
             .appendingPathComponent("MY-HANDLE")
 
@@ -196,7 +196,7 @@ class TransformableTests: XCTestCase {
         let secondObj = CGRect(x: 11, y: 21, width: 31, height: 41)
         transformable.add(transform: PartialBlurTransform(objects: [firstObj, secondObj]))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("partial_blur=objects:[[10,20,30,40],[11,21,31,41]]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -208,7 +208,7 @@ class TransformableTests: XCTestCase {
         let secondObj = CGRect(x: 11, y: 21, width: 31, height: 41)
         transformable.add(transform: PartialPixelateTransform(objects: [firstObj, secondObj]))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("partial_pixelate=objects:[[10,20,30,40],[11,21,31,41]]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -218,7 +218,7 @@ class TransformableTests: XCTestCase {
     func testProgressiveJPEGTransformationUrl() {
         transformable.add(transform: ProgressiveJPEGTransform().quality(15).metadata(true))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("pjpg=quality:15,metadata:true")
             .appendingPathComponent("MY-HANDLE")
 
@@ -228,7 +228,7 @@ class TransformableTests: XCTestCase {
     func testRedEyeRemovalTransformationUrl() {
         transformable.add(transform: RedEyeRemovalTransform())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("redeye")
             .appendingPathComponent("MY-HANDLE")
 
@@ -238,7 +238,7 @@ class TransformableTests: XCTestCase {
     func testUpscaleTransformationUrl() {
         transformable.add(transform: UpscaleTransform().noise(.low).style(.artwork).noUpscale())
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("upscale=noise:low,style:artwork,upscale:false")
             .appendingPathComponent("MY-HANDLE")
 
@@ -248,7 +248,7 @@ class TransformableTests: XCTestCase {
     func testURLScreenshotTransformationUrl() {
         transformable.add(transform: URLScreenshotTransform().mobileAgent().windowMode().width(1).height(2).delay(5).orientation(.landscape).device("test"))
 
-        let expectedUrl = Config.processURL
+        let expectedUrl = Constants.processURL
             .appendingPathComponent("urlscreenshot=agent:mobile,mode:window,width:1,height:2,delay:5,orientation:landscape,device:test")
             .appendingPathComponent("MY-HANDLE")
 
@@ -258,7 +258,7 @@ class TransformableTests: XCTestCase {
     func testResizeTransformationURL() {
         transformable.add(transform: ResizeTransform().width(50).height(25).fit(.crop).align(.bottom))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
             .appendingPathComponent("MY-HANDLE")
 
@@ -268,7 +268,7 @@ class TransformableTests: XCTestCase {
     func testResizeTransformationWithOptionalsURL() {
         transformable.add(transform: ResizeTransform().width(50).fit(.crop).align(.center))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("resize=width:50,fit:crop,align:center")
             .appendingPathComponent("MY-HANDLE")
 
@@ -278,7 +278,7 @@ class TransformableTests: XCTestCase {
     func testCropTransformationURL() {
         transformable.add(transform: CropTransform(x: 20, y: 30, width: 150, height: 250))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("crop=dim:[20,30,150,250]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -288,7 +288,7 @@ class TransformableTests: XCTestCase {
     func testSecureForWorkTransformationURL() {
         transformable.add(transform: SecureForWorkTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("sfw")
             .appendingPathComponent("MY-HANDLE")
 
@@ -298,7 +298,7 @@ class TransformableTests: XCTestCase {
     func testTagsTransformationURL() {
         transformable.add(transform: TagsTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("tags")
             .appendingPathComponent("MY-HANDLE")
 
@@ -308,7 +308,7 @@ class TransformableTests: XCTestCase {
     func testRotateTransformationURL() {
         transformable.add(transform: RotateTransform(deg: 320).exif(true).background(.white))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("rotate=deg:320,exif:true,background:FFFFFFFF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -318,7 +318,7 @@ class TransformableTests: XCTestCase {
     func testRotateDegExifTransformationURL() {
         transformable.add(transform: RotateTransform().exif(false).background(.red))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("rotate=deg:exif,exif:false,background:FF0000FF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -328,7 +328,7 @@ class TransformableTests: XCTestCase {
     func testRotateTransformationWithOptionalsURL() {
         transformable.add(transform: RotateTransform(deg: 150))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("rotate=deg:150")
             .appendingPathComponent("MY-HANDLE")
 
@@ -338,7 +338,7 @@ class TransformableTests: XCTestCase {
     func testFlipTransformationURL() {
         transformable.add(transform: FlipTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("flip")
             .appendingPathComponent("MY-HANDLE")
 
@@ -348,7 +348,7 @@ class TransformableTests: XCTestCase {
     func testFlopTransformationURL() {
         transformable.add(transform: FlopTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("flop")
             .appendingPathComponent("MY-HANDLE")
 
@@ -358,7 +358,7 @@ class TransformableTests: XCTestCase {
     func testWatermarkTransformationURL() {
         transformable.add(transform: WatermarkTransform(file: "WATERMARK-HANDLE").size(50).position(.top))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[top]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -368,7 +368,7 @@ class TransformableTests: XCTestCase {
     func testWatermarkTransformationWithPairedPositionURL() {
         transformable.add(transform: WatermarkTransform(file: "WATERMARK-HANDLE").size(50).position([.top, .left]))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("watermark=file:WATERMARK-HANDLE,size:50,position:[top,left]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -378,7 +378,7 @@ class TransformableTests: XCTestCase {
     func testWatermarkTransformationWithPairedPositionAndOptionalsURL() {
         transformable.add(transform: WatermarkTransform(file: "WATERMARK-HANDLE"))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("watermark=file:WATERMARK-HANDLE")
             .appendingPathComponent("MY-HANDLE")
 
@@ -388,7 +388,7 @@ class TransformableTests: XCTestCase {
     func testDetectFacesTransformationURL() {
         transformable.add(transform: DetectFacesTransform().minSize(0.25).maxSize(0.55).color(.white).export(true))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("detect_faces=minsize:0.25,maxsize:0.55,color:FFFFFFFF,export:true")
             .appendingPathComponent("MY-HANDLE")
 
@@ -398,7 +398,7 @@ class TransformableTests: XCTestCase {
     func testDetectFacesTransformationWithOptionalsURL() {
         transformable.add(transform: DetectFacesTransform().color(.red))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("detect_faces=color:FF0000FF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -408,7 +408,7 @@ class TransformableTests: XCTestCase {
     func testDetectFacesTransformationWithoutArgumentsURL() {
         transformable.add(transform: DetectFacesTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("detect_faces")
             .appendingPathComponent("MY-HANDLE")
 
@@ -418,7 +418,7 @@ class TransformableTests: XCTestCase {
     func testCropFacesTransformationURL() {
         transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([4]))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[4]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -428,7 +428,7 @@ class TransformableTests: XCTestCase {
     func testCropFacesTransformationWithOptionalsURL() {
         transformable.add(transform: CropFacesTransform().mode(.thumb).faces([1]))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("crop_faces=mode:thumb,faces:[1]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -438,7 +438,7 @@ class TransformableTests: XCTestCase {
     func testCropFacesTransformationWithOptionals2URL() {
         transformable.add(transform: CropFacesTransform().mode(.crop))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("crop_faces=mode:crop")
             .appendingPathComponent("MY-HANDLE")
 
@@ -448,7 +448,7 @@ class TransformableTests: XCTestCase {
     func testCropFacesTransformationWithFacesArrayURL() {
         transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).faces([1, 2, 3, 4]))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:[1,2,3,4]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -458,7 +458,7 @@ class TransformableTests: XCTestCase {
     func testCropFacesTransformationWithFacesAllURL() {
         transformable.add(transform: CropFacesTransform().mode(.fill).width(250).height(150).allFaces())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("crop_faces=mode:fill,width:250,height:150,faces:all")
             .appendingPathComponent("MY-HANDLE")
 
@@ -474,7 +474,7 @@ class TransformableTests: XCTestCase {
             .blur(0.25)
             .type(.oval))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("pixelate_faces=faces:[3],minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
             .appendingPathComponent("MY-HANDLE")
 
@@ -490,7 +490,7 @@ class TransformableTests: XCTestCase {
             .blur(0.25)
             .type(.oval))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("pixelate_faces=faces:[1,3,5],minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
             .appendingPathComponent("MY-HANDLE")
 
@@ -506,7 +506,7 @@ class TransformableTests: XCTestCase {
             .blur(0.25)
             .type(.oval))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("pixelate_faces=faces:all,minsize:0.25,maxsize:0.45,buffer:200,blur:0.25,type:oval")
             .appendingPathComponent("MY-HANDLE")
 
@@ -518,7 +518,7 @@ class TransformableTests: XCTestCase {
             .faces([4])
             .buffer(250))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("pixelate_faces=faces:[4],buffer:250")
             .appendingPathComponent("MY-HANDLE")
 
@@ -530,7 +530,7 @@ class TransformableTests: XCTestCase {
             .faces([1, 3, 5])
             .buffer(320))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("pixelate_faces=faces:[1,3,5],buffer:320")
             .appendingPathComponent("MY-HANDLE")
 
@@ -542,7 +542,7 @@ class TransformableTests: XCTestCase {
             .allFaces()
             .buffer(220))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("pixelate_faces=faces:all,buffer:220")
             .appendingPathComponent("MY-HANDLE")
 
@@ -552,7 +552,7 @@ class TransformableTests: XCTestCase {
     func testRoundedCornersTransformationURL() {
         transformable.add(transform: RoundedCornersTransform().radius(150).blur(0.8).background(.black))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("rounded_corners=radius:150,blur:0.8,background:000000FF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -562,7 +562,7 @@ class TransformableTests: XCTestCase {
     func testRoundedCornersTransformationWithoutArgumentsURL() {
         transformable.add(transform: RoundedCornersTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("rounded_corners")
             .appendingPathComponent("MY-HANDLE")
 
@@ -572,7 +572,7 @@ class TransformableTests: XCTestCase {
     func testRoundedCornersMaxRadiusTransformationURL() {
         transformable.add(transform: RoundedCornersTransform().maxRadius().blur(0.25).background(.white))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("rounded_corners=radius:max,blur:0.25,background:FFFFFFFF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -582,7 +582,7 @@ class TransformableTests: XCTestCase {
     func testRoundedCornersMaxRadiusTransformationWithoutArgumentsURL() {
         transformable.add(transform: RoundedCornersTransform().maxRadius())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("rounded_corners=radius:max")
             .appendingPathComponent("MY-HANDLE")
 
@@ -592,7 +592,7 @@ class TransformableTests: XCTestCase {
     func testVignetteTransformationURL() {
         transformable.add(transform: VignetteTransform().amount(80).blurMode(.gaussian).background(.black))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("vignette=amount:80,blurmode:gaussian,background:000000FF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -602,7 +602,7 @@ class TransformableTests: XCTestCase {
     func testVignetteTransformationWithoutArgumentsURL() {
         transformable.add(transform: VignetteTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("vignette")
             .appendingPathComponent("MY-HANDLE")
 
@@ -612,7 +612,7 @@ class TransformableTests: XCTestCase {
     func testVignetteTransformationWithOptionalsURL() {
         transformable.add(transform: VignetteTransform().amount(35))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("vignette=amount:35")
             .appendingPathComponent("MY-HANDLE")
 
@@ -622,7 +622,7 @@ class TransformableTests: XCTestCase {
     func testPolaroidTransformationURL() {
         transformable.add(transform: PolaroidTransform().color(.white).rotate(33).background(.black))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("polaroid=color:FFFFFFFF,rotate:33,background:000000FF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -632,7 +632,7 @@ class TransformableTests: XCTestCase {
     func testPolaroidTransformationWithoutArgumentsURL() {
         transformable.add(transform: PolaroidTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("polaroid")
             .appendingPathComponent("MY-HANDLE")
 
@@ -642,7 +642,7 @@ class TransformableTests: XCTestCase {
     func testPolaroidTransformationWithOptionalsURL() {
         transformable.add(transform: PolaroidTransform().rotate(45))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("polaroid=rotate:45")
             .appendingPathComponent("MY-HANDLE")
 
@@ -652,7 +652,7 @@ class TransformableTests: XCTestCase {
     func testTornEdgesTransformationURL() {
         transformable.add(transform: TornEdgesTransform().spread(start: 5, end: 25).background(.blue))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("torn_edges=spread:[5,25],background:0000FFFF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -662,7 +662,7 @@ class TransformableTests: XCTestCase {
     func testTornEdgesTransformationWithoutArgumentsURL() {
         transformable.add(transform: TornEdgesTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("torn_edges")
             .appendingPathComponent("MY-HANDLE")
 
@@ -672,7 +672,7 @@ class TransformableTests: XCTestCase {
     func testTornEdgesTransformationWithOptionalsURL() {
         transformable.add(transform: TornEdgesTransform().spread(start: 5, end: 25))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("torn_edges=spread:[5,25]")
             .appendingPathComponent("MY-HANDLE")
 
@@ -687,7 +687,7 @@ class TransformableTests: XCTestCase {
             .color(.black)
             .background(.white))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("shadow=blur:10,opacity:35,vector:[30,30],color:000000FF,background:FFFFFFFF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -697,7 +697,7 @@ class TransformableTests: XCTestCase {
     func testShadowTransformationWithoutArgumentsURL() {
         transformable.add(transform: ShadowTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("shadow")
             .appendingPathComponent("MY-HANDLE")
 
@@ -707,7 +707,7 @@ class TransformableTests: XCTestCase {
     func testShadowTransformationWithOptionalsURL() {
         transformable.add(transform: ShadowTransform().blur(15).opacity(20))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("shadow=blur:15,opacity:20")
             .appendingPathComponent("MY-HANDLE")
 
@@ -717,7 +717,7 @@ class TransformableTests: XCTestCase {
     func testCircleTransformationURL() {
         transformable.add(transform: CircleTransform().background(.red))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("circle=background:FF0000FF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -727,7 +727,7 @@ class TransformableTests: XCTestCase {
     func testCircleTransformationWithoutArgumentsURL() {
         transformable.add(transform: CircleTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("circle")
             .appendingPathComponent("MY-HANDLE")
 
@@ -737,7 +737,7 @@ class TransformableTests: XCTestCase {
     func testBorderTransformationURL() {
         transformable.add(transform: BorderTransform().width(3).color(.white).background(.red))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("border=width:3,color:FFFFFFFF,background:FF0000FF")
             .appendingPathComponent("MY-HANDLE")
 
@@ -747,7 +747,7 @@ class TransformableTests: XCTestCase {
     func testBorderTransformationWithoutArgumentsURL() {
         transformable.add(transform: BorderTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("border")
             .appendingPathComponent("MY-HANDLE")
 
@@ -757,7 +757,7 @@ class TransformableTests: XCTestCase {
     func testBorderTransformationWithOptionalsURL() {
         transformable.add(transform: BorderTransform().width(5))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("border=width:5")
             .appendingPathComponent("MY-HANDLE")
 
@@ -767,7 +767,7 @@ class TransformableTests: XCTestCase {
     func testSharpenTransformationURL() {
         transformable.add(transform: SharpenTransform().amount(3))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("sharpen=amount:3")
             .appendingPathComponent("MY-HANDLE")
 
@@ -777,7 +777,7 @@ class TransformableTests: XCTestCase {
     func testSharpenTransformationWithoutArgumentsURL() {
         transformable.add(transform: SharpenTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("sharpen")
             .appendingPathComponent("MY-HANDLE")
 
@@ -787,7 +787,7 @@ class TransformableTests: XCTestCase {
     func testBlurTransformationURL() {
         transformable.add(transform: BlurTransform().amount(5))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("blur=amount:5")
             .appendingPathComponent("MY-HANDLE")
 
@@ -797,7 +797,7 @@ class TransformableTests: XCTestCase {
     func testBlurTransformationWithoutArgumentsURL() {
         transformable.add(transform: BlurTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("blur")
             .appendingPathComponent("MY-HANDLE")
 
@@ -807,7 +807,7 @@ class TransformableTests: XCTestCase {
     func testMonochromeTransformationURL() {
         transformable.add(transform: MonochromeTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("monochrome")
             .appendingPathComponent("MY-HANDLE")
 
@@ -817,7 +817,7 @@ class TransformableTests: XCTestCase {
     func testBlackAndWhiteTransformationURL() {
         transformable.add(transform: BlackAndWhiteTransform().threshold(45))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("blackwhite=threshold:45")
             .appendingPathComponent("MY-HANDLE")
 
@@ -827,7 +827,7 @@ class TransformableTests: XCTestCase {
     func testBlackAndWhiteTransformationWithoutArgumentsURL() {
         transformable.add(transform: BlackAndWhiteTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("blackwhite")
             .appendingPathComponent("MY-HANDLE")
 
@@ -837,7 +837,7 @@ class TransformableTests: XCTestCase {
     func testSepiaTransformationURL() {
         transformable.add(transform: SepiaTransform().tone(85))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("sepia=tone:85")
             .appendingPathComponent("MY-HANDLE")
 
@@ -847,7 +847,7 @@ class TransformableTests: XCTestCase {
     func testSepiaTransformationWithoutArgumentsURL() {
         transformable.add(transform: SepiaTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("sepia")
             .appendingPathComponent("MY-HANDLE")
 
@@ -869,7 +869,7 @@ class TransformableTests: XCTestCase {
             .pageFormat(.letter)
             .pageOrientation(.portrait))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent(
                 "output=format:pdf,background:FFFFFFFF,page:1,density:100,compress:true,quality:85,strip:true," +
                     "colorspace:input,secure:true,docinfo:true,pageformat:letter,pageorientation:portrait"
@@ -886,7 +886,7 @@ class TransformableTests: XCTestCase {
             .strip()
             .colorSpace(.input))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("output=format:jpg,compress:true,strip:true,colorspace:input")
             .appendingPathComponent("MY-HANDLE")
 
@@ -900,7 +900,7 @@ class TransformableTests: XCTestCase {
             .preserveInputQuality()
             .colorSpace(.input))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("output=format:jpg,compress:true,quality:input,colorspace:input")
             .appendingPathComponent("MY-HANDLE")
 
@@ -910,7 +910,7 @@ class TransformableTests: XCTestCase {
     func testNoMetadataTransformationURL() {
         transformable.add(transform: NoMetadataTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("no_metadata")
             .appendingPathComponent("MY-HANDLE")
 
@@ -920,7 +920,7 @@ class TransformableTests: XCTestCase {
     func testQualityTransformationURL() {
         transformable.add(transform: QualityTransform(value: 88))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("quality=value:88")
             .appendingPathComponent("MY-HANDLE")
 
@@ -930,7 +930,7 @@ class TransformableTests: XCTestCase {
     func testZipTransformationURL() {
         transformable.add(transform: ZipTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("zip")
             .appendingPathComponent("MY-HANDLE")
 
@@ -967,7 +967,7 @@ class TransformableTests: XCTestCase {
             .watermarkWidth(256)
             .watermarkHeight(256))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent(
                 "video_convert=preset:h264,force:false,width:1080,height:720,title:Chapter 1," +
                     "extname:mp4,filename:chapter_1,location:S3,path:/myfiles/chapter_1.mp4," +
@@ -990,7 +990,7 @@ class TransformableTests: XCTestCase {
         let allowedCharacters = CharacterSet(charactersIn: ",").inverted
         let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("video_convert=preset:h264,title:\(escapedTitle)")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1015,7 +1015,7 @@ class TransformableTests: XCTestCase {
                 .clipLength("00:02:30")
                 .clipOffset("00:00:05"))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent(
                 "video_convert=preset:m4a,force:false,title:Chapter 1," +
                     "extname:m4a,filename:chapter_1,location:S3,path:/myfiles/chapter_1.m4a," +
@@ -1033,7 +1033,7 @@ class TransformableTests: XCTestCase {
             .add(transform: FlopTransform())
             .debug()
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("debug")
             .appendingPathComponent("flip")
             .appendingPathComponent("flop")
@@ -1101,7 +1101,7 @@ class TransformableTests: XCTestCase {
                 .audioSampleRate(44100))
             .debug()
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("debug")
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
             .appendingPathComponent("crop=dim:[20,30,150,250]")
@@ -1141,7 +1141,7 @@ class TransformableTests: XCTestCase {
         let transformable = client.transformable(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
             .add(transform: ResizeTransform().width(50).height(25).fit(.crop).align(.bottom))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("MY-API-KEY")
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
             .appendingPathComponent("https://SOME-EXTERNAL-URL/photo.jpg")
@@ -1161,7 +1161,7 @@ class TransformableTests: XCTestCase {
         let transformable = client.transformable(externalURLs: externalURLs)
             .add(transform: AnimateTransform().width(50).height(25).fit(.crop).align(.bottom))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("MY-API-KEY")
             .appendingPathComponent("animate=width:50,height:25,fit:crop,align:[bottom]")
             .appendingPathComponent("[https://some.tld/1.jpg,https://some.tld/2.jpg,https://some.tld/3.jpg]")
@@ -1228,7 +1228,7 @@ class TransformableTests: XCTestCase {
                 .audioSampleRate(44100))
             .debug()
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("MY-API-KEY")
             .appendingPathComponent("debug")
             .appendingPathComponent("resize=width:50,height:25,fit:crop,align:bottom")
@@ -1294,7 +1294,7 @@ class TransformableTests: XCTestCase {
                                             filename: "custom_flower_crop.jpg",
                                             access: .public)
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("store=location:S3,region:us-east-1,container:filestack-web-demo,path:my/custom/path/,filename:custom_flower_crop.jpg,access:public,base64decode:true")
             .appendingPathComponent("crop=dim:[301,269,1226,1100]")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
@@ -1331,7 +1331,7 @@ class TransformableTests: XCTestCase {
 
         let storageOptions = StorageOptions(location: .s3, access: .public)
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("store=location:S3,access:public,base64decode:false")
             .appendingPathComponent("crop=dim:[301,269,1226,1100]")
             .appendingPathComponent("MY-HANDLE")
@@ -1355,7 +1355,7 @@ class TransformableTests: XCTestCase {
         transformable.add(transform: PDFInfoTransform()
             .colorInfo())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent(
                 "output=format:pdf/" +
                     "pdfinfo=colorinfo:true"
@@ -1374,7 +1374,7 @@ class TransformableTests: XCTestCase {
             .pageFormat(.a3)
             .pages([2, 3, 4]))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent(
                 "output=format:pdf/" +
                     "pdfconvert=pageorientation:landscape,pageformat:a3,pages:[2,3,4]"
@@ -1395,7 +1395,7 @@ class TransformableTests: XCTestCase {
 
         transformable.add(transform: PDFMonochromeTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent(
                 "output=format:pdf/" +
                     "pdfconvert=pageorientation:landscape,pageformat:a3,pages:[2,3,4]/" +
@@ -1411,7 +1411,7 @@ class TransformableTests: XCTestCase {
             .coords(false)
             .preprocess(true))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent(
                 "doc_detection=coords:false,preprocess:true"
             )
@@ -1427,7 +1427,7 @@ class TransformableTests: XCTestCase {
         let transformable = client.transformable(externalURL: URL(string: "https://SOME-EXTERNAL-URL/photo.jpg")!)
             .add(transform: DocumentDetectionTransform().coords(false).preprocess(true))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("MY-API-KEY")
             .appendingPathComponent("doc_detection=coords:false,preprocess:true")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
@@ -1445,7 +1445,7 @@ class TransformableTests: XCTestCase {
             .coords(false)
             .preprocess(true))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("fallback=cache:10,handle:MY-FALLBACK-HANDLE")
             .appendingPathComponent("doc_detection=coords:false,preprocess:true")
             .appendingPathComponent("MY-HANDLE")
@@ -1467,7 +1467,7 @@ class TransformableTests: XCTestCase {
             .coords(false)
             .preprocess(true))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("MY-API-KEY")
             .appendingPathComponent("fallback=cache:10,handle:MY-FALLBACK-HANDLE")
             .appendingPathComponent("doc_detection=coords:false,preprocess:true")
@@ -1480,7 +1480,7 @@ class TransformableTests: XCTestCase {
     func testImageSizeTransformationURL() {
         transformable.add(transform: ImageSizeTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("imagesize")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1490,7 +1490,7 @@ class TransformableTests: XCTestCase {
     func testCopyrightTransformationURL() {
         transformable.add(transform: CopyrightTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("copyright")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1500,7 +1500,7 @@ class TransformableTests: XCTestCase {
     func testOCRTransformationURL() {
         transformable.add(transform: OCRTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("ocr")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1510,7 +1510,7 @@ class TransformableTests: XCTestCase {
     func testAutoImageTransformationURL() {
         transformable.add(transform: AutoImageTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("auto_image")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1520,7 +1520,7 @@ class TransformableTests: XCTestCase {
     func testMinifyJSTransformationURL() {
         transformable.add(transform: MinifyJSTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("minify_js")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1551,7 +1551,7 @@ class TransformableTests: XCTestCase {
             .typeConstructors(false)
             .undefinedToVoid(true))
 
-        let expectedURL = Config.processURL.appendingPathComponent("minify_js=booleans:true,builtIns:false," +
+        let expectedURL = Constants.processURL.appendingPathComponent("minify_js=booleans:true,builtIns:false," +
             "consecutiveAdds:true,deadcode:false,evaluate:true,flipComparisons:false,guards:true,infinity:false," +
             "mangle:true,memberExpressions:false,mergeVars:true,numericLiterals:false,propertyLiterals:true," +
             "regexpConstructors:false,removeConsole:true,removeDebugger:false,removeUndefined:true,simplify:false," +
@@ -1564,7 +1564,7 @@ class TransformableTests: XCTestCase {
     func testMinifyCSSTransformationURL() {
         transformable.add(transform: MinifyCSSTransform())
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("minify_css")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1576,7 +1576,7 @@ class TransformableTests: XCTestCase {
             .level(1)
             .gzip(true))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("minify_css=level:1,gzip:true")
             .appendingPathComponent("MY-HANDLE")
 
@@ -1595,7 +1595,7 @@ class TransformableTests: XCTestCase {
             .align([.middle, .center])
             .background("transparent"))
 
-        let expectedURL = Config.processURL
+        let expectedURL = Constants.processURL
             .appendingPathComponent("animate=delay:150,loop:0,width:200,height:300,fit:crop,align:[middle,center],background:transparent")
             .appendingPathComponent("[HANDLE1,HANDLE2,HANDLE3,HANDLE4,HANDLE5]")
 

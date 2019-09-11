@@ -13,8 +13,8 @@ import Alamofire
 @testable import FilestackSDK
 
 class FileLinkTests: XCTestCase {
-    private let cdnStubConditions = isScheme(Config.cdnURL.scheme!) && isHost(Config.cdnURL.host!)
-    private let apiStubConditions = isScheme(Config.apiURL.scheme!) && isHost(Config.apiURL.host!)
+    private let cdnStubConditions = isScheme(Constants.cdnURL.scheme!) && isHost(Constants.cdnURL.host!)
+    private let apiStubConditions = isScheme(Constants.apiURL.scheme!) && isHost(Constants.apiURL.host!)
     private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 
     override func tearDown() {
@@ -44,7 +44,7 @@ class FileLinkTests: XCTestCase {
     func testURL() {
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectedURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
+        let expectedURL = Constants.cdnURL.appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(fileLink.url, expectedURL)
     }
@@ -55,7 +55,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         XCTAssertEqual(fileLink.url.absoluteString,
-                       Config.cdnURL.absoluteString +
+                       Constants.cdnURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
     }
@@ -91,7 +91,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.response)
 
         XCTAssertEqual(response?.response?.url?.absoluteString,
-                       Config.cdnURL.absoluteString +
+                       Constants.cdnURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
 
@@ -110,7 +110,7 @@ class FileLinkTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
+        let expectedRequestURL = Constants.cdnURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
         var response: NetworkDataResponse?
@@ -149,7 +149,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.request?.url)
 
         XCTAssertEqual(response?.request?.url?.absoluteString,
-                       Config.cdnURL.absoluteString +
+                       Constants.cdnURL.absoluteString +
                            "/MY-HANDLE" +
                            "?bar=321&foo=123")
     }
@@ -176,7 +176,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.request?.url)
 
         XCTAssertEqual(response?.request?.url?.absoluteString,
-                       Config.cdnURL.absoluteString +
+                       Constants.cdnURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)" +
                            "&bar=321&foo=123")
@@ -286,7 +286,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.response)
 
         XCTAssertEqual(response?.response?.url?.absoluteString,
-                       Config.cdnURL.absoluteString +
+                       Constants.cdnURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
 
@@ -304,7 +304,7 @@ class FileLinkTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectedRequestURL = Config.cdnURL.appendingPathComponent("MY-HANDLE")
+        let expectedRequestURL = Constants.cdnURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
@@ -345,7 +345,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.request?.url)
 
         XCTAssertEqual(response?.request?.url?.absoluteString,
-                       Config.cdnURL.absoluteString +
+                       Constants.cdnURL.absoluteString +
                            "/MY-HANDLE" +
                            "?bar=321&foo=123")
     }
@@ -401,7 +401,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNil(response?.error)
 
         XCTAssertEqual(response?.request?.url?.absoluteString,
-                       Config.apiURL.absoluteString +
+                       Constants.apiURL.absoluteString +
                            "/file/MY-HANDLE" +
                            "?key=MY-API-KEY")
     }
@@ -566,7 +566,7 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
-        let expectedURL = Config.cdnURL
+        let expectedURL = Constants.cdnURL
             .appendingPathComponent("tags")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("MY-HANDLE")
@@ -598,7 +598,7 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
-        let expectedURL = Config.cdnURL
+        let expectedURL = Constants.cdnURL
             .appendingPathComponent("sfw")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("MY-HANDLE")
@@ -637,7 +637,7 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
-        let expectedBaseURL = Config.apiURL
+        let expectedBaseURL = Constants.apiURL
             .appendingPathComponent("file")
             .appendingPathComponent("MY-HANDLE")
             .appendingPathComponent("metadata")

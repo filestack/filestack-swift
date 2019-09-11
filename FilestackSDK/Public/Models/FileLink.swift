@@ -73,7 +73,7 @@ import Foundation
             }
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { response in
 
@@ -93,7 +93,7 @@ import Foundation
             return
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseJSON(queue: queue) { response in
 
@@ -113,7 +113,7 @@ import Foundation
             return
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseJSON(queue: queue) { response in
 
@@ -144,7 +144,7 @@ import Foundation
             return
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseJSON(queue: queue) { response in
 
@@ -194,7 +194,7 @@ import Foundation
             }
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { response in
 
@@ -217,13 +217,13 @@ import Foundation
                              queue: DispatchQueue? = .main,
                              completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = APIService.deleteRequest(handle: handle,
-                                                     path: Config.filePath,
+                                                     path: Constants.filePath,
                                                      parameters: ensureAPIKey(parameters),
                                                      security: security) else {
             return
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { response in
 
@@ -251,7 +251,7 @@ import Foundation
                                 uploadProgress: ((Progress) -> Void)? = nil,
                                 completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = APIService.overwriteRequest(handle: handle,
-                                                        path: Config.filePath,
+                                                        path: Constants.filePath,
                                                         parameters: parameters,
                                                         fileURL: fileURL,
                                                         security: security) else {
@@ -266,7 +266,7 @@ import Foundation
             }
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { response in
 
@@ -291,14 +291,14 @@ import Foundation
                                 queue: DispatchQueue? = .main,
                                 completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = APIService.overwriteRequest(handle: handle,
-                                                        path: Config.filePath,
+                                                        path: Constants.filePath,
                                                         parameters: parameters,
                                                         remoteURL: remoteURL,
                                                         security: security) else {
             return
         }
 
-        request.validate(statusCode: Config.validHTTPResponseCodes)
+        request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseData(queue: queue, completionHandler: { response in
 

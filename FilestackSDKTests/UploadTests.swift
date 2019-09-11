@@ -120,8 +120,8 @@ class UploadTests: XCTestCase {
     }
 
     func testResumableMultiPartUploadWithDownNetworkOnStart() {
-        let uploadMultipartStartStubConditions = isScheme(Config.uploadURL.scheme!) &&
-            isHost(Config.uploadURL.host!) &&
+        let uploadMultipartStartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+            isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/start") &&
             isMethodPOST()
 
@@ -301,8 +301,8 @@ private extension UploadTests {
     }
 
     func stubMultipartStartRequest(supportsIntelligentIngestion: Bool) {
-        let uploadMultipartStartStubConditions = isScheme(Config.uploadURL.scheme!) &&
-            isHost(Config.uploadURL.host!) &&
+        let uploadMultipartStartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+            isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/start") &&
             isMethodPOST()
 
@@ -341,8 +341,8 @@ private extension UploadTests {
     }
 
     func stubMultipartPostPartRequest() {
-        let uploadMultipartPostPartStubConditions = isScheme(Config.uploadURL.scheme!) &&
-            isHost(Config.uploadURL.host!) &&
+        let uploadMultipartPostPartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+            isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/upload") &&
             isMethodPOST()
 
@@ -361,8 +361,8 @@ private extension UploadTests {
 
     func stubMultipartPostPartRequest(parts: [String], hitCount: inout Int) {
         let partName = parts[hitCount]
-        let uploadMultipartPostPartStubConditions = isScheme(Config.uploadURL.scheme!) &&
-            isHost(Config.uploadURL.host!) &&
+        let uploadMultipartPostPartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+            isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/upload") &&
             isMethodPOST()
 
@@ -375,8 +375,8 @@ private extension UploadTests {
     }
 
     func stubMultipartCompleteRequest(requestTime: TimeInterval = 0, responseTime: TimeInterval = 0, workflows: [String]? = nil) {
-        let uploadMultipartCompleteStubConditions = isScheme(Config.uploadURL.scheme!) &&
-            isHost(Config.uploadURL.host!) &&
+        let uploadMultipartCompleteStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+            isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/complete") &&
             isMethodPOST()
 
@@ -406,8 +406,8 @@ private extension UploadTests {
     }
 
     func stubMultipartCommitRequest() {
-        let uploadMultipartCommitStubConditions = isScheme(Config.uploadURL.scheme!) &&
-            isHost(Config.uploadURL.host!) &&
+        let uploadMultipartCommitStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+            isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/commit") &&
             isMethodPOST()
 
