@@ -145,13 +145,12 @@ private extension MultifileUpload {
     }
 
     func uploadNextFile() {
-        currentStatus = .inProgress
-
         guard shouldAbort == false, let nextUploadable = pendingUploadables.first, let size = nextUploadable.size else {
             stopUpload()
             return
         }
 
+        currentStatus = .inProgress
         currentFileSize = Int64(size)
         currentOperation = MultipartUpload(using: nextUploadable,
                                            options: options,
@@ -171,6 +170,8 @@ private extension MultifileUpload {
     }
 
     func stopUpload() {
+        guard currentStatus != .completed, currentStatus != .cancelled else { return }
+
         if progress.completedUnitCount == progress.totalUnitCount {
             currentStatus = .completed
         } else {
@@ -179,6 +180,7 @@ private extension MultifileUpload {
 
         while uploadResponses.count < pendingUploadables.count {
             uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
+            pendingUploadables = Array(pendingUploadables.dropFirst())
         }
 
         queue.async {
@@ -202,7 +204,11 @@ private extension MultifileUpload {
 
     func finishedCurrentFile(with response: NetworkJSONResponse) {
         finishedFilesSize += currentFileSize
-        uploadResponses.append(response)
+
+        if !pendingUploadables.isEmpty {
+            uploadResponses.append(response)
+        }
+
         pendingUploadables = Array(pendingUploadables.dropFirst())
         uploadNextFile()
     }
