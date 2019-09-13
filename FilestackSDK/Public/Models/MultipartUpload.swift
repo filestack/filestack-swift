@@ -404,6 +404,6 @@ private extension MultipartUpload {
 extension MultipartUpload {
     /// :nodoc:
     public override var description: String {
-        return Tools.describe(subject: self, only: ["currentStatus"])
+        return Tools.describe(subject: self, only: ["currentStatus", "progress"])
     }
 }

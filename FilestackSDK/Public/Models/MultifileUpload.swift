@@ -208,6 +208,6 @@ private extension MultifileUpload {
 extension MultifileUpload {
     /// :nodoc:
     public override var description: String {
-        return Tools.describe(subject: self, only: ["currentStatus"])
+        return Tools.describe(subject: self, only: ["currentStatus", "progress"])
     }
 }

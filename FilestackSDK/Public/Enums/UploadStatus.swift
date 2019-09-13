@@ -35,7 +35,7 @@ extension UploadStatus: CustomStringConvertible {
         case .notStarted:
             return "notStarted"
         case .inProgress:
-            return "public"
+            return "inProgress"
         case .completed:
             return "completed"
         case .cancelled:
