@@ -23,9 +23,7 @@ import Foundation
     // MARK: - Public Properties
 
     /// The overall upload progress.
-    @objc public lazy var progress: Progress = {
-        Progress(totalUnitCount: Int64(totalSize))
-    }()
+    @objc public let progress = Progress()
 
     /// Current upload status.
     @objc public private(set) var currentStatus: UploadStatus = .notStarted
@@ -37,13 +35,8 @@ import Foundation
 
     // MARK: - Private Properties
 
-    private var uploadables: [Uploadable]
-    private var pendingUploadables: [Uploadable]
-
-    private var uploadResponses: [NetworkJSONResponse] = []
-
-    private var finishedFilesSize: Int64
-    private var currentFileSize: Int64
+    private var pendingUploads = [MultipartUpload]()
+    private var uploadResponses = [NetworkJSONResponse]()
 
     private var shouldAbort: Bool
     private var currentOperation: MultipartUpload?
@@ -60,15 +53,17 @@ import Foundation
          queue: DispatchQueue = .main,
          apiKey: String,
          security: Security? = nil) {
-        self.uploadables = uploadables ?? []
-        self.pendingUploadables = uploadables ?? []
         self.options = options
         self.shouldAbort = false
         self.queue = queue
         self.apiKey = apiKey
         self.security = security
-        self.finishedFilesSize = 0
-        self.currentFileSize = 0
+
+        super.init()
+
+        if let uploadables = uploadables {
+            enqueueUploadables(uploadables: uploadables)
+        }
     }
 
     // MARK: - Public Functions
@@ -82,8 +77,7 @@ import Foundation
     @discardableResult public func add(uploadables: [Uploadable]) -> Bool {
         switch currentStatus {
         case .notStarted:
-            self.uploadables.append(contentsOf: uploadables)
-            pendingUploadables.append(contentsOf: uploadables)
+            self.enqueueUploadables(uploadables: uploadables)
 
             return true
         default:
@@ -118,7 +112,7 @@ import Foundation
         switch currentStatus {
         case .notStarted:
             uploadNextFile()
-            showMinimalProgress()
+            updateProgress()
 
             return true
         default:
@@ -134,39 +128,38 @@ import Foundation
 }
 
 private extension MultifileUpload {
-    var totalSize: UInt64 {
-        return (uploadables.compactMap { $0.size }).reduce(UInt64(0)) { sum, size in sum + size }
-    }
+    // Enqueue uploadables
+    private func enqueueUploadables(uploadables: [Uploadable]) {
+        // Map uploadables into `MultipartUpload`,
+        // discarding uploadables that can't report size (e.g., an unexisting URL.)
+        let uploads: [MultipartUpload] = uploadables.compactMap { uploadable in
+            guard uploadable.size != nil else { return nil }
+            return MultipartUpload(using: uploadable, options: options, queue: queue, apiKey: apiKey, security: security)
+        }
 
-    func showMinimalProgress() {
-        let minimalProgress = Progress(totalUnitCount: 100)
-        minimalProgress.completedUnitCount = 1
-        updateProgress(minimalProgress)
+        // Append uploads to `pendingUploads`.
+        pendingUploads.append(contentsOf: uploads)
+        // Update progress total unit count so it matches the `pendingUploads` count.
+        progress.totalUnitCount = Int64(pendingUploads.count)
+
+        // Set upload progress and completion handlers and add upload progress as a child of our main `progress` object
+        // so we can track all uploads from our main `progress` object.
+        for upload in uploads {
+            upload.uploadProgress = { _ in self.updateProgress() }
+            upload.completionHandler = { self.finishedCurrentFile(with: $0) }
+
+            progress.addChild(upload.progress, withPendingUnitCount: 1)
+        }
     }
 
     func uploadNextFile() {
-        guard shouldAbort == false, let nextUploadable = pendingUploadables.first, let size = nextUploadable.size else {
+        guard shouldAbort == false, let nextUpload = pendingUploads.first else {
             stopUpload()
             return
         }
 
         currentStatus = .inProgress
-        currentFileSize = Int64(size)
-        currentOperation = MultipartUpload(using: nextUploadable,
-                                           options: options,
-                                           queue: queue,
-                                           apiKey: apiKey,
-                                           security: security)
-
-        currentOperation?.uploadProgress = { progress in
-            self.updateProgress(progress)
-        }
-
-        currentOperation?.completionHandler = { response in
-            self.finishedCurrentFile(with: response)
-        }
-
-        currentOperation?.start()
+        nextUpload.start()
     }
 
     func stopUpload() {
@@ -178,9 +171,8 @@ private extension MultifileUpload {
             currentStatus = .cancelled
         }
 
-        while uploadResponses.count < pendingUploadables.count {
+        while uploadResponses.count < progress.totalUnitCount {
             uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
-            pendingUploadables = Array(pendingUploadables.dropFirst())
         }
 
         queue.async {
@@ -193,23 +185,18 @@ private extension MultifileUpload {
         }
     }
 
-    func updateProgress(_ currentFileProgress: Progress) {
-        currentFileSize = currentFileProgress.completedUnitCount
-        progress.completedUnitCount = finishedFilesSize + currentFileSize
-
+    func updateProgress() {
         queue.async {
             self.uploadProgress?(self.progress)
         }
     }
 
     func finishedCurrentFile(with response: NetworkJSONResponse) {
-        finishedFilesSize += currentFileSize
-
-        if !pendingUploadables.isEmpty {
+        if !pendingUploads.isEmpty {
             uploadResponses.append(response)
         }
 
-        pendingUploadables = Array(pendingUploadables.dropFirst())
+        pendingUploads = Array(pendingUploads.dropFirst())
         uploadNextFile()
     }
 }
