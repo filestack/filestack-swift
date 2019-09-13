@@ -159,6 +159,8 @@ private extension MultifileUpload {
         }
 
         currentStatus = .inProgress
+        currentOperation = nextUpload
+
         nextUpload.start()
     }
 
