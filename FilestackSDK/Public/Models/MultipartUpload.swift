@@ -83,7 +83,7 @@ extension MultipartUploadError: LocalizedError {
         self.options = options
         self.security = security
         self.shouldAbort = false
-        self.progress = Progress(totalUnitCount: 0)
+        self.progress = Progress(totalUnitCount: Int64(uploadable.size ?? 0))
 
         uploadOperationQueue.underlyingQueue = uploadOperationUnderlyingQueue
         uploadOperationQueue.maxConcurrentOperationCount = options.partUploadConcurrency
@@ -163,8 +163,6 @@ private extension MultipartUpload {
             fail(with: MultipartUploadError.invalidFile)
             return
         }
-
-        progress = Progress(totalUnitCount: Int64(fileSize))
 
         let startOperation = MultipartUploadStartOperation(apiKey: apiKey,
                                                            fileName: fileName,
