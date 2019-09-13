@@ -38,7 +38,7 @@ import Foundation
     private var pendingUploads = [MultipartUpload]()
     private var uploadResponses = [NetworkJSONResponse]()
 
-    private var shouldAbort: Bool
+    private var shouldAbort: Bool = false
     private var currentOperation: MultipartUpload?
 
     private let queue: DispatchQueue
@@ -54,7 +54,6 @@ import Foundation
          apiKey: String,
          security: Security? = nil) {
         self.options = options
-        self.shouldAbort = false
         self.queue = queue
         self.apiKey = apiKey
         self.security = security
@@ -90,18 +89,23 @@ import Foundation
     /// - Important: Any already uploaded files **will not** be deleted —
     /// only the current file being uploaded (if any) and any pending files will be affected.
     ///
-    /// This will trigger `completionHandler`.
+    /// On success, this will trigger `completionHandler`.
     ///
     /// - Returns: True on success, false otherwise.
     @objc
     @discardableResult public func cancel() -> Bool {
-        guard currentStatus != .cancelled else { return false }
+        switch currentStatus {
+        case .notStarted:
+            fallthrough
+        case .inProgress:
+            shouldAbort = true
+            currentOperation?.cancel()
+            stopUpload()
 
-        shouldAbort = true
-        currentOperation?.cancel()
-        stopUpload()
-
-        return true
+            return true
+        default:
+            return false
+        }
     }
 
     /// Starts upload.
@@ -153,7 +157,7 @@ private extension MultifileUpload {
     }
 
     func uploadNextFile() {
-        guard shouldAbort == false, let nextUpload = pendingUploads.first else {
+        guard !shouldAbort, let nextUpload = pendingUploads.first else {
             stopUpload()
             return
         }
