@@ -19,6 +19,7 @@ import Foundation
     /// Starts this process.
     @discardableResult func start() -> Bool
 
+    /// :nodoc:
     @available(*, deprecated, message: "Marked for removal in version 3.0. Use start() instead.")
     func uploadFiles()
 }
