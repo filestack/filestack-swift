@@ -213,39 +213,39 @@ let uploadable = URL(...) // may also be Data or arrays of URL or Data.
 
 // Call the function in your `Client` instance that takes care of uploading your Uploadable.
 // Please notice that most arguments have sensible defaults and may be ommited.
-let mpu = client.upload(// You may pass an URL, Data or arrays of URL or Data
-                        using: uploadable,
-                        // Set the upload options here. If none given, `UploadOptions.defaults` 
-                        // is assumed.
-                        options: uploadOptions,
-                        // Set the dispatch queue where you want your upload progress
-                        // and completion handlers to be called.
-                        // Remember that any UI updates should be performed on the
-                        // main queue.
-                        // You can omit this parameter, and the main queue will be
-                        // used by default.
-                        queue: .main,
-                        // Set your upload progress handler here (optional)
-                        uploadProgress: { progress in
-                            // Here you may update the UI to reflect the upload progress.
-                        	print("Progress: \(progress)")
-                        }) { response in
-                            // Try to obtain Filestack handle
-                            if let json = response?.json, let handle = json["handle"] as? String {
-                                // Use Filestack handle
-                            } else if let error = response?.error {
-                                // Handle error
-                            }
-                        }
+let uploader = client.upload(// You may pass an URL, Data or arrays of URL or Data
+                             using: uploadable,
+                             // Set the upload options here. If none given, `UploadOptions.defaults` 
+                             // is assumed.
+                             options: uploadOptions,
+                             // Set the dispatch queue where you want your upload progress
+                             // and completion handlers to be called.
+                             // Remember that any UI updates should be performed on the
+                             // main queue.
+                             // You can omit this parameter, and the main queue will be
+                             // used by default.
+                             queue: .main,
+                             // Set your upload progress handler here (optional)
+                             uploadProgress: { progress in
+                                 // Here you may update the UI to reflect the upload progress.
+                                 print("Progress: \(progress)")
+                             }) { response in
+                                 // Try to obtain Filestack handle
+                                 if let json = response?.json, let handle = json["handle"] as? String {
+                                     // Use Filestack handle
+                                 } else if let error = response?.error {
+                                     // Handle error
+                                 }
+                             }
 
 // Start upload (only useful when `startImmediately` option is `false`)
-mpu.start()
+uploader.start()
 
 // Cancel ongoing upload.
-mpu.cancel()
+uploader.cancel()
 
 // Query progress.
-mpu.progress // returns a `Progress` object
+uploader.progress // returns a `Progress` object
 ```
 </details>
 
@@ -288,8 +288,8 @@ uploadOptions.storeOptions.workflows = @[@"WF-1", @"WF-2"];
 // Some local URL to be uploaded
 NSURL *someURL = ...;
 
-FSMultipartUpload *mpu = [client uploadURLUsing:someURL
-                                        options:uploadOptions
+FSUploader *uploader = [client uploadURLUsing:someURL
+                                      options:uploadOptions
                                         queue:dispatch_get_main_queue()
                                uploadProgress:^(NSProgress * _Nonnull progress) {
                                    // Here you may update the UI to reflect the upload progress.
@@ -316,13 +316,13 @@ FSMultipartUpload *mpu = [client uploadURLUsing:someURL
 // - For multiple data uploading: `uploadMultipleDataUsing:options:queue:uploadProgress:completionHandler:)`
 
 // Start upload (only useful when `startImmediately` option is `false`)
-[mpu start];
+[uploader start];
 
 // Cancel ongoing upload.
-[mpu cancel];
+[uploader cancel];
 
 // Query progress.
-mpu.progress // returns an `NSProgress` object
+uploader.progress // returns an `NSProgress` object
 ```
 </details>
 </details>
