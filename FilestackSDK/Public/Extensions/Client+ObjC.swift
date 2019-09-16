@@ -35,7 +35,7 @@ extension Client {
                                 options: UploadOptions = .defaults,
                                 queue: DispatchQueue = .main,
                                 uploadProgress: ((Progress) -> Void)? = nil,
-                                completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
+                                completionHandler: @escaping (NetworkJSONResponse) -> Void) -> Uploader {
         return upload(using: localURL as URL,
                       options: options,
                       queue: queue,
@@ -67,7 +67,7 @@ extension Client {
                                          options: UploadOptions = .defaults,
                                          queue: DispatchQueue = .main,
                                          uploadProgress: ((Progress) -> Void)? = nil,
-                                         completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
+                                         completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader {
         return upload(using: localURLs.map { $0 as URL },
                       options: options,
                       queue: queue,
@@ -94,12 +94,12 @@ extension Client {
     /// of the upload process as data is uploaded to the server. `nil` by default.
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
-    /// - Returns: A `MultipartUpload` object that allows monitoring progress, cancelling the upload request, etc.
+    /// - Returns: An object conforming to `Uploader` that allows starting, cancelling and monitoring the upload.
     @objc public func uploadData(using data: NSData,
                                  options: UploadOptions = .defaults,
                                  queue: DispatchQueue = .main,
                                  uploadProgress: ((Progress) -> Void)? = nil,
-                                 completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
+                                 completionHandler: @escaping (NetworkJSONResponse) -> Void) -> Uploader {
         return upload(using: data as Data,
                       options: options,
                       queue: queue,
@@ -126,12 +126,12 @@ extension Client {
     /// of the upload process as data is uploaded to the server. `nil` by default.
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
-    /// - Returns: A `MultifileUpload` object that allows monitoring progress, cancelling the upload request, etc.
+    /// - Returns: An object conforming to `Uploader` that allows starting, cancelling and monitoring the upload.
     @objc public func uploadMultipleData(using multipleData: [NSData],
                                          options: UploadOptions = .defaults,
                                          queue: DispatchQueue = .main,
                                          uploadProgress: ((Progress) -> Void)? = nil,
-                                         completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
+                                         completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader {
         return upload(using: multipleData.map { $0 as Data },
                       options: options,
                       queue: queue,

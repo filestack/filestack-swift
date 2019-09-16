@@ -9,28 +9,13 @@
 import Foundation
 
 /// This class allows uploading multiple `Uploadable` items to a given storage location.
-///
-/// Please notice this class can not be directly instantiated. Instances of this class are
-/// returned by the upload functions in `Client`.
-///
-/// Features:
-///
-/// - Ability to track upload progress (see the `progress` property)
-/// - Ability to add `Uploadable` items at any time before the upload starts (see `add(uploadables:)`)
-/// - Ability to cancel the upload process (see `cancel()`)
-///
-@objc(FSMultifileUpload) public class MultifileUpload: NSObject {
+class MultifileUpload: Uploader, DeferredAdd {
     // MARK: - Public Properties
-
-    /// The overall upload progress.
-    @objc public let progress = Progress()
-
-    /// Current upload status.
-    @objc public private(set) var currentStatus: UploadStatus = .notStarted
 
     // MARK: - Internal Properties
 
-    internal var uploadProgress: ((Progress) -> Void)?
+    internal let masterProgress = MirroredProgress()
+    internal var progressHandler: ((Progress) -> Void)?
     internal var completionHandler: (([NetworkJSONResponse]) -> Void)?
 
     // MARK: - Private Properties
@@ -58,42 +43,29 @@ import Foundation
         self.apiKey = apiKey
         self.security = security
 
-        super.init()
-
         if let uploadables = uploadables {
             enqueueUploadables(uploadables: uploadables)
         }
     }
 
-    // MARK: - Public Functions
+    // MARK: - Uploadable Protocol Implementation
 
-    /// Adds items to be uploaded.
-    ///
-    /// - Important: Any items added after the upload process started will be ignored.
-    ///
-    /// - Parameter uploadables: An array of `Uploadable` items to upload.
-    /// - Returns: True on success, false otherwise.
-    @discardableResult public func add(uploadables: [Uploadable]) -> Bool {
-        switch currentStatus {
-        case .notStarted:
-            self.enqueueUploadables(uploadables: uploadables)
-
-            return true
-        default:
-            return false
+    private(set) var currentStatus: UploadStatus = .notStarted {
+        didSet {
+            switch currentStatus {
+            case .cancelled:
+                progress.cancel()
+            default:
+                break
+            }
         }
     }
 
-    /// Cancels upload.
-    ///
-    /// - Important: Any already uploaded files **will not** be deleted —
-    /// only the current file being uploaded (if any) and any pending files will be affected.
-    ///
-    /// On success, this will trigger `completionHandler`.
-    ///
-    /// - Returns: True on success, false otherwise.
-    @objc
-    @discardableResult public func cancel() -> Bool {
+    lazy var progress = {
+        masterProgress.mirror
+    }()
+
+    @discardableResult func cancel() -> Bool {
         switch currentStatus {
         case .notStarted:
             fallthrough
@@ -108,11 +80,7 @@ import Foundation
         }
     }
 
-    /// Starts upload.
-    ///
-    /// - Returns: True on success, false otherwise.
-    @objc
-    @discardableResult public func start() -> Bool {
+    @discardableResult func start() -> Bool {
         switch currentStatus {
         case .notStarted:
             uploadNextFile()
@@ -124,10 +92,21 @@ import Foundation
         }
     }
 
-    /// :nodoc:
-    @available(*, deprecated, message: "Marked for removal in version 3.0. Use start() instead.")
-    @objc public func uploadFiles() {
+    func uploadFiles() {
         start()
+    }
+
+    // MARK: - DeferredAdd Protocol Implementation
+
+    @discardableResult func add(uploadables: [Uploadable]) -> Bool {
+        switch currentStatus {
+        case .notStarted:
+            self.enqueueUploadables(uploadables: uploadables)
+
+            return true
+        default:
+            return false
+        }
     }
 }
 
@@ -144,7 +123,7 @@ private extension MultifileUpload {
         // Append uploads to `pendingUploads`.
         pendingUploads.append(contentsOf: uploads)
         // Update progress total unit count so it matches the `pendingUploads` count.
-        progress.totalUnitCount = Int64(pendingUploads.count)
+        masterProgress.totalUnitCount = Int64(pendingUploads.count)
 
         // Set upload progress and completion handlers and add upload progress as a child of our main `progress` object
         // so we can track all uploads from our main `progress` object.
@@ -152,7 +131,7 @@ private extension MultifileUpload {
             upload.uploadProgress = { _ in self.updateProgress() }
             upload.completionHandler = { self.finishedCurrentFile(with: $0) }
 
-            progress.addChild(upload.progress, withPendingUnitCount: 1)
+            masterProgress.addChild(upload.masterProgress, withPendingUnitCount: 1)
         }
     }
 
@@ -171,13 +150,13 @@ private extension MultifileUpload {
     func stopUpload() {
         guard currentStatus != .completed, currentStatus != .cancelled else { return }
 
-        if progress.completedUnitCount == progress.totalUnitCount {
+        if masterProgress.completedUnitCount == masterProgress.totalUnitCount {
             currentStatus = .completed
         } else {
             currentStatus = .cancelled
         }
 
-        while uploadResponses.count < progress.totalUnitCount {
+        while uploadResponses.count < masterProgress.totalUnitCount {
             uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
         }
 
@@ -186,14 +165,14 @@ private extension MultifileUpload {
             // To ensure this object can be properly deallocated we must ensure that any closures are niled,
             // and `currentOperation` object is niled as well.
             self.completionHandler = nil
-            self.uploadProgress = nil
+            self.progressHandler = nil
             self.currentOperation = nil
         }
     }
 
     func updateProgress() {
         queue.async {
-            self.uploadProgress?(self.progress)
+            self.progressHandler?(self.progress)
         }
     }
 
@@ -211,7 +190,7 @@ private extension MultifileUpload {
 
 extension MultifileUpload {
     /// :nodoc:
-    public override var description: String {
+    public var description: String {
         return Tools.describe(subject: self, only: ["currentStatus", "progress"])
     }
 }

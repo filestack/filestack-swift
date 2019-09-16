@@ -118,13 +118,13 @@ import Foundation
     /// of the upload process as data is uploaded to the server. `nil` by default.
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
-    /// - Returns: A `MultipartUpload` object that allows monitoring progress, cancelling the upload request, etc.
+    /// - Returns: An object conforming to `Uploader` that allows starting, cancelling and monitoring the upload.
     @discardableResult
     public func upload(using uploadable: Uploadable,
                        options: UploadOptions = .defaults,
                        queue: DispatchQueue = .main,
                        uploadProgress: ((Progress) -> Void)? = nil,
-                       completionHandler: @escaping (NetworkJSONResponse) -> Void) -> MultipartUpload {
+                       completionHandler: @escaping (NetworkJSONResponse) -> Void) -> Uploader {
         let mpu = MultipartUpload(using: uploadable, options: options, queue: queue, apiKey: apiKey, security: security)
 
         mpu.uploadProgress = uploadProgress
@@ -154,16 +154,17 @@ import Foundation
     /// of the upload process as data is uploaded to the server. `nil` by default.
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
-    /// - Returns: A `MultifileUpload` object that allows monitoring progress, cancelling the upload request, etc.
+    /// - Returns: An object conforming to `Uploader` and `DeferredAdd` that allows starting, cancelling and monitoring
+    /// the upload, plus adding `Uploadables` at a later time.
     @discardableResult
     public func upload(using uploadables: [Uploadable]? = nil,
                        options: UploadOptions = .defaults,
                        queue: DispatchQueue = .main,
                        uploadProgress: ((Progress) -> Void)? = nil,
-                       completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> MultifileUpload {
+                       completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader & DeferredAdd {
         let mpu = MultifileUpload(using: uploadables, options: options, queue: queue, apiKey: apiKey, security: security)
 
-        mpu.uploadProgress = uploadProgress
+        mpu.progressHandler = uploadProgress
         mpu.completionHandler = completionHandler
 
         if options.startImmediately {

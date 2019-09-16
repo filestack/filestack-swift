@@ -61,6 +61,8 @@
 		4596207022BA338E00D58036 /* ImageSizeTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596206F22BA338E00D58036 /* ImageSizeTransform.swift */; };
 		45965C6B1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */; };
 		45991FA41F14C1DD0042A279 /* ProcessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45991FA31F14C1DD0042A279 /* ProcessService.swift */; };
+		459B7404232F7BD5007CBC50 /* MirroredProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B7403232F7BD5007CBC50 /* MirroredProgress.swift */; };
+		459B7406232F894B007CBC50 /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B7405232F894B007CBC50 /* Uploader.swift */; };
 		459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */; };
 		45A07B3122B91A52003128B0 /* DocumentDetectionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */; };
 		45B63B0423279E690040BFBB /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B0323279E690040BFBB /* Uploadable.swift */; };
@@ -240,6 +242,8 @@
 		4596206F22BA338E00D58036 /* ImageSizeTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizeTransform.swift; sourceTree = "<group>"; };
 		45965C6A1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45991FA31F14C1DD0042A279 /* ProcessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessService.swift; sourceTree = "<group>"; };
+		459B7403232F7BD5007CBC50 /* MirroredProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroredProgress.swift; sourceTree = "<group>"; };
+		459B7405232F894B007CBC50 /* Uploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploader.swift; sourceTree = "<group>"; };
 		459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartuploadSubmitChunkOperation.swift; sourceTree = "<group>"; };
 		45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetectionTransform.swift; sourceTree = "<group>"; };
 		45B63B0323279E690040BFBB /* Uploadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploadable.swift; sourceTree = "<group>"; };
@@ -475,16 +479,27 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		459B7407232F95E1007CBC50 /* Uploaders */ = {
+			isa = PBXGroup;
+			children = (
+				BCDB405120A9A87C00148136 /* MultifileUpload.swift */,
+				45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */,
+			);
+			path = Uploaders;
+			sourceTree = "<group>";
+		};
 		45B63AFE23279C790040BFBB /* Internal */ = {
 			isa = PBXGroup;
 			children = (
 				4589A4871F0A4B1900C39405 /* Constants.swift */,
+				459B7403232F7BD5007CBC50 /* MirroredProgress.swift */,
 				45B66480232838C200DF5706 /* Tools.swift */,
 				454CC1C91F0D1151005821AC /* Extensions */,
 				4502F71E1F1F4C28000875D6 /* Operations */,
 				45B63B0123279E3F0040BFBB /* Protocols */,
 				45FA0CC91F0B86B6008EDBCD /* Services */,
 				45B63B0D23279F810040BFBB /* Uploadable Readers */,
+				459B7407232F95E1007CBC50 /* Uploaders */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -515,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				45B63B0323279E690040BFBB /* Uploadable.swift */,
+				459B7405232F894B007CBC50 /* Uploader.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -614,8 +630,6 @@
 			children = (
 				45B831211F03F1C90053742A /* Client.swift */,
 				4589A4891F0A4DA600C39405 /* FileLink.swift */,
-				BCDB405120A9A87C00148136 /* MultifileUpload.swift */,
-				45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */,
 				45F9B8C51F0BA02F00E04380 /* NetworkDataResponse.swift */,
 				454CC1AC1F0CD8D5005821AC /* NetworkDownloadResponse.swift */,
 				4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */,
@@ -902,6 +916,7 @@
 				457D5BF31F1614D400FBD5B1 /* PolicyCall.swift in Sources */,
 				45B63B0C23279F3D0040BFBB /* DataReader.swift in Sources */,
 				454CC1AD1F0CD8D5005821AC /* NetworkDownloadResponse.swift in Sources */,
+				459B7404232F7BD5007CBC50 /* MirroredProgress.swift in Sources */,
 				BC8832E220D181A700B88EAF /* QualityTransform.swift in Sources */,
 				BC8832DB20D181A700B88EAF /* DetectFacesTransform.swift in Sources */,
 				45A07B3122B91A52003128B0 /* DocumentDetectionTransform.swift in Sources */,
@@ -954,6 +969,7 @@
 				BC8832CF20D181A700B88EAF /* CropFacesTransform.swift in Sources */,
 				BC8832F820D27A7B00B88EAF /* ASCIITransform.swift in Sources */,
 				BC8832D920D181A700B88EAF /* PixelateFacesTransform.swift in Sources */,
+				459B7406232F894B007CBC50 /* Uploader.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
 				45C3EA0F1F262ED30003598D /* MetadataOptions.swift in Sources */,
 			);

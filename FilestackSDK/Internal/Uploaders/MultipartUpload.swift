@@ -29,27 +29,12 @@ extension MultipartUploadError: LocalizedError {
 }
 
 /// This class allows uploading a single `Uploadable` item to a given storage location.
-///
-/// Please notice this class can not be directly instantiated. Instances of this class are
-/// returned by the upload functions in `Client`.
-///
-/// Features:
-///
-/// - Ability to track upload progress (see the `progress` property)
-/// - Ability to cancel the upload process (see `cancel()`)
-@objc(FSMultipartUpload) public class MultipartUpload: NSObject {
+class MultipartUpload: Uploader {
     typealias UploadProgress = (Int64) -> Void
-
-    // MARK: - Public Properties
-
-    /// The overall upload progress.
-    @objc public private(set) var progress: Progress
-
-    /// Current upload status.
-    @objc public private(set) var currentStatus: UploadStatus = .notStarted
 
     // MARK: - Internal Properties
 
+    internal let masterProgress = MirroredProgress()
     internal var uploadProgress: ((Progress) -> Void)?
     internal var completionHandler: ((NetworkJSONResponse) -> Void)?
 
@@ -57,7 +42,6 @@ extension MultipartUploadError: LocalizedError {
 
     private var uploadable: Uploadable
     private var shouldAbort: Bool
-    private var totalUploadedBytes: Int64 = 0
 
     private let queue: DispatchQueue
     private let apiKey: String
@@ -83,19 +67,30 @@ extension MultipartUploadError: LocalizedError {
         self.options = options
         self.security = security
         self.shouldAbort = false
-        self.progress = Progress(totalUnitCount: Int64(uploadable.size ?? 0))
+        self.masterProgress.totalUnitCount = Int64(uploadable.size ?? 0)
 
         uploadOperationQueue.underlyingQueue = uploadOperationUnderlyingQueue
         uploadOperationQueue.maxConcurrentOperationCount = options.partUploadConcurrency
     }
 
-    // MARK: - Public Functions
+    // MARK: - Uploadable Protocol Implementation
 
-    /// Cancels upload.
-    ///
-    /// - Returns: True on success, false otherwise.
-    @objc
-    @discardableResult public func cancel() -> Bool {
+    private(set) var currentStatus: UploadStatus = .notStarted {
+        didSet {
+            switch currentStatus {
+            case .cancelled:
+                progress.cancel()
+            default:
+                break
+            }
+        }
+    }
+
+    lazy var progress = {
+        masterProgress.mirror
+    }()
+
+    @discardableResult func cancel() -> Bool {
         guard currentStatus != .cancelled else { return false }
 
         uploadQueue.sync {
@@ -112,11 +107,7 @@ extension MultipartUploadError: LocalizedError {
         return true
     }
 
-    /// Starts upload.
-    ///
-    /// - Returns: True on success, false otherwise.
-    @objc
-    @discardableResult public func start() -> Bool {
+    @discardableResult func start() -> Bool {
         switch currentStatus {
         case .notStarted:
             uploadQueue.async {
@@ -129,9 +120,7 @@ extension MultipartUploadError: LocalizedError {
         }
     }
 
-    /// :nodoc:
-    @available(*, deprecated, message: "Marked for removal in version 3.0. Use start() instead.")
-    @objc public func uploadFile() {
+    func uploadFiles() {
         start()
     }
 }
@@ -142,14 +131,6 @@ private extension MultipartUpload {
 
         queue.async {
             self.completionHandler?(NetworkJSONResponse(with: error))
-        }
-    }
-
-    func updateProgress(uploadedBytes: Int64) {
-        progress.completedUnitCount = uploadedBytes
-
-        queue.async {
-            self.uploadProgress?(self.progress)
         }
     }
 
@@ -314,7 +295,7 @@ private extension MultipartUpload {
                                                                  storeOptions: options.storeOptions,
                                                                  chunkSize: chunkSize,
                                                                  chunkUploadConcurrency: options.chunkUploadConcurrency,
-                                                                 uploadProgress: uploadProgress)
+                                                                 uploadProgress: updateProgress)
         } else {
             return MultipartRegularUploadSubmitPartOperation(seek: seek,
                                                              reader: reader,
@@ -326,13 +307,16 @@ private extension MultipartUpload {
                                                              region: region,
                                                              uploadID: uploadId,
                                                              chunkSize: chunkSize,
-                                                             uploadProgress: uploadProgress)
+                                                             uploadProgress: updateProgress)
         }
     }
 
-    func uploadProgress(progress: Int64) {
-        totalUploadedBytes += progress
-        updateProgress(uploadedBytes: totalUploadedBytes)
+    func updateProgress(progress: Int64) {
+        masterProgress.completedUnitCount += progress
+
+        queue.async {
+            self.uploadProgress?(self.progress)
+        }
     }
 
     func addCompleteOperation(fileName: String,
@@ -403,7 +387,7 @@ private extension MultipartUpload {
 
 extension MultipartUpload {
     /// :nodoc:
-    public override var description: String {
+    public var description: String {
         return Tools.describe(subject: self, only: ["currentStatus", "progress"])
     }
 }
