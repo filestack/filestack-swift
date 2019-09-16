@@ -31,6 +31,7 @@ extension Client {
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
     /// - Returns: An `Uploader` that allows starting, cancelling and monitoring the upload.
+    @discardableResult
     @objc public func uploadURL(using localURL: NSURL,
                                 options: UploadOptions = .defaults,
                                 queue: DispatchQueue = .main,
@@ -63,6 +64,7 @@ extension Client {
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
     /// - Returns: An `Uploader` that allows starting, cancelling and monitoring the upload.
+    @discardableResult
     @objc public func uploadMultipleURLs(using localURLs: [NSURL],
                                          options: UploadOptions = .defaults,
                                          queue: DispatchQueue = .main,
@@ -95,6 +97,7 @@ extension Client {
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
     /// - Returns: An `Uploader` that allows starting, cancelling and monitoring the upload.
+    @discardableResult
     @objc public func uploadData(using data: NSData,
                                  options: UploadOptions = .defaults,
                                  queue: DispatchQueue = .main,
@@ -127,6 +130,7 @@ extension Client {
     /// - Parameter completionHandler: Adds a handler to be called once the upload has finished.
     ///
     /// - Returns: An `Uploader` that allows starting, cancelling and monitoring the upload.
+    @discardableResult
     @objc public func uploadMultipleData(using multipleData: [NSData],
                                          options: UploadOptions = .defaults,
                                          queue: DispatchQueue = .main,
