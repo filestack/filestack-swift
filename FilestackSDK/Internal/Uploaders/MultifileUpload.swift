@@ -30,6 +30,7 @@ class MultifileUpload: Uploader, DeferredAdd {
     private let apiKey: String
     private let options: UploadOptions
     private let security: Security?
+    private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.multi-upload-queue")
 
     // MARK: - Lifecycle Functions
 
@@ -44,7 +45,9 @@ class MultifileUpload: Uploader, DeferredAdd {
         self.security = security
 
         if let uploadables = uploadables {
-            enqueueUploadables(uploadables: uploadables)
+            uploadQueue.sync {
+                enqueueUploadables(uploadables: uploadables)
+            }
         }
     }
 
@@ -70,9 +73,11 @@ class MultifileUpload: Uploader, DeferredAdd {
         case .notStarted:
             fallthrough
         case .inProgress:
-            shouldAbort = true
-            currentOperation?.cancel()
-            stopUpload()
+            uploadQueue.sync {
+                shouldAbort = true
+                currentOperation?.cancel()
+                stopUpload()
+            }
 
             return true
         default:
@@ -83,8 +88,10 @@ class MultifileUpload: Uploader, DeferredAdd {
     @discardableResult func start() -> Bool {
         switch currentStatus {
         case .notStarted:
-            uploadNextFile()
-            updateProgress()
+            uploadQueue.sync {
+                uploadNextFile()
+                updateProgress()
+            }
 
             return true
         default:
@@ -101,7 +108,9 @@ class MultifileUpload: Uploader, DeferredAdd {
     @discardableResult func add(uploadables: [Uploadable]) -> Bool {
         switch currentStatus {
         case .notStarted:
-            self.enqueueUploadables(uploadables: uploadables)
+            uploadQueue.sync {
+                self.enqueueUploadables(uploadables: uploadables)
+            }
 
             return true
         default:
