@@ -19,9 +19,6 @@ import Foundation
     /// An object containing the store options (e.g. location, region, container, access, etc.)
     @objc public var storeOptions: StorageOptions
 
-    /// The chunksize in bytes to use.
-    @objc public var chunkSize: Int
-
     /// How many parts should be uploaded concurrently
     @objc public var partUploadConcurrency: Int
 
@@ -32,19 +29,14 @@ import Foundation
     @objc public init(preferIntelligentIngestion: Bool,
                       startImmediately: Bool,
                       storeOptions: StorageOptions = .defaults,
-                      chunkSize: Int = UploadOptions.defaultChunkSize,
                       partUploadConcurrency: Int = UploadOptions.defaultPartUploadConcurrency,
                       chunkUploadConcurrency: Int = UploadOptions.defaultChunkUploadConcurrency) {
         self.preferIntelligentIngestion = preferIntelligentIngestion
         self.startImmediately = startImmediately
         self.storeOptions = storeOptions
-        self.chunkSize = chunkSize
         self.partUploadConcurrency = partUploadConcurrency
         self.chunkUploadConcurrency = chunkUploadConcurrency
     }
-
-    /// Default chunk size (5 megabytes)
-    @objc public static var defaultChunkSize: Int = 5 * Int(pow(Double(1024), Double(2)))
 
     /// Default part upload concurrency
     @objc public static var defaultPartUploadConcurrency: Int = 5

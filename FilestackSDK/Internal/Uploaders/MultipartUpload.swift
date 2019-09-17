@@ -28,6 +28,14 @@ extension MultipartUploadError: LocalizedError {
     }
 }
 
+/// Chunksize depending on upload type.
+enum ChunkSize: Int {
+    /// Regular (5 megabytes)
+    case regular = 5_242_880
+    /// Intelligent Ingestion (8 megabytes)
+    case ii = 8_388_608
+}
+
 /// This class allows uploading a single `Uploadable` item to a given storage location.
 class MultipartUpload: Uploader {
     typealias UploadProgress = (Int64) -> Void
@@ -192,12 +200,11 @@ private extension MultipartUpload {
             canUseIntelligentIngestion = false
         }
 
-        let chunkSize: Int = options.chunkSize
-
         var part: Int = 0
         var seekPoint: UInt64 = 0
         var partsAndEtags: [Int: String] = [:]
 
+        let chunkSize = (canUseIntelligentIngestion ? ChunkSize.ii : ChunkSize.regular).rawValue
         let beforeCompleteCheckPointOperation = BlockOperation()
 
         beforeCompleteCheckPointOperation.completionBlock = {
