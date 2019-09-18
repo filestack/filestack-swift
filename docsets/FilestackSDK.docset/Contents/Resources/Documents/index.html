@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           FilestackSDK Docs
         </a>
-         (89% documented)
+         (100% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -239,6 +239,9 @@
                 <a class="nav-group-task-link" href="Classes/URLScreenshotTransform.html">URLScreenshotTransform</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/UploadOptions.html">UploadOptions</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/UpscaleTransform.html">UpscaleTransform</a>
               </li>
               <li class="nav-group-task">
@@ -300,16 +303,51 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/TransformStyleMode.html">TransformStyleMode</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/UploadStatus.html">UploadStatus</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/MultifileUpload.html">MultifileUpload</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/MultipartUploadError.html">MultipartUploadError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/Transform.html">Transform</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/URL.html">URL</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Cancellable.html">Cancellable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/DeferredAdd.html">DeferredAdd</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Monitorizable.html">Monitorizable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Startable.html">Startable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Uploadable.html">Uploadable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Uploader.html">Uploader</a>
               </li>
             </ul>
           </li>
@@ -357,42 +395,42 @@ This is the official Swift SDK for Filestack - API and content management system
 <h3 id='cocoapods' class='heading'>CocoaPods</h3>
 
 <p><a href="http://cocoapods.org/">CocoaPods</a> is a dependency manager for Cocoa projects. You can install it with the following command:</p>
-
-<p><code>$ gem install cocoapods</code></p>
+<pre class="highlight shell"><code><span class="nv">$ </span>gem <span class="nb">install </span>cocoapods
+</code></pre>
 
 <p>To integrate FilestackSDK into your Xcode project using CocoaPods, specify it in your <code>Podfile</code>:</p>
-<pre class="highlight plaintext"><code>source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '11.0'
-use_frameworks!
+<pre class="highlight ruby"><code><span class="n">source</span> <span class="s1">'https://github.com/CocoaPods/Specs.git'</span>
+<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'11.0'</span>
+<span class="n">use_frameworks!</span>
 
-target '&lt;Your Target Name&gt;' do
-    pod 'FilestackSDK', '~&gt; 2.0'
-end
+<span class="n">target</span> <span class="s1">'&lt;Your Target Name&gt;'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'FilestackSDK'</span><span class="p">,</span> <span class="s1">'~&gt; 2.2'</span>
+<span class="k">end</span>
 </code></pre>
 
 <p>Then, run the following command:</p>
-
-<p><code>$ pod install</code></p>
+<pre class="highlight shell"><code><span class="nv">$ </span>pod <span class="nb">install</span>
+</code></pre>
 <h3 id='carthage' class='heading'>Carthage</h3>
 
 <p><a href="https://github.com/Carthage/Carthage">Carthage</a> is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.</p>
 
 <p>You can install Carthage with <a href="http://brew.sh/">Homebrew</a> using the following command:</p>
-<pre class="highlight plaintext"><code>$ brew update
-$ brew install carthage
+<pre class="highlight shell"><code><span class="nv">$ </span>brew update
+<span class="nv">$ </span>brew <span class="nb">install </span>carthage
 </code></pre>
 
 <p>To integrate FilestackSDK into your Xcode project using Carthage, specify it in your <code>Cartfile</code>:</p>
 
-<p><code>github &quot;filestack/filestack-swift&quot; ~&gt; 2.0</code></p>
+<p><code>github &quot;filestack/filestack-swift&quot; ~&gt; 2.2</code></p>
 
 <p>Run <code>carthage update</code> to build the framework and drag the built <code>FilestackSDK.framework</code> into your Xcode project. Additionally, add <code>FilestackSDK.framework</code>, <code>Alamofire.framework</code> and <code>CryptoSwift.framework</code> to the embedded frameworks build phase of your app&rsquo;s target.</p>
 <h3 id='manually' class='heading'>Manually</h3>
 <h4 id='embedded-framework' class='heading'>Embedded Framework</h4>
 
 <p>Open up Terminal, cd into your top-level project directory, and run the following command <q>if</q> your project is not initialized as a git repository:</p>
-
-<p><code>$ git init</code></p>
+<pre class="highlight shell"><code><span class="nv">$ </span>git init
+</code></pre>
 
 <p>Add FilestackSDK and its dependencies as git submodules by running the following commands:</p>
 <pre class="highlight shell"><code><span class="nv">$ </span>git submodule add https://github.com/filestack/filestack-swift.git
@@ -413,186 +451,185 @@ Select the <code>FilestackSDK.xcodeproj</code> in the Project Navigator and veri
 
 <p>Repeat the same process for adding <code>Alamofire</code> and <code>CryptoSwift</code> dependent frameworks.</p>
 <h2 id='usage' class='heading'>Usage</h2>
-<h3 id='integration-into-a-swift-project' class='heading'>Integration into a Swift project</h3>
 
-<ol>
-<li><p>Import the framework into your code:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">FilestackSDK</span>
-</code></pre></li>
-<li><p>Instantiate a <code><a href="Classes/Client.html">Client</a></code> object by providing your API key and, optionally, a <code><a href="Classes/Security.html">Security</a></code> object:</p>
-<pre class="highlight swift"><code><span class="c1">// Initialize a `Policy` with the expiry time and permissions you need.</span>
-<span class="k">let</span> <span class="nv">oneDayInSeconds</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="c1">// expires tomorrow</span>
-<span class="k">let</span> <span class="nv">policy</span> <span class="o">=</span> <span class="kt">Policy</span><span class="p">(</span><span class="c1">// Set your expiry time (24 hours in our case)</span>
-                    <span class="nv">expiry</span><span class="p">:</span> <span class="kt">Date</span><span class="p">(</span><span class="nv">timeIntervalSinceNow</span><span class="p">:</span> <span class="n">oneDayInSeconds</span><span class="p">),</span>
-                    <span class="c1">// Set the permissions you want your policy to have</span>
-                    <span class="nv">call</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">pick</span><span class="p">,</span> <span class="o">.</span><span class="n">read</span><span class="p">,</span> <span class="o">.</span><span class="n">store</span><span class="p">])</span>
+<details>
+<summary>Integration into a Swift project</summary>
 
-<span class="c1">// Initialize a `Security` object by providing a `Policy` object and your app secret.</span>
-<span class="c1">// You can find and/or enable your app secret in the Developer Portal.</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">security</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">Security</span><span class="p">(</span><span class="nv">policy</span><span class="p">:</span> <span class="n">policy</span><span class="p">,</span> <span class="nv">appSecret</span><span class="p">:</span> <span class="s">"YOUR-APP-SECRET"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">return</span>
-<span class="p">}</span>
+1. Import the framework into your code:
 
-<span class="c1">// Initialize your `Client` object by passing a valid API key, and security options.</span>
-<span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">Client</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"YOUR-API-KEY"</span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span> <span class="n">security</span><span class="p">)</span>
-</code></pre></li>
-</ol>
-<h3 id='integration-into-an-objective-c-project' class='heading'>Integration into an Objective-C project</h3>
+    &ldquo;`swift
+    import FilestackSDK
+    &rdquo;`
 
-<ol>
-<li><p>Import the framework into your code:</p>
-<pre class="highlight plaintext"><code>@import FilestackSDK;
-</code></pre></li>
-<li><p>Instantiate a <code>FSClient</code> object by providing your API key and, optionally, a <code>FSSecurity</code> object:</p>
-<pre class="highlight plaintext"><code>// Initialize a `FSPolicy` object with the expiry time and permissions you need.
-NSTimeInterval oneDayInSeconds = 60 * 60 * 24; // expires tomorrow
-NSDate *expiryDate = [[NSDate alloc] initWithTimeIntervalSinceNow:oneDayInSeconds];
-FSPolicyCall permissions = FSPolicyCallPick | FSPolicyCallRead | FSPolicyCallStore;
+2. Instantiate a `Client` object by providing your API key and, optionally, a `Security` object:
 
-FSPolicy *policy = [[FSPolicy alloc] initWithExpiry:expiryDate
-                                               call:permissions];
+    &ldquo;`swift
+    // Initialize a `Policy` with the expiry time and permissions you need.
+    let oneDayInSeconds: TimeInterval = 60 * 60 * 24 // expires tomorrow
+    let policy = Policy(// Set your expiry time (24 hours in our case)
+                        expiry: Date(timeIntervalSinceNow: oneDayInSeconds),
+                        // Set the permissions you want your policy to have
+                        call: [.pick, .read, .store])
 
-NSError *error;
+    // Initialize a `Security` object by providing a `Policy` object and your app secret.
+    // You can find and/or enable your app secret in the Developer Portal.
+    guard let security = try? Security(policy: policy, appSecret: &quot;YOUR-APP-SECRET&rdquo;) else {
+        return
+    }
 
-// Initialize a `Security` object by providing a `FSPolicy` object and your app secret.
-// You can find and/or enable your app secret in the Developer Portal.
-FSSecurity *security = [[FSSecurity alloc] initWithPolicy:policy
-                                                appSecret:@"YOUR-APP-SECRET"
-                                                    error:&amp;error];
+    // Initialize your `Client` object by passing a valid API key, and security options.
+    let client = Client(apiKey: &ldquo;YOUR-API-KEY&rdquo;, security: security)
+    &ldquo;`
 
-if (error != nil) {
-    NSLog(@"Error instantiating policy object: %@", error.localizedDescription);
-    return;
-}
+</details>
 
-// Initialize your `Client` object by passing a valid API key, and security options.
-FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
-                                           security:security];
-</code></pre></li>
-</ol>
+<details>
+<summary>Integration into an Objective-C project</summary>
 
-<p>For more information, please consult our <a href="https://filestack.github.io/filestack-swift/">API Reference</a>.</p>
-<h3 id='uploading-files-directly-to-a-storage-location' class='heading'>Uploading files directly to a storage location</h3>
+1. Import the framework into your code:
 
-<p>Both regular and Intelligent Ingestion uploads use the same API function available in the <code><a href="Classes/Client.html">Client</a></code> class. However, if your account has Intelligent Ingestion support enabled and you prefer using the regular uploading mechanism, you could disable it by setting the <code>useIntelligentIngestionIfAvailable</code> argument to <code>false</code> (see the relevant examples below.)</p>
-<h4 id='swift-example' class='heading'>Swift Example</h4>
-<pre class="highlight swift"><code><span class="c1">// Initialize a `Policy` with the expiry time and permissions you need.</span>
-<span class="k">let</span> <span class="nv">oneDayInSeconds</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="c1">// expires tomorrow</span>
-<span class="k">let</span> <span class="nv">policy</span> <span class="o">=</span> <span class="kt">Policy</span><span class="p">(</span><span class="c1">// Set your expiry time (24 hours in our case)</span>
-                    <span class="nv">expiry</span><span class="p">:</span> <span class="kt">Date</span><span class="p">(</span><span class="nv">timeIntervalSinceNow</span><span class="p">:</span> <span class="n">oneDayInSeconds</span><span class="p">),</span>
-                    <span class="c1">// Set the permissions you want your policy to have</span>
-                    <span class="nv">call</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">pick</span><span class="p">,</span> <span class="o">.</span><span class="n">read</span><span class="p">,</span> <span class="o">.</span><span class="n">store</span><span class="p">])</span>
+    &rdquo;`objective-c
+    @import FilestackSDK;
+    &ldquo;`
 
-<span class="c1">// Initialize a `Security` object by providing a `Policy` object and your app secret.</span>
-<span class="c1">// You can find and/or enable your app secret in the Developer Portal.</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">security</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">Security</span><span class="p">(</span><span class="nv">policy</span><span class="p">:</span> <span class="n">policy</span><span class="p">,</span> <span class="nv">appSecret</span><span class="p">:</span> <span class="s">"YOUR-APP-SECRET"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">return</span>
-<span class="p">}</span>
+2. Instantiate a `FSClient` object by providing your API key and, optionally, a `FSSecurity` object:
 
-<span class="c1">// Get an URL pointing to the local file you would like to upload.</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">localURL</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"YOUR-IMAGE"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"jpg"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">return</span>
-<span class="p">}</span>
+    &rdquo;`objective-c
+    // Initialize a `FSPolicy` object with the expiry time and permissions you need.
+    NSTimeInterval oneDayInSeconds = 60 * 60 * 24; // expires tomorrow
+    NSDate *expiryDate = [[NSDate alloc] initWithTimeIntervalSinceNow:oneDayInSeconds];
+    FSPolicyCall permissions = FSPolicyCallPick | FSPolicyCallRead | FSPolicyCallStore;
 
-<span class="c1">// Initialize your `Client` object by passing a valid API key, and security options.</span>
-<span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">Client</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"YOUR-API-KEY"</span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span> <span class="n">security</span><span class="p">)</span>
+    FSPolicy *policy = [[FSPolicy alloc] initWithExpiry:expiryDate
+                                                   call:permissions];
 
-<span class="k">let</span> <span class="nv">uploadProgress</span><span class="p">:</span> <span class="p">(</span><span class="kt">Progress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">progress</span> <span class="k">in</span>
-    <span class="c1">// Here you may update the UI to reflect the upload progress.</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Progress: </span><span class="se">\(</span><span class="n">progress</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
-<span class="p">}</span>
+    NSError *error;
 
-<span class="c1">// Store options</span>
-<span class="k">let</span> <span class="nv">storeOptions</span><span class="p">:</span> <span class="kt">StorageOptions</span> <span class="o">=</span> <span class="kt">StorageOptions</span><span class="p">(</span><span class="c1">// Store location (e.g. S3, Dropbox, Rackspace, Azure, Google Cloud Storage)</span>
-                                                  <span class="nv">location</span><span class="p">:</span> <span class="o">.</span><span class="n">s3</span><span class="p">,</span>
-                                                  <span class="c1">// AWS Region for S3 (e.g. "us-east-1", "eu-west-1", "ap-northeast-1", etc.)</span>
-                                                  <span class="nv">region</span><span class="p">:</span> <span class="s">"us-east-1"</span><span class="p">,</span>
-                                                  <span class="c1">// The name of your S3 bucket</span>
-                                                  <span class="nv">container</span><span class="p">:</span> <span class="s">"YOUR-S3-BUCKET"</span><span class="p">,</span>
-                                                  <span class="c1">// Destination path in the store.</span>
-                                                  <span class="c1">// You may use a path to a folder (e.g. /public/) or,</span>
-                                                  <span class="c1">// alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).</span>
-                                                  <span class="c1">// When using a path to a folder, the uploaded file will be stored at that folder using a</span>
-                                                  <span class="c1">// filename derived from the original filename.</span>
-                                                  <span class="c1">// When using a path to a filename, the uploaded file will be stored at the given path</span>
-                                                  <span class="c1">// using the filename indicated in the path.</span>
-                                                  <span class="nv">path</span><span class="p">:</span> <span class="s">"/public/oncorhynchus.jpg"</span><span class="p">,</span>
-                                                  <span class="c1">// Access permissions (either public or private)</span>
-                                                  <span class="nv">access</span><span class="p">:</span> <span class="o">.</span><span class="kd">public</span><span class="p">)</span>
+    // Initialize a `Security` object by providing a `FSPolicy` object and your app secret.
+    // You can find and/or enable your app secret in the Developer Portal.
+    FSSecurity *security = [[FSSecurity alloc] initWithPolicy:policy
+                                                    appSecret:@&ldquo;YOUR-APP-SECRET&rdquo;
+                                                        error:&error];
 
-<span class="c1">// Call the function in your `Client` instance that takes care of file uploading.</span>
-<span class="c1">// Please notice that some of the parameters are optional and have default values.</span>
-<span class="k">let</span> <span class="nv">multiPartUpload</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nf">multiPartUpload</span><span class="p">(</span><span class="c1">// Set the URL pointing to the local file you want to upload.</span>
-                                             <span class="nv">from</span><span class="p">:</span> <span class="n">localURL</span><span class="p">,</span>
-                                             <span class="c1">// Set the destination storage location here.</span>
-                                             <span class="c1">// If none given, S3 location with default options is assumed.</span>
-                                             <span class="nv">storeOptions</span><span class="p">:</span> <span class="n">storeOptions</span><span class="p">,</span>
-                                             <span class="c1">// Set to `false` if you don't want to use</span>
-                                             <span class="c1">// Intelligent Ingestion regardless of whether it is available</span>
-                                             <span class="c1">// for you.</span>
-                                             <span class="nv">useIntelligentIngestionIfAvailable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-                                             <span class="c1">// Set the dispatch queue where you want your upload progress</span>
-                                             <span class="c1">// and completion handlers to be called.</span>
-                                             <span class="c1">// Remember that any UI updates should be performed on the</span>
-                                             <span class="c1">// main queue.</span>
-                                             <span class="c1">// You can omit this parameter, and the main queue will be</span>
-                                             <span class="c1">// used by default.</span>
-                                             <span class="nv">queue</span><span class="p">:</span> <span class="o">.</span><span class="n">main</span><span class="p">,</span>
-                                             <span class="c1">// Set your upload progress handler here (optional)</span>
-                                             <span class="nv">uploadProgress</span><span class="p">:</span> <span class="n">uploadProgress</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
-    <span class="c1">// Try to obtain Filestack handle</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">json</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">json</span><span class="p">,</span> <span class="k">let</span> <span class="nv">handle</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s">"handle"</span><span class="p">]</span> <span class="k">as?</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="c1">// Use Filestack handle</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">error</span> <span class="p">{</span>
-        <span class="c1">// Handle error</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    if (error != nil) {
+        NSLog(@&ldquo;Error instantiating policy object: %@&rdquo;, error.localizedDescription);
+        return;
+    }
 
-<span class="c1">// Cancelling ongoing multipart upload.</span>
-<span class="n">multipartUpload</span><span class="o">.</span><span class="nf">cancel</span><span class="p">()</span>
-</code></pre>
-<h4 id='objective-c-example' class='heading'>Objective-C Example</h4>
-<pre class="highlight plaintext"><code>// Initialize a `FSPolicy` object with the expiry time and permissions you need.
-NSTimeInterval oneDayInSeconds = 60 * 60 * 24; // expires tomorrow
-NSDate *expiryDate = [[NSDate alloc] initWithTimeIntervalSinceNow:oneDayInSeconds];
-FSPolicyCall permissions = FSPolicyCallPick | FSPolicyCallRead | FSPolicyCallStore;
+    // Initialize your `Client` object by passing a valid API key, and security options.
+    FSClient *client = [[FSClient alloc] initWithApiKey:@&ldquo;YOUR-API-KEY&rdquo;
+                                               security:security];
+    &ldquo;`
 
-FSPolicy *policy = [[FSPolicy alloc] initWithExpiry:expiryDate
-                                               call:permissions];
+For more information, please consult our [API Reference](https://filestack.github.io/filestack-swift/).
+</details>
 
-NSError *error;
+<details>
+<summary>Uploading files directly to a storage location</summary>
 
-// Initialize a `Security` object by providing a `FSPolicy` object and your app secret.
-// You can find and/or enable your app secret in the Developer Portal.
-FSSecurity *security = [[FSSecurity alloc] initWithPolicy:policy
-                                                appSecret:@"YOUR-APP-SECRET"
-                                                    error:&amp;error];
+Both regular and Intelligent Ingestion uploads use the same API function available in the `Client` class. However, if your account has Intelligent Ingestion support enabled and you prefer using the regular uploading mechanism, you could disable it by setting the `useIntelligentIngestionIfAvailable` argument to `false` (see the relevant examples below.)
 
-if (error != nil) {
-    NSLog(@"Error instantiating policy object: %@", error.localizedDescription);
-    return;
-}
+<details>
+<summary>Swift Example</summary>
 
-// Get an URL pointing to the local file you would like to upload.
-NSURL *localURL = [[NSBundle mainBundle] URLForResource:@"YOUR-IMAGE"
-                                          withExtension:@"jpg"];
+&rdquo;`swift
+// Define upload options (see `UploadOptions` for all the available options)
+// Here we use `.defaults` which implies:
+// * preferIntelligentIngestion = true
+// * startImmediately = true
+// * storeOptions = StorageOptions(location: .s3, access: .private)
+// * defaultPartUploadConcurrency = 5
+// * defaultChunkUploadConcurrency = 8
+// * chunkSize = 5mbs 
+let uploadOptions = UploadOptions.defaults
+// For instance, if you don&rsquo;t want to use Intelligent Ingestion regardless of whether it is available:
+uploadOptions.preferIntelligentIngestion = false
+// You may also easily override the default store options:
+uploadOptions.storeOptions = StorageOptions(// Store location (e.g. S3, Dropbox, Rackspace, Azure, Google Cloud Storage)
+                                            location: .s3,
+                                            // AWS Region for S3 (e.g. &ldquo;us-east-1&rdquo;, &ldquo;eu-west-1&rdquo;, &ldquo;ap-northeast-1&rdquo;, etc.)
+                                            region: &ldquo;us-east-1&rdquo;,
+                                            // The name of your S3 bucket
+                                            container: &ldquo;YOUR-S3-BUCKET&rdquo;,
+                                            // Destination path in the store.
+                                            // You may use a path to a folder (e.g. /public/) or,
+                                            // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
+                                            // When using a path to a folder, the uploaded file will be stored at that folder using a
+                                            // filename derived from the original filename.
+                                            // When using a path to a filename, the uploaded file will be stored at the given path
+                                            // using the filename indicated in the path.
+                                            path: &ldquo;/public/oncorhynchus.jpg&rdquo;,
+                                            // Custom MIME type (useful when uploadable has no way of knowing its MIME type)
+                                            mimeType: &ldquo;image/jpg&rdquo;,
+                                            // Access permissions (either public or private)
+                                            access: .public,
+                                            // An array of workflow IDs to trigger for each upload
+                                            workflows: [&ldquo;WF-1&rdquo;, &ldquo;WF-2&rdquo;]
+                                            )
 
-// Initialize your `FSClient` object by passing a valid API key, and security options.
-FSClient *client = [[FSClient alloc] initWithApiKey:@"YOUR-API-KEY"
-                                           security:security];
+let uploadable = URL(&hellip;) // may also be Data or arrays of URL or Data.
 
+// Call the function in your `Client` instance that takes care of uploading your Uploadable.
+// Please notice that most arguments have sensible defaults and may be ommited.
+let uploader = client.upload(// You may pass an URL, Data or arrays of URL or Data
+                             using: uploadable,
+                             // Set the upload options here. If none given, `UploadOptions.defaults` 
+                             // is assumed.
+                             options: uploadOptions,
+                             // Set the dispatch queue where you want your upload progress
+                             // and completion handlers to be called.
+                             // Remember that any UI updates should be performed on the
+                             // main queue.
+                             // You can omit this parameter, and the main queue will be
+                             // used by default.
+                             queue: .main,
+                             // Set your upload progress handler here (optional)
+                             uploadProgress: { progress in
+                                 // Here you may update the UI to reflect the upload progress.
+                                 print(&ldquo;Progress: \(progress)&rdquo;)
+                             }) { response in
+                                 // Try to obtain Filestack handle
+                                 if let json = response?.json, let handle = json[&ldquo;handle&rdquo;] as? String {
+                                     // Use Filestack handle
+                                 } else if let error = response?.error {
+                                     // Handle error
+                                 }
+                             }
 
-void (^uploadProgress)(NSProgress *) = ^(NSProgress *progress) {
-    // Here you may update the UI to reflect the upload progress.
-    NSLog(@"Progress: %@", progress);
-};
+// Start upload (only useful when `startImmediately` option is `false`)
+uploader.start()
 
-// Store options, initialized with a storage location (e.g. S3, Dropbox, Rackspace, Azure, Google Cloud Storage)
-FSStorageOptions *storeOptions = [[FSStorageOptions alloc] initWithLocation:FSStorageLocationS3];
-// AWS Region for S3 (e.g. "us-east-1", "eu-west-1", "ap-northeast-1", etc.)
-storeOptions.region = @"us-east-1";
+// Cancel ongoing upload.
+uploader.cancel()
+
+// Query progress.
+uploader.progress // returns a `Progress` object
+&ldquo;`
+</details>
+
+<details>
+<summary>Objective-C Example</summary>
+
+&rdquo;`objective-c
+// Define upload options (see `FSUploadOptions` for all the available options)
+// Here we use `.defaults` which implies:
+// * preferIntelligentIngestion = true
+// * startImmediately = true
+// * storeOptions = FSStorageOptions.defaults (= location:S3, access:private)
+// * defaultPartUploadConcurrency = 5
+// * defaultChunkUploadConcurrency = 8
+// * chunkSize = 5mbs
+FSUploadOptions *uploadOptions = FSUploadOptions.defaults;
+
+// For instance, if you don&rsquo;t want to use Intelligent Ingestion regardless of whether it is available:
+uploadOptions.preferIntelligentIngestion = NO;
+
+// You may also easily override the default store options:
+uploadOptions.storeOptions = [[FSStorageOptions alloc] initWithLocation:FSStorageLocationS3 access:FSStorageAccessPrivate];
+// AWS Region for S3 (e.g. &ldquo;us-east-1&rdquo;, &ldquo;eu-west-1&rdquo;, &ldquo;ap-northeast-1&rdquo;, etc.)
+uploadOptions.storeOptions.region = @&ldquo;us-east-1&rdquo;;
 // The name of your S3 bucket
-storeOptions.container = @"YOUR-S3-BUCKET";
+uploadOptions.storeOptions.container = @&ldquo;YOUR-S3-BUCKET&rdquo;;
 // Destination path in the store.
 // You may use a path to a folder (e.g. /public/) or,
 // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
@@ -600,35 +637,54 @@ storeOptions.container = @"YOUR-S3-BUCKET";
 // filename derived from the original filename.
 // When using a path to a filename, the uploaded file will be stored at the given path
 // using the filename indicated in the path.
-storeOptions.path = @"/public/oncorhynchus.jpg";
-// Access permissions (either public or private)
-storeOptions.access = FSStorageAccessPublic;
+uploadOptions.storeOptions.path = @&ldquo;/public/oncorhynchus.jpg&rdquo;;
+// Custom MIME type (useful when uploadable has no way of knowing its MIME type)
+uploadOptions.storeOptions.mimeType = @&ldquo;image/jpg&rdquo;;
+// An array of workflow IDs to trigger for each upload
+uploadOptions.storeOptions.workflows = @[@&ldquo;WF-1&rdquo;, @&ldquo;WF-2&rdquo;];
 
-// Call the function in your `FSClient` instance that takes care of file uploading.
-// Please notice that some of the parameters are optional and have default values.
-MultipartUpload *multipartUpload = [client multiPartUploadFrom:localURL
-                                                  storeOptions: storeOptions,
-                            useIntelligentIngestionIfAvailable:YES
-                                                         queue:dispatch_get_main_queue()
-                                                uploadProgress:uploadProgress
-             completionHandler:^(FSNetworkJSONResponse * _Nullable response) {
-                 NSDictionary *jsonResponse = response.json;
-                 NSString *handle = jsonResponse[@"handle"];
-                 NSError *error = response.error;
+// Some local URL to be uploaded
+NSURL *someURL = &hellip;;
 
-                 if (handle) {
-                     // Use Filestack handle
-                     NSLog(@"Handle is: %@", handle);
-                 } else if (error) {
-                     // Handle error
-                     NSLog(@"Error is: %@", error);
-                 }
-             }
+FSUploader *uploader = [client uploadURLUsing:someURL
+                                      options:uploadOptions
+                                        queue:dispatch_get_main_queue()
+                               uploadProgress:^(NSProgress * _Nonnull progress) {
+                                   // Here you may update the UI to reflect the upload progress.
+                                   NSLog(@&ldquo;Progress: %@&rdquo;, progress);
+                               }
+                              completionHandler:^(FSNetworkJSONResponse * _Nullable response) {
+         NSDictionary *jsonResponse = response.json;
+         NSString *handle = jsonResponse[@&ldquo;handle&rdquo;];
+         NSError *error = response.error;
+
+         if (handle) {
+             // Use Filestack handle
+             NSLog(@&ldquo;Handle is: %@&rdquo;, handle);
+         } else if (error) {
+             // Handle error
+             NSLog(@&ldquo;Error is: %@&rdquo;, error);
+         }
+     }
 ];
 
-// Cancelling ongoing multipart upload.
-[multipartUpload cancel];
-</code></pre>
+// Other alternative uploading methods are available in `FSClient`:
+// - For multiple URL uploading: `uploadMultipleURLs:options:queue:uploadProgress:completionHandler:)`
+// - For data uploading: `uploadDataUsing:options:queue:uploadProgress:completionHandler:)`
+// - For multiple data uploading: `uploadMultipleDataUsing:options:queue:uploadProgress:completionHandler:)`
+
+// Start upload (only useful when `startImmediately` option is `false`)
+[uploader start];
+
+// Cancel ongoing upload.
+[uploader cancel];
+
+// Query progress.
+uploader.progress // returns an `NSProgress` object
+&ldquo;`
+</details>
+
+<p></details></p>
 <h2 id='versioning' class='heading'>Versioning</h2>
 
 <p>Filestack Swift SDK follows the <a href="http://semver.org/">Semantic Versioning</a>.</p>
@@ -649,8 +705,8 @@ MultipartUpload *multipartUpload = [client multiPartUploadFrom:localURL
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2019-09-05)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2019 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2019-09-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
