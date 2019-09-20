@@ -69,13 +69,13 @@ class UploadTests: XCTestCase {
         stubMultipartCompleteRequest()
 
         let expectation = self.expectation(description: "request should succeed")
-        let progressExpectation = self.expectation(description: "request should succeed")
-
+        var progressExpectation: XCTestExpectation? = self.expectation(description: "request should succeed")
         var json: [String: Any]!
 
         let progressHandler: ((Progress) -> Void) = { progress in
             if progress.completedUnitCount == UploadTests.largeFileSize {
-                progressExpectation.fulfill()
+                progressExpectation?.fulfill()
+                progressExpectation = nil
             }
         }
 
