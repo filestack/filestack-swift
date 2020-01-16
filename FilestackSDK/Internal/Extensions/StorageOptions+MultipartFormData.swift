@@ -6,11 +6,10 @@
 //  Copyright © 2020 Filestack. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 extension StorageOptions {
-
     internal func append(to form: MultipartFormData) {
         form.append(location.description, withName: "store_location")
         form.append(region, withName: "store_region")

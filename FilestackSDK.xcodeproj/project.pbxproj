@@ -20,6 +20,7 @@
 		452055401F4AE87D00A6795D /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 4520553F1F4AE7B900A6795D /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		452055421F4B191900A6795D /* RotateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452055411F4B191900A6795D /* RotateTransform.swift */; };
 		4528C7461F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4528C7451F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift */; };
+		452C639623D0703A0057656C /* StorageOptions+MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452C639523D0703A0057656C /* StorageOptions+MultipartFormData.swift */; };
 		452D715B1F17A49D0037E1BB /* TransformPageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715A1F17A49D0037E1BB /* TransformPageFormat.swift */; };
 		452D715D1F17A4DB0037E1BB /* TransformPageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715C1F17A4DB0037E1BB /* TransformPageOrientation.swift */; };
 		452D715F1F17A51B0037E1BB /* TransformColorSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715E1F17A51B0037E1BB /* TransformColorSpace.swift */; };
@@ -199,6 +200,7 @@
 		4520553F1F4AE7B900A6795D /* FSPolicyCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
 		452055411F4B191900A6795D /* RotateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotateTransform.swift; path = FilestackSDK/Public/Transforms/RotateTransform.swift; sourceTree = SOURCE_ROOT; };
 		4528C7451F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartUploadCommitOperation.swift; sourceTree = "<group>"; };
+		452C639523D0703A0057656C /* StorageOptions+MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageOptions+MultipartFormData.swift"; sourceTree = "<group>"; };
 		452D715A1F17A49D0037E1BB /* TransformPageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPageFormat.swift; sourceTree = "<group>"; };
 		452D715C1F17A4DB0037E1BB /* TransformPageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPageOrientation.swift; sourceTree = "<group>"; };
 		452D715E1F17A51B0037E1BB /* TransformColorSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformColorSpace.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				45050F4B1F2B49C100B4E3C3 /* Data+base64MD5Digest.swift */,
 				45B63B262328078A0040BFBB /* NetworkingService+DefaultImplementations.swift */,
 				454CC1CA1F0D1160005821AC /* SessionManager+filestackDefault.swift */,
+				452C639523D0703A0057656C /* StorageOptions+MultipartFormData.swift */,
 				45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */,
 				45B63B0523279EB10040BFBB /* Uploadable+reader.swift */,
 			);
@@ -878,6 +881,7 @@
 				45B63B112327CBB90040BFBB /* UploadOptions.swift in Sources */,
 				459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */,
 				BC27301A20DA806200142174 /* TagsTransform.swift in Sources */,
+				452C639623D0703A0057656C /* StorageOptions+MultipartFormData.swift in Sources */,
 				4589A45F1F0A3B5500C39405 /* StorageLocation.swift in Sources */,
 				45C9E93B1F137EB200260F2A /* Transformable.swift in Sources */,
 				BC8832EC20D239A900B88EAF /* OilPaintTransform.swift in Sources */,
