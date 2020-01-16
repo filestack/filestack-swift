@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 2.2.1 *(2020-01-16)*
+----------------------------
+
+- Fixed missing store options when uploading files using the regular uploading mechanism.
+
 Version 2.2 *(2019-09-18)*
 ----------------------------
 
