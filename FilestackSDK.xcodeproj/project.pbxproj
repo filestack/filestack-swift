@@ -829,7 +829,7 @@
 		};
 		45CDA04C22C666E4008DF3F4 /* Run SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (

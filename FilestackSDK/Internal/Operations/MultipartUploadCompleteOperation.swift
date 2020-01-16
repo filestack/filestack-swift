@@ -80,16 +80,8 @@ private extension MultipartUploadCompleteOperation {
         form.append(fileName, withName: "filename")
         form.append(String(fileSize), withName: "size")
         form.append(mimeType, withName: "mimetype")
-        form.append(storeOptions.location.description, withName: "store_location")
-        form.append(storeOptions.region, withName: "store_region")
-        form.append(storeOptions.container, withName: "store_container")
-        form.append(storeOptions.path, withName: "store_path")
-        form.append(storeOptions.access?.description, withName: "store_access")
 
-        if let workflows = storeOptions.workflows {
-            let joinedWorkflows = "[\((workflows.map { "\"\($0)\"" }).joined(separator: ","))]"
-            form.append(joinedWorkflows, withName: "workflows")
-        }
+        storeOptions.append(to: form)
 
         if let security = security {
             form.append(security.encodedPolicy, withName: "policy")

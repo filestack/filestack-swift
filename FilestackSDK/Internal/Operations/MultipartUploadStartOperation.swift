@@ -60,15 +60,14 @@ private extension MultipartUploadStartOperation {
         form.append(fileName, withName: "filename")
         form.append(mimeType, withName: "mimetype")
         form.append(String(fileSize), withName: "size")
-        form.append(storeOptions.location.description, withName: "store_location")
-        form.append(storeOptions.region, withName: "store_region")
-        form.append(storeOptions.container, withName: "store_container")
-        form.append(storeOptions.path, withName: "store_path")
-        form.append(storeOptions.access?.description, withName: "store_access")
+
+        storeOptions.append(to: form)
+
         if let security = security {
             form.append(security.encodedPolicy, withName: "policy")
             form.append(security.signature, withName: "signature")
         }
+
         if useIntelligentIngestionIfAvailable {
             form.append("true", withName: "multipart")
         }

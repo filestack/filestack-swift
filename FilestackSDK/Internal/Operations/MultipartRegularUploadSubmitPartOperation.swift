@@ -21,6 +21,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     let uri: String
     let region: String
     let uploadID: String
+    let storeOptions: StorageOptions
     let chunkSize: Int
     var uploadProgress: ((Int64) -> Void)?
 
@@ -39,6 +40,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
                   uri: String,
                   region: String,
                   uploadID: String,
+                  storeOptions: StorageOptions,
                   chunkSize: Int,
                   uploadProgress: @escaping ((Int64) -> Void)) {
         self.seek = seek
@@ -50,6 +52,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
         self.uri = uri
         self.region = region
         self.uploadID = uploadID
+        self.storeOptions = storeOptions
         self.chunkSize = chunkSize
         self.didFail = false
         self.uploadProgress = uploadProgress
@@ -97,6 +100,8 @@ private extension MultipartRegularUploadSubmitPartOperation {
             form.append(String(dataChunk.count), withName: "size")
             form.append(String(self.part), withName: "part")
             form.append(dataChunk.base64MD5Digest(), withName: "md5")
+
+            self.storeOptions.append(to: form)
         }
     }
 

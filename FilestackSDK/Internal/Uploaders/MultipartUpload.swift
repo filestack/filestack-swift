@@ -313,6 +313,7 @@ private extension MultipartUpload {
                                                              uri: uri,
                                                              region: region,
                                                              uploadID: uploadId,
+                                                             storeOptions: options.storeOptions,
                                                              chunkSize: chunkSize,
                                                              uploadProgress: updateProgress)
         }
