@@ -41,12 +41,6 @@
 		456FF4C31F2790C800E9F192 /* large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 456FF4C21F27902500E9F192 /* large.jpg */; };
 		4579CD3E1F1764A500DCF37A /* TransformBlurMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4579CD3D1F1764A500DCF37A /* TransformBlurMode.swift */; };
 		457B179E23281EC50033BDB1 /* UploadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B179D23281EC50033BDB1 /* UploadStatus.swift */; };
-		457B17A22328269A0033BDB1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 457B179F2328269A0033BDB1 /* LICENSE */; };
-		457B17A32328269A0033BDB1 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 457B17A02328269A0033BDB1 /* CHANGELOG.md */; };
-		457B17A42328269A0033BDB1 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 457B17A12328269A0033BDB1 /* VERSION */; };
-		457B17A7232826C80033BDB1 /* Cartfile.private in Resources */ = {isa = PBXBuildFile; fileRef = 457B17A5232826C80033BDB1 /* Cartfile.private */; };
-		457B17A8232826C80033BDB1 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 457B17A6232826C80033BDB1 /* Cartfile.resolved */; };
-		457B17AB232827730033BDB1 /* FilestackSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 457B17AA232827730033BDB1 /* FilestackSDK.podspec */; };
 		457D5BED1F16146B00FBD5B1 /* TransformPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BEC1F16146B00FBD5B1 /* TransformPosition.swift */; };
 		457D5BEF1F16147E00FBD5B1 /* TransformFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BEE1F16147E00FBD5B1 /* TransformFit.swift */; };
 		457D5BF11F1614A800FBD5B1 /* TransformAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5BF01F1614A800FBD5B1 /* TransformAlign.swift */; };
@@ -81,7 +75,6 @@
 		45B63B272328078A0040BFBB /* NetworkingService+DefaultImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B262328078A0040BFBB /* NetworkingService+DefaultImplementations.swift */; };
 		45B66481232838C200DF5706 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B66480232838C200DF5706 /* Tools.swift */; };
 		45B830A01F03B27A0053742A /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B8309E1F03B27A0053742A /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45B830CB1F03BB6D0053742A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 45B830CA1F03BB6D0053742A /* Cartfile */; };
 		45B830E31F03BCF20053742A /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E01F03BCF20053742A /* Policy.swift */; };
 		45B830E41F03BCF20053742A /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B830E11F03BCF20053742A /* Security.swift */; };
 		45B831121F03D8140053742A /* FilestackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B8309B1F03B27A0053742A /* FilestackSDK.framework */; };
@@ -794,13 +787,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457B17A22328269A0033BDB1 /* LICENSE in Resources */,
-				457B17A8232826C80033BDB1 /* Cartfile.resolved in Resources */,
-				457B17A42328269A0033BDB1 /* VERSION in Resources */,
-				457B17AB232827730033BDB1 /* FilestackSDK.podspec in Resources */,
-				457B17A7232826C80033BDB1 /* Cartfile.private in Resources */,
-				457B17A32328269A0033BDB1 /* CHANGELOG.md in Resources */,
-				45B830CB1F03BB6D0053742A /* Cartfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
