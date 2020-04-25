@@ -145,7 +145,7 @@ private extension MultipartUpload {
     func doUploadFile() {
         currentStatus = .inProgress
 
-        let fileName = options.storeOptions.filename ?? UUID().uuidString
+        let fileName = options.storeOptions.filename ?? uploadable.filename ?? UUID().uuidString
         let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
 
         guard let fileSize = uploadable.size, !fileName.isEmpty else {
