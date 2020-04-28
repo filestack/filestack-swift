@@ -57,10 +57,16 @@ class MultipartUpload: Uploader {
     private let security: Security?
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
     private let maxRetries = 5
-    private let uploadOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.upload-operation-queue",
-                                                               qos: .utility,
-                                                               attributes: .concurrent)
-    private let uploadOperationQueue = OperationQueue()
+
+    private let masterOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.master-upload-operation-queue",
+                                                               qos: .utility)
+
+    private let partOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.part-upload-operation-queue",
+                                                             qos: .utility,
+                                                             attributes: .concurrent)
+
+    private let masterOperationQueue = OperationQueue()
+    private let partOperationQueue = OperationQueue()
 
     // MARK: - Lifecycle Functions
 
@@ -77,8 +83,10 @@ class MultipartUpload: Uploader {
         self.shouldAbort = false
         self.masterProgress.totalUnitCount = Int64(uploadable.size ?? 0)
 
-        uploadOperationQueue.underlyingQueue = uploadOperationUnderlyingQueue
-        uploadOperationQueue.maxConcurrentOperationCount = options.partUploadConcurrency
+        masterOperationQueue.underlyingQueue = masterOperationUnderlyingQueue
+        masterOperationQueue.maxConcurrentOperationCount = 1
+        partOperationQueue.underlyingQueue = partOperationUnderlyingQueue
+        partOperationQueue.maxConcurrentOperationCount = options.partUploadConcurrency
     }
 
     // MARK: - Uploadable Protocol Implementation
@@ -103,7 +111,8 @@ class MultipartUpload: Uploader {
 
         uploadQueue.sync {
             shouldAbort = true
-            uploadOperationQueue.cancelAllOperations()
+            partOperationQueue.cancelAllOperations()
+            masterOperationQueue.cancelAllOperations()
             currentStatus = .cancelled
         }
 
@@ -165,10 +174,10 @@ private extension MultipartUpload {
             fail(with: MultipartUploadError.aborted)
             return
         } else {
-            uploadOperationQueue.addOperation(startOperation)
+            masterOperationQueue.addOperation(startOperation)
         }
 
-        uploadOperationQueue.waitUntilAllOperationsAreFinished()
+        masterOperationQueue.waitUntilAllOperationsAreFinished()
 
         // Ensure that there's a response and JSON payload or fail.
         guard let response = startOperation.response, let json = response.json else {
@@ -205,24 +214,6 @@ private extension MultipartUpload {
         var partsAndEtags: [Int: String] = [:]
 
         let chunkSize = (canUseIntelligentIngestion ? ChunkSize.ii : ChunkSize.regular).rawValue
-        let beforeCompleteCheckPointOperation = BlockOperation()
-
-        beforeCompleteCheckPointOperation.completionBlock = {
-            if self.shouldAbort {
-                self.fail(with: MultipartUploadError.aborted)
-                return
-            } else {
-                self.addCompleteOperation(fileName: fileName,
-                                          fileSize: fileSize,
-                                          mimeType: mimeType,
-                                          uri: uri,
-                                          region: region,
-                                          uploadID: uploadID,
-                                          partsAndEtags: partsAndEtags,
-                                          usingIntelligentIngestion: canUseIntelligentIngestion,
-                                          retriesLeft: self.maxRetries)
-            }
-        }
 
         // Submit all parts
         while !shouldAbort, seekPoint < fileSize {
@@ -262,21 +253,34 @@ private extension MultipartUpload {
                 }
 
                 if self.shouldAbort {
-                    self.uploadOperationQueue.cancelAllOperations()
+                    self.partOperationQueue.cancelAllOperations()
                 }
             }
 
             checkpointOperation.addDependency(partOperation)
-            uploadOperationQueue.addOperation(partOperation)
-            uploadOperationQueue.addOperation(checkpointOperation)
-
-            beforeCompleteCheckPointOperation.addDependency(partOperation)
-            beforeCompleteCheckPointOperation.addDependency(checkpointOperation)
+            partOperationQueue.addOperation(partOperation)
+            partOperationQueue.addOperation(checkpointOperation)
 
             seekPoint += UInt64(chunkSize)
         }
 
-        uploadOperationQueue.addOperation(beforeCompleteCheckPointOperation)
+        masterOperationQueue.addOperation {
+            self.partOperationQueue.waitUntilAllOperationsAreFinished()
+
+            if self.shouldAbort {
+                self.fail(with: MultipartUploadError.aborted)
+            } else {
+                self.addCompleteOperation(fileName: fileName,
+                                          fileSize: fileSize,
+                                          mimeType: mimeType,
+                                          uri: uri,
+                                          region: region,
+                                          uploadID: uploadID,
+                                          partsAndEtags: partsAndEtags,
+                                          usingIntelligentIngestion: canUseIntelligentIngestion,
+                                          retriesLeft: self.maxRetries)
+            }
+        }
     }
 
     func uploadSubmitPartOperation(usingIntelligentIngestion: Bool,
@@ -386,8 +390,8 @@ private extension MultipartUpload {
         }
 
         checkpointOperation.addDependency(completeOperation)
-        uploadOperationQueue.addOperation(completeOperation)
-        uploadOperationQueue.addOperation(checkpointOperation)
+        masterOperationQueue.addOperation(completeOperation)
+        masterOperationQueue.addOperation(checkpointOperation)
     }
 }
 

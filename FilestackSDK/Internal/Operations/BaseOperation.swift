@@ -38,6 +38,12 @@ class BaseOperation: Operation {
         }
     }
 
+    override func cancel() {
+        if isExecuting {
+            state = .finished
+        }
+    }
+
     override var isReady: Bool {
         return state == .ready
     }
