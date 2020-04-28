@@ -50,6 +50,13 @@ import Foundation
     }()
 }
 
+extension UploadOptions {
+    internal func updateStoreOptions(fileName: String, mimeType: String) {
+        storeOptions.filename = fileName
+        storeOptions.mimeType = mimeType
+    }
+}
+
 // MARK: - CustomStringConvertible
 
 extension UploadOptions {

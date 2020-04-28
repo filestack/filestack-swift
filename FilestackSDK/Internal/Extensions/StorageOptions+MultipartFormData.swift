@@ -14,12 +14,19 @@ extension StorageOptions {
         form.append(location.description, withName: "store_location")
         form.append(region, withName: "store_region")
         form.append(container, withName: "store_container")
-        form.append(path, withName: "store_path")
+        form.append(completePath, withName: "store_path")
         form.append(access?.description, withName: "store_access")
 
         if let workflows = workflows {
             let joinedWorkflows = "[\((workflows.map { "\"\($0)\"" }).joined(separator: ","))]"
             form.append(joinedWorkflows, withName: "workflows")
         }
+    }
+    
+    internal var completePath: String? {
+        guard let path = path, let fileName = filename else {
+            return nil
+        }
+        return "\(path)_\(fileName)"
     }
 }

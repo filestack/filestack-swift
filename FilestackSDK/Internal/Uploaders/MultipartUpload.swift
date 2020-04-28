@@ -152,6 +152,7 @@ private extension MultipartUpload {
             fail(with: MultipartUploadError.invalidFile)
             return
         }
+        options.updateStoreOptions(fileName: fileName, mimeType: mimeType)
 
         let startOperation = MultipartUploadStartOperation(apiKey: apiKey,
                                                            fileName: fileName,
