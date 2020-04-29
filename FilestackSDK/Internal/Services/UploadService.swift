@@ -19,7 +19,7 @@ final class UploadService: NetworkingService {
                        completionHandler: @escaping (NetworkJSONResponse) -> Void) {
         sessionManager.upload(multipartFormData: multipartFormData, to: url) { result in
             switch result {
-            case .success(let request, _, _):
+            case let .success(request, _, _):
                 request.responseJSON(queue: queue) { response in
                     let jsonResponse = NetworkJSONResponse(with: response)
                     completionHandler(jsonResponse)
