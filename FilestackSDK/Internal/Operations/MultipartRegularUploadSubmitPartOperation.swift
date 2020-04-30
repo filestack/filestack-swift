@@ -74,13 +74,6 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
 
 private extension MultipartRegularUploadSubmitPartOperation {
     func upload() {
-        guard !isCancelled else {
-            state = .finished
-            return
-        }
-
-        state = .executing
-
         reader.seek(position: seek)
         let dataChunk = reader.read(amount: chunkSize)
 

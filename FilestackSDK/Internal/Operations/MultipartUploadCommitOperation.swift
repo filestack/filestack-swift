@@ -41,11 +41,6 @@ class MultipartUploadCommitOperation: BaseOperation {
     }
 
     override func main() {
-        if isCancelled {
-            state = .finished
-            return
-        }
-        state = .executing
         UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
             self.response = response
             self.state = .finished

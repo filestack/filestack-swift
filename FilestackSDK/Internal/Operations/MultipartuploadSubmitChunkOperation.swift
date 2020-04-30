@@ -43,18 +43,12 @@ class MultipartUploadSubmitChunkOperation: BaseOperation {
     }
 
     override func main() {
-        if isCancelled {
-            state = .finished
-            return
-        }
-        state = .executing
         UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl, completionHandler: uploadDidFinish)
     }
 
     override func cancel() {
         super.cancel()
         uploadRequest?.cancel()
-        state = .finished
     }
 }
 

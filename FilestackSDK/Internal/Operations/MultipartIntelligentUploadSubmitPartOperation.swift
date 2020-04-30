@@ -92,12 +92,6 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
 
 private extension MultipartIntelligentUploadSubmitPartOperation {
     func upload() {
-        if isCancelled {
-            state = .finished
-            return
-        }
-
-        state = .executing
         partChunkSize = resumableMobileChunkSize
 
         beforeCommitCheckPointOperation = BlockOperation()

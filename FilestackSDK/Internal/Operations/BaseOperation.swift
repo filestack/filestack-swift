@@ -38,7 +38,20 @@ class BaseOperation: Operation {
         }
     }
 
+    override func start() {
+        state = .executing
+
+        guard !isCancelled else {
+            state = .finished
+            return
+        }
+
+        main()
+    }
+
     override func cancel() {
+        super.cancel()
+
         if isExecuting {
             state = .finished
         }
