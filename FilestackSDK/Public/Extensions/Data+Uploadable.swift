@@ -9,6 +9,10 @@
 import Foundation
 
 extension Data: Uploadable {
+    public var filename: String? {
+        return nil
+    }
+
     public var size: UInt64? {
         return UInt64(count)
     }

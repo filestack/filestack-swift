@@ -10,6 +10,10 @@ import Foundation
 import MobileCoreServices
 
 extension URL: Uploadable {
+    public var filename: String? {
+        return lastPathComponent
+    }
+
     public var size: UInt64? {
         guard let attributtes = try? FileManager.default.attributesOfItem(atPath: relativePath) else { return nil }
 
