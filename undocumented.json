@@ -1,6 +1,68 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Internal/Extensions/NetworkingService+DefaultImplementations.swift",
+      "line": 13,
+      "symbol": "NetworkingService.buildURL(handle:path:extra:queryItems:security:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Internal/Extensions/NetworkingService+DefaultImplementations.swift",
+      "line": 48,
+      "symbol": "NetworkingService.request(url:method:parameters:headers:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Internal/Extensions/SessionManager+filestackDefault.swift",
+      "line": 13,
+      "symbol": "SessionManager.filestackDefault",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Internal/Extensions/UIColor+hexString.swift",
+      "line": 12,
+      "symbol": "UIColor.hexString",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Internal/Extensions/Uploadable+reader.swift",
+      "line": 12,
+      "symbol": "Uploadable.reader",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Internal/Operations/BaseOperation.swift",
+      "line": 80,
+      "symbol": "MultipartFormData.append(_:withName:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Internal/Protocols/NetworkingService.swift",
+      "line": 12,
+      "symbol": "NetworkingService",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Public/Transforms/Transform.swift",
+      "line": 196,
+      "symbol": "Transform.appending(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ruben/src/filestack/filestack-swift/FilestackSDK/Public/Transforms/Transform.swift",
+      "line": 202,
+      "symbol": "Transform.removeAllOptions()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/ruben/src/filestack/filestack-swift"
 }
