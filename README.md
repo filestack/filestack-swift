@@ -13,7 +13,7 @@ This is the official Swift SDK for Filestack - API and content management system
 ## Requirements
 
 * Xcode 10.2 or later
-* Swift 4.2 up to 5.0 / Objective-C
+* Swift 4.2 up to 5.2 / Objective-C
 * iOS 11 or later
 
 ## Installing
@@ -34,7 +34,7 @@ platform :ios, '11.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'FilestackSDK', '~> 2.2.1'
+    pod 'FilestackSDK', '~> 2.2.2'
 end
 ```
 
@@ -57,7 +57,7 @@ $ brew install carthage
 
 To integrate FilestackSDK into your Xcode project using Carthage, specify it in your `Cartfile`:
 
-`github "filestack/filestack-swift" ~> 2.2.1`
+`github "filestack/filestack-swift" ~> 2.2.2`
 
 Run `carthage update` to build the framework and drag the built `FilestackSDK.framework` into your Xcode project. Additionally, add `FilestackSDK.framework`, `Alamofire.framework` and `CryptoSwift.framework` to the embedded frameworks build phase of your app's target.
 

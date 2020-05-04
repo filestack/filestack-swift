@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+Version 2.2.2 *(2020-05-04)*
+----------------------------
+
+- Added `filename` property to `Uploadable` and default implementation for `URL` (addresses #19.)
+- Improved reliability of `MultipartUpload` abort logic (addresses #18.)
+- Removed unnecessary files from Copy Bundle Resources phase (addresses #17.)
+- Updated `CryptoSwift` dependency to `~> 1.3` in `Cartfile` and podspec.
+
 Version 2.2.1 *(2020-01-16)*
 ----------------------------
 
