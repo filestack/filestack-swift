@@ -10,40 +10,32 @@ import Alamofire
 import Foundation
 
 class MultipartUploadSubmitChunkOperation: BaseOperation {
-    let partOffset: UInt64
-    let dataChunk: Data
-    let apiKey: String
+    let offset: UInt64
+    let chunk: Data
     let part: Int
-    let uri: String
-    let region: String
-    let uploadID: String
-    let storeOptions: StorageOptions
+    let descriptor: MultipartUploadDescriptor
+    let progress: Progress
 
     var receivedResponse: MultipartResponse?
 
     private var uploadRequest: UploadRequest?
 
-    required init(partOffset: UInt64,
-                  dataChunk: Data,
-                  apiKey: String,
+    required init(offset: UInt64,
+                  chunk: Data,
                   part: Int,
-                  uri: String,
-                  region: String,
-                  uploadID: String,
-                  storeOptions: StorageOptions) {
-        self.partOffset = partOffset
-        self.dataChunk = dataChunk
-        self.apiKey = apiKey
+                  descriptor: MultipartUploadDescriptor) {
+        self.offset = offset
+        self.chunk = chunk
         self.part = part
-        self.uri = uri
-        self.region = region
-        self.uploadID = uploadID
-        self.storeOptions = storeOptions
+        self.progress = MirroredProgress()
+        self.progress.totalUnitCount = Int64(chunk.count)
+        self.descriptor = descriptor
+
         super.init()
     }
 
     override func main() {
-        UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl, completionHandler: uploadDidFinish)
+        UploadService.upload(multipartFormData: multipartFormData, url: uploadURL, completionHandler: uploadDidFinish)
     }
 
     override func cancel() {
@@ -63,7 +55,12 @@ private extension MultipartUploadSubmitChunkOperation {
             return
         }
 
-        uploadRequest = UploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
+        uploadRequest = UploadService.upload(data: chunk, to: url, method: .put, headers: headers)
+
+        uploadRequest?.uploadProgress(closure: { progress in
+            self.progress.totalUnitCount = progress.totalUnitCount
+            self.progress.completedUnitCount = progress.completedUnitCount
+        })
 
         uploadRequest?.response { response in
             self.saveResponse(response)
@@ -77,19 +74,19 @@ private extension MultipartUploadSubmitChunkOperation {
                                              etag: response.response?.allHeaderFields["Etag"] as? String)
     }
 
-    var uploadUrl: URL {
+    var uploadURL: URL {
         return URL(string: "multipart/upload", relativeTo: UploadService.baseURL)!
     }
 
     func multipartFormData(form: MultipartFormData) {
-        form.append(apiKey, withName: "apikey")
+        form.append(descriptor.apiKey, withName: "apikey")
         form.append(String(part), withName: "part")
-        form.append(String(dataChunk.count), withName: "size")
-        form.append(dataChunk.base64MD5Digest(), withName: "md5")
-        form.append(uri, withName: "uri")
-        form.append(region, withName: "region")
-        form.append(uploadID, withName: "upload_id")
+        form.append(String(chunk.count), withName: "size")
+        form.append(chunk.base64MD5Digest(), withName: "md5")
+        form.append(descriptor.uri, withName: "uri")
+        form.append(descriptor.region, withName: "region")
+        form.append(descriptor.uploadID, withName: "upload_id")
         form.append("true", withName: "multipart")
-        form.append(String(partOffset), withName: "offset")
+        form.append(String(offset), withName: "offset")
     }
 }

@@ -179,7 +179,7 @@ import Foundation
 
 extension Client {
     /// :nodoc:
-    public override var description: String {
+    override public var description: String {
         return Tools.describe(subject: self)
     }
 }

@@ -332,7 +332,7 @@ import Foundation
 
 extension FileLink {
     /// :nodoc:
-    public override var description: String {
+    override public var description: String {
         return Tools.describe(subject: self)
     }
 }

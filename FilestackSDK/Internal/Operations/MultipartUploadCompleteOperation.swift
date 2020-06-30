@@ -10,80 +10,63 @@ import Alamofire
 import Foundation
 
 class MultipartUploadCompleteOperation: BaseOperation {
-    let apiKey: String
-    let fileName: String
-    let fileSize: UInt64
-    let mimeType: String
-    let uri: String
-    let region: String
-    let uploadID: String
-    let storeOptions: StorageOptions
-    let security: Security?
-    let preferIntelligentIngestion: Bool
-    let parts: String
+    // MARK: - Internal Properties
 
-    var response = NetworkJSONResponse(with: MultipartUploadError.aborted)
+    private(set) var response = NetworkJSONResponse(with: MultipartUploadError.aborted)
 
-    required init(apiKey: String,
-                  fileName: String,
-                  fileSize: UInt64,
-                  mimeType: String,
-                  uri: String,
-                  region: String,
-                  uploadID: String,
-                  storeOptions: StorageOptions,
-                  partsAndEtags: [Int: String],
-                  security: Security? = nil,
-                  preferIntelligentIngestion: Bool) {
-        self.apiKey = apiKey
-        self.fileName = fileName
-        self.fileSize = fileSize
-        self.mimeType = mimeType
-        self.uri = uri
-        self.region = region
-        self.uploadID = uploadID
-        self.storeOptions = storeOptions
-        parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
-        self.security = security
-        self.preferIntelligentIngestion = preferIntelligentIngestion
+    // MARK: - Private Properties
+
+    private let partsAndEtags: [Int: String]
+    private let descriptor: MultipartUploadDescriptor
+
+    // MARK: - Lifecycle
+
+    required init(partsAndEtags: [Int: String], descriptor: MultipartUploadDescriptor) {
+        self.partsAndEtags = partsAndEtags
+        self.descriptor = descriptor
 
         super.init()
 
         state = .ready
     }
+}
 
+// MARK: - Overrides
+
+extension MultipartUploadCompleteOperation {
     override func main() {
-        UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
+        let uploadURL = URL(string: "multipart/complete", relativeTo: UploadService.baseURL)!
+
+        UploadService.upload(multipartFormData: multipartFormData, url: uploadURL) { response in
             self.response = response
             self.state = .finished
         }
     }
 }
 
+// MARK: - Private Functions
+
 private extension MultipartUploadCompleteOperation {
-    var uploadUrl: URL {
-        return URL(string: "multipart/complete", relativeTo: UploadService.baseURL)!
-    }
-
     func multipartFormData(form: MultipartFormData) {
-        form.append(apiKey, withName: "apikey")
-        form.append(uri, withName: "uri")
-        form.append(region, withName: "region")
-        form.append(uploadID, withName: "upload_id")
-        form.append(fileName, withName: "filename")
-        form.append(String(fileSize), withName: "size")
-        form.append(mimeType, withName: "mimetype")
+        form.append(descriptor.apiKey, withName: "apikey")
+        form.append(descriptor.uri, withName: "uri")
+        form.append(descriptor.region, withName: "region")
+        form.append(descriptor.uploadID, withName: "upload_id")
+        form.append(descriptor.filename, withName: "filename")
+        form.append(String(descriptor.filesize), withName: "size")
+        form.append(descriptor.mimeType, withName: "mimetype")
 
-        storeOptions.append(to: form)
+        descriptor.options.storeOptions.append(to: form)
 
-        if let security = security {
+        if let security = descriptor.security {
             form.append(security.encodedPolicy, withName: "policy")
             form.append(security.signature, withName: "signature")
         }
 
-        if preferIntelligentIngestion {
+        if descriptor.useIntelligentIngestion {
             form.append("true", withName: "multipart")
         } else {
+            let parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
             form.append(parts, withName: "parts")
         }
     }

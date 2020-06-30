@@ -12,50 +12,33 @@ import Foundation
 internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
     typealias MultiPartFormDataClosure = (MultipartFormData) -> Void
 
-    let seek: UInt64
-    let reader: UploadableReader
-    let fileName: String
-    let fileSize: UInt64
-    let apiKey: String
+    let offset: UInt64
     let part: Int
-    let uri: String
-    let region: String
-    let uploadID: String
-    let storeOptions: StorageOptions
-    let chunkSize: Int
-    var uploadProgress: ((Int64) -> Void)?
+    let partSize: Int
+    let descriptor: MultipartUploadDescriptor
+
+    private(set) lazy var progress: Progress = {
+        let progress = MirroredProgress()
+
+        progress.totalUnitCount = Int64(partSize)
+
+        return progress
+    }()
 
     var response: DefaultDataResponse?
     var responseEtag: String?
-    var didFail: Bool
+    var didFail: Bool = false
 
     private var beforeCommitCheckPointOperation: BlockOperation?
 
-    required init(seek: UInt64,
-                  reader: UploadableReader,
-                  fileName: String,
-                  fileSize: UInt64,
-                  apiKey: String,
+    required init(offset: UInt64,
                   part: Int,
-                  uri: String,
-                  region: String,
-                  uploadID: String,
-                  storeOptions: StorageOptions,
-                  chunkSize: Int,
-                  uploadProgress: @escaping ((Int64) -> Void)) {
-        self.seek = seek
-        self.reader = reader
-        self.fileName = fileName
-        self.fileSize = fileSize
-        self.apiKey = apiKey
+                  partSize: Int,
+                  descriptor: MultipartUploadDescriptor) {
+        self.offset = offset
         self.part = part
-        self.uri = uri
-        self.region = region
-        self.uploadID = uploadID
-        self.storeOptions = storeOptions
-        self.chunkSize = chunkSize
-        self.didFail = false
-        self.uploadProgress = uploadProgress
+        self.partSize = partSize
+        self.descriptor = descriptor
 
         super.init()
 
@@ -74,9 +57,9 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
 
 private extension MultipartRegularUploadSubmitPartOperation {
     func upload() {
-        reader.seek(position: seek)
-        let dataChunk = reader.read(amount: chunkSize)
+        descriptor.reader.seek(position: offset)
 
+        let dataChunk = descriptor.reader.read(amount: partSize)
         let url = URL(string: "multipart/upload", relativeTo: UploadService.baseURL)!
 
         UploadService.upload(multipartFormData: multipartFormData(dataChunk: dataChunk),
@@ -86,15 +69,15 @@ private extension MultipartRegularUploadSubmitPartOperation {
 
     func multipartFormData(dataChunk: Data) -> MultiPartFormDataClosure {
         return { form in
-            form.append(self.apiKey, withName: "apikey")
-            form.append(self.uri, withName: "uri")
-            form.append(self.region, withName: "region")
-            form.append(self.uploadID, withName: "upload_id")
+            form.append(self.descriptor.apiKey, withName: "apikey")
+            form.append(self.descriptor.uri, withName: "uri")
+            form.append(self.descriptor.region, withName: "region")
+            form.append(self.descriptor.uploadID, withName: "upload_id")
             form.append(String(dataChunk.count), withName: "size")
             form.append(String(self.part), withName: "part")
             form.append(dataChunk.base64MD5Digest(), withName: "md5")
 
-            self.storeOptions.append(to: form)
+            self.descriptor.options.storeOptions.append(to: form)
         }
     }
 
@@ -104,20 +87,25 @@ private extension MultipartRegularUploadSubmitPartOperation {
                 self.state = .finished
                 return
             }
+
             uploadRequest.response { response in
-                let chunkSize = Int64(dataChunk.count)
                 self.response = response
                 self.responseEtag = response.response?.allHeaderFields["Etag"] as? String
                 self.state = .finished
-                self.uploadProgress?(chunkSize)
-                self.uploadProgress = nil
             }
         }
     }
 
     func uploadRequest(with json: [String: Any]?, dataChunk: Data) -> UploadRequest? {
         guard let url = url(from: json), let headers = json?["headers"] as? [String: String] else { return nil }
-        return UploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
+        let request = UploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
+
+        request.uploadProgress { progress in
+            self.progress.totalUnitCount = progress.totalUnitCount
+            self.progress.completedUnitCount = progress.completedUnitCount
+        }
+
+        return request
     }
 
     func url(from json: [String: Any]?) -> URL? {

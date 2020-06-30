@@ -14,65 +14,47 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
     let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
     let minimumPartChunkSize = 32768
 
-    let seek: UInt64
-    let reader: UploadableReader
-    let fileName: String
-    let fileSize: UInt64
-    let apiKey: String
+    let offset: UInt64
     let part: Int
-    let uri: String
-    let region: String
-    let uploadID: String
-    let storeOptions: StorageOptions
-    let chunkSize: Int
-    var uploadProgress: ((Int64) -> Void)?
-    let maxRetries: Int
+    let partSize: Int
+    let maxRetries: Int = 5
+
+    private(set) lazy var progress: Progress = {
+        let progress = MirroredProgress()
+
+        progress.totalUnitCount = Int64(partSize)
+
+        return progress
+    }()
 
     var response: DefaultDataResponse?
     var responseEtag: String?
-    var didFail: Bool
+    var didFail: Bool = false
 
-    private var retriesLeft: Int
-    private var partChunkSize: Int
+    private lazy var retriesLeft: Int = maxRetries
+    private var chunkSize: Int = 0
 
     private var beforeCommitCheckPointOperation: BlockOperation?
     private let chunkUploadOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.chunk-upload-operation-queue",
                                                                     qos: .utility,
                                                                     attributes: .concurrent)
-    private let chunkUploadOperationQueue = OperationQueue()
 
-    required init(seek: UInt64,
-                  reader: UploadableReader,
-                  fileName: String,
-                  fileSize: UInt64,
-                  apiKey: String,
-                  part: Int,
-                  uri: String,
-                  region: String,
-                  uploadID: String,
-                  storeOptions: StorageOptions,
-                  chunkSize: Int,
-                  chunkUploadConcurrency: Int,
-                  uploadProgress: @escaping ((Int64) -> Void)) {
-        self.seek = seek
-        self.reader = reader
-        self.fileName = fileName
-        self.fileSize = fileSize
-        self.apiKey = apiKey
+    private(set) lazy var chunkUploadOperationQueue: OperationQueue = {
+        let queue = OperationQueue()
+
+        queue.underlyingQueue = chunkUploadOperationUnderlyingQueue
+        queue.maxConcurrentOperationCount = descriptor.options.chunkUploadConcurrency
+
+        return queue
+    }()
+
+    private let descriptor: MultipartUploadDescriptor
+
+    required init(offset: UInt64, part: Int, partSize: Int, descriptor: MultipartUploadDescriptor) {
+        self.offset = offset
         self.part = part
-        self.uri = uri
-        self.region = region
-        self.uploadID = uploadID
-        self.storeOptions = storeOptions
-        self.chunkSize = chunkSize
-        self.partChunkSize = 0
-        self.maxRetries = 5
-        self.retriesLeft = maxRetries
-        self.didFail = false
-        self.uploadProgress = uploadProgress
-
-        chunkUploadOperationQueue.underlyingQueue = chunkUploadOperationUnderlyingQueue
-        chunkUploadOperationQueue.maxConcurrentOperationCount = chunkUploadConcurrency
+        self.partSize = partSize
+        self.descriptor = descriptor
 
         super.init()
 
@@ -92,7 +74,7 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
 
 private extension MultipartIntelligentUploadSubmitPartOperation {
     func upload() {
-        partChunkSize = resumableMobileChunkSize
+        chunkSize = resumableMobileChunkSize
 
         beforeCommitCheckPointOperation = BlockOperation()
 
@@ -100,21 +82,21 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
             self.doCommit()
         }
 
-        var partOffset: UInt64 = 0
+        var bytesRead: UInt64 = 0
 
-        while partOffset < UInt64(chunkSize) {
+        while bytesRead < UInt64(partSize) {
             if isCancelled || isFinished {
                 chunkUploadOperationQueue.cancelAllOperations()
                 break
             }
 
-            guard let chunkOperation = addChunkOperation(partOffset: partOffset,
-                                                         partChunkSize: partChunkSize) else {
-                // EOF condition
-                break
-            }
+            // Guard against EOF
+            guard let chunkOperation = addChunkOperation(offset: offset + bytesRead, chunkSize: chunkSize) else { break }
 
-            partOffset += UInt64(chunkOperation.dataChunk.count)
+            let actualChunkSize = chunkOperation.progress.totalUnitCount
+
+            progress.addChild(chunkOperation.progress, withPendingUnitCount: Int64(actualChunkSize))
+            bytesRead += UInt64(actualChunkSize)
         }
 
         if let beforeCommitCheckPointOperation = beforeCommitCheckPointOperation {
@@ -125,13 +107,7 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
     private func doCommit() {
         // Try to commit operation with retries.
         while !didFail, retriesLeft > 0 {
-            let commitOperation = MultipartUploadCommitOperation(apiKey: apiKey,
-                                                                 fileSize: fileSize,
-                                                                 part: part,
-                                                                 uri: uri,
-                                                                 region: region,
-                                                                 uploadID: uploadID,
-                                                                 storeOptions: storeOptions)
+            let commitOperation = MultipartUploadCommitOperation(descriptor: descriptor, part: part)
 
             chunkUploadOperationQueue.addOperation(commitOperation)
             chunkUploadOperationQueue.waitUntilAllOperationsAreFinished()
@@ -155,19 +131,21 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
             didFail = true
         }
 
-        // fileHandle = nil
-        uploadProgress = nil
         state = .finished
         beforeCommitCheckPointOperation = nil
     }
 
-    private func addChunkOperation(partOffset: UInt64, partChunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
-        reader.seek(position: seek + partOffset)
-        let dataChunk = reader.read(amount: partChunkSize)
+    private func addChunkOperation(offset: UInt64, chunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
+        descriptor.reader.seek(position: offset)
+
+        let dataChunk = descriptor.reader.read(amount: chunkSize)
 
         guard !dataChunk.isEmpty else { return nil }
 
-        let operation = chunkOperation(partOffset: partOffset, dataChunk: dataChunk)
+        let operation = MultipartUploadSubmitChunkOperation(offset: offset,
+                                                            chunk: dataChunk,
+                                                            part: part,
+                                                            descriptor: descriptor)
 
         weak var weakOperation = operation
 
@@ -175,8 +153,8 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
             guard let operation = weakOperation else { return }
             guard operation.isCancelled == false else { return }
 
-            // Network error
             if operation.receivedResponse?.error != nil {
+                // Network error
                 guard self.retriesLeft > 0 else {
                     self.failOperation()
                     return
@@ -184,33 +162,29 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
 
                 self.retriesLeft -= 1
 
-                guard self.addChunkOperation(partOffset: operation.partOffset,
-                                             partChunkSize: self.partChunkSize) != nil else { return }
-                // Server error
+                guard self.addChunkOperation(offset: operation.offset, chunkSize: self.chunkSize) != nil else { return }
             } else if let response = operation.receivedResponse?.response {
                 switch response.statusCode {
                 case 200:
-
-                    let chunkSize = Int64(dataChunk.count)
-                    self.uploadProgress?(chunkSize)
-
+                    // NO-OP
+                    break
                 default:
-
-                    guard partChunkSize > self.minimumPartChunkSize else {
+                    // Server error
+                    guard chunkSize > self.minimumPartChunkSize else {
                         self.failOperation()
                         return
                     }
 
                     // Enqueue 2 chunks corresponding to the 2 halves of the failed chunk.
-                    let newPartChunkSize = partChunkSize / 2
-                    self.partChunkSize = newPartChunkSize
-                    var localPartOffset = operation.partOffset
+                    let newPartChunkSize = chunkSize / 2
+                    self.chunkSize = newPartChunkSize
+                    var partOffset = operation.offset
 
                     for _ in 1 ... 2 {
-                        guard self.addChunkOperation(partOffset: localPartOffset,
-                                                     partChunkSize: newPartChunkSize) != nil else { break }
+                        guard self.addChunkOperation(offset: partOffset,
+                                                     chunkSize: newPartChunkSize) != nil else { break }
 
-                        localPartOffset += UInt64(newPartChunkSize)
+                        partOffset += UInt64(newPartChunkSize)
                     }
                 }
             }
@@ -224,17 +198,6 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
         beforeCommitCheckPointOperation?.addDependency(checkpointOperation)
 
         return operation
-    }
-
-    func chunkOperation(partOffset: UInt64, dataChunk: Data) -> MultipartUploadSubmitChunkOperation {
-        return MultipartUploadSubmitChunkOperation(partOffset: partOffset,
-                                                   dataChunk: dataChunk,
-                                                   apiKey: apiKey,
-                                                   part: part,
-                                                   uri: uri,
-                                                   region: region,
-                                                   uploadID: uploadID,
-                                                   storeOptions: storeOptions)
     }
 
     func failOperation() {

@@ -9,31 +9,28 @@
 import Alamofire
 import Foundation
 
-class MultipartUploadCommitOperation: BaseOperation {
+struct MultipartUploadDescriptor {
     let apiKey: String
-    let fileSize: UInt64
-    let part: Int
+    let security: Security?
+    let options: UploadOptions
+    let reader: UploadableReader
+    let filename: String
+    let filesize: UInt64
+    let mimeType: String
     let uri: String
     let region: String
     let uploadID: String
-    let storeOptions: StorageOptions
+    let useIntelligentIngestion: Bool
+}
 
-    var response: NetworkJSONResponse?
+class MultipartUploadCommitOperation: BaseOperation {
+    let part: Int
+    let descriptor: MultipartUploadDescriptor
+    private(set) var response: NetworkJSONResponse?
 
-    required init(apiKey: String,
-                  fileSize: UInt64,
-                  part: Int,
-                  uri: String,
-                  region: String,
-                  uploadID: String,
-                  storeOptions: StorageOptions) {
-        self.apiKey = apiKey
-        self.fileSize = fileSize
+    required init(descriptor: MultipartUploadDescriptor, part: Int) {
+        self.descriptor = descriptor
         self.part = part
-        self.uri = uri
-        self.region = region
-        self.uploadID = uploadID
-        self.storeOptions = storeOptions
 
         super.init()
 
@@ -41,7 +38,7 @@ class MultipartUploadCommitOperation: BaseOperation {
     }
 
     override func main() {
-        UploadService.upload(multipartFormData: multipartFormData, url: uploadUrl) { response in
+        UploadService.upload(multipartFormData: multipartFormData, url: uploadURL) { response in
             self.response = response
             self.state = .finished
         }
@@ -49,17 +46,17 @@ class MultipartUploadCommitOperation: BaseOperation {
 }
 
 private extension MultipartUploadCommitOperation {
-    var uploadUrl: URL {
+    var uploadURL: URL {
         return URL(string: "multipart/commit", relativeTo: UploadService.baseURL)!
     }
 
     func multipartFormData(form: MultipartFormData) {
-        form.append(apiKey, withName: "apikey")
-        form.append(uri, withName: "uri")
-        form.append(region, withName: "region")
-        form.append(uploadID, withName: "upload_id")
-        form.append(String(fileSize), withName: "size")
+        form.append(descriptor.apiKey, withName: "apikey")
+        form.append(descriptor.uri, withName: "uri")
+        form.append(descriptor.region, withName: "region")
+        form.append(descriptor.uploadID, withName: "upload_id")
+        form.append(String(descriptor.filesize), withName: "size")
         form.append(String(part), withName: "part")
-        form.append(storeOptions.location.description, withName: "store_location")
+        form.append(descriptor.options.storeOptions.location.description, withName: "store_location")
     }
 }

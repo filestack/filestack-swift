@@ -15,4 +15,5 @@ protocol MultipartUploadSubmitPartProtocol: AnyObject {
     var part: Int { get }
     var responseEtag: String? { get }
     var didFail: Bool { get }
+    var progress: Progress { get }
 }

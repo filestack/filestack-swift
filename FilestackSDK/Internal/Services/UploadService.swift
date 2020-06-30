@@ -35,6 +35,25 @@ final class UploadService: NetworkingService {
                        to url: URLConvertible,
                        method: HTTPMethod,
                        headers: HTTPHeaders? = nil) -> UploadRequest {
-        return sessionManager.upload(data, to: url, method: method, headers: headers)
+        if let dataURL = temporaryURL(using: data) {
+            defer { try? FileManager.default.removeItem(at: dataURL) }
+            return sessionManager.upload(dataURL, to: url, method: method, headers: headers)
+        } else {
+            return sessionManager.upload(data, to: url, method: method, headers: headers)
+        }
+    }
+}
+
+extension UploadService {
+    static func temporaryURL(using data: Data) -> URL? {
+        let temporaryDirectoryURL = FileManager.default.temporaryDirectory
+        let dataURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString)
+
+        do {
+            try data.write(to: dataURL)
+            return dataURL
+        } catch {
+            return nil
+        }
     }
 }

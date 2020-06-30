@@ -68,6 +68,8 @@ class MultipartUpload: Uploader {
     private let masterOperationQueue = OperationQueue()
     private let partOperationQueue = OperationQueue()
 
+    var masterProgressFractionCompletedObserver: NSKeyValueObservation?
+
     // MARK: - Lifecycle Functions
 
     init(using uploadable: Uploadable,
@@ -82,6 +84,12 @@ class MultipartUpload: Uploader {
         self.security = security
         self.shouldAbort = false
         self.masterProgress.totalUnitCount = Int64(uploadable.size ?? 0)
+
+        masterProgressFractionCompletedObserver = masterProgress.observe(\.fractionCompleted, options: [.new]) { _, _ in
+            queue.async {
+                self.uploadProgress?(self.progress)
+            }
+        }
 
         masterOperationQueue.underlyingQueue = masterOperationUnderlyingQueue
         masterOperationQueue.maxConcurrentOperationCount = 1
@@ -142,6 +150,8 @@ class MultipartUpload: Uploader {
     }
 }
 
+// MARK: - Private Functions
+
 private extension MultipartUpload {
     func fail(with error: Error) {
         self.currentStatus = .failed
@@ -154,86 +164,34 @@ private extension MultipartUpload {
     func doUploadFile() {
         currentStatus = .inProgress
 
-        let fileName = options.storeOptions.filename ?? uploadable.filename ?? UUID().uuidString
-        let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
-
-        guard let fileSize = uploadable.size, !fileName.isEmpty else {
-            fail(with: MultipartUploadError.invalidFile)
-            return
-        }
-
-        let startOperation = MultipartUploadStartOperation(apiKey: apiKey,
-                                                           fileName: fileName,
-                                                           fileSize: fileSize,
-                                                           mimeType: mimeType,
-                                                           storeOptions: options.storeOptions,
-                                                           security: security,
-                                                           useIntelligentIngestionIfAvailable: options.preferIntelligentIngestion)
-
-        if shouldAbort {
-            fail(with: MultipartUploadError.aborted)
-            return
-        } else {
-            masterOperationQueue.addOperation(startOperation)
-        }
-
-        masterOperationQueue.waitUntilAllOperationsAreFinished()
-
-        // Ensure that there's a response and JSON payload or fail.
-        guard let response = startOperation.response, let json = response.json else {
-            fail(with: MultipartUploadError.aborted)
-            return
-        }
-
-        // Did the REST API return an error? Fail and send the error downstream.
-        if let apiErrorDescription = json["error"] as? String {
-            fail(with: MultipartUploadError.error(description: apiErrorDescription))
-            return
-        }
-
-        // Ensure that there's an uri, region, and upload_id in the JSON payload or fail.
-        guard let uri = json["uri"] as? String,
-            let region = json["region"] as? String,
-            let uploadID = json["upload_id"] as? String else {
-            fail(with: MultipartUploadError.aborted)
-            return
-        }
-
-        // Detect whether intelligent ingestion is available.
-        // The JSON payload should contain an "upload_type" field with value "intelligent_ingestion".
-        let canUseIntelligentIngestion: Bool!
-
-        if let uploadType = json["upload_type"] as? String, uploadType == "intelligent_ingestion" {
-            canUseIntelligentIngestion = true
-        } else {
-            canUseIntelligentIngestion = false
-        }
+        guard let descriptor = setupUploadDescriptor() else { return }
 
         var part: Int = 0
-        var seekPoint: UInt64 = 0
+        var bytesLeft: UInt64 = descriptor.filesize
         var partsAndEtags: [Int: String] = [:]
-
-        let chunkSize = (canUseIntelligentIngestion ? ChunkSize.ii : ChunkSize.regular).rawValue
+        let chunkSize = (descriptor.useIntelligentIngestion ? ChunkSize.ii : ChunkSize.regular).rawValue
 
         // Submit all parts
-        while !shouldAbort, seekPoint < fileSize {
+        while !shouldAbort, bytesLeft > 0 {
             part += 1
 
-            guard let reader = uploadable.reader else {
-                self.shouldAbort = true
-                continue
+            let partSize = Int(min(UInt64(chunkSize), bytesLeft))
+            let offset = (descriptor.filesize - bytesLeft)
+            let partOperation: MultipartUploadSubmitPartOperation
+
+            if descriptor.useIntelligentIngestion {
+                partOperation = MultipartIntelligentUploadSubmitPartOperation(offset: offset,
+                                                                              part: part,
+                                                                              partSize: partSize,
+                                                                              descriptor: descriptor)
+            } else {
+                partOperation = MultipartRegularUploadSubmitPartOperation(offset: offset,
+                                                                          part: part,
+                                                                          partSize: partSize,
+                                                                          descriptor: descriptor)
             }
 
-            let partOperation = uploadSubmitPartOperation(usingIntelligentIngestion: canUseIntelligentIngestion,
-                                                          seek: seekPoint,
-                                                          reader: reader,
-                                                          fileName: fileName,
-                                                          fileSize: fileSize,
-                                                          part: part,
-                                                          uri: uri,
-                                                          region: region,
-                                                          uploadId: uploadID,
-                                                          chunkSize: chunkSize)
+            masterProgress.addChild(partOperation.progress, withPendingUnitCount: Int64(partSize))
 
             weak var weakPartOperation = partOperation
 
@@ -244,7 +202,7 @@ private extension MultipartUpload {
                     self.shouldAbort = true
                 }
 
-                if !canUseIntelligentIngestion {
+                if !descriptor.useIntelligentIngestion {
                     if let responseEtag = partOperation.responseEtag {
                         partsAndEtags[partOperation.part] = responseEtag
                     } else {
@@ -261,7 +219,7 @@ private extension MultipartUpload {
             partOperationQueue.addOperation(partOperation)
             partOperationQueue.addOperation(checkpointOperation)
 
-            seekPoint += UInt64(chunkSize)
+            bytesLeft -= UInt64(partSize)
         }
 
         masterOperationQueue.addOperation {
@@ -270,87 +228,97 @@ private extension MultipartUpload {
             if self.shouldAbort {
                 self.fail(with: MultipartUploadError.aborted)
             } else {
-                self.addCompleteOperation(fileName: fileName,
-                                          fileSize: fileSize,
-                                          mimeType: mimeType,
-                                          uri: uri,
-                                          region: region,
-                                          uploadID: uploadID,
-                                          partsAndEtags: partsAndEtags,
-                                          usingIntelligentIngestion: canUseIntelligentIngestion,
+                self.addCompleteOperation(partsAndEtags: partsAndEtags,
+                                          descriptor: descriptor,
                                           retriesLeft: self.maxRetries)
             }
         }
     }
 
-    func uploadSubmitPartOperation(usingIntelligentIngestion: Bool,
-                                   seek: UInt64,
-                                   reader: UploadableReader,
-                                   fileName: String,
-                                   fileSize: UInt64,
-                                   part: Int,
-                                   uri: String,
-                                   region: String,
-                                   uploadId: String,
-                                   chunkSize: Int) -> MultipartUploadSubmitPartOperation {
-        if usingIntelligentIngestion {
-            return MultipartIntelligentUploadSubmitPartOperation(seek: seek,
-                                                                 reader: reader,
-                                                                 fileName: fileName,
-                                                                 fileSize: fileSize,
-                                                                 apiKey: apiKey,
-                                                                 part: part,
-                                                                 uri: uri,
-                                                                 region: region,
-                                                                 uploadID: uploadId,
-                                                                 storeOptions: options.storeOptions,
-                                                                 chunkSize: chunkSize,
-                                                                 chunkUploadConcurrency: options.chunkUploadConcurrency,
-                                                                 uploadProgress: updateProgress)
+    // Calls `multipart/start`, and, assuming uploadable is valid and the request succeeds,
+    // returns a `MultipartUploadDescriptor`.
+    func setupUploadDescriptor() -> MultipartUploadDescriptor? {
+        let filename = options.storeOptions.filename ?? uploadable.filename ?? UUID().uuidString
+        let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
+
+        guard let filesize = uploadable.size, !filename.isEmpty else {
+            fail(with: MultipartUploadError.invalidFile)
+            return nil
+        }
+
+        let startOperation = MultipartUploadStartOperation(apiKey: apiKey,
+                                                           fileName: filename,
+                                                           fileSize: filesize,
+                                                           mimeType: mimeType,
+                                                           storeOptions: options.storeOptions,
+                                                           security: security,
+                                                           multipart: options.preferIntelligentIngestion)
+
+        if shouldAbort {
+            fail(with: MultipartUploadError.aborted)
+            return nil
         } else {
-            return MultipartRegularUploadSubmitPartOperation(seek: seek,
-                                                             reader: reader,
-                                                             fileName: fileName,
-                                                             fileSize: fileSize,
-                                                             apiKey: apiKey,
-                                                             part: part,
-                                                             uri: uri,
-                                                             region: region,
-                                                             uploadID: uploadId,
-                                                             storeOptions: options.storeOptions,
-                                                             chunkSize: chunkSize,
-                                                             uploadProgress: updateProgress)
+            masterOperationQueue.addOperation(startOperation)
         }
+
+        masterOperationQueue.waitUntilAllOperationsAreFinished()
+
+        // Ensure that there's a response and JSON payload or fail.
+        guard let json = startOperation.response?.json else {
+            fail(with: MultipartUploadError.aborted)
+            return nil
+        }
+
+        // Did the REST API return an error? Fail and send the error downstream.
+        if let apiErrorDescription = json["error"] as? String {
+            fail(with: MultipartUploadError.error(description: apiErrorDescription))
+            return nil
+        }
+
+        // Ensure that there's an uri, region, and upload_id in the JSON payload or fail.
+        guard let uri = json["uri"] as? String,
+              let region = json["region"] as? String,
+              let uploadID = json["upload_id"] as? String else {
+            fail(with: MultipartUploadError.aborted)
+            return nil
+        }
+
+        // Detect whether intelligent ingestion is available.
+        // The JSON payload should contain an "upload_type" field with value "intelligent_ingestion".
+        let canUseIntelligentIngestion: Bool
+
+        if let uploadType = json["upload_type"] as? String, uploadType == "intelligent_ingestion" {
+            canUseIntelligentIngestion = true
+        } else {
+            canUseIntelligentIngestion = false
+        }
+
+        guard let reader = uploadable.reader else {
+            fail(with: MultipartUploadError.aborted)
+            return nil
+        }
+
+        let descriptor = MultipartUploadDescriptor(
+            apiKey: apiKey,
+            security: security,
+            options: options,
+            reader: reader,
+            filename: filename,
+            filesize: filesize,
+            mimeType: mimeType,
+            uri: uri,
+            region: region,
+            uploadID: uploadID,
+            useIntelligentIngestion: canUseIntelligentIngestion
+        )
+
+        return descriptor
     }
 
-    func updateProgress(progress: Int64) {
-        masterProgress.completedUnitCount += progress
-
-        queue.async {
-            self.uploadProgress?(self.progress)
-        }
-    }
-
-    func addCompleteOperation(fileName: String,
-                              fileSize: UInt64,
-                              mimeType: String,
-                              uri: String,
-                              region: String,
-                              uploadID: String,
-                              partsAndEtags: [Int: String],
-                              usingIntelligentIngestion: Bool,
+    func addCompleteOperation(partsAndEtags: [Int: String],
+                              descriptor: MultipartUploadDescriptor,
                               retriesLeft: Int) {
-        let completeOperation = MultipartUploadCompleteOperation(apiKey: apiKey,
-                                                                 fileName: fileName,
-                                                                 fileSize: fileSize,
-                                                                 mimeType: mimeType,
-                                                                 uri: uri,
-                                                                 region: region,
-                                                                 uploadID: uploadID,
-                                                                 storeOptions: options.storeOptions,
-                                                                 partsAndEtags: partsAndEtags,
-                                                                 security: security,
-                                                                 preferIntelligentIngestion: usingIntelligentIngestion)
+        let completeOperation = MultipartUploadCompleteOperation(partsAndEtags: partsAndEtags, descriptor: descriptor)
 
         weak var weakCompleteOperation = completeOperation
 
@@ -366,14 +334,8 @@ private extension MultipartUpload {
 
                     // Retry in `delay` seconds
                     DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                        self.addCompleteOperation(fileName: fileName,
-                                                  fileSize: fileSize,
-                                                  mimeType: mimeType,
-                                                  uri: uri,
-                                                  region: region,
-                                                  uploadID: uploadID,
-                                                  partsAndEtags: partsAndEtags,
-                                                  usingIntelligentIngestion: usingIntelligentIngestion,
+                        self.addCompleteOperation(partsAndEtags: partsAndEtags,
+                                                  descriptor: descriptor,
                                                   retriesLeft: retriesLeft - 1)
                     }
                 } else {
@@ -395,7 +357,7 @@ private extension MultipartUpload {
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Comformance
 
 extension MultipartUpload {
     /// :nodoc:

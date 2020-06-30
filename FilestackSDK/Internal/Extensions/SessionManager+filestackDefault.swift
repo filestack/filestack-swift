@@ -11,7 +11,7 @@ import Foundation
 
 extension SessionManager {
     static var filestackDefault: SessionManager = {
-        let configuration = URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.background(withIdentifier: "com.filestack.FilestackSDK")
         var defaultHeaders = SessionManager.defaultHTTPHeaders
 
         defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
