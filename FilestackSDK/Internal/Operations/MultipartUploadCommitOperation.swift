@@ -9,26 +9,19 @@
 import Alamofire
 import Foundation
 
-struct MultipartUploadDescriptor {
-    let apiKey: String
-    let security: Security?
-    let options: UploadOptions
-    let reader: UploadableReader
-    let filename: String
-    let filesize: UInt64
-    let mimeType: String
-    let uri: String
-    let region: String
-    let uploadID: String
-    let useIntelligentIngestion: Bool
-}
-
 class MultipartUploadCommitOperation: BaseOperation {
-    let part: Int
-    let descriptor: MultipartUploadDescriptor
+    // MARK: - Internal Properties
+
     private(set) var response: NetworkJSONResponse?
 
-    required init(descriptor: MultipartUploadDescriptor, part: Int) {
+    // MARK: - Private Properties
+
+    private let part: Int
+    private let descriptor: UploadDescriptor
+
+    // MARK: - Lifecyle
+
+    required init(descriptor: UploadDescriptor, part: Int) {
         self.descriptor = descriptor
         self.part = part
 
@@ -36,8 +29,13 @@ class MultipartUploadCommitOperation: BaseOperation {
 
         state = .ready
     }
+}
 
+// MARK: - Overrides
+extension MultipartUploadCommitOperation {
     override func main() {
+        let uploadURL = URL(string: "multipart/commit", relativeTo: UploadService.baseURL)!
+
         UploadService.upload(multipartFormData: multipartFormData, url: uploadURL) { response in
             self.response = response
             self.state = .finished
@@ -45,11 +43,9 @@ class MultipartUploadCommitOperation: BaseOperation {
     }
 }
 
-private extension MultipartUploadCommitOperation {
-    var uploadURL: URL {
-        return URL(string: "multipart/commit", relativeTo: UploadService.baseURL)!
-    }
+// MARK: - Private Functions
 
+private extension MultipartUploadCommitOperation {
     func multipartFormData(form: MultipartFormData) {
         form.append(descriptor.apiKey, withName: "apikey")
         form.append(descriptor.uri, withName: "uri")

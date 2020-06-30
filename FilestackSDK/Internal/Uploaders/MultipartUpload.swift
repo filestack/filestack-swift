@@ -237,7 +237,7 @@ private extension MultipartUpload {
 
     // Calls `multipart/start`, and, assuming uploadable is valid and the request succeeds,
     // returns a `MultipartUploadDescriptor`.
-    func setupUploadDescriptor() -> MultipartUploadDescriptor? {
+    func setupUploadDescriptor() -> UploadDescriptor? {
         let filename = options.storeOptions.filename ?? uploadable.filename ?? UUID().uuidString
         let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
 
@@ -298,7 +298,7 @@ private extension MultipartUpload {
             return nil
         }
 
-        let descriptor = MultipartUploadDescriptor(
+        let descriptor = UploadDescriptor(
             apiKey: apiKey,
             security: security,
             options: options,
@@ -316,7 +316,7 @@ private extension MultipartUpload {
     }
 
     func addCompleteOperation(partsAndEtags: [Int: String],
-                              descriptor: MultipartUploadDescriptor,
+                              descriptor: UploadDescriptor,
                               retriesLeft: Int) {
         let completeOperation = MultipartUploadCompleteOperation(partsAndEtags: partsAndEtags, descriptor: descriptor)
 

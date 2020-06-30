@@ -48,9 +48,9 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
         return queue
     }()
 
-    private let descriptor: MultipartUploadDescriptor
+    private let descriptor: UploadDescriptor
 
-    required init(offset: UInt64, part: Int, partSize: Int, descriptor: MultipartUploadDescriptor) {
+    required init(offset: UInt64, part: Int, partSize: Int, descriptor: UploadDescriptor) {
         self.offset = offset
         self.part = part
         self.partSize = partSize

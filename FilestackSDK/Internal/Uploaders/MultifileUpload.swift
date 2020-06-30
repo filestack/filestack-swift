@@ -10,8 +10,6 @@ import Foundation
 
 /// This class allows uploading multiple `Uploadable` items to a given storage location.
 class MultifileUpload: Uploader, DeferredAdd {
-    // MARK: - Public Properties
-
     // MARK: - Internal Properties
 
     internal let masterProgress = MirroredProgress()
@@ -121,7 +119,7 @@ class MultifileUpload: Uploader, DeferredAdd {
 
 private extension MultifileUpload {
     // Enqueue uploadables
-    private func enqueueUploadables(uploadables: [Uploadable]) {
+    func enqueueUploadables(uploadables: [Uploadable]) {
         // Map uploadables into `MultipartUpload`,
         // discarding uploadables that can't report size (e.g., an unexisting URL.)
         let uploads: [MultipartUpload] = uploadables.compactMap { uploadable in

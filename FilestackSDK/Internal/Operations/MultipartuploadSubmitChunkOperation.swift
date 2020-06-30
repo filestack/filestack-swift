@@ -13,7 +13,7 @@ class MultipartUploadSubmitChunkOperation: BaseOperation {
     let offset: UInt64
     let chunk: Data
     let part: Int
-    let descriptor: MultipartUploadDescriptor
+    let descriptor: UploadDescriptor
     let progress: Progress
 
     var receivedResponse: MultipartResponse?
@@ -23,7 +23,7 @@ class MultipartUploadSubmitChunkOperation: BaseOperation {
     required init(offset: UInt64,
                   chunk: Data,
                   part: Int,
-                  descriptor: MultipartUploadDescriptor) {
+                  descriptor: UploadDescriptor) {
         self.offset = offset
         self.chunk = chunk
         self.part = part

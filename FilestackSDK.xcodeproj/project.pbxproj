@@ -59,6 +59,7 @@
 		459B7404232F7BD5007CBC50 /* MirroredProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B7403232F7BD5007CBC50 /* MirroredProgress.swift */; };
 		459B7406232F894B007CBC50 /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B7405232F894B007CBC50 /* Uploader.swift */; };
 		459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */; };
+		459F230524ABB373000D6363 /* UploadDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459F230424ABB373000D6363 /* UploadDescriptor.swift */; };
 		45A07B3122B91A52003128B0 /* DocumentDetectionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */; };
 		45B63B0423279E690040BFBB /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B0323279E690040BFBB /* Uploadable.swift */; };
 		45B63B0623279EB10040BFBB /* Uploadable+reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B0523279EB10040BFBB /* Uploadable+reader.swift */; };
@@ -240,6 +241,7 @@
 		459B7403232F7BD5007CBC50 /* MirroredProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroredProgress.swift; sourceTree = "<group>"; };
 		459B7405232F894B007CBC50 /* Uploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploader.swift; sourceTree = "<group>"; };
 		459E61ED1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartuploadSubmitChunkOperation.swift; sourceTree = "<group>"; };
+		459F230424ABB373000D6363 /* UploadDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDescriptor.swift; sourceTree = "<group>"; };
 		45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetectionTransform.swift; sourceTree = "<group>"; };
 		45B63B0323279E690040BFBB /* Uploadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploadable.swift; sourceTree = "<group>"; };
 		45B63B0523279EB10040BFBB /* Uploadable+reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Uploadable+reader.swift"; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				4589A4871F0A4B1900C39405 /* Constants.swift */,
 				459B7403232F7BD5007CBC50 /* MirroredProgress.swift */,
 				45B66480232838C200DF5706 /* Tools.swift */,
+				459F230424ABB373000D6363 /* UploadDescriptor.swift */,
 				454CC1C91F0D1151005821AC /* Extensions */,
 				4502F71E1F1F4C28000875D6 /* Operations */,
 				45B63B0123279E3F0040BFBB /* Protocols */,
@@ -846,6 +849,7 @@
 				4502F7371F1F540F000875D6 /* UploadService.swift in Sources */,
 				BC88330020D3DCB600B88EAF /* TransformNoiseMode.swift in Sources */,
 				45B63B112327CBB90040BFBB /* UploadOptions.swift in Sources */,
+				459F230524ABB373000D6363 /* UploadDescriptor.swift in Sources */,
 				459E61EE1F31BBEF00237EA1 /* MultipartuploadSubmitChunkOperation.swift in Sources */,
 				BC27301A20DA806200142174 /* TagsTransform.swift in Sources */,
 				452C639623D0703A0057656C /* StorageOptions+MultipartFormData.swift in Sources */,

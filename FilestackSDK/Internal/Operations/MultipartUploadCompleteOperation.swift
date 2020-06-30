@@ -17,11 +17,11 @@ class MultipartUploadCompleteOperation: BaseOperation {
     // MARK: - Private Properties
 
     private let partsAndEtags: [Int: String]
-    private let descriptor: MultipartUploadDescriptor
+    private let descriptor: UploadDescriptor
 
     // MARK: - Lifecycle
 
-    required init(partsAndEtags: [Int: String], descriptor: MultipartUploadDescriptor) {
+    required init(partsAndEtags: [Int: String], descriptor: UploadDescriptor) {
         self.partsAndEtags = partsAndEtags
         self.descriptor = descriptor
 

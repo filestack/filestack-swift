@@ -10,7 +10,7 @@ import Alamofire
 import Foundation
 
 class MultipartUploadStartOperation: BaseOperation {
-    // MARK: - Public Properties
+    // MARK: - Internal Properties
 
     var response: NetworkJSONResponse?
 

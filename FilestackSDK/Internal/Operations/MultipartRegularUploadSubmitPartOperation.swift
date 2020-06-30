@@ -15,7 +15,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     let offset: UInt64
     let part: Int
     let partSize: Int
-    let descriptor: MultipartUploadDescriptor
+    let descriptor: UploadDescriptor
 
     private(set) lazy var progress: Progress = {
         let progress = MirroredProgress()
@@ -34,7 +34,7 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     required init(offset: UInt64,
                   part: Int,
                   partSize: Int,
-                  descriptor: MultipartUploadDescriptor) {
+                  descriptor: UploadDescriptor) {
         self.offset = offset
         self.part = part
         self.partSize = partSize
