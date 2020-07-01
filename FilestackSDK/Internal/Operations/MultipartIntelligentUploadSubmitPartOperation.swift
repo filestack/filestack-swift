@@ -27,17 +27,12 @@ class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, MultipartUpl
 
     // MARK: - Private Properties
 
-    private let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
-    private let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
-    private let minimumPartChunkSize = 32768
+    private var retriesLeft = Defaults.maxRetries
+    private var chunkSize: Int = 0
+    private var beforeCommitCheckPointOperation: BlockOperation?
 
     private let offset: UInt64
     private let partSize: Int
-    private let maxRetries: Int = 5
-
-    private lazy var retriesLeft: Int = maxRetries
-    private var chunkSize: Int = 0
-    private var beforeCommitCheckPointOperation: BlockOperation?
 
     private let chunkUploadOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.chunk-upload-operation-queue",
                                                                     qos: .utility,
@@ -86,7 +81,7 @@ extension MultipartIntelligentUploadSubmitPartOperation {
 
 private extension MultipartIntelligentUploadSubmitPartOperation {
     func upload() {
-        chunkSize = resumableMobileChunkSize
+        chunkSize = Defaults.resumableMobileChunkSize
 
         beforeCommitCheckPointOperation = BlockOperation()
         beforeCommitCheckPointOperation?.completionBlock = { self.doCommit() }
@@ -126,7 +121,7 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
 
             // Check for any error response.
             if jsonResponse?.response?.statusCode != 200 || isNetworkError, retriesLeft > 0 {
-                let delay = isNetworkError ? 0 : pow(2, Double(maxRetries - retriesLeft))
+                let delay = isNetworkError ? 0 : pow(2, Double(Defaults.maxRetries - retriesLeft))
                 // Retrying in `delay` seconds
                 Thread.sleep(forTimeInterval: delay)
             } else {
@@ -179,7 +174,7 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
                     break
                 default:
                     // Server error
-                    guard chunkSize > self.minimumPartChunkSize else {
+                    guard chunkSize > Defaults.minimumPartChunkSize else {
                         self.failOperation()
                         return
                     }
@@ -213,5 +208,16 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
         didFail = true
         state = .finished
         chunkUploadOperationQueue.cancelAllOperations()
+    }
+}
+
+// MARK: - Defaults
+
+private extension MultipartIntelligentUploadSubmitPartOperation {
+    struct Defaults {
+        static let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
+        static let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
+        static let minimumPartChunkSize = 32768
+        static let maxRetries: Int = 5
     }
 }

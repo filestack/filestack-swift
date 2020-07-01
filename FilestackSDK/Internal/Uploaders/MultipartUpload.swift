@@ -28,14 +28,6 @@ extension MultipartUploadError: LocalizedError {
     }
 }
 
-/// Chunksize depending on upload type.
-enum ChunkSize: Int {
-    /// Regular (5 megabytes)
-    case regular = 5_242_880
-    /// Intelligent Ingestion (8 megabytes)
-    case ii = 8_388_608
-}
-
 /// This class allows uploading a single `Uploadable` item to a given storage location.
 class MultipartUpload: Uploader {
     // MARK: - Internal Properties
@@ -54,8 +46,8 @@ class MultipartUpload: Uploader {
     private let apiKey: String
     private let options: UploadOptions
     private let security: Security?
+
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
-    private let maxRetries = 5
 
     private let masterOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.master-upload-operation-queue",
                                                                qos: .utility)
@@ -164,7 +156,7 @@ private extension MultipartUpload {
         var part: Int = 0
         var bytesLeft: UInt64 = descriptor.filesize
         var partsAndEtags: [Int: String] = [:]
-        let chunkSize = (descriptor.useIntelligentIngestion ? ChunkSize.ii : ChunkSize.regular).rawValue
+        let chunkSize = (descriptor.useIntelligentIngestion ? Defaults.ChunkSize.ii : Defaults.ChunkSize.regular).rawValue
 
         var failMessage: String?
 
@@ -228,13 +220,13 @@ private extension MultipartUpload {
             } else {
                 self.addCompleteOperation(partsAndEtags: partsAndEtags,
                                           descriptor: descriptor,
-                                          retriesLeft: self.maxRetries)
+                                          retriesLeft: Defaults.maxRetries)
             }
         }
     }
 
-    // Calls `multipart/start`, and, assuming uploadable is valid and the request succeeds,
-    // returns a `MultipartUploadDescriptor`.
+    /// Calls `multipart/start`, and, assuming uploadable is valid and the request succeeds, returns a
+    /// `MultipartUploadDescriptor`.
     func setupUploadDescriptor() -> UploadDescriptor? {
         let filename = options.storeOptions.filename ?? uploadable.filename ?? UUID().uuidString
         let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
@@ -327,7 +319,7 @@ private extension MultipartUpload {
             // Check for any error response
             if jsonResponse.response?.statusCode != 200 || isNetworkError {
                 if retriesLeft > 0 {
-                    let delay = isNetworkError ? 0 : pow(2, Double(self.maxRetries - retriesLeft))
+                    let delay = isNetworkError ? 0 : pow(2, Double(Defaults.maxRetries - retriesLeft))
 
                     // Retry in `delay` seconds
                     DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -337,7 +329,7 @@ private extension MultipartUpload {
                     }
                 } else {
                     let error = MultipartUploadError.custom(
-                        description: "Unable to submit complete operation after \(self.maxRetries)."
+                        description: "Unable to submit complete operation after \(Defaults.maxRetries)."
                     )
 
                     self.fail(with: error)
@@ -358,11 +350,27 @@ private extension MultipartUpload {
     }
 }
 
-// MARK: - CustomStringConvertible Conformance  Conformance
+// MARK: - CustomStringConvertible Conformance
 
 extension MultipartUpload {
     /// :nodoc:
     public var description: String {
         return Tools.describe(subject: self, only: ["currentStatus", "progress"])
+    }
+}
+
+// MARK: - Defaults
+
+private extension MultipartUpload {
+    struct Defaults {
+        static let maxRetries = 5
+
+        /// Chunksize depending on upload type.
+        enum ChunkSize: Int {
+            /// Regular (5 megabytes)
+            case regular = 5_242_880
+            /// Intelligent Ingestion (8 megabytes)
+            case ii = 8_388_608
+        }
     }
 }

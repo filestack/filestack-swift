@@ -103,6 +103,7 @@
 		45D803B32302C27900762A87 /* MinifyJSTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803B22302C27900762A87 /* MinifyJSTransform.swift */; };
 		45D803B52302CFE300762A87 /* MinifyCSSTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D803B42302CFE300762A87 /* MinifyCSSTransform.swift */; };
 		45D99F2F1F14EDD400CE709F /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */; };
+		45DC974224ACC0840014ECE3 /* Loggers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DC974124ACC0840014ECE3 /* Loggers.swift */; };
 		45E07AAA22AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */; };
 		45E07AAB22AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA922AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift */; };
 		45E07AB022AFC15300CD4573 /* Alamofire.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCC22A65FC500285F62 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -295,6 +296,7 @@
 		45D803B22302C27900762A87 /* MinifyJSTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinifyJSTransform.swift; sourceTree = "<group>"; };
 		45D803B42302CFE300762A87 /* MinifyCSSTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinifyCSSTransform.swift; sourceTree = "<group>"; };
 		45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
+		45DC974124ACC0840014ECE3 /* Loggers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggers.swift; sourceTree = "<group>"; };
 		45E07AA822AFA58000CD4573 /* MultipartRegularUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartRegularUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45E07AA922AFA58000CD4573 /* MultipartIntelligentUploadSubmitPartOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartIntelligentUploadSubmitPartOperation.swift; sourceTree = "<group>"; };
 		45F9B8C31F0B941300E04380 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sample.jpg; path = Fixtures/sample.jpg; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				45FA0CC91F0B86B6008EDBCD /* Services */,
 				45B63B0D23279F810040BFBB /* Uploadable Readers */,
 				459B7407232F95E1007CBC50 /* Uploaders */,
+				45DC974124ACC0840014ECE3 /* Loggers.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				BC8832FA20D3C90D00B88EAF /* CollageTransform.swift in Sources */,
 				BC88330520D3E08000B88EAF /* EnhanceTransform.swift in Sources */,
 				BC8832D820D181A700B88EAF /* ShadowTransform.swift in Sources */,
+				45DC974224ACC0840014ECE3 /* Loggers.swift in Sources */,
 				45B63B272328078A0040BFBB /* NetworkingService+DefaultImplementations.swift in Sources */,
 				4528C7461F2F24FB00A4BEF6 /* MultipartUploadCommitOperation.swift in Sources */,
 				BC8832D420D181A700B88EAF /* BlackAndWhiteTransform.swift in Sources */,

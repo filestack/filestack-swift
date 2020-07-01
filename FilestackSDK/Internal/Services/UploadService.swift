@@ -8,6 +8,7 @@
 
 import Alamofire
 import Foundation
+import os.log
 
 final class UploadService: NetworkingService {
     static let sessionManager = SessionManager.filestackDefault
@@ -21,12 +22,10 @@ final class UploadService: NetworkingService {
             switch result {
             case let .success(request, _, _):
                 request.responseJSON(queue: queue) { response in
-                    let jsonResponse = NetworkJSONResponse(with: response)
-                    completionHandler(jsonResponse)
+                    completionHandler(NetworkJSONResponse(with: response))
                 }
             case let .failure(error):
-                let jsonResponse = NetworkJSONResponse(with: error)
-                completionHandler(jsonResponse)
+                completionHandler(NetworkJSONResponse(with: error))
             }
         }
     }
@@ -34,13 +33,13 @@ final class UploadService: NetworkingService {
     static func upload(data: Data,
                        to url: URLConvertible,
                        method: HTTPMethod,
-                       headers: HTTPHeaders? = nil) -> UploadRequest {
+                       headers: HTTPHeaders? = nil) -> UploadRequest? {
         if let dataURL = temporaryURL(using: data) {
             defer { try? FileManager.default.removeItem(at: dataURL) }
             return sessionManager.upload(dataURL, to: url, method: method, headers: headers)
-        } else {
-            return sessionManager.upload(data, to: url, method: method, headers: headers)
         }
+
+        return nil
     }
 }
 
@@ -53,6 +52,7 @@ extension UploadService {
             try data.write(to: dataURL)
             return dataURL
         } catch {
+            os_log("Unable to create temporary data file at %@", log: .uploads, type: .fault, dataURL.description)
             return nil
         }
     }

@@ -9,9 +9,12 @@
 import Alamofire
 import Foundation
 
+private class BundleFinder {}
+
 extension SessionManager {
     static var filestackDefault: SessionManager = {
-        let configuration = URLSessionConfiguration.background(withIdentifier: "com.filestack.FilestackSDK")
+        let bundleIdentifier = Bundle.main.bundleIdentifier!
+        let configuration = URLSessionConfiguration.background(withIdentifier: bundleIdentifier)
         var defaultHeaders = SessionManager.defaultHTTPHeaders
 
         defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
@@ -26,6 +29,6 @@ extension SessionManager {
     // MARK: - Private Functions
 
     private class var shortVersionString: String {
-        return Bundle(for: Client.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
+        return Bundle(for: BundleFinder.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
     }
 }

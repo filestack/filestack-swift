@@ -109,7 +109,7 @@ private extension MultipartRegularUploadSubmitPartOperation {
 
     func uploadRequest(with json: [String: Any]?, dataChunk: Data) -> UploadRequest? {
         guard let url = url(from: json), let headers = json?["headers"] as? [String: String] else { return nil }
-        let request = UploadService.upload(data: dataChunk, to: url, method: .put, headers: headers)
+        guard let request = UploadService.upload(data: dataChunk, to: url, method: .put, headers: headers) else { return nil }
 
         request.uploadProgress { progress in
             self.progress.totalUnitCount = progress.totalUnitCount
