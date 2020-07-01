@@ -8,23 +8,25 @@
 
 import Foundation
 
-/**
- Applies a sharpening effect to the image.
- */
-@objc(FSSharpenTransform) public class SharpenTransform: Transform {
-    /**
-     Initializes a `SharpenTransform` object.
-     */
+/// Applies a sharpening effect to the image.
+@objc(FSSharpenTransform)
+public class SharpenTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `SharpenTransform` object.
     @objc public init() {
         super.init(name: "sharpen")
     }
+}
 
-    /**
-     Adds the `amount` option.
+// MARK: - Public Functions
 
-     - Parameter value: The amount to sharpen the image. Valid range: `1...20`
-     */
-    @objc @discardableResult public func amount(_ value: Int) -> Self {
+public extension SharpenTransform {
+    /// Adds the `amount` option.
+    ///
+    /// - Parameter value: The amount to sharpen the image. Valid range: `1...20`
+    @discardableResult
+    @objc func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 }

@@ -9,13 +9,12 @@
 import Alamofire
 import Foundation
 
-/**
- Represents a `FileLink` object.
-
- See [Filestack Architecture Overview](https://www.filestack.com/docs/file-architecture) for more information
- about files.
- */
-@objc(FSFileLink) public class FileLink: NSObject {
+/// Represents a `FileLink` object.
+///
+/// See [Filestack Architecture Overview](https://www.filestack.com/docs/file-architecture) for more information about
+/// files.
+@objc(FSFileLink)
+public class FileLink: NSObject {
     // MARK: - Public Properties
 
     /// An API key obtained from the Developer Portal.
@@ -32,32 +31,32 @@ import Foundation
         CDNService.buildURL(handle: self.handle, security: self.security)!
     }()
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
-    internal init(handle: String, apiKey: String, security: Security? = nil) {
+    init(handle: String, apiKey: String, security: Security? = nil) {
         self.handle = handle
         self.apiKey = apiKey
         self.security = security
 
         super.init()
     }
+}
 
-    // MARK: - Public Functions
+// MARK: - Public Functions
 
-    /**
-     Gets the content associated to this `FileLink` as a `Data` object.
-
-     - Parameter parameters: Any query string parameters that should be added to the request.
-     `nil` by default.
-     - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
-     - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle
-     of the Request as data is read from the server. `nil` by default.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func getContent(parameters: [String: Any]? = nil,
-                                 queue: DispatchQueue? = .main,
-                                 downloadProgress: ((Progress) -> Void)? = nil,
-                                 completionHandler: @escaping (NetworkDataResponse) -> Void) {
+public extension FileLink {
+    /// Gets the content associated to this `FileLink` as a `Data` object.
+    ///
+    /// - Parameter parameters: Any query string parameters that should be added to the request.
+    /// `nil` by default.
+    /// - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
+    /// - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle
+    /// of the Request as data is read from the server. `nil` by default.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func getContent(parameters: [String: Any]? = nil,
+                          queue: DispatchQueue? = .main,
+                          downloadProgress: ((Progress) -> Void)? = nil,
+                          completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = CDNService.getDataRequest(handle: handle,
                                                       path: nil,
                                                       parameters: parameters,
@@ -81,14 +80,12 @@ import Foundation
         })
     }
 
-    /**
-     Gets the image tags associated to this `FileLink` as a JSON payload.
-
-     - Parameter queue: The queue on which the completion handler is dispatched.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func getTags(queue: DispatchQueue? = .main,
-                              completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+    /// Gets the image tags associated to this `FileLink` as a JSON payload.
+    ///
+    /// - Parameter queue: The queue on which the completion handler is dispatched.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func getTags(queue: DispatchQueue? = .main,
+                       completionHandler: @escaping (NetworkJSONResponse) -> Void) {
         guard let request = CDNService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
             return
         }
@@ -101,14 +98,12 @@ import Foundation
         }
     }
 
-    /**
-     Gets the safe for work status associated to this `FileLink` as a JSON payload.
-
-     - Parameter queue: The queue on which the completion handler is dispatched.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func getSafeForWork(queue: DispatchQueue? = .main,
-                                     completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+    /// Gets the safe for work status associated to this `FileLink` as a JSON payload.
+    ///
+    /// - Parameter queue: The queue on which the completion handler is dispatched.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func getSafeForWork(queue: DispatchQueue? = .main,
+                              completionHandler: @escaping (NetworkJSONResponse) -> Void) {
         guard let request = CDNService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
             return
         }
@@ -121,16 +116,14 @@ import Foundation
         }
     }
 
-    /**
-     Gets metadata associated to this `Filelink` as a JSON payload.
-
-     - Parameter options: The options that should be included as part of the response.
-     - Parameter queue: The queue on which the completion handler is dispatched.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func getMetadata(options: MetadataOptions,
-                                  queue: DispatchQueue? = .main,
-                                  completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+    /// Gets metadata associated to this `Filelink` as a JSON payload.
+    ///
+    /// - Parameter options: The options that should be included as part of the response.
+    /// - Parameter queue: The queue on which the completion handler is dispatched.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func getMetadata(options: MetadataOptions,
+                           queue: DispatchQueue? = .main,
+                           completionHandler: @escaping (NetworkJSONResponse) -> Void) {
         let optionQueryItems = options.toArray().map {
             URLQueryItem(name: $0.description, value: "true")
         }
@@ -152,22 +145,20 @@ import Foundation
         }
     }
 
-    /**
-     Downloads the content associated to this `FileLink` to a destination URL.
-
-     - Parameter destinationURL: The local URL where content should be saved.
-     - Parameter parameters: Any query string parameters that should be added to the request.
-     `nil` by default.
-     - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
-     - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle
-     of the Request as data is read from the server. `nil` by default.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func download(destinationURL: URL,
-                               parameters: [String: Any]? = nil,
-                               queue: DispatchQueue? = .main,
-                               downloadProgress: ((Progress) -> Void)? = nil,
-                               completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
+    /// Downloads the content associated to this `FileLink` to a destination URL.
+    ///
+    /// - Parameter destinationURL: The local URL where content should be saved.
+    /// - Parameter parameters: Any query string parameters that should be added to the request.
+    /// `nil` by default.
+    /// - Parameter queue: The queue on which the downloadProgress and completion handlers are dispatched.
+    /// - Parameter downloadProgress: Sets a closure to be called periodically during the lifecycle
+    /// of the Request as data is read from the server. `nil` by default.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func download(destinationURL: URL,
+                        parameters: [String: Any]? = nil,
+                        queue: DispatchQueue? = .main,
+                        downloadProgress: ((Progress) -> Void)? = nil,
+                        completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
         let downloadDestination: DownloadRequest.DownloadFileDestination = { _, _ in
 
             let downloadOptions: DownloadRequest.DownloadOptions = [
@@ -202,20 +193,18 @@ import Foundation
         })
     }
 
-    /**
-     Removes this `FileLink` from Filestack.
-
-     - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
-     that includes the `remove` permission.
-
-     - Parameter parameters: Any query string parameters that should be added to the request.
-     `nil` by default.
-     - Parameter queue: The queue on which the completion handler is dispatched.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func delete(parameters: [String: Any]? = nil,
-                             queue: DispatchQueue? = .main,
-                             completionHandler: @escaping (NetworkDataResponse) -> Void) {
+    /// Removes this `FileLink` from Filestack.
+    ///
+    /// - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
+    /// that includes the `remove` permission.
+    ///
+    /// - Parameter parameters: Any query string parameters that should be added to the request.
+    /// `nil` by default.
+    /// - Parameter queue: The queue on which the completion handler is dispatched.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func delete(parameters: [String: Any]? = nil,
+                      queue: DispatchQueue? = .main,
+                      completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = APIService.deleteRequest(handle: handle,
                                                      path: Constants.filePath,
                                                      parameters: ensureAPIKey(parameters),
@@ -231,25 +220,23 @@ import Foundation
         })
     }
 
-    /**
-     Overwrites this `FileLink` with a provided local file.
-
-     - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
-     that includes the `write` permission.
-
-     - Parameter parameters: Any query string parameters that should be added to the request.
-     `nil` by default.
-     - Parameter fileURL: A local file that will replace the existing remote content.
-     - Parameter queue: The queue on which the uploadProgress and completion handlers are dispatched.
-     - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
-     of the Request as data is written on the server. `nil` by default.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func overwrite(parameters: [String: Any]? = nil,
-                                fileURL: URL,
-                                queue: DispatchQueue? = .main,
-                                uploadProgress: ((Progress) -> Void)? = nil,
-                                completionHandler: @escaping (NetworkDataResponse) -> Void) {
+    /// Overwrites this `FileLink` with a provided local file.
+    ///
+    /// - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
+    /// that includes the `write` permission.
+    ///
+    /// - Parameter parameters: Any query string parameters that should be added to the request.
+    /// `nil` by default.
+    /// - Parameter fileURL: A local file that will replace the existing remote content.
+    /// - Parameter queue: The queue on which the uploadProgress and completion handlers are dispatched.
+    /// - Parameter uploadProgress: Sets a closure to be called periodically during the lifecycle
+    /// of the Request as data is written on the server. `nil` by default.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func overwrite(parameters: [String: Any]? = nil,
+                         fileURL: URL,
+                         queue: DispatchQueue? = .main,
+                         uploadProgress: ((Progress) -> Void)? = nil,
+                         completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = APIService.overwriteRequest(handle: handle,
                                                         path: Constants.filePath,
                                                         parameters: parameters,
@@ -274,22 +261,20 @@ import Foundation
         })
     }
 
-    /**
-     Overwrites this `FileLink` with a provided remote URL.
-
-     - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
-     that includes the `write` permission.
-
-     - Parameter parameters: Any query string parameters that should be added to the request.
-     `nil` by default.
-     - Parameter queue: The queue on which the completion handler is dispatched.
-     - Parameter remoteURL: A remote `URL` whose content will replace the existing remote content.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
-    @objc public func overwrite(parameters: [String: Any]? = nil,
-                                remoteURL: URL,
-                                queue: DispatchQueue? = .main,
-                                completionHandler: @escaping (NetworkDataResponse) -> Void) {
+    /// Overwrites this `FileLink` with a provided remote URL.
+    ///
+    /// - Note: Please ensure this `FileLink` object has the `security` property properly set up with a `Policy`
+    /// that includes the `write` permission.
+    ///
+    /// - Parameter parameters: Any query string parameters that should be added to the request.
+    /// `nil` by default.
+    /// - Parameter queue: The queue on which the completion handler is dispatched.
+    /// - Parameter remoteURL: A remote `URL` whose content will replace the existing remote content.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
+    @objc func overwrite(parameters: [String: Any]? = nil,
+                         remoteURL: URL,
+                         queue: DispatchQueue? = .main,
+                         completionHandler: @escaping (NetworkDataResponse) -> Void) {
         guard let request = APIService.overwriteRequest(handle: handle,
                                                         path: Constants.filePath,
                                                         parameters: parameters,
@@ -306,16 +291,16 @@ import Foundation
         })
     }
 
-    /**
-     Returns an `Transformable` corresponding to this `FileLink`.
-     */
-    @objc public func transformable() -> Transformable {
+    /// Returns an `Transformable` corresponding to this `FileLink`.
+    @objc func transformable() -> Transformable {
         return Transformable(handles: [handle], apiKey: apiKey, security: security)
     }
+}
 
-    // MARK: - Private Functions
+// MARK: - Private Functions
 
-    private func ensureAPIKey(_ parameters: [String: Any]?) -> [String: Any] {
+private extension FileLink {
+    func ensureAPIKey(_ parameters: [String: Any]?) -> [String: Any] {
         guard var parameters = parameters else {
             return ["key": apiKey]
         }
@@ -328,7 +313,7 @@ import Foundation
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension FileLink {
     /// :nodoc:

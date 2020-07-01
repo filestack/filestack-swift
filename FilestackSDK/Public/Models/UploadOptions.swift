@@ -9,7 +9,23 @@
 import Foundation
 
 /// Represents a set of options for uploading items to a given storage location.
-@objc(FSUploadOptions) public class UploadOptions: NSObject {
+@objc(FSUploadOptions)
+public class UploadOptions: NSObject {
+    // MARK: - Public Static Properties
+
+    /// Default part upload concurrency
+    @objc public static var defaultPartUploadConcurrency: Int = 5
+
+    /// Default chunk upload concurrency per part
+    @objc public static var defaultChunkUploadConcurrency: Int = 8
+
+    /// A default set of upload options.
+    @objc public static var defaults: UploadOptions = {
+        UploadOptions(preferIntelligentIngestion: true, startImmediately: true)
+    }()
+
+    // MARK: - Public Properties
+
     /// Attempts to use Intelligent Ingestion when enabled.
     @objc public var preferIntelligentIngestion: Bool
 
@@ -25,6 +41,8 @@ import Foundation
     /// How many chunks should be uploaded concurrently per part
     @objc public var chunkUploadConcurrency: Int
 
+    // MARK: - Lifecycle
+
     /// Default initializer.
     @objc public init(preferIntelligentIngestion: Bool,
                       startImmediately: Bool,
@@ -37,20 +55,9 @@ import Foundation
         self.partUploadConcurrency = partUploadConcurrency
         self.chunkUploadConcurrency = chunkUploadConcurrency
     }
-
-    /// Default part upload concurrency
-    @objc public static var defaultPartUploadConcurrency: Int = 5
-
-    /// Default chunk upload concurrency per part
-    @objc public static var defaultChunkUploadConcurrency: Int = 8
-
-    /// A default set of upload options.
-    @objc public static var defaults: UploadOptions = {
-        UploadOptions(preferIntelligentIngestion: true, startImmediately: true)
-    }()
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension UploadOptions {
     /// :nodoc:

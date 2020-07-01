@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension MultifileUpload {
-    // MARK: - Objective-C Compatibility
+// MARK: - Objective-C Compatibility
 
+extension MultifileUpload {
     /// Adds multiple local URLs to be uploaded.
     ///
     /// - Important: Any items added after the upload process started will be ignored.

@@ -42,9 +42,9 @@ class MultipartUpload: Uploader {
 
     // MARK: - Internal Properties
 
-    internal let masterProgress = MirroredProgress()
-    internal var uploadProgress: ((Progress) -> Void)?
-    internal var completionHandler: ((NetworkJSONResponse) -> Void)?
+    let masterProgress = MirroredProgress()
+    var uploadProgress: ((Progress) -> Void)?
+    var completionHandler: ((NetworkJSONResponse) -> Void)?
 
     // MARK: - Private Properties
 
@@ -70,7 +70,7 @@ class MultipartUpload: Uploader {
 
     var masterProgressFractionCompletedObserver: NSKeyValueObservation?
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
     init(using uploadable: Uploadable,
          options: UploadOptions,
@@ -357,7 +357,7 @@ private extension MultipartUpload {
     }
 }
 
-// MARK: - CustomStringConvertible Comformance
+// MARK: - CustomStringConvertible Conformance  Conformance
 
 extension MultipartUpload {
     /// :nodoc:

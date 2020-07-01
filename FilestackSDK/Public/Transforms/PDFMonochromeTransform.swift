@@ -8,13 +8,12 @@
 
 import Foundation
 
-/**
- Converts a PDF to black and white version.
- */
-@objc(FSPDFMonochromeTransform) public class PDFMonochromeTransform: Transform {
-    /**
-     Initializes a `PDFMonochromeTransform` object.
-     */
+/// Converts a PDF to black and white version.
+@objc(FSPDFMonochromeTransform)
+public class PDFMonochromeTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `PDFMonochromeTransform` object.
     @objc public init() {
         super.init(name: "monochrome")
     }

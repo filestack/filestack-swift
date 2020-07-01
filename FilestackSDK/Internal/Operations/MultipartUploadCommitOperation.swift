@@ -32,6 +32,7 @@ class MultipartUploadCommitOperation: BaseOperation {
 }
 
 // MARK: - Overrides
+
 extension MultipartUploadCommitOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/commit", relativeTo: UploadService.baseURL)!
@@ -47,12 +48,12 @@ extension MultipartUploadCommitOperation {
 
 private extension MultipartUploadCommitOperation {
     func multipartFormData(form: MultipartFormData) {
-        form.append(descriptor.apiKey, withName: "apikey")
-        form.append(descriptor.uri, withName: "uri")
-        form.append(descriptor.region, withName: "region")
-        form.append(descriptor.uploadID, withName: "upload_id")
-        form.append(String(descriptor.filesize), withName: "size")
-        form.append(String(part), withName: "part")
-        form.append(descriptor.options.storeOptions.location.description, withName: "store_location")
+        form.append(descriptor.apiKey, named: "apikey")
+        form.append(descriptor.uri, named: "uri")
+        form.append(descriptor.region, named: "region")
+        form.append(descriptor.uploadID, named: "upload_id")
+        form.append(String(descriptor.filesize), named: "size")
+        form.append(String(part), named: "part")
+        form.append(descriptor.options.storeOptions.location.description, named: "store_location")
     }
 }

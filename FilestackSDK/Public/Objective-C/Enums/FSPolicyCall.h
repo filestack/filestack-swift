@@ -6,12 +6,10 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-/**
-    Represents a policy call type.
-
-    See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
-    information about policy calls.
- */
+/// Represents a policy call type.
+///
+/// See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policy
+/// calls.
 typedef NS_OPTIONS(NSUInteger, FSPolicyCall) {
 
     /// Allows users to upload files.

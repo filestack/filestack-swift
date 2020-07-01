@@ -8,39 +8,32 @@
 
 import Foundation
 
-/**
- Represents an image transform page format type.
- */
-@objc(FSTransformPageFormat) public enum TransformPageFormat: UInt, CustomStringConvertible {
+/// Represents an image transform page format type.
+@objc(FSTransformPageFormat)
+public enum TransformPageFormat: UInt, CustomStringConvertible {
     /// A2
     case a2
-
     /// A3
     case a3
-
     /// A4
     case a4
-
     /// A5
     case a5
-
     /// B4
     case b4
-
     /// B5
     case b5
-
     /// Letter
     case letter
-
     /// Legal
     case legal
-
     /// Tabloid
     case tabloid
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
+extension TransformPageFormat {
     /// Returns a `String` representation of self.
     public var description: String {
         switch self {

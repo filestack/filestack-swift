@@ -8,23 +8,25 @@
 
 import Foundation
 
-/**
- Change the image to look like it was oil painted.
- */
-@objc(FSOilPaintTransform) public class OilPaintTransform: Transform {
-    /**
-     Initializes an `OilPaintTransform` object.
-     */
+/// Change the image to look like it was oil painted.
+@objc(FSOilPaintTransform)
+public class OilPaintTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes an `OilPaintTransform` object.
     @objc public init() {
         super.init(name: "oil_paint")
     }
+}
 
-    /**
-     Adds `amount` option.
+// MARK: - Public Functions
 
-     - Parameter value: Valid range: `2...100`
-     */
-    @objc @discardableResult public func amount(_ value: Int) -> Self {
+public extension OilPaintTransform {
+    /// Adds `amount` option.
+    ///
+    /// - Parameter value: Valid range: `2...100`
+    @discardableResult
+    @objc func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 }

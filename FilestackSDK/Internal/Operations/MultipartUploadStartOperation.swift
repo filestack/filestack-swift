@@ -62,20 +62,20 @@ extension MultipartUploadStartOperation {
 
 private extension MultipartUploadStartOperation {
     func multipartFormData(form: MultipartFormData) {
-        form.append(apiKey, withName: "apikey")
-        form.append(fileName, withName: "filename")
-        form.append(mimeType, withName: "mimetype")
-        form.append(String(fileSize), withName: "size")
+        form.append(apiKey, named: "apikey")
+        form.append(fileName, named: "filename")
+        form.append(mimeType, named: "mimetype")
+        form.append(String(fileSize), named: "size")
 
         storeOptions.append(to: form)
 
         if let security = security {
-            form.append(security.encodedPolicy, withName: "policy")
-            form.append(security.signature, withName: "signature")
+            form.append(security.encodedPolicy, named: "policy")
+            form.append(security.signature, named: "signature")
         }
 
         if multipart {
-            form.append("true", withName: "multipart")
+            form.append("true", named: "multipart")
         }
     }
 }

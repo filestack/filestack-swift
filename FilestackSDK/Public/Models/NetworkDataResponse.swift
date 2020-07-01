@@ -9,11 +9,10 @@
 import Alamofire
 import Foundation
 
-/**
- This object represents a network data response.
- */
-@objc(FSNetworkDataResponse) public class NetworkDataResponse: NSObject {
-    // MARK: - Properties
+/// This object represents a network data response.
+@objc(FSNetworkDataResponse)
+public class NetworkDataResponse: NSObject {
+    // MARK: - Public Properties
 
     /// The URL request sent to the server.
     @objc public let request: URLRequest?
@@ -27,9 +26,9 @@ import Foundation
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
     @objc public var error: Error?
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
-    internal init(with dataResponse: DataResponse<Data>) {
+    init(with dataResponse: DataResponse<Data>) {
         self.request = dataResponse.request
         self.response = dataResponse.response
         self.data = dataResponse.data
@@ -39,7 +38,7 @@ import Foundation
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension NetworkDataResponse {
     /// :nodoc:

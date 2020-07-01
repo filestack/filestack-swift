@@ -8,42 +8,29 @@
 
 import Foundation
 
-/**
- Represents an image transform fit type.
- */
-@objc(FSTransformFit) public enum TransformFit: UInt, CustomStringConvertible {
+/// Represents an image transform fit type.
+@objc(FSTransformFit)
+public enum TransformFit: UInt, CustomStringConvertible {
     /// Clip
     case clip
-
     /// Crop
     case crop
-
     /// Scale
     case scale
-
     /// Max
     case max
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
+extension TransformFit {
     /// Returns a `String` representation of self.
     public var description: String {
         switch self {
-        case .clip:
-
-            return "clip"
-
-        case .crop:
-
-            return "crop"
-
-        case .scale:
-
-            return "scale"
-
-        case .max:
-
-            return "max"
+        case .clip: return "clip"
+        case .crop: return "crop"
+        case .scale: return "scale"
+        case .max: return "max"
         }
     }
 }

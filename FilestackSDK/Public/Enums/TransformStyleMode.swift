@@ -8,18 +8,18 @@
 
 import Foundation
 
-/**
- Represents an image transform style type.
- */
-@objc(FSTransformStyleMode) public enum TransformStyleMode: UInt, CustomStringConvertible {
+/// Represents an image transform style type.
+@objc(FSTransformStyleMode)
+public enum TransformStyleMode: UInt, CustomStringConvertible {
     /// Artwork
     case artwork
-
     /// Photo
     case photo
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
+extension TransformStyleMode {
     /// Returns a `String` representation of self.
     public var description: String {
         switch self {

@@ -10,33 +10,25 @@ import Alamofire
 import Foundation
 
 class BaseOperation: Operation {
-    enum State {
-        case ready
-        case executing
-        case finished
-
-        var key: String {
-            switch self {
-            case .ready:
-                return "isReady"
-            case .executing:
-                return "isExecuting"
-            case .finished:
-                return "isFinished"
-            }
-        }
-    }
-
     var state = State.ready {
         willSet {
-            willChangeValue(forKey: state.key)
-            willChangeValue(forKey: newValue.key)
+            willChangeValue(forKey: state.description)
+            willChangeValue(forKey: newValue.description)
         }
+
         didSet {
-            didChangeValue(forKey: oldValue.key)
-            didChangeValue(forKey: state.key)
+            didChangeValue(forKey: oldValue.description)
+            didChangeValue(forKey: state.description)
         }
     }
+}
+
+// MARK: - Overrides
+
+extension BaseOperation {
+    override var isReady: Bool { state == .ready }
+    override var isExecuting: Bool { state == .executing }
+    override var isFinished: Bool { state == .finished }
 
     override func start() {
         state = .executing
@@ -56,29 +48,26 @@ class BaseOperation: Operation {
             state = .finished
         }
     }
+}
 
-    override var isReady: Bool {
-        return state == .ready
-    }
+// MARK: -
 
-    override var isExecuting: Bool {
-        return state == .executing
-    }
-
-    override var isFinished: Bool {
-        return state == .finished
+extension BaseOperation {
+    enum State {
+        case ready
+        case executing
+        case finished
     }
 }
 
-struct MultipartResponse {
-    let response: HTTPURLResponse?
-    let error: Error?
-    let etag: String?
-}
+// MARK: - CustomStringConvertible Conformance
 
-extension MultipartFormData {
-    func append(_ string: String?, withName name: String) {
-        guard let data = string?.data(using: .utf8) else { return }
-        append(data, withName: name)
+extension BaseOperation.State: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .ready: return "isReady"
+        case .executing: return "isExecuting"
+        case .finished: return "isFinished"
+        }
     }
 }

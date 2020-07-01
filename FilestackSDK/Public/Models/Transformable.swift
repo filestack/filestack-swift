@@ -8,13 +8,12 @@
 
 import Foundation
 
-/**
- Represents an `Transformable` object.
-
- See [Image Transformations Overview](https://www.filestack.com/docs/image-transformations) for more information
- about image transformations.
- */
-@objc(FSTransformable) public class Transformable: NSObject {
+/// Represents an `Transformable` object.
+///
+/// See [Image Transformations Overview](https://www.filestack.com/docs/image-transformations) for more information
+/// about image transformations.
+@objc(FSTransformable)
+public class Transformable: NSObject {
     // MARK: - Public Properties
 
     /// An API key obtained from the Developer Portal.
@@ -62,7 +61,7 @@ import Foundation
     private var sources: [String]
     private var usingExternalURLs: Bool
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
     init(handles: [String], apiKey: String, security: Security? = nil) {
         self.sources = handles
@@ -81,28 +80,26 @@ import Foundation
 
         super.init()
     }
+}
 
-    // MARK: - Public Functions
+// MARK: - Public Functions
 
-    /**
-     Adds a new transformation to the transformation chain.
-
-     - Parameter transform: The `Transform` to add.
-     */
+public extension Transformable {
+    /// Adds a new transformation to the transformation chain.
+    ///
+    /// - Parameter transform: The `Transform` to add.
     @objc(add:)
     @discardableResult
-    public func add(transform: Transform) -> Self {
+    func add(transform: Transform) -> Self {
         transformationTasks.append(transform.task)
 
         return self
     }
 
-    /**
-     Includes detailed information about the transformation request.
-     */
+    /// Includes detailed information about the transformation request.
     @objc
     @discardableResult
-    public func debug() -> Self {
+    func debug() -> Self {
         let task = Task(name: "debug", options: nil)
 
         transformationTasks.insert(task, at: 0)
@@ -110,22 +107,20 @@ import Foundation
         return self
     }
 
-    /**
-     Stores a copy of the transformation results to your preferred filestore.
-
-     - Parameter options: An `StorageOptions` value.
-     - Parameter base64Decode: Specify that you want the data to be first decoded from base64
-     before being written to the file. For example, if you have base64 encoded image data,
-     you can use this flag to first decode the data before writing the image file.
-     - Parameter queue: The queue on which the completion handler is dispatched.
-     - Parameter completionHandler: Adds a handler to be called once the request has finished.
-     */
+    /// Stores a copy of the transformation results to your preferred filestore.
+    ///
+    /// - Parameter options: An `StorageOptions` value.
+    /// - Parameter base64Decode: Specify that you want the data to be first decoded from base64
+    /// before being written to the file. For example, if you have base64 encoded image data,
+    /// you can use this flag to first decode the data before writing the image file.
+    /// - Parameter queue: The queue on which the completion handler is dispatched.
+    /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
     @objc
     @discardableResult
-    public func store(using options: StorageOptions,
-                      base64Decode: Bool = false,
-                      queue: DispatchQueue? = .main,
-                      completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
+    func store(using options: StorageOptions,
+               base64Decode: Bool = false,
+               queue: DispatchQueue? = .main,
+               completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
         var taskOptions = [TaskOption]()
 
         taskOptions.append((key: "location", value: options.location))
@@ -177,6 +172,8 @@ import Foundation
     }
 }
 
+// MARK: - Private Functions
+
 private extension Transformable {
     func computeURL() -> URL {
         let key = usingExternalURLs ? apiKey : nil
@@ -215,7 +212,7 @@ private extension Transformable {
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension Transformable {
     /// :nodoc:

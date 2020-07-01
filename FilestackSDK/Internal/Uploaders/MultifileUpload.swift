@@ -12,9 +12,9 @@ import Foundation
 class MultifileUpload: Uploader, DeferredAdd {
     // MARK: - Internal Properties
 
-    internal let masterProgress = MirroredProgress()
-    internal var progressHandler: ((Progress) -> Void)?
-    internal var completionHandler: (([NetworkJSONResponse]) -> Void)?
+    let masterProgress = MirroredProgress()
+    var progressHandler: ((Progress) -> Void)?
+    var completionHandler: (([NetworkJSONResponse]) -> Void)?
 
     // MARK: - Private Properties
 
@@ -30,7 +30,7 @@ class MultifileUpload: Uploader, DeferredAdd {
     private let security: Security?
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.multi-upload-queue")
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
     init(using uploadables: [Uploadable]? = nil,
          options: UploadOptions,
@@ -193,7 +193,7 @@ private extension MultifileUpload {
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension MultifileUpload {
     /// :nodoc:

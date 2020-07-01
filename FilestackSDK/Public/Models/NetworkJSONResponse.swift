@@ -9,11 +9,10 @@
 import Alamofire
 import Foundation
 
-/**
- This object represents a network JSON response.
- */
-@objc(FSNetworkJSONResponse) public class NetworkJSONResponse: NSObject {
-    // MARK: - Properties
+/// This object represents a network JSON response.
+@objc(FSNetworkJSONResponse)
+public class NetworkJSONResponse: NSObject {
+    // MARK: - Public Properties
 
     /// The URL request sent to the server.
     @objc public let request: URLRequest?
@@ -27,9 +26,9 @@ import Foundation
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
     @objc public var error: Error?
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
-    internal init(with dataResponse: DataResponse<Any>) {
+    init(with dataResponse: DataResponse<Any>) {
         request = dataResponse.request
         response = dataResponse.response
 
@@ -44,7 +43,7 @@ import Foundation
         super.init()
     }
 
-    internal init(with error: Error) {
+    init(with error: Error) {
         self.request = nil
         self.response = nil
         self.json = nil
@@ -54,7 +53,7 @@ import Foundation
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension NetworkJSONResponse {
     /// :nodoc:

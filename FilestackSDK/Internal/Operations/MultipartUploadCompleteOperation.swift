@@ -48,26 +48,26 @@ extension MultipartUploadCompleteOperation {
 
 private extension MultipartUploadCompleteOperation {
     func multipartFormData(form: MultipartFormData) {
-        form.append(descriptor.apiKey, withName: "apikey")
-        form.append(descriptor.uri, withName: "uri")
-        form.append(descriptor.region, withName: "region")
-        form.append(descriptor.uploadID, withName: "upload_id")
-        form.append(descriptor.filename, withName: "filename")
-        form.append(String(descriptor.filesize), withName: "size")
-        form.append(descriptor.mimeType, withName: "mimetype")
+        form.append(descriptor.apiKey, named: "apikey")
+        form.append(descriptor.uri, named: "uri")
+        form.append(descriptor.region, named: "region")
+        form.append(descriptor.uploadID, named: "upload_id")
+        form.append(descriptor.filename, named: "filename")
+        form.append(String(descriptor.filesize), named: "size")
+        form.append(descriptor.mimeType, named: "mimetype")
 
         descriptor.options.storeOptions.append(to: form)
 
         if let security = descriptor.security {
-            form.append(security.encodedPolicy, withName: "policy")
-            form.append(security.signature, withName: "signature")
+            form.append(security.encodedPolicy, named: "policy")
+            form.append(security.signature, named: "signature")
         }
 
         if descriptor.useIntelligentIngestion {
-            form.append("true", withName: "multipart")
+            form.append("true", named: "multipart")
         } else {
             let parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
-            form.append(parts, withName: "parts")
+            form.append(parts, named: "parts")
         }
     }
 }

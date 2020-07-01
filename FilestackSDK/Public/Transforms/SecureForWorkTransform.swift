@@ -8,13 +8,12 @@
 
 import Foundation
 
-/**
- Returns whether the image if safe to display.
- */
-@objc(FSSecureForWorkTransform) public class SecureForWorkTransform: Transform {
-    /**
-     Initializes a `SecureForWorkTransform` object.
-     */
+/// Returns whether the image if safe to display.
+@objc(FSSecureForWorkTransform)
+public class SecureForWorkTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `SecureForWorkTransform` object.
     @objc public init() {
         super.init(name: "sfw")
     }

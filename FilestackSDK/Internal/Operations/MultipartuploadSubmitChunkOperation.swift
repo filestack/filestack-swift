@@ -79,14 +79,14 @@ private extension MultipartUploadSubmitChunkOperation {
     }
 
     func multipartFormData(form: MultipartFormData) {
-        form.append(descriptor.apiKey, withName: "apikey")
-        form.append(String(part), withName: "part")
-        form.append(String(chunk.count), withName: "size")
-        form.append(chunk.base64MD5Digest(), withName: "md5")
-        form.append(descriptor.uri, withName: "uri")
-        form.append(descriptor.region, withName: "region")
-        form.append(descriptor.uploadID, withName: "upload_id")
-        form.append("true", withName: "multipart")
-        form.append(String(offset), withName: "offset")
+        form.append(descriptor.apiKey, named: "apikey")
+        form.append(String(part), named: "part")
+        form.append(String(chunk.count), named: "size")
+        form.append(chunk.base64MD5Digest(), named: "md5")
+        form.append(descriptor.uri, named: "uri")
+        form.append(descriptor.region, named: "region")
+        form.append(descriptor.uploadID, named: "upload_id")
+        form.append("true", named: "multipart")
+        form.append(String(offset), named: "offset")
     }
 }

@@ -8,20 +8,20 @@
 
 import Foundation
 
-/**
- Represents a policy call type.
-
- See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
- information about policy calls.
- */
+/// Represents a policy call type.
+///
+/// See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
+/// information about policy calls.
 public typealias PolicyCall = FSPolicyCall
 
-public extension PolicyCall {
-    internal static func all() -> [PolicyCall] {
+// MARK: - Internal Functions
+
+extension PolicyCall {
+    static func all() -> [PolicyCall] {
         return [.pick, .read, .stat, .write, .writeURL, .store, .convert, .remove, .exif, .runWorkflow]
     }
 
-    internal func toArray() -> [String] {
+    func toArray() -> [String] {
         let ops: [String] = type(of: self).all().compactMap {
             guard contains($0) else {
                 return nil
@@ -31,8 +31,12 @@ public extension PolicyCall {
 
         return ops
     }
+}
 
-    private func stringValue() -> String? {
+// MARK: - Private Functions
+
+private extension PolicyCall {
+    func stringValue() -> String? {
         switch self {
         case PolicyCall.pick:
 

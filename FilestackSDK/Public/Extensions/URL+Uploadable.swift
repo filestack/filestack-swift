@@ -10,9 +10,7 @@ import Foundation
 import MobileCoreServices
 
 extension URL: Uploadable {
-    public var filename: String? {
-        return lastPathComponent
-    }
+    public var filename: String? { lastPathComponent }
 
     public var size: UInt64? {
         guard let attributtes = try? FileManager.default.attributesOfItem(atPath: relativePath) else { return nil }
@@ -30,10 +28,12 @@ extension URL: Uploadable {
 
         return mimeType as String
     }
+}
 
-    // MARK: - Private Functions
+// MARK: - Private Functions
 
-    private var uniformTypeIdentifier: CFString? {
+private extension URL {
+    var uniformTypeIdentifier: CFString? {
         let ext = pathExtension as CFString
         guard let utiRef = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext, nil) else { return nil }
 

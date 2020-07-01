@@ -8,24 +8,26 @@
 
 import Foundation
 
-/**
- Converts the image to black and white.
- */
-@objc(FSBlackAndWhiteTransform) public class BlackAndWhiteTransform: Transform {
-    /**
-     Initializes a `BlackAndWhiteTransform` object.
-     */
+/// Converts the image to black and white.
+@objc(FSBlackAndWhiteTransform)
+public class BlackAndWhiteTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `BlackAndWhiteTransform` object.
     @objc public init() {
         super.init(name: "blackwhite")
     }
+}
 
-    /**
-     Adds the `threshold` option.
+// MARK: - Public Functions
 
-     - Parameter value: Controls the balance between black and white (contrast) in
-     the returned image. Valid range: `1...100`
-     */
-    @objc @discardableResult public func threshold(_ value: Int) -> Self {
+public extension BlackAndWhiteTransform {
+    /// Adds the `threshold` option.
+    ///
+    /// - Parameter value: Controls the balance between black and white (contrast) in
+    /// the returned image. Valid range: `1...100`
+    @discardableResult
+    @objc func threshold(_ value: Int) -> Self {
         return appending(key: "threshold", value: value)
     }
 }

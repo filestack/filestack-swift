@@ -12,18 +12,40 @@ typealias TaskOption = (key: String, value: Any?)
 typealias Task = (name: String, options: [TaskOption]?)
 
 /// :nodoc:
-@objc(FSTransform) public class Transform: NSObject {
+@objc(FSTransform)
+public class Transform: NSObject {
+    // MARK: - Internal Properties
+
+    var task: Task { Task(name: name, options: options) }
+
+    // MARK: - Private Properties
+
     private var options = [TaskOption]()
     private let name: String
 
-    var task: Task {
-        return Task(name: name, options: options)
-    }
+    // MARK: - Lifecycle
 
     init(name: String) {
         self.name = name
     }
 }
+
+// MARK: - Internal Functions
+
+extension Transform {
+    @discardableResult
+    func appending(key: String, value: Any?) -> Self {
+        options.append((key: key, value: value))
+
+        return self
+    }
+
+    func removeAllOptions() {
+        options.removeAll()
+    }
+}
+
+// MARK: - Public Aliases
 
 public extension Transform {
     /// Shortcut for AnimateTransform.
@@ -190,16 +212,4 @@ public extension Transform {
 
     /// Shortcut for ZipTransform.
     typealias Zip = ZipTransform
-}
-
-extension Transform {
-    @discardableResult func appending(key: String, value: Any?) -> Self {
-        options.append((key: key, value: value))
-
-        return self
-    }
-
-    func removeAllOptions() {
-        options.removeAll()
-    }
 }

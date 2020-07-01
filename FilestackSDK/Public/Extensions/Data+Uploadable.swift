@@ -9,15 +9,7 @@
 import Foundation
 
 extension Data: Uploadable {
-    public var filename: String? {
-        return nil
-    }
-
-    public var size: UInt64? {
-        return UInt64(count)
-    }
-
-    public var mimeType: String? {
-        return nil
-    }
+    public var filename: String? { nil }
+    public var size: UInt64? { UInt64(count) }
+    public var mimeType: String? { nil }
 }

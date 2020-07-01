@@ -8,17 +8,16 @@
 
 import Foundation
 
-/**
- Sets the quality of your JPG or WEBP image without the danger of possibly generating a larger file.
- */
-@objc(FSQualityTransform) public class QualityTransform: Transform {
-    /**
-     Initializes a `QualityTransform` object.
+/// Sets the quality of your JPG or WEBP image without the danger of possibly generating a larger file.
+@objc(FSQualityTransform)
+public class QualityTransform: Transform {
+    // MARK: - Lifecycle
 
-     - Parameter value: This task will take a JPG or WEBP file and reduce the file size of the image by reducing
-     the quality. If the file is not a JPG, the original file will be returned. If after the conversion,
-     the resulting file is not smaller than the original, the original file will be returned. Valid range: `1...100`
-     */
+    /// Initializes a `QualityTransform` object.
+    ///
+    /// - Parameter value: This task will take a JPG or WEBP file and reduce the file size of the image by reducing
+    /// the quality. If the file is not a JPG, the original file will be returned. If after the conversion,
+    /// the resulting file is not smaller than the original, the original file will be returned. Valid range: `1...100`
     @objc public init(value: Int) {
         super.init(name: "quality")
 

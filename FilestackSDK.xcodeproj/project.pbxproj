@@ -24,6 +24,12 @@
 		452D715B1F17A49D0037E1BB /* TransformPageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715A1F17A49D0037E1BB /* TransformPageFormat.swift */; };
 		452D715D1F17A4DB0037E1BB /* TransformPageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715C1F17A4DB0037E1BB /* TransformPageOrientation.swift */; };
 		452D715F1F17A51B0037E1BB /* TransformColorSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D715E1F17A51B0037E1BB /* TransformColorSpace.swift */; };
+		453DA1BC24ABBFAC004138F4 /* MultipartResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DA1BB24ABBFAC004138F4 /* MultipartResponse.swift */; };
+		453DA1BE24ABC0BB004138F4 /* MultipartformData+append.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DA1BD24ABC0BB004138F4 /* MultipartformData+append.swift */; };
+		453DA1C024ABC1BB004138F4 /* Monitorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DA1BF24ABC1BB004138F4 /* Monitorizable.swift */; };
+		453DA1C224ABC1CF004138F4 /* Startable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DA1C124ABC1CF004138F4 /* Startable.swift */; };
+		453DA1C424ABC1E1004138F4 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DA1C324ABC1E1004138F4 /* Cancellable.swift */; };
+		453DA1C624ABC1F0004138F4 /* DeferredAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DA1C524ABC1F0004138F4 /* DeferredAdd.swift */; };
 		4548CA491F1CBE58009FDBEF /* NetworkJSONResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */; };
 		454B22F322B8DD0C00A7A93E /* PDFInfoTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454B22F222B8DD0C00A7A93E /* PDFInfoTransform.swift */; };
 		454B22F522B8E3F400A7A93E /* PDFConvertTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454B22F422B8E3F400A7A93E /* PDFConvertTransform.swift */; };
@@ -198,6 +204,12 @@
 		452D715A1F17A49D0037E1BB /* TransformPageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPageFormat.swift; sourceTree = "<group>"; };
 		452D715C1F17A4DB0037E1BB /* TransformPageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformPageOrientation.swift; sourceTree = "<group>"; };
 		452D715E1F17A51B0037E1BB /* TransformColorSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformColorSpace.swift; sourceTree = "<group>"; };
+		453DA1BB24ABBFAC004138F4 /* MultipartResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartResponse.swift; sourceTree = "<group>"; };
+		453DA1BD24ABC0BB004138F4 /* MultipartformData+append.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultipartformData+append.swift"; sourceTree = "<group>"; };
+		453DA1BF24ABC1BB004138F4 /* Monitorizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitorizable.swift; sourceTree = "<group>"; };
+		453DA1C124ABC1CF004138F4 /* Startable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Startable.swift; sourceTree = "<group>"; };
+		453DA1C324ABC1E1004138F4 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		453DA1C524ABC1F0004138F4 /* DeferredAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeferredAdd.swift; sourceTree = "<group>"; };
 		4548CA481F1CBE58009FDBEF /* NetworkJSONResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONResponse.swift; sourceTree = "<group>"; };
 		454B22F222B8DD0C00A7A93E /* PDFInfoTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFInfoTransform.swift; sourceTree = "<group>"; };
 		454B22F422B8E3F400A7A93E /* PDFConvertTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFConvertTransform.swift; sourceTree = "<group>"; };
@@ -442,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				45050F4B1F2B49C100B4E3C3 /* Data+base64MD5Digest.swift */,
+				453DA1BD24ABC0BB004138F4 /* MultipartformData+append.swift */,
 				45B63B262328078A0040BFBB /* NetworkingService+DefaultImplementations.swift */,
 				454CC1CA1F0D1160005821AC /* SessionManager+filestackDefault.swift */,
 				452C639523D0703A0057656C /* StorageOptions+MultipartFormData.swift */,
@@ -491,6 +504,7 @@
 			children = (
 				4589A4871F0A4B1900C39405 /* Constants.swift */,
 				459B7403232F7BD5007CBC50 /* MirroredProgress.swift */,
+				453DA1BB24ABBFAC004138F4 /* MultipartResponse.swift */,
 				45B66480232838C200DF5706 /* Tools.swift */,
 				459F230424ABB373000D6363 /* UploadDescriptor.swift */,
 				454CC1C91F0D1151005821AC /* Extensions */,
@@ -528,6 +542,10 @@
 		45B63B0223279E5D0040BFBB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				453DA1C324ABC1E1004138F4 /* Cancellable.swift */,
+				453DA1C524ABC1F0004138F4 /* DeferredAdd.swift */,
+				453DA1BF24ABC1BB004138F4 /* Monitorizable.swift */,
+				453DA1C124ABC1CF004138F4 /* Startable.swift */,
 				45B63B0323279E690040BFBB /* Uploadable.swift */,
 				459B7405232F894B007CBC50 /* Uploader.swift */,
 			);
@@ -829,8 +847,10 @@
 				4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */,
 				45F9B8C61F0BA02F00E04380 /* NetworkDataResponse.swift in Sources */,
 				45C3639223280DC40064EC93 /* MultifileUpload+ObjC.swift in Sources */,
+				453DA1C024ABC1BB004138F4 /* Monitorizable.swift in Sources */,
 				457B179E23281EC50033BDB1 /* UploadStatus.swift in Sources */,
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
+				453DA1BC24ABBFAC004138F4 /* MultipartResponse.swift in Sources */,
 				BC8832D720D181A700B88EAF /* MonochromeTransform.swift in Sources */,
 				BC8832E120D181A700B88EAF /* ResizeTransform.swift in Sources */,
 				45D803A72302B54500762A87 /* CopyrightTransform.swift in Sources */,
@@ -845,6 +865,7 @@
 				BC8832D020D181A700B88EAF /* BorderTransform.swift in Sources */,
 				BC8832F220D266F100B88EAF /* PartialPixelateTransform.swift in Sources */,
 				4589A48A1F0A4DA600C39405 /* FileLink.swift in Sources */,
+				453DA1C624ABC1F0004138F4 /* DeferredAdd.swift in Sources */,
 				45C8F2061F18B279001A6558 /* TransformAspectMode.swift in Sources */,
 				4502F7371F1F540F000875D6 /* UploadService.swift in Sources */,
 				BC88330020D3DCB600B88EAF /* TransformNoiseMode.swift in Sources */,
@@ -856,6 +877,7 @@
 				4589A45F1F0A3B5500C39405 /* StorageLocation.swift in Sources */,
 				45C9E93B1F137EB200260F2A /* Transformable.swift in Sources */,
 				BC8832EC20D239A900B88EAF /* OilPaintTransform.swift in Sources */,
+				453DA1C424ABC1E1004138F4 /* Cancellable.swift in Sources */,
 				457D5BF11F1614A800FBD5B1 /* TransformAlign.swift in Sources */,
 				454B22F522B8E3F400A7A93E /* PDFConvertTransform.swift in Sources */,
 				BC8832F020D264CF00B88EAF /* ModulateTransform.swift in Sources */,
@@ -896,6 +918,7 @@
 				BC8832DB20D181A700B88EAF /* DetectFacesTransform.swift in Sources */,
 				45A07B3122B91A52003128B0 /* DocumentDetectionTransform.swift in Sources */,
 				BC8832D620D181A700B88EAF /* FlipTransform.swift in Sources */,
+				453DA1BE24ABC0BB004138F4 /* MultipartformData+append.swift in Sources */,
 				454B22F322B8DD0C00A7A93E /* PDFInfoTransform.swift in Sources */,
 				BC8832E020D181A700B88EAF /* VignetteTransform.swift in Sources */,
 				45965C6B1F20C47B005689BA /* MultipartUploadSubmitPartOperation.swift in Sources */,
@@ -946,6 +969,7 @@
 				BC8832D920D181A700B88EAF /* PixelateFacesTransform.swift in Sources */,
 				459B7406232F894B007CBC50 /* Uploader.swift in Sources */,
 				45B831221F03F1C90053742A /* Client.swift in Sources */,
+				453DA1C224ABC1CF004138F4 /* Startable.swift in Sources */,
 				45C3EA0F1F262ED30003598D /* MetadataOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

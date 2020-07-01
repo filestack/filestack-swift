@@ -6,9 +6,7 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-/**
-    Represents a metadata option.
- */
+/// Represents a metadata option.
 typedef NS_OPTIONS(NSUInteger, FSMetadataOptions) {
 
     /// Size

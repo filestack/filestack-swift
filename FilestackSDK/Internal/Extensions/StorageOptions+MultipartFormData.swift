@@ -10,16 +10,16 @@ import Alamofire
 import Foundation
 
 extension StorageOptions {
-    internal func append(to form: MultipartFormData) {
-        form.append(location.description, withName: "store_location")
-        form.append(region, withName: "store_region")
-        form.append(container, withName: "store_container")
-        form.append(path, withName: "store_path")
-        form.append(access?.description, withName: "store_access")
+    func append(to form: MultipartFormData) {
+        form.append(location.description, named: "store_location")
+        form.append(region, named: "store_region")
+        form.append(container, named: "store_container")
+        form.append(path, named: "store_path")
+        form.append(access?.description, named: "store_access")
 
         if let workflows = workflows {
             let joinedWorkflows = "[\((workflows.map { "\"\($0)\"" }).joined(separator: ","))]"
-            form.append(joinedWorkflows, withName: "workflows")
+            form.append(joinedWorkflows, named: "workflows")
         }
     }
 }

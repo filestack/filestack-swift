@@ -8,63 +8,48 @@
 
 import Foundation
 
-/**
- Represents an image transform noise reduction type.
- */
-@objc(FSTransformFiletype) public enum TransformFiletype: UInt, CustomStringConvertible {
+/// Represents an image transform noise reduction type.
+@objc(FSTransformFiletype)
+public enum TransformFiletype: UInt, CustomStringConvertible {
     /// doc
     case doc
-
     /// docx
     case docx
-
-    /// HTML
+    /// html
     case html
-
-    /// JPG
+    /// jpg
     case jpg
-
     /// opd
     case odp
-
     /// ods
     case ods
-
     /// odt
     case odt
-
     /// pjpg
     case pjpg
-
     /// pdf
     case pdf
-
     /// png
     case png
-
     /// ppt
     case ppt
-
     /// pptx
     case pptx
-
     /// svg
     case svg
-
     /// txt
     case txt
-
     /// webp
     case webp
-
     /// xls
     case xls
-
     /// xlsx
     case xlsx
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
+extension TransformFiletype {
     /// Returns a `String` representation of self.
     public var description: String {
         switch self {

@@ -8,56 +8,35 @@
 
 import Foundation
 
-/**
- Represents an image transform alignment type.
- */
-@objc(FSTransformAlign) public enum TransformAlign: UInt, CustomStringConvertible {
+/// Represents an image transform alignment type.
+@objc(FSTransformAlign)
+public enum TransformAlign: UInt, CustomStringConvertible {
     /// Center
     case center
-
     /// Top
     case top
-
     /// Bottom
     case bottom
-
     /// Left
     case left
-
     /// Right
     case right
-
     /// Faces
     case faces
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
+extension TransformAlign {
     /// Returns a `String` representation of self.
     public var description: String {
         switch self {
-        case .center:
-
-            return "center"
-
-        case .top:
-
-            return "top"
-
-        case .bottom:
-
-            return "bottom"
-
-        case .left:
-
-            return "left"
-
-        case .right:
-
-            return "right"
-
-        case .faces:
-
-            return "faces"
+        case .center: return "center"
+        case .top: return "top"
+        case .bottom: return "bottom"
+        case .left: return "left"
+        case .right: return "right"
+        case .faces: return "faces"
         }
     }
 }

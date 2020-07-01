@@ -8,23 +8,25 @@
 
 import Foundation
 
-/**
- Pixelates the image.
- */
-@objc(FSPixelateTransform) public class PixelateTransform: Transform {
-    /**
-     Initializes a `PixelateTransform` object.
-     */
+/// Pixelates the image.
+@objc(FSPixelateTransform)
+public class PixelateTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `PixelateTransform` object.
     @objc public init() {
         super.init(name: "pixelate")
     }
+}
 
-    /**
-     Adds `amount` option.
+// MARK: - Public Functions
 
-     - Parameter value: Valid range: `2...100`
-     */
-    @objc @discardableResult public func amount(_ value: Int = 2) -> Self {
+public extension PixelateTransform {
+    /// Adds `amount` option.
+    ///
+    /// - Parameter value: Valid range: `2...100`
+    @discardableResult
+    @objc func amount(_ value: Int = 2) -> Self {
         return appending(key: "amount", value: value)
     }
 }

@@ -8,28 +8,23 @@
 
 import Foundation
 
-/**
- Represents the storage access to a file.
- */
-@objc(FSStorageAccess) public enum StorageAccess: UInt, CustomStringConvertible {
-    /// Private
+/// Represents the storage access to a file.
+@objc(FSStorageAccess)
+public enum StorageAccess: UInt, CustomStringConvertible {
+    /// Private storage access.
     case `private`
-
-    /// Public
+    /// Public storage access.
     case `public`
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
+extension StorageAccess {
     /// Returns a `String` representation of self.
     public var description: String {
         switch self {
-        case .private:
-
-            return "private"
-
-        case .public:
-
-            return "public"
+        case .private: return "private"
+        case .public: return "public"
         }
     }
 }

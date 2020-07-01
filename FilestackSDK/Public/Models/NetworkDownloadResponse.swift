@@ -9,11 +9,10 @@
 import Alamofire
 import Foundation
 
-/**
- This object represents a network download response.
- */
-@objc(FSNetworkDownloadResponse) public class NetworkDownloadResponse: NSObject {
-    // MARK: - Properties
+/// This object represents a network download response.
+@objc(FSNetworkDownloadResponse)
+public class NetworkDownloadResponse: NSObject {
+    // MARK: - Public Properties
 
     /// The URL request sent to the server.
     @objc public let request: URLRequest?
@@ -30,9 +29,9 @@ import Foundation
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
     @objc public var error: Error?
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
-    internal init(with downloadResponse: DownloadResponse<Data>) {
+    init(with downloadResponse: DownloadResponse<Data>) {
         self.request = downloadResponse.request
         self.response = downloadResponse.response
         self.temporaryURL = downloadResponse.temporaryURL
@@ -43,7 +42,7 @@ import Foundation
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension NetworkDownloadResponse {
     /// :nodoc:

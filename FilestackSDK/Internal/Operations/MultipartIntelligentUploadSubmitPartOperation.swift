@@ -9,15 +9,13 @@
 import Alamofire
 import Foundation
 
-internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
-    let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
-    let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
-    let minimumPartChunkSize = 32768
+class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
+    // MARK: - Internal Properties
 
-    let offset: UInt64
     let part: Int
-    let partSize: Int
-    let maxRetries: Int = 5
+    var responseEtag: String?
+    var response: DefaultDataResponse?
+    var didFail: Bool = false
 
     private(set) lazy var progress: Progress = {
         let progress = MirroredProgress()
@@ -27,14 +25,20 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
         return progress
     }()
 
-    var response: DefaultDataResponse?
-    var responseEtag: String?
-    var didFail: Bool = false
+    // MARK: - Private Properties
+
+    private let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
+    private let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
+    private let minimumPartChunkSize = 32768
+
+    private let offset: UInt64
+    private let partSize: Int
+    private let maxRetries: Int = 5
 
     private lazy var retriesLeft: Int = maxRetries
     private var chunkSize: Int = 0
-
     private var beforeCommitCheckPointOperation: BlockOperation?
+
     private let chunkUploadOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.chunk-upload-operation-queue",
                                                                     qos: .utility,
                                                                     attributes: .concurrent)
@@ -50,6 +54,8 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
 
     private let descriptor: UploadDescriptor
 
+    // MARK: - Lifecycle
+
     required init(offset: UInt64, part: Int, partSize: Int, descriptor: UploadDescriptor) {
         self.offset = offset
         self.part = part
@@ -60,7 +66,11 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
 
         state = .ready
     }
+}
 
+// MARK: - Operation Overrides
+
+extension MultipartIntelligentUploadSubmitPartOperation {
     override func main() {
         upload()
     }
@@ -71,6 +81,8 @@ internal class MultipartIntelligentUploadSubmitPartOperation: BaseOperation, Mul
         chunkUploadOperationQueue.cancelAllOperations()
     }
 }
+
+// MARK: - Private Functions
 
 private extension MultipartIntelligentUploadSubmitPartOperation {
     func upload() {
@@ -104,7 +116,7 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
         }
     }
 
-    private func doCommit() {
+    func doCommit() {
         // Try to commit operation with retries.
         while !didFail, retriesLeft > 0 {
             let commitOperation = MultipartUploadCommitOperation(descriptor: descriptor, part: part)
@@ -135,7 +147,7 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
         beforeCommitCheckPointOperation = nil
     }
 
-    private func addChunkOperation(offset: UInt64, chunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
+    func addChunkOperation(offset: UInt64, chunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
         descriptor.reader.seek(position: offset)
 
         let dataChunk = descriptor.reader.read(amount: chunkSize)

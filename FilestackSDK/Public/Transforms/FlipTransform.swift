@@ -8,13 +8,12 @@
 
 import Foundation
 
-/**
- Flips/mirrors the image vertically.
- */
-@objc(FSFlipTransform) public class FlipTransform: Transform {
-    /**
-     Initializes a `FlipTransform` object.
-     */
+/// Flips/mirrors the image vertically.
+@objc(FSFlipTransform)
+public class FlipTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `FlipTransform` object.
     @objc public init() {
         super.init(name: "flip")
     }

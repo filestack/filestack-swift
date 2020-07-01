@@ -8,23 +8,25 @@
 
 import Foundation
 
-/**
- Applies a circle border effect to the image.
- */
-@objc(FSCircleTransform) public class CircleTransform: Transform {
-    /**
-     Initializes a `CircleTransform` object.
-     */
+/// Applies a circle border effect to the image.
+@objc(FSCircleTransform)
+public class CircleTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `CircleTransform` object.
     @objc public init() {
         super.init(name: "circle")
     }
+}
 
-    /**
-     Adds the `background` option.
+// MARK: - Public Functions
 
-     - Parameter value: Sets the background color to display behind the image.
-     */
-    @objc @discardableResult public func background(_ value: UIColor) -> Self {
+public extension CircleTransform {
+    /// Adds the `background` option.
+    ///
+    /// - Parameter value: Sets the background color to display behind the image.
+    @discardableResult
+    @objc func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }

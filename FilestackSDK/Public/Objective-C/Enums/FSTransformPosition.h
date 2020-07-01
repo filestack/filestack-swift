@@ -6,9 +6,7 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-/**
-    Represents an image transform position type.
- */
+/// Represents an image transform position type.
 typedef NS_OPTIONS(NSUInteger, FSTransformPosition) {
 
     /// Top

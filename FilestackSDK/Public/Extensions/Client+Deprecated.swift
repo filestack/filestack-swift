@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Deprecated
+
 extension Client {
     /// :nodoc:
     @discardableResult

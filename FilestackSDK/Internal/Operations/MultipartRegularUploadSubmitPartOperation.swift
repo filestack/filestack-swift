@@ -9,13 +9,13 @@
 import Alamofire
 import Foundation
 
-internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
-    typealias MultiPartFormDataClosure = (MultipartFormData) -> Void
+class MultipartRegularUploadSubmitPartOperation: BaseOperation, MultipartUploadSubmitPartProtocol {
+    // MARK: - Public Properties
 
-    let offset: UInt64
     let part: Int
-    let partSize: Int
-    let descriptor: UploadDescriptor
+    var response: DefaultDataResponse?
+    var responseEtag: String?
+    var didFail: Bool = false
 
     private(set) lazy var progress: Progress = {
         let progress = MirroredProgress()
@@ -25,11 +25,14 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
         return progress
     }()
 
-    var response: DefaultDataResponse?
-    var responseEtag: String?
-    var didFail: Bool = false
+    // MARK: - Private Properties
 
+    private let offset: UInt64
+    private let partSize: Int
+    private let descriptor: UploadDescriptor
     private var beforeCommitCheckPointOperation: BlockOperation?
+
+    // MARK: - Lifecycle
 
     required init(offset: UInt64,
                   part: Int,
@@ -44,7 +47,11 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
 
         state = .ready
     }
+}
 
+// MARK: - Operation Overrides
+
+extension MultipartRegularUploadSubmitPartOperation {
     override func main() {
         upload()
     }
@@ -55,7 +62,11 @@ internal class MultipartRegularUploadSubmitPartOperation: BaseOperation, Multipa
     }
 }
 
+// MARK: - Private Functions
+
 private extension MultipartRegularUploadSubmitPartOperation {
+    typealias MultiPartFormDataClosure = (MultipartFormData) -> Void
+
     func upload() {
         descriptor.reader.seek(position: offset)
 
@@ -69,13 +80,13 @@ private extension MultipartRegularUploadSubmitPartOperation {
 
     func multipartFormData(dataChunk: Data) -> MultiPartFormDataClosure {
         return { form in
-            form.append(self.descriptor.apiKey, withName: "apikey")
-            form.append(self.descriptor.uri, withName: "uri")
-            form.append(self.descriptor.region, withName: "region")
-            form.append(self.descriptor.uploadID, withName: "upload_id")
-            form.append(String(dataChunk.count), withName: "size")
-            form.append(String(self.part), withName: "part")
-            form.append(dataChunk.base64MD5Digest(), withName: "md5")
+            form.append(self.descriptor.apiKey, named: "apikey")
+            form.append(self.descriptor.uri, named: "uri")
+            form.append(self.descriptor.region, named: "region")
+            form.append(self.descriptor.uploadID, named: "upload_id")
+            form.append(String(dataChunk.count), named: "size")
+            form.append(String(self.part), named: "part")
+            form.append(dataChunk.base64MD5Digest(), named: "md5")
 
             self.descriptor.options.storeOptions.append(to: form)
         }

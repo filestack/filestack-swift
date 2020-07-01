@@ -8,13 +8,12 @@
 
 import Foundation
 
-/**
- Returns a negative image by portraying the lightest area as the darkest and the darkest areas as the lightest.
- */
-@objc(FSNegativeTransform) public class NegativeTransform: Transform {
-    /**
-     Initializes a `NegativeTransform` object.
-     */
+/// Returns a negative image by portraying the lightest area as the darkest and the darkest areas as the lightest.
+@objc(FSNegativeTransform)
+public class NegativeTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `NegativeTransform` object.
     @objc public init() {
         super.init(name: "negative")
     }

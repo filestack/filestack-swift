@@ -9,39 +9,31 @@
 import Foundation
 
 /// Represents the current status of an upload.
-@objc(FSUploadStatus) public enum UploadStatus: UInt {
+@objc(FSUploadStatus)
+public enum UploadStatus: UInt {
     /// Upload has not started.
     case notStarted
-
     /// Upload is currently in progress.
     case inProgress
-
     /// Upload has completed.
     case completed
-
     /// Upload was cancelled.
     case cancelled
-
     /// Upload failed.
     case failed
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension UploadStatus: CustomStringConvertible {
     /// :nodoc:
     public var description: String {
         switch self {
-        case .notStarted:
-            return "notStarted"
-        case .inProgress:
-            return "inProgress"
-        case .completed:
-            return "completed"
-        case .cancelled:
-            return "cancelled"
-        case .failed:
-            return "failed"
+        case .notStarted: return "notStarted"
+        case .inProgress: return "inProgress"
+        case .completed: return "completed"
+        case .cancelled: return "cancelled"
+        case .failed: return "failed"
         }
     }
 }

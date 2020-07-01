@@ -9,24 +9,22 @@
 
 import Foundation
 
-/**
- Represents an image transform noise reduction type.
- */
-@objc(FSTransformNoiseMode) public enum TransformNoiseMode: UInt, CustomStringConvertible {
+/// Represents an image transform noise reduction type.
+@objc(FSTransformNoiseMode)
+public enum TransformNoiseMode: UInt, CustomStringConvertible {
     /// None
     case none
-
     /// Low
     case low
-
     /// Medium
     case medium
-
     /// High
     case high
+}
 
-    // MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
+extension TransformNoiseMode {
     /// Returns a `String` representation of self.
     public var description: String {
         switch self {

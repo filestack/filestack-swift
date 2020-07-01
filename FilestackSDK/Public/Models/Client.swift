@@ -8,11 +8,9 @@
 
 import Foundation
 
-/**
- Represents a client that allows communicating with the
- [Filestack REST API](https://www.filestack.com/docs/rest-api).
- */
-@objc(FSClient) public class Client: NSObject {
+/// Represents a client that allows communicating with the [Filestack REST API](https://www.filestack.com/docs/rest-api).
+@objc(FSClient)
+public class Client: NSObject {
     // MARK: - Properties
 
     /// An API key obtained from the [Developer Portal](http://dev.filestack.com).
@@ -21,16 +19,14 @@ import Foundation
     /// A `Security` object. `nil` by default.
     @objc public let security: Security?
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
-    /**
-     Default initializer.
-
-     - SeeAlso: `Security`
-
-     - Parameter apiKey: An API key obtained from the Developer Portal.
-     - Parameter security: A `Security` object. `nil` by default.
-     */
+    /// Default initializer.
+    ///
+    /// - SeeAlso: `Security`
+    ///
+    /// - Parameter apiKey: An API key obtained from the Developer Portal.
+    /// - Parameter security: A `Security` object. `nil` by default.
     @objc public init(apiKey: String, security: Security? = nil) {
         self.apiKey = apiKey
         self.security = security
@@ -46,59 +42,51 @@ import Foundation
 
         super.init()
     }
+}
 
-    // MARK: - Public Functions
+// MARK: - Public Functions
 
-    /**
-     A `FileLink` object for a given Filestack handle.
-
-     - Parameter handle: A Filestack handle.
-     */
-    @objc public func fileLink(for handle: String) -> FileLink {
+public extension Client {
+    /// A `FileLink` object for a given Filestack handle.
+    ///
+    /// - Parameter handle: A Filestack handle.
+    @objc func fileLink(for handle: String) -> FileLink {
         return FileLink(handle: handle, apiKey: apiKey, security: security)
     }
 
-    /**
-     A `Transformable` object for a Filestack handle.
-
-     - SeeAlso: `Transformable`
-
-     - Parameter handle: A Filestack handle.
-     */
-    @objc public func transformable(handle: String) -> Transformable {
+    /// A `Transformable` object for a Filestack handle.
+    ///
+    /// - SeeAlso: `Transformable`
+    ///
+    /// - Parameter handle: A Filestack handle.
+    @objc func transformable(handle: String) -> Transformable {
         return Transformable(handles: [handle], apiKey: apiKey, security: security)
     }
 
-    /**
-     A `Transformable` object for an array of Filestack handles.
-
-     - SeeAlso: `Transformable`
-
-     - Parameter handles: An array of Filestack handles.
-     */
-    @objc public func transformable(handles: [String]) -> Transformable {
+    /// A `Transformable` object for an array of Filestack handles.
+    ///
+    /// - SeeAlso: `Transformable`
+    ///
+    /// - Parameter handles: An array of Filestack handles.
+    @objc func transformable(handles: [String]) -> Transformable {
         return Transformable(handles: handles, apiKey: apiKey, security: security)
     }
 
-    /**
-     A `Transformable` object for an external URL.
-
-     - SeeAlso: `Transformable`
-
-     - Parameter externalURL: An external URL.
-     */
-    @objc public func transformable(externalURL: URL) -> Transformable {
+    /// A `Transformable` object for an external URL.
+    ///
+    /// - SeeAlso: `Transformable`
+    ///
+    /// - Parameter externalURL: An external URL.
+    @objc func transformable(externalURL: URL) -> Transformable {
         return Transformable(externalURLs: [externalURL], apiKey: apiKey, security: security)
     }
 
-    /**
-     A `Transformable` object for an array of external URLs.
-
-     - SeeAlso: `Transformable`
-
-     - Parameter externalURLs: An array of external URLs.
-     */
-    @objc public func transformable(externalURLs: [URL]) -> Transformable {
+    /// A `Transformable` object for an array of external URLs.
+    ///
+    /// - SeeAlso: `Transformable`
+    ///
+    /// - Parameter externalURLs: An array of external URLs.
+    @objc func transformable(externalURLs: [URL]) -> Transformable {
         return Transformable(externalURLs: externalURLs, apiKey: apiKey, security: security)
     }
 
@@ -120,11 +108,11 @@ import Foundation
     ///
     /// - Returns: An `Uploader` that allows starting, cancelling and monitoring the upload.
     @discardableResult
-    public func upload(using uploadable: Uploadable,
-                       options: UploadOptions = .defaults,
-                       queue: DispatchQueue = .main,
-                       uploadProgress: ((Progress) -> Void)? = nil,
-                       completionHandler: @escaping (NetworkJSONResponse) -> Void) -> Uploader {
+    func upload(using uploadable: Uploadable,
+                options: UploadOptions = .defaults,
+                queue: DispatchQueue = .main,
+                uploadProgress: ((Progress) -> Void)? = nil,
+                completionHandler: @escaping (NetworkJSONResponse) -> Void) -> Uploader {
         let mpu = MultipartUpload(using: uploadable, options: options, queue: queue, apiKey: apiKey, security: security)
 
         mpu.uploadProgress = uploadProgress
@@ -157,11 +145,11 @@ import Foundation
     /// - Returns: An `Uploader & DeferredAdd` that allows starting, cancelling and monitoring the upload, plus adding
     /// `Uploadables` at a later time.
     @discardableResult
-    public func upload(using uploadables: [Uploadable]? = nil,
-                       options: UploadOptions = .defaults,
-                       queue: DispatchQueue = .main,
-                       uploadProgress: ((Progress) -> Void)? = nil,
-                       completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader & DeferredAdd {
+    func upload(using uploadables: [Uploadable]? = nil,
+                options: UploadOptions = .defaults,
+                queue: DispatchQueue = .main,
+                uploadProgress: ((Progress) -> Void)? = nil,
+                completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader & DeferredAdd {
         let mpu = MultifileUpload(using: uploadables, options: options, queue: queue, apiKey: apiKey, security: security)
 
         mpu.progressHandler = uploadProgress
@@ -175,7 +163,7 @@ import Foundation
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension Client {
     /// :nodoc:

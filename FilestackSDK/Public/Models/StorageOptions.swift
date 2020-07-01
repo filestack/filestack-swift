@@ -8,10 +8,9 @@
 
 import Foundation
 
-/**
- Represents a set of storage options.
- */
-@objc(FSStorageOptions) public class StorageOptions: NSObject {
+/// Represents a set of storage options.
+@objc(FSStorageOptions)
+public class StorageOptions: NSObject {
     // MARK: - Public Properties
 
     /// An `StorageLocation` value. Valid options are `.s3`, `.dropbox`, `.rackspace`, `.azure`, `.gcs`.
@@ -40,7 +39,7 @@ import Foundation
     /// An array of workflow IDs to trigger for each upload.
     @objc public var workflows: [String]?
 
-    // MARK: - Lifecycle Functions
+    // MARK: - Lifecycle
 
     /// Convenience initializer (for Objective-C).
     @objc public convenience init(location: StorageLocation) {
@@ -72,14 +71,18 @@ import Foundation
 
         super.init()
     }
+}
 
+// MARK: - Public Functions
+
+public extension StorageOptions {
     /// A default set of storage options.
-    @objc public static var defaults: StorageOptions = {
+    @objc static var defaults: StorageOptions = {
         StorageOptions(location: .s3, access: .private)
     }()
 }
 
-// MARK: - CustomStringConvertible
+// MARK: - CustomStringConvertible Conformance
 
 extension StorageOptions {
     /// :nodoc:

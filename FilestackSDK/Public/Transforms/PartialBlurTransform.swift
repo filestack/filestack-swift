@@ -8,13 +8,12 @@
 
 import Foundation
 
-/**
- Changes image brightness, saturation and hue.
- */
-@objc(FSPartialBlurTransform) public class PartialBlurTransform: Transform {
-    /**
-     Initializes a `PartialBlurTransform` object.
-     */
+/// Changes image brightness, saturation and hue.
+@objc(FSPartialBlurTransform)
+public class PartialBlurTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `PartialBlurTransform` object.
     @objc public init(objects: [CGRect]) {
         super.init(name: "partial_blur")
 
@@ -24,31 +23,32 @@ import Foundation
 
         appending(key: "objects", value: values)
     }
+}
 
-    /**
-     Adds `amount` option.
+// MARK: - Public Functions
 
-     - Parameter value: Valid range: `2...100`
-     */
-    @objc @discardableResult func amount(_ value: Int) -> Self {
+public extension PartialBlurTransform {
+    /// Adds `amount` option.
+    ///
+    /// - Parameter value: Valid range: `2...100`
+    @discardableResult
+    @objc func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 
-    /**
-     Adds the `blur` option.
-
-     - Parameter value: The amount to blur the pixelated faces. Valid range: `0...20`
-     */
-    @objc @discardableResult func blur(_ value: Float) -> Self {
+    /// Adds the `blur` option.
+    ///
+    /// - Parameter value: The amount to blur the pixelated faces. Valid range: `0...20`
+    @discardableResult
+    @objc func blur(_ value: Float) -> Self {
         return appending(key: "blur", value: value)
     }
 
-    /**
-     Adds the `type` option.
-
-     - Parameter value: An `TransformShapeType` value.
-     */
-    @objc @discardableResult func type(_ value: TransformShapeType) -> Self {
+    /// Adds the `type` option.
+    ///
+    /// - Parameter value: An `TransformShapeType` value.
+    @discardableResult
+    @objc func type(_ value: TransformShapeType) -> Self {
         return appending(key: "type", value: value)
     }
 }

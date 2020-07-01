@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension Client {
-    // MARK: - Objective-C Compatibility
+// MARK: - Objective-C Compatibility
 
+extension Client {
     /// Uploads a single local URL directly to a given storage location.
     ///
     /// Currently the only storage location supported is Amazon S3.

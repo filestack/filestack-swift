@@ -8,41 +8,41 @@
 
 import Foundation
 
-/**
- Converts a PDF to a specific orientation, page format, and, optionally, extracts specific pages.
- */
-@objc(FSPDFConvertTransform) public class PDFConvertTransform: Transform {
-    /**
-     Initializes a `PDFConvertTransform` object.
-     */
+/// Converts a PDF to a specific orientation, page format, and, optionally, extracts specific pages.
+@objc(FSPDFConvertTransform)
+public class PDFConvertTransform: Transform {
+    // MARK: - Lifecycle
+
+    /// Initializes a `PDFConvertTransform` object.
     @objc public init() {
         super.init(name: "pdfconvert")
     }
+}
 
-    /**
-     Adds the `pageOrientation` option.
+// MARK: - Public Functions
 
-     - Parameter value: A `TransformPageOrientation` value.
-     */
-    @objc @discardableResult public func pageOrientation(_ value: TransformPageOrientation) -> Self {
+public extension PDFConvertTransform {
+    /// Adds the `pageOrientation` option.
+    ///
+    /// - Parameter value: A `TransformPageOrientation` value.
+    @discardableResult
+    @objc func pageOrientation(_ value: TransformPageOrientation) -> Self {
         return appending(key: "pageorientation", value: value)
     }
 
-    /**
-     Adds the `pageFormat` option.
-
-     - Parameter value: A `TransformPageFormat` value.
-     */
-    @objc @discardableResult public func pageFormat(_ value: TransformPageFormat) -> Self {
+    /// Adds the `pageFormat` option.
+    ///
+    /// - Parameter value: A `TransformPageFormat` value.
+    @discardableResult
+    @objc func pageFormat(_ value: TransformPageFormat) -> Self {
         return appending(key: "pageformat", value: value)
     }
 
-    /**
-     Adds the `pages` option.
-
-     - Parameter value: An array of page numbers.
-     */
-    @objc @discardableResult func pages(_ value: [Int]) -> Self {
+    /// Adds the `pages` option.
+    ///
+    /// - Parameter value: An array of page numbers.
+    @discardableResult
+    @objc func pages(_ value: [Int]) -> Self {
         return appending(key: "pages", value: value)
     }
 }
