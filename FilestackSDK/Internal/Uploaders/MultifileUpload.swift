@@ -12,6 +12,7 @@ import Foundation
 class MultifileUpload: Uploader, DeferredAdd {
     // MARK: - Internal Properties
 
+    let uuid = UUID()
     let masterProgress = MirroredProgress()
     var progressHandler: ((Progress) -> Void)?
     var completionHandler: (([NetworkJSONResponse]) -> Void)?
@@ -21,8 +22,8 @@ class MultifileUpload: Uploader, DeferredAdd {
     private var pendingUploads = [MultipartUpload]()
     private var uploadResponses = [NetworkJSONResponse]()
 
-    private var shouldAbort: Bool = false
     private var currentOperation: MultipartUpload?
+    private var masterProgressFractionCompletedObserver: NSKeyValueObservation?
 
     private let queue: DispatchQueue
     private let apiKey: String
@@ -41,6 +42,12 @@ class MultifileUpload: Uploader, DeferredAdd {
         self.queue = queue
         self.apiKey = apiKey
         self.security = security
+
+        masterProgressFractionCompletedObserver = masterProgress.observe(\.fractionCompleted, options: [.new]) { _, _ in
+            queue.async {
+                self.progressHandler?(self.progress)
+            }
+        }
 
         if let uploadables = uploadables {
             uploadQueue.sync {
@@ -72,7 +79,6 @@ class MultifileUpload: Uploader, DeferredAdd {
             fallthrough
         case .inProgress:
             uploadQueue.sync {
-                shouldAbort = true
                 currentOperation?.cancel()
                 stopUpload()
             }
@@ -88,7 +94,6 @@ class MultifileUpload: Uploader, DeferredAdd {
         case .notStarted:
             uploadQueue.sync {
                 uploadNextFile()
-                updateProgress()
             }
 
             return true
@@ -124,6 +129,7 @@ private extension MultifileUpload {
         // discarding uploadables that can't report size (e.g., an unexisting URL.)
         let uploads: [MultipartUpload] = uploadables.compactMap { uploadable in
             guard uploadable.size != nil else { return nil }
+
             return MultipartUpload(using: uploadable, options: options, queue: queue, apiKey: apiKey, security: security)
         }
 
@@ -135,15 +141,19 @@ private extension MultifileUpload {
         // Set upload progress and completion handlers and add upload progress as a child of our main `progress` object
         // so we can track all uploads from our main `progress` object.
         for upload in uploads {
-            upload.uploadProgress = { _ in self.updateProgress() }
-            upload.completionHandler = { self.finishedCurrentFile(with: $0) }
-
+            upload.completionHandler = { self.finished(upload: upload, response: $0) }
             masterProgress.addChild(upload.masterProgress, withPendingUnitCount: 1)
         }
     }
 
+    func finished(upload: MultipartUpload, response: NetworkJSONResponse) {
+        pendingUploads.removeAll { $0 == upload }
+        uploadResponses.append(response)
+        uploadNextFile()
+    }
+
     func uploadNextFile() {
-        guard !shouldAbort, let nextUpload = pendingUploads.first else {
+        guard [.inProgress, .notStarted].contains(currentStatus), let nextUpload = pendingUploads.first else {
             stopUpload()
             return
         }
@@ -155,7 +165,7 @@ private extension MultifileUpload {
     }
 
     func stopUpload() {
-        guard currentStatus != .completed, currentStatus != .cancelled else { return }
+        guard ![.completed, .cancelled].contains(currentStatus) else { return }
 
         if masterProgress.completedUnitCount == masterProgress.totalUnitCount {
             currentStatus = .completed
@@ -175,21 +185,6 @@ private extension MultifileUpload {
             self.progressHandler = nil
             self.currentOperation = nil
         }
-    }
-
-    func updateProgress() {
-        queue.async {
-            self.progressHandler?(self.progress)
-        }
-    }
-
-    func finishedCurrentFile(with response: NetworkJSONResponse) {
-        if !pendingUploads.isEmpty {
-            uploadResponses.append(response)
-        }
-
-        pendingUploads = Array(pendingUploads.dropFirst())
-        uploadNextFile()
     }
 }
 

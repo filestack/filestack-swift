@@ -12,7 +12,7 @@ import Foundation
 enum MultipartUploadError: Error {
     case invalidFile
     case aborted
-    case error(description: String)
+    case custom(description: String)
 }
 
 extension MultipartUploadError: LocalizedError {
@@ -21,8 +21,8 @@ extension MultipartUploadError: LocalizedError {
         case .invalidFile:
             return "The file provided is invalid or could not be found"
         case .aborted:
-            return "The upload operation was aborted"
-        case let .error(description):
+            return "The upload operation was aborted."
+        case let .custom(description):
             return description
         }
     }
@@ -42,6 +42,7 @@ class MultipartUpload: Uploader {
 
     // MARK: - Internal Properties
 
+    let uuid = UUID()
     let masterProgress = MirroredProgress()
     var uploadProgress: ((Progress) -> Void)?
     var completionHandler: ((NetworkJSONResponse) -> Void)?
@@ -49,7 +50,7 @@ class MultipartUpload: Uploader {
     // MARK: - Private Properties
 
     private var uploadable: Uploadable
-    private var shouldAbort: Bool
+    private var masterProgressFractionCompletedObserver: NSKeyValueObservation?
 
     private let queue: DispatchQueue
     private let apiKey: String
@@ -68,8 +69,6 @@ class MultipartUpload: Uploader {
     private let masterOperationQueue = OperationQueue()
     private let partOperationQueue = OperationQueue()
 
-    var masterProgressFractionCompletedObserver: NSKeyValueObservation?
-
     // MARK: - Lifecycle
 
     init(using uploadable: Uploadable,
@@ -82,7 +81,6 @@ class MultipartUpload: Uploader {
         self.apiKey = apiKey
         self.options = options
         self.security = security
-        self.shouldAbort = false
         self.masterProgress.totalUnitCount = Int64(uploadable.size ?? 0)
 
         masterProgressFractionCompletedObserver = masterProgress.observe(\.fractionCompleted, options: [.new]) { _, _ in
@@ -118,7 +116,6 @@ class MultipartUpload: Uploader {
         guard currentStatus != .cancelled else { return false }
 
         uploadQueue.sync {
-            shouldAbort = true
             partOperationQueue.cancelAllOperations()
             masterOperationQueue.cancelAllOperations()
             currentStatus = .cancelled
@@ -171,8 +168,10 @@ private extension MultipartUpload {
         var partsAndEtags: [Int: String] = [:]
         let chunkSize = (descriptor.useIntelligentIngestion ? ChunkSize.ii : ChunkSize.regular).rawValue
 
+        var failMessage: String?
+
         // Submit all parts
-        while !shouldAbort, bytesLeft > 0 {
+        while currentStatus == .inProgress, bytesLeft > 0 {
             part += 1
 
             let partSize = Int(min(UInt64(chunkSize), bytesLeft))
@@ -199,18 +198,18 @@ private extension MultipartUpload {
                 guard let partOperation = weakPartOperation else { return }
 
                 if partOperation.didFail {
-                    self.shouldAbort = true
+                    failMessage = "Part operation did fail."
                 }
 
                 if !descriptor.useIntelligentIngestion {
                     if let responseEtag = partOperation.responseEtag {
                         partsAndEtags[partOperation.part] = responseEtag
                     } else {
-                        self.shouldAbort = true
+                        failMessage = "Part operation was expected to provide response ETags."
                     }
                 }
 
-                if self.shouldAbort {
+                if self.currentStatus != .inProgress {
                     self.partOperationQueue.cancelAllOperations()
                 }
             }
@@ -225,8 +224,9 @@ private extension MultipartUpload {
         masterOperationQueue.addOperation {
             self.partOperationQueue.waitUntilAllOperationsAreFinished()
 
-            if self.shouldAbort {
-                self.fail(with: MultipartUploadError.aborted)
+            if let failMessage = failMessage {
+                let error = MultipartUploadError.custom(description: failMessage)
+                self.fail(with: error)
             } else {
                 self.addCompleteOperation(partsAndEtags: partsAndEtags,
                                           descriptor: descriptor,
@@ -254,24 +254,21 @@ private extension MultipartUpload {
                                                            security: security,
                                                            multipart: options.preferIntelligentIngestion)
 
-        if shouldAbort {
-            fail(with: MultipartUploadError.aborted)
-            return nil
-        } else {
-            masterOperationQueue.addOperation(startOperation)
-        }
+        guard currentStatus == .inProgress else { return nil }
 
+        masterOperationQueue.addOperation(startOperation)
         masterOperationQueue.waitUntilAllOperationsAreFinished()
 
         // Ensure that there's a response and JSON payload or fail.
         guard let json = startOperation.response?.json else {
-            fail(with: MultipartUploadError.aborted)
+            let error = MultipartUploadError.custom(description: "Unable to obtain JSON from /multipart/start response.")
+            fail(with: error)
             return nil
         }
 
         // Did the REST API return an error? Fail and send the error downstream.
         if let apiErrorDescription = json["error"] as? String {
-            fail(with: MultipartUploadError.error(description: apiErrorDescription))
+            fail(with: MultipartUploadError.custom(description: "API Error: \(apiErrorDescription)"))
             return nil
         }
 
@@ -279,7 +276,8 @@ private extension MultipartUpload {
         guard let uri = json["uri"] as? String,
               let region = json["region"] as? String,
               let uploadID = json["upload_id"] as? String else {
-            fail(with: MultipartUploadError.aborted)
+            let error = MultipartUploadError.custom(description: "JSON payload is missing required parameters.")
+            fail(with: error)
             return nil
         }
 
@@ -294,7 +292,8 @@ private extension MultipartUpload {
         }
 
         guard let reader = uploadable.reader else {
-            fail(with: MultipartUploadError.aborted)
+            let error = MultipartUploadError.custom(description: "Unable to instantiate uploadable data reader.")
+            fail(with: error)
             return nil
         }
 
@@ -339,7 +338,11 @@ private extension MultipartUpload {
                                                   retriesLeft: retriesLeft - 1)
                     }
                 } else {
-                    self.fail(with: MultipartUploadError.aborted)
+                    let error = MultipartUploadError.custom(
+                        description: "Unable to submit complete operation after \(self.maxRetries)."
+                    )
+
+                    self.fail(with: error)
                     return
                 }
             } else {

@@ -89,26 +89,23 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
         chunkSize = resumableMobileChunkSize
 
         beforeCommitCheckPointOperation = BlockOperation()
+        beforeCommitCheckPointOperation?.completionBlock = { self.doCommit() }
 
-        beforeCommitCheckPointOperation?.completionBlock = {
-            self.doCommit()
-        }
+        var chunkOffset: UInt64 = 0
 
-        var bytesRead: UInt64 = 0
-
-        while bytesRead < UInt64(partSize) {
+        while chunkOffset < UInt64(partSize) {
             if isCancelled || isFinished {
                 chunkUploadOperationQueue.cancelAllOperations()
                 break
             }
 
             // Guard against EOF
-            guard let chunkOperation = addChunkOperation(offset: offset + bytesRead, chunkSize: chunkSize) else { break }
+            guard let chunkOperation = addChunkOperation(chunkOffset: chunkOffset, chunkSize: chunkSize) else { break }
 
             let actualChunkSize = chunkOperation.progress.totalUnitCount
 
             progress.addChild(chunkOperation.progress, withPendingUnitCount: Int64(actualChunkSize))
-            bytesRead += UInt64(actualChunkSize)
+            chunkOffset += UInt64(actualChunkSize)
         }
 
         if let beforeCommitCheckPointOperation = beforeCommitCheckPointOperation {
@@ -147,15 +144,15 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
         beforeCommitCheckPointOperation = nil
     }
 
-    func addChunkOperation(offset: UInt64, chunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
-        descriptor.reader.seek(position: offset)
+    func addChunkOperation(chunkOffset: UInt64, chunkSize: Int) -> MultipartUploadSubmitChunkOperation? {
+        descriptor.reader.seek(position: offset + chunkOffset)
 
         let dataChunk = descriptor.reader.read(amount: chunkSize)
 
         guard !dataChunk.isEmpty else { return nil }
 
-        let operation = MultipartUploadSubmitChunkOperation(offset: offset,
-                                                            chunk: dataChunk,
+        let operation = MultipartUploadSubmitChunkOperation(data: dataChunk,
+                                                            offset: chunkOffset,
                                                             part: part,
                                                             descriptor: descriptor)
 
@@ -174,7 +171,7 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
 
                 self.retriesLeft -= 1
 
-                guard self.addChunkOperation(offset: operation.offset, chunkSize: self.chunkSize) != nil else { return }
+                guard self.addChunkOperation(chunkOffset: operation.offset, chunkSize: self.chunkSize) != nil else { return }
             } else if let response = operation.receivedResponse?.response {
                 switch response.statusCode {
                 case 200:
@@ -193,7 +190,7 @@ private extension MultipartIntelligentUploadSubmitPartOperation {
                     var partOffset = operation.offset
 
                     for _ in 1 ... 2 {
-                        guard self.addChunkOperation(offset: partOffset,
+                        guard self.addChunkOperation(chunkOffset: partOffset,
                                                      chunkSize: newPartChunkSize) != nil else { break }
 
                         partOffset += UInt64(newPartChunkSize)

@@ -11,6 +11,14 @@ import Foundation
 /// The protocol any uploader must conform to.
 @objc(FSUploader)
 public protocol Uploader: Monitorizable, Startable, Cancellable {
+    /// Uploader UUID.
+    var uuid: UUID { get }
     /// Current upload status.
     var currentStatus: UploadStatus { get }
+}
+
+// MARK: - Equatable Conformance
+
+func ==(lhs: Uploader, rhs: Uploader) -> Bool {
+    return lhs.uuid == rhs.uuid
 }

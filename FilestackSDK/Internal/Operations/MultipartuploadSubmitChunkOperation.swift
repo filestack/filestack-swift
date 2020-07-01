@@ -10,8 +10,8 @@ import Alamofire
 import Foundation
 
 class MultipartUploadSubmitChunkOperation: BaseOperation {
+    let data: Data
     let offset: UInt64
-    let chunk: Data
     let part: Int
     let descriptor: UploadDescriptor
     let progress: Progress
@@ -20,15 +20,12 @@ class MultipartUploadSubmitChunkOperation: BaseOperation {
 
     private var uploadRequest: UploadRequest?
 
-    required init(offset: UInt64,
-                  chunk: Data,
-                  part: Int,
-                  descriptor: UploadDescriptor) {
+    required init(data: Data, offset: UInt64, part: Int, descriptor: UploadDescriptor) {
+        self.data = data
         self.offset = offset
-        self.chunk = chunk
         self.part = part
         self.progress = MirroredProgress()
-        self.progress.totalUnitCount = Int64(chunk.count)
+        self.progress.totalUnitCount = Int64(data.count)
         self.descriptor = descriptor
 
         super.init()
@@ -55,7 +52,7 @@ private extension MultipartUploadSubmitChunkOperation {
             return
         }
 
-        uploadRequest = UploadService.upload(data: chunk, to: url, method: .put, headers: headers)
+        uploadRequest = UploadService.upload(data: data, to: url, method: .put, headers: headers)
 
         uploadRequest?.uploadProgress(closure: { progress in
             self.progress.totalUnitCount = progress.totalUnitCount
@@ -81,8 +78,8 @@ private extension MultipartUploadSubmitChunkOperation {
     func multipartFormData(form: MultipartFormData) {
         form.append(descriptor.apiKey, named: "apikey")
         form.append(String(part), named: "part")
-        form.append(String(chunk.count), named: "size")
-        form.append(chunk.base64MD5Digest(), named: "md5")
+        form.append(String(data.count), named: "size")
+        form.append(data.base64MD5Digest(), named: "md5")
         form.append(descriptor.uri, named: "uri")
         form.append(descriptor.region, named: "region")
         form.append(descriptor.uploadID, named: "upload_id")
