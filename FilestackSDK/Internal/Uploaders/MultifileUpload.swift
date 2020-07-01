@@ -14,7 +14,7 @@ class MultifileUpload: Uploader, DeferredAdd {
 
     let uuid = UUID()
     let masterProgress = MirroredProgress()
-    var progressHandler: ((Progress) -> Void)?
+    var uploadProgress: ((Progress) -> Void)?
     var completionHandler: (([NetworkJSONResponse]) -> Void)?
 
     // MARK: - Private Properties
@@ -45,7 +45,7 @@ class MultifileUpload: Uploader, DeferredAdd {
 
         masterProgressFractionCompletedObserver = masterProgress.observe(\.fractionCompleted, options: [.new]) { _, _ in
             queue.async {
-                self.progressHandler?(self.progress)
+                self.uploadProgress?(self.progress)
             }
         }
 
@@ -182,7 +182,7 @@ private extension MultifileUpload {
             // To ensure this object can be properly deallocated we must ensure that any closures are niled,
             // and `currentOperation` object is niled as well.
             self.completionHandler = nil
-            self.progressHandler = nil
+            self.uploadProgress = nil
             self.currentOperation = nil
         }
     }

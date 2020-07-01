@@ -152,7 +152,7 @@ public extension Client {
                 completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader & DeferredAdd {
         let mpu = MultifileUpload(using: uploadables, options: options, queue: queue, apiKey: apiKey, security: security)
 
-        mpu.progressHandler = uploadProgress
+        mpu.uploadProgress = uploadProgress
         mpu.completionHandler = completionHandler
 
         if options.startImmediately {

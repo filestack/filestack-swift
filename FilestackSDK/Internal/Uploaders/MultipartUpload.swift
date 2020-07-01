@@ -38,8 +38,6 @@ enum ChunkSize: Int {
 
 /// This class allows uploading a single `Uploadable` item to a given storage location.
 class MultipartUpload: Uploader {
-    typealias UploadProgress = (Int64) -> Void
-
     // MARK: - Internal Properties
 
     let uuid = UUID()
