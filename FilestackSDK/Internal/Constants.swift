@@ -13,8 +13,6 @@ struct Constants {
     static let uploadURL = URL(string: "https://upload.filestackapi.com")!
 
     static let filePath = "file"
-    static let storePath = "store"
-    static let metadataPath = "metadata"
 
     static let validHTTPResponseCodes = Array(200 ..< 300)
 }
