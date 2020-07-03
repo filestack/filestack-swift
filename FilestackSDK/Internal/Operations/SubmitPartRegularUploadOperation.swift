@@ -17,22 +17,6 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
     let offset: UInt64
     let descriptor: UploadDescriptor
 
-    var responseEtag: String? {
-        switch result {
-        case let .success(response):
-            return response.allHeaderFields["Etag"] as? String
-        default:
-            return nil
-        }
-    }
-
-    var didFail: Bool {
-        switch result {
-        case .success(_): return false
-        default: return true
-        }
-    }
-
     private(set) lazy var progress = Progress(totalUnitCount: Int64(size))
 
     // MARK: - Private Properties
