@@ -143,8 +143,6 @@ private extension MultipartUpload {
 
         masterProgressObservers.append(masterProgress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
             self.progress.completedUnitCount = Int64(progress.fractionCompleted * Double(progress.totalUnitCount))
-            print("self.progress.completedUnitCount: \(self.progress.completedUnitCount)")
-            print("progress.completedUnitCount: \(progress.completedUnitCount)")
 
             self.queue.async {
                 self.uploadProgress?(self.progress)
