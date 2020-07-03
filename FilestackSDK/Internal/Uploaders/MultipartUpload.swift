@@ -230,11 +230,11 @@ private extension MultipartUpload {
         }
 
         let startOperation = StartUploadOperation(config: config,
-                                                           options: options,
-                                                           reader: reader,
-                                                           filename: filename,
-                                                           filesize: filesize,
-                                                           mimeType: mimeType)
+                                                  options: options,
+                                                  reader: reader,
+                                                  filename: filename,
+                                                  filesize: filesize,
+                                                  mimeType: mimeType)
 
         masterOperationQueue.addOperation(startOperation)
         masterOperationQueue.addOperation { completion(startOperation.result) }
