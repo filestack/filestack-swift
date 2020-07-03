@@ -22,7 +22,6 @@ class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
     // MARK: - Private Properties
 
     private var uploadRequest: UploadRequest?
-    private var multipartRequest: UploadRequest?
 
     // MARK: - Lifecycle
 
