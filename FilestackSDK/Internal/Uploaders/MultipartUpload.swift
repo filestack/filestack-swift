@@ -63,10 +63,7 @@ class MultipartUpload: Uploader {
 
     // MARK: - Lifecycle
 
-    init(using uploadable: Uploadable,
-         options: UploadOptions,
-         config: Config,
-         queue: DispatchQueue = .main) {
+    init(using uploadable: Uploadable, options: UploadOptions, config: Config, queue: DispatchQueue = .main) {
         self.uploadable = uploadable
         self.options = options
         self.config = config
