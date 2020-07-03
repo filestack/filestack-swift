@@ -15,6 +15,7 @@ class CompleteUploadOperation: BaseOperation<JSONResponse> {
     private let partsAndEtags: [Int: String]
     private let descriptor: UploadDescriptor
     private let retries: Int
+    private var retrier: TaskRetrier<JSONResponse>?
 
     // MARK: - Lifecycle
 
@@ -35,6 +36,12 @@ extension CompleteUploadOperation {
     override func main() {
         upload()
     }
+
+    override func cancel() {
+        retrier?.cancel()
+
+        super.cancel()
+    }
 }
 
 // MARK: - Private Functions
@@ -43,8 +50,7 @@ private extension CompleteUploadOperation {
     func upload() {
         let uploadURL = URL(string: "multipart/complete", relativeTo: Constants.uploadURL)!
 
-        let retrier = TaskRetrier<JSONResponse>(attempts: retries, label: uploadURL.relativePath) { (retrier) -> JSONResponse? in
-            let semaphore = DispatchSemaphore(value: 0)
+        retrier = .init(attempts: retries, label: uploadURL.relativePath) { (semaphore) -> JSONResponse? in
             var jsonResponse: JSONResponse?
 
             UploadService.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
@@ -53,12 +59,6 @@ private extension CompleteUploadOperation {
             }
 
             semaphore.wait()
-
-            // Guard against operation cancellation.
-            guard !self.isCancelled else {
-                retrier.cancel()
-                return nil
-            }
 
             // Validate response.
             let isWrongStatusCode = jsonResponse?.response?.statusCode != 200
@@ -72,10 +72,10 @@ private extension CompleteUploadOperation {
             }
         }
 
-        if let response = retrier.run() {
+        if let response = retrier?.run() {
             finish(with: .success(response))
         } else {
-            finish(with: .failure(Error.custom("Failed to complete upload operation.")))
+            finish(with: .failure(Error.custom("Failed to complete /multipart/complete operation.")))
         }
     }
 

@@ -15,6 +15,7 @@ class CommitPartUploadOperation: BaseOperation<HTTPURLResponse> {
     private let descriptor: UploadDescriptor
     private let part: Int
     private let retries: Int
+    private var retrier: TaskRetrier<HTTPURLResponse>?
 
     // MARK: - Lifecyle
 
@@ -35,6 +36,12 @@ extension CommitPartUploadOperation {
     override func main() {
         upload()
     }
+
+    override func cancel() {
+        retrier?.cancel()
+
+        super.cancel()
+    }
 }
 
 // MARK: - Private Functions
@@ -43,8 +50,7 @@ private extension CommitPartUploadOperation {
     func upload() {
         let uploadURL = URL(string: "multipart/commit", relativeTo: Constants.uploadURL)!
 
-        let retrier = TaskRetrier<HTTPURLResponse>(attempts: retries, label: uploadURL.relativePath) { (retrier) -> HTTPURLResponse? in
-            let semaphore = DispatchSemaphore(value: 0)
+        retrier = .init(attempts: retries, label: uploadURL.relativePath) { (semaphore) -> HTTPURLResponse? in
             var httpURLResponse: HTTPURLResponse?
 
             UploadService.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
@@ -54,11 +60,7 @@ private extension CommitPartUploadOperation {
 
             semaphore.wait()
 
-            guard !self.isCancelled else {
-                retrier.cancel()
-                return nil
-            }
-
+            // Validate response.
             let isWrongStatusCode = httpURLResponse?.statusCode != 200
             let isNetworkError = httpURLResponse == nil
 
@@ -70,7 +72,7 @@ private extension CommitPartUploadOperation {
             }
         }
 
-        if let response = retrier.run() {
+        if let response = retrier?.run() {
             finish(with: .success(response))
         } else {
             finish(with: .failure(Error.custom("Unable to complete /multipart/commit operation.")))
