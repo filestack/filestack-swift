@@ -56,7 +56,7 @@ public extension FileLink {
     @objc func getContent(parameters: [String: Any]? = nil,
                           queue: DispatchQueue? = .main,
                           downloadProgress: ((Progress) -> Void)? = nil,
-                          completionHandler: @escaping (NetworkDataResponse) -> Void) {
+                          completionHandler: @escaping (DataResponse) -> Void) {
         guard let request = CDNService.getDataRequest(handle: handle,
                                                       path: nil,
                                                       parameters: parameters,
@@ -76,7 +76,7 @@ public extension FileLink {
 
         request.responseData(queue: queue, completionHandler: { response in
 
-            completionHandler(NetworkDataResponse(with: response))
+            completionHandler(DataResponse(with: response))
         })
     }
 
@@ -85,7 +85,7 @@ public extension FileLink {
     /// - Parameter queue: The queue on which the completion handler is dispatched.
     /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
     @objc func getTags(queue: DispatchQueue? = .main,
-                       completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+                       completionHandler: @escaping (JSONResponse) -> Void) {
         guard let request = CDNService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
             return
         }
@@ -94,7 +94,7 @@ public extension FileLink {
 
         request.responseJSON(queue: queue) { response in
 
-            completionHandler(NetworkJSONResponse(with: response))
+            completionHandler(JSONResponse(with: response))
         }
     }
 
@@ -103,7 +103,7 @@ public extension FileLink {
     /// - Parameter queue: The queue on which the completion handler is dispatched.
     /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
     @objc func getSafeForWork(queue: DispatchQueue? = .main,
-                              completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+                              completionHandler: @escaping (JSONResponse) -> Void) {
         guard let request = CDNService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
             return
         }
@@ -112,7 +112,7 @@ public extension FileLink {
 
         request.responseJSON(queue: queue) { response in
 
-            completionHandler(NetworkJSONResponse(with: response))
+            completionHandler(JSONResponse(with: response))
         }
     }
 
@@ -123,7 +123,7 @@ public extension FileLink {
     /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
     @objc func getMetadata(options: MetadataOptions,
                            queue: DispatchQueue? = .main,
-                           completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+                           completionHandler: @escaping (JSONResponse) -> Void) {
         let optionQueryItems = options.toArray().map {
             URLQueryItem(name: $0.description, value: "true")
         }
@@ -141,7 +141,7 @@ public extension FileLink {
 
         request.responseJSON(queue: queue) { response in
 
-            completionHandler(NetworkJSONResponse(with: response))
+            completionHandler(JSONResponse(with: response))
         }
     }
 
@@ -158,7 +158,7 @@ public extension FileLink {
                         parameters: [String: Any]? = nil,
                         queue: DispatchQueue? = .main,
                         downloadProgress: ((Progress) -> Void)? = nil,
-                        completionHandler: @escaping (NetworkDownloadResponse) -> Void) {
+                        completionHandler: @escaping (DownloadResponse) -> Void) {
         let downloadDestination: DownloadRequest.DownloadFileDestination = { _, _ in
 
             let downloadOptions: DownloadRequest.DownloadOptions = [
@@ -189,7 +189,7 @@ public extension FileLink {
 
         request.responseData(queue: queue, completionHandler: { response in
 
-            completionHandler(NetworkDownloadResponse(with: response))
+            completionHandler(DownloadResponse(with: response))
         })
     }
 
@@ -204,7 +204,7 @@ public extension FileLink {
     /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
     @objc func delete(parameters: [String: Any]? = nil,
                       queue: DispatchQueue? = .main,
-                      completionHandler: @escaping (NetworkDataResponse) -> Void) {
+                      completionHandler: @escaping (DataResponse) -> Void) {
         guard let request = APIService.deleteRequest(handle: handle,
                                                      path: Constants.filePath,
                                                      parameters: ensureAPIKey(parameters),
@@ -216,7 +216,7 @@ public extension FileLink {
 
         request.responseData(queue: queue, completionHandler: { response in
 
-            completionHandler(NetworkDataResponse(with: response))
+            completionHandler(DataResponse(with: response))
         })
     }
 
@@ -236,7 +236,7 @@ public extension FileLink {
                          fileURL: URL,
                          queue: DispatchQueue? = .main,
                          uploadProgress: ((Progress) -> Void)? = nil,
-                         completionHandler: @escaping (NetworkDataResponse) -> Void) {
+                         completionHandler: @escaping (DataResponse) -> Void) {
         guard let request = APIService.overwriteRequest(handle: handle,
                                                         path: Constants.filePath,
                                                         parameters: parameters,
@@ -257,7 +257,7 @@ public extension FileLink {
 
         request.responseData(queue: queue, completionHandler: { response in
 
-            completionHandler(NetworkDataResponse(with: response))
+            completionHandler(DataResponse(with: response))
         })
     }
 
@@ -274,7 +274,7 @@ public extension FileLink {
     @objc func overwrite(parameters: [String: Any]? = nil,
                          remoteURL: URL,
                          queue: DispatchQueue? = .main,
-                         completionHandler: @escaping (NetworkDataResponse) -> Void) {
+                         completionHandler: @escaping (DataResponse) -> Void) {
         guard let request = APIService.overwriteRequest(handle: handle,
                                                         path: Constants.filePath,
                                                         parameters: parameters,
@@ -287,7 +287,7 @@ public extension FileLink {
 
         request.responseData(queue: queue, completionHandler: { response in
 
-            completionHandler(NetworkDataResponse(with: response))
+            completionHandler(DataResponse(with: response))
         })
     }
 

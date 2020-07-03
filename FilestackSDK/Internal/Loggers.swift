@@ -15,4 +15,7 @@ extension OSLog {
 
     /// Logs any issues related to file uploading.
     static let uploads = OSLog(subsystem: subsystem, category: "uploads")
+
+    /// Logs any issues related to task retrier.
+    static let retrier = OSLog(subsystem: subsystem, category: "task-retrier")
 }

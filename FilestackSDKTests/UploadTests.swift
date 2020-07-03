@@ -22,6 +22,7 @@ class UploadTests: XCTestCase {
     private let defaultStoreOptions = StorageOptions(location: .s3, access: .private)
 
     override func setUp() {
+        UploadService.useBackgroundSession = false
         currentPart = 1
         currentOffset = 0
         super.setUp()
@@ -39,7 +40,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var response: NetworkJSONResponse?
+        var response: JSONResponse?
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
@@ -61,7 +62,7 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(response?.json?["mimetype"] as? String, "image/jpeg")
     }
 
-    func testResumableMultiPartUpload() {
+    func testIntelligentMultiPartUpload() {
         stubMultipartStartRequest(supportsIntelligentIngestion: true)
         stubMultipartPostPartRequest()
         stubMultipartPutRequest()
@@ -69,17 +70,9 @@ class UploadTests: XCTestCase {
         stubMultipartCompleteRequest()
 
         let expectation = self.expectation(description: "request should succeed")
-        var progressExpectation: XCTestExpectation? = self.expectation(description: "request should succeed")
         var json: [String: Any]!
 
-        let progressHandler: ((Progress) -> Void) = { progress in
-            if progress.completedUnitCount == UploadTests.largeFileSize {
-                progressExpectation?.fulfill()
-                progressExpectation = nil
-            }
-        }
-
-        client.upload(using: largeFileURL, uploadProgress: progressHandler) { resp in
+        client.upload(using: largeFileURL) { resp in
             json = resp.json
             expectation.fulfill()
         }
@@ -103,7 +96,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var error: Error!
+        var error: Swift.Error!
 
         let multipartUpload = client.upload(using: sampleFileURL) { resp in
             error = resp.error
@@ -120,7 +113,8 @@ class UploadTests: XCTestCase {
     }
 
     func testResumableMultiPartUploadWithDownNetworkOnStart() {
-        let uploadMultipartStartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+        let uploadMultipartStartStubConditions =
+            isScheme(Constants.uploadURL.scheme!) &&
             isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/start") &&
             isMethodPOST()
@@ -133,7 +127,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var response: NetworkJSONResponse?
+        var response: JSONResponse?
 
         client.upload(using: largeFileURL) { resp in
             response = resp
@@ -161,7 +155,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var error: Error?
+        var error: Swift.Error?
 
         client.upload(using: sampleFileURL) { resp in
             error = resp.error
@@ -186,7 +180,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var response: NetworkJSONResponse?
+        var response: JSONResponse?
 
         client.upload(using: largeFileURL, options: uploadOptions) { resp in
             response = resp
@@ -220,7 +214,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var responses: [NetworkJSONResponse]!
+        var responses: [JSONResponse]!
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
@@ -250,7 +244,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var responses: [NetworkJSONResponse]!
+        var responses: [JSONResponse]!
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
@@ -272,7 +266,7 @@ class UploadTests: XCTestCase {
 
         let expectation = self.expectation(description: "request should succeed")
 
-        var responses: [NetworkJSONResponse]!
+        var responses: [JSONResponse]!
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: false,
@@ -301,7 +295,8 @@ private extension UploadTests {
     }
 
     func stubMultipartStartRequest(supportsIntelligentIngestion: Bool) {
-        let uploadMultipartStartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+        let uploadMultipartStartStubConditions =
+            isScheme(Constants.uploadURL.scheme!) &&
             isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/start") &&
             isMethodPOST()
@@ -341,7 +336,8 @@ private extension UploadTests {
     }
 
     func stubMultipartPostPartRequest() {
-        let uploadMultipartPostPartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+        let uploadMultipartPostPartStubConditions =
+            isScheme(Constants.uploadURL.scheme!) &&
             isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/upload") &&
             isMethodPOST()
@@ -361,7 +357,9 @@ private extension UploadTests {
 
     func stubMultipartPostPartRequest(parts: [String], hitCount: inout Int) {
         let partName = parts[hitCount]
-        let uploadMultipartPostPartStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+
+        let uploadMultipartPostPartStubConditions =
+            isScheme(Constants.uploadURL.scheme!) &&
             isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/upload") &&
             isMethodPOST()
@@ -406,7 +404,8 @@ private extension UploadTests {
     }
 
     func stubMultipartCommitRequest() {
-        let uploadMultipartCommitStubConditions = isScheme(Constants.uploadURL.scheme!) &&
+        let uploadMultipartCommitStubConditions =
+            isScheme(Constants.uploadURL.scheme!) &&
             isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/commit") &&
             isMethodPOST()

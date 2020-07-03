@@ -21,7 +21,7 @@ extension Client {
                                 queue: DispatchQueue = .main,
                                 startUploadImmediately: Bool = true,
                                 uploadProgress: ((Progress) -> Void)? = nil,
-                                completionHandler: @escaping (NetworkJSONResponse) -> Void) -> Uploader {
+                                completionHandler: @escaping (JSONResponse) -> Void) -> Uploader {
         let options = UploadOptions(preferIntelligentIngestion: useIntelligentIngestionIfAvailable,
                                     startImmediately: startUploadImmediately,
                                     storeOptions: storeOptions)
@@ -43,7 +43,7 @@ extension Client {
                                 queue: DispatchQueue = .main,
                                 startUploadImmediately: Bool = true,
                                 uploadProgress: ((Progress) -> Void)? = nil,
-                                completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader {
+                                completionHandler: @escaping ([JSONResponse]) -> Void) -> Uploader {
         let options = UploadOptions(preferIntelligentIngestion: useIntelligentIngestionIfAvailable,
                                     startImmediately: startUploadImmediately,
                                     storeOptions: storeOptions)

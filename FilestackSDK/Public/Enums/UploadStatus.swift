@@ -8,9 +8,12 @@
 
 import Foundation
 
-/// Represents the current status of an upload.
+@available(*, deprecated, renamed: "UploadState")
+public typealias UploadStatus = UploadState
+
+/// Represents the current state of an upload.
 @objc(FSUploadStatus)
-public enum UploadStatus: UInt {
+public enum UploadState: UInt {
     /// Upload has not started.
     case notStarted
     /// Upload is currently in progress.
@@ -25,7 +28,7 @@ public enum UploadStatus: UInt {
 
 // MARK: - CustomStringConvertible Conformance
 
-extension UploadStatus: CustomStringConvertible {
+extension UploadState: CustomStringConvertible {
     /// :nodoc:
     public var description: String {
         switch self {

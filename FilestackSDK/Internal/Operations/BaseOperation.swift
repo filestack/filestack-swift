@@ -9,7 +9,11 @@
 import Alamofire
 import Foundation
 
-class BaseOperation: Operation {
+class BaseOperation<Success>: Operation {
+    typealias Result = Swift.Result<Success, Swift.Error>
+
+    var result: Result = .failure(Error.unknown)
+
     var state = State.ready {
         willSet {
             willChangeValue(forKey: state.description)
@@ -21,11 +25,9 @@ class BaseOperation: Operation {
             didChangeValue(forKey: state.description)
         }
     }
-}
 
-// MARK: - Overrides
+    // MARK: - Operation Overrides
 
-extension BaseOperation {
     override var isReady: Bool { state == .ready }
     override var isExecuting: Bool { state == .executing }
     override var isFinished: Bool { state == .finished }
@@ -42,15 +44,20 @@ extension BaseOperation {
     }
 
     override func cancel() {
-        super.cancel()
+        finish(with: .failure(Error.cancelled))
 
-        if isExecuting {
-            state = .finished
-        }
+        super.cancel()
+    }
+
+    // MARK: - Internal Functions
+
+    func finish(with result: Result) {
+        self.result = result
+        state = .finished
     }
 }
 
-// MARK: -
+// MARK: - State
 
 extension BaseOperation {
     enum State {

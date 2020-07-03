@@ -9,9 +9,9 @@
 import Alamofire
 import Foundation
 
-final class CDNService: NetworkingService {
-    static let sessionManager = SessionManager.filestackDefault
-    static let baseURL = Constants.cdnURL
+final class CDNService: NetworkingServiceWithBaseURL {
+    static let sessionManager = SessionManager.filestack()
+    static let baseURL = Constants.apiURL
 
     static func getDataRequest(handle: String,
                                path: String?,

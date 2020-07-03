@@ -1,5 +1,5 @@
 //
-//  NetworkingService+DefaultImplementations.swift
+//  NetworkingServiceWithBaseURL+buildURL.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 10/09/2019.
@@ -9,7 +9,7 @@
 import Alamofire
 import Foundation
 
-extension NetworkingService {
+extension NetworkingServiceWithBaseURL {
     static func buildURL(handle: String? = nil,
                          path: String? = nil,
                          extra: String? = nil,
@@ -17,17 +17,9 @@ extension NetworkingService {
                          security: Security? = nil) -> URL? {
         var url = baseURL
 
-        if let path = path {
-            url.appendPathComponent(path)
-        }
-
-        if let handle = handle {
-            url.appendPathComponent(handle)
-        }
-
-        if let extra = extra {
-            url.appendPathComponent(extra)
-        }
+        if let path = path { url.appendPathComponent(path) }
+        if let handle = handle { url.appendPathComponent(handle) }
+        if let extra = extra { url.appendPathComponent(extra) }
 
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
 

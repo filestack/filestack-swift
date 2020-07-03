@@ -39,7 +39,7 @@ extension Transformable {
                       access: StorageAccess,
                       base64Decode: Bool,
                       queue: DispatchQueue? = .main,
-                      completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
+                      completionHandler: @escaping (FileLink?, JSONResponse) -> Void) -> Self {
         let options = StorageOptions(location: location,
                                      region: region,
                                      container: container,

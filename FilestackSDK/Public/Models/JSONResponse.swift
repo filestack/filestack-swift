@@ -1,5 +1,5 @@
 //
-//  NetworkJSONResponse.swift
+//  JSONResponse.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/17/17.
@@ -9,9 +9,12 @@
 import Alamofire
 import Foundation
 
+@available(*, deprecated, renamed: "JSONResponse")
+public typealias NetworkJSONResponse = JSONResponse
+
 /// This object represents a network JSON response.
 @objc(FSNetworkJSONResponse)
-public class NetworkJSONResponse: NSObject {
+public class JSONResponse: NSObject {
     // MARK: - Public Properties
 
     /// The URL request sent to the server.
@@ -24,11 +27,11 @@ public class NetworkJSONResponse: NSObject {
     @objc public let json: [String: Any]?
 
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
-    @objc public var error: Error?
+    @objc public var error: Swift.Error?
 
     // MARK: - Lifecycle
 
-    init(with dataResponse: DataResponse<Any>) {
+    init(with dataResponse: Alamofire.DataResponse<Any>) {
         request = dataResponse.request
         response = dataResponse.response
 
@@ -43,7 +46,7 @@ public class NetworkJSONResponse: NSObject {
         super.init()
     }
 
-    init(with error: Error) {
+    init(with error: Swift.Error) {
         self.request = nil
         self.response = nil
         self.json = nil
@@ -55,7 +58,7 @@ public class NetworkJSONResponse: NSObject {
 
 // MARK: - CustomStringConvertible Conformance
 
-extension NetworkJSONResponse {
+extension JSONResponse {
     /// :nodoc:
     override public var description: String {
         return Tools.describe(subject: self)

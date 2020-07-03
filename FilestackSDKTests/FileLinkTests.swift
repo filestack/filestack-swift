@@ -13,7 +13,7 @@ import Alamofire
 @testable import FilestackSDK
 
 class FileLinkTests: XCTestCase {
-    private let cdnStubConditions = isScheme(Constants.cdnURL.scheme!) && isHost(Constants.cdnURL.host!)
+    private let cdnStubConditions = isScheme(Constants.apiURL.scheme!) && isHost(Constants.apiURL.host!)
     private let apiStubConditions = isScheme(Constants.apiURL.scheme!) && isHost(Constants.apiURL.host!)
     private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 
@@ -44,7 +44,7 @@ class FileLinkTests: XCTestCase {
     func testURL() {
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectedURL = Constants.cdnURL.appendingPathComponent("MY-HANDLE")
+        let expectedURL = Constants.apiURL.appendingPathComponent("MY-HANDLE")
 
         XCTAssertEqual(fileLink.url, expectedURL)
     }
@@ -55,7 +55,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         XCTAssertEqual(fileLink.url.absoluteString,
-                       Constants.cdnURL.absoluteString +
+                       Constants.apiURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
     }
@@ -77,7 +77,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         let expectation = self.expectation(description: "request should succeed")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.getContent { resp in
 
@@ -91,7 +91,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.response)
 
         XCTAssertEqual(response?.response?.url?.absoluteString,
-                       Constants.cdnURL.absoluteString +
+                       Constants.apiURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
 
@@ -110,10 +110,10 @@ class FileLinkTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectedRequestURL = Constants.cdnURL.appendingPathComponent("MY-HANDLE")
+        let expectedRequestURL = Constants.apiURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.getContent { resp in
 
@@ -136,7 +136,7 @@ class FileLinkTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.getContent(parameters: ["foo": "123", "bar": "321"]) { resp in
 
@@ -149,7 +149,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.request?.url)
 
         XCTAssertEqual(response?.request?.url?.absoluteString,
-                       Constants.cdnURL.absoluteString +
+                       Constants.apiURL.absoluteString +
                            "/MY-HANDLE" +
                            "?bar=321&foo=123")
     }
@@ -163,7 +163,7 @@ class FileLinkTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY", security: security)
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.getContent(parameters: ["foo": "123", "bar": "321"]) { resp in
 
@@ -176,7 +176,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.request?.url)
 
         XCTAssertEqual(response?.request?.url?.absoluteString,
-                       Constants.cdnURL.absoluteString +
+                       Constants.apiURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)" +
                            "&bar=321&foo=123")
@@ -272,7 +272,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
-        var response: NetworkDownloadResponse?
+        var response: FilestackSDK.DownloadResponse?
 
         fileLink.download(destinationURL: destinationURL) { resp in
 
@@ -286,7 +286,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.response)
 
         XCTAssertEqual(response?.response?.url?.absoluteString,
-                       Constants.cdnURL.absoluteString +
+                       Constants.apiURL.absoluteString +
                            "/MY-HANDLE" +
                            "?policy=\(security.encodedPolicy)&signature=\(security.signature)")
 
@@ -304,11 +304,11 @@ class FileLinkTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let expectedRequestURL = Constants.cdnURL.appendingPathComponent("MY-HANDLE")
+        let expectedRequestURL = Constants.apiURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
-        var response: NetworkDownloadResponse?
+        var response: FilestackSDK.DownloadResponse?
 
         fileLink.download(destinationURL: destinationURL) { resp in
 
@@ -332,7 +332,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
         let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
-        var response: NetworkDownloadResponse?
+        var response: FilestackSDK.DownloadResponse?
 
         fileLink.download(destinationURL: destinationURL, parameters: ["foo": "123", "bar": "321"]) { resp in
 
@@ -345,7 +345,7 @@ class FileLinkTests: XCTestCase {
         XCTAssertNotNil(response?.request?.url)
 
         XCTAssertEqual(response?.request?.url?.absoluteString,
-                       Constants.cdnURL.absoluteString +
+                       Constants.apiURL.absoluteString +
                            "/MY-HANDLE" +
                            "?bar=321&foo=123")
     }
@@ -387,7 +387,7 @@ class FileLinkTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should complete")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.delete { resp in
 
@@ -414,7 +414,7 @@ class FileLinkTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should complete")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.delete { resp in
 
@@ -444,7 +444,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let fileURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
         let expectation = self.expectation(description: "request should complete")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.overwrite(fileURL: fileURL) { resp in
 
@@ -475,7 +475,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let remoteURL = URL(string: "https://SOME-REMOTE-PLACE")!
         let responseExpectation = expectation(description: "request should complete")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.overwrite(remoteURL: remoteURL) { resp in
 
@@ -499,7 +499,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let remoteURL = URL(string: "https://SOME-REMOTE-PLACE")!
         let responseExpectation = expectation(description: "request should complete")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.overwrite(remoteURL: remoteURL) { resp in
 
@@ -522,7 +522,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let fileURL = Bundle(for: type(of: self)).url(forResource: "sample", withExtension: "jpg")!
         let expectation = self.expectation(description: "request should complete")
-        var response: NetworkDataResponse?
+        var response: FilestackSDK.DataResponse?
 
         fileLink.overwrite(fileURL: fileURL) { resp in
 
@@ -556,7 +556,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         let expectation = self.expectation(description: "request should complete")
-        var response: NetworkJSONResponse?
+        var response: JSONResponse?
 
         fileLink.getTags { resp in
 
@@ -566,7 +566,7 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
-        let expectedURL = Constants.cdnURL
+        let expectedURL = Constants.apiURL
             .appendingPathComponent("tags")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("MY-HANDLE")
@@ -588,7 +588,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         let expectation = self.expectation(description: "request should complete")
-        var response: NetworkJSONResponse?
+        var response: JSONResponse?
 
         fileLink.getSafeForWork { resp in
 
@@ -598,7 +598,7 @@ class FileLinkTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
-        let expectedURL = Constants.cdnURL
+        let expectedURL = Constants.apiURL
             .appendingPathComponent("sfw")
             .appendingPathComponent("security=policy:\(security.encodedPolicy),signature:\(security.signature)")
             .appendingPathComponent("MY-HANDLE")
@@ -627,7 +627,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
 
         let expectation = self.expectation(description: "request should complete")
-        var response: NetworkJSONResponse?
+        var response: JSONResponse?
 
         fileLink.getMetadata(options: [.width, .height, .MD5]) { resp in
 

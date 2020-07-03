@@ -9,8 +9,8 @@
 import Alamofire
 import Foundation
 
-final class APIService: NetworkingService {
-    static let sessionManager = SessionManager.filestackDefault
+final class APIService: NetworkingServiceWithBaseURL {
+    static let sessionManager = SessionManager.filestack()
     static let baseURL = Constants.apiURL
 
     static func deleteRequest(handle: String,

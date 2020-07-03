@@ -9,9 +9,9 @@
 import Alamofire
 import Foundation
 
-final class ProcessService: NetworkingService {
-    static let sessionManager = SessionManager.filestackDefault
-    static let baseURL = Constants.processURL
+final class ProcessService: NetworkingServiceWithBaseURL {
+    static let sessionManager = SessionManager.filestack()
+    static let baseURL = Constants.apiURL
 
     static func buildURL(tasks: String? = nil, sources: [String], key: String? = nil, security: Security? = nil) -> URL? {
         var url = baseURL

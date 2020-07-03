@@ -1,5 +1,5 @@
 //
-//  NetworkDownloadResponse.swift
+//  DownloadResponse.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/5/17.
@@ -9,9 +9,12 @@
 import Alamofire
 import Foundation
 
+@available(*, deprecated, renamed: "DownloadResponse")
+public typealias NetworkDownloadResponse = DownloadResponse
+
 /// This object represents a network download response.
 @objc(FSNetworkDownloadResponse)
-public class NetworkDownloadResponse: NSObject {
+public class DownloadResponse: NSObject {
     // MARK: - Public Properties
 
     /// The URL request sent to the server.
@@ -27,11 +30,11 @@ public class NetworkDownloadResponse: NSObject {
     @objc public let destinationURL: URL?
 
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
-    @objc public var error: Error?
+    @objc public var error: Swift.Error?
 
     // MARK: - Lifecycle
 
-    init(with downloadResponse: DownloadResponse<Data>) {
+    init(with downloadResponse: Alamofire.DownloadResponse<Data>) {
         self.request = downloadResponse.request
         self.response = downloadResponse.response
         self.temporaryURL = downloadResponse.temporaryURL
@@ -44,7 +47,7 @@ public class NetworkDownloadResponse: NSObject {
 
 // MARK: - CustomStringConvertible Conformance
 
-extension NetworkDownloadResponse {
+extension DownloadResponse {
     /// :nodoc:
     override public var description: String {
         return Tools.describe(subject: self)

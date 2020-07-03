@@ -11,13 +11,17 @@ import Foundation
 /// Represents a client that allows communicating with the [Filestack REST API](https://www.filestack.com/docs/rest-api).
 @objc(FSClient)
 public class Client: NSObject {
-    // MARK: - Properties
+    // MARK: - Public Properties
 
     /// An API key obtained from the [Developer Portal](http://dev.filestack.com).
-    @objc public let apiKey: String
+    @objc public var apiKey: String { config.apiKey }
 
     /// A `Security` object. `nil` by default.
-    @objc public let security: Security?
+    @objc public var security: Security? { config.security }
+
+    // MARK: - Private Properties
+
+    private let config: Config
 
     // MARK: - Lifecycle
 
@@ -28,8 +32,7 @@ public class Client: NSObject {
     /// - Parameter apiKey: An API key obtained from the Developer Portal.
     /// - Parameter security: A `Security` object. `nil` by default.
     @objc public init(apiKey: String, security: Security? = nil) {
-        self.apiKey = apiKey
-        self.security = security
+        self.config = Config(apiKey: apiKey, security: security)
 
         super.init()
     }
@@ -37,8 +40,7 @@ public class Client: NSObject {
     /// :nodoc:
     @available(*, deprecated, message: "Marked for removal in version 3.0. Please use `init(apiKey:security:)` instead.")
     @objc public init(apiKey: String, security: Security? = nil, storage _: StorageLocation) {
-        self.apiKey = apiKey
-        self.security = security
+        self.config = Config(apiKey: apiKey, security: security)
 
         super.init()
     }
@@ -112,8 +114,8 @@ public extension Client {
                 options: UploadOptions = .defaults,
                 queue: DispatchQueue = .main,
                 uploadProgress: ((Progress) -> Void)? = nil,
-                completionHandler: @escaping (NetworkJSONResponse) -> Void) -> Uploader {
-        let mpu = MultipartUpload(using: uploadable, options: options, queue: queue, apiKey: apiKey, security: security)
+                completionHandler: @escaping (JSONResponse) -> Void) -> Uploader {
+        let mpu = MultipartUpload(using: uploadable, options: options, config: config, queue: queue)
 
         mpu.uploadProgress = uploadProgress
         mpu.completionHandler = completionHandler
@@ -149,8 +151,8 @@ public extension Client {
                 options: UploadOptions = .defaults,
                 queue: DispatchQueue = .main,
                 uploadProgress: ((Progress) -> Void)? = nil,
-                completionHandler: @escaping ([NetworkJSONResponse]) -> Void) -> Uploader & DeferredAdd {
-        let mpu = MultifileUpload(using: uploadables, options: options, queue: queue, apiKey: apiKey, security: security)
+                completionHandler: @escaping ([JSONResponse]) -> Void) -> Uploader & DeferredAdd {
+        let mpu = MultifileUpload(using: uploadables, options: options, config: config, queue: queue)
 
         mpu.uploadProgress = uploadProgress
         mpu.completionHandler = completionHandler

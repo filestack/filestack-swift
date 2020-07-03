@@ -120,7 +120,7 @@ public extension Transformable {
     func store(using options: StorageOptions,
                base64Decode: Bool = false,
                queue: DispatchQueue? = .main,
-               completionHandler: @escaping (FileLink?, NetworkJSONResponse) -> Void) -> Self {
+               completionHandler: @escaping (FileLink?, JSONResponse) -> Void) -> Self {
         var taskOptions = [TaskOption]()
 
         taskOptions.append((key: "location", value: options.location))
@@ -154,7 +154,7 @@ public extension Transformable {
         request.validate(statusCode: Constants.validHTTPResponseCodes)
 
         request.responseJSON(queue: queue ?? .main) { response in
-            let jsonResponse = NetworkJSONResponse(with: response)
+            let jsonResponse = JSONResponse(with: response)
             var fileLink: FileLink?
 
             if let json = jsonResponse.json,

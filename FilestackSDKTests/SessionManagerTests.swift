@@ -18,7 +18,7 @@ class SessionManagerTests: XCTestCase {
     }
 
     func testFilestackDefaultCustomHTTPHeaders() {
-        let session = SessionManager.filestackDefault
+        let session = SessionManager.filestack()
         let requestURL = URL(string: "https://SOME-URL-HERE")!
         let expectation = self.expectation(description: "request should succeed")
         var dataRequest: URLRequest?

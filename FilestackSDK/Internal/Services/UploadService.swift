@@ -11,29 +11,29 @@ import Foundation
 import os.log
 
 final class UploadService: NetworkingService {
-    static let sessionManager = SessionManager.filestackDefault
-    static let baseURL = Constants.uploadURL
+    static private(set) var sessionManager = SessionManager.filestack(background: useBackgroundSession)
+
+    static var useBackgroundSession: Bool = true {
+        didSet { sessionManager = .filestack(background: useBackgroundSession) }
+    }
 
     static func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
                        url: URL,
                        queue: DispatchQueue? = .main,
-                       completionHandler: @escaping (NetworkJSONResponse) -> Void) {
+                       completionHandler: @escaping (JSONResponse) -> Void) {
         sessionManager.upload(multipartFormData: multipartFormData, to: url) { result in
             switch result {
             case let .success(request, _, _):
                 request.responseJSON(queue: queue) { response in
-                    completionHandler(NetworkJSONResponse(with: response))
+                    completionHandler(JSONResponse(with: response))
                 }
             case let .failure(error):
-                completionHandler(NetworkJSONResponse(with: error))
+                completionHandler(JSONResponse(with: error))
             }
         }
     }
 
-    static func upload(data: Data,
-                       to url: URLConvertible,
-                       method: HTTPMethod,
-                       headers: HTTPHeaders? = nil) -> UploadRequest? {
+    static func upload(data: Data, to url: URLConvertible, method: HTTPMethod, headers: HTTPHeaders? = nil) -> UploadRequest? {
         if let dataURL = temporaryURL(using: data) {
             defer { try? FileManager.default.removeItem(at: dataURL) }
             return sessionManager.upload(dataURL, to: url, method: method, headers: headers)
@@ -50,9 +50,11 @@ extension UploadService {
 
         do {
             try data.write(to: dataURL)
+
             return dataURL
         } catch {
             os_log("Unable to create temporary data file at %@", log: .uploads, type: .fault, dataURL.description)
+
             return nil
         }
     }

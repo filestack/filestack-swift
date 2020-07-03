@@ -8,89 +8,78 @@
 
 import Foundation
 
-/// :nodoc:
-enum MultipartUploadError: Error {
-    case invalidFile
-    case aborted
-    case custom(description: String)
-}
-
-extension MultipartUploadError: LocalizedError {
-    public var errorDescription: String? {
-        switch self {
-        case .invalidFile:
-            return "The file provided is invalid or could not be found"
-        case .aborted:
-            return "The upload operation was aborted."
-        case let .custom(description):
-            return description
-        }
-    }
-}
-
 /// This class allows uploading a single `Uploadable` item to a given storage location.
 class MultipartUpload: Uploader {
+    typealias Result = Swift.Result<JSONResponse, Swift.Error>
+
     // MARK: - Internal Properties
 
     let uuid = UUID()
-    let masterProgress = MirroredProgress()
+
+    // Closures
     var uploadProgress: ((Progress) -> Void)?
-    var completionHandler: ((NetworkJSONResponse) -> Void)?
+    var completionHandler: ((JSONResponse) -> Void)?
+
+    // Public-facing progress object.
+    let progress: Progress = {
+        let progress = Progress()
+
+        progress.kind = .file
+        progress.fileOperationKind = .copying
+
+        return progress
+    }()
 
     // MARK: - Private Properties
 
     private var uploadable: Uploadable
-    private var masterProgressFractionCompletedObserver: NSKeyValueObservation?
+    private var masterProgressObservers: [NSKeyValueObservation] = []
+    private let masterProgress = Progress()
+
+    private var descriptor: UploadDescriptor?
+    private var partsAndEtags: [Int: String]?
 
     private let queue: DispatchQueue
-    private let apiKey: String
+    private let config: Config
     private let options: UploadOptions
-    private let security: Security?
 
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.upload-queue")
 
-    private let masterOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.master-upload-operation-queue",
-                                                               qos: .utility)
+    private lazy var masterOperationQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
 
-    private let partOperationUnderlyingQueue = DispatchQueue(label: "com.filestack.part-upload-operation-queue",
-                                                             qos: .utility,
-                                                             attributes: .concurrent)
+        operationQueue.maxConcurrentOperationCount = 1
 
-    private let masterOperationQueue = OperationQueue()
-    private let partOperationQueue = OperationQueue()
+        return operationQueue
+    }()
+
+    private lazy var partOperationQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+
+        operationQueue.maxConcurrentOperationCount = options.partUploadConcurrency
+
+        return operationQueue
+    }()
 
     // MARK: - Lifecycle
 
     init(using uploadable: Uploadable,
          options: UploadOptions,
-         queue: DispatchQueue = .main,
-         apiKey: String,
-         security: Security? = nil) {
+         config: Config,
+         queue: DispatchQueue = .main) {
         self.uploadable = uploadable
-        self.queue = queue
-        self.apiKey = apiKey
         self.options = options
-        self.security = security
-        self.masterProgress.totalUnitCount = Int64(uploadable.size ?? 0)
-
-        masterProgressFractionCompletedObserver = masterProgress.observe(\.fractionCompleted, options: [.new]) { _, _ in
-            queue.async {
-                self.uploadProgress?(self.progress)
-            }
-        }
-
-        masterOperationQueue.underlyingQueue = masterOperationUnderlyingQueue
-        masterOperationQueue.maxConcurrentOperationCount = 1
-        partOperationQueue.underlyingQueue = partOperationUnderlyingQueue
-        partOperationQueue.maxConcurrentOperationCount = options.partUploadConcurrency
+        self.config = config
+        self.queue = queue
     }
 
     // MARK: - Uploadable Protocol Implementation
 
-    private(set) var currentStatus: UploadStatus = .notStarted {
+    private(set) var state: UploadState = .notStarted {
         didSet {
-            switch currentStatus {
+            switch state {
             case .cancelled:
+                masterProgress.cancel()
                 progress.cancel()
             default:
                 break
@@ -98,40 +87,40 @@ class MultipartUpload: Uploader {
         }
     }
 
-    lazy var progress = {
-        masterProgress.mirror
-    }()
-
     @discardableResult func cancel() -> Bool {
-        guard currentStatus != .cancelled else { return false }
+        guard state != .cancelled else { return false }
 
         uploadQueue.sync {
             partOperationQueue.cancelAllOperations()
             masterOperationQueue.cancelAllOperations()
-            currentStatus = .cancelled
+            removeProgressObservers()
+            state = .cancelled
         }
 
         queue.async {
-            self.completionHandler?(NetworkJSONResponse(with: MultipartUploadError.aborted))
+            self.completionHandler?(JSONResponse(with: Error.cancelled))
             self.completionHandler = nil
+            self.uploadProgress = nil
         }
 
         return true
     }
 
     @discardableResult func start() -> Bool {
-        switch currentStatus {
+        switch state {
         case .notStarted:
-            uploadQueue.async {
-                self.doUploadFile()
-            }
-
+            uploadQueue.async { self.upload() }
             return true
         default:
             return false
         }
     }
+}
 
+// MARK: - Deprecated
+
+extension MultipartUpload {
+    @available(*, deprecated, message: "Marked for removal in version 3.0. Use start() instead.")
     func uploadFiles() {
         start()
     }
@@ -140,213 +129,155 @@ class MultipartUpload: Uploader {
 // MARK: - Private Functions
 
 private extension MultipartUpload {
-    func fail(with error: Error) {
-        self.currentStatus = .failed
+    func removeProgressObservers() {
+        masterProgressObservers.removeAll()
+    }
 
-        queue.async {
-            self.completionHandler?(NetworkJSONResponse(with: error))
+    func setupProgressObservers() {
+        removeProgressObservers()
+
+        masterProgressObservers.append(masterProgress.observe(\.totalUnitCount, options: [.new]) { progress, _ in
+            self.progress.totalUnitCount = progress.totalUnitCount
+
+            self.queue.async {
+                self.uploadProgress?(self.progress)
+            }
+        })
+
+        masterProgressObservers.append(masterProgress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
+            self.progress.completedUnitCount = Int64(progress.fractionCompleted * Double(progress.totalUnitCount))
+            print("self.progress.completedUnitCount: \(self.progress.completedUnitCount)")
+            print("progress.completedUnitCount: \(progress.completedUnitCount)")
+
+            self.queue.async {
+                self.uploadProgress?(self.progress)
+            }
+        })
+    }
+
+    func finish(with result: Result) {
+        guard state == .notStarted || state == .inProgress else { return }
+
+        removeProgressObservers()
+
+        switch result {
+        case let .success(response):
+            state = .completed
+            queue.async {
+                self.completionHandler?(response)
+                self.completionHandler = nil
+                self.uploadProgress = nil
+            }
+        case let .failure(error):
+            state = .failed
+
+            queue.async {
+                self.completionHandler?(JSONResponse(with: error))
+                self.completionHandler = nil
+                self.uploadProgress = nil
+            }
         }
     }
 
-    func doUploadFile() {
-        currentStatus = .inProgress
+    func upload() {
+        state = .inProgress
+        setupProgressObservers()
 
-        guard let descriptor = setupUploadDescriptor() else { return }
+        // Step 1) Execute start operation
+        executeStartOperation { (result) in
+            switch result {
+            case let .success(descriptor):
+                // Set `totalUnitCount` to descriptor's filesize.
+                self.masterProgress.totalUnitCount = Int64(descriptor.filesize)
 
-        var part: Int = 0
-        var bytesLeft: UInt64 = descriptor.filesize
-        var partsAndEtags: [Int: String] = [:]
-        let chunkSize = (descriptor.useIntelligentIngestion ? Defaults.ChunkSize.ii : Defaults.ChunkSize.regular).rawValue
+                // Step 2) Execute submit parts operation
+                self.executeSubmitPartsOperation(using: descriptor) { (result) in
+                    switch result {
+                    case let .success(partsAndEtags):
+                        guard self.state == .inProgress else { return }
 
-        var failMessage: String?
-
-        // Submit all parts
-        while currentStatus == .inProgress, bytesLeft > 0 {
-            part += 1
-
-            let partSize = Int(min(UInt64(chunkSize), bytesLeft))
-            let offset = (descriptor.filesize - bytesLeft)
-            let partOperation: MultipartUploadSubmitPartOperation
-
-            if descriptor.useIntelligentIngestion {
-                partOperation = MultipartIntelligentUploadSubmitPartOperation(offset: offset,
-                                                                              part: part,
-                                                                              partSize: partSize,
-                                                                              descriptor: descriptor)
-            } else {
-                partOperation = MultipartRegularUploadSubmitPartOperation(offset: offset,
-                                                                          part: part,
-                                                                          partSize: partSize,
-                                                                          descriptor: descriptor)
-            }
-
-            masterProgress.addChild(partOperation.progress, withPendingUnitCount: Int64(partSize))
-
-            weak var weakPartOperation = partOperation
-
-            let checkpointOperation = BlockOperation {
-                guard let partOperation = weakPartOperation else { return }
-
-                if partOperation.didFail {
-                    failMessage = "Part operation did fail."
-                }
-
-                if !descriptor.useIntelligentIngestion {
-                    if let responseEtag = partOperation.responseEtag {
-                        partsAndEtags[partOperation.part] = responseEtag
-                    } else {
-                        failMessage = "Part operation was expected to provide response ETags."
+                        // Step 3) Execute complete operation
+                        self.executeCompleteOperation(using: partsAndEtags, descriptor: descriptor) { (result) in
+                            switch result {
+                            case let .success(response):
+                                self.finish(with: .success(response))
+                            case let .failure(error):
+                                self.finish(with: .failure(error))
+                            }
+                        }
+                    case let .failure(error):
+                        self.finish(with: .failure(error))
                     }
                 }
-
-                if self.currentStatus != .inProgress {
-                    self.partOperationQueue.cancelAllOperations()
-                }
-            }
-
-            checkpointOperation.addDependency(partOperation)
-            partOperationQueue.addOperation(partOperation)
-            partOperationQueue.addOperation(checkpointOperation)
-
-            bytesLeft -= UInt64(partSize)
-        }
-
-        masterOperationQueue.addOperation {
-            self.partOperationQueue.waitUntilAllOperationsAreFinished()
-
-            if let failMessage = failMessage {
-                let error = MultipartUploadError.custom(description: failMessage)
-                self.fail(with: error)
-            } else {
-                self.addCompleteOperation(partsAndEtags: partsAndEtags,
-                                          descriptor: descriptor,
-                                          retriesLeft: Defaults.maxRetries)
+            case let .failure(error):
+                self.finish(with: .failure(error))
             }
         }
     }
 
-    /// Calls `multipart/start`, and, assuming uploadable is valid and the request succeeds, returns a
-    /// `MultipartUploadDescriptor`.
-    func setupUploadDescriptor() -> UploadDescriptor? {
+    /// Executes the start operation.
+    ///
+    /// - Parameter completion: On success, returns an `UploadDescriptor`, otherwise returns an error.
+    func executeStartOperation(completion: @escaping (StartUploadOperation.Result) -> Void) {
+        guard state == .inProgress else { return }
+
         let filename = options.storeOptions.filename ?? uploadable.filename ?? UUID().uuidString
         let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
 
-        guard let filesize = uploadable.size, !filename.isEmpty else {
-            fail(with: MultipartUploadError.invalidFile)
-            return nil
-        }
-
-        let startOperation = MultipartUploadStartOperation(apiKey: apiKey,
-                                                           fileName: filename,
-                                                           fileSize: filesize,
-                                                           mimeType: mimeType,
-                                                           storeOptions: options.storeOptions,
-                                                           security: security,
-                                                           multipart: options.preferIntelligentIngestion)
-
-        guard currentStatus == .inProgress else { return nil }
-
-        masterOperationQueue.addOperation(startOperation)
-        masterOperationQueue.waitUntilAllOperationsAreFinished()
-
-        // Ensure that there's a response and JSON payload or fail.
-        guard let json = startOperation.response?.json else {
-            let error = MultipartUploadError.custom(description: "Unable to obtain JSON from /multipart/start response.")
-            fail(with: error)
-            return nil
-        }
-
-        // Did the REST API return an error? Fail and send the error downstream.
-        if let apiErrorDescription = json["error"] as? String {
-            fail(with: MultipartUploadError.custom(description: "API Error: \(apiErrorDescription)"))
-            return nil
-        }
-
-        // Ensure that there's an uri, region, and upload_id in the JSON payload or fail.
-        guard let uri = json["uri"] as? String,
-              let region = json["region"] as? String,
-              let uploadID = json["upload_id"] as? String else {
-            let error = MultipartUploadError.custom(description: "JSON payload is missing required parameters.")
-            fail(with: error)
-            return nil
-        }
-
-        // Detect whether intelligent ingestion is available.
-        // The JSON payload should contain an "upload_type" field with value "intelligent_ingestion".
-        let canUseIntelligentIngestion: Bool
-
-        if let uploadType = json["upload_type"] as? String, uploadType == "intelligent_ingestion" {
-            canUseIntelligentIngestion = true
-        } else {
-            canUseIntelligentIngestion = false
+        guard let filesize = uploadable.size, filesize > 0, !filename.isEmpty else {
+            finish(with: .failure(Error.custom("The provided uploadable is invalid or cannot be found.")))
+            return
         }
 
         guard let reader = uploadable.reader else {
-            let error = MultipartUploadError.custom(description: "Unable to instantiate uploadable data reader.")
-            fail(with: error)
-            return nil
+            finish(with: .failure(Error.custom("Unable to instantiate uploadable data reader.")))
+            return
         }
 
-        let descriptor = UploadDescriptor(
-            apiKey: apiKey,
-            security: security,
-            options: options,
-            reader: reader,
-            filename: filename,
-            filesize: filesize,
-            mimeType: mimeType,
-            uri: uri,
-            region: region,
-            uploadID: uploadID,
-            useIntelligentIngestion: canUseIntelligentIngestion
-        )
+        let startOperation = StartUploadOperation(config: config,
+                                                           options: options,
+                                                           reader: reader,
+                                                           filename: filename,
+                                                           filesize: filesize,
+                                                           mimeType: mimeType)
 
-        return descriptor
+        masterOperationQueue.addOperation(startOperation)
+        masterOperationQueue.addOperation { completion(startOperation.result) }
     }
 
-    func addCompleteOperation(partsAndEtags: [Int: String],
-                              descriptor: UploadDescriptor,
-                              retriesLeft: Int) {
-        let completeOperation = MultipartUploadCompleteOperation(partsAndEtags: partsAndEtags, descriptor: descriptor)
+    /// Executes the submit parts operation.
+    ///
+    /// - Parameter descriptor: The `UploadDescriptor` to use as input.
+    /// - Parameter completion: On success, returns a `[Int: String]` dictionary with parts and Etags
+    /// (will be empty if Intelligent Ingestion is used), otherwise returns an error.
+    func executeSubmitPartsOperation(using descriptor: UploadDescriptor, completion: @escaping (SubmitPartsUploadOperation.Result) -> Void) {
+        guard self.state == .inProgress else { return }
 
-        weak var weakCompleteOperation = completeOperation
+        let submitPartsOperation = SubmitPartsUploadOperation(using: descriptor)
+        let pendingUnitCount = Int64(descriptor.filesize)
 
-        let checkpointOperation = BlockOperation {
-            guard let completeOperation = weakCompleteOperation else { return }
-            let jsonResponse = completeOperation.response
-            let isNetworkError = jsonResponse.response == nil && jsonResponse.error != nil
+        masterOperationQueue.addOperation(submitPartsOperation)
+        masterProgress.addChild(submitPartsOperation.progress, withPendingUnitCount: pendingUnitCount)
+        masterOperationQueue.addOperation { completion(submitPartsOperation.result) }
+    }
 
-            // Check for any error response
-            if jsonResponse.response?.statusCode != 200 || isNetworkError {
-                if retriesLeft > 0 {
-                    let delay = isNetworkError ? 0 : pow(2, Double(Defaults.maxRetries - retriesLeft))
+    /// Executes the complete operation.
+    ///
+    /// - Parameter partsAndEtags: A `[Int: String]` dictionary to use as input.
+    /// - Parameter descriptor: The `UploadDescriptor` to use as input.
+    /// - Parameter completion: On success, returns a `JSONResponse` containing the response from the API server,
+    ///  otherwise returns an error.
+    func executeCompleteOperation(using partsAndEtags: [Int: String],
+                                  descriptor: UploadDescriptor,
+                                  completion: @escaping (CompleteUploadOperation.Result) -> Void) {
+        guard state == .inProgress else { return }
 
-                    // Retry in `delay` seconds
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                        self.addCompleteOperation(partsAndEtags: partsAndEtags,
-                                                  descriptor: descriptor,
-                                                  retriesLeft: retriesLeft - 1)
-                    }
-                } else {
-                    let error = MultipartUploadError.custom(
-                        description: "Unable to submit complete operation after \(Defaults.maxRetries)."
-                    )
+        let completeOperation = CompleteUploadOperation(partsAndEtags: partsAndEtags,
+                                                        retries: Defaults.maxRetries,
+                                                        descriptor: descriptor)
 
-                    self.fail(with: error)
-                    return
-                }
-            } else {
-                // Return response to the user.
-                self.queue.async {
-                    self.currentStatus = .completed
-                    self.completionHandler?(jsonResponse)
-                }
-            }
-        }
-
-        checkpointOperation.addDependency(completeOperation)
         masterOperationQueue.addOperation(completeOperation)
-        masterOperationQueue.addOperation(checkpointOperation)
+        masterOperationQueue.addOperation { completion(completeOperation.result) }
     }
 }
 
@@ -364,13 +295,5 @@ extension MultipartUpload {
 private extension MultipartUpload {
     struct Defaults {
         static let maxRetries = 5
-
-        /// Chunksize depending on upload type.
-        enum ChunkSize: Int {
-            /// Regular (5 megabytes)
-            case regular = 5_242_880
-            /// Intelligent Ingestion (8 megabytes)
-            case ii = 8_388_608
-        }
     }
 }

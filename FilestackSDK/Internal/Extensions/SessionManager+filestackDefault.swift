@@ -12,9 +12,17 @@ import Foundation
 private class BundleFinder {}
 
 extension SessionManager {
-    static var filestackDefault: SessionManager = {
-        let bundleIdentifier = Bundle.main.bundleIdentifier!
-        let configuration = URLSessionConfiguration.background(withIdentifier: bundleIdentifier)
+    static func filestack(background: Bool = false) -> SessionManager {
+        let configuration: URLSessionConfiguration
+
+        if background {
+            let bundleIdentifier = Bundle.main.bundleIdentifier!
+            configuration = .background(withIdentifier: bundleIdentifier)
+            configuration.shouldUseExtendedBackgroundIdleMode = true
+        } else {
+            configuration = .default
+        }
+
         var defaultHeaders = SessionManager.defaultHTTPHeaders
 
         defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
@@ -24,7 +32,7 @@ extension SessionManager {
         configuration.httpAdditionalHeaders = defaultHeaders
 
         return SessionManager(configuration: configuration)
-    }()
+    }
 
     // MARK: - Private Functions
 

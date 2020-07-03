@@ -9,8 +9,7 @@
 import Foundation
 
 struct UploadDescriptor {
-    let apiKey: String
-    let security: Security?
+    let config: Config
     let options: UploadOptions
     let reader: UploadableReader
     let filename: String

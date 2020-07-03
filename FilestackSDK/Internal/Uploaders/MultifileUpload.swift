@@ -13,55 +13,51 @@ class MultifileUpload: Uploader, DeferredAdd {
     // MARK: - Internal Properties
 
     let uuid = UUID()
-    let masterProgress = MirroredProgress()
     var uploadProgress: ((Progress) -> Void)?
-    var completionHandler: (([NetworkJSONResponse]) -> Void)?
+    var completionHandler: (([JSONResponse]) -> Void)?
+
+    private(set) lazy var progress: Progress = {
+        let progress = Progress()
+
+        progress.kind = .file
+        progress.fileOperationKind = .copying
+
+        return progress
+    }()
 
     // MARK: - Private Properties
 
     private var pendingUploads = [MultipartUpload]()
-    private var uploadResponses = [NetworkJSONResponse]()
-
-    private var currentOperation: MultipartUpload?
-    private var masterProgressFractionCompletedObserver: NSKeyValueObservation?
+    private var uploadResponses = [JSONResponse]()
+    private var masterProgressObservers: [NSKeyValueObservation] = []
+    private let masterProgress = Progress()
 
     private let queue: DispatchQueue
-    private let apiKey: String
+    private let config: Config
     private let options: UploadOptions
-    private let security: Security?
     private let uploadQueue: DispatchQueue = DispatchQueue(label: "com.filestack.multi-upload-queue")
+    private var uploadables: [Uploadable] = []
 
     // MARK: - Lifecycle
 
-    init(using uploadables: [Uploadable]? = nil,
-         options: UploadOptions,
-         queue: DispatchQueue = .main,
-         apiKey: String,
-         security: Security? = nil) {
+    init(using uploadables: [Uploadable]? = nil, options: UploadOptions, config: Config, queue: DispatchQueue = .main) {
         self.options = options
+        self.config = config
         self.queue = queue
-        self.apiKey = apiKey
-        self.security = security
-
-        masterProgressFractionCompletedObserver = masterProgress.observe(\.fractionCompleted, options: [.new]) { _, _ in
-            queue.async {
-                self.uploadProgress?(self.progress)
-            }
-        }
 
         if let uploadables = uploadables {
-            uploadQueue.sync {
-                enqueueUploadables(uploadables: uploadables)
-            }
+            self.uploadables = uploadables
+            uploadQueue.sync { upload() }
         }
     }
 
     // MARK: - Uploadable Protocol Implementation
 
-    private(set) var currentStatus: UploadStatus = .notStarted {
+    private(set) var state: UploadState = .notStarted {
         didSet {
-            switch currentStatus {
+            switch state {
             case .cancelled:
+                masterProgress.cancel()
                 progress.cancel()
             default:
                 break
@@ -69,20 +65,18 @@ class MultifileUpload: Uploader, DeferredAdd {
         }
     }
 
-    lazy var progress = {
-        masterProgress.mirror
-    }()
-
     @discardableResult func cancel() -> Bool {
-        switch currentStatus {
+        switch state {
         case .notStarted:
             fallthrough
         case .inProgress:
             uploadQueue.sync {
-                currentOperation?.cancel()
+                for upload in pendingUploads {
+                    upload.cancel()
+                }
+
                 stopUpload()
             }
-
             return true
         default:
             return false
@@ -90,31 +84,24 @@ class MultifileUpload: Uploader, DeferredAdd {
     }
 
     @discardableResult func start() -> Bool {
-        switch currentStatus {
+        switch state {
         case .notStarted:
-            uploadQueue.sync {
-                uploadNextFile()
-            }
-
+            uploadQueue.sync { uploadNext() }
             return true
         default:
             return false
         }
     }
 
-    func uploadFiles() {
-        start()
-    }
-
     // MARK: - DeferredAdd Protocol Implementation
 
     @discardableResult func add(uploadables: [Uploadable]) -> Bool {
-        switch currentStatus {
+        switch state {
         case .notStarted:
             uploadQueue.sync {
-                self.enqueueUploadables(uploadables: uploadables)
+                self.uploadables = uploadables
+                upload()
             }
-
             return true
         default:
             return false
@@ -122,68 +109,121 @@ class MultifileUpload: Uploader, DeferredAdd {
     }
 }
 
+// MARK: - Deprecated
+
+extension MultifileUpload {
+    @available(*, deprecated, message: "Marked for removal in version 3.0. Use start() instead.")
+    func uploadFiles() {
+        start()
+    }
+}
+
+// MARK: - Private Functions
+
 private extension MultifileUpload {
+    func removeProgressObservers() {
+        masterProgressObservers.removeAll()
+    }
+
+    func setupProgressObserver() {
+        removeProgressObservers()
+
+        masterProgressObservers.append(masterProgress.observe(\.totalUnitCount, options: [.new]) { progress, _ in
+            self.progress.totalUnitCount = progress.totalUnitCount
+
+            self.queue.async {
+                self.uploadProgress?(self.progress)
+            }
+        })
+
+        masterProgressObservers.append(masterProgress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
+            self.progress.completedUnitCount = Int64(progress.fractionCompleted * Double(progress.totalUnitCount))
+
+            self.queue.async {
+                self.uploadProgress?(self.progress)
+            }
+        })
+    }
+
     // Enqueue uploadables
-    func enqueueUploadables(uploadables: [Uploadable]) {
-        // Map uploadables into `MultipartUpload`,
-        // discarding uploadables that can't report size (e.g., an unexisting URL.)
-        let uploads: [MultipartUpload] = uploadables.compactMap { uploadable in
-            guard uploadable.size != nil else { return nil }
+    func upload() {
+        setupProgressObserver()
 
-            return MultipartUpload(using: uploadable, options: options, queue: queue, apiKey: apiKey, security: security)
-        }
+        var totalUploadingBytes: UInt64 = 0
 
-        // Append uploads to `pendingUploads`.
-        pendingUploads.append(contentsOf: uploads)
-        // Update progress total unit count so it matches the `pendingUploads` count.
-        masterProgress.totalUnitCount = Int64(pendingUploads.count)
+        for uploadable in uploadables {
+            guard let uploadableSize = uploadable.size else { continue }
 
-        // Set upload progress and completion handlers and add upload progress as a child of our main `progress` object
-        // so we can track all uploads from our main `progress` object.
-        for upload in uploads {
+            totalUploadingBytes += uploadableSize
+
+            let upload = MultipartUpload(using: uploadable, options: options, config: config, queue: queue)
+
+            // Set upload progress and completion handlers and add upload progress as a child of our main `progress` object
+            // so we can track all uploads from our main `progress` object.
             upload.completionHandler = { self.finished(upload: upload, response: $0) }
-            masterProgress.addChild(upload.masterProgress, withPendingUnitCount: 1)
+            // Add `upload.masterProgress` as a child our our `masterProgress`.
+            masterProgress.addChild(upload.progress, withPendingUnitCount: Int64(uploadableSize))
+
+            // Append upload to `pendingUploads`.
+            pendingUploads.append(upload)
         }
+
+        // Update `fileCompletedCount` and `fileTotalCount`.
+        progress.fileTotalCount = pendingUploads.count
+        progress.fileCompletedCount = 0
+
+        // Update `totalUnitCount`
+        masterProgress.totalUnitCount = Int64(totalUploadingBytes)
     }
 
-    func finished(upload: MultipartUpload, response: NetworkJSONResponse) {
-        pendingUploads.removeAll { $0 == upload }
+    func finished(upload: MultipartUpload, response: JSONResponse) {
+        remove(upload: upload)
         uploadResponses.append(response)
-        uploadNextFile()
+        progress.fileCompletedCount = uploadResponses.count
+        uploadNext()
     }
 
-    func uploadNextFile() {
-        guard [.inProgress, .notStarted].contains(currentStatus), let nextUpload = pendingUploads.first else {
+    func remove(upload: MultipartUpload) {
+        upload.completionHandler = nil
+        upload.uploadProgress = nil
+
+        pendingUploads.removeAll { $0 == upload }
+    }
+
+    func uploadNext() {
+        guard state == .inProgress || state == .notStarted, let nextUpload = pendingUploads.first else {
             stopUpload()
             return
         }
 
-        currentStatus = .inProgress
-        currentOperation = nextUpload
+        state = .inProgress
 
         nextUpload.start()
     }
 
     func stopUpload() {
-        guard ![.completed, .cancelled].contains(currentStatus) else { return }
+        guard state == .inProgress || state == .notStarted else { return }
 
-        if masterProgress.completedUnitCount == masterProgress.totalUnitCount {
-            currentStatus = .completed
+        removeProgressObservers()
+
+        if progress.completedUnitCount == progress.totalUnitCount {
+            state = .completed
         } else {
-            currentStatus = .cancelled
+            state = .cancelled
         }
 
-        while uploadResponses.count < masterProgress.totalUnitCount {
-            uploadResponses.append(NetworkJSONResponse(with: MultipartUploadError.aborted))
+        var responses = uploadResponses
+
+        while responses.count < uploadables.count {
+            responses.append(JSONResponse(with: Error.cancelled))
         }
 
         queue.async {
-            self.completionHandler?(self.uploadResponses)
+            self.completionHandler?(responses)
             // To ensure this object can be properly deallocated we must ensure that any closures are niled,
             // and `currentOperation` object is niled as well.
             self.completionHandler = nil
             self.uploadProgress = nil
-            self.currentOperation = nil
         }
     }
 }

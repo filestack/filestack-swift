@@ -14,7 +14,7 @@ public protocol Uploader: Monitorizable, Startable, Cancellable {
     /// Uploader UUID.
     var uuid: UUID { get }
     /// Current upload status.
-    var currentStatus: UploadStatus { get }
+    var state: UploadState { get }
 }
 
 // MARK: - Equatable Conformance
