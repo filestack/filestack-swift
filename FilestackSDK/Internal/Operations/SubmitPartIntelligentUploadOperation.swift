@@ -158,9 +158,9 @@ private extension SubmitPartIntelligentUploadOperation {
 
 private extension SubmitPartIntelligentUploadOperation {
     struct Defaults {
-        static let resumableMobileChunkSize = 1 * Int(pow(Double(1024), Double(2)))
-        static let resumableDesktopChunkSize = 8 * Int(pow(Double(1024), Double(2)))
-        static let minimumPartChunkSize = 32768
+        static let resumableMobileChunkSize = 1_048_576
+        static let resumableDesktopChunkSize = 8_388_608
+        static let minimumPartChunkSize = 32_768
         static let maxRetries: Int = 5
     }
 }
