@@ -51,8 +51,8 @@ class TaskRetrier<Result> {
 
     /// Starts executing and retries until success using the configured backoff strategy.
     ///
-    /// User should call `semaphore.signal()` after result is received and assigned and `semaphore.wait()` before
-    /// returning the value.
+    /// User should call `semaphore.wait()` while waiting for the return value, and, `semaphore.signal()` after result
+    /// is obtained.
     func run() -> Result? {
         runQueue.sync { doRun() }
     }
