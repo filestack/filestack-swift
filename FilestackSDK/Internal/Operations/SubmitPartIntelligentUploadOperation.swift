@@ -88,9 +88,13 @@ private extension SubmitPartIntelligentUploadOperation {
             return nil
         }
 
-        descriptor.reader.seek(position: offset + chunkOffset)
+        let reader = descriptor.reader
 
-        let data = descriptor.reader.read(amount: chunkSize)
+        let data: Data = reader.sync {
+            reader.seek(position: self.offset + chunkOffset)
+            return reader.read(amount: chunkSize)
+        }
+
         let operation = SubmitChunkUploadOperation(data: data, offset: chunkOffset, part: number, descriptor: descriptor)
         let validateOperation = self.validateOperation(for: operation, retries: retries)
 

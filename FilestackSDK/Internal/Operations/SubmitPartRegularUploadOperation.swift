@@ -24,11 +24,10 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
     private var beforeCommitCheckPointOperation: BlockOperation?
     private var uploadRequest: UploadRequest?
 
-    private lazy var data: Data = {
+    private lazy var data: Data = descriptor.reader.sync {
         descriptor.reader.seek(position: offset)
-
         return descriptor.reader.read(amount: size)
-    }()
+    }
 
     // MARK: - Lifecycle
 
