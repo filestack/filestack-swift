@@ -12,4 +12,5 @@ protocol UploadableReader {
     var size: UInt64 { get }
     func seek(position: UInt64)
     func read(amount: Int) -> Data
+    func sync<T>(execute work: () throws -> T) rethrows -> T
 }
