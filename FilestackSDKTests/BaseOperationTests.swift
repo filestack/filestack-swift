@@ -31,7 +31,7 @@ func serialOperationQueue() -> OperationQueue {
 }
 
 class BaseOperationTests: XCTestCase {
-    func testNotStartedOperation() throws {
+    func testReadyOperation() throws {
         let operation = WorkOperation<Bool>() { _ in }
 
         // Assert flags
@@ -66,7 +66,7 @@ class BaseOperationTests: XCTestCase {
         case let .success(result):
             XCTAssertEqual(result, true)
         case .failure(_):
-            XCTFail("Should not fail.")
+            XCTFail()
         }
     }
 
@@ -125,5 +125,77 @@ class BaseOperationTests: XCTestCase {
         case let .failure(error):
             XCTAssertEqual(error.localizedDescription, Error.cancelled.localizedDescription)
         }
+    }
+
+    func testObserversOnCancelledOperation() throws {
+        let queue = serialOperationQueue()
+        let semaphore = DispatchSemaphore(value: 0)
+
+        let operation = WorkOperation<Bool>() { work in
+            Thread.sleep(forTimeInterval: 5)
+            work.finish(with: .success(true))
+        }
+
+        let isExecutingExpectation = self.expectation(description: "should change `isExecuting` to true")
+        let isFinishedExpectation = self.expectation(description: "should change `isFinished` to true")
+        let isCancelledExpectation = self.expectation(description: "should change `isCancelled` to true")
+
+        var observers: [NSKeyValueObservation] = []
+
+        observers.append(operation.observe(\.isExecuting, options: [.new]) { (operation, change) in
+            if change.newValue == true {
+                isExecutingExpectation.fulfill()
+            }
+        })
+
+        observers.append(operation.observe(\.isFinished, options: [.new]) { (operation, change) in
+            if change.newValue == true {
+                isFinishedExpectation.fulfill()
+            }
+        })
+
+        observers.append(operation.observe(\.isCancelled, options: [.new]) { (operation, change) in
+            if change.newValue == true {
+                isCancelledExpectation.fulfill()
+            }
+        })
+
+        queue.addOperation(operation)
+        _ = semaphore.wait(timeout: .now() + .milliseconds(500))
+
+        // Cancel ongoing operation.
+        operation.cancel()
+
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testObserversOnFinishingOperation() throws {
+        let queue = serialOperationQueue()
+
+        let operation = WorkOperation<Bool>() { work in
+            Thread.sleep(forTimeInterval: 1)
+            work.finish(with: .success(true))
+        }
+
+        let isExecutingExpectation = self.expectation(description: "should change `isExecuting` to true")
+        let isFinishedExpectation = self.expectation(description: "should change `isFinished` to true")
+
+        var observers: [NSKeyValueObservation] = []
+
+        observers.append(operation.observe(\.isExecuting, options: [.new]) { (operation, change) in
+            if change.newValue == true {
+                isExecutingExpectation.fulfill()
+            }
+        })
+
+        observers.append(operation.observe(\.isFinished, options: [.new]) { (operation, change) in
+            if change.newValue == true {
+                isFinishedExpectation.fulfill()
+            }
+        })
+
+        queue.addOperation(operation)
+
+        waitForExpectations(timeout: 5, handler: nil)
     }
 }
