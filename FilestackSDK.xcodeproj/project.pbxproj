@@ -388,7 +388,6 @@
 				45E07AA922AFA58000CD4573 /* SubmitPartIntelligentUploadOperation.swift */,
 				45E07AA822AFA58000CD4573 /* SubmitPartRegularUploadOperation.swift */,
 				45CB774A24AE0D050047BED4 /* SubmitPartsUploadOperation.swift */,
-				45965C6A1F20C47B005689BA /* SubmitPartUploadOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -543,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				4551400C1F0E97E2006DB972 /* NetworkingService.swift */,
+				45965C6A1F20C47B005689BA /* SubmitPartUploadOperation.swift */,
 				45B63B0723279ED10040BFBB /* UploadableReader.swift */,
 			);
 			path = Protocols;

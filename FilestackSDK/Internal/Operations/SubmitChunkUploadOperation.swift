@@ -82,7 +82,7 @@ private extension SubmitChunkUploadOperation {
               let headers = headers(from: response),
               let uploadRequest = UploadService.upload(data: data, to: url, method: .put, headers: headers)
         else {
-            self.finish(with: .failure(Error.unknown))
+            finish(with: .failure(Error.unknown))
             return
         }
 

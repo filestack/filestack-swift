@@ -84,7 +84,7 @@ private extension SubmitPartIntelligentUploadOperation {
         guard !isCancelled else { return nil }
 
         guard retries > 0 else {
-            self.finish(with: .failure(Error.custom("Too many retries.")))
+            finish(with: .failure(Error.custom("Too many retries.")))
             return nil
         }
 

@@ -246,7 +246,7 @@ private extension MultipartUpload {
     /// - Parameter completion: On success, returns a `[Int: String]` dictionary with parts and Etags
     /// (will be empty if Intelligent Ingestion is used), otherwise returns an error.
     func executeSubmitPartsOperation(using descriptor: UploadDescriptor, completion: @escaping (SubmitPartsUploadOperation.Result) -> Void) {
-        guard self.state == .inProgress else { return }
+        guard state == .inProgress else { return }
 
         let submitPartsOperation = SubmitPartsUploadOperation(using: descriptor)
         let pendingUnitCount = Int64(descriptor.filesize)

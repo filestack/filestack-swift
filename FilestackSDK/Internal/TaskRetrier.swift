@@ -18,7 +18,7 @@ enum BackoffStrategy {
 /// Encapsulates a mechanism that retries a task with configurable attempts and backoff strategy.
 ///
 /// Task is assumed to have succeeded if the task block returns `Result`, however if it receives `nil`, it will keep
-/// retrying using the configured the backoff strategy.
+/// retrying using the configured backoff strategy.
 class TaskRetrier<Result> {
     // MARK: - Internal Properties
 

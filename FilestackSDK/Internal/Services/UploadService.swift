@@ -50,11 +50,9 @@ extension UploadService {
 
         do {
             try data.write(to: dataURL)
-
             return dataURL
         } catch {
             os_log("Unable to create temporary data file at %@", log: .uploads, type: .fault, dataURL.description)
-
             return nil
         }
     }
