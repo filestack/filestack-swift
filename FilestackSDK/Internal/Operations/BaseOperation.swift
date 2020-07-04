@@ -12,25 +12,29 @@ import Foundation
 class BaseOperation<Success>: Operation {
     typealias Result = Swift.Result<Success, Swift.Error>
 
-    var result: Result = .failure(Error.unknown)
+    // MARK: - Private Properties
 
-    var state = State.ready {
+    private var lockQueue = DispatchQueue(label: "lock-queue")
+
+    private var _result: Result = .failure(Error.unknown)
+
+    private var _state = State.ready {
         willSet {
-            willChangeValue(forKey: state.description)
+            willChangeValue(forKey: _state.description)
             willChangeValue(forKey: newValue.description)
         }
 
         didSet {
             didChangeValue(forKey: oldValue.description)
-            didChangeValue(forKey: state.description)
+            didChangeValue(forKey: _state.description)
         }
     }
 
     // MARK: - Operation Overrides
 
-    override var isReady: Bool { state == .ready }
-    override var isExecuting: Bool { state == .executing }
-    override var isFinished: Bool { state == .finished }
+    override var isReady: Bool { _state == .ready }
+    override var isExecuting: Bool { _state == .executing }
+    override var isFinished: Bool { _state == .finished }
 
     override func start() {
         state = .executing
@@ -54,6 +58,20 @@ class BaseOperation<Success>: Operation {
     func finish(with result: Result) {
         self.result = result
         state = .finished
+    }
+}
+
+// MARK: - Synchronized Properties
+
+extension BaseOperation {
+    private(set) var result: Result {
+        get { lockQueue.sync { _result } }
+        set { lockQueue.sync { _result = newValue } }
+    }
+
+    var state: State {
+        get { lockQueue.sync { _state } }
+        set { lockQueue.sync { _state = newValue } }
     }
 }
 
