@@ -29,8 +29,8 @@ class SubmitPartsUploadOperation: BaseOperation<[Int: String]> {
 
     init(using descriptor: UploadDescriptor) {
         self.descriptor = descriptor
+
         super.init()
-        state = .ready
     }
 }
 
@@ -84,7 +84,7 @@ private extension SubmitPartsUploadOperation {
 
         // Operation to run after all other operations completed.
         let finalOperation = BlockOperation {
-            guard self.state != .finished else { return }
+            guard self.isExecuting else { return }
 
             if !self.descriptor.useIntelligentIngestion && partsAndEtags.isEmpty {
                 self.finish(with: .failure(Error.custom("Unable to obtain parts and Etags.")))
@@ -97,7 +97,7 @@ private extension SubmitPartsUploadOperation {
         for operation in operations {
             // Validate operation to be executed after a dependent operation finishes running.
             let validateOperation = BlockOperation {
-                guard self.state != .finished else { return }
+                guard self.isExecuting else { return }
 
                 switch operation.result {
                 case let .success(response):

@@ -25,8 +25,6 @@ class CommitPartUploadOperation: BaseOperation<HTTPURLResponse> {
         self.retries = retries
 
         super.init()
-
-        state = .ready
     }
 }
 

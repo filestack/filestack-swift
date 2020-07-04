@@ -19,7 +19,7 @@ extension Error: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .cancelled:
-            return "The upload operation was cancelled by the user."
+            return "The operation was cancelled by the user."
         case .unknown:
             return "Unknown error."
         case let .api(description):

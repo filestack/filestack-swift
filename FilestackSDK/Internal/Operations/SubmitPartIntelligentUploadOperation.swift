@@ -38,8 +38,6 @@ class SubmitPartIntelligentUploadOperation: BaseOperation<HTTPURLResponse>, Subm
         self.descriptor = descriptor
 
         super.init()
-
-        state = .ready
     }
 }
 
@@ -65,7 +63,7 @@ private extension SubmitPartIntelligentUploadOperation {
         var chunkOffset: UInt64 = 0
         let finishOperation = BlockOperation { self.executeCommit() }
 
-        while !isCancelled, !isFinished, chunkOffset < UInt64(size) {
+        while isExecuting, chunkOffset < UInt64(size) {
             // Guard against EOF
             guard let chunkOperation = submitChunk(chunkOffset: chunkOffset, chunkSize: chunkSize) else { break }
 
@@ -81,7 +79,7 @@ private extension SubmitPartIntelligentUploadOperation {
     }
 
     func submitChunk(chunkOffset: UInt64, chunkSize: Int, retries: Int = Defaults.maxRetries) -> SubmitChunkUploadOperation? {
-        guard !isCancelled else { return nil }
+        guard isExecuting else { return nil }
 
         guard retries > 0 else {
             finish(with: .failure(Error.custom("Too many retries.")))
@@ -139,7 +137,7 @@ private extension SubmitPartIntelligentUploadOperation {
     }
 
     func executeCommit() {
-        guard state != .finished else { return }
+        guard isExecuting else { return }
 
         let commitOperation = CommitPartUploadOperation(descriptor: descriptor, part: number, retries: Defaults.maxRetries)
 

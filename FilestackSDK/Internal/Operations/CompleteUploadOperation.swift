@@ -25,8 +25,6 @@ class CompleteUploadOperation: BaseOperation<JSONResponse> {
         self.descriptor = descriptor
 
         super.init()
-
-        state = .ready
     }
 }
 

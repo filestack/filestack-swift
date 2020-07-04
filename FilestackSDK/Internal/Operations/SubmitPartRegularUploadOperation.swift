@@ -38,8 +38,6 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
         self.descriptor = descriptor
 
         super.init()
-
-        state = .ready
     }
 
     // MARK: - BaseOperation Overrides
@@ -84,7 +82,7 @@ private extension SubmitPartRegularUploadOperation {
 
     /// Uploads the data chunk to the destination URL.
     func uploadDataChunk(using response: JSONResponse) {
-        guard !isCancelled else { return }
+        guard isExecuting else { return }
 
         guard let url = url(from: response),
               let headers = headers(from: response),

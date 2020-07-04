@@ -81,7 +81,7 @@ private extension SubmitChunkUploadOperation {
 
     /// Uploads the data chunk to the destination URL.
     func uploadDataChunk(using response: JSONResponse) {
-        guard !isCancelled else { return }
+        guard isExecuting else { return }
 
         if let apiErrorDescription = error(from: response) {
             finish(with: .failure(Error.api(apiErrorDescription)))
