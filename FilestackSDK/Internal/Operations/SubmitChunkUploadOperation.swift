@@ -74,9 +74,19 @@ private extension SubmitChunkUploadOperation {
         return response.json?["headers"] as? [String: String]
     }
 
+    /// Extracts the error from response.
+    func error(from response: JSONResponse) -> String? {
+        return response.json?["error"] as? String
+    }
+
     /// Uploads the data chunk to the destination URL.
     func uploadDataChunk(using response: JSONResponse) {
         guard !isCancelled else { return }
+
+        if let apiErrorDescription = error(from: response) {
+            finish(with: .failure(Error.api(apiErrorDescription)))
+            return
+        }
 
         guard let url = url(from: response),
               let headers = headers(from: response),

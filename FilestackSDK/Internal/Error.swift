@@ -11,6 +11,7 @@ import Foundation
 enum Error: Swift.Error {
     case cancelled
     case unknown
+    case api(_ description: String)
     case custom(_ description: String)
 }
 
@@ -21,6 +22,8 @@ extension Error: LocalizedError {
             return "The upload operation was cancelled by the user."
         case .unknown:
             return "Unknown error."
+        case let .api(description):
+            return "API Error: \(description)"
         case let .custom(description):
             return description
         }

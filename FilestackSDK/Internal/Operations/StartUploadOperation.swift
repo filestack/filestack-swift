@@ -60,7 +60,7 @@ private extension StartUploadOperation {
 
         // Did the REST API return an error? Fail and send the error downstream.
         if let apiErrorDescription = json["error"] as? String {
-            finish(with: .failure(Error.custom("API Error: \(apiErrorDescription)")))
+            finish(with: .failure(Error.api(apiErrorDescription)))
             return
         }
 
