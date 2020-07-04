@@ -48,16 +48,19 @@ class BaseOperation<Success>: Operation {
     }
 
     override func cancel() {
-        finish(with: .failure(Error.cancelled))
-
         super.cancel()
+
+        finish(with: .failure(Error.cancelled))
     }
 
     // MARK: - Internal Functions
 
     func finish(with result: Result) {
         self.result = result
-        state = .finished
+
+        if !isCancelled {
+            state = .finished
+        }
     }
 }
 
