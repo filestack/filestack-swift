@@ -75,13 +75,7 @@ private extension StartUploadOperation {
 
         // Detect whether intelligent ingestion is available.
         // The JSON payload should contain an "upload_type" field with value "intelligent_ingestion".
-        let canUseIntelligentIngestion: Bool
-
-        if let uploadType = json["upload_type"] as? String, uploadType == "intelligent_ingestion" {
-            canUseIntelligentIngestion = true
-        } else {
-            canUseIntelligentIngestion = false
-        }
+        let canUseIntelligentIngestion = json["upload_type"] as? String == "intelligent_ingestion"
 
         let descriptor = UploadDescriptor(
             config: config,
