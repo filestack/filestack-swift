@@ -76,7 +76,7 @@ private extension TaskRetrier {
                 stopWatch.signalComplete()
                 return result
             } else {
-                stopWatch.signalFail()
+                stopWatch.signalFailedAttempt()
             }
 
             // Determine wait time, depending on strategy.
@@ -104,7 +104,7 @@ private extension TaskRetrier {
 
         private var start: CFTimeInterval?
         private var end: CFTimeInterval?
-        private var attempts: Int = 0
+        private var attempts: Int = 1
 
         private weak var owner: TaskRetrier<Result>?
 
@@ -121,9 +121,9 @@ private extension TaskRetrier {
 private extension TaskRetrier.StopWatch {
     /// Signals task start.
     mutating func signalStart() {
-        guard let owner = owner else { return }
-
         start = CACurrentMediaTime()
+
+        guard let owner = owner else { return }
 
         os_log("Started task \"%@\" %@.",
                log: .retrier,
@@ -131,11 +131,11 @@ private extension TaskRetrier.StopWatch {
                owner.label, owner.uuid.uuidString)
     }
 
-    /// Signals attempt failed.
-    mutating func signalFail() {
-        guard let owner = owner, let elapsedTime = getElapsedTime() else { return }
-
+    /// Signals failed attempt.
+    mutating func signalFailedAttempt() {
         attempts += 1
+
+        guard let owner = owner, let elapsedTime = getElapsedTime() else { return }
 
         os_log("Failed to complete task \"%@\" (%@) started %.2fs ago. Attempt %d of %d.",
                log: .retrier,
@@ -143,13 +143,11 @@ private extension TaskRetrier.StopWatch {
                owner.label, owner.uuid.uuidString, elapsedTime, attempts, owner.attempts)
     }
 
-    /// Signals task completion.
+    /// Signals task complete.
     mutating func signalComplete() {
         guard let owner = owner, let elapsedTime = getElapsedTime() else { return }
 
-        attempts += 1
-
-        os_log("Completed task \"%@\" (%@) in %.2fs after %d attempts.",
+        os_log("Completed task \"%@\" (%@) in %.2fs after %d attempt(s).",
                log: .retrier,
                type: .debug,
                owner.label, owner.uuid.uuidString, elapsedTime, attempts)
