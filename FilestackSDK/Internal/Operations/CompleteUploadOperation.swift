@@ -26,6 +26,14 @@ class CompleteUploadOperation: BaseOperation<JSONResponse> {
 
         super.init()
     }
+
+    // MARK: - BaseOperation Overrides
+
+    override func finish(with result: BaseOperation<JSONResponse>.Result) {
+        retrier = nil
+
+        super.finish(with: result)
+    }
 }
 
 // MARK: - Overrides

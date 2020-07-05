@@ -26,6 +26,14 @@ class CommitPartUploadOperation: BaseOperation<HTTPURLResponse> {
 
         super.init()
     }
+
+    // MARK: - BaseOperation Overrides
+
+    override func finish(with result: BaseOperation<HTTPURLResponse>.Result) {
+        retrier = nil
+
+        super.finish(with: result)
+    }
 }
 
 // MARK: - Overrides
