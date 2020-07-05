@@ -73,10 +73,10 @@ private extension TaskRetrier {
             guard !shouldCancel else { break }
 
             if let result = block(semaphore) {
-                stopWatch.signalComplete()
+                stopWatch.signalComplete(attempts: attempt)
                 return result
             } else {
-                stopWatch.signalFailedAttempt()
+                stopWatch.signalFail(attempts: attempt)
             }
 
             // Determine wait time, depending on strategy.
@@ -104,7 +104,6 @@ private extension TaskRetrier {
 
         private var start: CFTimeInterval?
         private var end: CFTimeInterval?
-        private var attempts: Int = 1
 
         private weak var owner: TaskRetrier<Result>?
 
@@ -132,9 +131,7 @@ private extension TaskRetrier.StopWatch {
     }
 
     /// Signals failed attempt.
-    mutating func signalFailedAttempt() {
-        attempts += 1
-
+    mutating func signalFail(attempts: Int) {
         guard let owner = owner, let elapsedTime = getElapsedTime() else { return }
 
         os_log("Failed to complete task \"%@\" (%@) started %.2fs ago. Attempt %d of %d.",
@@ -144,7 +141,7 @@ private extension TaskRetrier.StopWatch {
     }
 
     /// Signals task complete.
-    mutating func signalComplete() {
+    mutating func signalComplete(attempts: Int) {
         guard let owner = owner, let elapsedTime = getElapsedTime() else { return }
 
         os_log("Completed task \"%@\" (%@) in %.2fs after %d attempt(s).",
