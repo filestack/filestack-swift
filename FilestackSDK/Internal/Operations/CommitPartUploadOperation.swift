@@ -14,15 +14,13 @@ class CommitPartUploadOperation: BaseOperation<HTTPURLResponse> {
 
     private let descriptor: UploadDescriptor
     private let part: Int
-    private let retries: Int
     private var retrier: TaskRetrier<HTTPURLResponse>?
 
     // MARK: - Lifecyle
 
-    required init(descriptor: UploadDescriptor, part: Int, retries: Int) {
+    required init(descriptor: UploadDescriptor, part: Int) {
         self.descriptor = descriptor
         self.part = part
-        self.retries = retries
 
         super.init()
     }
@@ -56,7 +54,7 @@ private extension CommitPartUploadOperation {
     func upload() {
         let uploadURL = URL(string: "multipart/commit", relativeTo: Constants.uploadURL)!
 
-        retrier = .init(attempts: retries, label: uploadURL.relativePath) { (semaphore) -> HTTPURLResponse? in
+        retrier = .init(attempts: Defaults.maxRetries, label: uploadURL.relativePath) { (semaphore) -> HTTPURLResponse? in
             var httpURLResponse: HTTPURLResponse?
 
             UploadService.shared.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
@@ -86,5 +84,13 @@ private extension CommitPartUploadOperation {
         form.append(String(descriptor.filesize), named: "size")
         form.append(String(part), named: "part")
         form.append(descriptor.options.storeOptions.location.description, named: "store_location")
+    }
+}
+
+// MARK: - Defaults
+
+private extension CommitPartUploadOperation {
+    struct Defaults {
+        static let maxRetries = 5
     }
 }

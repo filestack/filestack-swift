@@ -82,7 +82,7 @@ private extension SubmitPartIntelligentUploadOperation {
         guard !isCancelled else { return nil }
 
         guard retries > 0 else {
-            finish(with: .failure(.custom("Too many retries.")))
+            finish(with: .failure(.custom("Exceeded max retries trying to submit data chunk.")))
             return nil
         }
 
@@ -133,7 +133,7 @@ private extension SubmitPartIntelligentUploadOperation {
     func executeCommit() {
         guard !isCancelled else { return }
 
-        let commitOperation = CommitPartUploadOperation(descriptor: descriptor, part: number, retries: Defaults.maxRetries)
+        let commitOperation = CommitPartUploadOperation(descriptor: descriptor, part: number)
 
         commitOperation.completionBlock = {
             switch commitOperation.result {
@@ -155,6 +155,6 @@ private extension SubmitPartIntelligentUploadOperation {
         static let resumableMobileChunkSize = 1_048_576
         static let resumableDesktopChunkSize = 8_388_608
         static let minimumPartChunkSize = 32_768
-        static let maxRetries: Int = 5
+        static let maxRetries = 5
     }
 }

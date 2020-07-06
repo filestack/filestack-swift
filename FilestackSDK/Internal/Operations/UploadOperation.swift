@@ -178,20 +178,10 @@ private extension UploadOperation {
                                   completion: @escaping (CompleteUploadOperation.Result) -> Void) {
         guard !isCancelled else { return }
 
-        let completeOperation = CompleteUploadOperation(partsAndEtags: partsAndEtags,
-                                                        retries: Defaults.maxRetries,
-                                                        descriptor: descriptor)
+        let completeOperation = CompleteUploadOperation(partsAndEtags: partsAndEtags, descriptor: descriptor)
 
         completeOperation.completionBlock = { completion(completeOperation.result) }
 
         operationQueue.addOperation(completeOperation)
-    }
-}
-
-// MARK: - Defaults
-
-private extension UploadOperation {
-    struct Defaults {
-        static let maxRetries = 5
     }
 }

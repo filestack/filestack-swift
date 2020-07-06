@@ -14,14 +14,12 @@ class CompleteUploadOperation: BaseOperation<JSONResponse> {
 
     private let partsAndEtags: [Int: String]
     private let descriptor: UploadDescriptor
-    private let retries: Int
     private var retrier: TaskRetrier<JSONResponse>?
 
     // MARK: - Lifecycle
 
-    required init(partsAndEtags: [Int: String], retries: Int, descriptor: UploadDescriptor) {
+    required init(partsAndEtags: [Int: String], descriptor: UploadDescriptor) {
         self.partsAndEtags = partsAndEtags
-        self.retries = retries
         self.descriptor = descriptor
 
         super.init()
@@ -56,7 +54,7 @@ private extension CompleteUploadOperation {
     func upload() {
         let uploadURL = URL(string: "multipart/complete", relativeTo: Constants.uploadURL)!
 
-        retrier = .init(attempts: retries, label: uploadURL.relativePath) { (semaphore) -> JSONResponse? in
+        retrier = .init(attempts: Defaults.maxRetries, label: uploadURL.relativePath) { (semaphore) -> JSONResponse? in
             var jsonResponse: JSONResponse?
 
             UploadService.shared.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
@@ -100,5 +98,13 @@ private extension CompleteUploadOperation {
             let parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
             form.append(parts, named: "parts")
         }
+    }
+}
+
+// MARK: - Defaults
+
+private extension CompleteUploadOperation {
+    struct Defaults {
+        static let maxRetries = 5
     }
 }
