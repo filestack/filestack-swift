@@ -123,11 +123,15 @@ private extension UploadOperation {
     func executeStartOperation(completion: @escaping (StartUploadOperation.Result) -> Void) {
         guard !isCancelled else { return }
 
-        let filename = options.storeOptions.filename ?? uploadable.filename ?? UUID().uuidString
+        var filename = options.storeOptions.filename ?? uploadable.filename ?? ""
         let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
 
-        guard let filesize = uploadable.size, filesize > 0, !filename.isEmpty else {
-            completion(.failure(.custom("The provided uploadable is invalid or cannot be found.")))
+        if filename.isEmpty {
+            filename = UUID().uuidString
+        }
+
+        guard let filesize = uploadable.size, filesize > 0 else {
+            completion(.failure(.custom("The provided uploadable is either empty or cannot be accessed.")))
             return
         }
 
