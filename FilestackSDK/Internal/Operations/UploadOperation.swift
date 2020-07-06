@@ -124,11 +124,10 @@ private extension UploadOperation {
         guard !isCancelled else { return }
 
         var filename = options.storeOptions.filename ?? uploadable.filename ?? ""
-        let mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? "text/plain"
+        var mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? ""
 
-        if filename.isEmpty {
-            filename = UUID().uuidString
-        }
+        if filename.isEmpty { filename = UUID().uuidString }
+        if mimeType.isEmpty { mimeType = "text/plain" }
 
         guard let filesize = uploadable.size, filesize > 0 else {
             completion(.failure(.custom("The provided uploadable is either empty or cannot be accessed.")))
