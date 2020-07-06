@@ -66,16 +66,9 @@ private extension CommitPartUploadOperation {
 
             semaphore.wait()
 
-            // Validate response.
-            let isWrongStatusCode = httpURLResponse?.statusCode != 200
-            let isNetworkError = httpURLResponse == nil
+            guard httpURLResponse?.statusCode == 200 else { return nil }
 
-            // Check for any error response
-            if isWrongStatusCode || isNetworkError {
-                return nil
-            } else {
-                return httpURLResponse
-            }
+            return httpURLResponse
         }
 
         if let response = retrier?.run() {

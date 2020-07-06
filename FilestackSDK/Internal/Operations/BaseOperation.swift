@@ -10,20 +10,20 @@ import Alamofire
 import Foundation
 
 /// An operation that simplifies state flag handling and provides a method to finish a task delivering a `result`
-/// containing either a `Success` response or a `Swift.Error` response.
+/// containing either a `Success` response or an `Error` response.
 ///
 /// State behavior:
 ///
 /// - The operation, regardless of state, will always return `isReady` true.
-/// - An executing operation will always return `isExecuting` true.
-/// - A finished operation will always return `isFinished` true.
-/// - A cancelled operation will always return `isCancelled` true and also `isFinished` true.
+/// - An executing operation will return `isExecuting` true.
+/// - A finished operation will return `isFinished` true.
+/// - A cancelled operation will return `isCancelled` true.
 class BaseOperation<Success>: Operation {
     typealias Result = Swift.Result<Success, Error>
 
     // MARK: - Private Properties
 
-    private var lockQueue = DispatchQueue(label: "lock-queue")
+    private var lockQueue = DispatchQueue(label: "com.filestack.FilestackSDK.operation-lock-queue")
 
     private var _result: Result = .failure(.custom("Result not unavailable."))
 

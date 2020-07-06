@@ -66,16 +66,9 @@ private extension CompleteUploadOperation {
 
             semaphore.wait()
 
-            // Validate response.
-            let isWrongStatusCode = jsonResponse?.response?.statusCode != 200
-            let isNetworkError = jsonResponse?.response == nil
+            guard jsonResponse?.response?.statusCode == 200 else { return nil }
 
-            // Check for any error response
-            if jsonResponse == nil || isWrongStatusCode || isNetworkError {
-                return nil
-            } else {
-                return jsonResponse
-            }
+            return jsonResponse
         }
 
         if let response = retrier?.run() {
