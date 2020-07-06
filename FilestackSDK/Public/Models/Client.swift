@@ -11,14 +11,6 @@ import Foundation
 /// Represents a client that allows communicating with the [Filestack REST API](https://www.filestack.com/docs/rest-api).
 @objc(FSClient)
 public class Client: NSObject {
-    // MARK: - Public Properties
-
-    /// An API key obtained from the [Developer Portal](http://dev.filestack.com).
-    @objc public var apiKey: String { config.apiKey }
-
-    /// A `Security` object. `nil` by default.
-    @objc public var security: Security? { config.security }
-
     // MARK: - Private Properties
 
     private let config: Config
@@ -44,6 +36,16 @@ public class Client: NSObject {
 
         super.init()
     }
+}
+
+// MARK: - Public Computed Properties
+
+public extension Client {
+    /// An API key obtained from the [Developer Portal](http://dev.filestack.com).
+    @objc var apiKey: String { config.apiKey }
+
+    /// A `Security` object. `nil` by default.
+    @objc var security: Security? { config.security }
 }
 
 // MARK: - Public Functions
@@ -115,16 +117,23 @@ public extension Client {
                 queue: DispatchQueue = .main,
                 uploadProgress: ((Progress) -> Void)? = nil,
                 completionHandler: @escaping (JSONResponse) -> Void) -> Uploader {
-        let mpu = MultipartUpload(using: uploadable, options: options, config: config, queue: queue)
+        let uploader = MultipartUpload(using: [uploadable], options: options, config: config, queue: queue)
 
-        mpu.uploadProgress = uploadProgress
-        mpu.completionHandler = completionHandler
+        uploader.uploadProgress = uploadProgress
 
-        if options.startImmediately {
-            mpu.start()
+        uploader.completionHandler = { responses in
+            if let response = responses.first {
+                completionHandler(response)
+            } else {
+                completionHandler(JSONResponse(with: Error.unknown))
+            }
         }
 
-        return mpu
+        if options.startImmediately {
+            uploader.start()
+        }
+
+        return uploader
     }
 
     /// Uploads an array of `Uploadable` items to a given storage location.
@@ -152,16 +161,16 @@ public extension Client {
                 queue: DispatchQueue = .main,
                 uploadProgress: ((Progress) -> Void)? = nil,
                 completionHandler: @escaping ([JSONResponse]) -> Void) -> Uploader & DeferredAdd {
-        let mpu = MultifileUpload(using: uploadables, options: options, config: config, queue: queue)
+        let uploader = MultipartUpload(using: uploadables, options: options, config: config, queue: queue)
 
-        mpu.uploadProgress = uploadProgress
-        mpu.completionHandler = completionHandler
+        uploader.uploadProgress = uploadProgress
+        uploader.completionHandler = completionHandler
 
         if options.startImmediately {
-            mpu.start()
+            uploader.start()
         }
 
-        return mpu
+        return uploader
     }
 }
 

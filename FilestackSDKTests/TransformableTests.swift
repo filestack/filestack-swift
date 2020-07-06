@@ -1315,7 +1315,7 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transform.url, expectedURL)
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
 
     func testFailedStoreImageTransformation() {
@@ -1345,7 +1345,7 @@ class TransformableTests: XCTestCase {
             XCTAssertNotNil(response.error)
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
 
     func testPDFInfoDocumentTransformationURL() {

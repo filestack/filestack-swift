@@ -85,7 +85,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNotNil(response?.response)
@@ -121,7 +121,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertEqual(response?.request?.url, expectedRequestURL)
@@ -144,7 +144,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertNotNil(response?.request?.url)
 
@@ -171,7 +171,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertNotNil(response?.request?.url)
 
@@ -207,7 +207,7 @@ class FileLinkTests: XCTestCase {
 
         fileLink.getContent(downloadProgress: downloadProgress) { _ in }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
 
     func testGetContentUsingDefaultQueue() {
@@ -227,7 +227,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertTrue(isMainThread!)
     }
@@ -250,7 +250,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertFalse(isMainThread!)
     }
@@ -280,7 +280,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNotNil(response?.response)
@@ -316,7 +316,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertEqual(response?.request?.url, expectedRequestURL)
@@ -340,7 +340,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertNotNil(response?.request?.url)
 
@@ -376,7 +376,7 @@ class FileLinkTests: XCTestCase {
 
         fileLink.download(destinationURL: destinationURL, downloadProgress: downloadProgress) { _ in }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
 
     func testDeleteExistingContent() {
@@ -395,7 +395,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 200)
         XCTAssertNil(response?.error)
@@ -422,7 +422,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertNotNil(response?.error)
@@ -452,7 +452,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(request?.value(forHTTPHeaderField: "Content-Type"), "application/octet-stream")
         XCTAssertEqual(response?.response?.statusCode, 200)
@@ -483,7 +483,7 @@ class FileLinkTests: XCTestCase {
             responseExpectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(request?.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded; charset=utf-8")
         XCTAssertEqual(response?.response?.statusCode, 200)
@@ -507,7 +507,7 @@ class FileLinkTests: XCTestCase {
             responseExpectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertNotNil(response?.error)
@@ -530,7 +530,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         XCTAssertEqual(response?.response?.statusCode, 404)
         XCTAssertNotNil(response?.error)
@@ -564,7 +564,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         let expectedURL = Constants.apiURL
             .appendingPathComponent("tags")
@@ -596,7 +596,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         let expectedURL = Constants.apiURL
             .appendingPathComponent("sfw")
@@ -635,7 +635,7 @@ class FileLinkTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         let expectedBaseURL = Constants.apiURL
             .appendingPathComponent("file")

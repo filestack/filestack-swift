@@ -19,13 +19,13 @@ import Foundation
 /// - A finished operation will always return `isFinished` true.
 /// - A cancelled operation will always return `isCancelled` true and also `isFinished` true.
 class BaseOperation<Success>: Operation {
-    typealias Result = Swift.Result<Success, Swift.Error>
+    typealias Result = Swift.Result<Success, Error>
 
     // MARK: - Private Properties
 
     private var lockQueue = DispatchQueue(label: "lock-queue")
 
-    private var _result: Result = .failure(Error.custom("Result not unavailable."))
+    private var _result: Result = .failure(.custom("Result not unavailable."))
 
     private var _state = State.ready {
         willSet {
@@ -63,18 +63,25 @@ class BaseOperation<Success>: Operation {
 
     override func start() {
         state = .executing
-        main()
+
+        if !isCancelled { main() }
     }
 
     override func cancel() {
         super.cancel()
-        finish(with: .failure(Error.cancelled))
+
+        finish(with: .failure(.cancelled))
     }
 
     // MARK: - Internal Functions
 
     func finish(with result: Result) {
         self.result = result
+
+        if state == .ready {
+            state = .executing
+        }
+
         state = .finished
     }
 }

@@ -12,9 +12,15 @@ import Foundation
 class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
     // MARK: - Internal Properties
 
-    let data: Data
+    // Part offset
+    let partOffset: UInt64
+    // Chunk offset
     let offset: UInt64
+    // Part number
     let part: Int
+    // Chunk size
+    let size: Int
+    // Uploader descriptor
     let descriptor: UploadDescriptor
 
     private(set) lazy var progress: Progress = Progress(totalUnitCount: Int64(data.count))
@@ -23,23 +29,22 @@ class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
 
     private var uploadRequest: UploadRequest?
 
+    private lazy var data: Data = descriptor.reader.sync {
+        descriptor.reader.seek(position: partOffset + offset)
+
+        return descriptor.reader.read(amount: size)
+    }
+
     // MARK: - Lifecycle
 
-    required init(data: Data, offset: UInt64, part: Int, descriptor: UploadDescriptor) {
-        self.data = data
+    required init(partOffset: UInt64, offset: UInt64, size: Int, part: Int, descriptor: UploadDescriptor) {
+        self.partOffset = partOffset
         self.offset = offset
         self.part = part
+        self.size = size
         self.descriptor = descriptor
 
         super.init()
-    }
-
-    // MARK - BaseOperation Overrides
-
-    override func finish(with result: BaseOperation<HTTPURLResponse>.Result) {
-        super.finish(with: result)
-
-        uploadRequest = nil
     }
 }
 
@@ -53,9 +58,9 @@ extension SubmitChunkUploadOperation {
     }
 
     override func cancel() {
-        uploadRequest?.cancel()
-
         super.cancel()
+
+        uploadRequest?.cancel()
     }
 }
 
@@ -81,39 +86,42 @@ private extension SubmitChunkUploadOperation {
 
     /// Uploads the data chunk to the destination URL.
     func uploadDataChunk(using response: JSONResponse) {
-        guard isExecuting else { return }
+        guard !isCancelled else { return }
 
         if let apiErrorDescription = error(from: response) {
-            finish(with: .failure(Error.api(apiErrorDescription)))
+            finish(with: .failure(.api(apiErrorDescription)))
             return
         }
 
         guard let url = url(from: response),
               let headers = headers(from: response),
-              let uploadRequest = UploadService.upload(data: data, to: url, method: .put, headers: headers)
+              let request = UploadService.upload(data: data, to: url, method: .put, headers: headers)
         else {
-            finish(with: .failure(Error.unknown))
+            finish(with: .failure(.unknown))
             return
         }
 
-        self.uploadRequest = uploadRequest
-
-        /// Handle upload progress update.
-        uploadRequest.uploadProgress {
+        // Handle upload progress update.
+        request.uploadProgress {
             self.progress.totalUnitCount = $0.totalUnitCount
             self.progress.completedUnitCount = $0.completedUnitCount
         }
 
-        /// Handle request response.
-        uploadRequest.response { response in
-            DispatchQueue.main.async {
-                if let httpURLResponse = response.response {
-                    self.finish(with: .success(httpURLResponse))
-                } else {
-                    self.finish(with: .failure(response.error ?? Error.unknown))
-                }
+        // Handle request response.
+        request.response { response in
+            self.uploadRequest = nil
+
+            if let error = response.error {
+                self.finish(with: .failure(.wrapped(error)))
+            } else if let httpURLResponse = response.response, httpURLResponse.statusCode == 200 {
+                self.progress.completedUnitCount = self.progress.totalUnitCount
+                self.finish(with: .success(httpURLResponse))
+            } else {
+                self.finish(with: .failure(.unknown))
             }
         }
+
+        uploadRequest = request
     }
 
     /// Encode multipart form data.

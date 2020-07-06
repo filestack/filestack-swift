@@ -18,6 +18,7 @@ class UploadTests: XCTestCase {
     private let partSize = 8 * Int(pow(Double(1024), Double(2)))
     private var currentPart = 1
     private var currentOffset = 0
+    private var client: Client!
 
     private let defaultStoreOptions = StorageOptions(location: .s3, access: .private)
 
@@ -25,12 +26,15 @@ class UploadTests: XCTestCase {
         UploadService.useBackgroundSession = false
         currentPart = 1
         currentOffset = 0
+        client = Client(apiKey: "MY-OTHER-API-KEY", security: Seeds.Securities.basic)
+
         super.setUp()
     }
 
     override func tearDown() {
         super.tearDown()
         OHHTTPStubs.removeAllStubs()
+        client = nil
     }
 
     func testRegularMultiPartUpload() {
@@ -46,12 +50,17 @@ class UploadTests: XCTestCase {
                                           startImmediately: true,
                                           storeOptions: defaultStoreOptions)
 
-        client.upload(using: largeFileURL, options: uploadOptions) { resp in
+        let uploader = client.upload(using: largeFileURL, options: uploadOptions) { resp in
             response = resp
             expectation.fulfill()
         }
 
         waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(UploadTests.largeFileSize))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(UploadTests.largeFileSize))
+        XCTAssertEqual(uploader.progress.fileTotalCount, 1)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
         XCTAssertEqual(hitCount, 1)
         XCTAssertEqual(response?.json?["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
@@ -72,12 +81,17 @@ class UploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
         var json: [String: Any]!
 
-        client.upload(using: largeFileURL) { resp in
+        let uploader = client.upload(using: largeFileURL) { resp in
             json = resp.json
             expectation.fulfill()
         }
 
         waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(UploadTests.largeFileSize))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(UploadTests.largeFileSize))
+        XCTAssertEqual(uploader.progress.fileTotalCount, 1)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
         XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(json["size"] as? Int, UploadTests.largeFileSize)
@@ -98,16 +112,21 @@ class UploadTests: XCTestCase {
 
         var error: Swift.Error!
 
-        let multipartUpload = client.upload(using: sampleFileURL) { resp in
+        let uploader = client.upload(using: sampleFileURL) { resp in
             error = resp.error
             expectation.fulfill()
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            multipartUpload.cancel()
+            uploader.cancel()
         }
 
         waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, 0)
+        XCTAssertEqual(uploader.progress.completedUnitCount, 0)
+        XCTAssertEqual(uploader.progress.fileTotalCount, 1)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
         XCTAssertNotNil(error)
     }
@@ -129,12 +148,17 @@ class UploadTests: XCTestCase {
 
         var response: JSONResponse?
 
-        client.upload(using: largeFileURL) { resp in
+        let uploader = client.upload(using: largeFileURL) { resp in
             response = resp
             expectation.fulfill()
         }
 
         waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, 0)
+        XCTAssertEqual(uploader.progress.completedUnitCount, 0)
+        XCTAssertEqual(uploader.progress.fileTotalCount, 1)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
         XCTAssertNotNil(response?.error)
     }
@@ -157,12 +181,17 @@ class UploadTests: XCTestCase {
 
         var error: Swift.Error?
 
-        client.upload(using: sampleFileURL) { resp in
+        let uploader = client.upload(using: sampleFileURL) { resp in
             error = resp.error
             expectation.fulfill()
         }
 
         waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, 0)
+        XCTAssertEqual(uploader.progress.completedUnitCount, 0)
+        XCTAssertEqual(uploader.progress.fileTotalCount, 1)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
         XCTAssertNotNil(error)
     }
@@ -182,7 +211,7 @@ class UploadTests: XCTestCase {
 
         var response: JSONResponse?
 
-        client.upload(using: largeFileURL, options: uploadOptions) { resp in
+        let uploader = client.upload(using: largeFileURL, options: uploadOptions) { resp in
             response = resp
             expectation.fulfill()
         }
@@ -193,6 +222,11 @@ class UploadTests: XCTestCase {
         XCTAssertNotNil(response?.json)
 
         let json: [String: Any]! = response?.json
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(UploadTests.largeFileSize))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(UploadTests.largeFileSize))
+        XCTAssertEqual(uploader.progress.fileTotalCount, 1)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
         XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(json["size"] as? Int, UploadTests.largeFileSize)
@@ -220,7 +254,7 @@ class UploadTests: XCTestCase {
                                           startImmediately: true,
                                           storeOptions: defaultStoreOptions)
 
-        client.upload(using: [sampleFileURL], options: uploadOptions) { resp in
+        let uploader = client.upload(using: [sampleFileURL], options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
@@ -229,7 +263,14 @@ class UploadTests: XCTestCase {
 
         XCTAssertEqual(hitCount, 1)
         XCTAssertEqual(responses.count, 1)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(UploadTests.sampleFileSize))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(UploadTests.sampleFileSize))
+        XCTAssertEqual(uploader.progress.fileTotalCount, 1)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
+
         let json = responses.first!.json!
+
         XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(json["size"] as? Int, UploadTests.largeFileSize)
         XCTAssertEqual(json["filename"] as? String, "large.jpg")
@@ -250,12 +291,17 @@ class UploadTests: XCTestCase {
                                           startImmediately: true,
                                           storeOptions: defaultStoreOptions)
 
-        client.upload(using: [sampleFileURL, sampleFileURL], options: uploadOptions) { resp in
+        let uploader = client.upload(using: [sampleFileURL, sampleFileURL], options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
 
         waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(UploadTests.sampleFileSize * 2))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(UploadTests.sampleFileSize * 2))
+        XCTAssertEqual(uploader.progress.fileTotalCount, 2)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 2)
 
         XCTAssertEqual(responses.count, 2)
     }
@@ -272,19 +318,26 @@ class UploadTests: XCTestCase {
                                           startImmediately: false,
                                           storeOptions: defaultStoreOptions)
 
-        let mfu = client.upload(options: uploadOptions) { resp in
+        let uploader = client.upload(options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
 
-        mfu.add(uploadables: [sampleFileURL, sampleFileURL])
-        mfu.start()
+        uploader.add(uploadables: [sampleFileURL, sampleFileURL])
+        uploader.start()
 
         waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(UploadTests.sampleFileSize * 2))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(UploadTests.sampleFileSize * 2))
+        XCTAssertEqual(uploader.progress.fileTotalCount, 2)
+        XCTAssertEqual(uploader.progress.fileCompletedCount, 2)
 
         XCTAssertEqual(responses.count, 2)
     }
 }
+
+// MARK: - Private Functions
 
 private extension UploadTests {
     func stubRegularMultipartRequest(hitCount: inout Int, workflows: [String]? = nil) {
@@ -422,10 +475,6 @@ private extension UploadTests {
 
     var largeFileURL: URL {
         return Bundle(for: type(of: self)).url(forResource: "large", withExtension: "jpg")!
-    }
-
-    var client: Client {
-        return Client(apiKey: "MY-OTHER-API-KEY", security: Seeds.Securities.basic)
     }
 
     func json(partName: String) -> [String: Any] {

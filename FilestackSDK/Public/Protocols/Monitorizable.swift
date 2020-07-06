@@ -14,4 +14,3 @@ public protocol Monitorizable {
     /// Returns a `Progress` object that may be used to monitor or cancel this process.
     var progress: Progress { get }
 }
-

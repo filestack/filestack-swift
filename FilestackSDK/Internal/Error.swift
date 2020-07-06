@@ -13,6 +13,7 @@ enum Error: Swift.Error {
     case unknown
     case api(_ description: String)
     case custom(_ description: String)
+    case wrapped(_ error: Swift.Error)
 }
 
 extension Error: LocalizedError {
@@ -26,6 +27,8 @@ extension Error: LocalizedError {
             return "API Error: \(description)"
         case let .custom(description):
             return description
+        case let .wrapped(error):
+            return error.localizedDescription
         }
     }
 }

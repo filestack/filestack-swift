@@ -33,7 +33,7 @@ final class ProcessService: NetworkingServiceWithBaseURL {
             // Most common case
             url.appendPathComponent(source, isDirectory: false)
         } else {
-            url.appendPathComponent("[\((sources.map { $0 }).joined(separator: ","))]", isDirectory: false)
+            url.appendPathComponent("[\(sources.joined(separator: ","))]", isDirectory: false)
         }
 
         return url

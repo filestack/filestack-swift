@@ -63,7 +63,7 @@ private extension SubmitPartIntelligentUploadOperation {
         var chunkOffset: UInt64 = 0
         let finishOperation = BlockOperation { self.executeCommit() }
 
-        while isExecuting, chunkOffset < UInt64(size) {
+        while !isCancelled, chunkOffset < UInt64(size) {
             // Guard against EOF
             guard let chunkOperation = submitChunk(chunkOffset: chunkOffset, chunkSize: chunkSize) else { break }
 
@@ -79,45 +79,35 @@ private extension SubmitPartIntelligentUploadOperation {
     }
 
     func submitChunk(chunkOffset: UInt64, chunkSize: Int, retries: Int = Defaults.maxRetries) -> SubmitChunkUploadOperation? {
-        guard isExecuting else { return nil }
+        guard !isCancelled else { return nil }
 
         guard retries > 0 else {
-            finish(with: .failure(Error.custom("Too many retries.")))
+            finish(with: .failure(.custom("Too many retries.")))
             return nil
         }
 
-        let reader = descriptor.reader
+        let operation = SubmitChunkUploadOperation(partOffset: self.offset,
+                                                   offset: chunkOffset,
+                                                   size: chunkSize,
+                                                   part: number,
+                                                   descriptor: descriptor)
 
-        let data: Data = reader.sync {
-            reader.seek(position: self.offset + chunkOffset)
-            return reader.read(amount: chunkSize)
-        }
+        operation.completionBlock = {
+            guard !self.isCancelled, !operation.isCancelled else { return }
 
-        let operation = SubmitChunkUploadOperation(data: data, offset: chunkOffset, part: number, descriptor: descriptor)
-        let validateOperation = self.validateOperation(for: operation, retries: retries)
-
-        validateOperation.addDependency(operation)
-        chunkUploadOperationQueue.addOperation(operation)
-        chunkUploadOperationQueue.addOperation(validateOperation)
-
-        return operation
-    }
-
-    // Ensures a submit chunk operation succeeded, or retries again up to `retries` times.
-    func validateOperation(for chunkOperation: SubmitChunkUploadOperation, retries: Int) -> Operation {
-        return BlockOperation {
-            switch chunkOperation.result {
-            case .success(let response):
+            // Ensure the operation succeeded, or retry again up to `retries` times.
+            switch operation.result {
+            case let .success(response):
                 if response.statusCode != 200 {
                     // Halve the chunk size and try again.
-                    let chunkSize = chunkOperation.data.count / 2
+                    let chunkSize = operation.size / 2
 
                     guard chunkSize > Defaults.minimumPartChunkSize else {
                         self.cancel()
                         return
                     }
 
-                    var partOffset = chunkOperation.offset
+                    var partOffset = operation.offset
 
                     // Enqueue 2 chunks corresponding to the 2 halves of the failed chunk.
                     for _ in 1 ... 2 {
@@ -129,19 +119,23 @@ private extension SubmitPartIntelligentUploadOperation {
                 }
             case .failure(_):
                 // Try again.
-                guard self.submitChunk(chunkOffset: chunkOperation.offset,
-                                       chunkSize: chunkOperation.data.count,
+                guard self.submitChunk(chunkOffset: operation.offset,
+                                       chunkSize: operation.size,
                                        retries: retries - 1) != nil else { return }
             }
         }
+
+        chunkUploadOperationQueue.addOperation(operation)
+
+        return operation
     }
 
     func executeCommit() {
-        guard isExecuting else { return }
+        guard !isCancelled else { return }
 
         let commitOperation = CommitPartUploadOperation(descriptor: descriptor, part: number, retries: Defaults.maxRetries)
 
-        let finalizeOperation = BlockOperation {
+        commitOperation.completionBlock = {
             switch commitOperation.result {
             case let .success(response):
                 self.finish(with: .success(response))
@@ -150,9 +144,7 @@ private extension SubmitPartIntelligentUploadOperation {
             }
         }
 
-        finalizeOperation.addDependency(commitOperation)
         chunkUploadOperationQueue.addOperation(commitOperation)
-        chunkUploadOperationQueue.addOperation(finalizeOperation)
     }
 }
 

@@ -54,13 +54,13 @@ private extension StartUploadOperation {
     func handleResponse(response: JSONResponse) {
         // Ensure that there's a response and JSON payload or fail.
         guard let json = response.json else {
-            finish(with: .failure(Error.custom("Unable to obtain JSON from /multipart/start response.")))
+            finish(with: .failure(.custom("Unable to obtain JSON from /multipart/start response.")))
             return
         }
 
         // Did the REST API return an error? Fail and send the error downstream.
         if let apiErrorDescription = json["error"] as? String {
-            finish(with: .failure(Error.api(apiErrorDescription)))
+            finish(with: .failure(.api(apiErrorDescription)))
             return
         }
 
@@ -69,7 +69,7 @@ private extension StartUploadOperation {
               let region = json["region"] as? String,
               let uploadID = json["upload_id"] as? String
         else {
-            finish(with: .failure(Error.custom("JSON payload is missing required parameters.")))
+            finish(with: .failure(.custom("JSON payload is missing required parameters.")))
             return
         }
 

@@ -21,11 +21,11 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
 
     // MARK: - Private Properties
 
-    private var beforeCommitCheckPointOperation: BlockOperation?
     private var uploadRequest: UploadRequest?
 
     private lazy var data: Data = descriptor.reader.sync {
         descriptor.reader.seek(position: offset)
+
         return descriptor.reader.read(amount: size)
     }
 
@@ -39,14 +39,6 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
 
         super.init()
     }
-
-    // MARK: - BaseOperation Overrides
-
-    override func finish(with result: BaseOperation<HTTPURLResponse>.Result) {
-        super.finish(with: result)
-
-        uploadRequest = nil
-    }
 }
 
 // MARK: - Operation Overrides
@@ -59,9 +51,9 @@ extension SubmitPartRegularUploadOperation {
     }
 
     override func cancel() {
-        uploadRequest?.cancel()
-
         super.cancel()
+
+        uploadRequest?.cancel()
     }
 }
 
@@ -80,32 +72,45 @@ private extension SubmitPartRegularUploadOperation {
         return response.json?["headers"] as? [String: String]
     }
 
+    /// Extracts the error from response.
+    func error(from response: JSONResponse) -> String? {
+        return response.json?["error"] as? String
+    }
+
     /// Uploads the data chunk to the destination URL.
     func uploadDataChunk(using response: JSONResponse) {
-        guard isExecuting else { return }
+        guard !isCancelled else { return }
+
+        if let apiErrorDescription = error(from: response) {
+            finish(with: .failure(.api(apiErrorDescription)))
+            return
+        }
 
         guard let url = url(from: response),
               let headers = headers(from: response),
               let request = UploadService.upload(data: data, to: url, method: .put, headers: headers)
         else {
-            cancel()
+            finish(with: .failure(.unknown))
             return
         }
 
-        request.uploadProgress { progress in
-            self.progress.totalUnitCount = progress.totalUnitCount
-            self.progress.completedUnitCount = progress.completedUnitCount
+        // Handle upload progress update.
+        request.uploadProgress {
+            self.progress.totalUnitCount = $0.totalUnitCount
+            self.progress.completedUnitCount = $0.completedUnitCount
         }
 
+        // Handle request response.
         request.response { response in
-            DispatchQueue.main.async {
-                if let httpURLResponse = response.response {
-                    self.finish(with: .success(httpURLResponse))
-                } else if let error = response.error {
-                    self.finish(with: .failure(error))
-                } else {
-                    self.finish(with: .failure(Error.unknown))
-                }
+            self.uploadRequest = nil
+
+            if let error = response.error {
+                self.finish(with: .failure(.wrapped(error)))
+            } else if let httpURLResponse = response.response, httpURLResponse.statusCode == 200 {
+                self.progress.completedUnitCount = self.progress.totalUnitCount
+                self.finish(with: .success(httpURLResponse))
+            } else {
+                self.finish(with: .failure(.unknown))
             }
         }
 

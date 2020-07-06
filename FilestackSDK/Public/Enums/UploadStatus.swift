@@ -23,6 +23,7 @@ public enum UploadState: UInt {
     /// Upload was cancelled.
     case cancelled
     /// Upload failed.
+    @available(*, deprecated, message: "Marked for removal in version 3.0.")
     case failed
 }
 

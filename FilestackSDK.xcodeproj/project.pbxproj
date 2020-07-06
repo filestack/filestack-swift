@@ -18,6 +18,7 @@
 		4512EB811FA7655F003A8C38 /* StorageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4512EB801FA7655F003A8C38 /* StorageOptions.swift */; };
 		4513903E230ABB5C00F3FA06 /* AnimateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513903D230ABB5C00F3FA06 /* AnimateTransform.swift */; };
 		45139040230AC4A500F3FA06 /* TransformEnhancePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513903F230AC4A500F3FA06 /* TransformEnhancePreset.swift */; };
+		4519B2A324B1CAEA002165AF /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519B2A224B1CAEA002165AF /* UploadOperation.swift */; };
 		451BB71624AE9D080005A8A5 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451BB71524AE9D080005A8A5 /* Error.swift */; };
 		452055401F4AE87D00A6795D /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 4520553F1F4AE7B900A6795D /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		452055421F4B191900A6795D /* RotateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452055411F4B191900A6795D /* RotateTransform.swift */; };
@@ -90,7 +91,6 @@
 		45B831201F03E52B0053742A /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8311F1F03E52B0053742A /* Seeds.swift */; };
 		45B831221F03F1C90053742A /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831211F03F1C90053742A /* Client.swift */; };
 		45B831241F03F4300053742A /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B831231F03F4300053742A /* ClientTests.swift */; };
-		45C3639223280DC40064EC93 /* MultifileUpload+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3639123280DC40064EC93 /* MultifileUpload+ObjC.swift */; };
 		45C3BB261F0E9B3500856883 /* NetworkingServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */; };
 		45C3EA0F1F262ED30003598D /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3EA0E1F262ED30003598D /* MetadataOptions.swift */; };
 		45C8F2061F18B279001A6558 /* TransformAspectMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8F2051F18B279001A6558 /* TransformAspectMode.swift */; };
@@ -161,7 +161,6 @@
 		BC88330D20D3EB7800B88EAF /* CompressTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330C20D3EB7800B88EAF /* CompressTransform.swift */; };
 		BC88330F20D3EC6300B88EAF /* ProgressiveJPEGTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88330E20D3EC6300B88EAF /* ProgressiveJPEGTransform.swift */; };
 		BC88331120D3EE0400B88EAF /* CacheTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88331020D3EE0400B88EAF /* CacheTransform.swift */; };
-		BCDB405220A9A87C00148136 /* MultifileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDB405120A9A87C00148136 /* MultifileUpload.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +201,7 @@
 		4512EB801FA7655F003A8C38 /* StorageOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageOptions.swift; sourceTree = "<group>"; };
 		4513903D230ABB5C00F3FA06 /* AnimateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTransform.swift; sourceTree = "<group>"; };
 		4513903F230AC4A500F3FA06 /* TransformEnhancePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformEnhancePreset.swift; sourceTree = "<group>"; };
+		4519B2A224B1CAEA002165AF /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		451BB71524AE9D080005A8A5 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		4520553F1F4AE7B900A6795D /* FSPolicyCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
 		452055411F4B191900A6795D /* RotateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotateTransform.swift; path = FilestackSDK/Public/Transforms/RotateTransform.swift; sourceTree = SOURCE_ROOT; };
@@ -286,7 +286,6 @@
 		45B8311F1F03E52B0053742A /* Seeds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeds.swift; sourceTree = "<group>"; };
 		45B831211F03F1C90053742A /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		45B831231F03F4300053742A /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
-		45C3639123280DC40064EC93 /* MultifileUpload+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultifileUpload+ObjC.swift"; sourceTree = "<group>"; };
 		45C3BB251F0E9B3500856883 /* NetworkingServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceTest.swift; sourceTree = "<group>"; };
 		45C3EA0E1F262ED30003598D /* MetadataOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
 		45C8F2051F18B279001A6558 /* TransformAspectMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformAspectMode.swift; sourceTree = "<group>"; };
@@ -354,7 +353,6 @@
 		BC88330C20D3EB7800B88EAF /* CompressTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressTransform.swift; sourceTree = "<group>"; };
 		BC88330E20D3EC6300B88EAF /* ProgressiveJPEGTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressiveJPEGTransform.swift; sourceTree = "<group>"; };
 		BC88331020D3EE0400B88EAF /* CacheTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTransform.swift; sourceTree = "<group>"; };
-		BCDB405120A9A87C00148136 /* MultifileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultifileUpload.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +388,7 @@
 				45E07AA922AFA58000CD4573 /* SubmitPartIntelligentUploadOperation.swift */,
 				45E07AA822AFA58000CD4573 /* SubmitPartRegularUploadOperation.swift */,
 				45CB774A24AE0D050047BED4 /* SubmitPartsUploadOperation.swift */,
+				4519B2A224B1CAEA002165AF /* UploadOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -501,7 +500,6 @@
 		459B7407232F95E1007CBC50 /* Uploaders */ = {
 			isa = PBXGroup;
 			children = (
-				BCDB405120A9A87C00148136 /* MultifileUpload.swift */,
 				45107C8B1F4D6ADC00250ABE /* MultipartUpload.swift */,
 			);
 			path = Uploaders;
@@ -578,7 +576,6 @@
 				45B63B202327E06C0040BFBB /* Client+Deprecated.swift */,
 				45B63B1E2327DA410040BFBB /* Client+ObjC.swift */,
 				45B63B152327D2870040BFBB /* Data+Uploadable.swift */,
-				45C3639123280DC40064EC93 /* MultifileUpload+ObjC.swift */,
 				45B63B242327F1770040BFBB /* Transformable+Deprecated.swift */,
 				45B63B132327D26F0040BFBB /* URL+Uploadable.swift */,
 			);
@@ -858,7 +855,6 @@
 				458D66CD1F4B31E4001770FB /* ZipTransform.swift in Sources */,
 				4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */,
 				45F9B8C61F0BA02F00E04380 /* DataResponse.swift in Sources */,
-				45C3639223280DC40064EC93 /* MultifileUpload+ObjC.swift in Sources */,
 				453DA1C024ABC1BB004138F4 /* Monitorizable.swift in Sources */,
 				457B179E23281EC50033BDB1 /* UploadStatus.swift in Sources */,
 				45B830E31F03BCF20053742A /* Policy.swift in Sources */,
@@ -954,7 +950,6 @@
 				4513903E230ABB5C00F3FA06 /* AnimateTransform.swift in Sources */,
 				BC8832D220D181A700B88EAF /* ConvertTransform.swift in Sources */,
 				BC8832FE20D3DBCA00B88EAF /* UpscaleTransform.swift in Sources */,
-				BCDB405220A9A87C00148136 /* MultifileUpload.swift in Sources */,
 				45E07AAB22AFA58000CD4573 /* SubmitPartIntelligentUploadOperation.swift in Sources */,
 				BC8832E420D181A700B88EAF /* CircleTransform.swift in Sources */,
 				BC88330220D3DF7900B88EAF /* TransformStyleMode.swift in Sources */,
@@ -973,6 +968,7 @@
 				BC8832D320D181A700B88EAF /* BlurTransform.swift in Sources */,
 				45991FA41F14C1DD0042A279 /* ProcessService.swift in Sources */,
 				BC8832DC20D181A700B88EAF /* SharpenTransform.swift in Sources */,
+				4519B2A324B1CAEA002165AF /* UploadOperation.swift in Sources */,
 				457D5BEF1F16147E00FBD5B1 /* TransformFit.swift in Sources */,
 				45D803B12302C18B00762A87 /* AutoImageTransform.swift in Sources */,
 				452D715B1F17A49D0037E1BB /* TransformPageFormat.swift in Sources */,

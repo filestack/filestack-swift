@@ -17,7 +17,7 @@ class SubmitPartsUploadOperation: BaseOperation<[Int: String]> {
 
     // MARK: - Private Properties
 
-    private lazy var partOperationQueue: OperationQueue = {
+    private lazy var operationQueue: OperationQueue = {
         let operationQueue = OperationQueue()
 
         operationQueue.maxConcurrentOperationCount = descriptor.options.partUploadConcurrency
@@ -42,9 +42,9 @@ extension SubmitPartsUploadOperation {
     }
 
     override func cancel() {
-        partOperationQueue.cancelAllOperations()
-
         super.cancel()
+
+        operationQueue.cancelAllOperations()
     }
 }
 
@@ -82,22 +82,13 @@ private extension SubmitPartsUploadOperation {
     func enqueue(operations: [SubmitPartUploadOperation]) {
         var partsAndEtags: [Int: String] = [:]
 
-        // Operation to run after all other operations completed.
-        let finalOperation = BlockOperation {
-            guard self.isExecuting else { return }
-
-            if !self.descriptor.useIntelligentIngestion && partsAndEtags.isEmpty {
-                self.finish(with: .failure(Error.custom("Unable to obtain parts and Etags.")))
-            } else {
-                self.finish(with: .success(partsAndEtags))
-            }
-        }
+        var completeCount = 0
 
         // Enqueue operations and setup operation dependencies.
         for operation in operations {
             // Validate operation to be executed after a dependent operation finishes running.
-            let validateOperation = BlockOperation {
-                guard self.isExecuting else { return }
+            operation.completionBlock = {
+                completeCount += 1
 
                 switch operation.result {
                 case let .success(response):
@@ -105,25 +96,26 @@ private extension SubmitPartsUploadOperation {
                     partsAndEtags[operation.number] = response.allHeaderFields["Etag"] as? String
                 case let .failure(error):
                     // In case a part submission fails, we will cancel all operations and finish with error.
-                    self.partOperationQueue.cancelAllOperations()
+                    self.operationQueue.cancelAllOperations()
                     self.finish(with: .failure(error))
+                    return
+                }
+
+                if completeCount == operations.count {
+                    if !self.descriptor.useIntelligentIngestion && partsAndEtags.isEmpty {
+                        self.finish(with: .failure(.custom("Unable to obtain parts and Etags.")))
+                    } else {
+                        self.finish(with: .success(partsAndEtags))
+                    }
                 }
             }
 
-            // Set operation dependencies.
-            validateOperation.addDependency(operation)
-            finalOperation.addDependency(validateOperation)
-
             // Enqueue operations.
-            partOperationQueue.addOperation(operation)
-            partOperationQueue.addOperation(validateOperation)
+            operationQueue.addOperation(operation)
 
             // Add `operation.progress` as child of `progress`.
             progress.addChild(operation.progress, withPendingUnitCount: Int64(operation.size))
         }
-
-        // Enqueue `finalOperation`.
-        partOperationQueue.addOperation(finalOperation)
     }
 }
 

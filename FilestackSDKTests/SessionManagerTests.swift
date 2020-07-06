@@ -36,7 +36,7 @@ class SessionManagerTests: XCTestCase {
         let request = session.request(requestURL, method: .get)
         request.responseData { _ in }
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
 
         guard let shortVersionString = Bundle(for: Client.self).infoDictionary?["CFBundleShortVersionString"] as? String else {
             XCTFail("Unable to extract CFBundleShortVersionString.")

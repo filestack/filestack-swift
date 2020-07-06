@@ -73,7 +73,7 @@ public class Transformable: NSObject {
     }
 
     init(externalURLs: [URL], apiKey: String, security: Security? = nil) {
-        self.sources = externalURLs.map { $0.absoluteString }
+        self.sources = externalURLs.map(\.absoluteString)
         self.apiKey = apiKey
         self.security = security
         self.usingExternalURLs = true

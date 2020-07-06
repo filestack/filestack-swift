@@ -13,13 +13,19 @@ extension URL: Uploadable {
     public var filename: String? { lastPathComponent }
 
     public var size: UInt64? {
-        guard let attributtes = try? FileManager.default.attributesOfItem(atPath: relativePath) else { return nil }
+        guard isFileURL,
+              let attributtes = try? FileManager.default.attributesOfItem(atPath: relativePath)
+        else {
+            return nil
+        }
 
-        return (attributtes[.size] as? UInt64)
+        return attributtes[.size] as? UInt64
     }
 
     public var mimeType: String? {
-        guard let uti = uniformTypeIdentifier, let mimeTypeRef = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType) else {
+        guard let uti = uniformTypeIdentifier,
+              let mimeTypeRef = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)
+        else {
             return nil
         }
 
@@ -35,7 +41,9 @@ extension URL: Uploadable {
 private extension URL {
     var uniformTypeIdentifier: CFString? {
         let ext = pathExtension as CFString
-        guard let utiRef = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext, nil) else { return nil }
+        let tag = kUTTagClassFilenameExtension
+
+        guard let utiRef = UTTypeCreatePreferredIdentifierForTag(tag, ext, nil) else { return nil }
 
         let uti = utiRef.takeUnretainedValue()
         utiRef.release()

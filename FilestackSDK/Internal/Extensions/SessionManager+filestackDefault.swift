@@ -16,27 +16,32 @@ extension SessionManager {
         let configuration: URLSessionConfiguration
 
         if background {
-            let bundleIdentifier = Bundle.main.bundleIdentifier!
-            configuration = .background(withIdentifier: bundleIdentifier)
-            configuration.shouldUseExtendedBackgroundIdleMode = true
+            configuration = .background(withIdentifier: Bundle.main.bundleIdentifier!.appending(".background-session"))
         } else {
             configuration = .default
         }
 
-        var defaultHeaders = SessionManager.defaultHTTPHeaders
-
-        defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
-        defaultHeaders["Filestack-Source"] = "Swift-\(shortVersionString)"
-
+        configuration.isDiscretionary = false
+        configuration.shouldUseExtendedBackgroundIdleMode = true
+        configuration.httpMaximumConnectionsPerHost = 20
         configuration.httpShouldUsePipelining = true
-        configuration.httpAdditionalHeaders = defaultHeaders
+        configuration.httpAdditionalHeaders = customHTTPHeaders
 
         return SessionManager(configuration: configuration)
     }
 
     // MARK: - Private Functions
 
-    private class var shortVersionString: String {
+    private static var customHTTPHeaders: HTTPHeaders {
+        var defaultHeaders = SessionManager.defaultHTTPHeaders
+
+        defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
+        defaultHeaders["Filestack-Source"] = "Swift-\(shortVersionString)"
+
+        return defaultHeaders
+    }
+
+    private static var shortVersionString: String {
         return Bundle(for: BundleFinder.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
     }
 }

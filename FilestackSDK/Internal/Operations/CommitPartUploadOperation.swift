@@ -44,9 +44,9 @@ extension CommitPartUploadOperation {
     }
 
     override func cancel() {
-        retrier?.cancel()
-
         super.cancel()
+
+        retrier?.cancel()
     }
 }
 
@@ -81,7 +81,7 @@ private extension CommitPartUploadOperation {
         if let response = retrier?.run() {
             finish(with: .success(response))
         } else {
-            finish(with: .failure(Error.custom("Unable to complete /multipart/commit operation.")))
+            finish(with: .failure(.custom("Unable to complete /multipart/commit operation.")))
         }
     }
 

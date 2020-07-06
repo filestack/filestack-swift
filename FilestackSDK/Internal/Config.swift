@@ -9,6 +9,6 @@
 import Foundation
 
 struct Config {
-    public let apiKey: String
-    public let security: Security?
+    let apiKey: String
+    let security: Security?
 }

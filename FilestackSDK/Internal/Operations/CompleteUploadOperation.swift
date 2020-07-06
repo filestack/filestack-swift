@@ -44,9 +44,9 @@ extension CompleteUploadOperation {
     }
 
     override func cancel() {
-        retrier?.cancel()
-
         super.cancel()
+
+        retrier?.cancel()
     }
 }
 
@@ -81,7 +81,7 @@ private extension CompleteUploadOperation {
         if let response = retrier?.run() {
             finish(with: .success(response))
         } else {
-            finish(with: .failure(Error.custom("Failed to complete /multipart/complete operation.")))
+            finish(with: .failure(.custom("Failed to complete /multipart/complete operation.")))
         }
     }
 

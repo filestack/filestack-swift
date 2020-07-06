@@ -166,7 +166,7 @@ class BaseOperationTests: XCTestCase {
         // Cancel ongoing operation.
         operation.cancel()
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
 
     func testObserversOnFinishingOperation() throws {
@@ -196,6 +196,6 @@ class BaseOperationTests: XCTestCase {
 
         queue.addOperation(operation)
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
 }
