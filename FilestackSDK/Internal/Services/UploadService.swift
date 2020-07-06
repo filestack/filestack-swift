@@ -26,8 +26,8 @@ public final class UploadService: NSObject, NetworkingService {
 
     // MARK: - Public Properties
 
-    /// Whether uploads should be run on a background process. Defaults to `true`.
-    static public var useBackgroundSession: Bool = true {
+    /// Whether uploads should be performed on a background process. Defaults to `false`.
+    static public var useBackgroundSession: Bool = false {
         didSet { sessionManager = .filestack(background: useBackgroundSession) }
     }
 
