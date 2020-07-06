@@ -123,12 +123,6 @@ private extension UploadOperation {
     func executeStartOperation(completion: @escaping (StartUploadOperation.Result) -> Void) {
         guard !isCancelled else { return }
 
-        var filename = options.storeOptions.filename ?? uploadable.filename ?? ""
-        var mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? ""
-
-        if filename.isEmpty { filename = UUID().uuidString }
-        if mimeType.isEmpty { mimeType = "text/plain" }
-
         guard let filesize = uploadable.size, filesize > 0 else {
             completion(.failure(.custom("The provided uploadable is either empty or cannot be accessed.")))
             return
@@ -138,6 +132,12 @@ private extension UploadOperation {
             completion(.failure(.custom("Unable to instantiate uploadable data reader.")))
             return
         }
+
+        var filename = options.storeOptions.filename ?? uploadable.filename ?? ""
+        var mimeType = options.storeOptions.mimeType ?? uploadable.mimeType ?? ""
+
+        if filename.isEmpty { filename = UUID().uuidString }
+        if mimeType.isEmpty { mimeType = "text/plain" }
 
         let startOperation = StartUploadOperation(config: config,
                                                   options: options,
