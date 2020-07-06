@@ -29,27 +29,19 @@ class BaseOperation<Success>: Operation {
 
     private var _state = State.ready {
         willSet {
-            switch newValue {
-            case .ready:
-                willChangeValue(for: \.isReady)
-            case .executing, .finished:
-                willChangeValue(for: \.isExecuting)
-                willChangeValue(for: \.isFinished)
-            default:
-                break
-            }
+            guard _state != newValue else { return }
+
+            if newValue == .ready { willChangeValue(for: \.isReady) }
+            willChangeValue(for: \.isExecuting)
+            willChangeValue(for: \.isFinished)
         }
 
         didSet {
-            switch _state {
-            case .ready:
-                didChangeValue(for: \.isReady)
-            case .executing, .finished:
-                didChangeValue(for: \.isExecuting)
-                didChangeValue(for: \.isFinished)
-            default:
-                break
-            }
+            guard _state != oldValue else { return }
+
+            if _state == .ready { didChangeValue(for: \.isReady) }
+            didChangeValue(for: \.isExecuting)
+            didChangeValue(for: \.isFinished)
         }
     }
 
