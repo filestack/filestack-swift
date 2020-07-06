@@ -54,7 +54,7 @@ extension SubmitChunkUploadOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/upload", relativeTo: Constants.uploadURL)!
 
-        UploadService.upload(multipartFormData: multipartFormData, url: uploadURL, completionHandler: uploadDataChunk)
+        UploadService.shared.upload(multipartFormData: multipartFormData, url: uploadURL, completionHandler: uploadDataChunk)
     }
 
     override func cancel() {
@@ -95,7 +95,7 @@ private extension SubmitChunkUploadOperation {
 
         guard let url = url(from: response),
               let headers = headers(from: response),
-              let request = UploadService.upload(data: data, to: url, method: .put, headers: headers)
+              let request = UploadService.shared.upload(data: data, to: url, method: .put, headers: headers)
         else {
             finish(with: .failure(.unknown))
             return

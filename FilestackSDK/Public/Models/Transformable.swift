@@ -149,7 +149,7 @@ public extension Transformable {
         transformationTasks.insert(task, at: 0)
 
         // Create and perform post request
-        guard let request = ProcessService.request(url: url, method: .post) else { return self }
+        guard let request = ProcessService.shared.request(url: url, method: .post) else { return self }
 
         request.validate(statusCode: Constants.validHTTPResponseCodes)
 
@@ -177,7 +177,7 @@ public extension Transformable {
 private extension Transformable {
     func computeURL() -> URL {
         let key = usingExternalURLs ? apiKey : nil
-        return ProcessService.buildURL(tasks: tasksToURLFragment(), sources: sources, key: key, security: security)!
+        return ProcessService.shared.buildURL(tasks: tasksToURLFragment(), sources: sources, key: key, security: security)!
     }
 
     func sanitize(string: String) -> String {

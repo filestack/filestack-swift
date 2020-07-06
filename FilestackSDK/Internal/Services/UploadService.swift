@@ -10,13 +10,25 @@ import Alamofire
 import Foundation
 import os.log
 
+private let Shared = UploadService()
+
 /// Service used for uploading files.
 @objc(FSUploadService)
 public final class UploadService: NSObject, NetworkingService {
     // MARK: - Internal Properties
 
-    static private(set) var sessionManager = SessionManager.filestack(background: useBackgroundSession) {
+    private(set) lazy var sessionManager = SessionManager.filestack(background: useBackgroundSession)
+
+    // MARK: - Public Properties
+
+    /// Shared `UploadService` instance.
+    public static let shared = Shared
+
+    /// Whether uploads should be performed on a background process. Defaults to `false`.
+    public var useBackgroundSession: Bool = false {
         didSet {
+            sessionManager = .filestack(background: useBackgroundSession)
+
             os_log("Background upload support is now %@.",
                    log: .uploads,
                    type: .info,
@@ -24,22 +36,15 @@ public final class UploadService: NSObject, NetworkingService {
         }
     }
 
-    // MARK: - Public Properties
-
-    /// Whether uploads should be performed on a background process. Defaults to `false`.
-    static public var useBackgroundSession: Bool = false {
-        didSet { sessionManager = .filestack(background: useBackgroundSession) }
-    }
-
     // MARK: - Lifecycle
 
-    private override init() {}
+    fileprivate override init() {}
 }
 
 // MARK: - Internal Functions
 
 extension UploadService {
-    static func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
+    func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
                        url: URL,
                        queue: DispatchQueue = .main,
                        completionHandler: @escaping (JSONResponse) -> Void) {
@@ -53,7 +58,7 @@ extension UploadService {
         }
     }
 
-    static func upload(data: Data, to url: URLConvertible, method: HTTPMethod, headers: HTTPHeaders? = nil) -> UploadRequest? {
+    func upload(data: Data, to url: URLConvertible, method: HTTPMethod, headers: HTTPHeaders? = nil) -> UploadRequest? {
         if useBackgroundSession {
             if let dataURL = temporaryURL(using: data) {
                 defer { try? FileManager.default.removeItem(at: dataURL) }
@@ -70,7 +75,7 @@ extension UploadService {
 // MARK: - Private Functions
 
 private extension UploadService {
-    static func temporaryURL(using data: Data) -> URL? {
+    func temporaryURL(using data: Data) -> URL? {
         let temporaryDirectoryURL = FileManager.default.temporaryDirectory
         let dataURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString)
 

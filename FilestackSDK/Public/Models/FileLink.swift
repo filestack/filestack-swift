@@ -28,7 +28,7 @@ public class FileLink: NSObject {
 
     /// A Filestack CDN URL corresponding to this `FileLink`.
     @objc public lazy var url: URL = {
-        CDNService.buildURL(handle: self.handle, security: self.security)!
+        CDNService.shared.buildURL(handle: self.handle, security: self.security)!
     }()
 
     // MARK: - Lifecycle
@@ -57,10 +57,10 @@ public extension FileLink {
                           queue: DispatchQueue? = .main,
                           downloadProgress: ((Progress) -> Void)? = nil,
                           completionHandler: @escaping (DataResponse) -> Void) {
-        guard let request = CDNService.getDataRequest(handle: handle,
-                                                      path: nil,
-                                                      parameters: parameters,
-                                                      security: security) else {
+        guard let request = CDNService.shared.getDataRequest(handle: handle,
+                                                             path: nil,
+                                                             parameters: parameters,
+                                                             security: security) else {
             return
         }
 
@@ -86,7 +86,7 @@ public extension FileLink {
     /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
     @objc func getTags(queue: DispatchQueue? = .main,
                        completionHandler: @escaping (JSONResponse) -> Void) {
-        guard let request = CDNService.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
+        guard let request = CDNService.shared.getImageTaggingRequest(type: "tags", handle: handle, security: security) else {
             return
         }
 
@@ -104,7 +104,7 @@ public extension FileLink {
     /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
     @objc func getSafeForWork(queue: DispatchQueue? = .main,
                               completionHandler: @escaping (JSONResponse) -> Void) {
-        guard let request = CDNService.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
+        guard let request = CDNService.shared.getImageTaggingRequest(type: "sfw", handle: handle, security: security) else {
             return
         }
 
@@ -128,12 +128,13 @@ public extension FileLink {
             URLQueryItem(name: $0.description, value: "true")
         }
 
-        guard let url = APIService.buildURL(handle: handle,
-                                            path: "file",
-                                            extra: "metadata",
-                                            queryItems: optionQueryItems,
-                                            security: security),
-            let request = APIService.request(url: url, method: .get) else {
+        guard let url = APIService.shared.buildURL(handle: handle,
+                                                   path: "file",
+                                                   extra: "metadata",
+                                                   queryItems: optionQueryItems,
+                                                   security: security),
+              let request = APIService.shared.request(url: url, method: .get)
+        else {
             return
         }
 
@@ -169,11 +170,11 @@ public extension FileLink {
             return (destinationURL: destinationURL, options: downloadOptions)
         }
 
-        guard let request = CDNService.downloadRequest(handle: handle,
-                                                       path: nil,
-                                                       parameters: parameters,
-                                                       security: security,
-                                                       downloadDestination: downloadDestination) else {
+        guard let request = CDNService.shared.downloadRequest(handle: handle,
+                                                              path: nil,
+                                                              parameters: parameters,
+                                                              security: security,
+                                                              downloadDestination: downloadDestination) else {
             return
         }
 
@@ -205,10 +206,10 @@ public extension FileLink {
     @objc func delete(parameters: [String: Any]? = nil,
                       queue: DispatchQueue? = .main,
                       completionHandler: @escaping (DataResponse) -> Void) {
-        guard let request = APIService.deleteRequest(handle: handle,
-                                                     path: Constants.filePath,
-                                                     parameters: ensureAPIKey(parameters),
-                                                     security: security) else {
+        guard let request = APIService.shared.deleteRequest(handle: handle,
+                                                            path: Constants.filePath,
+                                                            parameters: ensureAPIKey(parameters),
+                                                            security: security) else {
             return
         }
 
@@ -237,11 +238,11 @@ public extension FileLink {
                          queue: DispatchQueue? = .main,
                          uploadProgress: ((Progress) -> Void)? = nil,
                          completionHandler: @escaping (DataResponse) -> Void) {
-        guard let request = APIService.overwriteRequest(handle: handle,
-                                                        path: Constants.filePath,
-                                                        parameters: parameters,
-                                                        fileURL: fileURL,
-                                                        security: security) else {
+        guard let request = APIService.shared.overwriteRequest(handle: handle,
+                                                               path: Constants.filePath,
+                                                               parameters: parameters,
+                                                               fileURL: fileURL,
+                                                               security: security) else {
             return
         }
 
@@ -275,11 +276,11 @@ public extension FileLink {
                          remoteURL: URL,
                          queue: DispatchQueue? = .main,
                          completionHandler: @escaping (DataResponse) -> Void) {
-        guard let request = APIService.overwriteRequest(handle: handle,
-                                                        path: Constants.filePath,
-                                                        parameters: parameters,
-                                                        remoteURL: remoteURL,
-                                                        security: security) else {
+        guard let request = APIService.shared.overwriteRequest(handle: handle,
+                                                               path: Constants.filePath,
+                                                               parameters: parameters,
+                                                               remoteURL: remoteURL,
+                                                               security: security) else {
             return
         }
 
@@ -305,7 +306,7 @@ private extension FileLink {
             return ["key": apiKey]
         }
 
-        if parameters.keys.contains("key") == false {
+        if !parameters.keys.contains("key") {
             parameters["key"] = apiKey
         }
 

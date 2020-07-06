@@ -59,7 +59,7 @@ private extension CommitPartUploadOperation {
         retrier = .init(attempts: retries, label: uploadURL.relativePath) { (semaphore) -> HTTPURLResponse? in
             var httpURLResponse: HTTPURLResponse?
 
-            UploadService.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
+            UploadService.shared.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
                 httpURLResponse = response.response
                 semaphore.signal()
             }

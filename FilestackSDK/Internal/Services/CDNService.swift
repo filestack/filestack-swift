@@ -9,11 +9,21 @@
 import Alamofire
 import Foundation
 
-final class CDNService: NetworkingServiceWithBaseURL {
-    static let sessionManager = SessionManager.filestack()
-    static let baseURL = Constants.apiURL
+private let Shared = CDNService()
 
-    static func getDataRequest(handle: String,
+final class CDNService: NetworkingServiceWithBaseURL {
+    // MARK: - Internal Properties
+
+    let sessionManager = SessionManager.filestack()
+    let baseURL = Constants.apiURL
+
+    static let shared = Shared
+}
+
+// MARK: - Internal Functions
+
+extension CDNService {
+    func getDataRequest(handle: String,
                                path: String?,
                                parameters: [String: Any]?,
                                security: Security?) -> DataRequest? {
@@ -22,7 +32,7 @@ final class CDNService: NetworkingServiceWithBaseURL {
         return sessionManager.request(url, method: .get, parameters: parameters)
     }
 
-    static func getImageTaggingRequest(type: String, handle: String, security: Security?) -> DataRequest? {
+    func getImageTaggingRequest(type: String, handle: String, security: Security?) -> DataRequest? {
         var url = baseURL.appendingPathComponent(type)
 
         if let security = security {
@@ -34,7 +44,7 @@ final class CDNService: NetworkingServiceWithBaseURL {
         return sessionManager.request(url, method: .get, parameters: nil)
     }
 
-    static func downloadRequest(handle: String,
+    func downloadRequest(handle: String,
                                 path: String?,
                                 parameters: [String: Any]?,
                                 security: Security?,

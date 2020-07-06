@@ -44,7 +44,7 @@ extension StartUploadOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/start", relativeTo: Constants.uploadURL)!
 
-        UploadService.upload(multipartFormData: multipartFormData, url: uploadURL, completionHandler: handleResponse)
+        UploadService.shared.upload(multipartFormData: multipartFormData, url: uploadURL, completionHandler: handleResponse)
     }
 }
 

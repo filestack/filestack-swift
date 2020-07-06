@@ -59,7 +59,7 @@ private extension CompleteUploadOperation {
         retrier = .init(attempts: retries, label: uploadURL.relativePath) { (semaphore) -> JSONResponse? in
             var jsonResponse: JSONResponse?
 
-            UploadService.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
+            UploadService.shared.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
                 jsonResponse = response
                 semaphore.signal()
             }

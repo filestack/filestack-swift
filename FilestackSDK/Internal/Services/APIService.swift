@@ -9,11 +9,21 @@
 import Alamofire
 import Foundation
 
-final class APIService: NetworkingServiceWithBaseURL {
-    static let sessionManager = SessionManager.filestack()
-    static let baseURL = Constants.apiURL
+private let Shared = APIService()
 
-    static func deleteRequest(handle: String,
+final class APIService: NetworkingServiceWithBaseURL {
+    // MARK: - Internal Properties
+
+    let sessionManager = SessionManager.filestack()
+    let baseURL = Constants.apiURL
+
+    static let shared = Shared
+}
+
+// MARK: - Internal Functions
+
+extension APIService {
+    func deleteRequest(handle: String,
                               path: String?,
                               parameters: [String: Any]?,
                               security: Security?) -> DataRequest? {
@@ -22,7 +32,7 @@ final class APIService: NetworkingServiceWithBaseURL {
         return sessionManager.request(url, method: .delete, parameters: parameters)
     }
 
-    static func overwriteRequest(handle: String,
+    func overwriteRequest(handle: String,
                                  path: String?,
                                  parameters _: [String: Any]?,
                                  fileURL: URL,
@@ -32,7 +42,7 @@ final class APIService: NetworkingServiceWithBaseURL {
         return sessionManager.upload(fileURL, to: url)
     }
 
-    static func overwriteRequest(handle: String,
+    func overwriteRequest(handle: String,
                                  path: String?,
                                  parameters: [String: Any]?,
                                  remoteURL: URL,
@@ -41,7 +51,7 @@ final class APIService: NetworkingServiceWithBaseURL {
 
         var parameters = parameters ?? [String: Any]()
 
-        if parameters.keys.contains("url") == false {
+        if !parameters.keys.contains("url") {
             parameters["url"] = remoteURL.absoluteString
         }
 

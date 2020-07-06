@@ -10,11 +10,11 @@ import Alamofire
 import Foundation
 
 extension NetworkingServiceWithBaseURL {
-    static func buildURL(handle: String? = nil,
-                         path: String? = nil,
-                         extra: String? = nil,
-                         queryItems: [URLQueryItem]? = nil,
-                         security: Security? = nil) -> URL? {
+    func buildURL(handle: String? = nil,
+                  path: String? = nil,
+                  extra: String? = nil,
+                  queryItems: [URLQueryItem]? = nil,
+                  security: Security? = nil) -> URL? {
         var url = baseURL
 
         if let path = path { url.appendPathComponent(path) }
@@ -37,7 +37,7 @@ extension NetworkingServiceWithBaseURL {
         return try? urlComponents.asURL()
     }
 
-    static func request(url: URL, method: HTTPMethod, parameters: [String: Any]? = nil, headers: HTTPHeaders? = nil) -> DataRequest? {
+    func request(url: URL, method: HTTPMethod, parameters: [String: Any]? = nil, headers: HTTPHeaders? = nil) -> DataRequest? {
         return sessionManager.request(url, method: method, parameters: parameters, headers: headers)
     }
 }

@@ -23,7 +23,7 @@ class UploadTests: XCTestCase {
     private let defaultStoreOptions = StorageOptions(location: .s3, access: .private)
 
     override func setUp() {
-        UploadService.useBackgroundSession = false
+        UploadService.shared.useBackgroundSession = false
         currentPart = 1
         currentOffset = 0
         client = Client(apiKey: "MY-OTHER-API-KEY", security: Seeds.Securities.basic)
