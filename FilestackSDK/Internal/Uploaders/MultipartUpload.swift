@@ -26,6 +26,7 @@ class MultipartUpload: Uploader, DeferredAdd {
 
         progress.kind = .file
         progress.fileOperationKind = .copying
+        progress.totalUnitCount = -1 // indeterminate
 
         return progress
     }()

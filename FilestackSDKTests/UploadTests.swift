@@ -155,7 +155,7 @@ class UploadTests: XCTestCase {
 
         waitForExpectations(timeout: 15, handler: nil)
 
-        XCTAssertEqual(uploader.progress.totalUnitCount, 0)
+        XCTAssertEqual(uploader.progress.totalUnitCount, -1)
         XCTAssertEqual(uploader.progress.completedUnitCount, 0)
         XCTAssertEqual(uploader.progress.fileTotalCount, 1)
         XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
@@ -188,7 +188,7 @@ class UploadTests: XCTestCase {
 
         waitForExpectations(timeout: 15, handler: nil)
 
-        XCTAssertEqual(uploader.progress.totalUnitCount, 0)
+        XCTAssertEqual(uploader.progress.totalUnitCount, -1)
         XCTAssertEqual(uploader.progress.completedUnitCount, 0)
         XCTAssertEqual(uploader.progress.fileTotalCount, 1)
         XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
