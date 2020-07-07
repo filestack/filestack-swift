@@ -42,8 +42,10 @@
 		45513FFA1F0E9739006DB972 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FF91F0E9739006DB972 /* APIService.swift */; };
 		4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551400C1F0E97E2006DB972 /* NetworkingService.swift */; };
 		455266311F1618E1009537D9 /* TransformCropMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455266301F1618E1009537D9 /* TransformCropMode.swift */; };
+		4566603324B49C6400C3EAF0 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566603224B49C6400C3EAF0 /* CryptoSwift.framework */; };
+		4566603724B49CB600C3EAF0 /* CryptoSwift.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 4566603224B49C6400C3EAF0 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4566603924B49FD200C3EAF0 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566603824B49FD200C3EAF0 /* DataExtensionsTests.swift */; };
 		45690CD222A65FE800285F62 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCC22A65FC500285F62 /* Alamofire.framework */; };
-		45690CD322A65FE800285F62 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CB922A65FC500285F62 /* CryptoSwift.framework */; };
 		45690CD422A6600400285F62 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */; };
 		456FF4C11F27799D00E9F192 /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FF4C01F27799D00E9F192 /* CompleteUploadOperation.swift */; };
 		456FF4C31F2790C800E9F192 /* large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 456FF4C21F27902500E9F192 /* large.jpg */; };
@@ -110,7 +112,6 @@
 		45E07AAA22AFA58000CD4573 /* SubmitPartRegularUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA822AFA58000CD4573 /* SubmitPartRegularUploadOperation.swift */; };
 		45E07AAB22AFA58000CD4573 /* SubmitPartIntelligentUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E07AA922AFA58000CD4573 /* SubmitPartIntelligentUploadOperation.swift */; };
 		45E07AB022AFC15300CD4573 /* Alamofire.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCC22A65FC500285F62 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45E07AB122AFC15300CD4573 /* CryptoSwift.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CB922A65FC500285F62 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45E07AB222AFC15300CD4573 /* OHHTTPStubs.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45F9B8C41F0B941300E04380 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F9B8C31F0B941300E04380 /* sample.jpg */; };
 		45F9B8C61F0BA02F00E04380 /* DataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9B8C51F0BA02F00E04380 /* DataResponse.swift */; };
@@ -180,8 +181,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4566603724B49CB600C3EAF0 /* CryptoSwift.framework in Copy Embedded Frameworks */,
 				45E07AB022AFC15300CD4573 /* Alamofire.framework in Copy Embedded Frameworks */,
-				45E07AB122AFC15300CD4573 /* CryptoSwift.framework in Copy Embedded Frameworks */,
 				45E07AB222AFC15300CD4573 /* OHHTTPStubs.framework in Copy Embedded Frameworks */,
 			);
 			name = "Copy Embedded Frameworks";
@@ -225,7 +226,9 @@
 		45513FF91F0E9739006DB972 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		4551400C1F0E97E2006DB972 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		455266301F1618E1009537D9 /* TransformCropMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformCropMode.swift; sourceTree = "<group>"; };
-		45690CB922A65FC500285F62 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		4566603224B49C6400C3EAF0 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		4566603424B49C9500C3EAF0 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CryptoKit.framework; sourceTree = DEVELOPER_DIR; };
+		4566603824B49FD200C3EAF0 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
 		45690CCC22A65FC500285F62 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		45690CFF22A6770D00285F62 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -360,8 +363,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4566603324B49C6400C3EAF0 /* CryptoSwift.framework in Frameworks */,
 				45690CD222A65FE800285F62 /* Alamofire.framework in Frameworks */,
-				45690CD322A65FE800285F62 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,11 +644,11 @@
 			isa = PBXGroup;
 			children = (
 				45B830CA1F03BB6D0053742A /* Cartfile */,
+				45690CCC22A65FC500285F62 /* Alamofire.framework */,
+				4566603224B49C6400C3EAF0 /* CryptoSwift.framework */,
+				45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */,
 				457B17A5232826C80033BDB1 /* Cartfile.private */,
 				457B17A6232826C80033BDB1 /* Cartfile.resolved */,
-				45690CCC22A65FC500285F62 /* Alamofire.framework */,
-				45690CB922A65FC500285F62 /* CryptoSwift.framework */,
-				45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */,
 			);
 			name = "Carthage Dependencies";
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				45107C9F1F4D6B0E00250ABE /* UploadTests.swift */,
 				45FA0CCE1F0B8841008EDBCD /* Fixtures */,
 				45113DD424B0AB490090C1DD /* BaseOperationTests.swift */,
+				4566603824B49FD200C3EAF0 /* DataExtensionsTests.swift */,
 			);
 			path = FilestackSDKTests;
 			sourceTree = "<group>";
@@ -690,6 +694,7 @@
 		45E2B7DE1FC3284600448ED2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4566603424B49C9500C3EAF0 /* CryptoKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -990,6 +995,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B831191F03DA280053742A /* PolicyTests.swift in Sources */,
+				4566603924B49FD200C3EAF0 /* DataExtensionsTests.swift in Sources */,
 				4589A48C1F0A4DBC00C39405 /* FileLinkTests.swift in Sources */,
 				45C3BB261F0E9B3500856883 /* NetworkingServiceTest.swift in Sources */,
 				45113DD524B0AB490090C1DD /* BaseOperationTests.swift in Sources */,
