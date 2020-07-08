@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+Version 2.3 *(2020-07-08)*
+----------------------------
+
+- Added support for background uploads (see "Enabling background upload support" in README.md for more information.)
+- Improved upload progress reporting.
+- Improved retry and cancellation logic in upload operations. 
+- Significantly improved performance of MD5 and Hmac calculations by relying on `CommonCrypto`.
+- Removed `CryptoSwift` dependency.
+
 Version 2.2.2 *(2020-05-04)*
 ----------------------------
 
