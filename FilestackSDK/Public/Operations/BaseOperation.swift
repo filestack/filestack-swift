@@ -18,8 +18,8 @@ import Foundation
 /// - An executing operation will return `isExecuting` true.
 /// - A finished operation will return `isFinished` true.
 /// - A cancelled operation will return `isCancelled` true.
-class BaseOperation<Success>: Operation {
-    typealias Result = Swift.Result<Success, Error>
+open class BaseOperation<Success>: Operation {
+    public typealias Result = Swift.Result<Success, Error>
 
     // MARK: - Private Properties
 
@@ -47,27 +47,27 @@ class BaseOperation<Success>: Operation {
 
     // MARK: - Property Overrides
 
-    override var isReady: Bool { _state.contains(.ready) }
-    override var isExecuting: Bool { _state == .executing }
-    override var isFinished: Bool { _state == .finished }
+    open override var isReady: Bool { _state.contains(.ready) }
+    open override var isExecuting: Bool { _state == .executing }
+    open override var isFinished: Bool { _state == .finished }
 
     // MARK: - Function Overrides
 
-    override func start() {
+    open override func start() {
         state = .executing
 
         if !isCancelled { main() }
     }
 
-    override func cancel() {
+    open override func cancel() {
         super.cancel()
 
         finish(with: .failure(.cancelled))
     }
 
-    // MARK: - Internal Functions
+    // MARK: - Open Functions
 
-    func finish(with result: Result) {
+    open func finish(with result: Result) {
         self.result = result
 
         if state == .ready {

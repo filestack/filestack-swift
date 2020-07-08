@@ -383,7 +383,6 @@
 		4502F71E1F1F4C28000875D6 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				4502F7321F1F4D20000875D6 /* BaseOperation.swift */,
 				4528C7451F2F24FB00A4BEF6 /* CommitPartUploadOperation.swift */,
 				456FF4C01F27799D00E9F192 /* CompleteUploadOperation.swift */,
 				4502F7301F1F4C3A000875D6 /* StartUploadOperation.swift */,
@@ -477,6 +476,7 @@
 		457D5BDA1F16144B00FBD5B1 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				451BB71524AE9D080005A8A5 /* Error.swift */,
 				45C3EA0E1F262ED30003598D /* MetadataOptions.swift */,
 				457D5BF21F1614D400FBD5B1 /* PolicyCall.swift */,
 				45C8F2071F18B3AF001A6558 /* StorageAccess.swift */,
@@ -508,12 +508,19 @@
 			path = Uploaders;
 			sourceTree = "<group>";
 		};
+		45A6102A24B5B01200225738 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				4502F7321F1F4D20000875D6 /* BaseOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
 		45B63AFE23279C790040BFBB /* Internal */ = {
 			isa = PBXGroup;
 			children = (
 				45DC974524ACECDE0014ECE3 /* Config.swift */,
 				4589A4871F0A4B1900C39405 /* Constants.swift */,
-				451BB71524AE9D080005A8A5 /* Error.swift */,
 				45DC974124ACC0840014ECE3 /* Loggers.swift */,
 				45DC974324ACE38D0014ECE3 /* TaskRetrier.swift */,
 				45B66480232838C200DF5706 /* Tools.swift */,
@@ -535,6 +542,7 @@
 				45B63B122327D2640040BFBB /* Extensions */,
 				45B830DE1F03BCF20053742A /* Models */,
 				45B63B172327D6CC0040BFBB /* Objective-C */,
+				45A6102A24B5B01200225738 /* Operations */,
 				45B63B0223279E5D0040BFBB /* Protocols */,
 				452055431F4B192000A6795D /* Transforms */,
 			);

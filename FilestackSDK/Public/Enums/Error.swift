@@ -8,7 +8,8 @@
 
 import Foundation
 
-enum Error: Swift.Error {
+/// :nodoc:
+public enum Error: Swift.Error {
     case cancelled
     case unknown
     case api(_ description: String)
@@ -16,6 +17,7 @@ enum Error: Swift.Error {
     case wrapped(_ error: Swift.Error)
 }
 
+/// :nodoc:
 extension Error: LocalizedError {
     public var errorDescription: String? {
         switch self {
