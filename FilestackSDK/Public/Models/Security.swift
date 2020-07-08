@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import CryptoSwift
 import Foundation
 
 /// Represents a security object.
@@ -33,10 +32,7 @@ public class Security: NSObject {
     @objc public convenience init(policy: Policy, appSecret: String) throws {
         let policyJSON: Data = try policy.toJSON()
         let encodedPolicy: String = policyJSON.base64EncodedString()
-
-        let signature: String = try HMAC(key: appSecret, variant: .sha256)
-            .authenticate(Array(encodedPolicy.utf8))
-            .toHexString()
+        let signature = encodedPolicy.hmac(algorithm: .sha256, key: appSecret)
 
         self.init(encodedPolicy: encodedPolicy, signature: signature)
     }

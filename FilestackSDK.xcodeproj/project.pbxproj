@@ -42,8 +42,6 @@
 		45513FFA1F0E9739006DB972 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FF91F0E9739006DB972 /* APIService.swift */; };
 		4551400D1F0E97E2006DB972 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551400C1F0E97E2006DB972 /* NetworkingService.swift */; };
 		455266311F1618E1009537D9 /* TransformCropMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455266301F1618E1009537D9 /* TransformCropMode.swift */; };
-		4566603324B49C6400C3EAF0 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566603224B49C6400C3EAF0 /* CryptoSwift.framework */; };
-		4566603724B49CB600C3EAF0 /* CryptoSwift.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 4566603224B49C6400C3EAF0 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4566603924B49FD200C3EAF0 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566603824B49FD200C3EAF0 /* DataExtensionsTests.swift */; };
 		45690CD222A65FE800285F62 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCC22A65FC500285F62 /* Alamofire.framework */; };
 		45690CD422A6600400285F62 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */; };
@@ -70,6 +68,7 @@
 		459E61EE1F31BBEF00237EA1 /* SubmitChunkUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E61ED1F31BBEF00237EA1 /* SubmitChunkUploadOperation.swift */; };
 		459F230524ABB373000D6363 /* UploadDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459F230424ABB373000D6363 /* UploadDescriptor.swift */; };
 		45A07B3122B91A52003128B0 /* DocumentDetectionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */; };
+		45A6103C24B5C45800225738 /* String+Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6103B24B5C45800225738 /* String+Hmac.swift */; };
 		45B63B0423279E690040BFBB /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B0323279E690040BFBB /* Uploadable.swift */; };
 		45B63B0623279EB10040BFBB /* Uploadable+reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B0523279EB10040BFBB /* Uploadable+reader.swift */; };
 		45B63B0823279ED10040BFBB /* UploadableReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B0723279ED10040BFBB /* UploadableReader.swift */; };
@@ -181,7 +180,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4566603724B49CB600C3EAF0 /* CryptoSwift.framework in Copy Embedded Frameworks */,
 				45E07AB022AFC15300CD4573 /* Alamofire.framework in Copy Embedded Frameworks */,
 				45E07AB222AFC15300CD4573 /* OHHTTPStubs.framework in Copy Embedded Frameworks */,
 			);
@@ -226,7 +224,6 @@
 		45513FF91F0E9739006DB972 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		4551400C1F0E97E2006DB972 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		455266301F1618E1009537D9 /* TransformCropMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformCropMode.swift; sourceTree = "<group>"; };
-		4566603224B49C6400C3EAF0 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		4566603424B49C9500C3EAF0 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CryptoKit.framework; sourceTree = DEVELOPER_DIR; };
 		4566603824B49FD200C3EAF0 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
 		45690CCC22A65FC500285F62 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -262,6 +259,7 @@
 		459E61ED1F31BBEF00237EA1 /* SubmitChunkUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitChunkUploadOperation.swift; sourceTree = "<group>"; };
 		459F230424ABB373000D6363 /* UploadDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDescriptor.swift; sourceTree = "<group>"; };
 		45A07B3022B91A52003128B0 /* DocumentDetectionTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetectionTransform.swift; sourceTree = "<group>"; };
+		45A6103B24B5C45800225738 /* String+Hmac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hmac.swift"; sourceTree = "<group>"; };
 		45B63B0323279E690040BFBB /* Uploadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploadable.swift; sourceTree = "<group>"; };
 		45B63B0523279EB10040BFBB /* Uploadable+reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Uploadable+reader.swift"; sourceTree = "<group>"; };
 		45B63B0723279ED10040BFBB /* UploadableReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadableReader.swift; sourceTree = "<group>"; };
@@ -363,7 +361,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4566603324B49C6400C3EAF0 /* CryptoSwift.framework in Frameworks */,
 				45690CD222A65FE800285F62 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +466,7 @@
 				452C639523D0703A0057656C /* StorageOptions+MultipartFormData.swift */,
 				45D99F2E1F14EDD400CE709F /* UIColor+hexString.swift */,
 				45B63B0523279EB10040BFBB /* Uploadable+reader.swift */,
+				45A6103B24B5C45800225738 /* String+Hmac.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -653,7 +651,6 @@
 			children = (
 				45B830CA1F03BB6D0053742A /* Cartfile */,
 				45690CCC22A65FC500285F62 /* Alamofire.framework */,
-				4566603224B49C6400C3EAF0 /* CryptoSwift.framework */,
 				45690CCD22A65FC500285F62 /* OHHTTPStubs.framework */,
 				457B17A5232826C80033BDB1 /* Cartfile.private */,
 				457B17A6232826C80033BDB1 /* Cartfile.resolved */,
@@ -926,6 +923,7 @@
 				45DC974224ACC0840014ECE3 /* Loggers.swift in Sources */,
 				45B63B272328078A0040BFBB /* NetworkingServiceWithBaseURL+buildURL.swift in Sources */,
 				4528C7461F2F24FB00A4BEF6 /* CommitPartUploadOperation.swift in Sources */,
+				45A6103C24B5C45800225738 /* String+Hmac.swift in Sources */,
 				BC8832D420D181A700B88EAF /* BlackAndWhiteTransform.swift in Sources */,
 				4502F7311F1F4C3A000875D6 /* StartUploadOperation.swift in Sources */,
 				45B63B0423279E690040BFBB /* Uploadable.swift in Sources */,
