@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import CryptoSwift
 import XCTest
 @testable import FilestackSDK
 

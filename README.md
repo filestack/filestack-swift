@@ -76,7 +76,6 @@ Add FilestackSDK and its dependencies as git submodules by running the following
 ```shell
 $ git submodule add https://github.com/filestack/filestack-swift.git
 $ git submodule add https://github.com/Alamofire/Alamofire.git
-$ git submodule add https://github.com/krzyzanowskim/CryptoSwift.git
 ```
 
 Open the new `filestack-swift` folder, and drag the `FilestackSDK.xcodeproj` into the Project Navigator of your application's Xcode project.
