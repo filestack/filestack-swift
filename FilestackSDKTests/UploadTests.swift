@@ -131,6 +131,46 @@ class UploadTests: XCTestCase {
         XCTAssertNotNil(error)
     }
 
+    func testCancellingStartedUploadWithoutUploadablesShouldCallCompletionHandler() {
+        let expectation = self.expectation(description: "request should succeed")
+        var response: [JSONResponse] = []
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: true, startImmediately: true)
+
+        let uploader = client.upload(options: uploadOptions) { resp in
+            response = resp
+            expectation.fulfill()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            uploader.cancel()
+        }
+
+        waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(response, [])
+    }
+
+    func testCancellingNotStartedUploadWithoutUploadablesShouldCallCompletionHandler() {
+        let expectation = self.expectation(description: "request should succeed")
+        var response: [JSONResponse] = []
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: true, startImmediately: false)
+
+        let uploader = client.upload(options: uploadOptions) { resp in
+            response = resp
+            expectation.fulfill()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            uploader.cancel()
+        }
+
+        waitForExpectations(timeout: 15, handler: nil)
+
+        XCTAssertEqual(response, [])
+    }
+
     func testResumableMultiPartUploadWithDownNetworkOnStart() {
         let uploadMultipartStartStubConditions =
             isScheme(Constants.uploadURL.scheme!) &&

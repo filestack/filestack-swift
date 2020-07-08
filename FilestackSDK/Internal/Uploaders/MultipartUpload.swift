@@ -68,7 +68,12 @@ class MultipartUpload: Uploader, DeferredAdd {
 
         uploadQueue.sync {
             state = .cancelled
-            operationQueue.cancelAllOperations()
+
+            if uploadables == nil || uploadables?.count == 0 {
+                finish(with: [])
+            } else {
+                operationQueue.cancelAllOperations()
+            }
         }
 
         return true
