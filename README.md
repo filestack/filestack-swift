@@ -324,7 +324,6 @@ FSUploader *uploader = [client uploadURLUsing:someURL
 uploader.progress // returns an `NSProgress` object
 ```
 </details>
-</details>
 
 <details>
 <summary>Enabling background upload support</summary>
@@ -335,6 +334,8 @@ New in version `2.3`, we added support for uploading files in a background sessi
 // Set `UploadService.shared.useBackgroundSession` to true to allow uploads in the background.
 FilestackSDK.UploadService.shared.useBackgroundSession = true
 ```
+</details>
+</details>
 
 ## Versioning
 
