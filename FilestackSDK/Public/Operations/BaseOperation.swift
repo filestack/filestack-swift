@@ -82,7 +82,7 @@ open class BaseOperation<Success>: Operation {
 
 extension BaseOperation {
     /// Returns the result of operation.
-    private(set) var result: Result {
+    open private(set) var result: Result {
         get { lockQueue.sync { _result } }
         set { lockQueue.sync { _result = newValue } }
     }
