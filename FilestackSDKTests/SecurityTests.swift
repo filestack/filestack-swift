@@ -20,12 +20,7 @@ class SecurityTests: XCTestCase {
         XCTAssertNoThrow(jsonData = try! policy.toJSON())
 
         XCTAssertEqual(security.encodedPolicy, jsonData.base64EncodedString())
-
-        let signature: String = try! HMAC(key: "MY-APP-SECRET", variant: .sha256)
-            .authenticate(Array(security.encodedPolicy.utf8))
-            .toHexString()
-
-        XCTAssertEqual(security.signature, signature)
+        XCTAssertEqual(security.signature.lowercased(), "752d1daa283c45ccccbeebbfc384b59b69fe4a8fc50607adc9937ed1789deaaa")
     }
 
     func testDefaultInitializer() {
