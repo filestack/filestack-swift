@@ -26,7 +26,7 @@ class MultipartUpload: Uploader, DeferredAdd {
 
         progress.kind = .file
         progress.fileOperationKind = .copying
-        progress.totalUnitCount = -1 // indeterminate
+        progress.totalUnitCount = 0 // indeterminate
 
         return progress
     }()
@@ -61,7 +61,13 @@ class MultipartUpload: Uploader, DeferredAdd {
 
     // MARK: - Uploadable Protocol Implementation
 
-    private(set) var state: UploadState = .notStarted
+    private(set) var state: UploadState = .notStarted {
+        didSet {
+            if state == .cancelled {
+                progress.cancel()
+            }
+        }
+    }
 
     @discardableResult func cancel() -> Bool {
         guard state != .cancelled else { return false }
@@ -122,10 +128,14 @@ private extension MultipartUpload {
 
         var results: [JSONResponse] = []
 
-        // Observe changes in `progress.fractionCompleted`.
-        progressObservers.append(masterProgress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
-            self.progress.completedUnitCount = Int64(progress.fractionCompleted * Double(progress.totalUnitCount))
+        // Observe changes in `progress.totalUnitCount`.
+        progressObservers.append(masterProgress.observe(\.totalUnitCount) { progress, _ in
             self.progress.totalUnitCount = progress.totalUnitCount
+        })
+
+        // Observe changes in `progress.fractionCompleted`.
+        progressObservers.append(masterProgress.observe(\.fractionCompleted) { progress, _ in
+            self.progress.completedUnitCount = Int64(progress.fractionCompleted * Double(progress.totalUnitCount))
 
             self.queue.async {
                 self.uploadProgress?(self.progress)

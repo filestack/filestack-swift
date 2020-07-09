@@ -23,7 +23,7 @@ open class BaseOperation<Success>: Operation {
 
     // MARK: - Private Properties
 
-    private var lockQueue = DispatchQueue(label: "com.filestack.FilestackSDK.operation-lock-queue")
+    private let lockQueue = DispatchQueue(label: "com.filestack.FilestackSDK.operation-lock-queue")
 
     private var _result: Result = .failure(.custom("Result not unavailable."))
 

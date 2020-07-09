@@ -37,6 +37,7 @@ class UploadOperation: BaseOperation<JSONResponse> {
 
     private let masterProgress = Progress()
     private var masterProgressObservers: [NSKeyValueObservation] = []
+    private let lockQueue = DispatchQueue(label: "com.filestack.FilestackSDK.upload-operation-lock-queue")
 
     // MARK: - Lifecycle
 
@@ -76,17 +77,21 @@ extension UploadOperation {
 
 private extension UploadOperation {
     func setupProgressObservers() {
-        masterProgressObservers.append(masterProgress.observe(\.totalUnitCount, options: [.new]) { progress, _ in
-            self.progress.totalUnitCount = progress.totalUnitCount
-        })
+        lockQueue.sync {
+            guard !isCancelled else { return }
 
-        masterProgressObservers.append(masterProgress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
-            self.progress.completedUnitCount = Int64(progress.fractionCompleted * Double(progress.totalUnitCount))
-        })
+            masterProgressObservers.append(masterProgress.observe(\.totalUnitCount) { progress, _ in
+                self.progress.totalUnitCount = progress.totalUnitCount
+            })
+
+            masterProgressObservers.append(masterProgress.observe(\.fractionCompleted) { progress, _ in
+                self.progress.completedUnitCount = Int64(progress.fractionCompleted * Double(progress.totalUnitCount))
+            })
+        }
     }
 
     func removeProgressObservers() {
-        masterProgressObservers.removeAll()
+        lockQueue.sync { masterProgressObservers.removeAll() }
     }
 
     func upload() {
