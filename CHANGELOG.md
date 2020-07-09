@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 2.3.1 *(2020-07-09)*
+----------------------------
+- Cancelling an upload is now also reflected on its associated `progress` object.
+- Fixed a possible race condition when cancelling an upload operation right after it started.
+
 Version 2.3 *(2020-07-08)*
 ----------------------------
 
