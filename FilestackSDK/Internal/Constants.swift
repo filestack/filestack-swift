@@ -11,6 +11,7 @@ import Foundation
 struct Constants {
     static let apiURL = URL(string: "https://www.filestackapi.com/api")!
     static let uploadURL = URL(string: "https://upload.filestackapi.com")!
+    static let cdnURL = URL(string: "https://cdn.filestackcontent.com")!
 
     static let filePath = "file"
 
