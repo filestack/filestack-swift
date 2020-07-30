@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.3.2 *(2020-07-30)*
+----------------------------
+- Fixed transforms using the wrong base URL resulting in 404 responses.
+
 Version 2.3.1 *(2020-07-09)*
 ----------------------------
 - Cancelling an upload is now also reflected on its associated `progress` object.

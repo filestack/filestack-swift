@@ -34,7 +34,7 @@ platform :ios, '11.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'FilestackSDK', '~> 2.3.1'
+    pod 'FilestackSDK', '~> 2.3.2'
 end
 ```
 
@@ -57,7 +57,7 @@ $ brew install carthage
 
 To integrate FilestackSDK into your Xcode project using Carthage, specify it in your `Cartfile`:
 
-`github "filestack/filestack-swift" ~> 2.3.1`
+`github "filestack/filestack-swift" ~> 2.3.2`
 
 Run `carthage update` to build the framework and drag the built `FilestackSDK.framework` into your Xcode project. Additionally, add  `Alamofire.framework`  to the embedded frameworks build phase of your app's target.
 
