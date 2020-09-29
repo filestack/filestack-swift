@@ -53,8 +53,19 @@ class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
 extension SubmitChunkUploadOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/upload", relativeTo: Constants.uploadURL)!
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
-        UploadService.shared.upload(multipartFormData: multipartFormData, url: uploadURL, completionHandler: uploadDataChunk)
+        guard
+            let payload = self.payload(),
+            let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
+        else {
+            return
+        }
+
+        request.responseJSON { (response) in
+            let jsonResponse = JSONResponse(with: response)
+            self.uploadDataChunk(using: jsonResponse)
+        }
     }
 
     override func cancel() {
@@ -93,9 +104,10 @@ private extension SubmitChunkUploadOperation {
             return
         }
 
-        guard let url = url(from: response),
-              let headers = headers(from: response),
-              let request = UploadService.shared.upload(data: data, to: url, method: .put, headers: headers)
+        guard
+            let url = url(from: response),
+            let headers = headers(from: response),
+            let request = UploadService.shared.upload(data: data, to: url, method: .put, headers: headers)
         else {
             finish(with: .failure(.unknown))
             return
@@ -124,16 +136,20 @@ private extension SubmitChunkUploadOperation {
         uploadRequest = request
     }
 
-    /// Encode multipart form data.
-    func multipartFormData(form: MultipartFormData) {
-        form.append(descriptor.config.apiKey, named: "apikey")
-        form.append(String(part), named: "part")
-        form.append(String(data.count), named: "size")
-        form.append(data.base64MD5Digest(), named: "md5")
-        form.append(descriptor.uri, named: "uri")
-        form.append(descriptor.region, named: "region")
-        form.append(descriptor.uploadID, named: "upload_id")
-        form.append("true", named: "multipart")
-        form.append(String(offset), named: "offset")
+    func payload() -> Data? {
+        let payload: [String: Any] = [
+            "apikey": descriptor.config.apiKey,
+            "uri": descriptor.uri,
+            "region": descriptor.region,
+            "upload_id": descriptor.uploadID,
+            "part": part,
+            "size": data.count,
+            "md5": data.base64MD5Digest(),
+            "offset": offset,
+            "fii": true,
+            "store": descriptor.options.storeOptions.asDictionary()
+        ]
+
+        return try? JSONSerialization.data(withJSONObject: payload)
     }
 }

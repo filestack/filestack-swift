@@ -56,9 +56,17 @@ private extension CompleteUploadOperation {
 
         retrier = .init(attempts: Defaults.maxRetries, label: uploadURL.relativePath) { (semaphore) -> JSONResponse? in
             var jsonResponse: JSONResponse?
+            let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
-            UploadService.shared.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
-                jsonResponse = response
+            guard
+                let payload = self.payload(),
+                let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
+            else {
+                return nil
+            }
+
+            request.responseJSON { (response) in
+                jsonResponse = JSONResponse(with: response)
                 semaphore.signal()
             }
 
@@ -76,28 +84,34 @@ private extension CompleteUploadOperation {
         }
     }
 
-    func multipartFormData(form: MultipartFormData) {
-        form.append(descriptor.config.apiKey, named: "apikey")
-        form.append(descriptor.uri, named: "uri")
-        form.append(descriptor.region, named: "region")
-        form.append(descriptor.uploadID, named: "upload_id")
-        form.append(descriptor.filename, named: "filename")
-        form.append(String(descriptor.filesize), named: "size")
-        form.append(descriptor.mimeType, named: "mimetype")
-
-        descriptor.options.storeOptions.append(to: form)
+    func payload() -> Data? {
+        var payload: [String: Any] = [
+            "apikey": descriptor.config.apiKey,
+            "uri": descriptor.uri,
+            "region": descriptor.region,
+            "upload_id": descriptor.uploadID,
+            "filename": descriptor.filename,
+            "mimetype": descriptor.mimeType,
+            "size": descriptor.filesize,
+            "store": descriptor.options.storeOptions.asDictionary()
+        ]
 
         if let security = descriptor.config.security {
-            form.append(security.encodedPolicy, named: "policy")
-            form.append(security.signature, named: "signature")
+            payload["policy"] = security.encodedPolicy
+            payload["signature"] = security.signature
         }
 
         if descriptor.useIntelligentIngestion {
-            form.append("true", named: "multipart")
+            payload["fii"] = true
         } else {
-            let parts = (partsAndEtags.map { "\($0.key):\($0.value)" }).joined(separator: ";")
-            form.append(parts, named: "parts")
+            payload["parts"] = partsAndEtags.map { [String($0.key): $0.value] }
         }
+
+        if !descriptor.options.uploadTags.isEmpty {
+            payload["upload_tags"] = descriptor.options.uploadTags
+        }
+
+        return try? JSONSerialization.data(withJSONObject: payload)
     }
 }
 

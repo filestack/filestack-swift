@@ -56,8 +56,16 @@ private extension CommitPartUploadOperation {
 
         retrier = .init(attempts: Defaults.maxRetries, label: uploadURL.relativePath) { (semaphore) -> HTTPURLResponse? in
             var httpURLResponse: HTTPURLResponse?
+            let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
-            UploadService.shared.upload(multipartFormData: self.multipartFormData, url: uploadURL) { response in
+            guard
+                let payload = self.payload(),
+                let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
+            else {
+                return nil
+            }
+
+            request.responseJSON { (response) in
                 httpURLResponse = response.response
                 semaphore.signal()
             }
@@ -76,14 +84,22 @@ private extension CommitPartUploadOperation {
         }
     }
 
-    func multipartFormData(form: MultipartFormData) {
-        form.append(descriptor.config.apiKey, named: "apikey")
-        form.append(descriptor.uri, named: "uri")
-        form.append(descriptor.region, named: "region")
-        form.append(descriptor.uploadID, named: "upload_id")
-        form.append(String(descriptor.filesize), named: "size")
-        form.append(String(part), named: "part")
-        form.append(descriptor.options.storeOptions.location.description, named: "store_location")
+    func payload() -> Data? {
+        var payload: [String: Any] = [
+            "apikey": descriptor.config.apiKey,
+            "uri": descriptor.uri,
+            "region": descriptor.region,
+            "upload_id": descriptor.uploadID,
+            "size": descriptor.filesize,
+            "part": part,
+            "store": descriptor.options.storeOptions.asDictionary()
+        ]
+
+        if descriptor.useIntelligentIngestion {
+            payload["fii"] = true
+        }
+
+        return try? JSONSerialization.data(withJSONObject: payload)
     }
 }
 

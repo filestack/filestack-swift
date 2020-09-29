@@ -7,8 +7,8 @@
 //
 
 import OHHTTPStubs
+import OHHTTPStubsSwift
 import XCTest
-
 import Alamofire
 @testable import FilestackSDK
 
@@ -19,7 +19,7 @@ class FileLinkTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
     }
 
     func testInitializerWithHandleAndApiKey() {
@@ -105,7 +105,7 @@ class FileLinkTests: XCTestCase {
 
     func testGetUnexistingContent() {
         stub(condition: cdnStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -130,7 +130,7 @@ class FileLinkTests: XCTestCase {
 
     func testGetContentWithParameters() {
         stub(condition: cdnStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -156,7 +156,7 @@ class FileLinkTests: XCTestCase {
 
     func testGetContentWithParametersAndSecurity() {
         stub(condition: cdnStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let security = Seeds.Securities.basic
@@ -212,7 +212,7 @@ class FileLinkTests: XCTestCase {
 
     func testGetContentUsingDefaultQueue() {
         stub(condition: cdnStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -234,7 +234,7 @@ class FileLinkTests: XCTestCase {
 
     func testGetContentUsingCustomQueue() {
         stub(condition: cdnStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -299,7 +299,7 @@ class FileLinkTests: XCTestCase {
 
     func testDownloadUnexistingContent() {
         stub(condition: cdnStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -325,7 +325,7 @@ class FileLinkTests: XCTestCase {
 
     func testDownloadWithParameters() {
         stub(condition: cdnStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -381,7 +381,7 @@ class FileLinkTests: XCTestCase {
 
     func testDeleteExistingContent() {
         stub(condition: apiStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -408,7 +408,7 @@ class FileLinkTests: XCTestCase {
 
     func testDeleteUnexistingContent() {
         stub(condition: apiStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -437,7 +437,7 @@ class FileLinkTests: XCTestCase {
             request = req
             requestExpectation.fulfill()
 
-            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            return HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -468,7 +468,7 @@ class FileLinkTests: XCTestCase {
             request = req
             requestExpectation.fulfill()
 
-            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+            return HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -492,7 +492,7 @@ class FileLinkTests: XCTestCase {
 
     func testOverwriteUnExistingContentWithRemoteURL() {
         stub(condition: apiStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -515,7 +515,7 @@ class FileLinkTests: XCTestCase {
 
     func testOverwriteUnexistingContentWithFileURL() {
         stub(condition: apiStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")
@@ -548,7 +548,7 @@ class FileLinkTests: XCTestCase {
                 "user": nil,
             ]
 
-            return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
+            return HTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
         }
 
         let security = Seeds.Securities.basic
@@ -580,7 +580,7 @@ class FileLinkTests: XCTestCase {
     func testGetSafeForWorkResponse() {
         stub(condition: cdnStubConditions) { _ in
             let headers = ["Content-Type": "application/json"]
-            return OHHTTPStubsResponse(jsonObject: ["sfw": true], statusCode: 200, headers: headers)
+            return HTTPStubsResponse(jsonObject: ["sfw": true], statusCode: 200, headers: headers)
         }
 
         let security = Seeds.Securities.basic
@@ -619,7 +619,7 @@ class FileLinkTests: XCTestCase {
                 "md5": "de2af2ee5450732a4768442199d6718d",
             ]
 
-            return OHHTTPStubsResponse(jsonObject: returnedJSON, statusCode: 200, headers: headers)
+            return HTTPStubsResponse(jsonObject: returnedJSON, statusCode: 200, headers: headers)
         }
 
         let security = Seeds.Securities.basic

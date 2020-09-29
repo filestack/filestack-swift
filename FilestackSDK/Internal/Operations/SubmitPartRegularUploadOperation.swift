@@ -45,9 +45,20 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
 
 extension SubmitPartRegularUploadOperation {
     override func main() {
-        let url = URL(string: "multipart/upload", relativeTo: Constants.uploadURL)!
+        let uploadURL = URL(string: "multipart/upload", relativeTo: Constants.uploadURL)!
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
-        UploadService.shared.upload(multipartFormData: multipartFormData, url: url, completionHandler: uploadDataChunk)
+        guard
+            let payload = self.payload(),
+            let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
+        else {
+            return
+        }
+
+        request.responseJSON { (response) in
+            let jsonResponse = JSONResponse(with: response)
+            self.uploadDataChunk(using: jsonResponse)
+        }
     }
 
     override func cancel() {
@@ -117,16 +128,18 @@ private extension SubmitPartRegularUploadOperation {
         uploadRequest = request
     }
 
-    /// Encode multipart form data.
-    func multipartFormData(form: MultipartFormData) {
-        form.append(descriptor.config.apiKey, named: "apikey")
-        form.append(descriptor.uri, named: "uri")
-        form.append(descriptor.region, named: "region")
-        form.append(descriptor.uploadID, named: "upload_id")
-        form.append(String(data.count), named: "size")
-        form.append(String(number), named: "part")
-        form.append(data.base64MD5Digest(), named: "md5")
+    func payload() -> Data? {
+        let payload: [String: Any] = [
+            "apikey": descriptor.config.apiKey,
+            "uri": descriptor.uri,
+            "region": descriptor.region,
+            "upload_id": descriptor.uploadID,
+            "part": number,
+            "size": data.count,
+            "md5": data.base64MD5Digest(),
+            "store": descriptor.options.storeOptions.asDictionary()
+        ]
 
-        descriptor.options.storeOptions.append(to: form)
+        return try? JSONSerialization.data(withJSONObject: payload)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import OHHTTPStubs
+import OHHTTPStubsSwift
 import XCTest
 
 @testable import FilestackSDK
@@ -23,7 +24,7 @@ class TransformableTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
     }
 
     func testSingleHandleTransformation() {
@@ -284,7 +285,7 @@ class TransformableTests: XCTestCase {
 
         XCTAssertEqual(transformable.url, expectedURL)
     }
-
+    
     func testSecureForWorkTransformationURL() {
         transformable.add(transform: SecureForWorkTransform())
 
@@ -1277,7 +1278,7 @@ class TransformableTests: XCTestCase {
                 "url": "https://cdn.filestackcontent.com/lv3P2Q4QN2aluHLGhgAV",
             ]
 
-            return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: nil)
+            return HTTPStubsResponse(jsonObject: json, statusCode: 200, headers: nil)
         }
 
         let security = Seeds.Securities.basic
@@ -1320,7 +1321,7 @@ class TransformableTests: XCTestCase {
 
     func testFailedStoreImageTransformation() {
         stub(condition: processStubConditions) { _ in
-            OHHTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
+            HTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
         }
 
         let client = Client(apiKey: "MY-API-KEY")

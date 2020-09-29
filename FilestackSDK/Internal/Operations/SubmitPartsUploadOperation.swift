@@ -93,7 +93,9 @@ private extension SubmitPartsUploadOperation {
                 switch operation.result {
                 case let .success(response):
                     // Store parts and ETags, if present.
-                    partsAndEtags[operation.number] = response.allHeaderFields["Etag"] as? String
+                    if let etag = response.allHeaderFields["Etag"] as? String {
+                        partsAndEtags[operation.number] = etag.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+                    }
                 case let .failure(error):
                     // In case a part submission fails, we will cancel all operations and finish with error.
                     self.operationQueue.cancelAllOperations()

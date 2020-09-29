@@ -8,13 +8,14 @@
 
 import Alamofire
 import OHHTTPStubs
+import OHHTTPStubsSwift
 import XCTest
 @testable import FilestackSDK
 
 class SessionManagerTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
     }
 
     func testFilestackDefaultCustomHTTPHeaders() {
@@ -28,7 +29,7 @@ class SessionManagerTests: XCTestCase {
             expectation.fulfill()
 
             let data = Data()
-            let stubsResponse = OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+            let stubsResponse = HTTPStubsResponse(data: data, statusCode: 200, headers: nil)
 
             return stubsResponse
         }

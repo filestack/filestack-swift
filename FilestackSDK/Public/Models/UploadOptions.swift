@@ -35,6 +35,10 @@ public class UploadOptions: NSObject {
     /// An object containing the store options (e.g. location, region, container, access, etc.)
     @objc public var storeOptions: StorageOptions
 
+    /// A dictionary containing any custom data (tags) that should be associated to this upload.
+    /// For more information, please check [Upload tags](https://www.filestack.com/docs/uploads/uploading/#upload-tags).
+    @objc public var uploadTags: [String: String]
+
     /// How many parts should be uploaded concurrently
     @objc public var partUploadConcurrency: Int
 
@@ -47,11 +51,13 @@ public class UploadOptions: NSObject {
     @objc public init(preferIntelligentIngestion: Bool,
                       startImmediately: Bool,
                       storeOptions: StorageOptions = .defaults,
+                      uploadTags: [String: String] = [:],
                       partUploadConcurrency: Int = UploadOptions.defaultPartUploadConcurrency,
                       chunkUploadConcurrency: Int = UploadOptions.defaultChunkUploadConcurrency) {
         self.preferIntelligentIngestion = preferIntelligentIngestion
         self.startImmediately = startImmediately
         self.storeOptions = storeOptions
+        self.uploadTags = uploadTags
         self.partUploadConcurrency = partUploadConcurrency
         self.chunkUploadConcurrency = chunkUploadConcurrency
     }

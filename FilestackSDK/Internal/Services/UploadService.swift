@@ -44,20 +44,6 @@ public final class UploadService: NSObject, NetworkingService {
 // MARK: - Internal Functions
 
 extension UploadService {
-    func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
-                       url: URL,
-                       queue: DispatchQueue = .main,
-                       completionHandler: @escaping (JSONResponse) -> Void) {
-        sessionManager.upload(multipartFormData: multipartFormData, to: url) { result in
-            switch result {
-            case let .success(request, _, _):
-                request.responseJSON(queue: queue) { completionHandler(JSONResponse(with: $0)) }
-            case let .failure(error):
-                queue.async { completionHandler(JSONResponse(with: error)) }
-            }
-        }
-    }
-
     func upload(data: Data, to url: URLConvertible, method: HTTPMethod, headers: HTTPHeaders? = nil) -> UploadRequest? {
         if useBackgroundSession {
             if let dataURL = temporaryURL(using: data) {

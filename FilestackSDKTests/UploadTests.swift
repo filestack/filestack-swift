@@ -7,6 +7,7 @@
 //
 
 import OHHTTPStubs
+import OHHTTPStubsSwift
 import XCTest
 @testable import FilestackSDK
 
@@ -33,7 +34,7 @@ class UploadTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
         client = nil
     }
 
@@ -184,7 +185,7 @@ class UploadTests: XCTestCase {
         stub(condition: uploadMultipartStartStubConditions) { _ in
             let noConnectionCode = Int(CFNetworkErrors.cfurlErrorNotConnectedToInternet.rawValue)
             let notConnectedError = NSError(domain: NSURLErrorDomain, code: noConnectionCode, userInfo: nil)
-            return OHHTTPStubsResponse(error: notConnectedError)
+            return HTTPStubsResponse(error: notConnectedError)
         }
 
         let expectation = self.expectation(description: "request should succeed")
@@ -217,7 +218,7 @@ class UploadTests: XCTestCase {
         stub(condition: uploadMultipartPutStubConditions) { _ in
             let noConnectionCode = Int(CFNetworkErrors.cfurlErrorNotConnectedToInternet.rawValue)
             let notConnectedError = NSError(domain: NSURLErrorDomain, code: noConnectionCode, userInfo: nil)
-            return OHHTTPStubsResponse(error: notConnectedError)
+            return HTTPStubsResponse(error: notConnectedError)
         }
 
         let expectation = self.expectation(description: "request should succeed")
@@ -239,16 +240,19 @@ class UploadTests: XCTestCase {
         XCTAssertNotNil(error)
     }
 
-    func testMultiPartUploadWithWorkflows() {
+    func testMultiPartUploadWithWorkflowsAndUploadTags() {
         var hitCount = 0
         let workflows = ["workflow-1", "workflow-2", "workflow-3"]
+        let uploadTags = ["key1": "value1", "key2": "value2"]
         let storeOptions = StorageOptions(location: .s3, workflows: workflows)
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: true,
                                           startImmediately: true,
                                           storeOptions: storeOptions)
 
-        stubRegularMultipartRequest(hitCount: &hitCount, workflows: workflows)
+        uploadOptions.uploadTags = uploadTags
+
+        stubRegularMultipartRequest(hitCount: &hitCount, workflows: workflows, uploadTags: uploadTags)
 
         let expectation = self.expectation(description: "request should succeed")
 
@@ -277,6 +281,7 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(json["status"] as? String, "Stored")
         XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(json["mimetype"] as? String, "image/jpeg")
+        XCTAssertEqual(json["upload_tags"] as? [String: String], uploadTags)
 
         let returnedWorkflows: [String: Any]! = json["workflows"] as? [String: Any]
 
@@ -383,11 +388,11 @@ class UploadTests: XCTestCase {
 // MARK: - Private Functions
 
 private extension UploadTests {
-    func stubRegularMultipartRequest(hitCount: inout Int, workflows: [String]? = nil) {
+    func stubRegularMultipartRequest(hitCount: inout Int, workflows: [String]? = nil, uploadTags: [String: String]? = nil) {
         stubMultipartStartRequest(supportsIntelligentIngestion: false)
         stubMultipartPostPartRequest(parts: ["PART-1"], hitCount: &hitCount)
         stubMultipartPutRequest(part: "PART-1")
-        stubMultipartCompleteRequest(workflows: workflows)
+        stubMultipartCompleteRequest(workflows: workflows, uploadTags: uploadTags)
     }
 
     func stubMultipartStartRequest(supportsIntelligentIngestion: Bool) {
@@ -407,7 +412,7 @@ private extension UploadTests {
                 json["upload_type"] = "intelligent_ingestion"
             }
 
-            return OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
+            return HTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
         }
     }
 
@@ -427,7 +432,7 @@ private extension UploadTests {
                            "Server": "AmazonS3",
                            "x-amz-id-2": "LxaKVvjp9jAK+ErminkrN8HV0VMOA/Bjkbf4A0cCaDRC6smJZerZqN9PqzRzGfn9p8vvTb6YIfM=",
                            "x-amz-request-id": "7D827E4E5CFD2E7A"]
-            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: headers)
+            return HTTPStubsResponse(data: Data(), statusCode: 200, headers: headers)
         }
     }
 
@@ -447,7 +452,7 @@ private extension UploadTests {
             let partName = "PART-\(self.currentPart)/\(self.currentOffset)"
             let headers = ["Content-Type": "application/json"]
 
-            return OHHTTPStubsResponse(jsonObject: self.json(partName: partName), statusCode: 200, headers: headers)
+            return HTTPStubsResponse(jsonObject: self.json(partName: partName), statusCode: 200, headers: headers)
         }
     }
 
@@ -462,13 +467,16 @@ private extension UploadTests {
 
         stub(condition: uploadMultipartPostPartStubConditions) { _ in
             let headers = ["Content-Type": "application/json"]
-            return OHHTTPStubsResponse(jsonObject: self.json(partName: partName), statusCode: 200, headers: headers)
+            return HTTPStubsResponse(jsonObject: self.json(partName: partName), statusCode: 200, headers: headers)
         }
 
         hitCount += 1
     }
 
-    func stubMultipartCompleteRequest(requestTime: TimeInterval = 0, responseTime: TimeInterval = 0, workflows: [String]? = nil) {
+    func stubMultipartCompleteRequest(requestTime: TimeInterval = 0,
+                                      responseTime: TimeInterval = 0,
+                                      workflows: [String]? = nil,
+                                      uploadTags: [String: String]? = nil) {
         let uploadMultipartCompleteStubConditions = isScheme(Constants.uploadURL.scheme!) &&
             isHost(Constants.uploadURL.host!) &&
             isPath("/multipart/complete") &&
@@ -492,7 +500,11 @@ private extension UploadTests {
                 json["workflows"] = workflowsDic
             }
 
-            let response = OHHTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
+            if let uploadTags = uploadTags {
+                json["upload_tags"] = uploadTags
+            }
+
+            let response = HTTPStubsResponse(jsonObject: json, statusCode: 200, headers: headers)
             response.requestTime = requestTime
             response.responseTime = responseTime
             return response
@@ -508,7 +520,7 @@ private extension UploadTests {
 
         stub(condition: uploadMultipartCommitStubConditions) { _ in
             let headers = ["Content-Type": "text/plain; charset=utf-8"]
-            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: headers)
+            return HTTPStubsResponse(data: Data(), statusCode: 200, headers: headers)
         }
     }
 

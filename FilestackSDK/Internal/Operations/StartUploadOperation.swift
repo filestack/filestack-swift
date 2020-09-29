@@ -43,8 +43,19 @@ class StartUploadOperation: BaseOperation<UploadDescriptor> {
 extension StartUploadOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/start", relativeTo: Constants.uploadURL)!
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
-        UploadService.shared.upload(multipartFormData: multipartFormData, url: uploadURL, completionHandler: handleResponse)
+        guard
+            let payload = self.payload(),
+            let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
+        else {
+            return
+        }
+
+        request.responseJSON { (response) in
+            let jsonResponse = JSONResponse(with: response)
+            self.handleResponse(response: jsonResponse)
+        }
     }
 }
 
@@ -93,21 +104,24 @@ private extension StartUploadOperation {
         finish(with: .success(descriptor))
     }
 
-    func multipartFormData(form: MultipartFormData) {
-        form.append(config.apiKey, named: "apikey")
-        form.append(filename, named: "filename")
-        form.append(mimeType, named: "mimetype")
-        form.append(String(filesize), named: "size")
-
-        options.storeOptions.append(to: form)
+    func payload() -> Data? {
+        var payload: [String: Any] = [
+            "apikey": config.apiKey,
+            "filename": filename,
+            "mimetype": mimeType,
+            "size": filesize,
+            "store": options.storeOptions.asDictionary()
+        ]
 
         if let security = config.security {
-            form.append(security.encodedPolicy, named: "policy")
-            form.append(security.signature, named: "signature")
+            payload["policy"] = security.encodedPolicy
+            payload["signature"] = security.signature
         }
 
         if options.preferIntelligentIngestion {
-            form.append("true", named: "multipart")
+            payload["fii"] = true
         }
+
+        return try? JSONSerialization.data(withJSONObject: payload)
     }
 }
