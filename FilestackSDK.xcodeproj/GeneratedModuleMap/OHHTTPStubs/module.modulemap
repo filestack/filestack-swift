@@ -1,0 +1,4 @@
+module OHHTTPStubs {
+    umbrella "/Users/ruben/Desktop/FilestackSDK/.build/checkouts/OHHTTPStubs/Sources/OHHTTPStubs/include"
+    export *
+}

@@ -1,0 +1,4 @@
+module ObjcDefs {
+    umbrella "/Users/ruben/Desktop/FilestackSDK/Sources/ObjcDefs/include"
+    export *
+}

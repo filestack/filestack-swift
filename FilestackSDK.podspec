@@ -9,7 +9,8 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target  = '11.0'
 
-  spec.source_files = 'FilestackSDK/**/*.{h,swift}'
+  spec.source_files = 'Sources/**/*.{h,swift}'
+  spec.exclude_files = 'Sources/**/SPMSupport/*.*'
 
   spec.dependency 'Alamofire', '~> 4.9'
 end
