@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 2.4.0 *(TBD)*
+----------------------------
+- Added support for Upload Tags.
+- Added support for Swift Package Manager.
+
 Version 2.3.2 *(2020-07-30)*
 ----------------------------
 - Fixed transforms using the wrong base URL resulting in 404 responses.
@@ -15,7 +20,7 @@ Version 2.3 *(2020-07-08)*
 
 - Added support for background uploads (see "Enabling background upload support" in README.md for more information.)
 - Improved upload progress reporting.
-- Improved retry and cancellation logic in upload operations. 
+- Improved retry and cancellation logic in upload operations.
 - Significantly improved performance of MD5 and Hmac calculations by relying on `CommonCrypto`.
 - Removed `CryptoSwift` dependency.
 
