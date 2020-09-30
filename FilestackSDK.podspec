@@ -11,6 +11,7 @@ Pod::Spec.new do |spec|
 
   spec.source_files = 'Sources/**/*.{h,swift}'
   spec.exclude_files = 'Sources/**/SPMSupport/*.*'
+  spec.public_header_files = 'Sources/**/*.h'
 
   spec.swift_versions = [4.2, 5.2]
   spec.dependency 'Alamofire', '~> 4.9'
