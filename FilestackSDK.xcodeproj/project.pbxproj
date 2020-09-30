@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45825B052524D59B002F3310 /* ObjcDefs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FilestackSDK::ObjcDefs::Product" /* ObjcDefs.framework */; };
-		45825B062524D59B002F3310 /* ObjcDefs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "FilestackSDK::ObjcDefs::Product" /* ObjcDefs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45825B192524DB86002F3310 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 45825B182524DB86002F3310 /* Alamofire */; };
 		45825B2B2524DE46002F3310 /* FilestackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */; };
 		45825B352524DE5D002F3310 /* BaseOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_164 /* BaseOperationTests.swift */; };
@@ -26,7 +24,6 @@
 		45825B412524DE5D002F3310 /* UploadableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_176 /* UploadableTests.swift */; };
 		45825B472524DE8D002F3310 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45825B452524DE8D002F3310 /* sample.jpg */; };
 		45825B482524DE8D002F3310 /* large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45825B462524DE8D002F3310 /* large.jpg */; };
-		45825B5E2524DF5A002F3310 /* ObjcDefs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FilestackSDK::ObjcDefs::Product" /* ObjcDefs.framework */; };
 		45825B6B2524E03B002F3310 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 45825B6A2524E03B002F3310 /* OHHTTPStubs */; };
 		45825B6D2524E03B002F3310 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 45825B6C2524E03B002F3310 /* OHHTTPStubsSwift */; };
 		45825B712524E07F002F3310 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B702524E07F002F3310 /* Helpers.swift */; };
@@ -161,21 +158,13 @@
 		45825CA02524E38C002F3310 /* Startable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C132524E389002F3310 /* Startable.swift */; };
 		45825CA12524E38C002F3310 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C142524E389002F3310 /* Cancellable.swift */; };
 		45825CA22524E38C002F3310 /* DeferredAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C152524E389002F3310 /* DeferredAdd.swift */; };
-		45825CA32524E38C002F3310 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C192524E389002F3310 /* Import.swift */; };
-		45825CA92524E3BC002F3310 /* FSPolicyCall.h in Sources */ = {isa = PBXBuildFile; fileRef = 45825C1C2524E389002F3310 /* FSPolicyCall.h */; };
-		45825CAA2524E3BC002F3310 /* FSMetadataOptions.h in Sources */ = {isa = PBXBuildFile; fileRef = 45825C1D2524E389002F3310 /* FSMetadataOptions.h */; };
-		45825CAB2524E3BC002F3310 /* FSTransformPosition.h in Sources */ = {isa = PBXBuildFile; fileRef = 45825C1E2524E389002F3310 /* FSTransformPosition.h */; };
-		45825CAE2524E3D4002F3310 /* ObjcDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 45825C202524E389002F3310 /* ObjcDefs.m */; };
+		4586F17C2524EFEA008F282E /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586F1652524EEB8008F282E /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4586F1802524EFF5008F282E /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1C2524E389002F3310 /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4586F1842524EFF8008F282E /* FSMetadataOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1D2524E389002F3310 /* FSMetadataOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1E2524E389002F3310 /* FSTransformPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		45825B072524D59B002F3310 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "FilestackSDK::ObjcDefs";
-			remoteInfo = ObjcDefs;
-		};
 		45825B2C2524DE46002F3310 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -183,28 +172,7 @@
 			remoteGlobalIDString = "FilestackSDK::FilestackSDK";
 			remoteInfo = FilestackSDK;
 		};
-		45825B5C2524DF56002F3310 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "FilestackSDK::ObjcDefs";
-			remoteInfo = ObjcDefs;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		45825B092524D59B002F3310 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				45825B062524D59B002F3310 /* ObjcDefs.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		45825B262524DE46002F3310 /* FilestackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilestackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,14 +311,13 @@
 		45825C142524E389002F3310 /* Cancellable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		45825C152524E389002F3310 /* DeferredAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeferredAdd.swift; sourceTree = "<group>"; };
 		45825C172524E389002F3310 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
-		45825C192524E389002F3310 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		45825C1C2524E389002F3310 /* FSPolicyCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
 		45825C1D2524E389002F3310 /* FSMetadataOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMetadataOptions.h; sourceTree = "<group>"; };
 		45825C1E2524E389002F3310 /* FSTransformPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTransformPosition.h; sourceTree = "<group>"; };
 		45825C1F2524E389002F3310 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		45825C202524E389002F3310 /* ObjcDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcDefs.m; sourceTree = "<group>"; };
+		4586F1652524EEB8008F282E /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		"FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"FilestackSDK::ObjcDefs::Product" /* ObjcDefs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjcDefs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_164 /* BaseOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOperationTests.swift; sourceTree = "<group>"; };
 		OBJ_165 /* ClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
 		OBJ_166 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
@@ -373,7 +340,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45825B5E2524DF5A002F3310 /* ObjcDefs.framework in Frameworks */,
 				45825B6D2524E03B002F3310 /* OHHTTPStubsSwift in Frameworks */,
 				45825B6B2524E03B002F3310 /* OHHTTPStubs in Frameworks */,
 				45825B2B2524DE46002F3310 /* FilestackSDK.framework in Frameworks */,
@@ -385,14 +351,6 @@
 			buildActionMask = 0;
 			files = (
 				45825B192524DB86002F3310 /* Alamofire in Frameworks */,
-				45825B052524D59B002F3310 /* ObjcDefs.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_469 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,10 +385,10 @@
 		45825B852524E389002F3310 /* FilestackSDK */ = {
 			isa = PBXGroup;
 			children = (
+				4586F1652524EEB8008F282E /* FilestackSDK.h */,
 				45825C172524E389002F3310 /* VERSION */,
 				45825B862524E389002F3310 /* Internal */,
 				45825BAC2524E389002F3310 /* Public */,
-				45825C182524E389002F3310 /* SPMSupport */,
 			);
 			path = FilestackSDK;
 			sourceTree = "<group>";
@@ -683,14 +641,6 @@
 			path = "Objective-C";
 			sourceTree = "<group>";
 		};
-		45825C182524E389002F3310 /* SPMSupport */ = {
-			isa = PBXGroup;
-			children = (
-				45825C192524E389002F3310 /* Import.swift */,
-			);
-			path = SPMSupport;
-			sourceTree = "<group>";
-		};
 		45825C1A2524E389002F3310 /* ObjcDefs */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,7 +696,6 @@
 		OBJ_217 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"FilestackSDK::ObjcDefs::Product" /* ObjcDefs.framework */,
 				"FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */,
 				45825B262524DE46002F3310 /* FilestackSDKTests.xctest */,
 			);
@@ -767,6 +716,20 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		4586F1782524EFDA008F282E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4586F17C2524EFEA008F282E /* FilestackSDK.h in Headers */,
+				4586F1802524EFF5008F282E /* FSPolicyCall.h in Headers */,
+				4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */,
+				4586F1842524EFF8008F282E /* FSMetadataOptions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		45825B252524DE46002F3310 /* FilestackSDKTests */ = {
 			isa = PBXNativeTarget;
@@ -779,7 +742,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				45825B5D2524DF56002F3310 /* PBXTargetDependency */,
 				45825B2D2524DE46002F3310 /* PBXTargetDependency */,
 			);
 			name = FilestackSDKTests;
@@ -795,15 +757,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_255 /* Build configuration list for PBXNativeTarget "FilestackSDK" */;
 			buildPhases = (
+				4586F1782524EFDA008F282E /* Headers */,
 				OBJ_258 /* Sources */,
 				OBJ_390 /* Frameworks */,
-				45825B092524D59B002F3310 /* Embed Frameworks */,
 				45825B142524DAD9002F3310 /* Set Version And Build Number */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				45825B082524D59B002F3310 /* PBXTargetDependency */,
 			);
 			name = FilestackSDK;
 			packageProductDependencies = (
@@ -811,22 +772,6 @@
 			);
 			productName = FilestackSDK;
 			productReference = "FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		"FilestackSDK::ObjcDefs" /* ObjcDefs */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_464 /* Build configuration list for PBXNativeTarget "ObjcDefs" */;
-			buildPhases = (
-				OBJ_467 /* Sources */,
-				OBJ_469 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ObjcDefs;
-			productName = ObjcDefs;
-			productReference = "FilestackSDK::ObjcDefs::Product" /* ObjcDefs.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -861,7 +806,6 @@
 			projectRoot = "";
 			targets = (
 				"FilestackSDK::FilestackSDK" /* FilestackSDK */,
-				"FilestackSDK::ObjcDefs" /* ObjcDefs */,
 				45825B252524DE46002F3310 /* FilestackSDKTests */,
 			);
 		};
@@ -971,7 +915,6 @@
 				45825C722524E38B002F3310 /* SecureForWorkTransform.swift in Sources */,
 				45825C652524E38B002F3310 /* OCRTransform.swift in Sources */,
 				45825C572524E38B002F3310 /* Policy.swift in Sources */,
-				45825CA32524E38C002F3310 /* Import.swift in Sources */,
 				45825C3F2524E38A002F3310 /* URLReader.swift in Sources */,
 				45825C282524E38A002F3310 /* SubmitChunkUploadOperation.swift in Sources */,
 				45825C292524E38A002F3310 /* CompleteUploadOperation.swift in Sources */,
@@ -1061,34 +1004,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_467 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				45825CA92524E3BC002F3310 /* FSPolicyCall.h in Sources */,
-				45825CAE2524E3D4002F3310 /* ObjcDefs.m in Sources */,
-				45825CAA2524E3BC002F3310 /* FSMetadataOptions.h in Sources */,
-				45825CAB2524E3BC002F3310 /* FSTransformPosition.h in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		45825B082524D59B002F3310 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "FilestackSDK::ObjcDefs" /* ObjcDefs */;
-			targetProxy = 45825B072524D59B002F3310 /* PBXContainerItemProxy */;
-		};
 		45825B2D2524DE46002F3310 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FilestackSDK::FilestackSDK" /* FilestackSDK */;
 			targetProxy = 45825B2C2524DE46002F3310 /* PBXContainerItemProxy */;
-		};
-		45825B5D2524DF56002F3310 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "FilestackSDK::ObjcDefs" /* ObjcDefs */;
-			targetProxy = 45825B5C2524DF56002F3310 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1233,7 +1155,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Sources/ObjcDefs/include",
-					"$(SRCROOT)/FilestackSDK.xcodeproj/GeneratedModuleMap/ObjcDefs",
 				);
 				INFOPLIST_FILE = FilestackSDK.xcodeproj/FilestackSDK_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1244,7 +1165,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/FilestackSDK.xcodeproj/GeneratedModuleMap/ObjcDefs/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = FilestackSDK;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1269,7 +1189,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Sources/ObjcDefs/include",
-					"$(SRCROOT)/FilestackSDK.xcodeproj/GeneratedModuleMap/ObjcDefs",
 				);
 				INFOPLIST_FILE = FilestackSDK.xcodeproj/FilestackSDK_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1280,7 +1199,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/FilestackSDK.xcodeproj/GeneratedModuleMap/ObjcDefs/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = FilestackSDK;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1341,76 +1259,6 @@
 			};
 			name = Release;
 		};
-		OBJ_465 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEFINES_MODULE = YES;
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/Sources/ObjcDefs/include",
-				);
-				INFOPLIST_FILE = FilestackSDK.xcodeproj/ObjcDefs_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = Sources/ObjcDefs/module.modulemap;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = ObjcDefs;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				TARGET_NAME = ObjcDefs;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		OBJ_466 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEFINES_MODULE = YES;
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/Sources/ObjcDefs/include",
-				);
-				INFOPLIST_FILE = FilestackSDK.xcodeproj/ObjcDefs_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = Sources/ObjcDefs/module.modulemap;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = ObjcDefs;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				TARGET_NAME = ObjcDefs;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1437,15 +1285,6 @@
 			buildConfigurations = (
 				OBJ_256 /* Debug */,
 				OBJ_257 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_464 /* Build configuration list for PBXNativeTarget "ObjcDefs" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_465 /* Debug */,
-				OBJ_466 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
