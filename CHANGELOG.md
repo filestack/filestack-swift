@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-Version 2.4.0 *(TBD)*
+Version 2.4.0 *(2020-09-30)*
 ----------------------------
 - Added support for Upload Tags.
 - Added support for Swift Package Manager.
