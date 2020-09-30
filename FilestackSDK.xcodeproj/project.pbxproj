@@ -753,7 +753,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_224 /* bin */,
@@ -763,7 +763,6 @@
 				45825B842524E389002F3310 /* Sources */,
 				OBJ_162 /* Tests */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -852,7 +851,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			packageReferences = (
 				45825B172524DB86002F3310 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				45825B692524E03B002F3310 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
@@ -1235,7 +1234,7 @@
 					"$(SRCROOT)/Sources/ObjcDefs/include",
 					"$(SRCROOT)/FilestackSDK.xcodeproj/GeneratedModuleMap/ObjcDefs",
 				);
-				INFOPLIST_FILE = FilestackSDK.xcodeproj/FilestackSDK_Info.plist;
+				INFOPLIST_FILE = Sources/FilestackSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1270,7 +1269,7 @@
 					"$(SRCROOT)/Sources/ObjcDefs/include",
 					"$(SRCROOT)/FilestackSDK.xcodeproj/GeneratedModuleMap/ObjcDefs",
 				);
-				INFOPLIST_FILE = FilestackSDK.xcodeproj/FilestackSDK_Info.plist;
+				INFOPLIST_FILE = Sources/FilestackSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
