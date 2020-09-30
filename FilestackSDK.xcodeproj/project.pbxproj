@@ -158,10 +158,10 @@
 		45825CA02524E38C002F3310 /* Startable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C132524E389002F3310 /* Startable.swift */; };
 		45825CA12524E38C002F3310 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C142524E389002F3310 /* Cancellable.swift */; };
 		45825CA22524E38C002F3310 /* DeferredAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C152524E389002F3310 /* DeferredAdd.swift */; };
-		4586F17C2524EFEA008F282E /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586F1652524EEB8008F282E /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F1802524EFF5008F282E /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1C2524E389002F3310 /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F1842524EFF8008F282E /* FSMetadataOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1D2524E389002F3310 /* FSMetadataOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1E2524E389002F3310 /* FSTransformPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4586F19E2524F1CF008F282E /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586F1652524EEB8008F282E /* FilestackSDK.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -721,7 +721,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4586F17C2524EFEA008F282E /* FilestackSDK.h in Headers */,
+				4586F19E2524F1CF008F282E /* FilestackSDK.h in Headers */,
 				4586F1802524EFF5008F282E /* FSPolicyCall.h in Headers */,
 				4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */,
 				4586F1842524EFF8008F282E /* FSMetadataOptions.h in Headers */,
@@ -757,9 +757,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_255 /* Build configuration list for PBXNativeTarget "FilestackSDK" */;
 			buildPhases = (
-				4586F1782524EFDA008F282E /* Headers */,
 				OBJ_258 /* Sources */,
 				OBJ_390 /* Frameworks */,
+				4586F1782524EFDA008F282E /* Headers */,
 				45825B142524DAD9002F3310 /* Set Version And Build Number */,
 			);
 			buildRules = (
@@ -1146,6 +1146,7 @@
 		OBJ_256 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1180,6 +1181,7 @@
 		OBJ_257 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
