@@ -349,6 +349,7 @@
 		45825C1E2524E389002F3310 /* FSTransformPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTransformPosition.h; sourceTree = "<group>"; };
 		45825C1F2524E389002F3310 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		45825C202524E389002F3310 /* ObjcDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcDefs.m; sourceTree = "<group>"; };
+		45825CBB2524E8EE002F3310 /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		"FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"FilestackSDK::ObjcDefs::Product" /* ObjcDefs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjcDefs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_164 /* BaseOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOperationTests.swift; sourceTree = "<group>"; };
@@ -427,9 +428,10 @@
 		45825B852524E389002F3310 /* FilestackSDK */ = {
 			isa = PBXGroup;
 			children = (
+				45825C172524E389002F3310 /* VERSION */,
+				45825CBB2524E8EE002F3310 /* FilestackSDK.h */,
 				45825B862524E389002F3310 /* Internal */,
 				45825BAC2524E389002F3310 /* Public */,
-				45825C172524E389002F3310 /* VERSION */,
 				45825C182524E389002F3310 /* SPMSupport */,
 			);
 			path = FilestackSDK;
