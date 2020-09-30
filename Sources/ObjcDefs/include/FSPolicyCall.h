@@ -6,8 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-@import Foundation;
-
 /// Represents a policy call type.
 ///
 /// See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more information about policy
