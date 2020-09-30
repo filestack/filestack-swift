@@ -6,6 +6,8 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /// Represents an image transform position type.
 typedef NS_OPTIONS(NSUInteger, FSTransformPosition) {
 

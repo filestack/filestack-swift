@@ -12,7 +12,7 @@ class UploadableTests: XCTestCase {
     // MARK: - URL Tests
 
     func testExistingLocalURLSize() {
-        let localURL = Helpers.url(forResource: "sample", withExtension: "jpg")!
+        let localURL = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!
 
         XCTAssertEqual(localURL.size, 200_367)
     }

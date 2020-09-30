@@ -36,7 +36,7 @@ class SessionManagerTests: XCTestCase {
 
 private extension SessionManagerTests {
     var shortVersionString: String {
-        let url = Helpers.url(forResource: "VERSION", withExtension: nil)!
+        let url = Helpers.url(forResource: "VERSION", withExtension: nil, subdirectory: nil)!
 
         return String(data: try! Data(contentsOf: url), encoding: .utf8)!
             .trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

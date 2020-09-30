@@ -62,7 +62,7 @@ class FileLinkTests: XCTestCase {
 
     func testGetExistingContent() {
         stub(condition: cdnStubConditions) { _ in
-            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg")!.path
+            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!.path
 
             let httpHeaders: [AnyHashable: Any] = [
                 "Content-Type": "image/jpeg",
@@ -184,7 +184,7 @@ class FileLinkTests: XCTestCase {
 
     func testGetContentWithDownloadProgressMonitoring() {
         stub(condition: cdnStubConditions) { _ in
-            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg")!.path
+            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!.path
 
             let httpHeaders: [AnyHashable: Any] = [
                 "Content-Type": "image/jpeg",
@@ -257,7 +257,7 @@ class FileLinkTests: XCTestCase {
 
     func testDownloadExistingContent() {
         stub(condition: cdnStubConditions) { _ in
-            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg")!.path
+            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!.path
 
             let httpHeaders: [AnyHashable: Any] = [
                 "Content-Type": "image/jpeg",
@@ -352,7 +352,7 @@ class FileLinkTests: XCTestCase {
 
     func testDownloadWithDownloadProgressMonitoring() {
         stub(condition: cdnStubConditions) { _ in
-            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg")!.path
+            let stubPath = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!.path
 
             let httpHeaders: [AnyHashable: Any] = [
                 "Content-Type": "image/jpeg",
@@ -442,7 +442,7 @@ class FileLinkTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let fileURL = Helpers.url(forResource: "sample", withExtension: "jpg")!
+        let fileURL = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!
         let expectation = self.expectation(description: "request should complete")
         var response: FilestackSDK.DataResponse?
 
@@ -520,7 +520,7 @@ class FileLinkTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let fileURL = Helpers.url(forResource: "sample", withExtension: "jpg")!
+        let fileURL = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!
         let expectation = self.expectation(description: "request should complete")
         var response: FilestackSDK.DataResponse?
 

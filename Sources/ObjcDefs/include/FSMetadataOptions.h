@@ -6,6 +6,8 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /// Represents a metadata option.
 typedef NS_OPTIONS(NSUInteger, FSMetadataOptions) {
 

@@ -8,13 +8,13 @@
 import Foundation
 
 class Helpers {
-    static func url(forResource resource: String, withExtension ext: String?) -> URL? {
+    static func url(forResource resource: String, withExtension ext: String?, subdirectory: String?) -> URL? {
         #if SWIFT_PACKAGE
         let bundle = Bundle.module
         #else
         let bundle = Bundle(for: Helpers.self)
         #endif
 
-        return bundle.url(forResource: resource, withExtension: ext)
+        return bundle.url(forResource: resource, withExtension: ext, subdirectory: subdirectory)
     }
 }

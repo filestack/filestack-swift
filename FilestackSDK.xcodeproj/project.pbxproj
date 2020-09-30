@@ -22,8 +22,6 @@
 		45825B3F2524DE5D002F3310 /* TransformableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_174 /* TransformableTests.swift */; };
 		45825B402524DE5D002F3310 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_175 /* UploadTests.swift */; };
 		45825B412524DE5D002F3310 /* UploadableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_176 /* UploadableTests.swift */; };
-		45825B472524DE8D002F3310 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45825B452524DE8D002F3310 /* sample.jpg */; };
-		45825B482524DE8D002F3310 /* large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45825B462524DE8D002F3310 /* large.jpg */; };
 		45825B6B2524E03B002F3310 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 45825B6A2524E03B002F3310 /* OHHTTPStubs */; };
 		45825B6D2524E03B002F3310 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 45825B6C2524E03B002F3310 /* OHHTTPStubsSwift */; };
 		45825B712524E07F002F3310 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B702524E07F002F3310 /* Helpers.swift */; };
@@ -162,6 +160,7 @@
 		4586F1842524EFF8008F282E /* FSMetadataOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1D2524E389002F3310 /* FSMetadataOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1E2524E389002F3310 /* FSTransformPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F19E2524F1CF008F282E /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586F1652524EEB8008F282E /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4586F1C42524FD7E008F282E /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 4586F1C32524FD7E008F282E /* Fixtures */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,8 +175,6 @@
 
 /* Begin PBXFileReference section */
 		45825B262524DE46002F3310 /* FilestackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilestackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		45825B452524DE8D002F3310 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
-		45825B462524DE8D002F3310 /* large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = large.jpg; sourceTree = "<group>"; };
 		45825B702524E07F002F3310 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		45825B742524E315002F3310 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = SOURCE_ROOT; };
 		45825B872524E389002F3310 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -314,9 +311,9 @@
 		45825C1C2524E389002F3310 /* FSPolicyCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
 		45825C1D2524E389002F3310 /* FSMetadataOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMetadataOptions.h; sourceTree = "<group>"; };
 		45825C1E2524E389002F3310 /* FSTransformPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTransformPosition.h; sourceTree = "<group>"; };
-		45825C1F2524E389002F3310 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		45825C202524E389002F3310 /* ObjcDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcDefs.m; sourceTree = "<group>"; };
 		4586F1652524EEB8008F282E /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
+		4586F1C32524FD7E008F282E /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 		"FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_164 /* BaseOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOperationTests.swift; sourceTree = "<group>"; };
 		OBJ_165 /* ClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
@@ -362,15 +359,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		45825B442524DE8D002F3310 /* Fixtures */ = {
-			isa = PBXGroup;
-			children = (
-				45825B452524DE8D002F3310 /* sample.jpg */,
-				45825B462524DE8D002F3310 /* large.jpg */,
-			);
-			path = Fixtures;
 			sourceTree = "<group>";
 		};
 		45825B842524E389002F3310 /* Sources */ = {
@@ -645,7 +633,6 @@
 			isa = PBXGroup;
 			children = (
 				45825C1B2524E389002F3310 /* include */,
-				45825C1F2524E389002F3310 /* module.modulemap */,
 				45825C202524E389002F3310 /* ObjcDefs.m */,
 			);
 			path = ObjcDefs;
@@ -672,6 +659,7 @@
 		OBJ_163 /* FilestackSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				4586F1C32524FD7E008F282E /* Fixtures */,
 				45825B742524E315002F3310 /* VERSION */,
 				OBJ_164 /* BaseOperationTests.swift */,
 				OBJ_165 /* ClientTests.swift */,
@@ -687,7 +675,6 @@
 				OBJ_174 /* TransformableTests.swift */,
 				OBJ_176 /* UploadableTests.swift */,
 				OBJ_175 /* UploadTests.swift */,
-				45825B442524DE8D002F3310 /* Fixtures */,
 			);
 			name = FilestackSDKTests;
 			path = Tests/FilestackSDKTests;
@@ -816,9 +803,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4586F1C42524FD7E008F282E /* Fixtures in Resources */,
 				45825B752524E315002F3310 /* VERSION in Resources */,
-				45825B472524DE8D002F3310 /* sample.jpg in Resources */,
-				45825B482524DE8D002F3310 /* large.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
