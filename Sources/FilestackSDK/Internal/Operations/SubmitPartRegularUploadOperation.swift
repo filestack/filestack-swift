@@ -23,7 +23,7 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
 
     private var uploadRequest: UploadRequest?
 
-    private lazy var data: Data = descriptor.reader.sync {
+    private lazy var data: Data? = descriptor.reader.sync {
         descriptor.reader.seek(position: offset)
 
         return descriptor.reader.read(amount: size)
@@ -38,6 +38,12 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
         self.descriptor = descriptor
 
         super.init()
+    }
+
+    override func finish(with result: BaseOperation<HTTPURLResponse>.Result) {
+        data = nil
+
+        super.finish(with: result)
     }
 }
 
@@ -97,9 +103,10 @@ private extension SubmitPartRegularUploadOperation {
             return
         }
 
-        guard let url = url(from: response),
+        guard let data = data,
+              let url = url(from: response),
               let headers = headers(from: response),
-            let request = UploadService.shared.upload(data: data, to: url, method: .put, headers: headers)
+              let request = UploadService.shared.upload(data: data, to: url, method: .put, headers: headers)
         else {
             finish(with: .failure(.unknown))
             return
@@ -129,6 +136,8 @@ private extension SubmitPartRegularUploadOperation {
     }
 
     func payload() -> Data? {
+        guard let data = data else { return nil }
+
         let payload: [String: Any] = [
             "apikey": descriptor.config.apiKey,
             "uri": descriptor.uri,
