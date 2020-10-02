@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.4.1 *(2020-10-02)*
+----------------------------
+- Improved memory usage when using the regular upload mechanism. 
+
 Version 2.4.0 *(2020-09-30)*
 ----------------------------
 - Added support for Upload Tags.
