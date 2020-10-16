@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		450FE2D52539B60F0035D67C /* URL+Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450FE2D42539B60F0035D67C /* URL+Deletable.swift */; };
+		450FE2D92539B6160035D67C /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450FE2D82539B6160035D67C /* Deletable.swift */; };
 		45825B192524DB86002F3310 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 45825B182524DB86002F3310 /* Alamofire */; };
 		45825B2B2524DE46002F3310 /* FilestackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */; };
 		45825B352524DE5D002F3310 /* BaseOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_164 /* BaseOperationTests.swift */; };
@@ -174,6 +176,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		450FE2D42539B60F0035D67C /* URL+Deletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Deletable.swift"; sourceTree = "<group>"; };
+		450FE2D82539B6160035D67C /* Deletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
 		45825B262524DE46002F3310 /* FilestackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilestackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45825B702524E07F002F3310 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		45825B742524E315002F3310 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = SOURCE_ROOT; };
@@ -426,6 +430,7 @@
 		45825B962524E389002F3310 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				450FE2D42539B60F0035D67C /* URL+Deletable.swift */,
 				45825B972524E389002F3310 /* Uploadable+reader.swift */,
 				45825B982524E389002F3310 /* NetworkingServiceWithBaseURL+buildURL.swift */,
 				45825B992524E389002F3310 /* SessionManager+filestackDefault.swift */,
@@ -440,6 +445,7 @@
 		45825B9F2524E389002F3310 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				450FE2D82539B6160035D67C /* Deletable.swift */,
 				45825BA02524E389002F3310 /* NetworkingService.swift */,
 				45825BA12524E389002F3310 /* SubmitPartUploadOperation.swift */,
 				45825BA22524E389002F3310 /* UploadableReader.swift */,
@@ -857,6 +863,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				450FE2D52539B60F0035D67C /* URL+Deletable.swift in Sources */,
 				45825C6A2524E38B002F3310 /* PolaroidTransform.swift in Sources */,
 				45825C5E2524E38B002F3310 /* BaseOperation.swift in Sources */,
 				45825C952524E38C002F3310 /* SepiaTransform.swift in Sources */,
@@ -864,6 +871,7 @@
 				45825C9D2524E38C002F3310 /* Monitorizable.swift in Sources */,
 				45825C422524E38A002F3310 /* TransformPageOrientation.swift in Sources */,
 				45825C452524E38A002F3310 /* TransformStyleMode.swift in Sources */,
+				450FE2D92539B6160035D67C /* Deletable.swift in Sources */,
 				45825C5B2524E38B002F3310 /* DataResponse.swift in Sources */,
 				45825C772524E38B002F3310 /* MonochromeTransform.swift in Sources */,
 				45825C232524E38A002F3310 /* Loggers.swift in Sources */,
