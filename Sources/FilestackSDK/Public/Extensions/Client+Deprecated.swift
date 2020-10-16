@@ -24,6 +24,7 @@ extension Client {
                                 completionHandler: @escaping (JSONResponse) -> Void) -> Uploader {
         let options = UploadOptions(preferIntelligentIngestion: useIntelligentIngestionIfAvailable,
                                     startImmediately: startUploadImmediately,
+                                    deleteTemporaryFilesAfterUpload: false,
                                     storeOptions: storeOptions)
 
         return upload(using: localURL,
@@ -46,6 +47,7 @@ extension Client {
                                 completionHandler: @escaping ([JSONResponse]) -> Void) -> Uploader {
         let options = UploadOptions(preferIntelligentIngestion: useIntelligentIngestionIfAvailable,
                                     startImmediately: startUploadImmediately,
+                                    deleteTemporaryFilesAfterUpload: false,
                                     storeOptions: storeOptions)
 
         return upload(using: localURLs,

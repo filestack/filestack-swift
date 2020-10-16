@@ -147,6 +147,10 @@ private extension MultipartUpload {
 
             // Block to run when operation completes.
             operation.completionBlock = {
+                if self.options.deleteTemporaryFilesAfterUpload, let deletable = uploadable as? Deletable {
+                    deletable.delete()
+                }
+
                 if let fileCompletedCount = self.progress.fileCompletedCount {
                     self.progress.fileCompletedCount = fileCompletedCount + 1
                 }

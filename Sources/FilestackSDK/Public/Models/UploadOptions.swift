@@ -21,7 +21,11 @@ public class UploadOptions: NSObject {
 
     /// A default set of upload options.
     @objc public static var defaults: UploadOptions = {
-        UploadOptions(preferIntelligentIngestion: true, startImmediately: true)
+        UploadOptions(
+            preferIntelligentIngestion: true,
+            startImmediately: true,
+            deleteTemporaryFilesAfterUpload: false
+        )
     }()
 
     // MARK: - Public Properties
@@ -31,6 +35,9 @@ public class UploadOptions: NSObject {
 
     /// Whether the upload should start immediately.
     @objc public var startImmediately: Bool
+
+    /// Whether uploaded files located in the user's temporary directoy should be deleted after being uploaded.
+    @objc public var deleteTemporaryFilesAfterUpload: Bool
 
     /// An object containing the store options (e.g. location, region, container, access, etc.)
     @objc public var storeOptions: StorageOptions
@@ -50,12 +57,14 @@ public class UploadOptions: NSObject {
     /// Default initializer.
     @objc public init(preferIntelligentIngestion: Bool,
                       startImmediately: Bool,
+                      deleteTemporaryFilesAfterUpload: Bool,
                       storeOptions: StorageOptions = .defaults,
                       uploadTags: [String: String] = [:],
                       partUploadConcurrency: Int = UploadOptions.defaultPartUploadConcurrency,
                       chunkUploadConcurrency: Int = UploadOptions.defaultChunkUploadConcurrency) {
         self.preferIntelligentIngestion = preferIntelligentIngestion
         self.startImmediately = startImmediately
+        self.deleteTemporaryFilesAfterUpload = deleteTemporaryFilesAfterUpload
         self.storeOptions = storeOptions
         self.uploadTags = uploadTags
         self.partUploadConcurrency = partUploadConcurrency

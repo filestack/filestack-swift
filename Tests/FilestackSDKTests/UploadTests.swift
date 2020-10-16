@@ -52,6 +52,7 @@ class UploadTests: XCTestCase {
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
+                                          deleteTemporaryFilesAfterUpload: false,
                                           storeOptions: defaultStoreOptions)
 
         let uploader = client.upload(using: largeFileURL, options: uploadOptions) { resp in
@@ -140,7 +141,9 @@ class UploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
         var response: [JSONResponse] = []
 
-        let uploadOptions = UploadOptions(preferIntelligentIngestion: true, startImmediately: true)
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: true,
+                                          startImmediately: true,
+                                          deleteTemporaryFilesAfterUpload: false)
 
         let uploader = client.upload(options: uploadOptions) { resp in
             response = resp
@@ -161,7 +164,9 @@ class UploadTests: XCTestCase {
         let expectation = self.expectation(description: "request should succeed")
         var response: [JSONResponse] = []
 
-        let uploadOptions = UploadOptions(preferIntelligentIngestion: true, startImmediately: false)
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: true,
+                                          startImmediately: false,
+                                          deleteTemporaryFilesAfterUpload: false)
 
         let uploader = client.upload(options: uploadOptions) { resp in
             response = resp
@@ -251,6 +256,7 @@ class UploadTests: XCTestCase {
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: true,
                                           startImmediately: true,
+                                          deleteTemporaryFilesAfterUpload: false,
                                           storeOptions: storeOptions)
 
         uploadOptions.uploadTags = uploadTags
@@ -303,6 +309,7 @@ class UploadTests: XCTestCase {
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
+                                          deleteTemporaryFilesAfterUpload: false,
                                           storeOptions: defaultStoreOptions)
 
         let uploader = client.upload(using: [sampleFileURL], options: uploadOptions) { resp in
@@ -340,6 +347,7 @@ class UploadTests: XCTestCase {
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
+                                          deleteTemporaryFilesAfterUpload: false,
                                           storeOptions: defaultStoreOptions)
 
         let uploader = client.upload(using: [sampleFileURL, sampleFileURL], options: uploadOptions) { resp in
@@ -367,6 +375,7 @@ class UploadTests: XCTestCase {
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: false,
+                                          deleteTemporaryFilesAfterUpload: false,
                                           storeOptions: defaultStoreOptions)
 
         let uploader = client.upload(options: uploadOptions) { resp in
