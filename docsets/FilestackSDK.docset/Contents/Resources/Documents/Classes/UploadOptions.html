@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          FilestackSDK 2.4.0 Docs
+          FilestackSDK 2.5.0 Docs
         </a>
          (98% documented)
       </p>
@@ -385,7 +385,7 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">@objc(FSUploadOptions)</span>
+                  <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSUploadOptions</span><span class="p">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="kt">UploadOptions</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                 </div>
@@ -564,6 +564,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSUploadOptions(py)deleteTemporaryFilesAfterUpload"></a>
+                    <a name="//apple_ref/swift/Property/deleteTemporaryFilesAfterUpload" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSUploadOptions(py)deleteTemporaryFilesAfterUpload">deleteTemporaryFilesAfterUpload</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether uploaded files located in the user&rsquo;s temporary directoy should be deleted after being uploaded.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">deleteTemporaryFilesAfterUpload</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@M@FilestackSDK@objc(cs)FSUploadOptions(py)storeOptions"></a>
                     <a name="//apple_ref/swift/Property/storeOptions" class="dashAnchor"></a>
                     <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSUploadOptions(py)storeOptions">storeOptions</a>
@@ -690,9 +718,9 @@ For more information, please check <a href="https://www.filestack.com/docs/uploa
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSUploadOptions(im)initWithPreferIntelligentIngestion:startImmediately:storeOptions:uploadTags:partUploadConcurrency:chunkUploadConcurrency:"></a>
-                    <a name="//apple_ref/swift/Method/init(preferIntelligentIngestion:startImmediately:storeOptions:uploadTags:partUploadConcurrency:chunkUploadConcurrency:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSUploadOptions(im)initWithPreferIntelligentIngestion:startImmediately:storeOptions:uploadTags:partUploadConcurrency:chunkUploadConcurrency:">init(preferIntelligentIngestion:<wbr>startImmediately:<wbr>storeOptions:<wbr>uploadTags:<wbr>partUploadConcurrency:<wbr>chunkUploadConcurrency:<wbr>)</a>
+                    <a name="/c:@M@FilestackSDK@objc(cs)FSUploadOptions(im)initWithPreferIntelligentIngestion:startImmediately:deleteTemporaryFilesAfterUpload:storeOptions:uploadTags:partUploadConcurrency:chunkUploadConcurrency:"></a>
+                    <a name="//apple_ref/swift/Method/init(preferIntelligentIngestion:startImmediately:deleteTemporaryFilesAfterUpload:storeOptions:uploadTags:partUploadConcurrency:chunkUploadConcurrency:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSUploadOptions(im)initWithPreferIntelligentIngestion:startImmediately:deleteTemporaryFilesAfterUpload:storeOptions:uploadTags:partUploadConcurrency:chunkUploadConcurrency:">init(preferIntelligentIngestion:<wbr>startImmediately:<wbr>deleteTemporaryFilesAfterUpload:<wbr>storeOptions:<wbr>uploadTags:<wbr>partUploadConcurrency:<wbr>chunkUploadConcurrency:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -710,6 +738,7 @@ For more information, please check <a href="https://www.filestack.com/docs/uploa
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
 <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">preferIntelligentIngestion</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
             <span class="nv">startImmediately</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
+            <span class="nv">deleteTemporaryFilesAfterUpload</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
             <span class="nv">storeOptions</span><span class="p">:</span> <span class="kt"><a href="../Classes/StorageOptions.html">StorageOptions</a></span> <span class="o">=</span> <span class="o">.</span><span class="n"><a href="../Classes/UploadOptions.html#/c:@M@FilestackSDK@objc(cs)FSUploadOptions(cpy)defaults">defaults</a></span><span class="p">,</span>
             <span class="nv">uploadTags</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:],</span>
             <span class="nv">partUploadConcurrency</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="kt">UploadOptions</span><span class="o">.</span><span class="n"><a href="../Classes/UploadOptions.html#/c:@M@FilestackSDK@objc(cs)FSUploadOptions(cpy)defaultPartUploadConcurrency">defaultPartUploadConcurrency</a></span><span class="p">,</span>
@@ -728,7 +757,7 @@ For more information, please check <a href="https://www.filestack.com/docs/uploa
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2020-09-30)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2020-10-16)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
