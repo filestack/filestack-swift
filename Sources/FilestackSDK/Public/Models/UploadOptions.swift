@@ -36,7 +36,7 @@ public class UploadOptions: NSObject {
     /// Whether the upload should start immediately.
     @objc public var startImmediately: Bool
 
-    /// Whether uploaded files located in the user's temporary directoy should be deleted after being uploaded.
+    /// Whether uploaded files located in the user's temporary directory should be deleted after being uploaded.
     @objc public var deleteTemporaryFilesAfterUpload: Bool
 
     /// An object containing the store options (e.g. location, region, container, access, etc.)
