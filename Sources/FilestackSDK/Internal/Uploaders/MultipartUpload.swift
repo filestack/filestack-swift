@@ -94,8 +94,6 @@ class MultipartUpload: Uploader, DeferredAdd {
     }
 
     @discardableResult func add(uploadables: [Uploadable]) -> Bool {
-        guard state == .notStarted else { return false }
-
         uploadQueue.sync {
             if self.uploadables != nil {
                 self.uploadables?.append(contentsOf: uploadables)
