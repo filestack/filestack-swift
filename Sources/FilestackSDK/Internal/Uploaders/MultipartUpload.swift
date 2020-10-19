@@ -147,10 +147,6 @@ private extension MultipartUpload {
 
             // Block to run when operation completes.
             operation.completionBlock = {
-                if self.options.deleteTemporaryFilesAfterUpload, let deletable = uploadable as? Deletable {
-                    deletable.delete()
-                }
-
                 if let fileCompletedCount = self.progress.fileCompletedCount {
                     self.progress.fileCompletedCount = fileCompletedCount + 1
                 }
@@ -193,6 +189,13 @@ private extension MultipartUpload {
         // Update state to `completed` unless it is already in `cancelled` state.
         if state != .cancelled {
             state = .completed
+        }
+
+        // Delete any deletable files if `deleteTemporaryFilesAfterUpload` option is enabled.
+        if options.deleteTemporaryFilesAfterUpload, let deletables = (uploadables?.compactMap { $0 as? Deletable }) {
+            for deletable in deletables {
+                deletable.delete()
+            }
         }
 
         queue.async {
