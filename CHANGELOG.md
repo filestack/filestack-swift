@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.5.1 *(2020-10-19)*
+----------------------------
+- Ensuring automatic deletion of uploaded files logic is triggered in case the upload process is cancelled before starting.   
+
 Version 2.5.0 *(2020-10-16)*
 ----------------------------
 - Added optional setting to allow automatic deletion of uploaded files if they are located in the user's temporary directory.   
