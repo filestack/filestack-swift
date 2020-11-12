@@ -149,7 +149,7 @@ public extension Transformable {
         transformationTasks.insert(task, at: 0)
 
         // Create and perform post request
-        guard let request = ProcessService.shared.request(url: url, method: .post) else { return self }
+        guard let request = ProcessService.shared.request(url: url, method: .get) else { return self }
 
         request.validate(statusCode: Constants.validHTTPResponseCodes)
 
