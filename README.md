@@ -34,7 +34,7 @@ platform :ios, '11.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'FilestackSDK', '~> 2.5.1'
+    pod 'FilestackSDK', '~> 2.5.2'
 end
 ```
 
@@ -57,7 +57,7 @@ $ brew install carthage
 
 To integrate FilestackSDK into your Xcode project using Carthage, specify it in your `Cartfile`:
 
-`github "filestack/filestack-swift" ~> 2.5.1`
+`github "filestack/filestack-swift" ~> 2.5.2`
 
 Run `carthage update` to build the framework and drag the built `FilestackSDK.framework` into your Xcode project. Additionally, add  `Alamofire.framework`  to the embedded frameworks build phase of your app's target.
 
@@ -69,7 +69,7 @@ Alternatively, if you are adding `FilestackSDK` to your own Swift Package, decla
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/filestack/filestack-swift.git", .upToNextMajor(from: "2.5.1"))
+    .package(url: "https://github.com/filestack/filestack-swift.git", .upToNextMajor(from: "2.5.2"))
 ]
 ```
 
@@ -194,7 +194,7 @@ Both regular and Intelligent Ingestion uploads use the same API function availab
 // * storeOptions = StorageOptions(location: .s3, access: .private)
 // * defaultPartUploadConcurrency = 5
 // * defaultChunkUploadConcurrency = 8
-// * chunkSize = 5mbs 
+// * chunkSize = 5mbs
 let uploadOptions = UploadOptions.defaults
 // For instance, if you don't want to use Intelligent Ingestion regardless of whether it is available:
 uploadOptions.preferIntelligentIngestion = false
@@ -227,7 +227,7 @@ let uploadable = URL(...) // may also be Data or arrays of URL or Data.
 // Please notice that most arguments have sensible defaults and may be ommited.
 let uploader = client.upload(// You may pass an URL, Data or arrays of URL or Data
                              using: uploadable,
-                             // Set the upload options here. If none given, `UploadOptions.defaults` 
+                             // Set the upload options here. If none given, `UploadOptions.defaults`
                              // is assumed.
                              options: uploadOptions,
                              // Set the dispatch queue where you want your upload progress
