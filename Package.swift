@@ -9,6 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "FilestackSDK",
+            type: .dynamic,
             targets: ["FilestackSDK"]
         ),
     ],
