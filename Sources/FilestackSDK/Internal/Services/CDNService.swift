@@ -15,7 +15,7 @@ final class CDNService: NetworkingServiceWithBaseURL {
     // MARK: - Internal Properties
 
     let sessionManager = SessionManager.filestack()
-    let baseURL = Constants.apiURL
+    let baseURL = Constants.cdnURL
 
     static let shared = Shared
 }
