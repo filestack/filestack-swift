@@ -6,7 +6,6 @@
 //  Copyright © 2019 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 extension NetworkingServiceWithBaseURL {
@@ -23,7 +22,9 @@ extension NetworkingServiceWithBaseURL {
 
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
 
-        urlComponents.queryItems = queryItems
+        if let queryItems = queryItems {
+            urlComponents.queryItems = queryItems
+        }
 
         if let security = security {
             if urlComponents.queryItems == nil {
@@ -34,10 +35,10 @@ extension NetworkingServiceWithBaseURL {
             urlComponents.queryItems?.append(URLQueryItem(name: "signature", value: security.signature))
         }
 
-        return try? urlComponents.asURL()
+        return urlComponents.url
     }
 
-    func request(url: URL, method: HTTPMethod, parameters: [String: Any]? = nil, headers: HTTPHeaders? = nil) -> DataRequest? {
-        return sessionManager.request(url, method: method, parameters: parameters, headers: headers)
+    func parametersToQueryItems(parameters: [String: Any]) -> [URLQueryItem] {
+        return parameters.compactMap { URLQueryItem(name: $0.key, value: $0.value as? String) }
     }
 }

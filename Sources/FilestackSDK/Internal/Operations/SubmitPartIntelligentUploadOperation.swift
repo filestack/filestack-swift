@@ -6,7 +6,6 @@
 //  Copyright © 2018 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 class SubmitPartIntelligentUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPartUploadOperation {

@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
@@ -27,7 +26,7 @@ class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
 
     // MARK: - Private Properties
 
-    private var uploadRequest: UploadRequest?
+    private var uploadTask: URLSessionUploadTask?
 
     private lazy var data: Data = descriptor.reader.sync {
         descriptor.reader.seek(position: partOffset + offset)
@@ -53,17 +52,12 @@ class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
 extension SubmitChunkUploadOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/upload", relativeTo: Constants.uploadURL)!
-        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        let headers = ["Content-Type": "application/json"]
 
-        guard
-            let payload = self.payload(),
-            let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
-        else {
-            return
-        }
+        guard let payload = self.payload() else { return }
 
-        request.responseJSON { (response) in
-            let jsonResponse = JSONResponse(with: response)
+        UploadService.shared.upload(data: payload, to: uploadURL, method: "POST", headers: headers) { (data, response, error) in
+            let jsonResponse = JSONResponse(response: response, data: data, error: error)
             self.uploadDataChunk(using: jsonResponse)
         }
     }
@@ -71,7 +65,7 @@ extension SubmitChunkUploadOperation {
     override func cancel() {
         super.cancel()
 
-        uploadRequest?.cancel()
+        uploadTask?.cancel()
     }
 }
 
@@ -106,22 +100,17 @@ private extension SubmitChunkUploadOperation {
 
         guard
             let url = url(from: response),
-            let headers = headers(from: response),
-            let request = UploadService.shared.upload(data: data, to: url, method: .put, headers: headers)
+            let headers = headers(from: response)
         else {
             finish(with: .failure(.unknown))
             return
         }
 
-        // Handle upload progress update.
-        request.uploadProgress {
-            self.progress.totalUnitCount = $0.totalUnitCount
-            self.progress.completedUnitCount = $0.completedUnitCount
-        }
-
-        // Handle request response.
-        request.response { response in
-            self.uploadRequest = nil
+        uploadTask = UploadService.shared.upload(data: data, to: url, method: "PUT", headers: headers, uploadProgress: { (progress) in
+            self.progress.totalUnitCount = Int64(self.data.size ?? 0)
+            self.progress.completedUnitCount = Int64(Double(self.progress.totalUnitCount) * progress.fractionCompleted)
+        }) { (request, data, error) in
+            self.uploadTask = nil
 
             if let error = response.error {
                 self.finish(with: .failure(.wrapped(error)))
@@ -132,8 +121,6 @@ private extension SubmitChunkUploadOperation {
                 self.finish(with: .failure(.unknown))
             }
         }
-
-        uploadRequest = request
     }
 
     func payload() -> Data? {

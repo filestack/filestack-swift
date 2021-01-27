@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 import os.log
 
@@ -17,7 +16,12 @@ private let Shared = UploadService()
 public final class UploadService: NSObject, NetworkingService {
     // MARK: - Internal Properties
 
-    private(set) lazy var sessionManager = SessionManager.filestack(background: useBackgroundSession)
+    private(set) internal lazy var session = URLSession.filestack(background: useBackgroundSession, delegate: self)
+
+    // MARK: - Private Properties
+
+    private var taskData: [URLSessionDataTask: Data] = [:]
+    private var taskCompletion: [URLSessionDataTask: (Data?, URLResponse?, Swift.Error?) -> Void] = [:]
 
     // MARK: - Public Properties
 
@@ -27,7 +31,7 @@ public final class UploadService: NSObject, NetworkingService {
     /// Whether uploads should be performed on a background process. Defaults to `false`.
     public var useBackgroundSession: Bool = false {
         didSet {
-            sessionManager = .filestack(background: useBackgroundSession)
+            session = .filestack(background: useBackgroundSession, delegate: self)
 
             os_log("Background upload support is now %@.",
                    log: .uploads,
@@ -41,20 +45,91 @@ public final class UploadService: NSObject, NetworkingService {
     fileprivate override init() {}
 }
 
+// MARK: - URLSessionDataDelegate Conformance
+
+extension UploadService: URLSessionDataDelegate {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        completionHandler(URLSession.ResponseDisposition .allow)
+
+        if response.expectedContentLength == 0 || dataTask.error != nil {
+            let completionHandler = taskCompletion[dataTask]
+
+            taskData.removeValue(forKey: dataTask)
+            taskCompletion.removeValue(forKey: dataTask)
+
+            DispatchQueue.main.async {
+                completionHandler?(nil, response, dataTask.error)
+            }
+        }
+    }
+
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        if var existingData = taskData[dataTask] {
+            existingData.append(data)
+            taskData[dataTask] = existingData
+        } else {
+            taskData[dataTask] = data
+        }
+
+        if let response = dataTask.response {
+            let data = taskData[dataTask]
+            let completionHandler = taskCompletion[dataTask]
+
+            taskData.removeValue(forKey: dataTask)
+            taskCompletion.removeValue(forKey: dataTask)
+
+            DispatchQueue.main.async {
+                completionHandler?(data, response, dataTask.error)
+            }
+        }
+    }
+}
+
 // MARK: - Internal Functions
 
 extension UploadService {
-    func upload(data: Data, to url: URLConvertible, method: HTTPMethod, headers: HTTPHeaders? = nil) -> UploadRequest? {
-        if useBackgroundSession {
-            if let dataURL = temporaryURL(using: data) {
-                defer { try? FileManager.default.removeItem(at: dataURL) }
-                return sessionManager.upload(dataURL, to: url, method: method, headers: headers)
-            }
+    @discardableResult
+    func upload(data: Data,
+                to url: URL,
+                method: String,
+                headers: [String: String]? = nil,
+                uploadProgress: ((Progress) -> Void)? = nil,
+                completionHandler: @escaping (Data?, URLResponse?, Swift.Error?) -> Void) -> URLSessionUploadTask? {
+        var request = URLRequest(url: url)
 
-            return nil
+        request.httpMethod = method
+        request.allHTTPHeaderFields = headers
+
+        let task: URLSessionUploadTask
+
+        if useBackgroundSession {
+            guard let dataURL = temporaryURL(using: data) else { return nil }
+            defer { try? FileManager.default.removeItem(at: dataURL) }
+
+            task = session.uploadTask(with: request, fromFile: dataURL)
         } else {
-            return sessionManager.upload(data, to: url, method: method, headers: headers)
+            task = session.uploadTask(with: request, from: data)
         }
+
+        taskCompletion[task] = completionHandler
+
+        if let uploadProgress = uploadProgress {
+            var progressObservers: [NSKeyValueObservation] = []
+
+            progressObservers.append(task.progress.observe(\.fractionCompleted) { progress, _ in
+                DispatchQueue.main.async {
+                    uploadProgress(progress)
+
+                    if progress.isFinished || progress.isCancelled {
+                        progressObservers.removeAll()
+                    }
+                }
+            })
+        }
+
+        task.resume()
+
+        return task
     }
 }
 

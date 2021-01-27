@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 private let Shared = CDNService()
@@ -14,7 +13,7 @@ private let Shared = CDNService()
 final class CDNService: NetworkingServiceWithBaseURL {
     // MARK: - Internal Properties
 
-    let sessionManager = SessionManager.filestack()
+    let session = URLSession.filestack()
     let baseURL = Constants.cdnURL
 
     static let shared = Shared
@@ -23,16 +22,28 @@ final class CDNService: NetworkingServiceWithBaseURL {
 // MARK: - Internal Functions
 
 extension CDNService {
-    func getDataRequest(handle: String,
-                               path: String?,
-                               parameters: [String: Any]?,
-                               security: Security?) -> DataRequest? {
-        guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
+    func getRequest(handle: String,
+                    path: String?,
+                    parameters: [String: Any]?,
+                    security: Security?) -> URLRequest? {
+        let queryItems: [URLQueryItem]?
 
-        return sessionManager.request(url, method: .get, parameters: parameters)
+        if let parameters = parameters {
+            queryItems = parametersToQueryItems(parameters: parameters)
+        } else {
+            queryItems = nil
+        }
+
+        guard let url = buildURL(handle: handle, path: path, queryItems: queryItems, security: security) else { return nil }
+
+        var request = URLRequest(url: url)
+
+        request.httpMethod = "GET"
+
+        return request
     }
 
-    func getImageTaggingRequest(type: String, handle: String, security: Security?) -> DataRequest? {
+    func getImageTaggingRequest(type: String, handle: String, security: Security?) -> URLRequest? {
         var url = baseURL.appendingPathComponent(type)
 
         if let security = security {
@@ -41,16 +52,10 @@ extension CDNService {
 
         url.appendPathComponent(handle)
 
-        return sessionManager.request(url, method: .get, parameters: nil)
-    }
+        var request = URLRequest(url: url)
 
-    func downloadRequest(handle: String,
-                                path: String?,
-                                parameters: [String: Any]?,
-                                security: Security?,
-                                downloadDestination: DownloadRequest.DownloadFileDestination?) -> DownloadRequest? {
-        guard let url = buildURL(handle: handle, path: path, security: security) else { return nil }
+        request.httpMethod = "GET"
 
-        return sessionManager.download(url, method: .get, parameters: parameters, to: downloadDestination)
+        return request
     }
 }

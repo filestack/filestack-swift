@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 /// An operation that simplifies state flag handling and provides a method to finish a task delivering a `result`

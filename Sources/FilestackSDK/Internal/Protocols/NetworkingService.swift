@@ -6,11 +6,10 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 protocol NetworkingService {
-    var sessionManager: SessionManager { get }
+    var session: URLSession { get }
 }
 
 protocol ProvidesBaseURL {

@@ -6,7 +6,6 @@
 //  Copyright © 2018 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPartUploadOperation {
@@ -21,7 +20,7 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
 
     // MARK: - Private Properties
 
-    private var uploadRequest: UploadRequest?
+    private var uploadTask: URLSessionUploadTask?
 
     private lazy var data: Data? = descriptor.reader.sync {
         descriptor.reader.seek(position: offset)
@@ -52,17 +51,12 @@ class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPa
 extension SubmitPartRegularUploadOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/upload", relativeTo: Constants.uploadURL)!
-        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        let headers = ["Content-Type": "application/json"]
 
-        guard
-            let payload = self.payload(),
-            let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
-        else {
-            return
-        }
+        guard let payload = self.payload() else { return }
 
-        request.responseJSON { (response) in
-            let jsonResponse = JSONResponse(with: response)
+        UploadService.shared.upload(data: payload, to: uploadURL, method: "POST", headers: headers) { (data, response, error) in
+            let jsonResponse = JSONResponse(response: response, data: data, error: error)
             self.uploadDataChunk(using: jsonResponse)
         }
     }
@@ -70,7 +64,7 @@ extension SubmitPartRegularUploadOperation {
     override func cancel() {
         super.cancel()
 
-        uploadRequest?.cancel()
+        uploadTask?.cancel()
     }
 }
 
@@ -105,34 +99,27 @@ private extension SubmitPartRegularUploadOperation {
 
         guard let data = data,
               let url = url(from: response),
-              let headers = headers(from: response),
-              let request = UploadService.shared.upload(data: data, to: url, method: .put, headers: headers)
+              let headers = headers(from: response)
         else {
             finish(with: .failure(.unknown))
             return
         }
 
-        // Handle upload progress update.
-        request.uploadProgress {
-            self.progress.totalUnitCount = $0.totalUnitCount
-            self.progress.completedUnitCount = $0.completedUnitCount
-        }
+        uploadTask = UploadService.shared.upload(data: data, to: url, method: "PUT", headers: headers, uploadProgress: { (progress) in
+            self.progress.totalUnitCount = Int64(data.size ?? 0)
+            self.progress.completedUnitCount = Int64(Double(self.progress.totalUnitCount) * progress.fractionCompleted)
+        }) { (_, response, error) in
+            self.uploadTask = nil
 
-        // Handle request response.
-        request.response { response in
-            self.uploadRequest = nil
-
-            if let error = response.error {
+            if let error = error {
                 self.finish(with: .failure(.wrapped(error)))
-            } else if let httpURLResponse = response.response, httpURLResponse.statusCode == 200 {
+            } else if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200 {
                 self.progress.completedUnitCount = self.progress.totalUnitCount
                 self.finish(with: .success(httpURLResponse))
             } else {
                 self.finish(with: .failure(.unknown))
             }
         }
-
-        uploadRequest = request
     }
 
     func payload() -> Data? {

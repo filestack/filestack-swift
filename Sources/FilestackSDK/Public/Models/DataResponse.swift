@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 @available(*, deprecated, renamed: "DataResponse")
@@ -31,11 +30,11 @@ public class DataResponse: NSObject {
 
     // MARK: - Lifecycle
 
-    init(with dataResponse: Alamofire.DataResponse<Data>) {
-        self.request = dataResponse.request
-        self.response = dataResponse.response
-        self.data = dataResponse.data
-        self.error = dataResponse.error
+    init(request: URLRequest?, response: URLResponse?, data: Data?, error: Swift.Error?) {
+        self.request = request
+        self.response = response as? HTTPURLResponse
+        self.data = data
+        self.error = error
 
         super.init()
     }

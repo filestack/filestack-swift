@@ -155,7 +155,7 @@ private extension MultipartUpload {
                     results.append(response)
                 case let .failure(error):
                     // Append error JSONResponse to `results`.
-                    results.append(JSONResponse(with: error))
+                    results.append(JSONResponse(error: error))
                     // Substract failed operation's `totalUnitCount` from globalProgress's `totalUnitCount`.
                     self.masterProgress.totalUnitCount -= operation.progress.totalUnitCount
                 }

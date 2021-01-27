@@ -1343,7 +1343,6 @@ class TransformableTests: XCTestCase {
             XCTAssertNil(fileLink)
             XCTAssertEqual(response.request?.url, expectedURL)
             XCTAssertEqual(response.response?.statusCode, 500)
-            XCTAssertNotNil(response.error)
         }
 
         waitForExpectations(timeout: 15, handler: nil)

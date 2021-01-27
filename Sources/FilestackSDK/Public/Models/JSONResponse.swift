@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 @available(*, deprecated, renamed: "JSONResponse")
@@ -31,25 +30,16 @@ public class JSONResponse: NSObject {
 
     // MARK: - Lifecycle
 
-    init(with dataResponse: Alamofire.DataResponse<Any>) {
-        request = dataResponse.request
-        response = dataResponse.response
+    init(request: URLRequest? = nil, response: URLResponse? = nil, data: Data? = nil, error: Swift.Error?) {
+        self.request = request
+        self.response = response as? HTTPURLResponse
 
-        if let data = dataResponse.data {
-            json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
+        if let data = data {
+            self.json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
         } else {
-            json = nil
+            self.json = nil
         }
 
-        error = dataResponse.error
-
-        super.init()
-    }
-
-    init(with error: Swift.Error) {
-        self.request = nil
-        self.response = nil
-        self.json = nil
         self.error = error
 
         super.init()

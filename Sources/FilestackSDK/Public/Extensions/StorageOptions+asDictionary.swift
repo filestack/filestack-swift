@@ -6,7 +6,6 @@
 //  Copyright © 2020 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 extension StorageOptions {

@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 class CommitPartUploadOperation: BaseOperation<HTTPURLResponse> {
@@ -56,17 +55,12 @@ private extension CommitPartUploadOperation {
 
         retrier = .init(attempts: Defaults.maxRetries, label: uploadURL.relativePath) { (semaphore) -> HTTPURLResponse? in
             var httpURLResponse: HTTPURLResponse?
-            let headers: HTTPHeaders = ["Content-Type": "application/json"]
+            let headers = ["Content-Type": "application/json"]
 
-            guard
-                let payload = self.payload(),
-                let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
-            else {
-                return nil
-            }
+            guard let payload = self.payload() else { return nil }
 
-            request.responseJSON { (response) in
-                httpURLResponse = response.response
+            UploadService.shared.upload(data: payload, to: uploadURL, method: "POST", headers: headers) { (data, response, error) in
+                httpURLResponse = response as? HTTPURLResponse
                 semaphore.signal()
             }
 

@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 /// Represents a `FileLink` object.
@@ -57,27 +56,32 @@ public extension FileLink {
                           queue: DispatchQueue? = .main,
                           downloadProgress: ((Progress) -> Void)? = nil,
                           completionHandler: @escaping (DataResponse) -> Void) {
-        guard let request = CDNService.shared.getDataRequest(handle: handle,
-                                                             path: nil,
-                                                             parameters: parameters,
-                                                             security: security) else {
+        guard let request = CDNService.shared.getRequest(handle: handle,
+                                                         path: nil,
+                                                         parameters: parameters,
+                                                         security: security)
+        else {
             return
         }
 
-        if let downloadProgress = downloadProgress {
-            if let queue = queue {
-                request.downloadProgress(queue: queue, closure: downloadProgress)
-            } else {
-                request.downloadProgress(closure: downloadProgress)
+        var progressObservers: [NSKeyValueObservation] = []
+
+        let task = CDNService.shared.session.dataTask(with: request) { (data, response, error) in
+            progressObservers.removeAll()
+            queue?.async {
+                completionHandler(DataResponse(request: request, response: response, data: data, error: error))
             }
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
+        if let downloadProgress = downloadProgress {
+            progressObservers.append(task.progress.observe(\.fractionCompleted) { progress, _ in
+                queue?.async {
+                    downloadProgress(progress)
+                }
+            })
+        }
 
-        request.responseData(queue: queue, completionHandler: { response in
-
-            completionHandler(DataResponse(with: response))
-        })
+        task.resume()
     }
 
     /// Gets the image tags associated to this `FileLink` as a JSON payload.
@@ -90,12 +94,13 @@ public extension FileLink {
             return
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
-
-        request.responseJSON(queue: queue) { response in
-
-            completionHandler(JSONResponse(with: response))
+        let task = CDNService.shared.session.dataTask(with: request) { (data, response, error) in
+            queue?.async {
+                completionHandler(JSONResponse(request: request, response: response, data: data, error: error))
+            }
         }
+
+        task.resume()
     }
 
     /// Gets the safe for work status associated to this `FileLink` as a JSON payload.
@@ -108,12 +113,13 @@ public extension FileLink {
             return
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
-
-        request.responseJSON(queue: queue) { response in
-
-            completionHandler(JSONResponse(with: response))
+        let task = CDNService.shared.session.dataTask(with: request) { (data, response, error) in
+            queue?.async {
+                completionHandler(JSONResponse(request: request, response: response, data: data, error: error))
+            }
         }
+
+        task.resume()
     }
 
     /// Gets metadata associated to this `Filelink` as a JSON payload.
@@ -128,22 +134,23 @@ public extension FileLink {
             URLQueryItem(name: $0.description, value: "true")
         }
 
-        guard let url = APIService.shared.buildURL(handle: handle,
+        guard let url = CDNService.shared.buildURL(handle: handle,
                                                    path: "file",
                                                    extra: "metadata",
                                                    queryItems: optionQueryItems,
-                                                   security: security),
-              let request = APIService.shared.request(url: url, method: .get)
-        else {
-            return
+                                                   security: security)
+        else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        let task = CDNService.shared.session.dataTask(with: request) { (data, response, error) in
+            queue?.async {
+                completionHandler(JSONResponse(request: request, response: response, data: data, error: error))
+            }
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
-
-        request.responseJSON(queue: queue) { response in
-
-            completionHandler(JSONResponse(with: response))
-        }
+        task.resume()
     }
 
     /// Downloads the content associated to this `FileLink` to a destination URL.
@@ -160,38 +167,53 @@ public extension FileLink {
                         queue: DispatchQueue? = .main,
                         downloadProgress: ((Progress) -> Void)? = nil,
                         completionHandler: @escaping (DownloadResponse) -> Void) {
-        let downloadDestination: DownloadRequest.DownloadFileDestination = { _, _ in
-
-            let downloadOptions: DownloadRequest.DownloadOptions = [
-                .createIntermediateDirectories,
-                .removePreviousFile,
-            ]
-
-            return (destinationURL: destinationURL, options: downloadOptions)
-        }
-
-        guard let request = CDNService.shared.downloadRequest(handle: handle,
-                                                              path: nil,
-                                                              parameters: parameters,
-                                                              security: security,
-                                                              downloadDestination: downloadDestination) else {
+        guard let request = CDNService.shared.getRequest(handle: handle,
+                                                         path: nil,
+                                                         parameters: parameters,
+                                                         security: security) else {
             return
         }
 
-        if let downloadProgress = downloadProgress {
-            if let queue = queue {
-                request.downloadProgress(queue: queue, closure: downloadProgress)
-            } else {
-                request.downloadProgress(closure: downloadProgress)
+        var progressObservers: [NSKeyValueObservation] = []
+
+        let task = CDNService.shared.session.downloadTask(with: request) { (url, response, error) in
+            var destURL: URL? = nil
+            var err = error
+
+            if let url = url {
+                do {
+                    try FileManager.default.removeItem(at: destinationURL)
+                    try FileManager.default.moveItem(at: url, to: destinationURL)
+                    destURL = destinationURL
+                } catch {
+                    err = error
+                }
+            }
+
+            progressObservers.removeAll()
+
+            queue?.async {
+                completionHandler(
+                    DownloadResponse(
+                        request: request,
+                        response: response,
+                        temporaryURL: url,
+                        destinationURL: destURL,
+                        error: err
+                    )
+                )
             }
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
+        if let downloadProgress = downloadProgress {
+            progressObservers.append(task.progress.observe(\.fractionCompleted) { progress, _ in
+                queue?.async {
+                    downloadProgress(progress)
+                }
+            })
+        }
 
-        request.responseData(queue: queue, completionHandler: { response in
-
-            completionHandler(DownloadResponse(with: response))
-        })
+        task.resume()
     }
 
     /// Removes this `FileLink` from Filestack.
@@ -206,19 +228,18 @@ public extension FileLink {
     @objc func delete(parameters: [String: Any]? = nil,
                       queue: DispatchQueue? = .main,
                       completionHandler: @escaping (DataResponse) -> Void) {
-        guard let request = APIService.shared.deleteRequest(handle: handle,
+        guard let request = try? APIService.shared.deleteRequest(handle: handle,
                                                             path: Constants.filePath,
                                                             parameters: ensureAPIKey(parameters),
                                                             security: security) else {
             return
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
+        let task = APIService.shared.session.dataTask(with: request) { (data, response, error) in
+            completionHandler(DataResponse(request: request, response: response, data: data, error: error))
+        }
 
-        request.responseData(queue: queue, completionHandler: { response in
-
-            completionHandler(DataResponse(with: response))
-        })
+        task.resume()
     }
 
     /// Overwrites this `FileLink` with a provided local file.
@@ -241,25 +262,28 @@ public extension FileLink {
         guard let request = APIService.shared.overwriteRequest(handle: handle,
                                                                path: Constants.filePath,
                                                                parameters: parameters,
-                                                               fileURL: fileURL,
                                                                security: security) else {
             return
         }
 
-        if let uploadProgress = uploadProgress {
-            if let queue = queue {
-                request.uploadProgress(queue: queue, closure: uploadProgress)
-            } else {
-                request.uploadProgress(closure: uploadProgress)
+        var progressObservers: [NSKeyValueObservation] = []
+
+        let task = APIService.shared.session.uploadTask(with: request, fromFile: fileURL) { (data, response, error) in
+            progressObservers.removeAll()
+            queue?.async {
+                completionHandler(DataResponse(request: request, response: response, data: data, error: error))
             }
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
+        if let uploadProgress = uploadProgress {
+            progressObservers.append(task.progress.observe(\.fractionCompleted) { progress, _ in
+                queue?.async {
+                    uploadProgress(progress)
+                }
+            })
+        }
 
-        request.responseData(queue: queue, completionHandler: { response in
-
-            completionHandler(DataResponse(with: response))
-        })
+        task.resume()
     }
 
     /// Overwrites this `FileLink` with a provided remote URL.
@@ -276,20 +300,26 @@ public extension FileLink {
                          remoteURL: URL,
                          queue: DispatchQueue? = .main,
                          completionHandler: @escaping (DataResponse) -> Void) {
+        var parameters = parameters ?? [String: Any]()
+
+        if !parameters.keys.contains("url") {
+            parameters["url"] = remoteURL.absoluteString
+        }
+
         guard let request = APIService.shared.overwriteRequest(handle: handle,
                                                                path: Constants.filePath,
                                                                parameters: parameters,
-                                                               remoteURL: remoteURL,
                                                                security: security) else {
             return
         }
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
+        let task = APIService.shared.session.dataTask(with: request) { (data, response, error) in
+            queue?.async {
+                completionHandler(DataResponse(request: request, response: response, data: data, error: error))
+            }
+        }
 
-        request.responseData(queue: queue, completionHandler: { response in
-
-            completionHandler(DataResponse(with: response))
-        })
+        task.resume()
     }
 
     /// Returns an `Transformable` corresponding to this `FileLink`.

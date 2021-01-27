@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 @available(*, deprecated, renamed: "DownloadResponse")
@@ -34,12 +33,12 @@ public class DownloadResponse: NSObject {
 
     // MARK: - Lifecycle
 
-    init(with downloadResponse: Alamofire.DownloadResponse<Data>) {
-        self.request = downloadResponse.request
-        self.response = downloadResponse.response
-        self.temporaryURL = downloadResponse.temporaryURL
-        self.destinationURL = downloadResponse.destinationURL
-        self.error = downloadResponse.error
+    init(request: URLRequest?, response: URLResponse?, temporaryURL: URL?, destinationURL: URL?, error: Swift.Error?) {
+        self.request = request
+        self.response = response as? HTTPURLResponse
+        self.temporaryURL = temporaryURL
+        self.destinationURL = destinationURL
+        self.error = error
 
         super.init()
     }

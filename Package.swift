@@ -14,13 +14,12 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: Version(4, 9, 0))),
         .package(url: "https://github.com/AliSoftware/OHHTTPStubs.git", .upToNextMajor(from: Version(9, 0, 0)))
     ],
     targets: [
         .target(
             name: "FilestackSDK",
-            dependencies: ["Alamofire", "ObjcDefs"],
+            dependencies: ["ObjcDefs"],
             resources: [
                 .copy("VERSION")
             ]

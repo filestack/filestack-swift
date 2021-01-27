@@ -1,12 +1,11 @@
 //
-//  SessionManager+filestackDefault.swift
+//  URLSession+filestackDefault.swift
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 7/5/17.
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 #if SWIFT_PACKAGE
@@ -14,8 +13,8 @@ import Foundation
 private class BundleFinder {}
 #endif
 
-extension SessionManager {
-    static func filestack(background: Bool = false) -> SessionManager {
+extension URLSession {
+    static func filestack(background: Bool = false, delegate: URLSessionDelegate? = nil) -> URLSession {
         let configuration: URLSessionConfiguration
 
         if background {
@@ -30,15 +29,15 @@ extension SessionManager {
         configuration.httpShouldUsePipelining = true
         configuration.httpAdditionalHeaders = customHTTPHeaders
 
-        return SessionManager(configuration: configuration)
+        return URLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
     }
 }
 
 // MARK: - Private Functions
 
-private extension SessionManager {
-    static var customHTTPHeaders: HTTPHeaders {
-        var defaultHeaders = SessionManager.defaultHTTPHeaders
+private extension URLSession {
+    static var customHTTPHeaders: [String: String] {
+        var defaultHeaders: [String: String] = [:]
 
         defaultHeaders["User-Agent"] = "filestack-swift \(shortVersionString)"
         defaultHeaders["Filestack-Source"] = "Swift-\(shortVersionString)"

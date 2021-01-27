@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 class CompleteUploadOperation: BaseOperation<JSONResponse> {
@@ -53,20 +52,15 @@ extension CompleteUploadOperation {
 private extension CompleteUploadOperation {
     func upload() {
         let uploadURL = URL(string: "multipart/complete", relativeTo: Constants.uploadURL)!
+        let headers = ["Content-Type": "application/json"]
 
         retrier = .init(attempts: Defaults.maxRetries, label: uploadURL.relativePath) { (semaphore) -> JSONResponse? in
             var jsonResponse: JSONResponse?
-            let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
-            guard
-                let payload = self.payload(),
-                let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
-            else {
-                return nil
-            }
+            guard let payload = self.payload() else { return nil }
 
-            request.responseJSON { (response) in
-                jsonResponse = JSONResponse(with: response)
+            UploadService.shared.upload(data: payload, to: uploadURL, method: "POST", headers: headers) { (data, response, error) in
+                jsonResponse = JSONResponse(response: response, data: data, error: error)
                 semaphore.signal()
             }
 
@@ -104,7 +98,7 @@ private extension CompleteUploadOperation {
         if descriptor.useIntelligentIngestion {
             payload["fii"] = true
         } else {
-            payload["parts"] = partsAndEtags.map { [String($0.key): $0.value] }
+            payload["parts"] = partsAndEtags.map { ["part_number": $0.key, "etag": $0.value] }
         }
 
         if !descriptor.options.uploadTags.isEmpty {

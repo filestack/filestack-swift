@@ -125,7 +125,7 @@ public extension Client {
             if let response = responses.first {
                 completionHandler(response)
             } else {
-                completionHandler(JSONResponse(with: Error.unknown))
+                completionHandler(JSONResponse(error: Error.unknown))
             }
         }
 

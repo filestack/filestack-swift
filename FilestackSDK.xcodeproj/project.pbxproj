@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		450FE2D52539B60F0035D67C /* URL+Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450FE2D42539B60F0035D67C /* URL+Deletable.swift */; };
 		450FE2D92539B6160035D67C /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450FE2D82539B6160035D67C /* Deletable.swift */; };
-		45825B192524DB86002F3310 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 45825B182524DB86002F3310 /* Alamofire */; };
+		4521EA5325BED24000398BB7 /* StorageOptions+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4521EA5225BED23F00398BB7 /* StorageOptions+asDictionary.swift */; };
 		45825B2B2524DE46002F3310 /* FilestackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */; };
 		45825B352524DE5D002F3310 /* BaseOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_164 /* BaseOperationTests.swift */; };
 		45825B362524DE5D002F3310 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_165 /* ClientTests.swift */; };
@@ -43,9 +43,7 @@
 		45825C2D2524E38A002F3310 /* TaskRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B952524E389002F3310 /* TaskRetrier.swift */; };
 		45825C2E2524E38A002F3310 /* Uploadable+reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B972524E389002F3310 /* Uploadable+reader.swift */; };
 		45825C2F2524E38A002F3310 /* NetworkingServiceWithBaseURL+buildURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B982524E389002F3310 /* NetworkingServiceWithBaseURL+buildURL.swift */; };
-		45825C302524E38A002F3310 /* SessionManager+filestackDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B992524E389002F3310 /* SessionManager+filestackDefault.swift */; };
 		45825C312524E38A002F3310 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B9A2524E389002F3310 /* UIColor+hexString.swift */; };
-		45825C322524E38A002F3310 /* StorageOptions+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B9B2524E389002F3310 /* StorageOptions+asDictionary.swift */; };
 		45825C332524E38A002F3310 /* Data+base64MD5Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B9C2524E389002F3310 /* Data+base64MD5Digest.swift */; };
 		45825C342524E38A002F3310 /* String+Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B9D2524E389002F3310 /* String+Hmac.swift */; };
 		45825C352524E38A002F3310 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825B9E2524E389002F3310 /* Tools.swift */; };
@@ -163,6 +161,7 @@
 		4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1E2524E389002F3310 /* FSTransformPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F19E2524F1CF008F282E /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586F1652524EEB8008F282E /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F1C42524FD7E008F282E /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 4586F1C32524FD7E008F282E /* Fixtures */; };
+		4591004A25C1A3DF008187F5 /* URLSession+filestackDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591004925C1A3DF008187F5 /* URLSession+filestackDefault.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +177,7 @@
 /* Begin PBXFileReference section */
 		450FE2D42539B60F0035D67C /* URL+Deletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Deletable.swift"; sourceTree = "<group>"; };
 		450FE2D82539B6160035D67C /* Deletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
+		4521EA5225BED23F00398BB7 /* StorageOptions+asDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageOptions+asDictionary.swift"; sourceTree = "<group>"; };
 		45825B262524DE46002F3310 /* FilestackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilestackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45825B702524E07F002F3310 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		45825B742524E315002F3310 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = SOURCE_ROOT; };
@@ -196,9 +196,7 @@
 		45825B952524E389002F3310 /* TaskRetrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskRetrier.swift; sourceTree = "<group>"; };
 		45825B972524E389002F3310 /* Uploadable+reader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Uploadable+reader.swift"; sourceTree = "<group>"; };
 		45825B982524E389002F3310 /* NetworkingServiceWithBaseURL+buildURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkingServiceWithBaseURL+buildURL.swift"; sourceTree = "<group>"; };
-		45825B992524E389002F3310 /* SessionManager+filestackDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SessionManager+filestackDefault.swift"; sourceTree = "<group>"; };
 		45825B9A2524E389002F3310 /* UIColor+hexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
-		45825B9B2524E389002F3310 /* StorageOptions+asDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageOptions+asDictionary.swift"; sourceTree = "<group>"; };
 		45825B9C2524E389002F3310 /* Data+base64MD5Digest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+base64MD5Digest.swift"; sourceTree = "<group>"; };
 		45825B9D2524E389002F3310 /* String+Hmac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Hmac.swift"; sourceTree = "<group>"; };
 		45825B9E2524E389002F3310 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -318,6 +316,7 @@
 		45825C202524E389002F3310 /* ObjcDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcDefs.m; sourceTree = "<group>"; };
 		4586F1652524EEB8008F282E /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		4586F1C32524FD7E008F282E /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
+		4591004925C1A3DF008187F5 /* URLSession+filestackDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+filestackDefault.swift"; sourceTree = "<group>"; };
 		"FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_164 /* BaseOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOperationTests.swift; sourceTree = "<group>"; };
 		OBJ_165 /* ClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
@@ -351,7 +350,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				45825B192524DB86002F3310 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,18 +386,18 @@
 		45825B862524E389002F3310 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				45825B872524E389002F3310 /* Constants.swift */,
-				45825B882524E389002F3310 /* Uploaders */,
-				45825B8A2524E389002F3310 /* Loggers.swift */,
 				45825B8B2524E389002F3310 /* Config.swift */,
-				45825B8C2524E389002F3310 /* Operations */,
+				45825B872524E389002F3310 /* Constants.swift */,
+				45825B8A2524E389002F3310 /* Loggers.swift */,
 				45825B952524E389002F3310 /* TaskRetrier.swift */,
-				45825B962524E389002F3310 /* Extensions */,
 				45825B9E2524E389002F3310 /* Tools.swift */,
-				45825B9F2524E389002F3310 /* Protocols */,
 				45825BA32524E389002F3310 /* UploadDescriptor.swift */,
+				45825B962524E389002F3310 /* Extensions */,
+				45825B8C2524E389002F3310 /* Operations */,
+				45825B9F2524E389002F3310 /* Protocols */,
 				45825BA42524E389002F3310 /* Services */,
 				45825BA92524E389002F3310 /* Uploadable Readers */,
+				45825B882524E389002F3310 /* Uploaders */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -415,13 +413,13 @@
 		45825B8C2524E389002F3310 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				45825B922524E389002F3310 /* CommitPartUploadOperation.swift */,
+				45825B912524E389002F3310 /* CompleteUploadOperation.swift */,
+				45825B932524E389002F3310 /* StartUploadOperation.swift */,
+				45825B902524E389002F3310 /* SubmitChunkUploadOperation.swift */,
 				45825B8D2524E389002F3310 /* SubmitPartIntelligentUploadOperation.swift */,
 				45825B8E2524E389002F3310 /* SubmitPartRegularUploadOperation.swift */,
 				45825B8F2524E389002F3310 /* SubmitPartsUploadOperation.swift */,
-				45825B902524E389002F3310 /* SubmitChunkUploadOperation.swift */,
-				45825B912524E389002F3310 /* CompleteUploadOperation.swift */,
-				45825B922524E389002F3310 /* CommitPartUploadOperation.swift */,
-				45825B932524E389002F3310 /* StartUploadOperation.swift */,
 				45825B942524E389002F3310 /* UploadOperation.swift */,
 			);
 			path = Operations;
@@ -430,14 +428,13 @@
 		45825B962524E389002F3310 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				450FE2D42539B60F0035D67C /* URL+Deletable.swift */,
-				45825B972524E389002F3310 /* Uploadable+reader.swift */,
-				45825B982524E389002F3310 /* NetworkingServiceWithBaseURL+buildURL.swift */,
-				45825B992524E389002F3310 /* SessionManager+filestackDefault.swift */,
-				45825B9A2524E389002F3310 /* UIColor+hexString.swift */,
-				45825B9B2524E389002F3310 /* StorageOptions+asDictionary.swift */,
 				45825B9C2524E389002F3310 /* Data+base64MD5Digest.swift */,
+				45825B982524E389002F3310 /* NetworkingServiceWithBaseURL+buildURL.swift */,
 				45825B9D2524E389002F3310 /* String+Hmac.swift */,
+				45825B9A2524E389002F3310 /* UIColor+hexString.swift */,
+				45825B972524E389002F3310 /* Uploadable+reader.swift */,
+				450FE2D42539B60F0035D67C /* URL+Deletable.swift */,
+				4591004925C1A3DF008187F5 /* URLSession+filestackDefault.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -457,9 +454,9 @@
 			isa = PBXGroup;
 			children = (
 				45825BA52524E389002F3310 /* APIService.swift */,
-				45825BA62524E389002F3310 /* UploadService.swift */,
 				45825BA72524E389002F3310 /* CDNService.swift */,
 				45825BA82524E389002F3310 /* ProcessService.swift */,
+				45825BA62524E389002F3310 /* UploadService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -477,12 +474,11 @@
 			isa = PBXGroup;
 			children = (
 				45825BAD2524E389002F3310 /* Enums */,
+				45825BCF2524E389002F3310 /* Extensions */,
 				45825BC22524E389002F3310 /* Models */,
 				45825BCD2524E389002F3310 /* Operations */,
-				45825BCF2524E389002F3310 /* Extensions */,
-				45825BD52524E389002F3310 /* Transforms */,
 				45825C0F2524E389002F3310 /* Protocols */,
-				45825C162524E389002F3310 /* Objective-C */,
+				45825BD52524E389002F3310 /* Transforms */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -490,26 +486,26 @@
 		45825BAD2524E389002F3310 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				45825BAE2524E389002F3310 /* TransformAlign.swift */,
-				45825BAF2524E389002F3310 /* TransformColorSpace.swift */,
-				45825BB02524E389002F3310 /* TransformPageOrientation.swift */,
-				45825BB12524E389002F3310 /* TransformShapeType.swift */,
 				45825BB22524E389002F3310 /* Error.swift */,
-				45825BB32524E389002F3310 /* TransformStyleMode.swift */,
-				45825BB42524E389002F3310 /* TransformFit.swift */,
-				45825BB52524E389002F3310 /* TransformBlurMode.swift */,
-				45825BB62524E389002F3310 /* UploadStatus.swift */,
-				45825BB72524E389002F3310 /* TransformFiletype.swift */,
-				45825BB82524E389002F3310 /* TransformAspectMode.swift */,
-				45825BB92524E389002F3310 /* StorageLocation.swift */,
-				45825BBA2524E389002F3310 /* TransformEnhancePreset.swift */,
 				45825BBB2524E389002F3310 /* MetadataOptions.swift */,
-				45825BBC2524E389002F3310 /* StorageAccess.swift */,
 				45825BBD2524E389002F3310 /* PolicyCall.swift */,
-				45825BBE2524E389002F3310 /* TransformPosition.swift */,
+				45825BBC2524E389002F3310 /* StorageAccess.swift */,
+				45825BB92524E389002F3310 /* StorageLocation.swift */,
+				45825BAE2524E389002F3310 /* TransformAlign.swift */,
+				45825BB82524E389002F3310 /* TransformAspectMode.swift */,
+				45825BB52524E389002F3310 /* TransformBlurMode.swift */,
+				45825BAF2524E389002F3310 /* TransformColorSpace.swift */,
+				45825BC12524E389002F3310 /* TransformCropMode.swift */,
+				45825BBA2524E389002F3310 /* TransformEnhancePreset.swift */,
+				45825BB72524E389002F3310 /* TransformFiletype.swift */,
+				45825BB42524E389002F3310 /* TransformFit.swift */,
 				45825BBF2524E389002F3310 /* TransformNoiseMode.swift */,
 				45825BC02524E389002F3310 /* TransformPageFormat.swift */,
-				45825BC12524E389002F3310 /* TransformCropMode.swift */,
+				45825BB02524E389002F3310 /* TransformPageOrientation.swift */,
+				45825BBE2524E389002F3310 /* TransformPosition.swift */,
+				45825BB12524E389002F3310 /* TransformShapeType.swift */,
+				45825BB32524E389002F3310 /* TransformStyleMode.swift */,
+				45825BB62524E389002F3310 /* UploadStatus.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -517,16 +513,16 @@
 		45825BC22524E389002F3310 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				45825BCB2524E389002F3310 /* Client.swift */,
+				45825BCA2524E389002F3310 /* DataResponse.swift */,
+				45825BC82524E389002F3310 /* DownloadResponse.swift */,
+				45825BC92524E389002F3310 /* FileLink.swift */,
+				45825BCC2524E389002F3310 /* JSONResponse.swift */,
+				45825BC62524E389002F3310 /* Policy.swift */,
 				45825BC32524E389002F3310 /* Security.swift */,
 				45825BC42524E389002F3310 /* StorageOptions.swift */,
 				45825BC52524E389002F3310 /* Transformable.swift */,
-				45825BC62524E389002F3310 /* Policy.swift */,
 				45825BC72524E389002F3310 /* UploadOptions.swift */,
-				45825BC82524E389002F3310 /* DownloadResponse.swift */,
-				45825BC92524E389002F3310 /* FileLink.swift */,
-				45825BCA2524E389002F3310 /* DataResponse.swift */,
-				45825BCB2524E389002F3310 /* Client.swift */,
-				45825BCC2524E389002F3310 /* JSONResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -542,11 +538,12 @@
 		45825BCF2524E389002F3310 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				45825BD02524E389002F3310 /* Transformable+Deprecated.swift */,
-				45825BD12524E389002F3310 /* URL+Uploadable.swift */,
+				45825BD42524E389002F3310 /* Client+Deprecated.swift */,
 				45825BD22524E389002F3310 /* Client+ObjC.swift */,
 				45825BD32524E389002F3310 /* Data+Uploadable.swift */,
-				45825BD42524E389002F3310 /* Client+Deprecated.swift */,
+				4521EA5225BED23F00398BB7 /* StorageOptions+asDictionary.swift */,
+				45825BD02524E389002F3310 /* Transformable+Deprecated.swift */,
+				45825BD12524E389002F3310 /* URL+Uploadable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -554,63 +551,63 @@
 		45825BD52524E389002F3310 /* Transforms */ = {
 			isa = PBXGroup;
 			children = (
-				45825BD62524E389002F3310 /* OilPaintTransform.swift */,
-				45825BD72524E389002F3310 /* OCRTransform.swift */,
-				45825BD82524E389002F3310 /* ShadowTransform.swift */,
-				45825BD92524E389002F3310 /* CollageTransform.swift */,
-				45825BDA2524E389002F3310 /* PixelateTransform.swift */,
-				45825BDB2524E389002F3310 /* PartialPixelateTransform.swift */,
-				45825BDC2524E389002F3310 /* PolaroidTransform.swift */,
-				45825BDD2524E389002F3310 /* EnhanceTransform.swift */,
-				45825BDE2524E389002F3310 /* CopyrightTransform.swift */,
-				45825BDF2524E389002F3310 /* TornEdgesTransform.swift */,
-				45825BE02524E389002F3310 /* PixelateFacesTransform.swift */,
-				45825BE12524E389002F3310 /* ConvertTransform.swift */,
-				45825BE22524E389002F3310 /* ProgressiveJPEGTransform.swift */,
-				45825BE32524E389002F3310 /* NoMetadataTransform.swift */,
-				45825BE42524E389002F3310 /* SecureForWorkTransform.swift */,
-				45825BE52524E389002F3310 /* CropFacesTransform.swift */,
-				45825BE62524E389002F3310 /* ModulateTransform.swift */,
+				45825BF02524E389002F3310 /* AnimateTransform.swift */,
+				45825BF42524E389002F3310 /* ASCIITransform.swift */,
 				45825BE72524E389002F3310 /* AutoImageTransform.swift */,
 				45825BE82524E389002F3310 /* AVTransform.swift */,
-				45825BE92524E389002F3310 /* MonochromeTransform.swift */,
-				45825BEA2524E389002F3310 /* PDFInfoTransform.swift */,
-				45825BEB2524E389002F3310 /* Transform.swift */,
-				45825BEC2524E389002F3310 /* MinifyCSSTransform.swift */,
-				45825BED2524E389002F3310 /* ResizeTransform.swift */,
-				45825BEE2524E389002F3310 /* FallbackTransform.swift */,
-				45825BEF2524E389002F3310 /* PartialBlurTransform.swift */,
-				45825BF02524E389002F3310 /* AnimateTransform.swift */,
-				45825BF12524E389002F3310 /* TagsTransform.swift */,
-				45825BF22524E389002F3310 /* DocumentDetectionTransform.swift */,
-				45825BF32524E389002F3310 /* CacheTransform.swift */,
-				45825BF42524E389002F3310 /* ASCIITransform.swift */,
-				45825BF52524E389002F3310 /* FlopTransform.swift */,
-				45825BF62524E389002F3310 /* UpscaleTransform.swift */,
-				45825BF72524E389002F3310 /* PDFConvertTransform.swift */,
-				45825BF82524E389002F3310 /* CompressTransform.swift */,
-				45825BF92524E389002F3310 /* BlurFacesTransform.swift */,
-				45825BFA2524E389002F3310 /* CircleTransform.swift */,
-				45825BFB2524E389002F3310 /* NegativeTransform.swift */,
-				45825BFC2524E389002F3310 /* SharpenTransform.swift */,
-				45825BFD2524E389002F3310 /* ImageSizeTransform.swift */,
-				45825BFE2524E389002F3310 /* RoundedCornersTransform.swift */,
-				45825BFF2524E389002F3310 /* VignetteTransform.swift */,
-				45825C002524E389002F3310 /* DetectFacesTransform.swift */,
-				45825C012524E389002F3310 /* URLScreenshotTransform.swift */,
 				45825C022524E389002F3310 /* BlackAndWhiteTransform.swift */,
-				45825C032524E389002F3310 /* ZipTransform.swift */,
-				45825C042524E389002F3310 /* BorderTransform.swift */,
-				45825C052524E389002F3310 /* RedEyeRemovalTransform.swift */,
-				45825C062524E389002F3310 /* WatermarkTransform.swift */,
-				45825C072524E389002F3310 /* SepiaTransform.swift */,
-				45825C082524E389002F3310 /* PDFMonochromeTransform.swift */,
-				45825C092524E389002F3310 /* MinifyJSTransform.swift */,
-				45825C0A2524E389002F3310 /* CropTransform.swift */,
+				45825BF92524E389002F3310 /* BlurFacesTransform.swift */,
 				45825C0B2524E389002F3310 /* BlurTransform.swift */,
-				45825C0C2524E389002F3310 /* QualityTransform.swift */,
+				45825C042524E389002F3310 /* BorderTransform.swift */,
+				45825BF32524E389002F3310 /* CacheTransform.swift */,
+				45825BFA2524E389002F3310 /* CircleTransform.swift */,
+				45825BD92524E389002F3310 /* CollageTransform.swift */,
+				45825BF82524E389002F3310 /* CompressTransform.swift */,
+				45825BE12524E389002F3310 /* ConvertTransform.swift */,
+				45825BDE2524E389002F3310 /* CopyrightTransform.swift */,
+				45825BE52524E389002F3310 /* CropFacesTransform.swift */,
+				45825C0A2524E389002F3310 /* CropTransform.swift */,
+				45825C002524E389002F3310 /* DetectFacesTransform.swift */,
+				45825BF22524E389002F3310 /* DocumentDetectionTransform.swift */,
+				45825BDD2524E389002F3310 /* EnhanceTransform.swift */,
+				45825BEE2524E389002F3310 /* FallbackTransform.swift */,
 				45825C0D2524E389002F3310 /* FlipTransform.swift */,
+				45825BF52524E389002F3310 /* FlopTransform.swift */,
+				45825BFD2524E389002F3310 /* ImageSizeTransform.swift */,
+				45825BEC2524E389002F3310 /* MinifyCSSTransform.swift */,
+				45825C092524E389002F3310 /* MinifyJSTransform.swift */,
+				45825BE62524E389002F3310 /* ModulateTransform.swift */,
+				45825BE92524E389002F3310 /* MonochromeTransform.swift */,
+				45825BFB2524E389002F3310 /* NegativeTransform.swift */,
+				45825BE32524E389002F3310 /* NoMetadataTransform.swift */,
+				45825BD72524E389002F3310 /* OCRTransform.swift */,
+				45825BD62524E389002F3310 /* OilPaintTransform.swift */,
+				45825BEF2524E389002F3310 /* PartialBlurTransform.swift */,
+				45825BDB2524E389002F3310 /* PartialPixelateTransform.swift */,
+				45825BF72524E389002F3310 /* PDFConvertTransform.swift */,
+				45825BEA2524E389002F3310 /* PDFInfoTransform.swift */,
+				45825C082524E389002F3310 /* PDFMonochromeTransform.swift */,
+				45825BE02524E389002F3310 /* PixelateFacesTransform.swift */,
+				45825BDA2524E389002F3310 /* PixelateTransform.swift */,
+				45825BDC2524E389002F3310 /* PolaroidTransform.swift */,
+				45825BE22524E389002F3310 /* ProgressiveJPEGTransform.swift */,
+				45825C0C2524E389002F3310 /* QualityTransform.swift */,
+				45825C052524E389002F3310 /* RedEyeRemovalTransform.swift */,
+				45825BED2524E389002F3310 /* ResizeTransform.swift */,
 				45825C0E2524E389002F3310 /* RotateTransform.swift */,
+				45825BFE2524E389002F3310 /* RoundedCornersTransform.swift */,
+				45825BE42524E389002F3310 /* SecureForWorkTransform.swift */,
+				45825C072524E389002F3310 /* SepiaTransform.swift */,
+				45825BD82524E389002F3310 /* ShadowTransform.swift */,
+				45825BFC2524E389002F3310 /* SharpenTransform.swift */,
+				45825BF12524E389002F3310 /* TagsTransform.swift */,
+				45825BDF2524E389002F3310 /* TornEdgesTransform.swift */,
+				45825BEB2524E389002F3310 /* Transform.swift */,
+				45825BF62524E389002F3310 /* UpscaleTransform.swift */,
+				45825C012524E389002F3310 /* URLScreenshotTransform.swift */,
+				45825BFF2524E389002F3310 /* VignetteTransform.swift */,
+				45825C062524E389002F3310 /* WatermarkTransform.swift */,
+				45825C032524E389002F3310 /* ZipTransform.swift */,
 			);
 			path = Transforms;
 			sourceTree = "<group>";
@@ -618,21 +615,14 @@
 		45825C0F2524E389002F3310 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				45825C102524E389002F3310 /* Monitorizable.swift */,
-				45825C112524E389002F3310 /* Uploadable.swift */,
-				45825C122524E389002F3310 /* Uploader.swift */,
-				45825C132524E389002F3310 /* Startable.swift */,
 				45825C142524E389002F3310 /* Cancellable.swift */,
 				45825C152524E389002F3310 /* DeferredAdd.swift */,
+				45825C102524E389002F3310 /* Monitorizable.swift */,
+				45825C132524E389002F3310 /* Startable.swift */,
+				45825C112524E389002F3310 /* Uploadable.swift */,
+				45825C122524E389002F3310 /* Uploader.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		45825C162524E389002F3310 /* Objective-C */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Objective-C";
 			sourceTree = "<group>";
 		};
 		45825C1A2524E389002F3310 /* ObjcDefs */ = {
@@ -647,8 +637,8 @@
 		45825C1B2524E389002F3310 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				45825C1C2524E389002F3310 /* FSPolicyCall.h */,
 				45825C1D2524E389002F3310 /* FSMetadataOptions.h */,
+				45825C1C2524E389002F3310 /* FSPolicyCall.h */,
 				45825C1E2524E389002F3310 /* FSTransformPosition.h */,
 			);
 			path = include;
@@ -761,7 +751,6 @@
 			);
 			name = FilestackSDK;
 			packageProductDependencies = (
-				45825B182524DB86002F3310 /* Alamofire */,
 			);
 			productName = FilestackSDK;
 			productReference = "FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */;
@@ -775,7 +764,7 @@
 			attributes = {
 				LastSwiftMigration = 9999;
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 9999;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					45825B252524DE46002F3310 = {
 						CreatedOnToolsVersion = 12.0;
@@ -788,6 +777,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = OBJ_5;
 			packageReferences = (
@@ -870,6 +860,7 @@
 				45825C8E2524E38C002F3310 /* DetectFacesTransform.swift in Sources */,
 				45825C9D2524E38C002F3310 /* Monitorizable.swift in Sources */,
 				45825C422524E38A002F3310 /* TransformPageOrientation.swift in Sources */,
+				4591004A25C1A3DF008187F5 /* URLSession+filestackDefault.swift in Sources */,
 				45825C452524E38A002F3310 /* TransformStyleMode.swift in Sources */,
 				450FE2D92539B6160035D67C /* Deletable.swift in Sources */,
 				45825C5B2524E38B002F3310 /* DataResponse.swift in Sources */,
@@ -893,7 +884,7 @@
 				45825C512524E38B002F3310 /* TransformNoiseMode.swift in Sources */,
 				45825C4B2524E38A002F3310 /* StorageLocation.swift in Sources */,
 				45825C642524E38B002F3310 /* OilPaintTransform.swift in Sources */,
-				45825C302524E38A002F3310 /* SessionManager+filestackDefault.swift in Sources */,
+				4521EA5325BED24000398BB7 /* StorageOptions+asDictionary.swift in Sources */,
 				45825C822524E38C002F3310 /* ASCIITransform.swift in Sources */,
 				45825C532524E38B002F3310 /* TransformCropMode.swift in Sources */,
 				45825C7D2524E38C002F3310 /* PartialBlurTransform.swift in Sources */,
@@ -933,7 +924,6 @@
 				45825C3E2524E38A002F3310 /* DataReader.swift in Sources */,
 				45825C832524E38C002F3310 /* FlopTransform.swift in Sources */,
 				45825CA12524E38C002F3310 /* Cancellable.swift in Sources */,
-				45825C322524E38A002F3310 /* StorageOptions+asDictionary.swift in Sources */,
 				45825C682524E38B002F3310 /* PixelateTransform.swift in Sources */,
 				45825C412524E38A002F3310 /* TransformColorSpace.swift in Sources */,
 				45825C8D2524E38C002F3310 /* VignetteTransform.swift in Sources */,
@@ -1193,16 +1183,43 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
 				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1221,11 +1238,37 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
@@ -1289,11 +1332,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		45825B182524DB86002F3310 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 45825B172524DB86002F3310 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		45825B6A2524E03B002F3310 /* OHHTTPStubs */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 45825B692524E03B002F3310 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;

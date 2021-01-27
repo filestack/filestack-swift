@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import OHHTTPStubs
 import OHHTTPStubsSwift
 import XCTest
@@ -19,14 +18,14 @@ class SessionManagerTests: XCTestCase {
     }
 
     func testFilestackDefaultCustomHTTPHeaders() {
-        let session = SessionManager.filestack()
+        let session = URLSession.filestack()
         let requestURL = URL(string: "https://SOME-URL-HERE")!
 
         stub(condition: isScheme(requestURL.scheme!) && isHost(requestURL.host!)) { request in
             return HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }
 
-        let task = session.session.dataTask(with: requestURL)
+        let task = session.dataTask(with: requestURL)
         let headers = task.currentRequest?.allHTTPHeaderFields!
 
         XCTAssertEqual(headers?["User-Agent"], "filestack-swift \(shortVersionString)")

@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.6.0 *TBD*
+----------------------------
+- Removed dependency on `AlamoFire`.
+
 Version 2.5.2 *(2020-11-12)*
 ----------------------------
 - Changed transformable store request to use GET instead of POST.

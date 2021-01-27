@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 private let Shared = ProcessService()
@@ -14,7 +13,7 @@ private let Shared = ProcessService()
 final class ProcessService: NetworkingServiceWithBaseURL {
     // MARK: - Internal Properties
 
-    let sessionManager = SessionManager.filestack()
+    let session = URLSession.filestack()
     let baseURL = Constants.cdnURL
 
     static let shared = Shared

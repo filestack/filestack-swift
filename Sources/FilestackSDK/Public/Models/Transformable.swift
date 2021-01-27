@@ -121,6 +121,7 @@ public extension Transformable {
                base64Decode: Bool = false,
                queue: DispatchQueue? = .main,
                completionHandler: @escaping (FileLink?, JSONResponse) -> Void) -> Self {
+        // Setup task options
         var taskOptions = [TaskOption]()
 
         taskOptions.append((key: "location", value: options.location))
@@ -144,17 +145,20 @@ public extension Transformable {
         taskOptions.append((key: "access", value: options.access))
         taskOptions.append((key: "base64decode", value: base64Decode))
 
-        let task = Task(name: "store", options: taskOptions)
+        // Setup `store` task with task options.
+        let storeTask = Task(name: "store", options: taskOptions)
 
-        transformationTasks.insert(task, at: 0)
+        transformationTasks.insert(storeTask, at: 0)
 
-        // Create and perform post request
-        guard let request = ProcessService.shared.request(url: url, method: .get) else { return self }
+        // Create request.
+        var request = URLRequest(url: url)
 
-        request.validate(statusCode: Constants.validHTTPResponseCodes)
+        request.httpMethod = "GET"
 
-        request.responseJSON(queue: queue ?? .main) { response in
-            let jsonResponse = JSONResponse(with: response)
+        // Perform request.
+        let task = ProcessService.shared.session.dataTask(with: request) { (data, response, error) in
+            let jsonResponse = JSONResponse(request: request, response: response, data: data, error: error)
+
             var fileLink: FileLink?
 
             if let json = jsonResponse.json,
@@ -163,10 +167,12 @@ public extension Transformable {
                 fileLink = FileLink(handle: url.lastPathComponent, apiKey: self.apiKey, security: self.security)
             }
 
-            completionHandler(fileLink, jsonResponse)
-
-            return
+            queue?.async {
+                completionHandler(fileLink, jsonResponse)
+            }
         }
+
+        task.resume()
 
         return self
     }

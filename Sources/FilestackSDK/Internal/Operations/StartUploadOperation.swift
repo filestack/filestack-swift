@@ -6,7 +6,6 @@
 //  Copyright © 2017 Filestack. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 class StartUploadOperation: BaseOperation<UploadDescriptor> {
@@ -43,17 +42,12 @@ class StartUploadOperation: BaseOperation<UploadDescriptor> {
 extension StartUploadOperation {
     override func main() {
         let uploadURL = URL(string: "multipart/start", relativeTo: Constants.uploadURL)!
-        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+        let headers = ["Content-Type": "application/json"]
 
-        guard
-            let payload = self.payload(),
-            let request = UploadService.shared.upload(data: payload, to: uploadURL, method: .post, headers: headers)
-        else {
-            return
-        }
+        guard let payload = self.payload() else { return }
 
-        request.responseJSON { (response) in
-            let jsonResponse = JSONResponse(with: response)
+        UploadService.shared.upload(data: payload, to: uploadURL, method: "POST", headers: headers) { (data, response, error) in
+            let jsonResponse = JSONResponse(response: response, data: data, error: error)
             self.handleResponse(response: jsonResponse)
         }
     }
