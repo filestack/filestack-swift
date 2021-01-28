@@ -60,13 +60,10 @@ private extension SubmitPartIntelligentUploadOperation {
     func upload() {
         let chunkSize = Defaults.resumableMobileChunkSize
         var chunkOffset: UInt64 = 0
-        let finishOperation = BlockOperation { self.executeCommit() }
 
         while !isCancelled, chunkOffset < UInt64(size) {
             // Guard against EOF
             guard let chunkOperation = submitChunk(chunkOffset: chunkOffset, chunkSize: chunkSize) else { break }
-
-            finishOperation.addDependency(chunkOperation)
 
             let actualChunkSize = chunkOperation.progress.totalUnitCount
 
@@ -74,7 +71,11 @@ private extension SubmitPartIntelligentUploadOperation {
             chunkOffset += UInt64(actualChunkSize)
         }
 
-        chunkUploadOperationQueue.addOperation(finishOperation)
+        chunkUploadOperationQueue.waitUntilAllOperationsAreFinished()
+
+        if !isCancelled {
+            executeCommit()
+        }
     }
 
     func submitChunk(chunkOffset: UInt64, chunkSize: Int, retries: Int = Defaults.maxRetries) -> SubmitChunkUploadOperation? {

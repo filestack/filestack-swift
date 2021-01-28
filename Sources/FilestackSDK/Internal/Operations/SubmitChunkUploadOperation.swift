@@ -109,12 +109,12 @@ private extension SubmitChunkUploadOperation {
         uploadTask = UploadService.shared.upload(data: data, to: url, method: "PUT", headers: headers, uploadProgress: { (progress) in
             self.progress.totalUnitCount = Int64(self.data.size ?? 0)
             self.progress.completedUnitCount = Int64(Double(self.progress.totalUnitCount) * progress.fractionCompleted)
-        }) { (request, data, error) in
+        }) { (_, response, error) in
             self.uploadTask = nil
 
-            if let error = response.error {
+            if let error = error {
                 self.finish(with: .failure(.wrapped(error)))
-            } else if let httpURLResponse = response.response, httpURLResponse.statusCode == 200 {
+            } else if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200 {
                 self.progress.completedUnitCount = self.progress.totalUnitCount
                 self.finish(with: .success(httpURLResponse))
             } else {

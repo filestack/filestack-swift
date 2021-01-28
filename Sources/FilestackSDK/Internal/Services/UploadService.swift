@@ -11,6 +11,39 @@ import os.log
 
 private let Shared = UploadService()
 
+// Provides synchronized access to task data and completion handlers.
+struct TaskState {
+    typealias CompletionHandler = (Data?, URLResponse?, Swift.Error?) -> Void
+
+    private var taskData: [URLSessionDataTask: Data] = [:]
+    private var taskCompletion: [URLSessionDataTask: CompletionHandler] = [:]
+    private let syncQueue = DispatchQueue(label: "io.filestack.TaskState-sync-queue")
+
+    func getData(for task: URLSessionDataTask) -> Data? {
+        syncQueue.sync { taskData[task] }
+    }
+
+    mutating func setData(for task: URLSessionDataTask, data: Data) {
+        syncQueue.sync { taskData[task] = data }
+    }
+
+    func getCompletion(for task: URLSessionDataTask) -> CompletionHandler? {
+        syncQueue.sync { taskCompletion[task] }
+    }
+
+    mutating func setCompletionHandler(for task: URLSessionDataTask, completionHandler: @escaping CompletionHandler) {
+        syncQueue.sync { taskCompletion[task] = completionHandler }
+    }
+
+    mutating func forget(task: URLSessionDataTask) {
+        syncQueue.sync {
+            taskData.removeValue(forKey: task)
+            taskCompletion.removeValue(forKey: task)
+        }
+    }
+}
+
+
 /// Service used for uploading files.
 @objc(FSUploadService)
 public final class UploadService: NSObject, NetworkingService {
@@ -20,8 +53,7 @@ public final class UploadService: NSObject, NetworkingService {
 
     // MARK: - Private Properties
 
-    private var taskData: [URLSessionDataTask: Data] = [:]
-    private var taskCompletion: [URLSessionDataTask: (Data?, URLResponse?, Swift.Error?) -> Void] = [:]
+    private var taskState = TaskState()
 
     // MARK: - Public Properties
 
@@ -52,10 +84,9 @@ extension UploadService: URLSessionDataDelegate {
         completionHandler(URLSession.ResponseDisposition .allow)
 
         if response.expectedContentLength == 0 || dataTask.error != nil {
-            let completionHandler = taskCompletion[dataTask]
+            let completionHandler = taskState.getCompletion(for: dataTask)
 
-            taskData.removeValue(forKey: dataTask)
-            taskCompletion.removeValue(forKey: dataTask)
+            taskState.forget(task: dataTask)
 
             DispatchQueue.main.async {
                 completionHandler?(nil, response, dataTask.error)
@@ -64,19 +95,18 @@ extension UploadService: URLSessionDataDelegate {
     }
 
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        if var existingData = taskData[dataTask] {
+        if var existingData = taskState.getData(for: dataTask) {
             existingData.append(data)
-            taskData[dataTask] = existingData
+            taskState.setData(for: dataTask, data: existingData)
         } else {
-            taskData[dataTask] = data
+            taskState.setData(for: dataTask, data: data)
         }
 
         if let response = dataTask.response {
-            let data = taskData[dataTask]
-            let completionHandler = taskCompletion[dataTask]
+            let data = taskState.getData(for: dataTask)
+            let completionHandler = taskState.getCompletion(for: dataTask)
 
-            taskData.removeValue(forKey: dataTask)
-            taskCompletion.removeValue(forKey: dataTask)
+            taskState.forget(task: dataTask)
 
             DispatchQueue.main.async {
                 completionHandler?(data, response, dataTask.error)
@@ -107,11 +137,15 @@ extension UploadService {
             defer { try? FileManager.default.removeItem(at: dataURL) }
 
             task = session.uploadTask(with: request, fromFile: dataURL)
-        } else {
-            task = session.uploadTask(with: request, from: data)
-        }
 
-        taskCompletion[task] = completionHandler
+            taskState.setCompletionHandler(for: task, completionHandler: completionHandler)
+        } else {
+            task = session.uploadTask(with: request, from: data) { (data, response, error) in
+                DispatchQueue.main.async {
+                    completionHandler(data, response, error)
+                }
+            }
+        }
 
         if let uploadProgress = uploadProgress {
             var progressObservers: [NSKeyValueObservation] = []
