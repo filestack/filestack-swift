@@ -182,8 +182,12 @@ public extension FileLink {
 
             if let url = url {
                 do {
-                    try FileManager.default.removeItem(at: destinationURL)
+                    if FileManager.default.fileExists(atPath: destinationURL.absoluteString) {
+                        try FileManager.default.removeItem(at: destinationURL)
+                    }
+
                     try FileManager.default.moveItem(at: url, to: destinationURL)
+
                     destURL = destinationURL
                 } catch {
                     err = error
