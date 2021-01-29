@@ -182,7 +182,7 @@ public extension FileLink {
 
             if let url = url {
                 do {
-                    if FileManager.default.fileExists(atPath: destinationURL.absoluteString) {
+                    if FileManager.default.fileExists(atPath: destinationURL.path) {
                         try FileManager.default.removeItem(at: destinationURL)
                     }
 
