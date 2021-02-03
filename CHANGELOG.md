@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.6.1 *(2021-02-03)*
+----------------------------
+- Removed Objective-C code dependency.
+
 Version 2.6.0 *(2021-01-29)*
 ----------------------------
 - Removed dependency on `AlamoFire`.
