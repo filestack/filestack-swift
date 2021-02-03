@@ -66,7 +66,7 @@ public extension AnimateTransform {
     ///
     /// - Parameter value: A `TransformPosition` value.
     @discardableResult
-    @objc func align(_ value: TransformPosition) -> Self {
+    func align(_ value: TransformPosition) -> Self {
         return appending(key: "align", value: value.toArray())
     }
 

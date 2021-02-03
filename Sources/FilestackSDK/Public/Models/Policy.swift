@@ -72,7 +72,7 @@ public class Policy: NSObject {
     }
 
     /// Convenience initializer with expiry time and call permissions.
-    @objc public convenience init(expiry: Date, call: PolicyCall) {
+    public convenience init(expiry: Date, call: PolicyCall) {
         self.init(expiry: expiry,
                   call: call,
                   handle: nil,

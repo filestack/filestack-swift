@@ -156,9 +156,6 @@
 		45825CA02524E38C002F3310 /* Startable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C132524E389002F3310 /* Startable.swift */; };
 		45825CA12524E38C002F3310 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C142524E389002F3310 /* Cancellable.swift */; };
 		45825CA22524E38C002F3310 /* DeferredAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45825C152524E389002F3310 /* DeferredAdd.swift */; };
-		4586F1802524EFF5008F282E /* FSPolicyCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1C2524E389002F3310 /* FSPolicyCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4586F1842524EFF8008F282E /* FSMetadataOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1D2524E389002F3310 /* FSMetadataOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 45825C1E2524E389002F3310 /* FSTransformPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F19E2524F1CF008F282E /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586F1652524EEB8008F282E /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F1C42524FD7E008F282E /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 4586F1C32524FD7E008F282E /* Fixtures */; };
 		4591004A25C1A3DF008187F5 /* URLSession+filestackDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591004925C1A3DF008187F5 /* URLSession+filestackDefault.swift */; };
@@ -310,10 +307,6 @@
 		45825C142524E389002F3310 /* Cancellable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		45825C152524E389002F3310 /* DeferredAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeferredAdd.swift; sourceTree = "<group>"; };
 		45825C172524E389002F3310 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
-		45825C1C2524E389002F3310 /* FSPolicyCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPolicyCall.h; sourceTree = "<group>"; };
-		45825C1D2524E389002F3310 /* FSMetadataOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMetadataOptions.h; sourceTree = "<group>"; };
-		45825C1E2524E389002F3310 /* FSTransformPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTransformPosition.h; sourceTree = "<group>"; };
-		45825C202524E389002F3310 /* ObjcDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcDefs.m; sourceTree = "<group>"; };
 		4586F1652524EEB8008F282E /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		4586F1C32524FD7E008F282E /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 		4591004925C1A3DF008187F5 /* URLSession+filestackDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+filestackDefault.swift"; sourceTree = "<group>"; };
@@ -367,7 +360,6 @@
 			isa = PBXGroup;
 			children = (
 				45825B852524E389002F3310 /* FilestackSDK */,
-				45825C1A2524E389002F3310 /* ObjcDefs */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -625,25 +617,6 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		45825C1A2524E389002F3310 /* ObjcDefs */ = {
-			isa = PBXGroup;
-			children = (
-				45825C1B2524E389002F3310 /* include */,
-				45825C202524E389002F3310 /* ObjcDefs.m */,
-			);
-			path = ObjcDefs;
-			sourceTree = "<group>";
-		};
-		45825C1B2524E389002F3310 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				45825C1D2524E389002F3310 /* FSMetadataOptions.h */,
-				45825C1C2524E389002F3310 /* FSPolicyCall.h */,
-				45825C1E2524E389002F3310 /* FSTransformPosition.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
 		OBJ_162 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -705,9 +678,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4586F19E2524F1CF008F282E /* FilestackSDK.h in Headers */,
-				4586F1802524EFF5008F282E /* FSPolicyCall.h in Headers */,
-				4586F1882524EFFC008F282E /* FSTransformPosition.h in Headers */,
-				4586F1842524EFF8008F282E /* FSMetadataOptions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

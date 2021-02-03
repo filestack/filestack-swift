@@ -12,7 +12,43 @@ import Foundation
 ///
 /// See [Creating Policies](https://www.filestack.com/docs/security/creating-policies) for more
 /// information about policy calls.
-public typealias PolicyCall = FSPolicyCall
+public struct PolicyCall: OptionSet {
+    /// Allows users to upload files.
+    static let pick = PolicyCall(rawValue: 1 << 0)
+
+    /// Allows files to be viewed/accessed.
+    static let read = PolicyCall(rawValue: 1 << 1)
+
+    /// Allows metadata about files to be retrieved.
+    static let stat = PolicyCall(rawValue: 1 << 2)
+
+    /// Allows use of the write function.
+    static let write = PolicyCall(rawValue: 1 << 3)
+
+    /// Allows use of the writeUrl function.
+    static let writeURL = PolicyCall(rawValue: 1 << 4)
+
+    /// Allows files to be written to custom storage.
+    static let store = PolicyCall(rawValue: 1 << 5)
+
+    /// Allows transformation (crop, resize, rotate) of files, also needed for the viewer.
+    static let convert = PolicyCall(rawValue: 1 << 6)
+
+    /// Allows removal of Filestack files.
+    static let remove = PolicyCall(rawValue: 1 << 7)
+
+    /// Allows exif metadata to be accessed.
+    static let exif = PolicyCall(rawValue: 1 << 8)
+
+    /// Allows workflows to be run.
+    static let runWorkflow = PolicyCall(rawValue: 1 << 9)
+
+    public let rawValue: Int
+
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+}
 
 // MARK: - Internal Functions
 
@@ -38,49 +74,17 @@ extension PolicyCall {
 private extension PolicyCall {
     func stringValue() -> String? {
         switch self {
-        case PolicyCall.pick:
-
-            return "pick"
-
-        case PolicyCall.read:
-
-            return "read"
-
-        case PolicyCall.stat:
-
-            return "stat"
-
-        case PolicyCall.write:
-
-            return "write"
-
-        case PolicyCall.writeURL:
-
-            return "write_url"
-
-        case PolicyCall.store:
-
-            return "store"
-
-        case PolicyCall.convert:
-
-            return "convert"
-
-        case PolicyCall.remove:
-
-            return "remove"
-
-        case PolicyCall.exif:
-
-            return "exif"
-
-        case PolicyCall.runWorkflow:
-
-            return "runWorkflow"
-
-        default:
-
-            return nil
+        case .pick: return "pick"
+        case .read: return "read"
+        case .stat: return "stat"
+        case .write: return "write"
+        case .writeURL: return "write_url"
+        case .store: return "store"
+        case .convert: return "convert"
+        case .remove: return "remove"
+        case .exif: return "exif"
+        case .runWorkflow: return "runWorkflow"
+        default: return nil
         }
     }
 }

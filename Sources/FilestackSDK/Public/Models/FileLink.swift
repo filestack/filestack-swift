@@ -127,7 +127,7 @@ public extension FileLink {
     /// - Parameter options: The options that should be included as part of the response.
     /// - Parameter queue: The queue on which the completion handler is dispatched.
     /// - Parameter completionHandler: Adds a handler to be called once the request has finished.
-    @objc func getMetadata(options: MetadataOptions,
+    func getMetadata(options: MetadataOptions,
                            queue: DispatchQueue? = .main,
                            completionHandler: @escaping (JSONResponse) -> Void) {
         let optionQueryItems = options.toArray().map {

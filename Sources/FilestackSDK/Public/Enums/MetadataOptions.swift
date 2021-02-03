@@ -9,7 +9,67 @@
 import Foundation
 
 /// Represents a metadata option.
-public typealias MetadataOptions = FSMetadataOptions
+public struct MetadataOptions: OptionSet {
+    /// Size
+    static let size = MetadataOptions(rawValue: 1 << 0)
+
+    /// MIME Type
+    static let mimeType = MetadataOptions(rawValue: 1 << 1)
+
+    /// Filename
+    static let fileName = MetadataOptions(rawValue: 1 << 2)
+
+    /// Width
+    static let width = MetadataOptions(rawValue: 1 << 3)
+
+    /// Height
+    static let height = MetadataOptions(rawValue: 1 << 4)
+
+    /// Uploaded
+    static let uploaded = MetadataOptions(rawValue: 1 << 5)
+
+    /// Writeable
+    static let writeable = MetadataOptions(rawValue: 1 << 6)
+
+    /// Cloud
+    static let cloud = MetadataOptions(rawValue: 1 << 7)
+
+    /// Source URL
+    static let sourceURL = MetadataOptions(rawValue: 1 << 8)
+
+    /// MD5
+    static let MD5 = MetadataOptions(rawValue: 1 << 9)
+
+    /// SHA224
+    static let SHA224 = MetadataOptions(rawValue: 1 << 10)
+
+    /// SHA256
+    static let SHA256 = MetadataOptions(rawValue: 1 << 11)
+
+    /// SHA384
+    static let SHA384 = MetadataOptions(rawValue: 1 << 12)
+
+    /// SHA512
+    static let SHA512 = MetadataOptions(rawValue: 1 << 13)
+
+    /// Location
+    static let location = MetadataOptions(rawValue: 1 << 14)
+
+    /// Path
+    static let path = MetadataOptions(rawValue: 1 << 15)
+
+    /// Container
+    static let container = MetadataOptions(rawValue: 1 << 16)
+
+    /// Exif
+    static let exif = MetadataOptions(rawValue: 1 << 17)
+
+    public let rawValue: Int
+
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+}
 
 // MARK: - Internal Functions
 
@@ -17,7 +77,7 @@ extension MetadataOptions {
     static func all() -> [MetadataOptions] {
         return [
             .size, .mimeType, .fileName, .width, .height, .uploaded, .writeable, .cloud,.sourceURL, .MD5, .SHA224,
-            .SHA256, .SHA384, .SHA512, .location, .path,.container, .exif,
+            .SHA256, .SHA384, .SHA512, .location, .path, .container, .exif,
         ]
     }
 
@@ -37,25 +97,25 @@ extension MetadataOptions {
 private extension MetadataOptions {
     func stringValue() -> String? {
         switch self {
-        case MetadataOptions.size: return "size"
-        case MetadataOptions.mimeType:return "mimetype"
-        case MetadataOptions.fileName:return "filename"
-        case MetadataOptions.width:return "width"
-        case MetadataOptions.height:return "height"
-        case MetadataOptions.uploaded:return "uploaded"
-        case MetadataOptions.writeable:return "writeable"
-        case MetadataOptions.cloud:return "cloud"
-        case MetadataOptions.sourceURL:return "source_url"
-        case MetadataOptions.MD5:return "md5"
-        case MetadataOptions.SHA224:return "sha224"
-        case MetadataOptions.SHA256:return "sha256"
-        case MetadataOptions.SHA384:return "sha384"
-        case MetadataOptions.SHA512:return "sha512"
-        case MetadataOptions.location:return "location"
-        case MetadataOptions.path:return "path"
-        case MetadataOptions.container:return "container"
-        case MetadataOptions.exif:return "exif"
-        default:return nil
+        case .size: return "size"
+        case .mimeType: return "mimetype"
+        case .fileName: return "filename"
+        case .width: return "width"
+        case .height: return "height"
+        case .uploaded: return "uploaded"
+        case .writeable: return "writeable"
+        case .cloud: return "cloud"
+        case .sourceURL: return "source_url"
+        case .MD5: return "md5"
+        case .SHA224: return "sha224"
+        case .SHA256: return "sha256"
+        case .SHA384: return "sha384"
+        case .SHA512: return "sha512"
+        case .location: return "location"
+        case .path: return "path"
+        case .container: return "container"
+        case .exif: return "exif"
+        default: return nil
         }
     }
 }

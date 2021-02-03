@@ -10,7 +10,31 @@ import Foundation
 import UIKit
 
 /// Represents an image transform position type.
-public typealias TransformPosition = FSTransformPosition
+public struct TransformPosition: OptionSet {
+    /// Top
+    static let top = TransformPosition(rawValue: 1 << 0)
+
+    /// Middle
+    static let middle = TransformPosition(rawValue: 1 << 1)
+
+    /// Bottom
+    static let bottom = TransformPosition(rawValue: 1 << 2)
+
+    /// Left
+    static let left = TransformPosition(rawValue: 1 << 3)
+
+    /// Center
+    static let center = TransformPosition(rawValue: 1 << 4)
+
+    /// Right
+    static let right = TransformPosition(rawValue: 1 << 5)
+
+    public let rawValue: Int
+
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+}
 
 // MARK: - Public Functions
 

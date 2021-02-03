@@ -39,7 +39,7 @@ public extension WatermarkTransform {
     ///
     /// - Parameter value: The position of the overlayed image. These values can be paired as well like position: [.top, .right].
     @discardableResult
-    @objc func position(_ value: TransformPosition) -> Self {
+    func position(_ value: TransformPosition) -> Self {
         return appending(key: "position", value: value.toArray())
     }
 }
