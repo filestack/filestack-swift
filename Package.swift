@@ -12,11 +12,6 @@ let package = Package(
             type: .dynamic,
             targets: ["FilestackSDK"]
         ),
-        .library(
-            name: "ObjcDefs",
-            type: .dynamic,
-            targets: ["ObjcDefs"]
-        ),
     ],
     dependencies: [
         .package(url: "https://github.com/AliSoftware/OHHTTPStubs.git", .upToNextMajor(from: Version(9, 0, 0)))

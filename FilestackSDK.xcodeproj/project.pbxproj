@@ -781,7 +781,6 @@
 			);
 			mainGroup = OBJ_5;
 			packageReferences = (
-				45825B172524DB86002F3310 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				45825B692524E03B002F3310 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 			);
 			productRefGroup = OBJ_217 /* Products */;
@@ -1313,14 +1312,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		45825B172524DB86002F3310 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.9.0;
-			};
-		};
 		45825B692524E03B002F3310 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs.git";
