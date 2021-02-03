@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.6.2 *(2021-02-03)*
+----------------------------
+- Fixed `MetadataOptions`, `PolicyCall`, and `TransformPosition` options visibility.
+
 Version 2.6.1 *(2021-02-03)*
 ----------------------------
 - Removed Objective-C code dependency.
