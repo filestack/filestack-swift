@@ -9,7 +9,6 @@
 import Foundation
 
 /// Crops the image to a specified rectangle.
-@objc(FSCropTransform)
 public class CropTransform: Transform {
     // MARK: - Lifecycle
 
@@ -19,7 +18,7 @@ public class CropTransform: Transform {
     /// - Parameter y: The starting point Y coordinate.
     /// - Parameter width: The output image's width.
     /// - Parameter height: The output image's height.
-    @objc public init(x: Int, y: Int, width: Int, height: Int) {
+    public init(x: Int, y: Int, width: Int, height: Int) {
         super.init(name: "crop")
 
         appending(key: "dim", value: [x, y, width, height])

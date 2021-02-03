@@ -9,12 +9,11 @@
 import Foundation
 
 /// Converts the image to monochrome.
-@objc(FSMonochromeTransform)
 public class MonochromeTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `MonochromeTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "monochrome")
     }
 }

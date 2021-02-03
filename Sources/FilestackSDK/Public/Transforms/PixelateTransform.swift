@@ -9,12 +9,11 @@
 import Foundation
 
 /// Pixelates the image.
-@objc(FSPixelateTransform)
 public class PixelateTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `PixelateTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "pixelate")
     }
 }
@@ -26,7 +25,7 @@ public extension PixelateTransform {
     ///
     /// - Parameter value: Valid range: `2...100`
     @discardableResult
-    @objc func amount(_ value: Int = 2) -> Self {
+    func amount(_ value: Int = 2) -> Self {
         return appending(key: "amount", value: value)
     }
 }

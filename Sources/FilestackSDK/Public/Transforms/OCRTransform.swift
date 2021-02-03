@@ -10,12 +10,11 @@ import Foundation
 
 /// Detects both printed and handwritten texts in images. The result follows the standard JSON format containing all of
 /// the details regarding detected text areas, lines, and words.
-@objc(FSOCRTransform)
 public class OCRTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes an `OCRTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "ocr")
     }
 }

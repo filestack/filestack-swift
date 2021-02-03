@@ -12,7 +12,6 @@ import Foundation
 ///
 /// See [Image Transformations Overview](https://www.filestack.com/docs/image-transformations) for more information
 /// about image transformations.
-@objc(FSTransformable)
 public class Transformable: NSObject {
     // MARK: - Public Properties
 
@@ -88,7 +87,6 @@ public extension Transformable {
     /// Adds a new transformation to the transformation chain.
     ///
     /// - Parameter transform: The `Transform` to add.
-    @objc(add:)
     @discardableResult
     func add(transform: Transform) -> Self {
         transformationTasks.append(transform.task)

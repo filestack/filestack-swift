@@ -9,12 +9,11 @@
 import Foundation
 
 /// Returns the width and height of a given image.
-@objc(FSImageSizeTransform)
 public class ImageSizeTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes an `ImageSizeTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "imagesize")
     }
 }

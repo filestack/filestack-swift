@@ -10,12 +10,11 @@ import Foundation
 
 /// Smartly analyzes a photo and performs color correction and other enhancements to improve the overall quality of the
 /// image.
-@objc(FSEnhanceTransform)
 public class EnhanceTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `EnhanceTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "enhance")
     }
 }
@@ -27,7 +26,7 @@ public extension EnhanceTransform {
     ///
     /// - Parameter value: The preset to use for enhancing the image. Only available on Pro plans or higher.
     @discardableResult
-    @objc func preset(_ value: TransformEnhancePreset) -> Self {
+    func preset(_ value: TransformEnhancePreset) -> Self {
         return appending(key: "preset", value: value)
     }
 }

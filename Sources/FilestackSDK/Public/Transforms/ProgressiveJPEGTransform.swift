@@ -15,12 +15,11 @@ import Foundation
 ///
 /// When progressive JPEGs are received by programs that do not support them (such as versions of Internet
 /// Explorer before Windows 7) the software displays the image only after it has been completely downloaded.
-@objc(FSProgressiveJpegTransform)
 public class ProgressiveJPEGTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `ProgressiveJPEGTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "pjpg")
     }
 }
@@ -32,7 +31,7 @@ public extension ProgressiveJPEGTransform {
     ///
     /// - Parameter value: You can set the quality of output file. Valid range: `1...100`
     @discardableResult
-    @objc func quality(_ value: Int) -> Self {
+    func quality(_ value: Int) -> Self {
         return appending(key: "quality", value: value)
     }
 
@@ -40,7 +39,7 @@ public extension ProgressiveJPEGTransform {
     ///
     /// - Parameter value: Sets if we want to keep metadata while cnverting.
     @discardableResult
-    @objc func metadata(_ value: Bool) -> Self {
+    func metadata(_ value: Bool) -> Self {
         return appending(key: "metadata", value: value)
     }
 }

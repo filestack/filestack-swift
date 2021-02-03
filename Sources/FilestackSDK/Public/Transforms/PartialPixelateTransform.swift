@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 /// Changes image brightness, saturation and hue.
-@objc(FSPartialPixelateTransform)
 public class PartialPixelateTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `PartialPixelateTransform` object.
-    @objc public init(objects: [CGRect]) {
+    public init(objects: [CGRect]) {
         super.init(name: "partial_pixelate")
 
         let values = objects.map {
@@ -33,7 +32,7 @@ public extension PartialPixelateTransform {
     ///
     /// - Parameter value: Valid range: `2...100`
     @discardableResult
-    @objc func amount(_ value: Int) -> Self {
+    func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 
@@ -41,7 +40,7 @@ public extension PartialPixelateTransform {
     ///
     /// - Parameter value: The amount to blur the pixelated faces. Valid range: `0...20`
     @discardableResult
-    @objc func blur(_ value: Float) -> Self {
+    func blur(_ value: Float) -> Self {
         return appending(key: "blur", value: value)
     }
 
@@ -49,7 +48,7 @@ public extension PartialPixelateTransform {
     ///
     /// - Parameter value: An `TransformShapeType` value.
     @discardableResult
-    @objc func type(_ value: TransformShapeType) -> Self {
+    func type(_ value: TransformShapeType) -> Self {
         return appending(key: "type", value: value)
     }
 }

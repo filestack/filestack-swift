@@ -9,12 +9,11 @@
 import Foundation
 
 /// Pixelates selected faces contained inside an image.
-@objc(FSPixelateFacesTransform)
 public class PixelateFacesTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `PixelateFacesTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "pixelate_faces")
     }
 }
@@ -26,7 +25,7 @@ public extension PixelateFacesTransform {
     ///
     /// - Parameter value: Valid range: `2...100`
     @discardableResult
-    @objc func amount(_ value: Int = 10) -> Self {
+    func amount(_ value: Int = 10) -> Self {
         return appending(key: "amount", value: value)
     }
 
@@ -34,7 +33,7 @@ public extension PixelateFacesTransform {
     ///
     /// - Parameter value: An `TransformShapeType` value.
     @discardableResult
-    @objc func type(_ value: TransformShapeType) -> Self {
+    func type(_ value: TransformShapeType) -> Self {
         return appending(key: "type", value: value)
     }
 
@@ -43,7 +42,7 @@ public extension PixelateFacesTransform {
     /// - Parameter value: This parameter is used to weed out objects that most likely
     /// are not faces. Valid range: `0.01...10000`
     @discardableResult
-    @objc func minSize(_ value: Float) -> Self {
+    func minSize(_ value: Float) -> Self {
         return appending(key: "minsize", value: value)
     }
 
@@ -52,7 +51,7 @@ public extension PixelateFacesTransform {
     /// - Parameter value: This parameter is used to weed out objects that most likely
     /// are not faces. Valid range: `0.01...10000`
     @discardableResult
-    @objc func maxSize(_ value: Float) -> Self {
+    func maxSize(_ value: Float) -> Self {
         return appending(key: "maxsize", value: value)
     }
 
@@ -61,7 +60,7 @@ public extension PixelateFacesTransform {
     /// - Parameter value: Adjusts the buffer around the face object as a percentage of
     /// the original object. Valid range: `0...1000`
     @discardableResult
-    @objc func buffer(_ value: Int) -> Self {
+    func buffer(_ value: Int) -> Self {
         return appending(key: "buffer", value: value)
     }
 
@@ -69,13 +68,13 @@ public extension PixelateFacesTransform {
     ///
     /// - Parameter value: The amount to blur the pixelated faces. Valid range: `0...20`
     @discardableResult
-    @objc func blur(_ value: Float) -> Self {
+    func blur(_ value: Float) -> Self {
         return appending(key: "blur", value: value)
     }
 
     /// Adds the `faces` option with value `all`.
     @discardableResult
-    @objc func allFaces() -> Self {
+    func allFaces() -> Self {
         return appending(key: "faces", value: "all")
     }
 
@@ -83,7 +82,7 @@ public extension PixelateFacesTransform {
     ///
     /// - Parameter value: The faces to be included in the crop.
     @discardableResult
-    @objc func faces(_ value: [Int]) -> Self {
+    func faces(_ value: [Int]) -> Self {
         return appending(key: "faces", value: value)
     }
 }

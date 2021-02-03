@@ -9,12 +9,11 @@
 import Foundation
 
 /// Minifies your JavaScript files.
-@objc(FSMinifyJSTransform)
 public class MinifyJSTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `MinifyJSTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "minify_js")
     }
 }
@@ -26,7 +25,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `booleans` option or not.
     @discardableResult
-    @objc func booleans(_ value: Bool) -> Self {
+    func booleans(_ value: Bool) -> Self {
         return appending(key: "booleans", value: value)
     }
 
@@ -34,7 +33,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `builtIns` option or not.
     @discardableResult
-    @objc func builtIns(_ value: Bool) -> Self {
+    func builtIns(_ value: Bool) -> Self {
         return appending(key: "builtIns", value: value)
     }
 
@@ -42,7 +41,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `consecutiveAdds` option or not.
     @discardableResult
-    @objc func consecutiveAdds(_ value: Bool) -> Self {
+    func consecutiveAdds(_ value: Bool) -> Self {
         return appending(key: "consecutiveAdds", value: value)
     }
 
@@ -50,7 +49,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `deadcode` option or not.
     @discardableResult
-    @objc func deadcode(_ value: Bool) -> Self {
+    func deadcode(_ value: Bool) -> Self {
         return appending(key: "deadcode", value: value)
     }
 
@@ -58,7 +57,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `evaluate` option or not.
     @discardableResult
-    @objc func evaluate(_ value: Bool) -> Self {
+    func evaluate(_ value: Bool) -> Self {
         return appending(key: "evaluate", value: value)
     }
 
@@ -66,7 +65,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `flipComparisons` option or not.
     @discardableResult
-    @objc func flipComparisons(_ value: Bool) -> Self {
+    func flipComparisons(_ value: Bool) -> Self {
         return appending(key: "flipComparisons", value: value)
     }
 
@@ -74,7 +73,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `guards` option or not.
     @discardableResult
-    @objc func guards(_ value: Bool) -> Self {
+    func guards(_ value: Bool) -> Self {
         return appending(key: "guards", value: value)
     }
 
@@ -82,7 +81,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `infinity` option or not.
     @discardableResult
-    @objc func infinity(_ value: Bool) -> Self {
+    func infinity(_ value: Bool) -> Self {
         return appending(key: "infinity", value: value)
     }
 
@@ -90,7 +89,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `mangle` option or not.
     @discardableResult
-    @objc func mangle(_ value: Bool) -> Self {
+    func mangle(_ value: Bool) -> Self {
         return appending(key: "mangle", value: value)
     }
 
@@ -98,7 +97,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `memberExpressions` option or not.
     @discardableResult
-    @objc func memberExpressions(_ value: Bool) -> Self {
+    func memberExpressions(_ value: Bool) -> Self {
         return appending(key: "memberExpressions", value: value)
     }
 
@@ -106,7 +105,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `mergeVars` option or not.
     @discardableResult
-    @objc func mergeVars(_ value: Bool) -> Self {
+    func mergeVars(_ value: Bool) -> Self {
         return appending(key: "mergeVars", value: value)
     }
 
@@ -114,7 +113,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `numericLiterals` option or not.
     @discardableResult
-    @objc func numericLiterals(_ value: Bool) -> Self {
+    func numericLiterals(_ value: Bool) -> Self {
         return appending(key: "numericLiterals", value: value)
     }
 
@@ -122,7 +121,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `propertyLiterals` option or not.
     @discardableResult
-    @objc func propertyLiterals(_ value: Bool) -> Self {
+    func propertyLiterals(_ value: Bool) -> Self {
         return appending(key: "propertyLiterals", value: value)
     }
 
@@ -130,7 +129,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `regexpConstructors` option or not.
     @discardableResult
-    @objc func regexpConstructors(_ value: Bool) -> Self {
+    func regexpConstructors(_ value: Bool) -> Self {
         return appending(key: "regexpConstructors", value: value)
     }
 
@@ -138,7 +137,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `removeConsole` option or not.
     @discardableResult
-    @objc func removeConsole(_ value: Bool) -> Self {
+    func removeConsole(_ value: Bool) -> Self {
         return appending(key: "removeConsole", value: value)
     }
 
@@ -146,7 +145,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `removeDebugger` option or not.
     @discardableResult
-    @objc func removeDebugger(_ value: Bool) -> Self {
+    func removeDebugger(_ value: Bool) -> Self {
         return appending(key: "removeDebugger", value: value)
     }
 
@@ -154,7 +153,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `removeUndefined` option or not.
     @discardableResult
-    @objc func removeUndefined(_ value: Bool) -> Self {
+    func removeUndefined(_ value: Bool) -> Self {
         return appending(key: "removeUndefined", value: value)
     }
 
@@ -162,7 +161,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `simplify` option or not.
     @discardableResult
-    @objc func simplify(_ value: Bool) -> Self {
+    func simplify(_ value: Bool) -> Self {
         return appending(key: "simplify", value: value)
     }
 
@@ -170,7 +169,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `simplifyComparisons` option or not.
     @discardableResult
-    @objc func simplifyComparisons(_ value: Bool) -> Self {
+    func simplifyComparisons(_ value: Bool) -> Self {
         return appending(key: "simplifyComparisons", value: value)
     }
 
@@ -178,7 +177,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `typeConstructors` option or not.
     @discardableResult
-    @objc func typeConstructors(_ value: Bool) -> Self {
+    func typeConstructors(_ value: Bool) -> Self {
         return appending(key: "typeConstructors", value: value)
     }
 
@@ -186,7 +185,7 @@ public extension MinifyJSTransform {
     ///
     /// - Parameter value: Whether to enable `undefinedToVoid` option or not.
     @discardableResult
-    @objc func undefinedToVoid(_ value: Bool) -> Self {
+    func undefinedToVoid(_ value: Bool) -> Self {
         return appending(key: "undefinedToVoid", value: value)
     }
 }

@@ -9,12 +9,11 @@
 import Foundation
 
 /// Converts a set of images to a GIF file.
-@objc(FSAnimateTransform)
 public class AnimateTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes an `AnimateTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "animate")
     }
 }
@@ -26,7 +25,7 @@ public extension AnimateTransform {
     ///
     /// - Parameter value: The delay between frames (in milliseconds). Valid range: `1...1000`
     @discardableResult
-    @objc func delay(_ value: Int) -> Self {
+    func delay(_ value: Int) -> Self {
         return appending(key: "delay", value: value)
     }
 
@@ -34,7 +33,7 @@ public extension AnimateTransform {
     ///
     /// - Parameter value: How many times images should be displayed. Use 0 to loop forever.
     @discardableResult
-    @objc func loop(_ value: Int) -> Self {
+    func loop(_ value: Int) -> Self {
         return appending(key: "loop", value: value)
     }
 
@@ -42,7 +41,7 @@ public extension AnimateTransform {
     ///
     /// - Parameter value: The new width in pixels. Valid range: `1...10000`
     @discardableResult
-    @objc func width(_ value: Int) -> Self {
+    func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -50,7 +49,7 @@ public extension AnimateTransform {
     ///
     /// - Parameter value: The new height in pixels. Valid range: `1...10000`
     @discardableResult
-    @objc func height(_ value: Int) -> Self {
+    func height(_ value: Int) -> Self {
         return appending(key: "height", value: value)
     }
 
@@ -58,7 +57,7 @@ public extension AnimateTransform {
     ///
     /// - Parameter value: A `TransformFit` value.
     @discardableResult
-    @objc func fit(_ value: TransformFit) -> Self {
+    func fit(_ value: TransformFit) -> Self {
         return appending(key: "fit", value: value)
     }
 
@@ -74,7 +73,7 @@ public extension AnimateTransform {
     ///
     /// - Parameter value: A color such as `transparent`, `black`, `white`, `red`, etc.
     @discardableResult
-    @objc func background(_ value: String) -> Self {
+    func background(_ value: String) -> Self {
         return appending(key: "background", value: value)
     }
 }

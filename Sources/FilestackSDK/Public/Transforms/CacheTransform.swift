@@ -9,12 +9,11 @@
 import Foundation
 
 /// Takes the file or files that are passed into it and compresses them into a zip file.
-@objc(FSCacheTransform)
 public class CacheTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `CacheTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "cache")
     }
 }
@@ -28,7 +27,7 @@ public extension CacheTransform {
     /// This setting is only recommended for testing purposes because every time a URL using cache=false loads,
     /// it will count against your conversion quota.
     @discardableResult
-    @objc func turnOff() -> Self {
+    func turnOff() -> Self {
         removeAllOptions()
         return appending(key: "false", value: nil)
     }
@@ -37,7 +36,7 @@ public extension CacheTransform {
     ///
     /// - Parameter value: Set the length in seconds to cache the file for. Valid range: 1...31536000
     @discardableResult
-    @objc func expiry(_ value: Int) -> Self {
+    func expiry(_ value: Int) -> Self {
         return appending(key: "expiry", value: value)
     }
 
@@ -45,7 +44,7 @@ public extension CacheTransform {
     ///
     /// Set the maximum length (1 year) to cache the file for.
     @discardableResult
-    @objc func maxExpiry() -> Self {
+    func maxExpiry() -> Self {
         return appending(key: "expiry", value: "max")
     }
 }

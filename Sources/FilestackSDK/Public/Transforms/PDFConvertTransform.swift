@@ -9,12 +9,11 @@
 import Foundation
 
 /// Converts a PDF to a specific orientation, page format, and, optionally, extracts specific pages.
-@objc(FSPDFConvertTransform)
 public class PDFConvertTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `PDFConvertTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "pdfconvert")
     }
 }
@@ -26,7 +25,7 @@ public extension PDFConvertTransform {
     ///
     /// - Parameter value: A `TransformPageOrientation` value.
     @discardableResult
-    @objc func pageOrientation(_ value: TransformPageOrientation) -> Self {
+    func pageOrientation(_ value: TransformPageOrientation) -> Self {
         return appending(key: "pageorientation", value: value)
     }
 
@@ -34,7 +33,7 @@ public extension PDFConvertTransform {
     ///
     /// - Parameter value: A `TransformPageFormat` value.
     @discardableResult
-    @objc func pageFormat(_ value: TransformPageFormat) -> Self {
+    func pageFormat(_ value: TransformPageFormat) -> Self {
         return appending(key: "pageformat", value: value)
     }
 
@@ -42,7 +41,7 @@ public extension PDFConvertTransform {
     ///
     /// - Parameter value: An array of page numbers.
     @discardableResult
-    @objc func pages(_ value: [Int]) -> Self {
+    func pages(_ value: [Int]) -> Self {
         return appending(key: "pages", value: value)
     }
 }

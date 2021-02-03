@@ -10,12 +10,11 @@ import Foundation
 
 /// Changes encoding of the image based on the user agent and therefore provides better compression and quality
 /// characteristics compared to their older JPEG and PNG counterparts.
-@objc(FSAutoImageTransform)
 public class AutoImageTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes an `AutoImageTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "auto_image")
     }
 }

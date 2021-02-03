@@ -11,12 +11,11 @@ import Foundation
 /// Captures content of given URL.
 /// The URL screenshot task will not work for content that is located in areas that require you to login.
 /// If the content is not publicly visible, then it will not be captured.
-@objc(FSURLScreenshotTransform)
 public class URLScreenshotTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `URLScreenshotTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "urlscreenshot")
     }
 }
@@ -26,13 +25,13 @@ public class URLScreenshotTransform: Transform {
 public extension URLScreenshotTransform {
     /// Changes the `agent` option from `desktop` to `mobile`.
     @discardableResult
-    @objc func mobileAgent() -> Self {
+    func mobileAgent() -> Self {
         return appending(key: "agent", value: "mobile")
     }
 
     /// Changes the `mode` option from `all` to `window`.
     @discardableResult
-    @objc func windowMode() -> Self {
+    func windowMode() -> Self {
         return appending(key: "mode", value: "window")
     }
 
@@ -40,7 +39,7 @@ public extension URLScreenshotTransform {
     ///
     /// - Parameter value: The new width in pixels. Valid range: `1...10000`
     @discardableResult
-    @objc func width(_ value: Int) -> Self {
+    func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -48,7 +47,7 @@ public extension URLScreenshotTransform {
     ///
     /// - Parameter value: The new height in pixels. Valid range: `1...10000`
     @discardableResult
-    @objc func height(_ value: Int) -> Self {
+    func height(_ value: Int) -> Self {
         return appending(key: "height", value: value)
     }
 
@@ -56,7 +55,7 @@ public extension URLScreenshotTransform {
     ///
     /// - Parameter value: Delay after which screenshot will be captured. Valid range: `1...20000`
     @discardableResult
-    @objc func delay(_ value: Int) -> Self {
+    func delay(_ value: Int) -> Self {
         return appending(key: "delay", value: value)
     }
 
@@ -64,7 +63,7 @@ public extension URLScreenshotTransform {
     ///
     /// - Parameter value: Orientation for which screenshot will be captured.
     @discardableResult
-    @objc func orientation(_ value: TransformPageOrientation) -> Self {
+    func orientation(_ value: TransformPageOrientation) -> Self {
         return appending(key: "orientation", value: value)
     }
 
@@ -72,7 +71,7 @@ public extension URLScreenshotTransform {
     ///
     /// - Parameter value: Device for which screenshot will be captured.
     @discardableResult
-    @objc func device(_ value: String) -> Self {
+    func device(_ value: String) -> Self {
         return appending(key: "device", value: value)
     }
 }

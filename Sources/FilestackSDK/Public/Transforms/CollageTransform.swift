@@ -13,7 +13,6 @@ import UIKit
 /// These files are appended in given order to the base file of the transformation URL.
 /// Altogther the base image and the passed files are the images that will comprise the collage.
 /// The order in which they are added dictates how the images will be arranged.
-@objc(FSCollageTransform)
 public class CollageTransform: Transform {
     // MARK: - Lifecycle
 
@@ -36,7 +35,7 @@ public extension CollageTransform {
     ///
     /// - Parameter value: Valid range: `1...100`
     @discardableResult
-    @objc func margin(_ value: Int) -> Self {
+    func margin(_ value: Int) -> Self {
         return appending(key: "margin", value: value)
     }
 
@@ -44,19 +43,19 @@ public extension CollageTransform {
     ///
     /// - Parameter value: Sets the background color to display behind the images.
     @discardableResult
-    @objc func color(_ value: UIColor) -> Self {
+    func color(_ value: UIColor) -> Self {
         return appending(key: "color", value: value.hexString)
     }
 
     /// Changes the `fit` option to every image from `auto` to `crop`.
     @discardableResult
-    @objc func cropFit() -> Self {
+    func cropFit() -> Self {
         return appending(key: "fit", value: TransformFit.crop)
     }
 
     /// Adds the `autorotate` option.
     @discardableResult
-    @objc func autorotate() -> Self {
+    func autorotate() -> Self {
         return appending(key: "autorotate", value: true)
     }
 }

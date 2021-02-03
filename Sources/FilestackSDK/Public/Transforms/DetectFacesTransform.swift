@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 /// Detects the faces contained inside an image.
-@objc(FSDetectFacesTransform)
 public class DetectFacesTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `DetectFacesTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "detect_faces")
     }
 }
@@ -28,7 +27,7 @@ public extension DetectFacesTransform {
     /// - Parameter value: This parameter is used to weed out objects that most likely
     /// are not faces. Valid range: `0.01...10000`
     @discardableResult
-    @objc func minSize(_ value: Float) -> Self {
+    func minSize(_ value: Float) -> Self {
         return appending(key: "minsize", value: value)
     }
 
@@ -37,7 +36,7 @@ public extension DetectFacesTransform {
     /// - Parameter value: This parameter is used to weed out objects that most likely
     /// are not faces. Valid range: `0.01...10000`
     @discardableResult
-    @objc func maxSize(_ value: Float) -> Self {
+    func maxSize(_ value: Float) -> Self {
         return appending(key: "maxsize", value: value)
     }
 
@@ -45,7 +44,7 @@ public extension DetectFacesTransform {
     ///
     /// - Parameter value: Will change the color of the "face object" boxes and text.
     @discardableResult
-    @objc func color(_ value: UIColor) -> Self {
+    func color(_ value: UIColor) -> Self {
         return appending(key: "color", value: value.hexString)
     }
 
@@ -53,7 +52,7 @@ public extension DetectFacesTransform {
     ///
     /// - Parameter value: If true, it will export all face objects to a JSON object.
     @discardableResult
-    @objc func export(_ value: Bool) -> Self {
+    func export(_ value: Bool) -> Self {
         return appending(key: "export", value: value)
     }
 }

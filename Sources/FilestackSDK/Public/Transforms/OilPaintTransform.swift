@@ -9,12 +9,11 @@
 import Foundation
 
 /// Change the image to look like it was oil painted.
-@objc(FSOilPaintTransform)
 public class OilPaintTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes an `OilPaintTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "oil_paint")
     }
 }
@@ -26,7 +25,7 @@ public extension OilPaintTransform {
     ///
     /// - Parameter value: Valid range: `2...100`
     @discardableResult
-    @objc func amount(_ value: Int) -> Self {
+    func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 }

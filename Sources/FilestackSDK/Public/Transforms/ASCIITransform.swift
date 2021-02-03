@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 /// Converts the image to black and white.
-@objc(FSASCIITransform)
 public class ASCIITransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes an `ASCIITransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "ascii")
     }
 }
@@ -27,7 +26,7 @@ public extension ASCIITransform {
     ///
     /// - Parameter value: Sets the background color to display behind the image.
     @discardableResult
-    @objc func background(_ value: UIColor) -> Self {
+    func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 
@@ -35,7 +34,7 @@ public extension ASCIITransform {
     ///
     /// - Parameter value: Sets the foreground color to display behind the image.
     @discardableResult
-    @objc func foreground(_ value: UIColor) -> Self {
+    func foreground(_ value: UIColor) -> Self {
         return appending(key: "foreground", value: value.hexString)
     }
 
@@ -43,7 +42,7 @@ public extension ASCIITransform {
     ///
     /// Sets output as colored.
     @discardableResult
-    @objc func colored() -> Self {
+    func colored() -> Self {
         return appending(key: "colored", value: true)
     }
 
@@ -52,13 +51,13 @@ public extension ASCIITransform {
     /// - Parameter value: The size of the overlayed image as a percentage of its original size.
     /// Valid range: `10...100`
     @discardableResult
-    @objc func size(_ value: Int) -> Self {
+    func size(_ value: Int) -> Self {
         return appending(key: "size", value: value)
     }
 
     /// Reverses the character set used to generate the ASCII output. Works well with dark backgrounds.
     @discardableResult
-    @objc func reverse() -> Self {
+    func reverse() -> Self {
         return colored().appending(key: "reverse", value: true)
     }
 }

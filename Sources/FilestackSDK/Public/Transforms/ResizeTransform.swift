@@ -9,12 +9,11 @@
 import Foundation
 
 /// Resizes the image to a given width and height using a particular fit and alignment mode.
-@objc(FSResizeTransform)
 public class ResizeTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `ResizeTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "resize")
     }
 }
@@ -26,7 +25,7 @@ public extension ResizeTransform {
     ///
     /// - Parameter value: The new width in pixels. Valid range: `1...10000`
     @discardableResult
-    @objc func width(_ value: Int) -> Self {
+    func width(_ value: Int) -> Self {
         return appending(key: "width", value: value)
     }
 
@@ -34,7 +33,7 @@ public extension ResizeTransform {
     ///
     /// - Parameter value: The new height in pixels. Valid range: `1...10000`
     @discardableResult
-    @objc func height(_ value: Int) -> Self {
+    func height(_ value: Int) -> Self {
         return appending(key: "height", value: value)
     }
 
@@ -42,7 +41,7 @@ public extension ResizeTransform {
     ///
     /// - Parameter value: An `TransformFit` value.
     @discardableResult
-    @objc func fit(_ value: TransformFit) -> Self {
+    func fit(_ value: TransformFit) -> Self {
         return appending(key: "fit", value: value)
     }
 
@@ -50,7 +49,7 @@ public extension ResizeTransform {
     ///
     /// - Parameter value: An `TransformAlign` value.
     @discardableResult
-    @objc func align(_ value: TransformAlign) -> Self {
+    func align(_ value: TransformAlign) -> Self {
         return appending(key: "align", value: value)
     }
 }

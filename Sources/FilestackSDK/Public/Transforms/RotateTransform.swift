@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 /// Rotates an image in a range from 0 to 359 degrees or based on Exif information.
-@objc(FSRotateTransform)
 public class RotateTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `RotateTransform` object with rotation based on Exif information.
-    @objc public init() {
+    public init() {
         super.init(name: "rotate")
 
         appending(key: "deg", value: "exif")
@@ -24,7 +23,7 @@ public class RotateTransform: Transform {
     /// Initializes a `RotateTransform` object using a given rotation degree.
     ///
     /// - Parameter deg: The rotation angle in degrees. Valid range: `0...359`
-    @objc public init(deg: Int) {
+    public init(deg: Int) {
         super.init(name: "rotate")
 
         appending(key: "deg", value: deg)
@@ -41,7 +40,7 @@ public extension RotateTransform {
     /// EXIF orientations. The image will behave as though it is contained in an html img tag
     /// if displayed in an application that supports Exif orientations.
     @discardableResult
-    @objc func exif(_ value: Bool) -> Self {
+    func exif(_ value: Bool) -> Self {
         return appending(key: "exif", value: value)
     }
 
@@ -49,7 +48,7 @@ public extension RotateTransform {
     ///
     /// - Parameter value: The background color to display if the image is rotated less than a full 90 degrees.
     @discardableResult
-    @objc func background(_ value: UIColor) -> Self {
+    func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }

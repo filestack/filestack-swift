@@ -30,12 +30,11 @@ import Foundation
 ///     }
 /// }
 /// ```
-@objc(FSTagsTransform)
 public class TagsTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `TagsTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "tags")
     }
 }

@@ -9,12 +9,11 @@
 import Foundation
 
 /// Takes the file or files that are passed into it and compresses them into a zip file.
-@objc(FSZipTransform)
 public class ZipTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `ZipTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "zip")
     }
 }

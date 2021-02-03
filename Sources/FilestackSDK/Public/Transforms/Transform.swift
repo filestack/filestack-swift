@@ -12,8 +12,7 @@ typealias TaskOption = (key: String, value: Any?)
 typealias Task = (name: String, options: [TaskOption]?)
 
 /// :nodoc:
-@objc(FSTransform)
-public class Transform: NSObject {
+public class Transform {
     // MARK: - Internal Properties
 
     var task: Task { Task(name: name, options: options) }

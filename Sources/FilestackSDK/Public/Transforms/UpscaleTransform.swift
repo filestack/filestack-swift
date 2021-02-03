@@ -9,12 +9,11 @@
 import Foundation
 
 /// Upscales the image making it two times bigger.
-@objc(FSUpscaleTransform)
 public class UpscaleTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes an `UpscaleTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "upscale")
     }
 }
@@ -24,7 +23,7 @@ public class UpscaleTransform: Transform {
 public extension UpscaleTransform {
     /// Turns off resizing of image.
     @discardableResult
-    @objc func noUpscale() -> Self {
+    func noUpscale() -> Self {
         return appending(key: "upscale", value: false)
     }
 
@@ -32,7 +31,7 @@ public extension UpscaleTransform {
     ///
     /// - Parameter value: An `TransformNoiseMode` value.
     @discardableResult
-    @objc func noise(_ value: TransformNoiseMode) -> Self {
+    func noise(_ value: TransformNoiseMode) -> Self {
         return appending(key: "noise", value: value)
     }
 
@@ -40,7 +39,7 @@ public extension UpscaleTransform {
     ///
     /// - Parameter value: An `TransformStyleMode` value.
     @discardableResult
-    @objc func style(_ value: TransformStyleMode) -> Self {
+    func style(_ value: TransformStyleMode) -> Self {
         return appending(key: "style", value: value)
     }
 }

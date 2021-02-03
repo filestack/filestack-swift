@@ -14,12 +14,11 @@ import Foundation
 /// For the best results, compress should be the last task in your transformation chain.
 ///
 /// - Important: Works only with PNG and JPG files.
-@objc(FSCompressTransform)
 public class CompressTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `CompressTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "compress")
     }
 }
@@ -31,7 +30,7 @@ public extension CompressTransform {
     ///
     /// - Parameter value: Sets if we want to keep metadata while compressing.
     @discardableResult
-    @objc func metadata(_ value: Bool) -> Self {
+    func metadata(_ value: Bool) -> Self {
         return appending(key: "metadata", value: value)
     }
 }

@@ -9,12 +9,11 @@
 import Foundation
 
 /// Minifies your CSS files.
-@objc(FSMinifyCSSTransform)
 public class MinifyCSSTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `MinifyCSSTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "minify_css")
     }
 }
@@ -26,7 +25,7 @@ public extension MinifyCSSTransform {
     ///
     /// - Parameter value: Minification level.
     @discardableResult
-    @objc func level(_ value: Int) -> Self {
+    func level(_ value: Int) -> Self {
         return appending(key: "level", value: value)
     }
 
@@ -34,7 +33,7 @@ public extension MinifyCSSTransform {
     ///
     /// - Parameter value: Whether to compress file and add content encoding gzip header.
     @discardableResult
-    @objc func gzip(_ value: Bool) -> Self {
+    func gzip(_ value: Bool) -> Self {
         return appending(key: "gzip", value: value)
     }
 }

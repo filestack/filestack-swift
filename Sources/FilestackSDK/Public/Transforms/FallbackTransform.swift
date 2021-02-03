@@ -9,12 +9,11 @@
 import Foundation
 
 /// Returns default file if the source of the transformation does not work or the transformation fails.
-@objc(FSFallbackTransform)
 public class FallbackTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `FallbackTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "fallback")
     }
 }
@@ -26,7 +25,7 @@ public extension FallbackTransform {
     ///
     /// - Parameter value: the HANDLE of the file that should be returned.
     @discardableResult
-    @objc func handle(_ value: String) -> Self {
+    func handle(_ value: String) -> Self {
         return appending(key: "handle", value: value)
     }
 
@@ -34,7 +33,7 @@ public extension FallbackTransform {
     ///
     /// - Parameter value: The number of seconds fallback response should be cached in CDN.
     @discardableResult
-    @objc func cache(_ value: Int) -> Self {
+    func cache(_ value: Int) -> Self {
         return appending(key: "cache", value: value)
     }
 }

@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 /// Applies a vignette border effect to the image.
-@objc(FSVignetteTransform)
 public class VignetteTransform: Transform {
     // MARK: - Lifecycle
 
     /// Initializes a `VignetteTransform` object.
-    @objc public init() {
+    public init() {
         super.init(name: "vignette")
     }
 }
@@ -27,7 +26,7 @@ public extension VignetteTransform {
     ///
     /// - Parameter value: Controls the opacity of the vignette effect. Valid range: `0...100`
     @discardableResult
-    @objc func amount(_ value: Int) -> Self {
+    func amount(_ value: Int) -> Self {
         return appending(key: "amount", value: value)
     }
 
@@ -35,7 +34,7 @@ public extension VignetteTransform {
     ///
     /// - Parameter value: An `TransformBlurMode` value.
     @discardableResult
-    @objc func blurMode(_ value: TransformBlurMode) -> Self {
+    func blurMode(_ value: TransformBlurMode) -> Self {
         return appending(key: "blurmode", value: value)
     }
 
@@ -43,7 +42,7 @@ public extension VignetteTransform {
     ///
     /// - Parameter value: Replaces the default transparent background with the specified color.
     @discardableResult
-    @objc func background(_ value: UIColor) -> Self {
+    func background(_ value: UIColor) -> Self {
         return appending(key: "background", value: value.hexString)
     }
 }
