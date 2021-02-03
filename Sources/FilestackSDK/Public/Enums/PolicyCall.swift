@@ -14,34 +14,34 @@ import Foundation
 /// information about policy calls.
 public struct PolicyCall: OptionSet {
     /// Allows users to upload files.
-    static let pick = PolicyCall(rawValue: 1 << 0)
+    public static let pick = PolicyCall(rawValue: 1 << 0)
 
     /// Allows files to be viewed/accessed.
-    static let read = PolicyCall(rawValue: 1 << 1)
+    public static let read = PolicyCall(rawValue: 1 << 1)
 
     /// Allows metadata about files to be retrieved.
-    static let stat = PolicyCall(rawValue: 1 << 2)
+    public static let stat = PolicyCall(rawValue: 1 << 2)
 
     /// Allows use of the write function.
-    static let write = PolicyCall(rawValue: 1 << 3)
+    public static let write = PolicyCall(rawValue: 1 << 3)
 
     /// Allows use of the writeUrl function.
-    static let writeURL = PolicyCall(rawValue: 1 << 4)
+    public static let writeURL = PolicyCall(rawValue: 1 << 4)
 
     /// Allows files to be written to custom storage.
-    static let store = PolicyCall(rawValue: 1 << 5)
+    public static let store = PolicyCall(rawValue: 1 << 5)
 
     /// Allows transformation (crop, resize, rotate) of files, also needed for the viewer.
-    static let convert = PolicyCall(rawValue: 1 << 6)
+    public static let convert = PolicyCall(rawValue: 1 << 6)
 
     /// Allows removal of Filestack files.
-    static let remove = PolicyCall(rawValue: 1 << 7)
+    public static let remove = PolicyCall(rawValue: 1 << 7)
 
     /// Allows exif metadata to be accessed.
-    static let exif = PolicyCall(rawValue: 1 << 8)
+    public static let exif = PolicyCall(rawValue: 1 << 8)
 
     /// Allows workflows to be run.
-    static let runWorkflow = PolicyCall(rawValue: 1 << 9)
+    public static let runWorkflow = PolicyCall(rawValue: 1 << 9)
 
     public let rawValue: Int
 

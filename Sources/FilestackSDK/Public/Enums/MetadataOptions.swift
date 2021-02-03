@@ -11,58 +11,58 @@ import Foundation
 /// Represents a metadata option.
 public struct MetadataOptions: OptionSet {
     /// Size
-    static let size = MetadataOptions(rawValue: 1 << 0)
+    public static let size = MetadataOptions(rawValue: 1 << 0)
 
     /// MIME Type
-    static let mimeType = MetadataOptions(rawValue: 1 << 1)
+    public static let mimeType = MetadataOptions(rawValue: 1 << 1)
 
     /// Filename
-    static let fileName = MetadataOptions(rawValue: 1 << 2)
+    public static let fileName = MetadataOptions(rawValue: 1 << 2)
 
     /// Width
-    static let width = MetadataOptions(rawValue: 1 << 3)
+    public static let width = MetadataOptions(rawValue: 1 << 3)
 
     /// Height
-    static let height = MetadataOptions(rawValue: 1 << 4)
+    public static let height = MetadataOptions(rawValue: 1 << 4)
 
     /// Uploaded
-    static let uploaded = MetadataOptions(rawValue: 1 << 5)
+    public static let uploaded = MetadataOptions(rawValue: 1 << 5)
 
     /// Writeable
-    static let writeable = MetadataOptions(rawValue: 1 << 6)
+    public static let writeable = MetadataOptions(rawValue: 1 << 6)
 
     /// Cloud
-    static let cloud = MetadataOptions(rawValue: 1 << 7)
+    public static let cloud = MetadataOptions(rawValue: 1 << 7)
 
     /// Source URL
-    static let sourceURL = MetadataOptions(rawValue: 1 << 8)
+    public static let sourceURL = MetadataOptions(rawValue: 1 << 8)
 
     /// MD5
-    static let MD5 = MetadataOptions(rawValue: 1 << 9)
+    public static let MD5 = MetadataOptions(rawValue: 1 << 9)
 
     /// SHA224
-    static let SHA224 = MetadataOptions(rawValue: 1 << 10)
+    public static let SHA224 = MetadataOptions(rawValue: 1 << 10)
 
     /// SHA256
-    static let SHA256 = MetadataOptions(rawValue: 1 << 11)
+    public static let SHA256 = MetadataOptions(rawValue: 1 << 11)
 
     /// SHA384
-    static let SHA384 = MetadataOptions(rawValue: 1 << 12)
+    public static let SHA384 = MetadataOptions(rawValue: 1 << 12)
 
     /// SHA512
-    static let SHA512 = MetadataOptions(rawValue: 1 << 13)
+    public static let SHA512 = MetadataOptions(rawValue: 1 << 13)
 
     /// Location
-    static let location = MetadataOptions(rawValue: 1 << 14)
+    public static let location = MetadataOptions(rawValue: 1 << 14)
 
     /// Path
-    static let path = MetadataOptions(rawValue: 1 << 15)
+    public static let path = MetadataOptions(rawValue: 1 << 15)
 
     /// Container
-    static let container = MetadataOptions(rawValue: 1 << 16)
+    public static let container = MetadataOptions(rawValue: 1 << 16)
 
     /// Exif
-    static let exif = MetadataOptions(rawValue: 1 << 17)
+    public static let exif = MetadataOptions(rawValue: 1 << 17)
 
     public let rawValue: Int
 

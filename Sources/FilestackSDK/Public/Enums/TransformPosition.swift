@@ -12,22 +12,22 @@ import UIKit
 /// Represents an image transform position type.
 public struct TransformPosition: OptionSet {
     /// Top
-    static let top = TransformPosition(rawValue: 1 << 0)
+    public static let top = TransformPosition(rawValue: 1 << 0)
 
     /// Middle
-    static let middle = TransformPosition(rawValue: 1 << 1)
+    public static let middle = TransformPosition(rawValue: 1 << 1)
 
     /// Bottom
-    static let bottom = TransformPosition(rawValue: 1 << 2)
+    public static let bottom = TransformPosition(rawValue: 1 << 2)
 
     /// Left
-    static let left = TransformPosition(rawValue: 1 << 3)
+    public static let left = TransformPosition(rawValue: 1 << 3)
 
     /// Center
-    static let center = TransformPosition(rawValue: 1 << 4)
+    public static let center = TransformPosition(rawValue: 1 << 4)
 
     /// Right
-    static let right = TransformPosition(rawValue: 1 << 5)
+    public static let right = TransformPosition(rawValue: 1 << 5)
 
     public let rawValue: Int
 
