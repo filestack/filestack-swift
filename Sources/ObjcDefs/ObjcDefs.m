@@ -6,3 +6,7 @@
 //
 //  Created by Ruben Nine on 30/09/2020.
 //
+
+#include "FSMetadataOptions.h"
+#include "FSPolicyCall.h"
+#include "FSTransformPosition.h"
