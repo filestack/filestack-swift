@@ -272,7 +272,11 @@ class FileLinkTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY", security: security)
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
-        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+
+        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true)
+            .appendingPathComponent(UUID().uuidString)
+            .appendingPathExtension("jpg")
+
         var response: FilestackSDK.DownloadResponse?
 
         fileLink.download(destinationURL: destinationURL) { resp in
