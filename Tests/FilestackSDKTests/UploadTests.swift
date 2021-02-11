@@ -359,17 +359,17 @@ class UploadTests: XCTestCase {
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
-                                          deleteTemporaryFilesAfterUpload: false,
+                                          deleteTemporaryFilesAfterUpload: true,
                                           storeOptions: defaultStoreOptions)
 
         let uploader = client.upload(using: temporaryURL, options: uploadOptions) { resp in
             XCTAssertTrue(fm.fileExists(atPath: temporaryURL.path), "File should exist")
 
             response = resp
-            expectation.fulfill()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 XCTAssertFalse(fm.fileExists(atPath: temporaryURL.path), "File should no longer exist")
+                expectation.fulfill()
             }
         }
 
@@ -392,17 +392,17 @@ class UploadTests: XCTestCase {
 
         let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
                                           startImmediately: true,
-                                          deleteTemporaryFilesAfterUpload: false,
+                                          deleteTemporaryFilesAfterUpload: true,
                                           storeOptions: defaultStoreOptions)
 
         let uploader = client.upload(using: largeFileURL, options: uploadOptions) { resp in
             XCTAssertTrue(fm.fileExists(atPath: self.largeFileURL.path), "File should exist")
 
             response = resp
-            expectation.fulfill()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                XCTAssertFalse(fm.fileExists(atPath: self.largeFileURL.path), "File should still exist")
+                XCTAssertTrue(fm.fileExists(atPath: self.largeFileURL.path), "File should still exist")
+                expectation.fulfill()
             }
         }
 
