@@ -107,7 +107,8 @@ private extension UploadOperation {
                         self.executeCompleteOperation(using: partsAndEtags, descriptor: descriptor) { (result) in
                             switch result {
                             case let .success(response):
-                                self.finish(with: .success(response))
+                                let responseWithContext = JSONResponse(response: response, context: self.uploadable)
+                                self.finish(with: .success(responseWithContext))
                             case let .failure(error):
                                 self.finish(with: .failure(error))
                             }

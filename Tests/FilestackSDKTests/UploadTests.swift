@@ -74,6 +74,7 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(response?.json?["status"] as? String, "Stored")
         XCTAssertEqual(response?.json?["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(response?.json?["mimetype"] as? String, "image/jpeg")
+        XCTAssertEqual(response?.context as? URL, largeFileURL)
     }
 
     func testIntelligentMultiPartUpload() {
@@ -84,10 +85,10 @@ class UploadTests: XCTestCase {
         stubMultipartCompleteRequest()
 
         let expectation = self.expectation(description: "request should succeed")
-        var json: [String: Any]!
+        var response: JSONResponse?
 
         let uploader = client.upload(using: largeFileURL) { resp in
-            json = resp.json
+            response = resp
             expectation.fulfill()
         }
 
@@ -98,12 +99,13 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(uploader.progress.fileTotalCount, 1)
         XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
-        XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(json["size"] as? Int, largeFileSize)
-        XCTAssertEqual(json["filename"] as? String, "large.jpg")
-        XCTAssertEqual(json["status"] as? String, "Stored")
-        XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(json["mimetype"] as? String, "image/jpeg")
+        XCTAssertEqual(response?.json?["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(response?.json?["size"] as? Int, largeFileSize)
+        XCTAssertEqual(response?.json?["filename"] as? String, "large.jpg")
+        XCTAssertEqual(response?.json?["status"] as? String, "Stored")
+        XCTAssertEqual(response?.json?["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(response?.json?["mimetype"] as? String, "image/jpeg")
+        XCTAssertEqual(response?.context as? URL, largeFileURL)
     }
 
     func testCancellingResumableMultiPartUpload() {
@@ -114,11 +116,10 @@ class UploadTests: XCTestCase {
         stubMultipartCompleteRequest(requestTime: 5.0, responseTime: 5.0)
 
         let expectation = self.expectation(description: "request should succeed")
-
-        var error: Swift.Error!
+        var response: JSONResponse?
 
         let uploader = client.upload(using: sampleFileURL) { resp in
-            error = resp.error
+            response = resp
             expectation.fulfill()
         }
 
@@ -134,7 +135,8 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
         XCTAssertTrue(uploader.progress.isCancelled)
 
-        XCTAssertNotNil(error)
+        XCTAssertNotNil(response?.error)
+        XCTAssertNil(response?.context)
     }
 
     func testCancellingStartedUploadWithoutUploadablesShouldCallCompletionHandler() {
@@ -212,22 +214,21 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(hitCount, 1)
         XCTAssertNotNil(response?.json)
 
-        let json: [String: Any]! = response?.json
-
         XCTAssertEqual(uploader.progress.totalUnitCount, Int64(largeFileSize))
         XCTAssertEqual(uploader.progress.completedUnitCount, Int64(largeFileSize))
         XCTAssertEqual(uploader.progress.fileTotalCount, 1)
         XCTAssertEqual(uploader.progress.fileCompletedCount, 1)
 
-        XCTAssertEqual(json["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(json["size"] as? Int, largeFileSize)
-        XCTAssertEqual(json["filename"] as? String, "large.jpg")
-        XCTAssertEqual(json["status"] as? String, "Stored")
-        XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
-        XCTAssertEqual(json["mimetype"] as? String, "image/jpeg")
-        XCTAssertEqual(json["upload_tags"] as? [String: String], uploadTags)
+        XCTAssertEqual(response?.json?["handle"] as? String, "6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(response?.json?["size"] as? Int, largeFileSize)
+        XCTAssertEqual(response?.json?["filename"] as? String, "large.jpg")
+        XCTAssertEqual(response?.json?["status"] as? String, "Stored")
+        XCTAssertEqual(response?.json?["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
+        XCTAssertEqual(response?.json?["mimetype"] as? String, "image/jpeg")
+        XCTAssertEqual(response?.json?["upload_tags"] as? [String: String], uploadTags)
+        XCTAssertEqual(response?.context as? URL, largeFileURL)
 
-        let returnedWorkflows: [String: Any]! = json["workflows"] as? [String: Any]
+        let returnedWorkflows: [String: Any]! = response?.json?["workflows"] as? [String: Any]
 
         XCTAssertNotNil(returnedWorkflows["workflow-1"])
         XCTAssertNotNil(returnedWorkflows["workflow-2"])
@@ -270,9 +271,10 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(json["status"] as? String, "Stored")
         XCTAssertEqual(json["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(json["mimetype"] as? String, "image/jpeg")
+        XCTAssertEqual(responses.first!.context as? URL, sampleFileURL)
     }
 
-    func testMultiFileUploadWithFewFile() {
+    func testMultiFileUploadWithFewFiles() {
         var hitCount = 0
         stubRegularMultipartRequest(hitCount: &hitCount)
 
@@ -285,19 +287,21 @@ class UploadTests: XCTestCase {
                                           deleteTemporaryFilesAfterUpload: false,
                                           storeOptions: defaultStoreOptions)
 
-        let uploader = client.upload(using: [sampleFileURL, sampleFileURL], options: uploadOptions) { resp in
+        let uploader = client.upload(using: [sampleFileURL, largeFileURL], options: uploadOptions) { resp in
             responses = resp
             expectation.fulfill()
         }
 
         waitForExpectations(timeout: 15, handler: nil)
 
-        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(sampleFileSize * 2))
-        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(sampleFileSize * 2))
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(sampleFileSize + largeFileSize))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(sampleFileSize + largeFileSize))
         XCTAssertEqual(uploader.progress.fileTotalCount, 2)
         XCTAssertEqual(uploader.progress.fileCompletedCount, 2)
 
         XCTAssertEqual(responses.count, 2)
+        XCTAssertEqual(responses[0].context as? URL, sampleFileURL)
+        XCTAssertEqual(responses[1].context as? URL, largeFileURL)
     }
 
     func testMultiFileUploadWithoutAutostart() {
@@ -318,17 +322,19 @@ class UploadTests: XCTestCase {
             expectation.fulfill()
         }
 
-        uploader.add(uploadables: [sampleFileURL, sampleFileURL])
+        uploader.add(uploadables: [sampleFileURL, largeFileURL])
         uploader.start()
 
         waitForExpectations(timeout: 15, handler: nil)
 
-        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(sampleFileSize * 2))
-        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(sampleFileSize * 2))
+        XCTAssertEqual(uploader.progress.totalUnitCount, Int64(sampleFileSize + largeFileSize))
+        XCTAssertEqual(uploader.progress.completedUnitCount, Int64(sampleFileSize + largeFileSize))
         XCTAssertEqual(uploader.progress.fileTotalCount, 2)
         XCTAssertEqual(uploader.progress.fileCompletedCount, 2)
 
         XCTAssertEqual(responses.count, 2)
+        XCTAssertEqual(responses[0].context as? URL, sampleFileURL)
+        XCTAssertEqual(responses[1].context as? URL, largeFileURL)
     }
 }
 

@@ -25,6 +25,9 @@ public class JSONResponse: NSObject {
     /// The JSON returned by the server.
     @objc public let json: [String: Any]?
 
+    /// Optionally, some associated context.
+    @objc public let context: Any?
+
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
     @objc public var error: Swift.Error?
 
@@ -41,6 +44,17 @@ public class JSONResponse: NSObject {
         }
 
         self.error = error
+        self.context = nil
+
+        super.init()
+    }
+
+    init(response: JSONResponse, context: Any?) {
+        self.request = response.request
+        self.response = response.response
+        self.json = response.json
+        self.error = response.error
+        self.context = context
 
         super.init()
     }
