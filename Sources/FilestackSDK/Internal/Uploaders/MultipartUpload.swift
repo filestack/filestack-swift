@@ -189,17 +189,17 @@ private extension MultipartUpload {
             state = .completed
         }
 
-        // Delete any deletable files if `deleteTemporaryFilesAfterUpload` option is enabled.
-        if options.deleteTemporaryFilesAfterUpload, let deletables = (uploadables?.compactMap { $0 as? Deletable }) {
-            for deletable in deletables {
-                deletable.delete()
-            }
-        }
-
         queue.async {
             self.completionHandler?(results)
             self.completionHandler = nil
             self.uploadProgress = nil
+
+            // Delete any deletable files if `deleteTemporaryFilesAfterUpload` option is enabled.
+            if self.options.deleteTemporaryFilesAfterUpload, let deletables = (self.uploadables?.compactMap { $0 as? Deletable }) {
+                for deletable in deletables {
+                    deletable.delete()
+                }
+            }
         }
     }
 }

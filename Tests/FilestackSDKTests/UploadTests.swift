@@ -60,7 +60,7 @@ class UploadTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(uploader.progress.totalUnitCount, Int64(largeFileSize))
         XCTAssertEqual(uploader.progress.completedUnitCount, Int64(largeFileSize))
@@ -75,6 +75,8 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(response?.json?["url"] as? String, "https://cdn.filestackcontent.com/6GKA0wnQWO7tKaGu2YXA")
         XCTAssertEqual(response?.json?["mimetype"] as? String, "image/jpeg")
         XCTAssertEqual(response?.context as? URL, largeFileURL)
+
+        XCTAssertTrue(FileManager.default.fileExists(atPath: largeFileURL.path))
     }
 
     func testIntelligentMultiPartUpload() {
@@ -92,7 +94,7 @@ class UploadTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(uploader.progress.totalUnitCount, Int64(largeFileSize))
         XCTAssertEqual(uploader.progress.completedUnitCount, Int64(largeFileSize))
@@ -127,7 +129,7 @@ class UploadTests: XCTestCase {
             uploader.cancel()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(uploader.progress.totalUnitCount, 0)
         XCTAssertEqual(uploader.progress.completedUnitCount, 0)
@@ -156,7 +158,7 @@ class UploadTests: XCTestCase {
             uploader.cancel()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(response, [])
         XCTAssertTrue(uploader.progress.isCancelled)
@@ -179,7 +181,7 @@ class UploadTests: XCTestCase {
             uploader.cancel()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(response, [])
         XCTAssertTrue(uploader.progress.isCancelled)
@@ -209,7 +211,7 @@ class UploadTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(hitCount, 1)
         XCTAssertNotNil(response?.json)
@@ -253,7 +255,7 @@ class UploadTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(hitCount, 1)
         XCTAssertEqual(responses.count, 1)
@@ -292,7 +294,7 @@ class UploadTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(uploader.progress.totalUnitCount, Int64(sampleFileSize + largeFileSize))
         XCTAssertEqual(uploader.progress.completedUnitCount, Int64(sampleFileSize + largeFileSize))
@@ -325,7 +327,7 @@ class UploadTests: XCTestCase {
         uploader.add(uploadables: [sampleFileURL, largeFileURL])
         uploader.start()
 
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 15)
 
         XCTAssertEqual(uploader.progress.totalUnitCount, Int64(sampleFileSize + largeFileSize))
         XCTAssertEqual(uploader.progress.completedUnitCount, Int64(sampleFileSize + largeFileSize))
@@ -335,6 +337,80 @@ class UploadTests: XCTestCase {
         XCTAssertEqual(responses.count, 2)
         XCTAssertEqual(responses[0].context as? URL, sampleFileURL)
         XCTAssertEqual(responses[1].context as? URL, largeFileURL)
+    }
+
+    func testUploadFileAtTemporaryLocation() {
+        var hitCount = 0
+
+        stubRegularMultipartRequest(hitCount: &hitCount)
+
+        let expectation = self.expectation(description: "request should succeed")
+
+        let fm = FileManager.default
+        let temporaryURL = fm.temporaryDirectory.appendingPathComponent(largeFileURL.lastPathComponent)
+
+        if fm.fileExists(atPath: temporaryURL.path) {
+            XCTAssertNoThrow(try? fm.removeItem(at: temporaryURL))
+        }
+
+        XCTAssertNoThrow(try fm.copyItem(at: largeFileURL, to: temporaryURL))
+
+        var response: JSONResponse?
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
+                                          startImmediately: true,
+                                          deleteTemporaryFilesAfterUpload: false,
+                                          storeOptions: defaultStoreOptions)
+
+        let uploader = client.upload(using: temporaryURL, options: uploadOptions) { resp in
+            XCTAssertTrue(fm.fileExists(atPath: temporaryURL.path), "File should exist")
+
+            response = resp
+            expectation.fulfill()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                XCTAssertFalse(fm.fileExists(atPath: temporaryURL.path), "File should no longer exist")
+            }
+        }
+
+        waitForExpectations(timeout: 15)
+
+        XCTAssertEqual(uploader.state, .completed)
+        XCTAssertEqual(hitCount, 1)
+        XCTAssertEqual(response?.context as? URL, temporaryURL)
+    }
+
+    func testUploadFileAtPermanentLocation() {
+        var hitCount = 0
+
+        stubRegularMultipartRequest(hitCount: &hitCount)
+
+        let expectation = self.expectation(description: "request should succeed")
+        let fm = FileManager.default
+
+        var response: JSONResponse?
+
+        let uploadOptions = UploadOptions(preferIntelligentIngestion: false,
+                                          startImmediately: true,
+                                          deleteTemporaryFilesAfterUpload: false,
+                                          storeOptions: defaultStoreOptions)
+
+        let uploader = client.upload(using: largeFileURL, options: uploadOptions) { resp in
+            XCTAssertTrue(fm.fileExists(atPath: self.largeFileURL.path), "File should exist")
+
+            response = resp
+            expectation.fulfill()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                XCTAssertFalse(fm.fileExists(atPath: self.largeFileURL.path), "File should still exist")
+            }
+        }
+
+        waitForExpectations(timeout: 15)
+
+        XCTAssertEqual(uploader.state, .completed)
+        XCTAssertEqual(hitCount, 1)
+        XCTAssertEqual(response?.context as? URL, largeFileURL)
     }
 }
 
