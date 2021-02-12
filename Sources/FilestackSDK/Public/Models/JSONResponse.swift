@@ -33,7 +33,11 @@ public class JSONResponse: NSObject {
 
     // MARK: - Lifecycle
 
-    init(request: URLRequest? = nil, response: URLResponse? = nil, data: Data? = nil, error: Swift.Error?) {
+    init(request: URLRequest? = nil,
+         response: URLResponse? = nil,
+         data: Data? = nil,
+         error: Swift.Error?,
+         context: Any? = nil) {
         self.request = request
         self.response = response as? HTTPURLResponse
 
@@ -44,16 +48,16 @@ public class JSONResponse: NSObject {
         }
 
         self.error = error
-        self.context = nil
+        self.context = context
 
         super.init()
     }
 
-    init(response: JSONResponse, context: Any?) {
-        self.request = response.request
-        self.response = response.response
-        self.json = response.json
-        self.error = response.error
+    init(using jsonResponse: JSONResponse, context: Any?) {
+        self.request = jsonResponse.request
+        self.response = jsonResponse.response
+        self.json = jsonResponse.json
+        self.error = jsonResponse.error
         self.context = context
 
         super.init()

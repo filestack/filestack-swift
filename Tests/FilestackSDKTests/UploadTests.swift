@@ -138,7 +138,7 @@ class UploadTests: XCTestCase {
         XCTAssertTrue(uploader.progress.isCancelled)
 
         XCTAssertNotNil(response?.error)
-        XCTAssertNil(response?.context)
+        XCTAssertEqual(response?.context as? URL, sampleFileURL)
     }
 
     func testCancellingStartedUploadWithoutUploadablesShouldCallCompletionHandler() {
