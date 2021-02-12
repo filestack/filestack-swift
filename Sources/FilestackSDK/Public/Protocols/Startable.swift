@@ -13,7 +13,4 @@ import Foundation
 public protocol Startable {
     /// Starts this process.
     @discardableResult func start() -> Bool
-
-    /// :nodoc:
-    func uploadFiles()
 }
