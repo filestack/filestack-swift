@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 2.7.0 *(2021-02-12)*
+----------------------------
+- Added `context` property to  `JSONResponse`.
+- Upload responses now contain the `Uploadable` objects used during the upload process in the `context` property of the `JSONResponse` object(s).
+
 Version 2.6.3 *(2021-02-10)*
 ----------------------------
 - Fixed `APIService` `overwriteRequest(handle:path:parameters:security:)` to configure request with method POST instead of GET.  
