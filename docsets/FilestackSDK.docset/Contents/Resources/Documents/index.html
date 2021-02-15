@@ -20,7 +20,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
-          FilestackSDK 2.5.2 Docs
+          FilestackSDK 2.7.0 Docs
         </a>
          (98% documented)
       </p>
@@ -349,11 +349,22 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK15MetadataOptionsa">MetadataOptions</a>
+                <a class="nav-group-task-link" href="Structs/MetadataOptions.html">MetadataOptions</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PolicyCall.html">PolicyCall</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TransformPosition.html">TransformPosition</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK19NetworkDataResponsea">NetworkDataResponse</a>
               </li>
@@ -362,12 +373,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK19NetworkJSONResponsea">NetworkJSONResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK10PolicyCalla">PolicyCall</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK17TransformPositiona">TransformPosition</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK12UploadStatusa">UploadStatus</a>
@@ -413,7 +418,7 @@ This is the official Swift SDK for Filestack - API and content management system
 <span class="n">use_frameworks!</span>
 
 <span class="n">target</span> <span class="s1">'&lt;Your Target Name&gt;'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'FilestackSDK'</span><span class="p">,</span> <span class="s1">'~&gt; 2.5.2'</span>
+    <span class="n">pod</span> <span class="s1">'FilestackSDK'</span><span class="p">,</span> <span class="s1">'~&gt; 2.7.0'</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -431,16 +436,16 @@ This is the official Swift SDK for Filestack - API and content management system
 
 <p>To integrate FilestackSDK into your Xcode project using Carthage, specify it in your <code>Cartfile</code>:</p>
 
-<p><code>github &quot;filestack/filestack-swift&quot; ~&gt; 2.5.2</code></p>
+<p><code>github &quot;filestack/filestack-swift&quot; ~&gt; 2.7.0</code></p>
 
-<p>Run <code>carthage update</code> to build the framework and drag the built <code>FilestackSDK.framework</code> into your Xcode project. Additionally, add  <code>Alamofire.framework</code>  to the embedded frameworks build phase of your app&rsquo;s target.</p>
+<p>Run <code>carthage update</code> to build the framework and drag the built <code>FilestackSDK.framework</code> into your Xcode project.</p>
 <h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
 
 <p>Add <code>https://github.com/filestack/filestack-swift.git</code> as a <a href="https://swift.org/package-manager/">Swift Package Manager</a> dependency to your Xcode project.</p>
 
 <p>Alternatively, if you are adding <code>FilestackSDK</code> to your own Swift Package, declare the dependency in your <code>Package.swift</code>:</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/filestack/filestack-swift.git"</span><span class="p">,</span> <span class="o">.</span><span class="nf">upToNextMajor</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="s">"2.5.2"</span><span class="p">))</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/filestack/filestack-swift.git"</span><span class="p">,</span> <span class="o">.</span><span class="nf">upToNextMajor</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="s">"2.7.0"</span><span class="p">))</span>
 <span class="p">]</span>
 </code></pre>
 <h3 id='manually' class='heading'>Manually</h3>
@@ -452,7 +457,6 @@ This is the official Swift SDK for Filestack - API and content management system
 
 <p>Add FilestackSDK and its dependencies as git submodules by running the following commands:</p>
 <pre class="highlight shell"><code><span class="nv">$ </span>git submodule add https://github.com/filestack/filestack-swift.git
-<span class="nv">$ </span>git submodule add https://github.com/Alamofire/Alamofire.git
 </code></pre>
 
 <p>Open the new <code>filestack-swift</code> folder, and drag the <code>FilestackSDK.xcodeproj</code> into the Project Navigator of your application&rsquo;s Xcode project.</p>
@@ -465,8 +469,6 @@ Select the <code>FilestackSDK.xcodeproj</code> in the Project Navigator and veri
 <p>In the tab bar at the top of that window, open the &ldquo;General&rdquo; panel.</p>
 
 <p>Click on the + button under the &ldquo;Embedded Binaries&rdquo; section and choose the <code>FilestackSDK.framework</code> for iOS.</p>
-
-<p>Repeat the same process for adding <code>Alamofire</code>.</p>
 <h2 id='usage' class='heading'>Usage</h2>
 
 <details>
@@ -735,7 +737,7 @@ FilestackSDK.UploadService.shared.useBackgroundSession = true
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2020-11-12)</p>
+      <p>&copy; 2021 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2021-02-15)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
-          FilestackSDK 2.5.2 Docs
+          FilestackSDK 2.7.0 Docs
         </a>
          (98% documented)
       </p>
@@ -350,11 +350,22 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK15MetadataOptionsa">MetadataOptions</a>
+                <a class="nav-group-task-link" href="Structs/MetadataOptions.html">MetadataOptions</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PolicyCall.html">PolicyCall</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TransformPosition.html">TransformPosition</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK19NetworkDataResponsea">NetworkDataResponse</a>
               </li>
@@ -363,12 +374,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK19NetworkJSONResponsea">NetworkJSONResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK10PolicyCalla">PolicyCall</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK17TransformPositiona">TransformPosition</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK12UploadStatusa">UploadStatus</a>
@@ -414,6 +419,7 @@
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSUploadService</span><span class="p">)</span>
 <span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">UploadService</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NetworkingService</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">UploadService</span><span class="p">:</span> <span class="kt">URLSessionDataDelegate</span></code></pre>
 
                         </div>
                       </div>
@@ -452,9 +458,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSTransformable"></a>
+                    <a name="/c:@M@FilestackSDK@objc(cs)Transformable"></a>
                     <a name="//apple_ref/swift/Class/Transformable" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSTransformable">Transformable</a>
+                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)Transformable">Transformable</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -473,8 +479,7 @@ about image transformations.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSTransformable</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">Transformable</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Transformable</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                         </div>
                       </div>
@@ -762,9 +767,9 @@ containing either a <code>Success</code> response or an <code>Error</code> respo
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSASCIITransform"></a>
+                    <a name="/s:12FilestackSDK14ASCIITransformC"></a>
                     <a name="//apple_ref/swift/Class/ASCIITransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSASCIITransform">ASCIITransform</a>
+                    <a class="token" href="#/s:12FilestackSDK14ASCIITransformC">ASCIITransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -780,8 +785,7 @@ containing either a <code>Success</code> response or an <code>Error</code> respo
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSASCIITransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ASCIITransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ASCIITransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -791,9 +795,9 @@ containing either a <code>Success</code> response or an <code>Error</code> respo
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSAVTransform"></a>
+                    <a name="/s:12FilestackSDK11AVTransformC"></a>
                     <a name="//apple_ref/swift/Class/AVTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSAVTransform">AVTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK11AVTransformC">AVTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -809,8 +813,7 @@ containing either a <code>Success</code> response or an <code>Error</code> respo
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSAVTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">AVTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">AVTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -820,9 +823,9 @@ containing either a <code>Success</code> response or an <code>Error</code> respo
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSAnimateTransform"></a>
+                    <a name="/s:12FilestackSDK16AnimateTransformC"></a>
                     <a name="//apple_ref/swift/Class/AnimateTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSAnimateTransform">AnimateTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16AnimateTransformC">AnimateTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -838,8 +841,7 @@ containing either a <code>Success</code> response or an <code>Error</code> respo
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSAnimateTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">AnimateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">AnimateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -849,9 +851,9 @@ containing either a <code>Success</code> response or an <code>Error</code> respo
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSAutoImageTransform"></a>
+                    <a name="/s:12FilestackSDK18AutoImageTransformC"></a>
                     <a name="//apple_ref/swift/Class/AutoImageTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSAutoImageTransform">AutoImageTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18AutoImageTransformC">AutoImageTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -868,8 +870,7 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSAutoImageTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">AutoImageTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">AutoImageTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -879,9 +880,9 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSBlackAndWhiteTransform"></a>
+                    <a name="/s:12FilestackSDK22BlackAndWhiteTransformC"></a>
                     <a name="//apple_ref/swift/Class/BlackAndWhiteTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSBlackAndWhiteTransform">BlackAndWhiteTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK22BlackAndWhiteTransformC">BlackAndWhiteTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -897,8 +898,7 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSBlackAndWhiteTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">BlackAndWhiteTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BlackAndWhiteTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -908,9 +908,9 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSBlurFacesTransform"></a>
+                    <a name="/s:12FilestackSDK18BlurFacesTransformC"></a>
                     <a name="//apple_ref/swift/Class/BlurFacesTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSBlurFacesTransform">BlurFacesTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18BlurFacesTransformC">BlurFacesTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -926,8 +926,7 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSBlurFacesTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">BlurFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BlurFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -937,9 +936,9 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSBlurTransform"></a>
+                    <a name="/s:12FilestackSDK13BlurTransformC"></a>
                     <a name="//apple_ref/swift/Class/BlurTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSBlurTransform">BlurTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK13BlurTransformC">BlurTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -955,8 +954,7 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSBlurTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">BlurTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BlurTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -966,9 +964,9 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSBorderTransform"></a>
+                    <a name="/s:12FilestackSDK15BorderTransformC"></a>
                     <a name="//apple_ref/swift/Class/BorderTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSBorderTransform">BorderTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK15BorderTransformC">BorderTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -984,8 +982,7 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSBorderTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">BorderTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BorderTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -995,9 +992,9 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCacheTransform"></a>
+                    <a name="/s:12FilestackSDK14CacheTransformC"></a>
                     <a name="//apple_ref/swift/Class/CacheTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCacheTransform">CacheTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK14CacheTransformC">CacheTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1013,8 +1010,7 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCacheTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CacheTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CacheTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1024,9 +1020,9 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCircleTransform"></a>
+                    <a name="/s:12FilestackSDK15CircleTransformC"></a>
                     <a name="//apple_ref/swift/Class/CircleTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCircleTransform">CircleTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK15CircleTransformC">CircleTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1042,8 +1038,7 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCircleTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CircleTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CircleTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1053,9 +1048,9 @@ characteristics compared to their older JPEG and PNG counterparts.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCollageTransform"></a>
+                    <a name="/s:12FilestackSDK16CollageTransformC"></a>
                     <a name="//apple_ref/swift/Class/CollageTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCollageTransform">CollageTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16CollageTransformC">CollageTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1074,8 +1069,7 @@ The order in which they are added dictates how the images will be arranged.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCollageTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CollageTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CollageTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1116,9 +1110,9 @@ The order in which they are added dictates how the images will be arranged.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCompressTransform"></a>
+                    <a name="/s:12FilestackSDK17CompressTransformC"></a>
                     <a name="//apple_ref/swift/Class/CompressTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCompressTransform">CompressTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17CompressTransformC">CompressTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1142,8 +1136,7 @@ It will not attempt to re-compress a previously compressed image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCompressTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CompressTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CompressTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1153,9 +1146,9 @@ It will not attempt to re-compress a previously compressed image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSConvertTransform"></a>
+                    <a name="/s:12FilestackSDK16ConvertTransformC"></a>
                     <a name="//apple_ref/swift/Class/ConvertTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSConvertTransform">ConvertTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16ConvertTransformC">ConvertTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1173,8 +1166,7 @@ It will not attempt to re-compress a previously compressed image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSConvertTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ConvertTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ConvertTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1184,9 +1176,9 @@ It will not attempt to re-compress a previously compressed image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCopyrightTransform"></a>
+                    <a name="/s:12FilestackSDK18CopyrightTransformC"></a>
                     <a name="//apple_ref/swift/Class/CopyrightTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCopyrightTransform">CopyrightTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18CopyrightTransformC">CopyrightTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1203,8 +1195,7 @@ details such as purchase link, etc.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCopyrightTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CopyrightTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CopyrightTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1214,9 +1205,9 @@ details such as purchase link, etc.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCropFacesTransform"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC"></a>
                     <a name="//apple_ref/swift/Class/CropFacesTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCropFacesTransform">CropFacesTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC">CropFacesTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1232,8 +1223,7 @@ details such as purchase link, etc.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCropFacesTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CropFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CropFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1243,9 +1233,9 @@ details such as purchase link, etc.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCropTransform"></a>
+                    <a name="/s:12FilestackSDK13CropTransformC"></a>
                     <a name="//apple_ref/swift/Class/CropTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCropTransform">CropTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK13CropTransformC">CropTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1261,8 +1251,7 @@ details such as purchase link, etc.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCropTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CropTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CropTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1272,9 +1261,9 @@ details such as purchase link, etc.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSDetectFacesTransform"></a>
+                    <a name="/s:12FilestackSDK20DetectFacesTransformC"></a>
                     <a name="//apple_ref/swift/Class/DetectFacesTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSDetectFacesTransform">DetectFacesTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK20DetectFacesTransformC">DetectFacesTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1290,8 +1279,7 @@ details such as purchase link, etc.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSDetectFacesTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">DetectFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DetectFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1301,9 +1289,9 @@ details such as purchase link, etc.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSDocumentDetectionTransform"></a>
+                    <a name="/s:12FilestackSDK26DocumentDetectionTransformC"></a>
                     <a name="//apple_ref/swift/Class/DocumentDetectionTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSDocumentDetectionTransform">DocumentDetectionTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK26DocumentDetectionTransformC">DocumentDetectionTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1322,8 +1310,7 @@ and distortion reduction in order to increase the accuracy of OCR engine in text
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSDocumentDetectionTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">DocumentDetectionTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DocumentDetectionTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1333,9 +1320,9 @@ and distortion reduction in order to increase the accuracy of OCR engine in text
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSEnhanceTransform"></a>
+                    <a name="/s:12FilestackSDK16EnhanceTransformC"></a>
                     <a name="//apple_ref/swift/Class/EnhanceTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSEnhanceTransform">EnhanceTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16EnhanceTransformC">EnhanceTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1352,8 +1339,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSEnhanceTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">EnhanceTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">EnhanceTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1363,9 +1349,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSFallbackTransform"></a>
+                    <a name="/s:12FilestackSDK17FallbackTransformC"></a>
                     <a name="//apple_ref/swift/Class/FallbackTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSFallbackTransform">FallbackTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17FallbackTransformC">FallbackTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1381,8 +1367,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSFallbackTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">FallbackTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FallbackTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1392,9 +1377,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSFlipTransform"></a>
+                    <a name="/s:12FilestackSDK13FlipTransformC"></a>
                     <a name="//apple_ref/swift/Class/FlipTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSFlipTransform">FlipTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK13FlipTransformC">FlipTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1410,8 +1395,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSFlipTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">FlipTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FlipTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1421,9 +1405,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSFlopTransform"></a>
+                    <a name="/s:12FilestackSDK13FlopTransformC"></a>
                     <a name="//apple_ref/swift/Class/FlopTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSFlopTransform">FlopTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK13FlopTransformC">FlopTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1439,8 +1423,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSFlopTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">FlopTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FlopTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1450,9 +1433,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSImageSizeTransform"></a>
+                    <a name="/s:12FilestackSDK18ImageSizeTransformC"></a>
                     <a name="//apple_ref/swift/Class/ImageSizeTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSImageSizeTransform">ImageSizeTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18ImageSizeTransformC">ImageSizeTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1468,8 +1451,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSImageSizeTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ImageSizeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ImageSizeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1479,9 +1461,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSMinifyCSSTransform"></a>
+                    <a name="/s:12FilestackSDK18MinifyCSSTransformC"></a>
                     <a name="//apple_ref/swift/Class/MinifyCSSTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSMinifyCSSTransform">MinifyCSSTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18MinifyCSSTransformC">MinifyCSSTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1497,8 +1479,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSMinifyCSSTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">MinifyCSSTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MinifyCSSTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1508,9 +1489,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSMinifyJSTransform"></a>
+                    <a name="/s:12FilestackSDK17MinifyJSTransformC"></a>
                     <a name="//apple_ref/swift/Class/MinifyJSTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSMinifyJSTransform">MinifyJSTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17MinifyJSTransformC">MinifyJSTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1526,8 +1507,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSMinifyJSTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">MinifyJSTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MinifyJSTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1537,9 +1517,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSModulateTransform"></a>
+                    <a name="/s:12FilestackSDK17ModulateTransformC"></a>
                     <a name="//apple_ref/swift/Class/ModulateTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSModulateTransform">ModulateTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17ModulateTransformC">ModulateTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1555,8 +1535,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSModulateTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ModulateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ModulateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1566,9 +1545,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSMonochromeTransform"></a>
+                    <a name="/s:12FilestackSDK19MonochromeTransformC"></a>
                     <a name="//apple_ref/swift/Class/MonochromeTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSMonochromeTransform">MonochromeTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK19MonochromeTransformC">MonochromeTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1584,8 +1563,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSMonochromeTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">MonochromeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MonochromeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1595,9 +1573,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSNegativeTransform"></a>
+                    <a name="/s:12FilestackSDK17NegativeTransformC"></a>
                     <a name="//apple_ref/swift/Class/NegativeTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSNegativeTransform">NegativeTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17NegativeTransformC">NegativeTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1613,8 +1591,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSNegativeTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">NegativeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">NegativeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1624,9 +1601,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSNoMetadataTransform"></a>
+                    <a name="/s:12FilestackSDK19NoMetadataTransformC"></a>
                     <a name="//apple_ref/swift/Class/NoMetadataTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSNoMetadataTransform">NoMetadataTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK19NoMetadataTransformC">NoMetadataTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1642,8 +1619,7 @@ image.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSNoMetadataTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">NoMetadataTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">NoMetadataTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1653,9 +1629,9 @@ image.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSOCRTransform"></a>
+                    <a name="/s:12FilestackSDK12OCRTransformC"></a>
                     <a name="//apple_ref/swift/Class/OCRTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSOCRTransform">OCRTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK12OCRTransformC">OCRTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1672,8 +1648,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSOCRTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">OCRTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">OCRTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1683,9 +1658,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSOilPaintTransform"></a>
+                    <a name="/s:12FilestackSDK17OilPaintTransformC"></a>
                     <a name="//apple_ref/swift/Class/OilPaintTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSOilPaintTransform">OilPaintTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17OilPaintTransformC">OilPaintTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1701,8 +1676,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSOilPaintTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">OilPaintTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">OilPaintTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1712,9 +1686,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPDFConvertTransform"></a>
+                    <a name="/s:12FilestackSDK19PDFConvertTransformC"></a>
                     <a name="//apple_ref/swift/Class/PDFConvertTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPDFConvertTransform">PDFConvertTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK19PDFConvertTransformC">PDFConvertTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1730,8 +1704,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPDFConvertTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PDFConvertTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PDFConvertTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1741,9 +1714,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPDFInfoTransform"></a>
+                    <a name="/s:12FilestackSDK16PDFInfoTransformC"></a>
                     <a name="//apple_ref/swift/Class/PDFInfoTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPDFInfoTransform">PDFInfoTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16PDFInfoTransformC">PDFInfoTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1761,8 +1734,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPDFInfoTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PDFInfoTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PDFInfoTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1772,9 +1744,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPDFMonochromeTransform"></a>
+                    <a name="/s:12FilestackSDK22PDFMonochromeTransformC"></a>
                     <a name="//apple_ref/swift/Class/PDFMonochromeTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPDFMonochromeTransform">PDFMonochromeTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK22PDFMonochromeTransformC">PDFMonochromeTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1790,8 +1762,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPDFMonochromeTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PDFMonochromeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PDFMonochromeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1801,9 +1772,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPartialBlurTransform"></a>
+                    <a name="/s:12FilestackSDK20PartialBlurTransformC"></a>
                     <a name="//apple_ref/swift/Class/PartialBlurTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPartialBlurTransform">PartialBlurTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK20PartialBlurTransformC">PartialBlurTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1819,8 +1790,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPartialBlurTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PartialBlurTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PartialBlurTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1830,9 +1800,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPartialPixelateTransform"></a>
+                    <a name="/s:12FilestackSDK24PartialPixelateTransformC"></a>
                     <a name="//apple_ref/swift/Class/PartialPixelateTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPartialPixelateTransform">PartialPixelateTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK24PartialPixelateTransformC">PartialPixelateTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1848,8 +1818,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPartialPixelateTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PartialPixelateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PartialPixelateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1859,9 +1828,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPixelateFacesTransform"></a>
+                    <a name="/s:12FilestackSDK22PixelateFacesTransformC"></a>
                     <a name="//apple_ref/swift/Class/PixelateFacesTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPixelateFacesTransform">PixelateFacesTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK22PixelateFacesTransformC">PixelateFacesTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1877,8 +1846,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPixelateFacesTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PixelateFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PixelateFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1888,9 +1856,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPixelateTransform"></a>
+                    <a name="/s:12FilestackSDK17PixelateTransformC"></a>
                     <a name="//apple_ref/swift/Class/PixelateTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPixelateTransform">PixelateTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17PixelateTransformC">PixelateTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1906,8 +1874,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPixelateTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PixelateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PixelateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1917,9 +1884,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSPolaroidTransform"></a>
+                    <a name="/s:12FilestackSDK17PolaroidTransformC"></a>
                     <a name="//apple_ref/swift/Class/PolaroidTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSPolaroidTransform">PolaroidTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17PolaroidTransformC">PolaroidTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1935,8 +1902,7 @@ the details regarding detected text areas, lines, and words.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSPolaroidTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PolaroidTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PolaroidTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1946,9 +1912,9 @@ the details regarding detected text areas, lines, and words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSProgressiveJpegTransform"></a>
+                    <a name="/s:12FilestackSDK24ProgressiveJPEGTransformC"></a>
                     <a name="//apple_ref/swift/Class/ProgressiveJPEGTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSProgressiveJpegTransform">ProgressiveJPEGTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK24ProgressiveJPEGTransformC">ProgressiveJPEGTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1970,8 +1936,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSProgressiveJpegTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ProgressiveJPEGTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ProgressiveJPEGTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -1981,9 +1946,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSQualityTransform"></a>
+                    <a name="/s:12FilestackSDK16QualityTransformC"></a>
                     <a name="//apple_ref/swift/Class/QualityTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSQualityTransform">QualityTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16QualityTransformC">QualityTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1999,8 +1964,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSQualityTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">QualityTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">QualityTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2010,9 +1974,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSRedEyeRemovalTransform"></a>
+                    <a name="/s:12FilestackSDK22RedEyeRemovalTransformC"></a>
                     <a name="//apple_ref/swift/Class/RedEyeRemovalTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSRedEyeRemovalTransform">RedEyeRemovalTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK22RedEyeRemovalTransformC">RedEyeRemovalTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2028,8 +1992,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSRedEyeRemovalTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">RedEyeRemovalTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RedEyeRemovalTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2039,9 +2002,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSResizeTransform"></a>
+                    <a name="/s:12FilestackSDK15ResizeTransformC"></a>
                     <a name="//apple_ref/swift/Class/ResizeTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSResizeTransform">ResizeTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK15ResizeTransformC">ResizeTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2057,8 +2020,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSResizeTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ResizeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ResizeTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2068,9 +2030,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSRotateTransform"></a>
+                    <a name="/s:12FilestackSDK15RotateTransformC"></a>
                     <a name="//apple_ref/swift/Class/RotateTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSRotateTransform">RotateTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK15RotateTransformC">RotateTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2086,8 +2048,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSRotateTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">RotateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RotateTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2097,9 +2058,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSRoundedCornersTransform"></a>
+                    <a name="/s:12FilestackSDK23RoundedCornersTransformC"></a>
                     <a name="//apple_ref/swift/Class/RoundedCornersTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSRoundedCornersTransform">RoundedCornersTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK23RoundedCornersTransformC">RoundedCornersTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2115,8 +2076,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSRoundedCornersTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">RoundedCornersTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RoundedCornersTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2126,9 +2086,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSSecureForWorkTransform"></a>
+                    <a name="/s:12FilestackSDK22SecureForWorkTransformC"></a>
                     <a name="//apple_ref/swift/Class/SecureForWorkTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSSecureForWorkTransform">SecureForWorkTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK22SecureForWorkTransformC">SecureForWorkTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2144,8 +2104,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSSecureForWorkTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">SecureForWorkTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SecureForWorkTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2155,9 +2114,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSSepiaTransform"></a>
+                    <a name="/s:12FilestackSDK14SepiaTransformC"></a>
                     <a name="//apple_ref/swift/Class/SepiaTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSSepiaTransform">SepiaTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK14SepiaTransformC">SepiaTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2173,8 +2132,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSSepiaTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">SepiaTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SepiaTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2184,9 +2142,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSShadowTransform"></a>
+                    <a name="/s:12FilestackSDK15ShadowTransformC"></a>
                     <a name="//apple_ref/swift/Class/ShadowTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSShadowTransform">ShadowTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK15ShadowTransformC">ShadowTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2202,8 +2160,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSShadowTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ShadowTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ShadowTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2213,9 +2170,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSSharpenTransform"></a>
+                    <a name="/s:12FilestackSDK16SharpenTransformC"></a>
                     <a name="//apple_ref/swift/Class/SharpenTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSSharpenTransform">SharpenTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16SharpenTransformC">SharpenTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2231,8 +2188,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSSharpenTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">SharpenTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SharpenTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2242,9 +2198,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSTagsTransform"></a>
+                    <a name="/s:12FilestackSDK13TagsTransformC"></a>
                     <a name="//apple_ref/swift/Class/TagsTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSTagsTransform">TagsTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK13TagsTransformC">TagsTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2279,8 +2235,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSTagsTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">TagsTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TagsTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2290,9 +2245,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSTornEdgesTransform"></a>
+                    <a name="/s:12FilestackSDK18TornEdgesTransformC"></a>
                     <a name="//apple_ref/swift/Class/TornEdgesTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSTornEdgesTransform">TornEdgesTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18TornEdgesTransformC">TornEdgesTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2308,8 +2263,7 @@ Explorer before Windows 7) the software displays the image only after it has bee
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSTornEdgesTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">TornEdgesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TornEdgesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2319,9 +2273,9 @@ Explorer before Windows 7) the software displays the image only after it has bee
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSURLScreenshotTransform"></a>
+                    <a name="/s:12FilestackSDK22URLScreenshotTransformC"></a>
                     <a name="//apple_ref/swift/Class/URLScreenshotTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSURLScreenshotTransform">URLScreenshotTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK22URLScreenshotTransformC">URLScreenshotTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2339,8 +2293,7 @@ If the content is not publicly visible, then it will not be captured.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSURLScreenshotTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">URLScreenshotTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">URLScreenshotTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2350,9 +2303,9 @@ If the content is not publicly visible, then it will not be captured.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSUpscaleTransform"></a>
+                    <a name="/s:12FilestackSDK16UpscaleTransformC"></a>
                     <a name="//apple_ref/swift/Class/UpscaleTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSUpscaleTransform">UpscaleTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK16UpscaleTransformC">UpscaleTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2368,8 +2321,7 @@ If the content is not publicly visible, then it will not be captured.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSUpscaleTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">UpscaleTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">UpscaleTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2379,9 +2331,9 @@ If the content is not publicly visible, then it will not be captured.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSVignetteTransform"></a>
+                    <a name="/s:12FilestackSDK17VignetteTransformC"></a>
                     <a name="//apple_ref/swift/Class/VignetteTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSVignetteTransform">VignetteTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK17VignetteTransformC">VignetteTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2397,8 +2349,7 @@ If the content is not publicly visible, then it will not be captured.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSVignetteTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">VignetteTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">VignetteTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2408,9 +2359,9 @@ If the content is not publicly visible, then it will not be captured.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSWatermarkTransform"></a>
+                    <a name="/s:12FilestackSDK18WatermarkTransformC"></a>
                     <a name="//apple_ref/swift/Class/WatermarkTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSWatermarkTransform">WatermarkTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK18WatermarkTransformC">WatermarkTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2426,8 +2377,7 @@ If the content is not publicly visible, then it will not be captured.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSWatermarkTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">WatermarkTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">WatermarkTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2437,9 +2387,9 @@ If the content is not publicly visible, then it will not be captured.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSZipTransform"></a>
+                    <a name="/s:12FilestackSDK12ZipTransformC"></a>
                     <a name="//apple_ref/swift/Class/ZipTransform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSZipTransform">ZipTransform</a>
+                    <a class="token" href="#/s:12FilestackSDK12ZipTransformC">ZipTransform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2455,8 +2405,7 @@ If the content is not publicly visible, then it will not be captured.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSZipTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ZipTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ZipTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                         </div>
                       </div>
@@ -2471,7 +2420,7 @@ If the content is not publicly visible, then it will not be captured.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2020-11-12)</p>
+      <p>&copy; 2021 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2021-02-15)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

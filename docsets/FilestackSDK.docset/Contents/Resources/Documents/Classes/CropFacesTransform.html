@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          FilestackSDK 2.5.2 Docs
+          FilestackSDK 2.7.0 Docs
         </a>
          (98% documented)
       </p>
@@ -350,11 +350,22 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12FilestackSDK15MetadataOptionsa">MetadataOptions</a>
+                <a class="nav-group-task-link" href="../Structs/MetadataOptions.html">MetadataOptions</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PolicyCall.html">PolicyCall</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TransformPosition.html">TransformPosition</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12FilestackSDK19NetworkDataResponsea">NetworkDataResponse</a>
               </li>
@@ -363,12 +374,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12FilestackSDK19NetworkJSONResponsea">NetworkJSONResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12FilestackSDK10PolicyCalla">PolicyCall</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12FilestackSDK17TransformPositiona">TransformPosition</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12FilestackSDK12UploadStatusa">UploadStatus</a>
@@ -385,8 +390,7 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="kt">FSCropFacesTransform</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">CropFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CropFacesTransform</span> <span class="p">:</span> <span class="kt">Transform</span></code></pre>
 
                 </div>
               </div>
@@ -411,9 +415,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@FilestackSDK@objc(cs)FSCropFacesTransform(im)init"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformCACycfc"></a>
                     <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FilestackSDK@objc(cs)FSCropFacesTransform(im)init">init()</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformCACycfc">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -428,8 +432,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -452,9 +455,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)mode:"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC4modeyACXDAA0eC4ModeOF"></a>
                     <a name="//apple_ref/swift/Method/mode(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)mode:">mode(_:<wbr>)</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC4modeyACXDAA0eC4ModeOF">mode(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -470,7 +473,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">mode</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/TransformCropMode.html">TransformCropMode</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -500,9 +502,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)width:"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC5widthyACXDSiF"></a>
                     <a name="//apple_ref/swift/Method/width(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)width:">width(_:<wbr>)</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC5widthyACXDSiF">width(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -518,7 +520,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">width</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -548,9 +549,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)height:"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC6heightyACXDSiF"></a>
                     <a name="//apple_ref/swift/Method/height(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)height:">height(_:<wbr>)</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC6heightyACXDSiF">height(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -566,7 +567,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">height</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -596,9 +596,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)minSize:"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC7minSizeyACXDSfF"></a>
                     <a name="//apple_ref/swift/Method/minSize(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)minSize:">minSize(_:<wbr>)</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC7minSizeyACXDSfF">minSize(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -614,7 +614,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">minSize</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -645,9 +644,9 @@ are not faces. Valid range: <code>0.01...10000</code></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)maxSize:"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC7maxSizeyACXDSfF"></a>
                     <a name="//apple_ref/swift/Method/maxSize(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)maxSize:">maxSize(_:<wbr>)</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC7maxSizeyACXDSfF">maxSize(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -663,7 +662,6 @@ are not faces. Valid range: <code>0.01...10000</code></p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">maxSize</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -694,9 +692,9 @@ are not faces. Valid range: <code>0.01...10000</code></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)allFaces"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC03allD0ACXDyF"></a>
                     <a name="//apple_ref/swift/Method/allFaces()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)allFaces">allFaces()</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC03allD0ACXDyF">allFaces()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -712,7 +710,6 @@ are not faces. Valid range: <code>0.01...10000</code></p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">allFaces</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -723,9 +720,9 @@ are not faces. Valid range: <code>0.01...10000</code></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)buffer:"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC6bufferyACXDSiF"></a>
                     <a name="//apple_ref/swift/Method/buffer(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)buffer:">buffer(_:<wbr>)</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC6bufferyACXDSiF">buffer(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -741,7 +738,6 @@ are not faces. Valid range: <code>0.01...10000</code></p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">buffer</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -772,9 +768,9 @@ the original object. Valid range: <code>0...1000</code></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)faces:"></a>
+                    <a name="/s:12FilestackSDK18CropFacesTransformC5facesyACXDSaySiGF"></a>
                     <a name="//apple_ref/swift/Method/faces(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@FilestackSDK@objc(cs)FSCropFacesTransform(im)faces:">faces(_:<wbr>)</a>
+                    <a class="token" href="#/s:12FilestackSDK18CropFacesTransformC5facesyACXDSaySiGF">faces(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -790,7 +786,6 @@ the original object. Valid range: <code>0...1000</code></p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">@objc</span>
 <span class="kd">func</span> <span class="nf">faces</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
@@ -825,7 +820,7 @@ the original object. Valid range: <code>0...1000</code></p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2020-11-12)</p>
+      <p>&copy; 2021 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2021-02-15)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
