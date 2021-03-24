@@ -16,8 +16,6 @@ class UploadTests: XCTestCase {
     private let sampleFileSize: Int = 200_367
     private let sampleFileURL = Helpers.url(forResource: "sample", withExtension: "jpg", subdirectory: "Fixtures")!
     private let largeFileURL = Helpers.url(forResource: "large", withExtension: "jpg", subdirectory: "Fixtures")!
-
-    private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     private let chunkSize = 1 * Int(pow(Double(1024), Double(2)))
     private let partSize = 8 * Int(pow(Double(1024), Double(2)))
     private var currentPart = 1

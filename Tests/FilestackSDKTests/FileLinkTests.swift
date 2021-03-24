@@ -14,7 +14,11 @@ import XCTest
 class FileLinkTests: XCTestCase {
     private let cdnStubConditions = isScheme(Constants.cdnURL.scheme!) && isHost(Constants.cdnURL.host!)
     private let apiStubConditions = isScheme(Constants.apiURL.scheme!) && isHost(Constants.apiURL.host!)
-    private let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+
+    private let downloadsDirectoryURL = try! FileManager.default.url(for: .downloadsDirectory,
+                                                                     in: .userDomainMask,
+                                                                     appropriateFor: nil,
+                                                                     create: true)
 
     override func tearDown() {
         super.tearDown()
@@ -273,7 +277,7 @@ class FileLinkTests: XCTestCase {
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
 
-        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true)
+        let destinationURL = downloadsDirectoryURL
             .appendingPathComponent(UUID().uuidString)
             .appendingPathExtension("jpg")
 
@@ -319,7 +323,7 @@ class FileLinkTests: XCTestCase {
         let expectedRequestURL = Constants.cdnURL.appendingPathComponent("MY-HANDLE")
 
         let expectation = self.expectation(description: "request should fail with a 404")
-        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+        let destinationURL = downloadsDirectoryURL.appendingPathComponent("sample.jpg")
         var response: FilestackSDK.DownloadResponse?
 
         fileLink.download(destinationURL: destinationURL) { resp in
@@ -341,7 +345,7 @@ class FileLinkTests: XCTestCase {
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
         let expectation = self.expectation(description: "request should succeed")
-        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+        let destinationURL = downloadsDirectoryURL.appendingPathComponent("sample.jpg")
         var response: FilestackSDK.DownloadResponse?
 
         fileLink.download(destinationURL: destinationURL, parameters: ["foo": "123", "bar": "321"]) { resp in
@@ -378,7 +382,7 @@ class FileLinkTests: XCTestCase {
 
         let client = Client(apiKey: "MY-API-KEY")
         let fileLink = client.fileLink(for: "MY-HANDLE")
-        let destinationURL = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent("sample.jpg")
+        let destinationURL = downloadsDirectoryURL.appendingPathComponent("sample.jpg")
         let progressExpectation = expectation(description: "request should report progress")
 
         let downloadProgress: ((Progress) -> Void) = { progress in
