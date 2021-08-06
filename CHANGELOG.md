@@ -3,8 +3,8 @@ Change Log
 
 Version 2.8.0 *(2021-08-06)*
 ----------------------------
-- Setting `networkServiceType` to `.responsiveData` in `UploadService` to prioritize upload requests.
-- Adding `currentUploaders` and `isUploading` to `Client` so SDK users can obtain the uploaders currently in use (e.g. to cancel or query progress.)
+- Set `networkServiceType` to `.responsiveData` in `UploadService` to prioritize upload requests.
+- Added `currentUploaders` and `isUploading` to `Client` so SDK users can obtain the uploaders currently in use (e.g. to cancel or query progress.)
 
 Version 2.7.0 *(2021-02-12)*
 ----------------------------
