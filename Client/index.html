@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filestack - Client</title>
-    <link rel="stylesheet" type="text/css" href="https://filestack.github.io/filestack-ios/all.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="https://filestack.github.io/filestack-swift/all.css" media="all" />
 </head>
 <body>
     <header>
-        <a href="https://filestack.github.io/filestack-ios/">
+        <a href="https://filestack.github.io/filestack-swift/">
             <strong>
                 Filestack
             </strong>
@@ -60,7 +60,7 @@
 <!-- Client -->
 <g id="node1" class="node class current">
 <title>Client</title>
-<g id="a_node1"><a xlink:href="https://filestack.github.io/filestack-ios/Client" xlink:title="Client">
+<g id="a_node1"><a xlink:href="https://filestack.github.io/filestack-swift/Client" xlink:title="Client">
 <path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
 <text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">Client</text>
 </a>
@@ -97,7 +97,7 @@
         <code><a href="#client.init(apikey:security:)">init(api​Key:​security:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">apiKey</span>: <span class="type">String</span>, <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-ios/Security"><span class="type">Security</span></a>? = <span class="keyword">nil</span>)  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">apiKey</span>: <span class="type">String</span>, <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-swift/Security"><span class="type">Security</span></a>? = <span class="keyword">nil</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Default initializer.</p>
@@ -141,7 +141,7 @@
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">deprecated</span>, <span class="variable">message</span>: <span class="string literal">"Marked for removal in version 3.0. Please use `init(apiKey:security:)` instead."</span>)
-    <span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">apiKey</span>: <span class="type">String</span>, <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-ios/Security"><span class="type">Security</span></a>? = <span class="keyword">nil</span>, <span class="variable">storage</span> <span class="keyword">_</span>: <a href="https://filestack.github.io/filestack-ios/StorageLocation"><span class="type">StorageLocation</span></a>)  </body></html></code></pre>
+    <span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">apiKey</span>: <span class="type">String</span>, <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-swift/Security"><span class="type">Security</span></a>? = <span class="keyword">nil</span>, <span class="variable">storage</span> <span class="keyword">_</span>: <a href="https://filestack.github.io/filestack-swift/StorageLocation"><span class="type">StorageLocation</span></a>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>:nodoc:</p>
@@ -169,7 +169,7 @@
         <code><a href="#client.security">security</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">var</span> <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-ios/Security"><span class="type">Security</span></a>?  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">var</span> <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-swift/Security"><span class="type">Security</span></a>?  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A <code>Security</code> object. <code>nil</code> by default.</p>
@@ -181,7 +181,7 @@
         <code><a href="#client.currentuploaders">current​Uploaders</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">var</span> <span class="variable">currentUploaders</span>: [<a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>]  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">var</span> <span class="variable">currentUploaders</span>: [<a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>]  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Returns an array containing the <code>Uploader</code> instances currently running.</p>
@@ -225,12 +225,12 @@
     <span class="attribute">@</span><span class="attribute">objc</span>
     <span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">deprecated</span>, <span class="variable">message</span>: <span class="string literal">"Marked for removal in version 3.0. Please use upload(using:options:queue:uploadProgress:completionHandler:) instead"</span>)
     <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">multiPartUpload</span>(<span class="variable">from</span> <span class="variable">localURL</span>: <span class="type">URL</span>,
-                                <span class="variable">storeOptions</span>: <a href="https://filestack.github.io/filestack-ios/StorageOptions"><span class="type">StorageOptions</span></a> = <span class="variable">StorageOptions</span>(<span class="variable">location</span>: .<span class="variable">s3</span>, <span class="variable">access</span>: .<span class="variable">private</span>),
+                                <span class="variable">storeOptions</span>: <a href="https://filestack.github.io/filestack-swift/StorageOptions"><span class="type">StorageOptions</span></a> = <span class="variable">StorageOptions</span>(<span class="variable">location</span>: .<span class="variable">s3</span>, <span class="variable">access</span>: .<span class="variable">private</span>),
                                 <span class="variable">useIntelligentIngestionIfAvailable</span>: <span class="type">Bool</span> = <span class="keyword">true</span>,
                                 <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                                 <span class="variable">startUploadImmediately</span>: <span class="type">Bool</span> = <span class="keyword">true</span>,
                                 <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
+                                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>:nodoc:</p>
@@ -246,12 +246,12 @@
     <span class="attribute">@</span><span class="attribute">objc</span>
     <span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">deprecated</span>, <span class="variable">message</span>: <span class="string literal">"Marked for removal in version 3.0. Please use upload(using:options:queue:uploadProgress:completionHandler:) instead"</span>)
     <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">multiFileUpload</span>(<span class="variable">from</span> <span class="variable">localURLs</span>: [<span class="type">URL</span>],
-                                <span class="variable">storeOptions</span>: <a href="https://filestack.github.io/filestack-ios/StorageOptions"><span class="type">StorageOptions</span></a> = <span class="variable">StorageOptions</span>(<span class="variable">location</span>: .<span class="variable">s3</span>, <span class="variable">access</span>: .<span class="variable">private</span>),
+                                <span class="variable">storeOptions</span>: <a href="https://filestack.github.io/filestack-swift/StorageOptions"><span class="type">StorageOptions</span></a> = <span class="variable">StorageOptions</span>(<span class="variable">location</span>: .<span class="variable">s3</span>, <span class="variable">access</span>: .<span class="variable">private</span>),
                                 <span class="variable">useIntelligentIngestionIfAvailable</span>: <span class="type">Bool</span> = <span class="keyword">true</span>,
                                 <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                                 <span class="variable">startUploadImmediately</span>: <span class="type">Bool</span> = <span class="keyword">true</span>,
                                 <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
+                                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>:nodoc:</p>
@@ -265,10 +265,10 @@
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
     <span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">uploadURL</span>(<span class="variable">using</span> <span class="variable">localURL</span>: <span class="type">NSURL</span>,
-                                <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-ios/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
+                                <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-swift/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
                                 <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                                 <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
+                                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Uploads a single local URL directly to a given storage location.</p>
@@ -340,10 +340,10 @@
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
     <span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">uploadMultipleURLs</span>(<span class="variable">using</span> <span class="variable">localURLs</span>: [<span class="type">NSURL</span>],
-                                         <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-ios/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
+                                         <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-swift/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
                                          <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                                          <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                                         <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
+                                         <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Uploads an array of local URLs directly to a given storage location.</p>
@@ -415,10 +415,10 @@
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
     <span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">uploadData</span>(<span class="variable">using</span> <span class="variable">data</span>: <span class="type">NSData</span>,
-                                 <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-ios/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
+                                 <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-swift/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
                                  <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                                  <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                                 <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
+                                 <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Uploads data directly to a given storage location.</p>
@@ -490,10 +490,10 @@
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
     <span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">uploadMultipleData</span>(<span class="variable">using</span> <span class="variable">multipleData</span>: [<span class="type">NSData</span>],
-                                         <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-ios/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
+                                         <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-swift/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
                                          <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                                          <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                                         <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
+                                         <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Uploads multiple data directly to a given storage location.</p>
@@ -563,7 +563,7 @@
         <code><a href="#client.filelink(for:)">file​Link(for:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">fileLink</span>(<span class="variable">for</span> <span class="variable">handle</span>: <span class="type">String</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/FileLink"><span class="type">FileLink</span></a>  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">fileLink</span>(<span class="variable">for</span> <span class="variable">handle</span>: <span class="type">String</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/FileLink"><span class="type">FileLink</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A <code>FileLink</code> object for a given Filestack handle.</p>
@@ -594,7 +594,7 @@
         <code><a href="#client.transformable(handle:)">transformable(handle:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">handle</span>: <span class="type">String</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">handle</span>: <span class="type">String</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A <code>Transformable</code> object for a Filestack handle.</p>
@@ -631,7 +631,7 @@
         <code><a href="#client.transformable(handles:)">transformable(handles:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">handles</span>: [<span class="type">String</span>]) -&gt; <a href="https://filestack.github.io/filestack-ios/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">handles</span>: [<span class="type">String</span>]) -&gt; <a href="https://filestack.github.io/filestack-swift/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A <code>Transformable</code> object for an array of Filestack handles.</p>
@@ -668,7 +668,7 @@
         <code><a href="#client.transformable(externalurl:)">transformable(external​URL:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">externalURL</span>: <span class="type">URL</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">externalURL</span>: <span class="type">URL</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A <code>Transformable</code> object for an external URL.</p>
@@ -705,7 +705,7 @@
         <code><a href="#client.transformable(externalurls:)">transformable(external​URLs:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">externalURLs</span>: [<span class="type">URL</span>]) -&gt; <a href="https://filestack.github.io/filestack-ios/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">func</span> <span class="function">transformable</span>(<span class="variable">externalURLs</span>: [<span class="type">URL</span>]) -&gt; <a href="https://filestack.github.io/filestack-swift/Transformable"><span class="type">Transformable</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A <code>Transformable</code> object for an array of external URLs.</p>
@@ -743,11 +743,11 @@
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
-    <span class="keyword">func</span> <span class="function">upload</span>(<span class="variable">using</span> <span class="variable">uploadable</span>: <a href="https://filestack.github.io/filestack-ios/Uploadable"><span class="type">Uploadable</span></a>,
-                <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-ios/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
+    <span class="keyword">func</span> <span class="function">upload</span>(<span class="variable">using</span> <span class="variable">uploadable</span>: <a href="https://filestack.github.io/filestack-swift/Uploadable"><span class="type">Uploadable</span></a>,
+                <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-swift/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
                 <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                 <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
+                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Uploads a single <code>Uploadable</code> to a given storage location.</p>
@@ -814,11 +814,11 @@
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
-    <span class="keyword">func</span> <span class="function">upload</span>(<span class="variable">using</span> <span class="variable">uploadables</span>: [<a href="https://filestack.github.io/filestack-ios/Uploadable"><span class="type">Uploadable</span></a>]? = <span class="keyword">nil</span>,
-                <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-ios/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
+    <span class="keyword">func</span> <span class="function">upload</span>(<span class="variable">using</span> <span class="variable">uploadables</span>: [<a href="https://filestack.github.io/filestack-swift/Uploadable"><span class="type">Uploadable</span></a>]? = <span class="keyword">nil</span>,
+                <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-swift/UploadOptions"><span class="type">UploadOptions</span></a> = .<span class="variable">defaults</span>,
                 <span class="variable">queue</span>: <span class="type">DispatchQueue</span> = .<span class="variable">main</span>,
                 <span class="variable">uploadProgress</span>: ((<span class="type">Progress</span>) -&gt; <span class="type">Void</span>)? = <span class="keyword">nil</span>,
-                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-ios/Uploader"><span class="type">Uploader</span></a> &amp; <a href="https://filestack.github.io/filestack-ios/DeferredAdd"><span class="type">DeferredAdd</span></a>  </body></html></code></pre>
+                <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>]) -&gt; <span class="type">Void</span>) -&gt; <a href="https://filestack.github.io/filestack-swift/Uploader"><span class="type">Uploader</span></a> &amp; <a href="https://filestack.github.io/filestack-swift/DeferredAdd"><span class="type">DeferredAdd</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Uploads an array of <code>Uploadable</code> items to a given storage location.</p>
@@ -888,7 +888,7 @@
 
     <footer>
         <p>
-    Generated on <time datetime="2021-08-06T16:22:15+0200">August 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2021-08-06T16:25:10+0200">August 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>

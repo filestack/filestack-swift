@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filestack - Transformable</title>
-    <link rel="stylesheet" type="text/css" href="https://filestack.github.io/filestack-ios/all.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="https://filestack.github.io/filestack-swift/all.css" media="all" />
 </head>
 <body>
     <header>
-        <a href="https://filestack.github.io/filestack-ios/">
+        <a href="https://filestack.github.io/filestack-swift/">
             <strong>
                 Filestack
             </strong>
@@ -64,7 +64,7 @@ about image transformations.</p>
 <!-- Transformable -->
 <g id="node1" class="node class current">
 <title>Transformable</title>
-<g id="a_node1"><a xlink:href="https://filestack.github.io/filestack-ios/Transformable" xlink:title="Transformable">
+<g id="a_node1"><a xlink:href="https://filestack.github.io/filestack-swift/Transformable" xlink:title="Transformable">
 <path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
 <text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">Transformable</text>
 </a>
@@ -113,7 +113,7 @@ about image transformations.</p>
         <code><a href="#transformable.security">security</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-ios/Security"><span class="type">Security</span></a>? </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span> <span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">security</span>: <a href="https://filestack.github.io/filestack-swift/Security"><span class="type">Security</span></a>? </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A <code>Security</code> object. <code>nil</code> by default.</p>
@@ -205,14 +205,14 @@ about image transformations.</p>
     <span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">deprecated</span>, <span class="variable">message</span>: <span class="string literal">"Marked for removal in version 3.0. Use the new store(using:base64Decode:queue:completionHandler) instead"</span>)
     <span class="attribute">@</span><span class="attribute">discardableResult</span>
     <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">store</span>(<span class="variable">fileName</span>: <span class="type">String</span>? = <span class="keyword">nil</span>,
-                      <span class="variable">location</span>: <a href="https://filestack.github.io/filestack-ios/StorageLocation"><span class="type">StorageLocation</span></a>,
+                      <span class="variable">location</span>: <a href="https://filestack.github.io/filestack-swift/StorageLocation"><span class="type">StorageLocation</span></a>,
                       <span class="variable">path</span>: <span class="type">String</span>? = <span class="keyword">nil</span>,
                       <span class="variable">container</span>: <span class="type">String</span>? = <span class="keyword">nil</span>,
                       <span class="variable">region</span>: <span class="type">String</span>? = <span class="keyword">nil</span>,
-                      <span class="variable">access</span>: <a href="https://filestack.github.io/filestack-ios/StorageAccess"><span class="type">StorageAccess</span></a>,
+                      <span class="variable">access</span>: <a href="https://filestack.github.io/filestack-swift/StorageAccess"><span class="type">StorageAccess</span></a>,
                       <span class="variable">base64Decode</span>: <span class="type">Bool</span>,
                       <span class="variable">queue</span>: <span class="type">DispatchQueue</span>? = .<span class="variable">main</span>,
-                      <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-ios/FileLink"><span class="type">FileLink</span></a>?, <a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <span class="keyword">Self</span>  </body></html></code></pre>
+                      <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-swift/FileLink"><span class="type">FileLink</span></a>?, <a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <span class="keyword">Self</span>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Stores a copy of the transformation results to your preferred filestore.</p>
@@ -292,7 +292,7 @@ about image transformations.</p>
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
-    <span class="keyword">func</span> <span class="function">add</span>(<span class="variable">transform</span>: <a href="https://filestack.github.io/filestack-ios/Transform"><span class="type">Transform</span></a>) -&gt; <span class="keyword">Self</span>  </body></html></code></pre>
+    <span class="keyword">func</span> <span class="function">add</span>(<span class="variable">transform</span>: <a href="https://filestack.github.io/filestack-swift/Transform"><span class="type">Transform</span></a>) -&gt; <span class="keyword">Self</span>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Adds a new transformation to the transformation chain.</p>
@@ -339,10 +339,10 @@ about image transformations.</p>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">objc</span>
     <span class="attribute">@</span><span class="attribute">discardableResult</span>
-    <span class="keyword">func</span> <span class="function">store</span>(<span class="variable">using</span> <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-ios/StorageOptions"><span class="type">StorageOptions</span></a>,
+    <span class="keyword">func</span> <span class="function">store</span>(<span class="variable">using</span> <span class="variable">options</span>: <a href="https://filestack.github.io/filestack-swift/StorageOptions"><span class="type">StorageOptions</span></a>,
                <span class="variable">base64Decode</span>: <span class="type">Bool</span> = <span class="keyword">false</span>,
                <span class="variable">queue</span>: <span class="type">DispatchQueue</span>? = .<span class="variable">main</span>,
-               <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-ios/FileLink"><span class="type">FileLink</span></a>?, <a href="https://filestack.github.io/filestack-ios/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <span class="keyword">Self</span>  </body></html></code></pre>
+               <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="https://filestack.github.io/filestack-swift/FileLink"><span class="type">FileLink</span></a>?, <a href="https://filestack.github.io/filestack-swift/JSONResponse"><span class="type">JSONResponse</span></a>) -&gt; <span class="type">Void</span>) -&gt; <span class="keyword">Self</span>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Stores a copy of the transformation results to your preferred filestore.</p>
@@ -395,7 +395,7 @@ about image transformations.</p>
 
     <footer>
         <p>
-    Generated on <time datetime="2021-08-06T16:22:15+0200">August 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2021-08-06T16:25:10+0200">August 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
