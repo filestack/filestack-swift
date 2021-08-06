@@ -129,6 +129,7 @@ extension UploadService {
 
         request.httpMethod = method
         request.allHTTPHeaderFields = headers
+        request.networkServiceType = .responsiveData
 
         let task: URLSessionUploadTask
 
