@@ -1,745 +1,989 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>FilestackSDK  Reference</title>
-    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
-    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
-    <meta charset="utf-8">
-    <script src="js/jquery.min.js" defer></script>
-    <script src="js/jazzy.js" defer></script>
-    
-    <script src="js/lunr.min.js" defer></script>
-    <script src="js/typeahead.jquery.js" defer></script>
-    <script src="js/jazzy.search.js" defer></script>
-  </head>
-  <body>
-
-
-    <a title="FilestackSDK  Reference"></a>
-
-    <header class="header">
-      <p class="header-col header-col--primary">
-        <a class="header-link" href="index.html">
-          FilestackSDK 2.8.0 Docs
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filestack - Filestack</title>
+    <link rel="stylesheet" type="text/css" href="https://filestack.github.io/filestack-ios/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="https://filestack.github.io/filestack-ios/">
+            <strong>
+                Filestack
+            </strong>
+            <span>Documentation</span>
         </a>
-         (98% documented)
-      </p>
-    
-      <p class="header-col--secondary">
-        <form role="search" action="search.json">
-          <input type="text" placeholder="Search documentation" data-typeahead>
-        </form>
-      </p>
-    
-        <p class="header-col header-col--secondary">
-          <a class="header-link" href="http://github.com/filestack/filestack-swift">
-            <img class="header-icon" src="img/gh.png"/>
-            View on GitHub
-          </a>
-        </p>
-    
     </header>
 
-    <p class="breadcrumbs">
-      <a class="breadcrumb" href="index.html">FilestackSDK Reference</a>
-      <img class="carat" src="img/carat.png" />
-      FilestackSDK  Reference
-    </p>
-
-    <div class="content-wrapper">
-      <nav class="navigation">
-        <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Classes.html">Classes</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ASCIITransform.html">ASCIITransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/AVTransform.html">AVTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/AnimateTransform.html">AnimateTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/AutoImageTransform.html">AutoImageTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/BaseOperation.html">BaseOperation</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/BlackAndWhiteTransform.html">BlackAndWhiteTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/BlurFacesTransform.html">BlurFacesTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/BlurTransform.html">BlurTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/BorderTransform.html">BorderTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CacheTransform.html">CacheTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CircleTransform.html">CircleTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/Client.html">Client</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CollageTransform.html">CollageTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CollageTransformCollection.html">CollageTransformCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CompressTransform.html">CompressTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ConvertTransform.html">ConvertTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CopyrightTransform.html">CopyrightTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CropFacesTransform.html">CropFacesTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/CropTransform.html">CropTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/DataResponse.html">DataResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/DetectFacesTransform.html">DetectFacesTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/DocumentDetectionTransform.html">DocumentDetectionTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/DownloadResponse.html">DownloadResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/EnhanceTransform.html">EnhanceTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/FallbackTransform.html">FallbackTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/FileLink.html">FileLink</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/FlipTransform.html">FlipTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/FlopTransform.html">FlopTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ImageSizeTransform.html">ImageSizeTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/JSONResponse.html">JSONResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/MinifyCSSTransform.html">MinifyCSSTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/MinifyJSTransform.html">MinifyJSTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ModulateTransform.html">ModulateTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/MonochromeTransform.html">MonochromeTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/NegativeTransform.html">NegativeTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/NoMetadataTransform.html">NoMetadataTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/OCRTransform.html">OCRTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/OilPaintTransform.html">OilPaintTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PDFConvertTransform.html">PDFConvertTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PDFInfoTransform.html">PDFInfoTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PDFMonochromeTransform.html">PDFMonochromeTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PartialBlurTransform.html">PartialBlurTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PartialPixelateTransform.html">PartialPixelateTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PixelateFacesTransform.html">PixelateFacesTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PixelateTransform.html">PixelateTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/PolaroidTransform.html">PolaroidTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/Policy.html">Policy</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ProgressiveJPEGTransform.html">ProgressiveJPEGTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/QualityTransform.html">QualityTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RedEyeRemovalTransform.html">RedEyeRemovalTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ResizeTransform.html">ResizeTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RotateTransform.html">RotateTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RoundedCornersTransform.html">RoundedCornersTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/SecureForWorkTransform.html">SecureForWorkTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/Security.html">Security</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/SepiaTransform.html">SepiaTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ShadowTransform.html">ShadowTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/SharpenTransform.html">SharpenTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/StorageOptions.html">StorageOptions</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/TagsTransform.html">TagsTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/TornEdgesTransform.html">TornEdgesTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/Transformable.html">Transformable</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/URLScreenshotTransform.html">URLScreenshotTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/UploadOptions.html">UploadOptions</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/UploadService.html">UploadService</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/UpscaleTransform.html">UpscaleTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/VignetteTransform.html">VignetteTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/WatermarkTransform.html">WatermarkTransform</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ZipTransform.html">ZipTransform</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/StorageAccess.html">StorageAccess</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/StorageLocation.html">StorageLocation</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformAlign.html">TransformAlign</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformAspectMode.html">TransformAspectMode</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformBlurMode.html">TransformBlurMode</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformColorSpace.html">TransformColorSpace</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformCropMode.html">TransformCropMode</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformEnhancePreset.html">TransformEnhancePreset</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformFiletype.html">TransformFiletype</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformFit.html">TransformFit</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformNoiseMode.html">TransformNoiseMode</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformPageFormat.html">TransformPageFormat</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformPageOrientation.html">TransformPageOrientation</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformShapeType.html">TransformShapeType</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/TransformStyleMode.html">TransformStyleMode</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/UploadState.html">UploadState</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/URL.html">URL</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/Cancellable.html">Cancellable</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/DeferredAdd.html">DeferredAdd</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/Monitorizable.html">Monitorizable</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/Startable.html">Startable</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/Uploadable.html">Uploadable</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/Uploader.html">Uploader</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Structs.html">Structures</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/MetadataOptions.html">MetadataOptions</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/PolicyCall.html">PolicyCall</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/TransformPosition.html">TransformPosition</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK19NetworkDataResponsea">NetworkDataResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK23NetworkDownloadResponsea">NetworkDownloadResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK19NetworkJSONResponsea">NetworkJSONResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12FilestackSDK12UploadStatusa">UploadStatus</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <article class="main-content">
-
-        <section class="section">
-          <div class="section-content top-matter">
-            
-            <p><a href="https://codeclimate.com/github/filestack/filestack-swift"><img src="https://codeclimate.com/github/filestack/filestack-swift.png" alt="Code Climate"></a> <a href="https://travis-ci.org/filestack/filestack-swift"><img src="https://travis-ci.org/filestack/filestack-swift.svg?branch=master" alt="Build Status"></a></p>
-<h1 id='filestack-swift-sdk' class='heading'>Filestack Swift SDK</h1>
-
-<p><a href="https://www.filestack.com"><img src="https://www.filestack.com/docs/images/fs-logo-dark.svg" align="left" hspace="10" vspace="6"></a>
-This is the official Swift SDK for Filestack - API and content management system that makes it easy to add powerful file uploading and transformation capabilities to any web or mobile application.</p>
-<h2 id='resources' class='heading'>Resources</h2>
-
-<ul>
-<li><a href="https://www.filestack.com">Filestack</a></li>
-<li><a href="https://www.filestack.com/docs">Documentation</a></li>
-<li><a href="https://filestack.github.io/filestack-swift/">API Reference</a></li>
-</ul>
-<h2 id='requirements' class='heading'>Requirements</h2>
-
-<ul>
-<li>Xcode 10.2+ (<em>Xcode 12+ required for SPM support</em>)</li>
-<li>Swift 4.2+ / Objective-C</li>
-<li>iOS 11.0+</li>
-</ul>
-<h2 id='installing' class='heading'>Installing</h2>
-<h3 id='cocoapods' class='heading'>CocoaPods</h3>
-
-<p><a href="http://cocoapods.org/">CocoaPods</a> is a dependency manager for Cocoa projects. You can install it with the following command:</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>gem <span class="nb">install </span>cocoapods
-</code></pre>
-
-<p>To integrate FilestackSDK into your Xcode project using CocoaPods, specify it in your <code>Podfile</code>:</p>
-<pre class="highlight ruby"><code><span class="n">source</span> <span class="s1">'https://github.com/CocoaPods/Specs.git'</span>
-<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'11.0'</span>
-<span class="n">use_frameworks!</span>
-
-<span class="n">target</span> <span class="s1">'&lt;Your Target Name&gt;'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'FilestackSDK'</span><span class="p">,</span> <span class="s1">'~&gt; 2.8.0'</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Then, run the following command:</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>pod <span class="nb">install</span>
-</code></pre>
-<h3 id='carthage' class='heading'>Carthage</h3>
-
-<p><a href="https://github.com/Carthage/Carthage">Carthage</a> is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.</p>
-
-<p>You can install Carthage with <a href="http://brew.sh/">Homebrew</a> using the following command:</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>brew update
-<span class="nv">$ </span>brew <span class="nb">install </span>carthage
-</code></pre>
-
-<p>To integrate FilestackSDK into your Xcode project using Carthage, specify it in your <code>Cartfile</code>:</p>
-
-<p><code>github &quot;filestack/filestack-swift&quot; ~&gt; 2.8.0</code></p>
-
-<p>Run <code>carthage update</code> to build the framework and drag the built <code>FilestackSDK.framework</code> into your Xcode project.</p>
-<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
-
-<p>Add <code>https://github.com/filestack/filestack-swift.git</code> as a <a href="https://swift.org/package-manager/">Swift Package Manager</a> dependency to your Xcode project.</p>
-
-<p>Alternatively, if you are adding <code>FilestackSDK</code> to your own Swift Package, declare the dependency in your <code>Package.swift</code>:</p>
-<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/filestack/filestack-swift.git"</span><span class="p">,</span> <span class="o">.</span><span class="nf">upToNextMajor</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="s">"2.8.0"</span><span class="p">))</span>
-<span class="p">]</span>
-</code></pre>
-<h3 id='manually' class='heading'>Manually</h3>
-<h4 id='embedded-framework' class='heading'>Embedded Framework</h4>
-
-<p>Open up Terminal, cd into your top-level project directory, and run the following command &ldquo;if&rdquo; your project is not initialized as a git repository:</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>git init
-</code></pre>
-
-<p>Add FilestackSDK and its dependencies as git submodules by running the following commands:</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>git submodule add https://github.com/filestack/filestack-swift.git
-</code></pre>
-
-<p>Open the new <code>filestack-swift</code> folder, and drag the <code>FilestackSDK.xcodeproj</code> into the Project Navigator of your application&rsquo;s Xcode project.</p>
-
-<p>It should appear nested underneath your application&rsquo;s blue project icon. Whether it is above or below all the other Xcode groups does not matter.
-Select the <code>FilestackSDK.xcodeproj</code> in the Project Navigator and verify the deployment target matches that of your application target.</p>
-
-<p>Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the &ldquo;Targets&rdquo; heading in the sidebar.</p>
-
-<p>In the tab bar at the top of that window, open the &ldquo;General&rdquo; panel.</p>
-
-<p>Click on the + button under the &ldquo;Embedded Binaries&rdquo; section and choose the <code>FilestackSDK.framework</code> for iOS.</p>
-<h2 id='usage' class='heading'>Usage</h2>
-
-<details>
-<summary>Integration into a Swift project</summary>
-
-1. Import the framework into your code:
-
-    &ldquo;`swift
-    import FilestackSDK
-    &rdquo;`
-
-2. Instantiate a `Client` object by providing your API key and, optionally, a `Security` object:
-
-    &ldquo;`swift
-    // Initialize a `Policy` with the expiry time and permissions you need.
-    let oneDayInSeconds: TimeInterval = 60 * 60 * 24 // expires tomorrow
-    let policy = Policy(// Set your expiry time (24 hours in our case)
-                        expiry: Date(timeIntervalSinceNow: oneDayInSeconds),
-                        // Set the permissions you want your policy to have
-                        call: [.pick, .read, .store])
-
-    // Initialize a `Security` object by providing a `Policy` object and your app secret.
-    // You can find and/or enable your app secret in the Developer Portal.
-    guard let security = try? Security(policy: policy, appSecret: &quot;YOUR-APP-SECRET&rdquo;) else {
-        return
-    }
-
-    // Initialize your `Client` object by passing a valid API key, and security options.
-    let client = Client(apiKey: &ldquo;YOUR-API-KEY&rdquo;, security: security)
-    &ldquo;`
-
-</details>
-
-<details>
-<summary>Integration into an Objective-C project</summary>
-
-1. Import the framework into your code:
-
-    &rdquo;`objective-c
-    @import FilestackSDK;
-    &ldquo;`
-
-2. Instantiate a `FSClient` object by providing your API key and, optionally, a `FSSecurity` object:
-
-    &rdquo;`objective-c
-    // Initialize a `FSPolicy` object with the expiry time and permissions you need.
-    NSTimeInterval oneDayInSeconds = 60 * 60 * 24; // expires tomorrow
-    NSDate *expiryDate = [[NSDate alloc] initWithTimeIntervalSinceNow:oneDayInSeconds];
-    FSPolicyCall permissions = FSPolicyCallPick | FSPolicyCallRead | FSPolicyCallStore;
-
-    FSPolicy *policy = [[FSPolicy alloc] initWithExpiry:expiryDate
-                                                   call:permissions];
-
-    NSError *error;
-
-    // Initialize a `Security` object by providing a `FSPolicy` object and your app secret.
-    // You can find and/or enable your app secret in the Developer Portal.
-    FSSecurity *security = [[FSSecurity alloc] initWithPolicy:policy
-                                                    appSecret:@&ldquo;YOUR-APP-SECRET&rdquo;
-                                                        error:&error];
-
-    if (error != nil) {
-        NSLog(@&ldquo;Error instantiating policy object: %@&rdquo;, error.localizedDescription);
-        return;
-    }
-
-    // Initialize your `Client` object by passing a valid API key, and security options.
-    FSClient *client = [[FSClient alloc] initWithApiKey:@&ldquo;YOUR-API-KEY&rdquo;
-                                               security:security];
-    &ldquo;`
-
-For more information, please consult our [API Reference](https://filestack.github.io/filestack-swift/).
-</details>
-
-<details>
-<summary>Uploading files directly to a storage location</summary>
-
-Both regular and Intelligent Ingestion uploads use the same API function available in the `Client` class. However, if your account has Intelligent Ingestion support enabled and you prefer using the regular uploading mechanism, you could disable it by setting the `useIntelligentIngestionIfAvailable` argument to `false` (see the relevant examples below.)
-
-<details>
-<summary>Swift Example</summary>
-
-&rdquo;`swift
-// Define upload options (see `UploadOptions` for all the available options)
-// Here we use `.defaults` which implies:
-// * preferIntelligentIngestion = true
-// * startImmediately = true
-// * deleteTemporaryFilesAfterUpload = false
-// * storeOptions = StorageOptions(location: .s3, access: .private)
-// * defaultPartUploadConcurrency = 5
-// * defaultChunkUploadConcurrency = 8
-// * chunkSize = 5mbs
-let uploadOptions = UploadOptions.defaults
-// For instance, if you don&rsquo;t want to use Intelligent Ingestion regardless of whether it is available:
-uploadOptions.preferIntelligentIngestion = false
-// You may also easily override the default store options:
-uploadOptions.storeOptions = StorageOptions(// Store location (e.g. S3, Dropbox, Rackspace, Azure, Google Cloud Storage)
-                                            location: .s3,
-                                            // AWS Region for S3 (e.g. &ldquo;us-east-1&rdquo;, &ldquo;eu-west-1&rdquo;, &ldquo;ap-northeast-1&rdquo;, etc.)
-                                            region: &ldquo;us-east-1&rdquo;,
-                                            // The name of your S3 bucket
-                                            container: &ldquo;YOUR-S3-BUCKET&rdquo;,
-                                            // Destination path in the store.
-                                            // You may use a path to a folder (e.g. /public/) or,
-                                            // alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
-                                            // When using a path to a folder, the uploaded file will be stored at that folder using a
-                                            // filename derived from the original filename.
-                                            // When using a path to a filename, the uploaded file will be stored at the given path
-                                            // using the filename indicated in the path.
-                                            path: &ldquo;/public/oncorhynchus.jpg&rdquo;,
-                                            // Custom MIME type (useful when uploadable has no way of knowing its MIME type)
-                                            mimeType: &ldquo;image/jpg&rdquo;,
-                                            // Access permissions (either public or private)
-                                            access: .public,
-                                            // An array of workflow IDs to trigger for each upload
-                                            workflows: [&ldquo;WF-1&rdquo;, &ldquo;WF-2&rdquo;]
-                                            )
-
-let uploadable = URL(&hellip;) // may also be Data or arrays of URL or Data.
-
-// Call the function in your `Client` instance that takes care of uploading your Uploadable.
-// Please notice that most arguments have sensible defaults and may be ommited.
-let uploader = client.upload(// You may pass an URL, Data or arrays of URL or Data
-                             using: uploadable,
-                             // Set the upload options here. If none given, `UploadOptions.defaults`
-                             // is assumed.
-                             options: uploadOptions,
-                             // Set the dispatch queue where you want your upload progress
-                             // and completion handlers to be called.
-                             // Remember that any UI updates should be performed on the
-                             // main queue.
-                             // You can omit this parameter, and the main queue will be
-                             // used by default.
-                             queue: .main,
-                             // Set your upload progress handler here (optional)
-                             uploadProgress: { progress in
-                                 // Here you may update the UI to reflect the upload progress.
-                                 print(&ldquo;Progress: \(progress)&rdquo;)
-                             }) { response in
-                                 // Try to obtain Filestack handle
-                                 if let json = response?.json, let handle = json[&ldquo;handle&rdquo;] as? String {
-                                     // Use Filestack handle
-                                 } else if let error = response?.error {
-                                     // Handle error
-                                 }
-                             }
-
-// Start upload (only useful when `startImmediately` option is `false`)
-uploader.start()
-
-// Cancel ongoing upload.
-uploader.cancel()
-
-// Query progress.
-uploader.progress // returns a `Progress` object
-&ldquo;`
-</details>
-
-<details>
-<summary>Objective-C Example</summary>
-
-&rdquo;`objective-c
-// Define upload options (see `FSUploadOptions` for all the available options)
-// Here we use `.defaults` which implies:
-// * preferIntelligentIngestion = true
-// * startImmediately = true
-// * deleteTemporaryFilesAfterUpload = false
-// * storeOptions = FSStorageOptions.defaults (= location:S3, access:private)
-// * defaultPartUploadConcurrency = 5
-// * defaultChunkUploadConcurrency = 8
-// * chunkSize = 5mbs
-FSUploadOptions *uploadOptions = FSUploadOptions.defaults;
-
-// For instance, if you don&rsquo;t want to use Intelligent Ingestion regardless of whether it is available:
-uploadOptions.preferIntelligentIngestion = NO;
-
-// You may also easily override the default store options:
-uploadOptions.storeOptions = [[FSStorageOptions alloc] initWithLocation:FSStorageLocationS3 access:FSStorageAccessPrivate];
-// AWS Region for S3 (e.g. &ldquo;us-east-1&rdquo;, &ldquo;eu-west-1&rdquo;, &ldquo;ap-northeast-1&rdquo;, etc.)
-uploadOptions.storeOptions.region = @&ldquo;us-east-1&rdquo;;
-// The name of your S3 bucket
-uploadOptions.storeOptions.container = @&ldquo;YOUR-S3-BUCKET&rdquo;;
-// Destination path in the store.
-// You may use a path to a folder (e.g. /public/) or,
-// alternatively a path containing a filename (e.g. /public/oncorhynchus.jpg).
-// When using a path to a folder, the uploaded file will be stored at that folder using a
-// filename derived from the original filename.
-// When using a path to a filename, the uploaded file will be stored at the given path
-// using the filename indicated in the path.
-uploadOptions.storeOptions.path = @&ldquo;/public/oncorhynchus.jpg&rdquo;;
-// Custom MIME type (useful when uploadable has no way of knowing its MIME type)
-uploadOptions.storeOptions.mimeType = @&ldquo;image/jpg&rdquo;;
-// An array of workflow IDs to trigger for each upload
-uploadOptions.storeOptions.workflows = @[@&ldquo;WF-1&rdquo;, @&ldquo;WF-2&rdquo;];
-
-// Some local URL to be uploaded
-NSURL *someURL = &hellip;;
-
-FSUploader *uploader = [client uploadURLUsing:someURL
-                                      options:uploadOptions
-                                        queue:dispatch_get_main_queue()
-                               uploadProgress:^(NSProgress * _Nonnull progress) {
-                                   // Here you may update the UI to reflect the upload progress.
-                                   NSLog(@&ldquo;Progress: %@&rdquo;, progress);
-                               }
-                              completionHandler:^(FSNetworkJSONResponse * _Nullable response) {
-         NSDictionary *jsonResponse = response.json;
-         NSString *handle = jsonResponse[@&ldquo;handle&rdquo;];
-         NSError *error = response.error;
-
-         if (handle) {
-             // Use Filestack handle
-             NSLog(@&ldquo;Handle is: %@&rdquo;, handle);
-         } else if (error) {
-             // Handle error
-             NSLog(@&ldquo;Error is: %@&rdquo;, error);
-         }
-     }
-];
-
-// Other alternative uploading methods are available in `FSClient`:
-// - For multiple URL uploading: `uploadMultipleURLs:options:queue:uploadProgress:completionHandler:)`
-// - For data uploading: `uploadDataUsing:options:queue:uploadProgress:completionHandler:)`
-// - For multiple data uploading: `uploadMultipleDataUsing:options:queue:uploadProgress:completionHandler:)`
-
-// Start upload (only useful when `startImmediately` option is `false`)
-[uploader start];
-
-// Cancel ongoing upload.
-[uploader cancel];
-
-// Query progress.
-uploader.progress // returns an `NSProgress` object
-&ldquo;`
-</details>
-
-<p></details></p>
-
-<details>
-<summary>Enabling background upload support</summary>
-
-New in version `2.3`, we added support for uploading files in a background session. In order to activate this feature, please do the following:
-
-&rdquo;`swift
-// Set `UploadService.shared.useBackgroundSession` to true to allow uploads in the background.
-FilestackSDK.UploadService.shared.useBackgroundSession = true
-&ldquo;`
-</details>
-<h2 id='versioning' class='heading'>Versioning</h2>
-
-<p>Filestack Swift SDK follows the <a href="http://semver.org/">Semantic Versioning</a>.</p>
-<h2 id='issues' class='heading'>Issues</h2>
-
-<p>If you have problems, please create a <a href="https://github.com/filestack/filestack-swift/issues">Github Issue</a>.</p>
-<h2 id='contributing' class='heading'>Contributing</h2>
-
-<p>Please see <a href="https://github.com/filestack/filestack-swift/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for details.</p>
-<h2 id='credits' class='heading'>Credits</h2>
-
-<p>Thank you to all the <a href="https://github.com/filestack/filestack-swift/graphs/contributors">contributors</a>.</p>
-
-          </div>
-        </section>
-
-
-      </article>
-    </div>
-    <section class="footer">
-      <p>&copy; 2021 <a class="link" href="https://github.com/filestack/filestack-swift" target="_blank" rel="external">Filestack</a>. All rights reserved. (Last updated: 2021-08-06)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#classes">Classes</a></li><li><a href="#structures">Structures</a></li><li><a href="#enumerations">Enumerations</a></li><li><a href="#protocols">Protocols</a></li><li><a href="#typealiases">Typealiases</a></li><li><a href="#extensions">Extensions</a></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+                <section id="classes">
+        <h2>Classes</h2>
+        <dl>
+            <dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/UploadService" title="class - UploadService">
+        Upload​Service
+    </a>
+</dt>
+<dd>
+    <p>Service used for uploading files.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/Client" title="class - Client">
+        Client
+    </a>
+</dt>
+<dd>
+    <p>Represents a client that allows communicating with the <a href="https://www.filestack.com/docs/rest-api">Filestack REST API</a>.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/DataResponse" title="class - DataResponse">
+        Data​Response
+    </a>
+</dt>
+<dd>
+    <p>This object represents a network data response.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/DownloadResponse" title="class - DownloadResponse">
+        Download​Response
+    </a>
+</dt>
+<dd>
+    <p>This object represents a network download response.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/FileLink" title="class - FileLink">
+        File​Link
+    </a>
+</dt>
+<dd>
+    <p>Represents a <code>FileLink</code> object.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/JSONResponse" title="class - JSONResponse">
+        JSONResponse
+    </a>
+</dt>
+<dd>
+    <p>This object represents a network JSON response.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/Policy" title="class - Policy">
+        Policy
+    </a>
+</dt>
+<dd>
+    <p>Represents a policy object.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/Security" title="class - Security">
+        Security
+    </a>
+</dt>
+<dd>
+    <p>Represents a security object.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/StorageOptions" title="class - StorageOptions">
+        Storage​Options
+    </a>
+</dt>
+<dd>
+    <p>Represents a set of storage options.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/Transformable" title="class - Transformable">
+        Transformable
+    </a>
+</dt>
+<dd>
+    <p>Represents an <code>Transformable</code> object.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/UploadOptions" title="class - UploadOptions">
+        Upload​Options
+    </a>
+</dt>
+<dd>
+    <p>Represents a set of options for uploading items to a given storage location.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/BaseOperation" title="class - BaseOperation">
+        Base​Operation
+    </a>
+</dt>
+<dd>
+    <p>An operation that simplifies state flag handling and provides a method to finish a task delivering a <code>result</code>
+containing either a <code>Success</code> response or an <code>Error</code> response.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ASCIITransform" title="class - ASCIITransform">
+        ASCIITransform
+    </a>
+</dt>
+<dd>
+    <p>Converts the image to black and white.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/AVTransform" title="class - AVTransform">
+        AVTransform
+    </a>
+</dt>
+<dd>
+    <p>Converts a video or audio to a different format, resolution, sample rate, etc.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/AnimateTransform" title="class - AnimateTransform">
+        Animate​Transform
+    </a>
+</dt>
+<dd>
+    <p>Converts a set of images to a GIF file.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/AutoImageTransform" title="class - AutoImageTransform">
+        Auto​Image​Transform
+    </a>
+</dt>
+<dd>
+    <p>Changes encoding of the image based on the user agent and therefore provides better compression and quality
+characteristics compared to their older JPEG and PNG counterparts.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/BlackAndWhiteTransform" title="class - BlackAndWhiteTransform">
+        Black​And​White​Transform
+    </a>
+</dt>
+<dd>
+    <p>Converts the image to black and white.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/BlurFacesTransform" title="class - BlurFacesTransform">
+        Blur​Faces​Transform
+    </a>
+</dt>
+<dd>
+    <p>Blur selected faces contained inside an image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/BlurTransform" title="class - BlurTransform">
+        Blur​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a blurring effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/BorderTransform" title="class - BorderTransform">
+        Border​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a border effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CacheTransform" title="class - CacheTransform">
+        Cache​Transform
+    </a>
+</dt>
+<dd>
+    <p>Takes the file or files that are passed into it and compresses them into a zip file.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CircleTransform" title="class - CircleTransform">
+        Circle​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a circle border effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CollageTransform" title="class - CollageTransform">
+        Collage​Transform
+    </a>
+</dt>
+<dd>
+    <p>The collage task accepts an array of Filestack file handles, storage aliases, or external URLs.
+These files are appended in given order to the base file of the transformation URL.
+Altogther the base image and the passed files are the images that will comprise the collage.
+The order in which they are added dictates how the images will be arranged.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CollageTransformCollection" title="class - CollageTransformCollection">
+        Collage​Transform​Collection
+    </a>
+</dt>
+<dd>
+    <p>Class that is used for creating and sanitizing collection of file handles, storage aliases, or external urls.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CompressTransform" title="class - CompressTransform">
+        Compress​Transform
+    </a>
+</dt>
+<dd>
+    <p>Utilizes mozjpeg to offer improved compression for JPGS over the algorithm used for <code>output=compress:true</code>.
+It will not attempt to re-compress a previously compressed image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ConvertTransform" title="class - ConvertTransform">
+        Convert​Transform
+    </a>
+</dt>
+<dd>
+    <p>Converts the image to a different format.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CopyrightTransform" title="class - CopyrightTransform">
+        Copyright​Transform
+    </a>
+</dt>
+<dd>
+    <p>Detects whether your image is copyright protected or not, and if it is protected, returns all types and related
+details such as purchase link, etc.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CropFacesTransform" title="class - CropFacesTransform">
+        Crop​Faces​Transform
+    </a>
+</dt>
+<dd>
+    <p>Crops selected faces contained inside an image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/CropTransform" title="class - CropTransform">
+        Crop​Transform
+    </a>
+</dt>
+<dd>
+    <p>Crops the image to a specified rectangle.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/DetectFacesTransform" title="class - DetectFacesTransform">
+        Detect​Faces​Transform
+    </a>
+</dt>
+<dd>
+    <p>Detects the faces contained inside an image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/DocumentDetectionTransform" title="class - DocumentDetectionTransform">
+        Document​Detection​Transform
+    </a>
+</dt>
+<dd>
+    <p>Detects your document in the image, transforms it to fully fit the image, and preprocesses it using de-noising
+and distortion reduction in order to increase the accuracy of OCR engine in text extraction.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/EnhanceTransform" title="class - EnhanceTransform">
+        Enhance​Transform
+    </a>
+</dt>
+<dd>
+    <p>Smartly analyzes a photo and performs color correction and other enhancements to improve the overall quality of the
+image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/FallbackTransform" title="class - FallbackTransform">
+        Fallback​Transform
+    </a>
+</dt>
+<dd>
+    <p>Returns default file if the source of the transformation does not work or the transformation fails.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/FlipTransform" title="class - FlipTransform">
+        Flip​Transform
+    </a>
+</dt>
+<dd>
+    <p>Flips/mirrors the image vertically.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/FlopTransform" title="class - FlopTransform">
+        Flop​Transform
+    </a>
+</dt>
+<dd>
+    <p>Flips/mirrors the image horizontally.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ImageSizeTransform" title="class - ImageSizeTransform">
+        Image​Size​Transform
+    </a>
+</dt>
+<dd>
+    <p>Returns the width and height of a given image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/MinifyCSSTransform" title="class - MinifyCSSTransform">
+        Minify​CSSTransform
+    </a>
+</dt>
+<dd>
+    <p>Minifies your CSS files.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/MinifyJSTransform" title="class - MinifyJSTransform">
+        Minify​JSTransform
+    </a>
+</dt>
+<dd>
+    <p>Minifies your JavaScript files.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ModulateTransform" title="class - ModulateTransform">
+        Modulate​Transform
+    </a>
+</dt>
+<dd>
+    <p>Changes the image brightness, saturation and hue.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/MonochromeTransform" title="class - MonochromeTransform">
+        Monochrome​Transform
+    </a>
+</dt>
+<dd>
+    <p>Converts the image to monochrome.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/NegativeTransform" title="class - NegativeTransform">
+        Negative​Transform
+    </a>
+</dt>
+<dd>
+    <p>Returns a negative image by portraying the lightest area as the darkest and the darkest areas as the lightest.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/NoMetadataTransform" title="class - NoMetadataTransform">
+        NoMetadata​Transform
+    </a>
+</dt>
+<dd>
+    <p>Removes any metadata embedded in an image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/OCRTransform" title="class - OCRTransform">
+        OCRTransform
+    </a>
+</dt>
+<dd>
+    <p>Detects both printed and handwritten texts in images. The result follows the standard JSON format containing all of
+the details regarding detected text areas, lines, and words.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/OilPaintTransform" title="class - OilPaintTransform">
+        Oil​Paint​Transform
+    </a>
+</dt>
+<dd>
+    <p>Change the image to look like it was oil painted.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PDFConvertTransform" title="class - PDFConvertTransform">
+        PDFConvert​Transform
+    </a>
+</dt>
+<dd>
+    <p>Converts a PDF to a specific orientation, page format, and, optionally, extracts specific pages.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PDFInfoTransform" title="class - PDFInfoTransform">
+        PDFInfo​Transform
+    </a>
+</dt>
+<dd>
+    <p>Gets information about a PDF document.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PDFMonochromeTransform" title="class - PDFMonochromeTransform">
+        PDFMonochrome​Transform
+    </a>
+</dt>
+<dd>
+    <p>Converts a PDF to black and white version.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PartialBlurTransform" title="class - PartialBlurTransform">
+        Partial​Blur​Transform
+    </a>
+</dt>
+<dd>
+    <p>Changes image brightness, saturation and hue.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PartialPixelateTransform" title="class - PartialPixelateTransform">
+        Partial​Pixelate​Transform
+    </a>
+</dt>
+<dd>
+    <p>Changes image brightness, saturation and hue.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PixelateFacesTransform" title="class - PixelateFacesTransform">
+        Pixelate​Faces​Transform
+    </a>
+</dt>
+<dd>
+    <p>Pixelates selected faces contained inside an image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PixelateTransform" title="class - PixelateTransform">
+        Pixelate​Transform
+    </a>
+</dt>
+<dd>
+    <p>Pixelates the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/PolaroidTransform" title="class - PolaroidTransform">
+        Polaroid​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a Polaroid border effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ProgressiveJPEGTransform" title="class - ProgressiveJPEGTransform">
+        Progressive​JPEGTransform
+    </a>
+</dt>
+<dd>
+    <p>Converts an image to progressive JPEG.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/QualityTransform" title="class - QualityTransform">
+        Quality​Transform
+    </a>
+</dt>
+<dd>
+    <p>Sets the quality of your JPG or WEBP image without the danger of possibly generating a larger file.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/RedEyeRemovalTransform" title="class - RedEyeRemovalTransform">
+        Red​Eye​Removal​Transform
+    </a>
+</dt>
+<dd>
+    <p>Removes the red eye effect from photos.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ResizeTransform" title="class - ResizeTransform">
+        Resize​Transform
+    </a>
+</dt>
+<dd>
+    <p>Resizes the image to a given width and height using a particular fit and alignment mode.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/RotateTransform" title="class - RotateTransform">
+        Rotate​Transform
+    </a>
+</dt>
+<dd>
+    <p>Rotates an image in a range from 0 to 359 degrees or based on Exif information.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/RoundedCornersTransform" title="class - RoundedCornersTransform">
+        Rounded​Corners​Transform
+    </a>
+</dt>
+<dd>
+    <p>Rounds the image's corners.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/SecureForWorkTransform" title="class - SecureForWorkTransform">
+        Secure​For​Work​Transform
+    </a>
+</dt>
+<dd>
+    <p>Returns whether the image if safe to display.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/SepiaTransform" title="class - SepiaTransform">
+        Sepia​Transform
+    </a>
+</dt>
+<dd>
+    <p>Converts the image to sepia color.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ShadowTransform" title="class - ShadowTransform">
+        Shadow​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a shadow border effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/SharpenTransform" title="class - SharpenTransform">
+        Sharpen​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a sharpening effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/TagsTransform" title="class - TagsTransform">
+        Tags​Transform
+    </a>
+</dt>
+<dd>
+    <p>Analyzes and returns any tags associated to this image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/TornEdgesTransform" title="class - TornEdgesTransform">
+        Torn​Edges​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a torn edge border effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/Transform" title="class - Transform">
+        Transform
+    </a>
+</dt>
+<dd>
+    <p>:nodoc:</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/URLScreenshotTransform" title="class - URLScreenshotTransform">
+        URLScreenshot​Transform
+    </a>
+</dt>
+<dd>
+    <p>Captures content of given URL.
+The URL screenshot task will not work for content that is located in areas that require you to login.
+If the content is not publicly visible, then it will not be captured.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/UpscaleTransform" title="class - UpscaleTransform">
+        Upscale​Transform
+    </a>
+</dt>
+<dd>
+    <p>Upscales the image making it two times bigger.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/VignetteTransform" title="class - VignetteTransform">
+        Vignette​Transform
+    </a>
+</dt>
+<dd>
+    <p>Applies a vignette border effect to the image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/WatermarkTransform" title="class - WatermarkTransform">
+        Watermark​Transform
+    </a>
+</dt>
+<dd>
+    <p>Watermarks the image by overlaying another image on top of your main image.</p>
+
+</dd>
+<dt class="class">
+    <a href="https://filestack.github.io/filestack-ios/ZipTransform" title="class - ZipTransform">
+        Zip​Transform
+    </a>
+</dt>
+<dd>
+    <p>Takes the file or files that are passed into it and compresses them into a zip file.</p>
+
+</dd>
+        </dl>
     </section>
-  </body>
-</div>
+    <section id="structures">
+        <h2>Structures</h2>
+        <dl>
+            <dt class="structure">
+    <a href="https://filestack.github.io/filestack-ios/MetadataOptions" title="structure - MetadataOptions">
+        Metadata​Options
+    </a>
+</dt>
+<dd>
+    <p>Represents a metadata option.</p>
+
+</dd>
+<dt class="structure">
+    <a href="https://filestack.github.io/filestack-ios/PolicyCall" title="structure - PolicyCall">
+        Policy​Call
+    </a>
+</dt>
+<dd>
+    <p>Represents a policy call type.</p>
+
+</dd>
+<dt class="structure">
+    <a href="https://filestack.github.io/filestack-ios/TransformPosition" title="structure - TransformPosition">
+        Transform​Position
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform position type.</p>
+
+</dd>
+        </dl>
+    </section>
+    <section id="enumerations">
+        <h2>Enumerations</h2>
+        <dl>
+            <dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/Error" title="enumeration - Error">
+        Error
+    </a>
+</dt>
+<dd>
+    <p>:nodoc:</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/StorageAccess" title="enumeration - StorageAccess">
+        Storage​Access
+    </a>
+</dt>
+<dd>
+    <p>Represents the storage access to a file.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/StorageLocation" title="enumeration - StorageLocation">
+        Storage​Location
+    </a>
+</dt>
+<dd>
+    <p>Represents a cloud storage location type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformAlign" title="enumeration - TransformAlign">
+        Transform​Align
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform alignment type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformAspectMode" title="enumeration - TransformAspectMode">
+        Transform​Aspect​Mode
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform aspect type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformBlurMode" title="enumeration - TransformBlurMode">
+        Transform​Blur​Mode
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform blur type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformColorSpace" title="enumeration - TransformColorSpace">
+        Transform​Color​Space
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform color space type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformCropMode" title="enumeration - TransformCropMode">
+        Transform​Crop​Mode
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform crop type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformEnhancePreset" title="enumeration - TransformEnhancePreset">
+        Transform​Enhance​Preset
+    </a>
+</dt>
+<dd>
+    <p>Represents an enhance transformation preset.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformFiletype" title="enumeration - TransformFiletype">
+        Transform​Filetype
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform noise reduction type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformFit" title="enumeration - TransformFit">
+        Transform​Fit
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform fit type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformNoiseMode" title="enumeration - TransformNoiseMode">
+        Transform​Noise​Mode
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform noise reduction type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformPageFormat" title="enumeration - TransformPageFormat">
+        Transform​Page​Format
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform page format type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformPageOrientation" title="enumeration - TransformPageOrientation">
+        Transform​Page​Orientation
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform page orientation type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformShapeType" title="enumeration - TransformShapeType">
+        Transform​Shape​Type
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform pixelate faces type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/TransformStyleMode" title="enumeration - TransformStyleMode">
+        Transform​Style​Mode
+    </a>
+</dt>
+<dd>
+    <p>Represents an image transform style type.</p>
+
+</dd>
+<dt class="enumeration">
+    <a href="https://filestack.github.io/filestack-ios/UploadState" title="enumeration - UploadState">
+        Upload​State
+    </a>
+</dt>
+<dd>
+    <p>Represents the current state of an upload.</p>
+
+</dd>
+        </dl>
+    </section>
+    <section id="protocols">
+        <h2>Protocols</h2>
+        <dl>
+            <dt class="protocol">
+    <a href="https://filestack.github.io/filestack-ios/Cancellable" title="protocol - Cancellable">
+        Cancellable
+    </a>
+</dt>
+<dd>
+    <p>The protocol any cancellable process must conform to.</p>
+
+</dd>
+<dt class="protocol">
+    <a href="https://filestack.github.io/filestack-ios/DeferredAdd" title="protocol - DeferredAdd">
+        Deferred​Add
+    </a>
+</dt>
+<dd>
+    <p>The protocol any uploader that supports deferred adds must conform to.</p>
+
+</dd>
+<dt class="protocol">
+    <a href="https://filestack.github.io/filestack-ios/Monitorizable" title="protocol - Monitorizable">
+        Monitorizable
+    </a>
+</dt>
+<dd>
+    <p>The protocol any monitorizable process must conform to.</p>
+
+</dd>
+<dt class="protocol">
+    <a href="https://filestack.github.io/filestack-ios/Startable" title="protocol - Startable">
+        Startable
+    </a>
+</dt>
+<dd>
+    <p>The protocol any startable process must conform to.</p>
+
+</dd>
+<dt class="protocol">
+    <a href="https://filestack.github.io/filestack-ios/Uploadable" title="protocol - Uploadable">
+        Uploadable
+    </a>
+</dt>
+<dd>
+    <p>The protocol any uploadables must conform to.</p>
+
+</dd>
+<dt class="protocol">
+    <a href="https://filestack.github.io/filestack-ios/Uploader" title="protocol - Uploader">
+        Uploader
+    </a>
+</dt>
+<dd>
+    <p>The protocol any uploader must conform to.</p>
+
+</dd>
+        </dl>
+    </section>
+    <section id="typealiases">
+        <h2>Typealiases</h2>
+        <dl>
+            <dt class="typealias">
+    <a href="https://filestack.github.io/filestack-ios/UploadStatus" title="typealias - UploadStatus">
+        Upload​Status
+    </a>
+</dt>
+<dd>
+    
+</dd>
+<dt class="typealias">
+    <a href="https://filestack.github.io/filestack-ios/NetworkDataResponse" title="typealias - NetworkDataResponse">
+        Network​Data​Response
+    </a>
+</dt>
+<dd>
+    
+</dd>
+<dt class="typealias">
+    <a href="https://filestack.github.io/filestack-ios/NetworkDownloadResponse" title="typealias - NetworkDownloadResponse">
+        Network​Download​Response
+    </a>
+</dt>
+<dd>
+    
+</dd>
+<dt class="typealias">
+    <a href="https://filestack.github.io/filestack-ios/NetworkJSONResponse" title="typealias - NetworkJSONResponse">
+        Network​JSONResponse
+    </a>
+</dt>
+<dd>
+    
+</dd>
+        </dl>
+    </section>
+<section id="extensions">
+    <h2>Extensions</h2>
+    <dl>
+    <dt class="extension">
+    <a href="https://filestack.github.io/filestack-ios/Data">Data</a>
+</dt>
+<dd></dd>
+<dt class="extension">
+    <a href="https://filestack.github.io/filestack-ios/URL">URL</a>
+</dt>
+<dd></dd>
+    </dl>
+<section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-08-06T16:22:15+0200">August 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+</p>
+    </footer>
+</body>
 </html>

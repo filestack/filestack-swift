@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filestack - DeferredAdd</title>
+    <link rel="stylesheet" type="text/css" href="https://filestack.github.io/filestack-ios/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="https://filestack.github.io/filestack-ios/">
+            <strong>
+                Filestack
+            </strong>
+            <span>Documentation</span>
+        </a>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="function"><a href="#deferredadd.add(uploadables:)">add(uploadables:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">Deferred​Add</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">DeferredAdd</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>The protocol any uploader that supports deferred adds must conform to.</p>
+
+</div>
+<div class="discussion">
+    <aside class="important" title="Important">
+    <p>This protocol is only available in Swift.</p>
+
+</aside>
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="function" id="deferredadd.add(uploadables:)">
+    <h3>
+        <code>add(uploadables:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span> <span class="keyword">func</span> <span class="function">add</span>(<span class="variable">uploadables</span>: [<a href="https://filestack.github.io/filestack-ios/Uploadable"><span class="type">Uploadable</span></a>]) -&gt; <span class="type">Bool</span></body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Adds items to be uploaded.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>uploadables</th>
+    <td><code class="type">[Uploadable]</code></td>
+    <td><p>An array of <code>Uploadable</code> items.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-08-06T16:22:15+0200">August 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+</p>
+    </footer>
+</body>
+</html>
