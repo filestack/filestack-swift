@@ -46,6 +46,12 @@ public extension Client {
 
     /// A `Security` object. `nil` by default.
     @objc var security: Security? { config.security }
+
+    /// Returns an array containing the `Uploader` instances currently running.
+    @objc var currentUploaders: [Uploader] { config.currentUploaders }
+
+    /// Returns whether there's at least a single `Uploader` instance currently running.
+    @objc var isUploading: Bool { config.currentUploaders.count > 0 }
 }
 
 // MARK: - Public Functions

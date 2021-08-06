@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct Config {
+class Config {
     let apiKey: String
     let security: Security?
+    var currentUploaders: [Uploader] = []
+
+    init(apiKey: String, security: Security? = nil) {
+        self.apiKey = apiKey
+        self.security = security
+    }
 }

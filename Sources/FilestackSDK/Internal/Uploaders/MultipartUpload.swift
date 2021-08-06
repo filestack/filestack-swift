@@ -122,6 +122,7 @@ private extension MultipartUpload {
     func upload() {
         guard let uploadables = uploadables else { return }
 
+        config.currentUploaders.append(self)
         state = .inProgress
 
         var results: [JSONResponse] = []
@@ -188,6 +189,8 @@ private extension MultipartUpload {
         if state != .cancelled {
             state = .completed
         }
+
+        config.currentUploaders.removeAll { $0 == self }
 
         queue.async {
             self.completionHandler?(results)
