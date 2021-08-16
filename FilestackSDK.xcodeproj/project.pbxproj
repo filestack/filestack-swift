@@ -159,6 +159,8 @@
 		4586F19E2524F1CF008F282E /* FilestackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4586F1652524EEB8008F282E /* FilestackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4586F1C42524FD7E008F282E /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 4586F1C32524FD7E008F282E /* Fixtures */; };
 		4591004A25C1A3DF008187F5 /* URLSession+filestackDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591004925C1A3DF008187F5 /* URLSession+filestackDefault.swift */; };
+		45F3187026CAB6B300A60607 /* SmartCropTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3186F26CAB6B300A60607 /* SmartCropTransform.swift */; };
+		45F3187226CAB6BF00A60607 /* TransformSmartCropMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3187126CAB6BF00A60607 /* TransformSmartCropMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,6 +312,8 @@
 		4586F1652524EEB8008F282E /* FilestackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilestackSDK.h; sourceTree = "<group>"; };
 		4586F1C32524FD7E008F282E /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 		4591004925C1A3DF008187F5 /* URLSession+filestackDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+filestackDefault.swift"; sourceTree = "<group>"; };
+		45F3186F26CAB6B300A60607 /* SmartCropTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartCropTransform.swift; sourceTree = "<group>"; };
+		45F3187126CAB6BF00A60607 /* TransformSmartCropMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformSmartCropMode.swift; sourceTree = "<group>"; };
 		"FilestackSDK::FilestackSDK::Product" /* FilestackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilestackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_164 /* BaseOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOperationTests.swift; sourceTree = "<group>"; };
 		OBJ_165 /* ClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
@@ -496,6 +500,7 @@
 				45825BB02524E389002F3310 /* TransformPageOrientation.swift */,
 				45825BBE2524E389002F3310 /* TransformPosition.swift */,
 				45825BB12524E389002F3310 /* TransformShapeType.swift */,
+				45F3187126CAB6BF00A60607 /* TransformSmartCropMode.swift */,
 				45825BB32524E389002F3310 /* TransformStyleMode.swift */,
 				45825BB62524E389002F3310 /* UploadStatus.swift */,
 			);
@@ -592,6 +597,7 @@
 				45825C072524E389002F3310 /* SepiaTransform.swift */,
 				45825BD82524E389002F3310 /* ShadowTransform.swift */,
 				45825BFC2524E389002F3310 /* SharpenTransform.swift */,
+				45F3186F26CAB6B300A60607 /* SmartCropTransform.swift */,
 				45825BF12524E389002F3310 /* TagsTransform.swift */,
 				45825BDF2524E389002F3310 /* TornEdgesTransform.swift */,
 				45825BEB2524E389002F3310 /* Transform.swift */,
@@ -734,7 +740,7 @@
 			attributes = {
 				LastSwiftMigration = 9999;
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					45825B252524DE46002F3310 = {
 						CreatedOnToolsVersion = 12.0;
@@ -861,6 +867,7 @@
 				45825C522524E38B002F3310 /* TransformPageFormat.swift in Sources */,
 				45825C2A2524E38A002F3310 /* CommitPartUploadOperation.swift in Sources */,
 				45825C582524E38B002F3310 /* UploadOptions.swift in Sources */,
+				45F3187226CAB6BF00A60607 /* TransformSmartCropMode.swift in Sources */,
 				45825C342524E38A002F3310 /* String+Hmac.swift in Sources */,
 				45825C5F2524E38B002F3310 /* Transformable+Deprecated.swift in Sources */,
 				45825C392524E38A002F3310 /* UploadDescriptor.swift in Sources */,
@@ -932,6 +939,7 @@
 				45825C712524E38B002F3310 /* NoMetadataTransform.swift in Sources */,
 				45825C3C2524E38A002F3310 /* CDNService.swift in Sources */,
 				45825C852524E38C002F3310 /* PDFConvertTransform.swift in Sources */,
+				45F3187026CAB6B300A60607 /* SmartCropTransform.swift in Sources */,
 				45825C742524E38B002F3310 /* ModulateTransform.swift in Sources */,
 				45825C2F2524E38A002F3310 /* NetworkingServiceWithBaseURL+buildURL.swift in Sources */,
 				45825C7A2524E38B002F3310 /* MinifyCSSTransform.swift in Sources */,
