@@ -3,7 +3,7 @@
 //  FilestackSDK
 //
 //  Created by Ruben Nine on 16/8/21.
-//  Copyright © 2019 Filestack. All rights reserved.
+//  Copyright © 2021 Filestack. All rights reserved.
 //
 
 import UIKit
