@@ -16,8 +16,8 @@ jobs:
     - name: Show Xcode version
       run: xcodebuild -version
     - name: Show Xcode SDKs
-      run: xcrun xctrace list devices
+      run: xcodebuild -showsdks
     - name: Build
-      run: xcodebuild -scheme "FilestackSDK" -destination "platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.5" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
+      run: xcodebuild -scheme "FilestackSDK" -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
     - name: Run tests
-      run: xcodebuild -scheme "FilestackSDK" -destination "platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.5" -configuration Debug test-without-building | xcpretty;
+      run: xcodebuild -scheme "FilestackSDK" -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" -configuration Debug test-without-building | xcpretty;
