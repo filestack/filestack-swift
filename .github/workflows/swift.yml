@@ -21,6 +21,10 @@ jobs:
         
     steps:
     - uses: actions/checkout@v2
+    - name: Show Xcode version
+      run: xcodebuild -version
+    - name: Show Xcode SDKs
+      run: xcodebuild -showsdks
     - name: Build
       run: xcodebuild -scheme "FilestackSDK" -destination "${{ matrix.destination }}" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
     - name: Run tests
