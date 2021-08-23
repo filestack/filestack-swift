@@ -11,14 +11,6 @@ jobs:
 
     runs-on: macos-latest
 
-    strategy:
-      matrix:
-        destination: [
-          "OS=11.2,name=iPhone 7 Plus",
-          "OS=11.4,name=iPhone 8",
-          "OS=14.2,name=iPhone 11 Pro Max"
-        ]
-        
     steps:
     - uses: actions/checkout@v2
     - name: Show Xcode version
@@ -26,6 +18,6 @@ jobs:
     - name: Show Xcode SDKs
       run: xcodebuild -showsdks
     - name: Build
-      run: xcodebuild -scheme "FilestackSDK" -destination "${{ matrix.destination }}" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
+      run: xcodebuild -scheme "FilestackSDK" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build build-for-testing | xcpretty;
     - name: Run tests
-      run: xcodebuild -scheme "FilestackSDK" -destination "${{ matrix.destination }}" -configuration Debug test-without-building | xcpretty;
+      run: xcodebuild -scheme "FilestackSDK" -configuration Debug test-without-building | xcpretty;
