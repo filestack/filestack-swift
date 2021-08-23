@@ -1,4 +1,4 @@
-[![Code Climate][code_climate_badge]][code_climate] [![Build Status](https://travis-ci.org/filestack/filestack-swift.svg?branch=master)](https://travis-ci.org/filestack/filestack-swift)
+[![Code Climate][code_climate_badge]][code_climate] [![Swift](https://github.com/filestack/filestack-swift/actions/workflows/swift.yml/badge.svg)](https://github.com/filestack/filestack-swift/actions/workflows/swift.yml)
 
 # Filestack Swift SDK
 <a href="https://www.filestack.com"><img src="https://www.filestack.com/docs/images/fs-logo-dark.svg" align="left" hspace="10" vspace="6"></a>
