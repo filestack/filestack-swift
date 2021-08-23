@@ -466,6 +466,54 @@ class TransformableTests: XCTestCase {
         XCTAssertEqual(transformable.url, expectedURL)
     }
 
+    func testSmartCropTransformationWithModeAutoURL() {
+        transformable.add(transform: SmartCropTransform()
+                            .mode(.auto)
+                            .fillColor(.white)
+                            .width(512)
+                            .height(512)
+                            .coords(false)
+        )
+
+        let expectedURL = Constants.cdnURL
+            .appendingPathComponent("smart_crop=mode:auto,fill_color:FFFFFFFF,width:512,height:512,coords:false")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testSmartCropTransformationWithModeObjectURL() {
+        transformable.add(transform: SmartCropTransform()
+                            .mode(.object(name: "dog"))
+                            .fillColor(.white)
+                            .width(512)
+                            .height(512)
+                            .coords(false)
+        )
+
+        let expectedURL = Constants.cdnURL
+            .appendingPathComponent("smart_crop=mode:object,object:dog,fill_color:FFFFFFFF,width:512,height:512,coords:false")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
+    func testSmartCropTransformationWithModeFaceURL() {
+        transformable.add(transform: SmartCropTransform()
+                            .mode(.face)
+                            .fillColor(.white)
+                            .width(512)
+                            .height(512)
+                            .coords(false)
+        )
+
+        let expectedURL = Constants.cdnURL
+            .appendingPathComponent("smart_crop=mode:face,fill_color:FFFFFFFF,width:512,height:512,coords:false")
+            .appendingPathComponent("MY-HANDLE")
+
+        XCTAssertEqual(transformable.url, expectedURL)
+    }
+
     func testPixelateFacesTransformationURL() {
         transformable.add(transform: PixelateFacesTransform()
             .faces([3])
