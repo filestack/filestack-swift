@@ -1,0 +1,19 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install swift-doc
+      run: brew install swiftdocorg/formulae/swift-doc
+    - name: Generate documentation
+      run: bin/generate-and-deploy-docs.sh
