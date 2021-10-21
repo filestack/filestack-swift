@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FilestackSDK",
+        "repositoryURL": "https://github.com/filestack/filestack-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "5ba0ac9ca2fb53ccf18335b1654b8cc600785b66",
+          "version": "2.8.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
