@@ -17,7 +17,7 @@ import Foundation
 /// - An executing operation will return `isExecuting` true.
 /// - A finished operation will return `isFinished` true.
 /// - A cancelled operation will return `isCancelled` true.
-open class BaseOperation<Success>: Operation {
+open class BaseOperation<Success>: Operation, @unchecked Sendable {
     public typealias Result = Swift.Result<Success, Error>
 
     // MARK: - Private Properties

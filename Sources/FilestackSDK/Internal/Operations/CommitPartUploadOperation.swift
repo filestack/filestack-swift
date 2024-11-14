@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CommitPartUploadOperation: BaseOperation<HTTPURLResponse> {
+class CommitPartUploadOperation: BaseOperation<HTTPURLResponse>, @unchecked Sendable {
     // MARK: - Private Properties
 
     private let descriptor: UploadDescriptor
