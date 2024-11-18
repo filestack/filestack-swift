@@ -15,7 +15,7 @@ extension Data {
         return Data((withUnsafeBytes { byte -> [UInt8] in
             var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
 
-            CC_MD5(byte.baseAddress, CC_LONG(count), &digest)
+            CC_SHA256(byte.baseAddress, CC_LONG(count), &digest)
 
             return digest
         })).base64EncodedString()

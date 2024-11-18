@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SubmitPartsUploadOperation: BaseOperation<[Int: String]> {
+class SubmitPartsUploadOperation: BaseOperation<[Int: String]>, @unchecked Sendable {
     // MARK: - Internal Properties
 
     let descriptor: UploadDescriptor

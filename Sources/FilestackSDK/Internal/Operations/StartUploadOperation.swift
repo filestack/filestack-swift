@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StartUploadOperation: BaseOperation<UploadDescriptor> {
+class StartUploadOperation: BaseOperation<UploadDescriptor>, @unchecked Sendable {
     // MARK: - Private Properties
 
     private let config: Config

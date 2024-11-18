@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UploadOperation: BaseOperation<JSONResponse> {
+class UploadOperation: BaseOperation<JSONResponse>, @unchecked Sendable {
     // MARK: - Internal Properties
 
     private(set) lazy var progress: Progress = {
