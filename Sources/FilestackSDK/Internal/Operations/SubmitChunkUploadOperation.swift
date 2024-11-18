@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse> {
+class SubmitChunkUploadOperation: BaseOperation<HTTPURLResponse>, @unchecked Sendable {
     // MARK: - Internal Properties
 
     // Part offset

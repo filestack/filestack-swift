@@ -17,7 +17,7 @@ import Foundation
 /// - An executing operation will return `isExecuting` true.
 /// - A finished operation will return `isFinished` true.
 /// - A cancelled operation will return `isCancelled` true.
-open class BaseOperation<Success>: Operation {
+open class BaseOperation<Success>: Operation, @unchecked Sendable {
     public typealias Result = Swift.Result<Success, Error>
 
     // MARK: - Private Properties
@@ -81,7 +81,7 @@ open class BaseOperation<Success>: Operation {
 
 extension BaseOperation {
     /// Returns the result of operation.
-    open private(set) var result: Result {
+    public private(set) var result: Result {
         get { lockQueue.sync { _result } }
         set { lockQueue.sync { _result = newValue } }
     }

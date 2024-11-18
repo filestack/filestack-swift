@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompleteUploadOperation: BaseOperation<JSONResponse> {
+class CompleteUploadOperation: BaseOperation<JSONResponse>, @unchecked Sendable {
     // MARK: - Private Properties
 
     private let partsAndEtags: [Int: String]

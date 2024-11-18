@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPartUploadOperation {
+class SubmitPartRegularUploadOperation: BaseOperation<HTTPURLResponse>, SubmitPartUploadOperation, @unchecked Sendable {
     // MARK: - Internal Properties
 
     let number: Int
