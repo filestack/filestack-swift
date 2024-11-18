@@ -81,7 +81,7 @@ open class BaseOperation<Success>: Operation, @unchecked Sendable {
 
 extension BaseOperation {
     /// Returns the result of operation.
-    open private(set) var result: Result {
+    public private(set) var result: Result {
         get { lockQueue.sync { _result } }
         set { lockQueue.sync { _result = newValue } }
     }
