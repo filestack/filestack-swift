@@ -212,8 +212,8 @@ uploadOptions.storeOptions = StorageOptions(// Store location (e.g. S3, Dropbox,
                                             path: "/public/oncorhynchus.jpg",
                                             // Custom MIME type (useful when uploadable has no way of knowing its MIME type)
                                             mimeType: "image/jpg",
-                                            // Access permissions (either public or private)
-                                            access: .public,
+                                            // Access permissions (either public or private, public only available for the custom s3 storage option)
+                                            access: .private,
                                             // An array of workflow IDs to trigger for each upload
                                             workflows: ["WF-1", "WF-2"]
                                             )

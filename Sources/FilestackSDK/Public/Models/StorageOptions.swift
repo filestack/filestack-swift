@@ -33,7 +33,7 @@ public class StorageOptions: NSObject {
     /// The file's MIME type.
     @objc public var mimeType: String?
 
-    /// An `StorageAccess` value. Valid options are `.public` or `.private`.
+    /// An `StorageAccess` value. Valid options are `.public` or `.private`. Public only available for the custom s3 storage option.
     public var access: StorageAccess?
 
     /// An array of workflow IDs to trigger for each upload.
