@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 3.0.0 *(2025-03-31)*
+----------------------------
+- Fixed all warnings
+- Minimum target of swift sdk from 11 to 14
+- Clarify the use of 'access' storage option
+
 Version 2.8.0 *(2021-08-06)*
 ----------------------------
 - Set `networkServiceType` to `.responsiveData` in `UploadService` to prioritize upload requests.
